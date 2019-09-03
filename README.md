@@ -8,5 +8,5 @@
 신정희
 
 #### WBS
-
+![WBS](https://github.com/HR-Kim/SUNNYSIDE3/blob/master/DOC/image/WBS.PNG)
 
