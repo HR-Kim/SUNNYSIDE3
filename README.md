@@ -1,4 +1,4 @@
-# SUNNYSIDE(2조)
+# SUNNYSIDE
 #### 조장 김도연
 #### 조원
 이규섭
