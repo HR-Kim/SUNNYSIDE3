@@ -7,6 +7,6 @@
 이혜준
 신정희
 
-#### WBS
+### WBS
 ![WBS](https://github.com/HR-Kim/SUNNYSIDE3/blob/master/DOC/image/WBS.PNG)
 
