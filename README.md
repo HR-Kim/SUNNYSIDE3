@@ -6,6 +6,7 @@
 시은지
 이혜준
 신정희  
+김영민
 
 ### WBS
 ![WBS](https://github.com/HR-Kim/SUNNYSIDE3/blob/master/DOC/image/WBS.PNG)
