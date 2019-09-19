@@ -8,6 +8,9 @@
 신정희
 김영민  
 
+## 프로젝트 주제
+멀티플렉스 영화관 사이트
+
 ## WBS
 ![WBS](https://github.com/HR-Kim/SUNNYSIDE3/blob/master/DOC/image/WBS.PNG)
 
