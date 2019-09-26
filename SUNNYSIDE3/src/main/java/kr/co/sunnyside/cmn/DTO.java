@@ -1,4 +1,4 @@
-package co.kr.sunnyside.cmn;
+package kr.co.sunnyside.cmn;
 
 public class DTO {
 
