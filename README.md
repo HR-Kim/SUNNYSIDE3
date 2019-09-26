@@ -15,6 +15,6 @@
 ![WBS](https://github.com/HR-Kim/SUNNYSIDE3/blob/master/DOC/image/WBS.PNG)
 
 ## 프로젝트 아키텍처
-![모바일컴포턴트아키텍처](https://github.com/HR-Kim/SUNNYSIDE3/blob/master/DOC/image/%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98.jpg?raw=true)
+![모바일컴포턴트아키텍처](https://github.com/HR-Kim/SUNNYSIDE3/blob/master/DOC/image/%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98.png?raw=true)
 
 
