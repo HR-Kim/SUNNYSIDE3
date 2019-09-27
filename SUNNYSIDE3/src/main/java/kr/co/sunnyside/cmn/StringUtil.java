@@ -16,7 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import kr.co.sunnyside.code.service.Code;
+import kr.co.sunnyside.code.service.CodeVO;
 
 public class StringUtil {
 	private static Logger LOG = LoggerFactory.getLogger(StringUtil.class);
@@ -240,7 +240,7 @@ public class StringUtil {
 	 *         value="1" selected>일반사용자</option> <option value="9">관리자</option>
 	 *         </select>
 	 */
-	public static String makeSelectBox(List<Code> list, String selectBoxNm, String selectedNm, boolean allYN) {
+	public static String makeSelectBox(List<CodeVO> list, String selectBoxNm, String selectedNm, boolean allYN) {
 		StringBuilder sb = new StringBuilder();
 		// <select name="lvl" id="lvl">
 		sb.append("<select  class=\"form-control input-sm\" name='" + selectBoxNm + "' id='" + selectBoxNm + "' > \n");
@@ -250,8 +250,8 @@ public class StringUtil {
 		}
 
 		// <option value="1" selected>일반사용자</option>
-		for (Code dto : list) {
-			Code vo = dto;
+		for (CodeVO dto : list) {
+			CodeVO vo = dto;
 			sb.append("\t<option value='" + vo.getCodeId() + "' ");
 			if (selectedNm.equals(vo.getCodeId())) {
 				sb.append("selected='selected' ");

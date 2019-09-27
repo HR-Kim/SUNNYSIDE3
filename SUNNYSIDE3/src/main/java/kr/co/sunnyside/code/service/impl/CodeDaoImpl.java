@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.sunnyside.cmn.DTO;
 import kr.co.sunnyside.cmn.WorkDiv;
-import kr.co.sunnyside.code.service.Code;
+import kr.co.sunnyside.code.service.CodeVO;
 
 
 @Repository
@@ -23,11 +23,11 @@ public class CodeDaoImpl implements WorkDiv {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	private RowMapper<Code> codeMapper=new RowMapper<Code>() {
+	private RowMapper<CodeVO> codeMapper=new RowMapper<CodeVO>() {
 
 		@Override
-		public Code mapRow(ResultSet rs, int rowNum) throws SQLException {
-			Code vo=new Code();
+		public CodeVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			CodeVO vo=new CodeVO();
 			vo.setCodeId(rs.getString("code_id"));
 			vo.setCodeNm(rs.getString("code_nm"));
 			vo.setNum(rs.getInt("num"));
@@ -74,7 +74,7 @@ public class CodeDaoImpl implements WorkDiv {
 		sb.append(" AND b.use_yn = 1                    \n");
 		sb.append(" ORDER BY b.num                      \n");
 		
-		Code inVO = (Code) dto;
+		CodeVO inVO = (CodeVO) dto;
 		LOG.debug("1==================================");
 		LOG.debug("1=param="+inVO);
 		LOG.debug("1==================================");
@@ -83,7 +83,7 @@ public class CodeDaoImpl implements WorkDiv {
 		LOG.debug("2=sql=\n"+sb.toString());
 		LOG.debug("2==================================");
 		
-		List<Code> list = this.jdbcTemplate.query(sb.toString()
+		List<CodeVO> list = this.jdbcTemplate.query(sb.toString()
 				   ,new Object[] {inVO.getCodeId()} 
 				   ,this.codeMapper);
 		
