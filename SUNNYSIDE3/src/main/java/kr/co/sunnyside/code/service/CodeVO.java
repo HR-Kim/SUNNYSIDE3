@@ -2,7 +2,7 @@ package kr.co.sunnyside.code.service;
 
 import kr.co.sunnyside.cmn.DTO;
 
-public class Code extends DTO {
+public class CodeVO extends DTO {
 
 	private String codeTypeId  ;//코드유형ID
 	private String codeId      ;//코드ID
@@ -13,7 +13,7 @@ public class Code extends DTO {
 	private String modId       ;//수정자ID
 	private String modDt       ;//수정일
 	
-	public Code() {}
+	public CodeVO() {}
 
 	public String getCodeTypeId() {
 		return codeTypeId;
