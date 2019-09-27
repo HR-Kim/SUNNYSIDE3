@@ -10,7 +10,9 @@
 	</settings>
 	<!-- 타입 별칭은 자바 타입에 대한 짧은 이름이다. 오직 XML 설정에서만 사용되며, 타이핑을 줄이기 위해 존재한다 -->
 	<typeAliases>
-	
+		<typeAlias type="kr.co.sunnyside.code.service.CodeVO" alias="Code" />
+		<typeAlias type="kr.co.sunnyside.cmn.SearchVO" alias="Search" />
+		<typeAlias type="kr.co.sunnyside.store.service.SEJ_StroreVO" alias="Strore" />
 	</typeAliases>
 
 </configuration>  
