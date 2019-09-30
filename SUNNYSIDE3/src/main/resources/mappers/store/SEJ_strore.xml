@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sunnyside.store">
+	<!-- 
+		 do_save   : 상품 등록 
+		 do_delete : 상품 삭제
+	     do_update : 상품정보수정
+	     get_selectOne : 상품 단건조회
+	     get_retrieve  : 상품목록조회
+	   -->
+	   
+<!-- 상품등록 -->
+<insert id="do_save" parameterType="Store">
+			Insert Into Product (
+			    PRODUCT_ID,
+			    PRODUCT_NM,
+			    PRUDUCT_INFO,
+			    CATEGORY,
+			    PRODUCT_COST,
+			    ORG_FILE_NM,
+			    SAVE_FILE_NM,
+			    IMG_SIZE,
+			    EXT
+			) Values (
+			    "20190927-001",
+			    #{productNm,jdbcType=VARCHAR},
+			    #{pruductInfo,jdbcType=VARCHAR},
+			    #{category,jdbcType=NUMERIC},
+			    #{productCost,jdbcType=NUMERIC},
+			    #{orgFileNM,jdbcType=VARCHAR},
+			    #{saveFileNM,jdbcType=VARCHAR},
+			    #{fileSize,jdbcType=NUMERIC},
+			    #{ext,jdbcType=VARCHAR}
+			);
+</insert>
+
+</mapper>
