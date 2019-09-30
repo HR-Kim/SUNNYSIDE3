@@ -1,8 +1,160 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+		
+	
+	<!-- locale change -->
+ 	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
+<!--	<bean class="kr.co.ehr.user.web.LocaleChangeController">
+		<property name="localeResolver" ref="localeResolver" />
+	</bean> -->
+	
+	
+	<!-- 다국어설정 -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>message.messageSouce</value>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<!-- mybatis -->
+	<!-- SqlSessionTemplate : DAO mybatis의 특정 namespace call -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+		<constructor-arg index="0" ref="sqlSessionFactoryBean"/>
+	</bean>
+	
+	
+	<!-- SqlSessionFactoryBean : mybatis-config.xml, mapper파일들, datasource 읽음 -->
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+		<property name="mapperLocations" value="classpath:mappers/**/*.xml" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	
+	
+	<bean id="authenticator" class="javax.mail.Authenticator">
+	 <lookup-method name="getPasswordAuthentication" bean="passwordAuth" />
+	</bean>
+	
+	
+	<bean id="emailSession" class="javax.mail.Session">
+	 <constructor-arg>
+	  <props>
+	   <prop key="mail.smtp.host">smtp.naver.com</prop>
+	   <prop key="mail.smtp.port">465</prop>
+	   <prop key="mail.smtp.auth">true</prop>
+	   <prop key="mail.smtp.ssl.enable">true</prop>
+	   <prop key="mail.smtp.ssl.trust">smtp.naver.com</prop>
+	  </props>
+	 </constructor-arg>
+	 <constructor-arg ref="authenticator" />
+	</bean>
+	
+	
+	
+	<!-- AspectJ Transaction -->
+	<!-- 데이터소스 트랜잭션 매니저 -->	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" >
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	
+	<!-- Transaction Advice -->	
+	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get_*" read-only="true" />
+			<tx:method name="tx_*" /> <!-- tx* -->
+		</tx:attributes>
+	</tx:advice>
+	
+	
+	<!-- Transaction Advisor -->	
+	<aop:config>
+		<!-- PointCut -->
+		<aop:pointcut id="allPointCut" expression="execution(* kr.co.ehr..service.impl.*Impl.tx_*(..))"/>
+		<aop:advisor advice-ref="transactionAdvice" pointcut-ref="allPointCut" />
+	</aop:config>
+	
+	
+	
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+	<!-- 예외처리 -->
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver" >
+		<!-- Default error.jsp -->
+		<property name="defaultErrorView" value="common/error" />
+		<!-- 특정예외 -->
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.IllegalArgumentException">
+					common/illegalArgumentError
+				</prop>
+				
+				<prop key="java.lang.ArithmeticException">
+					common/arithmeticException
+				</prop>
+				
+			</props>
+		</property>
+	</bean>
+	
+	
+	<!-- File Upload 설정 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 용량 : 50MB = 50*(1024*1024) = 5428800 -->
+		<property name="maxUploadSize" value="52428800" />
+		<property name="maxInMemorySize" value="52428800" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+	
+	
+	
+	
+	
+	<!-- JDBCTemplate -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	
+	
+	
+	<!-- resources/config/database.properties -->
+	<context:property-placeholder location="classpath:config/database.properties"/>
+	
+	<!-- DB Connection  -->
+	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"
+			value="${jdbc.driver}" />
+		<property name="url"
+			value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+	
+	<!-- log4jdbc-remix -->	
+	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+		<constructor-arg ref="dataSourceSpied"/>
+	    <property name="logFormatter">
+	    	<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+	    		<property name="loggingType" value="MULTI_LINE"/>
+	    		<property name="sqlPrefix" value="HR_SQL] : "/>
+	    	</bean>
+	    </property>
+	</bean>	
+	
+	
+	
 </beans>
