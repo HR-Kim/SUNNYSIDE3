@@ -9,34 +9,36 @@
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
 		<org.apache.tiles.version>3.0.8</org.apache.tiles.version>
-		<log4jdbc-remix.version>0.2.7</log4jdbc-remix.version>
-	    <mybatis-spring.version>1.3.2</mybatis-spring.version>
-		<mybatis.version>3.4.6</mybatis.version>
-		<poi.version>4.0.1</poi.version>
-		<json-path-assert.version>2.4.0</json-path-assert.version>
-		<gson.version>2.8.5</gson.version>
-		<javax.servlet-api.version>3.1.0</javax.servlet-api.version>
-		<org.apache.commons.version>3.9</org.apache.commons.version>
-		<commons-fileupload.version>1.3.1</commons-fileupload.version>
-		<commons-io.version>2.4</commons-io.version>
-		<mockito-all.version>1.10.19</mockito-all.version>
-		<commons-dbcp.version>1.4</commons-dbcp.version>
-		<javax.mail.version>1.4.7</javax.mail.version>
-		<javax.activation.version>1.1.1</javax.activation.version>
-		<org.aspectj.version>1.8.9</org.aspectj.version>
-		<org.slf4j-version>1.6.6</org.slf4j-version>
+		<log4jdbc-remix>0.2.7</log4jdbc-remix>
+		<mybatis-spring>1.3.2</mybatis-spring>
+		<org.mybatis>3.4.6</org.mybatis>
+		<org.apache.poi>4.0.1</org.apache.poi>
+		<com.jayway.jsonpath>2.4.0</com.jayway.jsonpath>
+		<com.google.code.gson>2.8.5</com.google.code.gson>
+		<junit.version>4.12</junit.version>
+		<javax.servlet-api>3.1.0</javax.servlet-api>
+		<org.springframework>spring-jdbc</org.springframework>
+		<org.apache.commons>3.9</org.apache.commons>
+		<commons-fileupload>1.3.1</commons-fileupload>
+		<commons-io>2.4</commons-io>
+		<org.mockito>1.10.19</org.mockito>
+		<commons-dbcp>1.4</commons-dbcp>
+ 		<javax.mail>1.4.7</javax.mail>
+  		<javax.activation>1.1.1</javax.activation>
 		<oracle.jdbc.version>11.2.0.3</oracle.jdbc.version>
-		<org.springframework-version>4.3.10.RELEASE</org.springframework-version>
+		<org.aspectj-version>1.8.9</org.aspectj-version>
+		<org.slf4j-version>1.6.6</org.slf4j-version>
 		<java-version>1.8</java-version>
+		<org.springframework-version>4.3.10.RELEASE</org.springframework-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<jnuit.version>4.12</jnuit.version>
-		<downloadSources>true</downloadSources>
-		<downloadJavadocs>true</downloadJavadocs>
-
+	    <maven.compiler.source>1.8</maven.compiler.source>
+	    <maven.compiler.target>1.8</maven.compiler.target>
+	    <jnuit.version>4.12</jnuit.version>
+	    <downloadSources>true</downloadSources>
+	    <downloadJavadocs>true</downloadJavadocs>
 	</properties>
-
+	
+	
 	<!-- Oracle jdbc driver추가 -->
 	<repositories>
 		<repository>
@@ -45,78 +47,96 @@
 			<url>http://www.datanucleus.org/downloads/maven2/</url>
 		</repository>
 	</repositories>
-
-
+	
+	
+	
 	<dependencies>
-		
-
-		<!-- https://mvnrepository.com/artifact/org.apache.tiles/tiles-core -->
 		<dependency>
-			<groupId>org.apache.tiles</groupId>
-			<artifactId>tiles-core</artifactId>
-			<version>${org.apache.tiles.version}</version>
+		    <groupId>org.apache.tiles</groupId>
+		    <artifactId>tiles-jsp</artifactId>
+		    <version>${org.apache.tiles.version}</version>
 		</dependency>
+		
+	
 		<!-- https://mvnrepository.com/artifact/org.apache.tiles/tiles-servlet -->
 		<dependency>
-			<groupId>org.apache.tiles</groupId>
-			<artifactId>tiles-servlet</artifactId>
-			<version>${org.apache.tiles.version}</version>
+		    <groupId>org.apache.tiles</groupId>
+		    <artifactId>tiles-servlet</artifactId>
+		    <version>${org.apache.tiles.version}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.tiles/tiles-jsp -->
+	
+	
+		<!-- https://mvnrepository.com/artifact/org.apache.tiles/tiles-core -->
 		<dependency>
-			<groupId>org.apache.tiles</groupId>
-			<artifactId>tiles-jsp</artifactId>
-			<version>${org.apache.tiles.version}</version>
+		    <groupId>org.apache.tiles</groupId>
+		    <artifactId>tiles-core</artifactId>
+		    <version>${org.apache.tiles.version}</version>
 		</dependency>
-			<!-- https://mvnrepository.com/artifact/org.lazyluke/log4jdbc-remix -->
+	
+		<!-- https://mvnrepository.com/artifact/org.lazyluke/log4jdbc-remix -->
 		<dependency>
 		    <groupId>org.lazyluke</groupId>
 		    <artifactId>log4jdbc-remix</artifactId>
-		    <version>${log4jdbc-remix.version}</version>
+		    <version>${log4jdbc-remix}</version>
 		</dependency>
-			
-		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
-		<dependency>
-		    <groupId>org.mybatis</groupId>
-		    <artifactId>mybatis</artifactId>
-		    <version>${mybatis.version}</version>
-		</dependency>
+	
+	
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
 		<dependency>
 		    <groupId>org.mybatis</groupId>
 		    <artifactId>mybatis-spring</artifactId>
-		    <version>${mybatis-spring.version}</version>
+		    <version>${mybatis-spring}</version>
 		</dependency>
 	
-		<!-- ExcelDown -->
-		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+	
+		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi</artifactId>
-			<version>${poi.version}</version>
+		    <groupId>org.mybatis</groupId>
+		    <artifactId>mybatis</artifactId>
+		    <version>${org.mybatis}</version>
 		</dependency>
+		
+	
 		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
-			<version>${poi.version}</version>
+			<version>${org.apache.poi}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>${org.apache.poi}</version>
+		</dependency>
+	
+	
+		<!-- https://mvnrepository.com/artifact/com.jayway.jsonpath/json-path -->
+		<dependency>
+		    <groupId>com.jayway.jsonpath</groupId>
+		    <artifactId>json-path</artifactId>
+		    <version>${com.jayway.jsonpath}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.jayway.jsonpath/json-path-assert -->
+		<dependency>
+		    <groupId>com.jayway.jsonpath</groupId>
+		    <artifactId>json-path-assert</artifactId>
+		    <version>${com.jayway.jsonpath}</version>
+		    <scope>test</scope>
+		</dependency>
+	
+	
+		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <version>${com.google.code.gson}</version>
 		</dependency>
 
-		<!-- JSON 테스트(PATH) -->
-		<dependency>
-			<groupId>com.jayway.jsonpath</groupId>
-			<artifactId>json-path-assert</artifactId>
-			<version>${json-path-assert.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.jayway.jsonpath</groupId>
-			<artifactId>json-path</artifactId>
-			<version>${json-path-assert.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<!-- junit은 항상 제일 위에: 아니면 오류남. -->
+		
+		
+		<!-- JUnit은 항상 제일 위에, 아니면 오류남 -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -130,85 +150,99 @@
 			<version>1.3</version>
 			<scope>test</scope>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		
+		
+		
+	
+ 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
 		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>${gson.version}</version>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>${org.springframework-version}</version>
 		</dependency>
-
-
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+	
+	
+		 <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${org.springframework-version}</version>
-			<scope>test</scope>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-test</artifactId>
+		    <version>${org.springframework-version}</version>
+		    <scope>test</scope>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+	
+	  	<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-			<version>${org.springframework-version}</version>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-jdbc</artifactId>
+		    <version>${org.springframework-version}</version>
 		</dependency>
+	
+	
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
 		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>${org.apache.commons.version}</version>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		    <version>${org.apache.commons}</version>
 		</dependency>
-
-
+	
+	
+	
 		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>${commons-fileupload.version}</version>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>${commons-fileupload}</version>
 		</dependency>
-
-
+	
+	
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>${commons-io.version}</version>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>${commons-io}</version>
 		</dependency>
-
-
-
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+		
+	
+		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-			<version>${org.springframework-version}</version>
+		    <groupId>org.mockito</groupId>
+		    <artifactId>mockito-all</artifactId>
+		    <version>${org.mockito}</version>
+		    <scope>test</scope>
 		</dependency>
-
+	
+	
 		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
 		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>${javax.mail.version}</version>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>mail</artifactId>
+		    <version>${javax.mail}</version>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/javax.activation/activation -->
+  
+  
+	 	<!-- https://mvnrepository.com/artifact/javax.activation/activation -->
 		<dependency>
-			<groupId>javax.activation</groupId>
-			<artifactId>activation</artifactId>
-			<version>${javax.activation.version}</version>
+		    <groupId>javax.activation</groupId>
+		    <artifactId>activation</artifactId>
+		    <version>${javax.activation}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
+		
+		
+		 <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
 		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>${commons-dbcp.version}</version>
+		    <groupId>commons-dbcp</groupId>
+		    <artifactId>commons-dbcp</artifactId>
+		    <version>${commons-dbcp}</version>
 		</dependency>
-
+		
+		
 		<dependency>
-			<groupId>oracle</groupId>
-			<artifactId>ojdbc6</artifactId>
-			<version>${oracle.jdbc.version}</version>
+		    <groupId>oracle</groupId>
+		    <artifactId>ojdbc6</artifactId>
+		    <version>${oracle.jdbc.version}</version>
 		</dependency>
+	
+	
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -219,7 +253,7 @@
 				<exclusion>
 					<groupId>commons-logging</groupId>
 					<artifactId>commons-logging</artifactId>
-				</exclusion>
+				 </exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
@@ -227,36 +261,38 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-
+				
 		<!-- AspectJ -->
-		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<version>${org.aspectj.version}</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<version>${org.aspectj.version}</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/aopalliance/aopalliance -->
-		<dependency>
-			<groupId>aopalliance</groupId>
-			<artifactId>aopalliance</artifactId>
-			<version>1.0</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjtools -->
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjtools</artifactId>
-			<version>${org.aspectj.version}</version>
-		</dependency>
-
+		  <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+			<dependency>
+			    <groupId>org.aspectj</groupId>
+			    <artifactId>aspectjweaver</artifactId>
+			    <version>${org.aspectj-version}</version>
+			</dependency>
+		  
+		  
+		  <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
+			<dependency>
+			    <groupId>org.aspectj</groupId>
+			    <artifactId>aspectjrt</artifactId>
+			    <version>${org.aspectj-version}</version>
+			</dependency>
+		  
+		  <!-- https://mvnrepository.com/artifact/aopalliance/aopalliance -->
+			<dependency>
+			    <groupId>aopalliance</groupId>
+			    <artifactId>aopalliance</artifactId>
+			    <version>1.0</version>
+			</dependency>
+		  
+		  
+		  <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjtools -->
+			<dependency>
+			    <groupId>org.aspectj</groupId>
+			    <artifactId>aspectjtools</artifactId>
+			    <version>${org.aspectj-version}</version>
+			</dependency>
+		
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -306,16 +342,15 @@
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
-
+				
 		<!-- Servlet -->
 		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>${javax.servlet-api.version}</version>
-			<scope>provided</scope>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>${javax.servlet-api}</version>
+		    <scope>provided</scope>
 		</dependency>
-
 
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
@@ -328,55 +363,46 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-
-		<!-- Test -->
-		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<version>${mockito-all.version}</version>
-			<scope>test</scope>
-		</dependency>
-
+	
 
 	</dependencies>
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<version>2.9</version>
-				<configuration>
-					<additionalProjectnatures>
-						<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
-					</additionalProjectnatures>
-					<additionalBuildcommands>
-						<buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
-					</additionalBuildcommands>
-					<downloadSources>true</downloadSources>
-					<downloadJavadocs>true</downloadJavadocs>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.5.1</version>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-					<compilerArgument>-Xlint:all</compilerArgument>
-					<showWarnings>true</showWarnings>
-					<showDeprecation>true</showDeprecation>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.2.1</version>
-				<configuration>
-					<mainClass>org.test.int1.Main</mainClass>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <version>2.9</version>
+                <configuration>
+                    <additionalProjectnatures>
+                        <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+                    </additionalProjectnatures>
+                    <additionalBuildcommands>
+                        <buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
+                    </additionalBuildcommands>
+                    <downloadSources>true</downloadSources>
+                    <downloadJavadocs>true</downloadJavadocs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <compilerArgument>-Xlint:all</compilerArgument>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <configuration>
+                    <mainClass>org.test.int1.Main</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
 	

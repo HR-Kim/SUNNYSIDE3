@@ -5,7 +5,9 @@
 
 <!-- Tiles mail : defaultLayout.jsp header,menu,body,footer -->
 <tiles-definitions>
-	<definition name="base-definition" template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">
+	<definition name="base-definition"
+		template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">
+
 		<put-attribute name="title" value="" />
 		<put-attribute name="header"
 			value="/WEB-INF/views/tiles/template/header.jsp" />
@@ -22,13 +24,13 @@
 		<put-attribute name="title" value="HRSPING>차트"/>
 		<put-attribute name="body" value="/chart/{1}.jsp"/>	
 	</definition>
-	
+		
 	<!-- main.jsp -->
 	<definition name="main/*" extends="base-definition">
 		<put-attribute name="title" value="HRSPING>사용자"/>
 		<put-attribute name="body" value="/main/{1}.jsp"/>	
 	</definition>
-	
+		
 	<!-- user.jsp -->
 	<definition name="user/*" extends="base-definition">
 		<put-attribute name="title" value="HRSPING>사용자"/>
@@ -40,12 +42,15 @@
 		<put-attribute name="title" value="HRSPING>사용자"/>
 		<put-attribute name="body" value="/board/{1}.jsp"/>	
 	</definition>
-	
+		
 	<!-- bootstrap_list_template.jsp -->
 	<definition name="template/*" extends="base-definition">
 		<put-attribute name="title" value="HRSPING>ListTemplate"/>
 		<put-attribute name="body" value="/WEB-INF/views/template/{1}.jsp"/>	
-	</definition>
+	</definition>	
+	
+	
+	
 	
 	
 </tiles-definitions>

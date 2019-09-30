@@ -51,7 +51,7 @@
 	<beans:bean id="downloadView" class="kr.co.sunnyside.cmn.DownloadView" />
 	
 	
-	<context:component-scan base-package="kr.co.ehr" />
+	<context:component-scan base-package="kr.co.sunnyside" />
 	
 	
 </beans:beans>
