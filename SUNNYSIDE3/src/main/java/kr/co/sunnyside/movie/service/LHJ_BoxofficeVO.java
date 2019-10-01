@@ -2,7 +2,7 @@ package kr.co.sunnyside.movie.service;
 
 import kr.co.sunnyside.cmn.DTO;
 
-public class LHJ_MovieVO extends DTO{
+public class LHJ_BoxofficeVO extends DTO{
 	private String movieId    ;
 	private String kortitle   ;
 	private String engtitle   ;
@@ -18,13 +18,12 @@ public class LHJ_MovieVO extends DTO{
 	private String poster     ;
 	private String expertRate ;
 	private String visitorRate;
-	private String screenState;
 	
-	public LHJ_MovieVO() {}
+	public LHJ_BoxofficeVO() {}
 	
-	public LHJ_MovieVO(String movieId, String kortitle, String engtitle, String limitage, String genre, String relDate,
-			String director, String cast, String runningTime, String synopsis, String trailer, String filmType,
-			String poster, String expertRate, String visitorRate, String screenState) {
+	public LHJ_BoxofficeVO(String movieId, String kortitle, String engtitle, String limitage, String genre,
+			String relDate, String director, String cast, String runningTime, String synopsis, String trailer,
+			String filmType, String poster, String expertRate, String visitorRate) {
 		super();
 		this.movieId = movieId;
 		this.kortitle = kortitle;
@@ -41,7 +40,6 @@ public class LHJ_MovieVO extends DTO{
 		this.poster = poster;
 		this.expertRate = expertRate;
 		this.visitorRate = visitorRate;
-		this.screenState = screenState;
 	}
 
 	public String getMovieId() {
@@ -164,20 +162,12 @@ public class LHJ_MovieVO extends DTO{
 		this.visitorRate = visitorRate;
 	}
 
-	public String getScreenState() {
-		return screenState;
-	}
-
-	public void setScreenState(String screenState) {
-		this.screenState = screenState;
-	}
-
 	@Override
 	public String toString() {
-		return "LHJ_MovieVO [movieId=" + movieId + ", kortitle=" + kortitle + ", engtitle=" + engtitle + ", limitage="
-				+ limitage + ", genre=" + genre + ", relDate=" + relDate + ", director=" + director + ", cast=" + cast
-				+ ", runningTime=" + runningTime + ", synopsis=" + synopsis + ", trailer=" + trailer + ", filmType="
-				+ filmType + ", poster=" + poster + ", expertRate=" + expertRate + ", visitorRate=" + visitorRate
-				+ ", screenState=" + screenState + ", toString()=" + super.toString() + "]";
-	}
+		return "LHJ_BoxofficeVO [movieId=" + movieId + ", kortitle=" + kortitle + ", engtitle=" + engtitle
+				+ ", limitage=" + limitage + ", genre=" + genre + ", relDate=" + relDate + ", director=" + director
+				+ ", cast=" + cast + ", runningTime=" + runningTime + ", synopsis=" + synopsis + ", trailer=" + trailer
+				+ ", filmType=" + filmType + ", poster=" + poster + ", expertRate=" + expertRate + ", visitorRate="
+				+ visitorRate + ", toString()=" + super.toString() + "]";
+	}	
 }
