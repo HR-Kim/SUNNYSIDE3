@@ -36,4 +36,25 @@
 			)
 </insert>
 
+<!-- 상품 삭제 -->
+<delete id="do_delete" parameterType="Store">
+			DELETE FROM product
+			WHERE
+			    product_id =  #{productId,jdbcType=VARCHAR}
+</delete>
+
+<!-- 상품정보 수정 -->
+<update id="do_update" parameterType="Store">
+			UPDATE product
+			SET product_nm     = #{productNm,jdbcType=VARCHAR},
+			    pruduct_info   = #{pruductInfo,jdbcType=VARCHAR},
+			    category       = #{category,jdbcType=NUMERIC},
+			    product_cost   = #{productCost,jdbcType=NUMERIC},
+			    org_file_nm    = #{orgFileNM,jdbcType=VARCHAR},
+			    save_file_nm   = #{saveFileNM,jdbcType=VARCHAR},
+			    img_size       = #{imageSize,javaType=double},
+			    ext 		   = #{ext,jdbcType=VARCHAR}
+			WHERE
+		   	 	product_id = #{productId,jdbcType=VARCHAR}
+</update>	
 </mapper>
