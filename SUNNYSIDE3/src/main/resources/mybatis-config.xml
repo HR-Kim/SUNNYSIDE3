@@ -12,7 +12,7 @@
 	<typeAliases>
 		<typeAlias type="kr.co.sunnyside.code.service.CodeVO" alias="Code" />
 		<typeAlias type="kr.co.sunnyside.cmn.SearchVO" alias="Search" />
-		<typeAlias type="kr.co.sunnyside.store.service.SEJ_StroreVO" alias="Strore" />
+		<typeAlias type="kr.co.sunnyside.store.service.SEJ_StroreVO" alias="Store" />
 	</typeAliases>
 
 </configuration>  

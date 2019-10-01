@@ -13,7 +13,7 @@
 	   
 <!-- 상품등록 -->
 <insert id="do_save" parameterType="Store">
-			Insert Into Product (
+			INSERT INTO PRODUCT (
 			    PRODUCT_ID,
 			    PRODUCT_NM,
 			    PRUDUCT_INFO,
@@ -23,8 +23,8 @@
 			    SAVE_FILE_NM,
 			    IMG_SIZE,
 			    EXT
-			) Values (
-			    "20190927-001",
+			) VALUES (
+			    #{productId,jdbcType=VARCHAR},
 			    #{productNm,jdbcType=VARCHAR},
 			    #{pruductInfo,jdbcType=VARCHAR},
 			    #{category,jdbcType=NUMERIC},

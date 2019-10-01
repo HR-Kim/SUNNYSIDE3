@@ -1,6 +1,8 @@
 package kr.co.sunnyside.store.service;
 
-public class SEJ_StroreVO extends FileVO {
+import kr.co.sunnyside.cmn.DTO;
+
+public class SEJ_StroreVO extends DTO {
 	
 	/**상품ID 20190927-분류명-001 */ 
 	private String productId;
@@ -9,11 +11,27 @@ public class SEJ_StroreVO extends FileVO {
 	/**상품정보*/
 	private String pruductInfo;
 	/**분류  001:팝콘  002:음료 003:영화예매권*/ 
-	private String category;
+	private int category;
 	/**상품가격 */
-	private String productCost;
+	private int productCost;
+	/**원본파일 명 */
+	private String orgFileNM ;
+	/**저장파일 명 */
+	private String saveFileNM; 
+	/**파일 사이즈 */
+	private long fileSize ; 
+	/**확장자 */
+	private String ext ; 
 	
 	public SEJ_StroreVO() {}
+
+	@Override
+	public String toString() {
+		return "SEJ_StroreVO [productId=" + productId + ", productNm=" + productNm + ", pruductInfo=" + pruductInfo
+				+ ", category=" + category + ", productCost=" + productCost + ", orgFileNM=" + orgFileNM
+				+ ", saveFileNM=" + saveFileNM + ", fileSize=" + fileSize + ", ext=" + ext + ", toString()="
+				+ super.toString() + "]";
+	}
 
 	public String getProductId() {
 		return productId;
@@ -39,27 +57,72 @@ public class SEJ_StroreVO extends FileVO {
 		this.pruductInfo = pruductInfo;
 	}
 
-	public String getCategory() {
+	public int getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(int category) {
 		this.category = category;
 	}
 
-	public String getProductCost() {
+	public int getProductCost() {
 		return productCost;
 	}
 
-	public void setProductCost(String productCost) {
+	public void setProductCost(int productCost) {
 		this.productCost = productCost;
 	}
 
-	@Override
-	public String toString() {
-		return "SEJ_StroreVO [productId=" + productId + ", productNm=" + productNm + ", pruductInfo=" + pruductInfo
-				+ ", category=" + category + ", productCost=" + productCost + ", toString()=" + super.toString() + "]";
+	public String getOrgFileNM() {
+		return orgFileNM;
 	}
+
+	public void setOrgFileNM(String orgFileNM) {
+		this.orgFileNM = orgFileNM;
+	}
+
+	public String getSaveFileNM() {
+		return saveFileNM;
+	}
+
+	public void setSaveFileNM(String saveFileNM) {
+		this.saveFileNM = saveFileNM;
+	}
+
+	public long getFileSize() {
+		return fileSize;
+	}
+
+	public void setFileSize(long fileSize) {
+		this.fileSize = fileSize;
+	}
+
+	public String getExt() {
+		return ext;
+	}
+
+	public void setExt(String ext) {
+		this.ext = ext;
+	}
+
+	public SEJ_StroreVO(String productId, String productNm, String pruductInfo, int category, int productCost,
+			String orgFileNM, String saveFileNM, long fileSize, String ext) {
+		super();
+		this.productId = productId;
+		this.productNm = productNm;
+		this.pruductInfo = pruductInfo;
+		this.category = category;
+		this.productCost = productCost;
+		this.orgFileNM = orgFileNM;
+		this.saveFileNM = saveFileNM;
+		this.fileSize = fileSize;
+		this.ext = ext;
+	}
+
+
+
+	
+
 	
 	
 }
