@@ -43,10 +43,10 @@
    
     <bean id="passwordAuth" class="javax.mail.PasswordAuthentication">
       <constructor-arg>
-         <value></value>
+         <value>메일 아이디</value>
       </constructor-arg>
       <constructor-arg>
-         <value></value>
+         <value>메일 비밀번호</value>
       </constructor-arg>
     </bean>
     
