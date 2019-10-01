@@ -180,4 +180,5 @@ public class LHJ_MovieVO extends DTO{
 				+ filmType + ", poster=" + poster + ", expertRate=" + expertRate + ", visitorRate=" + visitorRate
 				+ ", screenState=" + screenState + ", toString()=" + super.toString() + "]";
 	}
+	
 }

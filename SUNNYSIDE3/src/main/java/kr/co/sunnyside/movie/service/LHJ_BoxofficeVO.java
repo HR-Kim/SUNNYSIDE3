@@ -170,4 +170,6 @@ public class LHJ_BoxofficeVO extends DTO{
 				+ ", filmType=" + filmType + ", poster=" + poster + ", expertRate=" + expertRate + ", visitorRate="
 				+ visitorRate + ", toString()=" + super.toString() + "]";
 	}	
+	
 }
+
