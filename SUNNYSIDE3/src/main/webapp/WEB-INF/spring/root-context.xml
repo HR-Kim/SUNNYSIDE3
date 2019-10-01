@@ -43,10 +43,10 @@
    
     <bean id="passwordAuth" class="javax.mail.PasswordAuthentication">
       <constructor-arg>
-         <value>spdl7845</value>
+         <value></value>
       </constructor-arg>
       <constructor-arg>
-         <value>na7724545</value>
+         <value></value>
       </constructor-arg>
     </bean>
     
