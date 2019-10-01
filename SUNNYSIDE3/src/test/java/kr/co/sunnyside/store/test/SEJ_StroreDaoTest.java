@@ -22,6 +22,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.context.WebApplicationContext;
 
+import kr.co.sunnyside.cmn.StringUtil;
 import kr.co.sunnyside.store.service.SEJ_StroreVO;
 import kr.co.sunnyside.store.service.impl.SEJ_StroreDaoImpl;
 
@@ -42,12 +43,14 @@ public class SEJ_StroreDaoTest {
 	
 	@Before
 	public void setUp() {
+		//String fileId = StringUtil.cureDate("yyyyMMdd")+""+StringUtil.getUUID();
 		
+		//LOG.debug(fileId.length()+"");// 번호 등록될 때 아이디랑 뒤에 번호 아무거나 붙여져서 나온다
 		list = Arrays.asList(
-				new SEJ_StroreVO("20190930-001","고소팝콘(L)","옥수수 본연의 맛을 즐길 수 있는 짭짜름한 클래식 고소팝콘!",001,5000,"no_image","no_image",0 ,"no_image"),
-				new SEJ_StroreVO("20190930-002","달콤팝콘(L)","달콤한 카라멜 향이 가득한 달콤팝콘을 즐겨보세요!",001,6000,"no_image","no_image",0 ,"no_image"),
-				new SEJ_StroreVO("20190930-003","더블치즈팝콘(L)","치즈매니아들이라면 놓칠 수 없는 바로 그 팝콘!",001,6000,"no_image","no_image",0 ,"no_image"),
-				new SEJ_StroreVO("20190930-004","바질어니언팝콘(L)","수많은 매니아를 보유한 바로 그 팝콘! 중독성 200%",001,6000,"no_image","no_image",0 ,"no_image")
+				new SEJ_StroreVO("20191001-001","고소팝콘(L)","옥수수 본연의 맛을 즐길 수 있는 짭짜름한 클래식 고소팝콘!",001,5000,"J01_사진.jpg","J02_사진.jpg",1000 ,"jpg"),
+				new SEJ_StroreVO("20191001-002","달콤팝콘(L)","달콤한 카라멜 향이 가득한 달콤팝콘을 즐겨보세요!",001,6000,"J01_사진.jpg","J02_사진.jpg",2000 ,"jpg"),
+				new SEJ_StroreVO("20191001-003","더블치즈팝콘(L)","치즈매니아들이라면 놓칠 수 없는 바로 그 팝콘!",001,6000,"J01_사진.jpg","J02_사진.jpg",3000 ,"jpg"),
+				new SEJ_StroreVO("20191001-004","바질어니언팝콘(L)","수많은 매니아를 보유한 바로 그 팝콘! 중독성 200%",001,6000,"J01_사진.jpg","J02_사진.jpg",4000 ,"jpg")
 		
 				);
 	}

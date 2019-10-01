@@ -18,8 +18,8 @@ public class SEJ_StroreVO extends DTO {
 	private String orgFileNM ;
 	/**저장파일 명 */
 	private String saveFileNM; 
-	/**파일 사이즈 */
-	private long fileSize ; 
+	/**사진 사이즈 */
+	private double imageSize ; 
 	/**확장자 */
 	private String ext ; 
 	
@@ -29,7 +29,7 @@ public class SEJ_StroreVO extends DTO {
 	public String toString() {
 		return "SEJ_StroreVO [productId=" + productId + ", productNm=" + productNm + ", pruductInfo=" + pruductInfo
 				+ ", category=" + category + ", productCost=" + productCost + ", orgFileNM=" + orgFileNM
-				+ ", saveFileNM=" + saveFileNM + ", fileSize=" + fileSize + ", ext=" + ext + ", toString()="
+				+ ", saveFileNM=" + saveFileNM + ", fileSize=" + imageSize + ", ext=" + ext + ", toString()="
 				+ super.toString() + "]";
 	}
 
@@ -89,12 +89,12 @@ public class SEJ_StroreVO extends DTO {
 		this.saveFileNM = saveFileNM;
 	}
 
-	public long getFileSize() {
-		return fileSize;
+	public double getFileSize() {
+		return imageSize;
 	}
 
-	public void setFileSize(long fileSize) {
-		this.fileSize = fileSize;
+	public void setFileSize(double imageSize) {
+		this.imageSize = imageSize;
 	}
 
 	public String getExt() {
@@ -115,7 +115,7 @@ public class SEJ_StroreVO extends DTO {
 		this.productCost = productCost;
 		this.orgFileNM = orgFileNM;
 		this.saveFileNM = saveFileNM;
-		this.fileSize = fileSize;
+		this.imageSize = imageSize;
 		this.ext = ext;
 	}
 

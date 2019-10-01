@@ -31,9 +31,9 @@
 			    #{productCost,jdbcType=NUMERIC},
 			    #{orgFileNM,jdbcType=VARCHAR},
 			    #{saveFileNM,jdbcType=VARCHAR},
-			    #{fileSize,jdbcType=NUMERIC},
+			    #{imageSize,javaType=double},
 			    #{ext,jdbcType=VARCHAR}
-			);
+			)
 </insert>
 
 </mapper>
