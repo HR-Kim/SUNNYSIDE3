@@ -147,11 +147,11 @@ public class LGS_RoomDaoTest {
 	@Before
 	public void getBean() {
 		Blist = Arrays.asList(
-				new LGS_BranchInfoVO("", "name1")
-				,new LGS_BranchInfoVO("", "name2")
-				,new LGS_BranchInfoVO("", "name3")
-				,new LGS_BranchInfoVO("", "name4")
-				,new LGS_BranchInfoVO("", "name5")
+				new LGS_BranchInfoVO("", "branch1")
+				,new LGS_BranchInfoVO("", "branch2")
+				,new LGS_BranchInfoVO("", "branch3")
+				,new LGS_BranchInfoVO("", "branch4")
+				,new LGS_BranchInfoVO("", "branch5")
 				);
 		
 		LOG.debug("====================");
@@ -192,11 +192,11 @@ public class LGS_RoomDaoTest {
 		}
 		tmp2 = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.get_retrieve(search);
 		Rlist = Arrays.asList(
-				new LGS_RoomVO(tmp2.get(0).getBranchId(), "testRoom001", "branch1", 100, 100)
-				,new LGS_RoomVO(tmp2.get(1).getBranchId(), "testRoom002", "branch", 200, 100)
-				,new LGS_RoomVO(tmp2.get(2).getBranchId(), "testRoom003", "branch", 300, 100)
-				,new LGS_RoomVO(tmp2.get(3).getBranchId(), "testRoom004", "branch", 400, 100)
-				,new LGS_RoomVO(tmp2.get(4).getBranchId(), "testRoom005", "branch", 500, 100)
+				new LGS_RoomVO(tmp2.get(0).getBranchId(), "testRoom001", "room1", 100, 100)
+				,new LGS_RoomVO(tmp2.get(1).getBranchId(), "testRoom002", "room2", 200, 100)
+				,new LGS_RoomVO(tmp2.get(2).getBranchId(), "testRoom003", "room3", 300, 100)
+				,new LGS_RoomVO(tmp2.get(3).getBranchId(), "testRoom004", "room4", 400, 100)
+				,new LGS_RoomVO(tmp2.get(4).getBranchId(), "testRoom005", "room5", 500, 100)
 				);
 		for(LGS_RoomVO vo : Rlist) {
 			int flag = roomDaoImpl.do_save(vo);
