@@ -79,6 +79,14 @@ public class SEJ_StroreDaoTest {
 		List<SEJ_StroreVO> list = (List<SEJ_StroreVO>) storeDaoImpl.get_retrieve(search);
 		assertThat(3, is(list.size()));
 		
+//		search.setSearchWord("2");
+//		search.setSearchDiv("20");
+//		search.setPageSize(10);
+//		search.setPageNum(1);
+//		
+//		List<SEJ_StroreVO> list = (List<SEJ_StroreVO>) storeDaoImpl.get_retrieve(search);
+//		assertThat(1, is(list.size()));
+		
 	}
 
 	
