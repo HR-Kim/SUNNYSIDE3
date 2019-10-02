@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>	
+<!DOCTYPE mapper	
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"	
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">	
+<mapper namespace="kr.co.sunnyside.login">
+	
+	
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="pw_find" parameterType="SJH_LoginVO" resultType="SJH_LoginVO">
+		SELECT
+		    passwd
+		FROM
+		    USER_INFO
+		WHERE  user_name = #{userName,jdbcType=VARCHAR} 
+		AND    user_id   = #{userId,jdbcType=VARCHAR}   
+		AND    email   = #{email,jdbcType=VARCHAR}               
+	</select>
+	
+	
+	<!-- 아이디 찾기 -->
+	<select id="id_find" parameterType="SJH_LoginVO" resultType="SJH_LoginVO">
+    	SELECT
+		    user_id as userId
+		FROM
+		    user_info
+		WHERE   user_id   = #{userId,jdbcType=VARCHAR}
+		AND     user_name = #{userName,jdbcType=VARCHAR} 
+	</select>
+	
+	
+	<!-- 등록 -->
+	<insert id="do_save" parameterType="SJH_LoginVO">
+		INSERT INTO user_info (
+						    user_id,
+						    passwd,
+						    user_name,
+						    email,
+						    user_level,
+						    point,
+						    cellphone,
+						    birth,
+						    reg_dt      
+						) VALUES (          
+						    #{userId,jdbcType=VARCHAR},              
+						    #{passwd,jdbcType=VARCHAR},              
+						    #{userName,jdbcType=VARCHAR},
+						    #{email,jdbcType=VARCHAR},              
+						    #{userLevel,jdbcType=NUMERIC},              
+						    #{point,jdbcType=NUMERIC},              
+						    #{cellphone,jdbcType=VARCHAR},
+						    #{birth,jdbcType=VARCHAR}, 
+						    SYSDATE         
+						)                  
+	</insert>
+	
+	
+	<!-- 단건조회 -->
+	<select id="get_selectOne" parameterType="SJH_LoginVO" resultType="SJH_LoginVO">
+		SELECT										
+			user_id as userId,
+			passwd,
+			user_name as userName,
+			email,
+			user_level as userLevel,
+			point,
+			cellphone,
+			birth,
+			reg_dt as regDt
+		FROM                                     
+		    user_info                                
+		WHERE user_id = #{userId,jdbcType=VARCHAR}                         
+	</select>
+	
+	
+    <!-- 아이디 체크 -->
+	<select id="id_check" parameterType="SJH_LoginVO" resultType="int">
+		SELECT COUNT(*) CNT
+		FROM user_info
+		WHERE user_id = #{userId,jdbcType=VARCHAR}
+	</select>
+	
+	
+	<!-- 비번 체크 -->
+	<select id="passwd_check" parameterType="SJH_LoginVO" resultType="int">
+		SELECT COUNT(*) CNT
+		FROM user_info
+		WHERE user_id = #{userId,jdbcType=VARCHAR}	
+		AND passwd = #{passwd,jdbcType=VARCHAR}	
+	</select>
+
+</mapper>
+
