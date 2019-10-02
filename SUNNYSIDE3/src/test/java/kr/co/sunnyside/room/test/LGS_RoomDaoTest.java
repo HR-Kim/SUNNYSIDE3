@@ -192,11 +192,11 @@ public class LGS_RoomDaoTest {
 		}
 		tmp2 = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.get_retrieve(search);
 		Rlist = Arrays.asList(
-				new LGS_RoomVO(tmp2.get(0).getBranchId(), "testRoom001", "room1", 100, 100)
-				,new LGS_RoomVO(tmp2.get(1).getBranchId(), "testRoom002", "room2", 200, 100)
-				,new LGS_RoomVO(tmp2.get(2).getBranchId(), "testRoom003", "room3", 300, 100)
-				,new LGS_RoomVO(tmp2.get(3).getBranchId(), "testRoom004", "room4", 400, 100)
-				,new LGS_RoomVO(tmp2.get(4).getBranchId(), "testRoom005", "room5", 500, 100)
+				new LGS_RoomVO(tmp2.get(0).getBranchId(), "testRoom001", "branch1", 100, 100)
+				,new LGS_RoomVO(tmp2.get(1).getBranchId(), "testRoom002", "branch", 200, 100)
+				,new LGS_RoomVO(tmp2.get(2).getBranchId(), "testRoom003", "branch", 300, 100)
+				,new LGS_RoomVO(tmp2.get(3).getBranchId(), "testRoom004", "branch", 400, 100)
+				,new LGS_RoomVO(tmp2.get(4).getBranchId(), "testRoom005", "branch", 500, 100)
 				);
 		for(LGS_RoomVO vo : Rlist) {
 			int flag = roomDaoImpl.do_save(vo);
