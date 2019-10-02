@@ -22,6 +22,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.context.WebApplicationContext;
 
+
+import kr.co.sunnyside.cmn.SearchVO;
 import kr.co.sunnyside.store.service.SEJ_StroreVO;
 import kr.co.sunnyside.store.service.impl.SEJ_StroreDaoImpl;
 
@@ -63,13 +65,48 @@ public class SEJ_StroreDaoTest {
 		assertThat(context, is(notNullValue()));
 		assertThat(storeDaoImpl, is(notNullValue()));
 	}
+
+	//상품 전체조회
+	@Test
+	@Ignore
+	public void get_retrieve() {
+		SearchVO search = new SearchVO();
+		search.setSearchWord("팝콘");
+		search.setSearchDiv("10");
+		search.setPageSize(10);
+		search.setPageNum(1);
+		
+		List<SEJ_StroreVO> list = (List<SEJ_StroreVO>) storeDaoImpl.get_retrieve(search);
+		assertThat(3, is(list.size()));
+		
+	}
+
+	
+	//상품 단건조회
+	@Test
+	@Ignore
+	public void get_selectOne(){
+		storeDaoImpl.get_selectOne(list.get(1));
+		
+	}
 	
 	//상품 수정
 	@Test
 	@Ignore
 	public void do_update() {
-		SEJ_StroreVO storeData =list.get(0);
-
+		
+		SEJ_StroreVO store = list.get(0);
+		store.setProductNm("탄산음료(L)");
+		store.setPruductInfo("콜라,콜라제로,환타오렌지,스프라이트 중 원하는 맛으로 교환하세요! ");
+		store.setCategory(002);
+		store.setProductCost(2700);
+		store.setOrgFileNM("J12_사진.jpg");
+		store.setSaveFileNM("J12_사진.jpg");
+		store.setImageSize(2000);
+		store.setExt("jpg");
+		
+		int flag = storeDaoImpl.do_update(store);
+		assertThat(flag, is(1));
 	}
 	
 	//상품 삭제

@@ -12,49 +12,111 @@
 	   -->
 	   
 <!-- 상품등록 -->
-<insert id="do_save" parameterType="Store">
-			INSERT INTO PRODUCT (
-			    PRODUCT_ID,
-			    PRODUCT_NM,
-			    PRUDUCT_INFO,
-			    CATEGORY,
-			    PRODUCT_COST,
-			    ORG_FILE_NM,
-			    SAVE_FILE_NM,
-			    IMG_SIZE,
-			    EXT
-			) VALUES (
-			    #{productId,jdbcType=VARCHAR},
-			    #{productNm,jdbcType=VARCHAR},
-			    #{pruductInfo,jdbcType=VARCHAR},
-			    #{category,jdbcType=NUMERIC},
-			    #{productCost,jdbcType=NUMERIC},
-			    #{orgFileNM,jdbcType=VARCHAR},
-			    #{saveFileNM,jdbcType=VARCHAR},
-			    #{imageSize,javaType=double},
-			    #{ext,jdbcType=VARCHAR}
-			)
-</insert>
+	<insert id="do_save" parameterType="Store">
+				INSERT INTO PRODUCT (
+				    PRODUCT_ID,
+				    PRODUCT_NM,
+				    PRUDUCT_INFO,
+				    CATEGORY,
+				    PRODUCT_COST,
+				    ORG_FILE_NM,
+				    SAVE_FILE_NM,
+				    IMG_SIZE,
+				    EXT
+				) VALUES (
+				    #{productId,jdbcType=VARCHAR},
+				    #{productNm,jdbcType=VARCHAR},
+				    #{pruductInfo,jdbcType=VARCHAR},
+				    #{category,jdbcType=NUMERIC},
+				    #{productCost,jdbcType=NUMERIC},
+				    #{orgFileNM,jdbcType=VARCHAR},
+				    #{saveFileNM,jdbcType=VARCHAR},
+				    #{imageSize,javaType=double},
+				    #{ext,jdbcType=VARCHAR}
+				)
+	</insert>
 
 <!-- 상품 삭제 -->
-<delete id="do_delete" parameterType="Store">
-			DELETE FROM product
-			WHERE
-			    product_id =  #{productId,jdbcType=VARCHAR}
-</delete>
+	<delete id="do_delete" parameterType="Store">
+				DELETE FROM PRODUCT
+				WHERE
+				    product_id =  #{productId,jdbcType=VARCHAR}
+	</delete>
 
 <!-- 상품정보 수정 -->
-<update id="do_update" parameterType="Store">
-			UPDATE product
-			SET product_nm     = #{productNm,jdbcType=VARCHAR},
-			    pruduct_info   = #{pruductInfo,jdbcType=VARCHAR},
-			    category       = #{category,jdbcType=NUMERIC},
-			    product_cost   = #{productCost,jdbcType=NUMERIC},
-			    org_file_nm    = #{orgFileNM,jdbcType=VARCHAR},
-			    save_file_nm   = #{saveFileNM,jdbcType=VARCHAR},
-			    img_size       = #{imageSize,javaType=double},
-			    ext 		   = #{ext,jdbcType=VARCHAR}
-			WHERE
-		   	 	product_id = #{productId,jdbcType=VARCHAR}
-</update>	
+	<update id="do_update" parameterType="Store">
+				UPDATE PRODUCT
+				SET product_nm     = #{productNm,jdbcType=VARCHAR},
+				    pruduct_info   = #{pruductInfo,jdbcType=VARCHAR},
+				    category       = #{category,jdbcType=NUMERIC},
+				    product_cost   = #{productCost,jdbcType=NUMERIC},
+				    org_file_nm    = #{orgFileNM,jdbcType=VARCHAR},
+				    save_file_nm   = #{saveFileNM,jdbcType=VARCHAR},
+				    img_size       = #{imageSize,javaType=double},
+				    ext 		   = #{ext,jdbcType=VARCHAR}
+				WHERE
+			   	 	product_id = #{productId,jdbcType=VARCHAR}
+	</update>
+
+<!-- 상품 단건조회 -->
+  <select id="get_selectOne" parameterType="Store" resultType="Store">
+   	 SELECT                                 
+		   <include refid="boardColumns"/>          
+		 FROM                                   
+		     PRODUCT                              
+		  WHERE product_id=#{productId,jdbcType=VARCHAR}      
+   </select>
+   
+   <sql id="boardColumns">
+   			  	 	PRODUCT_ID,
+				    PRODUCT_NM as productNm,
+				    PRUDUCT_INFO as pruductInfo,
+				    CATEGORY,
+				    PRODUCT_COST as productCost,
+				    ORG_FILE_NM as orgFileNM,
+				    SAVE_FILE_NM as saveFileNM,
+				    IMG_SIZE as imageSize,
+				    EXT   
+   </sql>
+
+<!-- 상품 전체조회 -->
+	 <select id="get_retrieve" parameterType="Search" resultType="Store">
+		  SELECT T1.*												
+		  FROM                                                              
+		  (                                                                 
+		  	SELECT  B.rnum as num,
+				  	B.PRODUCT_ID as productId ,
+					B.PRODUCT_NM as productNm,
+					B.PRUDUCT_INFO as pruductInfo,
+					B.CATEGORY,
+					B.PRODUCT_COST as productCost,
+					B.ORG_FILE_NM as orgFileNM,
+					B.SAVE_FILE_NM as saveFileNM,
+					B.IMG_SIZE as imageSize,
+					B.EXT                                                     
+		    FROM(
+ 					SELECT ROWNUM AS rnum,A.*
+ 					FROM(
+  							SELECT *
+ 						    FROM PRODUCT   
+ 						    WHERE  1=1                        
+		  			<include refid="baseCondition"/>                                                                          
+		  		)A                                                         
+		  	   WHERE rownum <![CDATA[ <= ]]> (#{pageSize} * (#{pageNum}-1)+#{pageSize})    						       
+		  	) B                                                            
+		  	WHERE B.rnum <![CDATA[ >= ]]> (#{pageSize} * (#{pageNum}-1)+1)                  				   
+		  )T1	
+		</select>
+	 <sql id="baseCondition">   	
+			<choose>
+				<when test="'10' == searchDiv">
+					 and PRODUCT_NM LIKE '%' || #{searchWord} || '%'
+				</when>
+				<when test="'20' == searchDiv">
+					 and CATEGORY LIKE '%' || #{searchWord} || '%'
+				</when>
+				<otherwise></otherwise>
+			</choose>  
+	   </sql>
+	
 </mapper>

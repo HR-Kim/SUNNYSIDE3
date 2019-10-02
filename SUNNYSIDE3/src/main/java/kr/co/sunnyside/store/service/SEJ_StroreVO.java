@@ -29,8 +29,22 @@ public class SEJ_StroreVO extends DTO {
 	public String toString() {
 		return "SEJ_StroreVO [productId=" + productId + ", productNm=" + productNm + ", pruductInfo=" + pruductInfo
 				+ ", category=" + category + ", productCost=" + productCost + ", orgFileNM=" + orgFileNM
-				+ ", saveFileNM=" + saveFileNM + ", fileSize=" + imageSize + ", ext=" + ext + ", toString()="
+				+ ", saveFileNM=" + saveFileNM + ", imageSize=" + imageSize + ", ext=" + ext + ", toString()="
 				+ super.toString() + "]";
+	}
+
+	public SEJ_StroreVO(String productId, String productNm, String pruductInfo, int category, int productCost,
+			String orgFileNM, String saveFileNM, double imageSize, String ext) {
+		super();
+		this.productId = productId;
+		this.productNm = productNm;
+		this.pruductInfo = pruductInfo;
+		this.category = category;
+		this.productCost = productCost;
+		this.orgFileNM = orgFileNM;
+		this.saveFileNM = saveFileNM;
+		this.imageSize = imageSize;
+		this.ext = ext;
 	}
 
 	public String getProductId() {
@@ -89,11 +103,11 @@ public class SEJ_StroreVO extends DTO {
 		this.saveFileNM = saveFileNM;
 	}
 
-	public double getFileSize() {
+	public double getImageSize() {
 		return imageSize;
 	}
 
-	public void setFileSize(double imageSize) {
+	public void setImageSize(double imageSize) {
 		this.imageSize = imageSize;
 	}
 
@@ -105,20 +119,7 @@ public class SEJ_StroreVO extends DTO {
 		this.ext = ext;
 	}
 
-	public SEJ_StroreVO(String productId, String productNm, String pruductInfo, int category, int productCost,
-			String orgFileNM, String saveFileNM, long fileSize, String ext) {
-		super();
-		this.productId = productId;
-		this.productNm = productNm;
-		this.pruductInfo = pruductInfo;
-		this.category = category;
-		this.productCost = productCost;
-		this.orgFileNM = orgFileNM;
-		this.saveFileNM = saveFileNM;
-		this.imageSize = imageSize;
-		this.ext = ext;
-	}
-
+	
 
 
 	
