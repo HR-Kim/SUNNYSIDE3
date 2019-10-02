@@ -13,7 +13,14 @@
 		<typeAlias type="kr.co.sunnyside.code.service.CodeVO" alias="Code" />
 		<typeAlias type="kr.co.sunnyside.cmn.SearchVO" alias="Search" />
 		<typeAlias type="kr.co.sunnyside.store.service.SEJ_StroreVO" alias="Store" />
+		
+		<typeAlias type="kr.co.sunnyside.reservation.service.LGS_TicketVO" alias="TicketVO"/>
+		<typeAlias type="kr.co.sunnyside.branchinfo.service.LGS_BranchInfoVO" alias="BranchInfo"/>
+		<typeAlias type="kr.co.sunnyside.room.service.LGS_RoomVO" alias="Room"/>
+		<typeAlias type="kr.co.sunnyside.seat.service.LGS_SeatVO" alias="Seat"/>
+		<typeAlias type="kr.co.sunnyside.screeninfo.service.LGS_ScreenInfoVO" alias="ScreenInfo"/>
 	</typeAliases>
+
 
 </configuration>  
   
