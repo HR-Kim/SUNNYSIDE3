@@ -25,14 +25,14 @@ public class SEJ_StroreDaoImpl implements WorkDiv {
 	@Override
 	public int do_save(DTO dto) {
 		String statement = NAMESPACE+".do_save";
-		SEJ_StroreVO Store = (SEJ_StroreVO) dto;
+		SEJ_StroreVO store = (SEJ_StroreVO) dto;
 		LOG.debug("===================================");
-		LOG.debug("=1. param="+Store);
+		LOG.debug("=1. param="+store);
 		LOG.debug("===================================");
 		LOG.debug("===================================");
 		LOG.debug("=2. statement="+statement);
 		LOG.debug("===================================");
-		int flag = this.sqlSessionTemplate.insert(statement,Store);
+		int flag = this.sqlSessionTemplate.insert(statement,store);
 		LOG.debug("===================================");
 		LOG.debug("=3. flag="+flag);
 		LOG.debug("===================================");
@@ -43,15 +43,40 @@ public class SEJ_StroreDaoImpl implements WorkDiv {
 	/**상품 삭제*/
 	@Override
 	public int do_delete(DTO dto) {
+		String statement = NAMESPACE+".do_delete";
+		SEJ_StroreVO store = (SEJ_StroreVO) dto;
+		LOG.debug("===================================");
+		LOG.debug("=1. param="+store);
+		LOG.debug("===================================");
+		LOG.debug("===================================");
+		LOG.debug("=2. statement="+statement);
+		LOG.debug("===================================");
 		
-		return 0;
+		int flag = this.sqlSessionTemplate.delete(statement,store);
+		LOG.debug("===================================");
+		LOG.debug("=3. flag="+flag);
+		LOG.debug("===================================");
+		
+		return flag;
 	}
 	
 	/**상품 정보 수정*/
 	@Override
 	public int do_update(DTO dto) {
+		String statement = NAMESPACE+".do_update";
+		SEJ_StroreVO store = (SEJ_StroreVO) dto;
+		LOG.debug("===================================");
+		LOG.debug("=1. param="+store);
+		LOG.debug("===================================");
+		LOG.debug("===================================");
+		LOG.debug("=2. statement="+statement);
+		LOG.debug("===================================");
 		
-		return 0;
+		int flag = this.sqlSessionTemplate.delete(statement,store);
+		LOG.debug("===================================");
+		LOG.debug("=3. flag="+flag);
+		LOG.debug("===================================");
+		return flag;
 	}
 
 	/**상품 단건조회*/

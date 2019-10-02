@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="room">
+
+	<!-- 검색어 -->
+	<sql id="baseCondition">
+	<where>
+		<choose>
+			<when test="'10' == searchDiv">
+				BRANCH_ID LIKE '%' || #{searchWord} || '%'
+			</when>
+			<when test="'20' == searchDiv">
+				ROOM_ID LIKE '%' || #{searchWord} || '%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</where>
+	</sql>
+	 
+	<delete id="do_delete" parameterType="Room">
+		DELETE FROM ROOM WHERE ROOM_ID = #{roomId, jdbcType=VARCHAR}
+	</delete>
+	
+	<select id="get_selectOne" parameterType="Room" resultType="Room">
+		SELECT
+			BRANCH_ID as branchId,
+		    ROOM_ID as roomId,
+			ROOM_NM as roomNm,
+			TOTAL_SEAT as totalSeat,
+			REST_SEAT as restSeat
+		FROM
+		    ROOM
+		WHERE
+		    ROOM_NM = #{roomNm, jdbcType=VARCHAR}
+	</select>
+	 
+	<select id="do_save" parameterType="Room">
+		INSERT INTO ROOM (
+		    BRANCH_ID,
+		    ROOM_ID,
+		    ROOM_NM,
+		    TOTAL_SEAT,
+		    REST_SEAT
+		) VALUES (
+		    #{branchId, jdbcType=VARCHAR},
+		    DBMS_RANDOM.STRING('X', 20),
+		    #{roomNm, jdbcType=VARCHAR},
+		    #{totalSeat, jdbcType=NUMERIC},
+		    #{restSeat, jdbcType=NUMERIC}
+		)
+	</select>
+	
+	<update id="do_update" parameterType="Room">
+		UPDATE ROOM
+		SET
+			BRANCH_ID = #{branchId, jdbcType=VARCHAR},
+			ROOM_NM = #{roomNm, jdbcType=VARCHAR},
+			TOTAL_SEAT = #{totalSeat, jdbcType=NUMERIC},
+			REST_SEAT = #{restSeat, jdbcType=NUMERIC}
+		WHERE
+			ROOM_ID = #{roomId, jdbcType=VARCHAR}
+	</update>
+	
+	<select id="get_retrieve" parameterType="Search" resultType="Room">
+		SELECT T.RNUM as NUM
+			  ,T.BRANCH_ID as branchId
+			  ,T.ROOM_ID as roomId
+			  ,T.ROOM_NM as roomNm
+			  ,T.TOTAL_SEAT as totalSeat
+			  ,T.REST_SEAT as restSeat
+		FROM(
+		    SELECT ROWNUM AS RNUM, A.*
+		    FROM(
+		         SELECT *
+		         FROM ROOM
+		         <include refid="baseCondition"/>
+		         ORDER BY ROOM_ID
+		        )A
+		    WHERE CEIL(ROWNUM/ #{pageSize, jdbcType=VARCHAR} ) = #{pageNum, jdbcType=VARCHAR}
+		    )T
+		
+	</select>
+
+</mapper>

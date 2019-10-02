@@ -22,7 +22,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.context.WebApplicationContext;
 
-import kr.co.sunnyside.cmn.StringUtil;
 import kr.co.sunnyside.store.service.SEJ_StroreVO;
 import kr.co.sunnyside.store.service.impl.SEJ_StroreDaoImpl;
 
@@ -65,8 +64,24 @@ public class SEJ_StroreDaoTest {
 		assertThat(storeDaoImpl, is(notNullValue()));
 	}
 	
+	//상품 수정
 	@Test
-	//@Ignore
+	@Ignore
+	public void do_update() {
+		SEJ_StroreVO storeData =list.get(0);
+
+	}
+	
+	//상품 삭제
+	@Test
+	@Ignore
+	public void do_delete() {
+		storeDaoImpl.do_delete(list.get(0));
+	}
+		
+	//상품 등록 
+	@Test
+	@Ignore
 	public void do_save() {
 		for(SEJ_StroreVO vo:list) {
 			int flag = storeDaoImpl.do_save(vo);
