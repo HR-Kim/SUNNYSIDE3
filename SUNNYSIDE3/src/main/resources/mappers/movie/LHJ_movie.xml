@@ -1,57 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.sunnyside.movie">
-
-	<!-- 영화 등록(kobis)-->
-	<insert id="do_boxoffice_insert" parameterType="Boxoffice">
-		INSERT INTO movie (
-		    movie_id,
-		    kortitle,
-		    engtitle,
-		    limitage,
-		    genre,
-		    rel_date,
-		    director,
-		    cast,
-		    running_time,
-		    synopsis,
-		    poster,
-		    expert_rate,
-		    visitor_rate
-		) VALUES (
-		    #{movieId, jdbcType=VARCHAR}
-		    ,#{kortitle, jdbcType=VARCHAR}
-		    ,#{engtitle, jdbcType=VARCHAR}
-		    ,#{limitage, jdbcType=VARCHAR}
-		    ,#{genre, jdbcType=VARCHAR}
-		    ,#{relDate, jdbcType=VARCHAR}
-		    ,#{director, jdbcType=VARCHAR}
-		    ,#{cast, jdbcType=VARCHAR}
-		    ,#{runningTime, jdbcType=NUMERIC}
-		    ,#{synopsis, jdbcType=VARCHAR}
-		    ,#{poster, jdbcType=VARCHAR}
-		    ,0
-		    ,0
-		)
-	</insert>
 	
 	<!-- 영화 등록(kmdb) -->
 	<insert id="do_movie_insert" parameterType="Movie">
 		INSERT INTO movie (
-		    movie_id,
-		    kortitle,
-		    engtitle,
-		    limitage,
-		    genre,
-		    rel_date,
-		    director,
-		    cast,
-		    running_time,
-		    synopsis,
-		    poster,
-		    expert_rate,
-		    visitor_rate,
-		    screen_state
+		    movie_id
+			,kortitle
+			,engtitle
+			,limitage
+			,genre
+			,rel_date
+			,director
+			,cast
+			,running_time
+			,synopsis
+			,poster
+			,expert_rate
+			,visitor_rate
+		    ,screen_state
 		) VALUES (
 		    #{movieId, jdbcType=VARCHAR}
 		    ,#{kortitle, jdbcType=VARCHAR}
