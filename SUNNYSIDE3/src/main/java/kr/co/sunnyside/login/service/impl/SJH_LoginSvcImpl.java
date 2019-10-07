@@ -1,12 +1,21 @@
 package kr.co.sunnyside.login.service.impl;
 
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
 import kr.co.sunnyside.cmn.DTO;
 import kr.co.sunnyside.cmn.Message;
+import kr.co.sunnyside.cmn.StringUtil;
 import kr.co.sunnyside.login.service.SJH_LoginSvc;
 import kr.co.sunnyside.login.service.SJH_LoginVO;
 
@@ -18,6 +27,9 @@ public class SJH_LoginSvcImpl implements SJH_LoginSvc{
 	@Autowired
 	private SJH_LoginDao loginDao;
 
+	@Autowired
+	private MailSender mailSender;
+	
 	
 
 	@Override
@@ -25,10 +37,82 @@ public class SJH_LoginSvcImpl implements SJH_LoginSvc{
 		return loginDao.id_find(dto);
 	}
 
-
 	@Override
-	public DTO pw_find(DTO dto) {
-		return loginDao.pw_find(dto);
+	public int pw_find(DTO dto) {
+		SJH_LoginVO user = (SJH_LoginVO) dto;
+		int flag = loginDao.pw_find(user);
+		
+		//비밀번호 찾기 성공 시 임시 비밀번호 메일로 전송
+		if(flag>0) {
+			LOG.debug("메일 보내짐");
+			sendPwFindMail(user); // 메일 전송
+		}
+		return flag;
+	}
+	
+	
+	/**
+	 * 비번  mail전송
+	 */
+	private void sendPwFindMail(SJH_LoginVO user) {
+		try {
+			//보내는 사람
+			String host = "smtp.naver.com";
+			final String userName = "아이디";
+			final String password = "비번";
+			int port = 465;
+			
+			
+			//받는 사람
+			String recipient = user.getEmail();
+			//제목
+			String title = user.getUserName()+"님 임시 비밀번호가 발송되었습니다.";
+			//내용
+			String contents = user.getUserName()+"님의 임시 비밀번호는 "+user.getPasswd()+"입니다. 임시 비밀번호로 로그인 후 회원정보수정에서 비밀번호를 변경해주세요.";
+			
+			//SMTP 서버 설정
+			Properties props = System.getProperties();
+			props.put("mail.smtp.host", host);
+			props.put("mail.smtp.port", port);
+			props.put("mail.smtp.auth", "true");
+			props.put("mail.smtp.ssl.enable", "true");
+			props.put("mail.smtp.ssl.trust", host);
+			
+			
+			//인증
+			Session session = Session.getInstance(props, new Authenticator() {
+				String uName = userName;
+				String passwd = password;
+				
+				@Override
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(uName, passwd);
+				}
+				
+			});	
+			
+			session.setDebug(true);
+			
+			SimpleMailMessage mimeMessage = new SimpleMailMessage();
+			// 보내는 사람
+			mimeMessage.setFrom("glwlzkwp@naver.com");
+			// 받는사람
+			mimeMessage.setTo(recipient);
+			// 제목
+			mimeMessage.setSubject(title);
+			// 내용
+			mimeMessage.setText(contents);
+			// 전송
+			mailSender.send(mimeMessage);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		LOG.debug("======================");
+		LOG.debug("=mail send=");
+		LOG.debug("======================");
+		
 	}
 	
 	
@@ -45,7 +129,7 @@ public class SJH_LoginSvcImpl implements SJH_LoginSvc{
 	
 	
 	@Override
-	public DTO idPassCheck(DTO dto) {
+	public DTO do_login(DTO dto) {
 		Message outMsg = new Message();
 		
 		//-----------------------------

@@ -1,5 +1,6 @@
 package kr.co.sunnyside.login.test;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -22,9 +23,15 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.WebApplicationContext;
 
+import kr.co.sunnyside.cmn.DTO;
 import kr.co.sunnyside.login.service.SJH_LoginVO;
 import kr.co.sunnyside.login.service.impl.SJH_LoginDao;
 
@@ -68,13 +75,128 @@ public class SJH_LoginWebTest {
 		
 	}
 	
+	@Test
+	public void getBean() {
+		LOG.debug("======================");
+		LOG.debug("=context="+context);
+		LOG.debug("=mockMvc="+mockMvc);
+		LOG.debug("======================");
+	}
 	
+	
+	
+
+	
+	/**
+	 * 회원가입
+	 * @throws Exception
+	 */
 	@Test
 	//@Ignore
+	public void do_save() throws Exception {
+		//url, param
+		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/login/do_save.do")
+														.param("userId", "j07_126")
+														.param("passwd", "1234")
+														.param("userName", "회원이름07")
+														.param("email", "이메일07@naver.com")
+														.param("userLevel", "BASIC")
+														.param("point", "0")
+														.param("cellphone", "010-0000-0007")
+														.param("birth", "19/09/07")
+														;
+		
+		
+		
+		
+		//url call, 결과 return 
+		ResultActions resultAction = mockMvc.perform(createMessage)
+									.andExpect(status().isOk())
+									;
+									
+		//result: return VO 객체로 됨. (결과 출력 안 됨)						
+		String result = resultAction.andDo(print())
+						.andReturn()
+						.getResponse().getContentAsString()
+						;
+		
+		LOG.debug("======================");
+		LOG.debug("=result="+result);
+		LOG.debug("======================");
+	}
+	
+	
+	
+	
+	/**
+	 * 아이디 찾기
+	 * @throws Exception
+	 */
+	@Test
+	@Ignore
+	public void id_find() throws Exception {
+		SJH_LoginVO user = users.get(0);
+		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/login/id_find.do")
+																			.param("email", user.getEmail())
+																		    .param("userName", user.getUserName())
+																		    ;
+		
+		ResultActions resultActions = mockMvc.perform(createMessage)
+									.andExpect(MockMvcResultMatchers.content().contentType("application/json; charset=UTF-8")) //컨텐트타입 검증. 이렇게 나올거야라는 예상.
+									//.andExpect(MockMvcResultMatchers.jsonPath("$.userName", is("회원이름01"))) //json 수행테스트
+									;
+		
+		String result = resultActions.andDo(print())
+						.andReturn()
+						.getResponse().getContentAsString();
+		
+		LOG.debug("==============================");
+		LOG.debug("=result="+result);
+		LOG.debug("==============================");
+		
+	}
+	
+	
+	
+	/**
+	 * 비밀번호 찾기
+	 * @throws Exception
+	 */
+	@Test
+	@Ignore
+	public void pw_find() throws Exception {
+		SJH_LoginVO user = users.get(0);
+		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/login/pw_find.do")
+																			  .param("userName", user.getUserName())
+																			  .param("userId", user.getUserId())
+																			  .param("email", user.getEmail())
+																			  ;
+
+		ResultActions resultActions =mockMvc.perform(createMessage)
+											.andExpect(status().isOk())
+											//.andExpect(forwardedUrl("/main/main.jsp"))
+											;
+									
+		String result =	resultActions.andDo(print())
+									.andReturn()
+									.getResponse().getContentAsString();
+		
+		LOG.debug("===============================");
+		LOG.debug("=result="+result);
+		LOG.debug("===============================");	
+	}
+	
+	
+	/**
+	 * 로그인
+	 * @throws Exception
+	 */
+	@Test
+	@Ignore
 	public void do_login() throws Exception {
 		SJH_LoginVO user = users.get(0);
 		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/login/do_login.do")
-																			  .param("user_id", user.getUserId())
+																			  .param("userId", user.getUserId())
 																			  .param("passwd", user.getPasswd())
 																			  ;
 
