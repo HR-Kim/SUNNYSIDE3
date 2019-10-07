@@ -9,8 +9,8 @@ import kr.co.sunnyside.cmn.DTO;
  */
 public interface SJH_LoginSvc {
 	
-	/** 아이디/비번 체크 */
-	public DTO idPassCheck(DTO dto);
+	/** 로그인 */
+	public DTO do_login(DTO dto);
 	
 	/** 회원가입 */
 	public int do_save(DTO dto);
@@ -19,7 +19,7 @@ public interface SJH_LoginSvc {
 	public DTO id_find(DTO dto);
 	
 	/** 비밀번호 찾기 */
-	public DTO pw_find(DTO dto) ;
+	public int pw_find(DTO dto) ;
 	
 	/** 단건조회 */
 	public DTO get_selectOne(DTO dto);

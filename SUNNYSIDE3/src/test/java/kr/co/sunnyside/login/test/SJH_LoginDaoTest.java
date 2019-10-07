@@ -81,8 +81,7 @@ private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	//@Ignore
 	public void pw_find() {
 		SJH_LoginVO user01 = users.get(0);
-		SJH_LoginVO vsUser = (SJH_LoginVO) loginDao.pw_find(user01);
-		assertThat(user01.getPasswd(), is(vsUser.getPasswd()));
+		int flag = loginDao.pw_find(user01);
 	}
 	
 	

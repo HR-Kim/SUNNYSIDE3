@@ -14,19 +14,21 @@
 	 <!-- db connection -->
 	   <!-- locale Change -->
    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
+   
   <!--  <bean class="kr.co.ehr.board.web.LocaleResolverController">
       <property name="localeResolver" ref="localeResolver"></property>
    </bean> -->
  
-<!-- 다국어 설정 -->
-<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-	<property name="basenames">
-		<list>
-			<value>message.messageSource</value>
-		</list>	
-	</property>
-</bean>
- <!-- mybatis -->
+	<!-- 다국어 설정 -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>message.messageSource</value>
+			</list>	
+		</property>
+	</bean>
+
+	 <!-- mybatis -->
 	<!-- SqlSessionTemplate:DAO mybatis의 특정namespace call -->
 	<bean id="sqlSessionTemplate" destroy-method="clearCache"
 	 class="org.mybatis.spring.SqlSessionTemplate">
@@ -41,37 +43,44 @@
 	</bean>
    
    
-    <bean id="passwordAuth" class="javax.mail.PasswordAuthentication">
-      <constructor-arg>
-         <value>메일 아이디</value>
-      </constructor-arg>
-      <constructor-arg>
-         <value>메일 비밀번호</value>
-      </constructor-arg>
-    </bean>
-    
-   <bean id="authenticator" class="javax.mail.Authenticator">
-      <lookup-method name="getPasswordAuthentication" bean="passwordAuth" />
-    </bean>
-    
-   <bean id="emailSession" class="javax.mail.Session">
-      <constructor-arg>
-         <props>
-            <prop key="mail.smtp.host">smtp.naver.com</prop>
-            <prop key="mail.smtp.port">465</prop>
-            <prop key="mail.smtp.auth">true</prop>
-            <prop key="mail.smtp.ssl.enable">true</prop>
-            <prop key="mail.smtp.ssl.trust">smtp.naver.com</prop>
-         </props>
-      </constructor-arg>
-      <constructor-arg ref="authenticator" />
-   </bean>
-
-   <!-- 실제로 메일이 전송되게 함 -->
-<!--    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> -->
-<!--       <property name="session" ref="emailSession"></property> -->
-
-<!--    </bean> -->
+    <!-- mail -->
+	<bean id="mailSender" class="kr.co.sunnyside.login.service.impl.SJH_LoginDummiMailSender" />
+	
+	<bean id="passwordAuth" class="javax.mail.PasswordAuthentication">
+		<constructor-arg>
+	 		<value>아이디</value>
+		</constructor-arg>
+		<constructor-arg>
+	 		<value>비번</value>
+		</constructor-arg>
+	</bean>
+	
+	
+	<bean id="authenticator" class="javax.mail.Authenticator">
+	 <lookup-method name="getPasswordAuthentication" bean="passwordAuth" />
+	</bean>
+	
+	
+	<bean id="emailSession" class="javax.mail.Session">
+	 <constructor-arg>
+	  <props>
+	   <prop key="mail.smtp.host">smtp.naver.com</prop>
+	   <prop key="mail.smtp.port">465</prop>
+	   <prop key="mail.smtp.auth">true</prop>
+	   <prop key="mail.smtp.ssl.enable">true</prop>
+	   <prop key="mail.smtp.ssl.trust">smtp.naver.com</prop>
+	  </props>
+	 </constructor-arg>
+	 <constructor-arg ref="authenticator" />
+	</bean>
+	
+	
+	<!-- 실제로 메일이 보내짐 -->
+<!--  	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="session" ref="emailSession"></property>
+	</bean> -->
+	
+	
    
    
    <!-- AspectJ Transaction -->

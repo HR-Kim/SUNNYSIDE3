@@ -15,7 +15,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.junit.After;
@@ -38,6 +40,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import kr.co.sunnyside.cmn.StringUtil;
+import kr.co.sunnyside.movie.service.LHJ_BoxofficeVO;
 import kr.co.sunnyside.movie.service.LHJ_MovieVO;
 import kr.co.sunnyside.movie.service.impl.LHJ_MovieDaoImpl;
 import kr.co.sunnyside.store.service.SEJ_StroreVO;
@@ -56,25 +59,41 @@ public class LHJ_MovieParsingTest {
 	@Autowired
 	private LHJ_MovieDaoImpl movieDaoImpl;
 	
-	List<LHJ_MovieVO> DBList = new ArrayList<LHJ_MovieVO>();
+	List<LHJ_MovieVO> KmdbList = new ArrayList<LHJ_MovieVO>();
 
 	@Before
 	public void setUp() throws IOException, ParseException{
 
 	}
 	
-	//데이터베이스에 파싱한 데이터 삽입.
-	//실행하지 마시오~~~~
+	//데이터베이스에 파싱한 kobis데이터 삽입.
+	@Test
+//	@Ignore
+	public void do_boxoffice_insert() {
+		URL url;
+		try {
+			System.out.println(kobisUrl());
+			url = new URL(kobisUrl());//url
+		} catch (Exception e) {
+			LOG.debug("============================");
+			LOG.debug("Exception:"+e.toString());
+			LOG.debug("============================");
+		}
+		
+	}
+	
+	//데이터베이스에 파싱한 kmdb데이터 삽입.
+	//실행금지
 	@Test
 	@Ignore
-	public void do_save() {
+	public void do_movie_insert() {
 		URL url;
 		
-		for(int i=1000; i<72350; i++) {				
+		for(int i=0; i<72350; i++) {					
 			try {
-				url = new URL(url(i));//url
-				DBList=getData(url);//데이터를 List
-				movieDaoImpl.do_save(DBList.get(0));//담아온 정보를 insert	
+				url = new URL(KmdbUrl(i));//url
+				KmdbList=getKmdbData(url);//데이터를 List
+				movieDaoImpl.do_movie_insert(KmdbList.get(0));//담아온 정보를 insert	
 			} catch (Exception e) {
 				LOG.debug("============================");
 				LOG.debug("Exception:"+e.toString());
@@ -85,9 +104,127 @@ public class LHJ_MovieParsingTest {
 	} 
 	
 	//파싱 url 설정
-	public static String url(int i) throws IOException, ParseException{
-		List<LHJ_MovieVO> parsingList = new ArrayList<LHJ_MovieVO>();
+	public static String kobisUrl() throws IOException, ParseException{
+		Calendar cal = new GregorianCalendar();
+		cal.add(Calendar.DATE, -1);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		String yesterdayDate = sdf.format(cal.getTime());
 		
+		/*URL*/ 
+		StringBuilder urlBuilder = new StringBuilder("http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"); 
+		/*key(발급받은키 값)*/ 
+		urlBuilder.append("?" + URLEncoder.encode("key","UTF-8") + "=" + "5d8a4695de3453f20f2dfa2e34dad196");
+		/*targetDt(조회하고자 하는 날짜를 yyyymmdd 형식으로 입력)*/ 
+		urlBuilder.append("&" + URLEncoder.encode("targetDt","UTF-8") + "=" + yesterdayDate);
+		/*itemPerPage(결과 ROW 의 개수를 지정)*/ 
+		urlBuilder.append("&" + URLEncoder.encode("itemPerPage","UTF-8") + "=" + "10");
+
+		return urlBuilder.toString();
+	}
+	
+	//데이터 파싱
+		public static List<LHJ_BoxofficeVO> getKobisData(URL url) throws ParseException {
+			List<LHJ_BoxofficeVO> dataList =  new ArrayList<LHJ_BoxofficeVO>();
+			BufferedReader rd	   = null;
+			HttpURLConnection conn = null;
+			JsonParser jsonParser  = new JsonParser();
+			
+			try{
+				//커넥션 생성
+				conn = (HttpURLConnection) url.openConnection();
+				conn.setRequestMethod("GET");
+				conn.setRequestProperty("Content-type", "application/json");
+				
+				//데이터 읽어오기
+				StringBuilder sb = new StringBuilder();
+				String line;
+				rd = new BufferedReader(new InputStreamReader(conn.getInputStream())); 
+				
+				//null이 아니면 한 줄을 읽어서 sb에 덧붙인다.
+				while ((line = rd.readLine()) != null) { 
+					sb.append(line); 
+				} 
+				
+				//읽어 온 데이터를 Json오브젝트로 만든다.
+				JsonObject jsonObject = (JsonObject) jsonParser.parse(sb.toString());
+				
+				//"data"를 파싱
+				JsonArray boxOfficeArray = (JsonArray) jsonObject.get("dailyBoxOfficeList");
+					
+					for(int j=0; j<boxOfficeArray.size(); j++){
+						//파싱한 데이터를 담을 vo 생성
+						LHJ_BoxofficeVO vo = new LHJ_BoxofficeVO();
+						
+						//"result"를 파싱
+						JsonObject resultObj = (JsonObject) boxOfficeArray.get(j);					
+						String movieId = resultObj.get("movieCd").getAsString();			//movieId				
+//						String title = resultObj.get("movieNm").getAsString();			//제목
+////						String titleEng = resultObj.get("titleEng").getAsString();		//영제
+//						String directorNm = resultObj.get("titleEng").getAsString();		//감독이름
+//						
+//						JsonArray actor = resultObj.get("actor").getAsJsonArray();			
+//						String actorNm = arrayToString(actor, "actorNm");				//배우이름	
+//						
+//						String plot = resultObj.get("plot").getAsString();				//줄거리	
+//						String runtimeStr = resultObj.get("runtime").getAsString();
+//						int runtime = 0;
+//						if(runtimeStr != null && !runtimeStr.equals("")) {
+//							runtime = Integer.parseInt(runtimeStr);	//상영시간	
+//						}else {
+//							
+//						}
+//						
+//						JsonArray rating = resultObj.get("rating").getAsJsonArray();
+//						JsonObject ratingObj = (JsonObject) rating.get(0);
+//						String ratingGrade = ratingObj.get("ratingGrade").getAsString();//관람등급	
+//						String releaseDate = ratingObj.get("releaseDate").getAsString();//개봉일자
+//						
+//						String genre = resultObj.get("genre").getAsString();			//장르
+//						String posters = resultObj.get("posters").getAsString();		//포스터이미지	
+//						if(posters.contains("|")) { //포스터가 여러장일 경우 메인 포스터(첫번째 포스터)만 가져온다.
+//							posters = posters.substring(0,  posters.indexOf('|'));	
+//						}
+//						
+//						//vo에 가져온 정보들을 set하기
+//						vo.setMovieId(movieId);
+//						vo.setKortitle(title);
+//						vo.setEngtitle(titleEng);				
+//						vo.setDirector(directorNm);	
+//						vo.setCast(actorNm);				
+//						vo.setSynopsis(plot);
+//						vo.setRunningTime(runtime);
+//						vo.setLimitage(ratingGrade);
+//						vo.setGenre(genre);
+//						vo.setRelDate(releaseDate);
+//						vo.setPoster(posters);
+//						
+//						//예고편, 전문가 평점, 필름타입
+//							
+//						//vo를 리스트에 추가
+						dataList.add(vo);
+					
+				}
+				
+			}catch(IOException e){
+				LOG.debug("====================================");
+				LOG.debug("IOException:"+e.getMessage());
+				LOG.debug("====================================");
+			}finally{
+				//자원 반납
+				try {
+					rd.close();
+					conn.disconnect();
+				} catch (IOException e) {
+					LOG.debug("====================================");
+					LOG.debug("IOException:"+e.getMessage());
+					LOG.debug("====================================");
+				} 
+			}
+			return dataList;
+		}
+	
+	//파싱 url 설정
+	public static String KmdbUrl(int i) throws IOException, ParseException{
 		/*URL*/ 
 		StringBuilder urlBuilder = new StringBuilder("http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json.jsp"); 
 		/*collection(검색 대상 컬렉션 지정)*/ 
@@ -103,7 +240,7 @@ public class LHJ_MovieParsingTest {
 	}
 	
 	//데이터 파싱
-	public static List<LHJ_MovieVO> getData(URL url) throws ParseException {
+	public static List<LHJ_MovieVO> getKmdbData(URL url) throws ParseException {
 		List<LHJ_MovieVO> dataList =  new ArrayList<LHJ_MovieVO>();
 		BufferedReader rd	   = null;
 		HttpURLConnection conn = null;

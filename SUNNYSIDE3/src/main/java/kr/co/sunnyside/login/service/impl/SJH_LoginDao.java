@@ -52,11 +52,11 @@ public class SJH_LoginDao implements WorkDiv {
 	
 	
 	/**
-	 * 비밀번호 찾기
+	 * 비밀번호 찾기(비밀번호 난수로 업데이트)
 	 * @param dto
 	 * @return
 	 */
-	public DTO pw_find(DTO dto) {
+	public int pw_find(DTO dto) {
 		String statement = this.NAMESPACE+".pw_find";
 		SJH_LoginVO inVO = (SJH_LoginVO) dto;
 		
@@ -68,13 +68,13 @@ public class SJH_LoginDao implements WorkDiv {
 		LOG.debug("=02.statement="+statement);
 		LOG.debug("========================");
 		
-		SJH_LoginVO outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
+		int flag = this.sqlSessionTemplate.update(statement, inVO);
 		
 		LOG.debug("========================");
-		LOG.debug("03.outVO="+outVO);
+		LOG.debug("03.flag="+flag);
 		LOG.debug("========================");	
 		
-		return outVO;
+		return flag;
 	}	
 	
 	
@@ -134,7 +134,11 @@ public class SJH_LoginDao implements WorkDiv {
 		return flag;
 	}
 	
-
+	
+	
+	/**
+	 * 본인 확인
+	 */
 	@Override
 	public DTO get_selectOne(DTO dto) {
 		String statement = this.NAMESPACE+".get_selectOne";
@@ -156,13 +160,16 @@ public class SJH_LoginDao implements WorkDiv {
 		
 		return outVO;
 	}
-
 	
+	
+
+	/**
+	 * 회원가입
+	 */
 	@Override
 	public int do_save(DTO dto) {
 		String statement = this.NAMESPACE+".do_save";
 		SJH_LoginVO inVO = (SJH_LoginVO) dto;
-		//user.setLevel(user.gethLevel().intValue());
 		
 		LOG.debug("========================");
 		LOG.debug("=01.param="+inVO);
