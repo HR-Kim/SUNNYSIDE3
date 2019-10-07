@@ -79,11 +79,61 @@ public class LHJ_BoxofficeDaoTest {
 		);		
 	}
 	
+	@Test
+	public void addAndGet() {
+		//삭제
+		int flag = boxofficeDaoImpl.do_delete();
+		assertThat(flag, is(10)); //10건삭제
+		
+		//등록
+		URL url;
+		List<LHJ_BoxofficeVO> list = new ArrayList<LHJ_BoxofficeVO>();
+		try {
+			url = new URL(LHJ_MovieParsing.kobisUrl());//url
+			list=LHJ_MovieParsing.getKobisData(url);//데이터를 List형태로 반환
+			for(LHJ_BoxofficeVO vo : list) { //받아온 데이터를 insert
+				flag = boxofficeDaoImpl.do_save(vo);
+				assertThat(flag, is(1));
+			}
+		} catch (Exception e) {
+			LOG.debug("============================");
+			LOG.debug("Exception:"+e.toString());
+			LOG.debug("============================");
+		}
+		
+		//순위 업데이트
+		try {
+			int i=0;
+			url = new URL(LHJ_MovieParsing.kobisUrl());//url
+			list=LHJ_MovieParsing.getKobisData(url);//데이터를 List형태로 반환
+			for(LHJ_BoxofficeVO vo : list) { //받아온 데이터				
+				LHJ_BoxofficeVO idVO = (LHJ_BoxofficeVO) boxofficeDaoImpl.get_selectOne(kobisList.get(i)); //movieId를 받아옴
+				String movieId = idVO.getMovieId();//movieId를 변수에 담음
+				list.get(i).setMovieId(movieId);//list(받아온 데이터)에 movieId를 넣음
+				flag = boxofficeDaoImpl.do_rank_update(vo);//list의 vo를 넘긴다. 여기에는 rank정보와 movieId가 담겨있음
+				assertThat(flag, is(1));
+				i++;
+			}
+		} catch (Exception e) {
+			LOG.debug("============================");
+			LOG.debug("Exception:"+e.toString());
+			LOG.debug("============================");
+		}
+		
+		//전체조회
+		list = (List<LHJ_BoxofficeVO>) boxofficeDaoImpl.get_retrieve();
+		assertThat(10, is(list.size()));
+	}
+	
+	
+	//-----------------------------------------------------------------------------------------------
+	
+	
 	//박스오피스 전체조회
 	@Test
-//	@Ignore
+	@Ignore
 	public void get_retrieve() {
-		List<LHJ_BoxofficeVO> list = (List<LHJ_BoxofficeVO>) boxofficeDaoImpl.do_boxoffice_retrieve();
+		List<LHJ_BoxofficeVO> list = (List<LHJ_BoxofficeVO>) boxofficeDaoImpl.get_retrieve();
 		assertThat(10, is(list.size()));
 		
 	}
@@ -98,7 +148,7 @@ public class LHJ_BoxofficeDaoTest {
 			url = new URL(LHJ_MovieParsing.kobisUrl());//url
 			List<LHJ_BoxofficeVO> list=LHJ_MovieParsing.getKobisData(url);//데이터를 List형태로 반환
 			for(LHJ_BoxofficeVO vo : list) { //받아온 데이터				
-				LHJ_BoxofficeVO idVO = (LHJ_BoxofficeVO) boxofficeDaoImpl.do_boxoffice_selectOne(kobisList.get(i)); //movieId를 받아옴
+				LHJ_BoxofficeVO idVO = (LHJ_BoxofficeVO) boxofficeDaoImpl.get_selectOne(kobisList.get(i)); //movieId를 받아옴
 				String movieId = idVO.getMovieId();//movieId를 변수에 담음
 				list.get(i).setMovieId(movieId);//list(받아온 데이터)에 movieId를 넣음
 				int flag = boxofficeDaoImpl.do_rank_update(vo);//list의 vo를 넘긴다. 여기에는 rank정보와 movieId가 담겨있음
@@ -116,7 +166,7 @@ public class LHJ_BoxofficeDaoTest {
 	@Test
 	@Ignore
 	public void do_boxoffice_selectOne()  {
-		LHJ_BoxofficeVO vo = (LHJ_BoxofficeVO) boxofficeDaoImpl.do_boxoffice_selectOne(kobisList.get(0));
+		LHJ_BoxofficeVO vo = (LHJ_BoxofficeVO) boxofficeDaoImpl.get_selectOne(kobisList.get(0));
 		String movieId = vo.getMovieId();
 		LOG.debug("============================");
 		LOG.debug("=movieId="+movieId);
@@ -127,7 +177,7 @@ public class LHJ_BoxofficeDaoTest {
 	@Test
 	@Ignore
 	public void do_boxoffice_delete()  {
-		int flag = boxofficeDaoImpl.do_boxoffice_delete();
+		int flag = boxofficeDaoImpl.do_delete();
 		assertThat(flag, is(10)); //10건삭제
 	}
 	
@@ -136,7 +186,7 @@ public class LHJ_BoxofficeDaoTest {
 	@Ignore
 	public void do_boxoffice_insert()  {
 		for(LHJ_BoxofficeVO vo : kobisList) {
-			int flag = boxofficeDaoImpl.do_boxoffice_insert(vo);
+			int flag = boxofficeDaoImpl.do_save(vo);
 			assertThat(flag, is(1));
 		}
 	}
@@ -153,7 +203,7 @@ public class LHJ_BoxofficeDaoTest {
 			url = new URL(LHJ_MovieParsing.kobisUrl());//url
 			list=LHJ_MovieParsing.getKobisData(url);//데이터를 List형태로 반환
 			for(LHJ_BoxofficeVO vo : list) { //받아온 데이터를 insert
-				int flag = boxofficeDaoImpl.do_boxoffice_insert(vo);
+				int flag = boxofficeDaoImpl.do_save(vo);
 				assertThat(flag, is(1));
 			}
 		} catch (Exception e) {
