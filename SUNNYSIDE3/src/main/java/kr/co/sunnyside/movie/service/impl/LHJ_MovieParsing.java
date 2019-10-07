@@ -1,93 +1,126 @@
-package kr.co.sunnyside.movie.test;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
+package kr.co.sunnyside.movie.service.impl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.FixMethodOrder;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.web.context.WebApplicationContext;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import kr.co.sunnyside.cmn.StringUtil;
+import kr.co.sunnyside.movie.service.LHJ_BoxofficeVO;
 import kr.co.sunnyside.movie.service.LHJ_MovieVO;
-import kr.co.sunnyside.movie.service.impl.LHJ_MovieDaoImpl;
-import kr.co.sunnyside.store.service.SEJ_StroreVO;
-import kr.co.sunnyside.store.service.impl.SEJ_StroreDaoImpl;
 
-@WebAppConfiguration
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations= {"file:src/main/webapp/WEB-INF/spring/**/*.xml"}) 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING) //테스트 이름 알파벳 순으로 수행한다.
-public class LHJ_MovieParsingTest {
-	private final static Logger LOG = LoggerFactory.getLogger(LHJ_MovieParsingTest.class);
+public class LHJ_MovieParsing {
+	private final static Logger LOG = LoggerFactory.getLogger(LHJ_MovieParsing.class);
 	
-	@Autowired
-	private WebApplicationContext context;
-	
-	@Autowired
-	private LHJ_MovieDaoImpl movieDaoImpl;
-	
-	List<LHJ_MovieVO> DBList = new ArrayList<LHJ_MovieVO>();
+	//kobis파싱 url 설정
+	public static String kobisUrl() throws IOException, ParseException{
+		Calendar cal = new GregorianCalendar();
+		cal.add(Calendar.DATE, -1);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		String yesterdayDate = sdf.format(cal.getTime());
+		
+		/*URL*/ 
+		StringBuilder urlBuilder = new StringBuilder("http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"); 
+		/*key(발급받은키 값)*/ 
+		urlBuilder.append("?" + URLEncoder.encode("key","UTF-8") + "=" + "5d8a4695de3453f20f2dfa2e34dad196");
+		/*targetDt(조회하고자 하는 날짜를 yyyymmdd 형식으로 입력)*/ 
+		urlBuilder.append("&" + URLEncoder.encode("targetDt","UTF-8") + "=" + yesterdayDate);
+		/*itemPerPage(결과 ROW 의 개수를 지정)*/ 
+		urlBuilder.append("&" + URLEncoder.encode("itemPerPage","UTF-8") + "=" + "10");
+		
 
-	@Before
-	public void setUp() throws IOException, ParseException{
-
+		return urlBuilder.toString();
 	}
 	
-	//데이터베이스에 파싱한 데이터 삽입.
-	//실행하지 마시오~~~~
-	@Test
-	@Ignore
-	public void do_save() {
-		URL url;
+	//kobis데이터 파싱
+	public static List<LHJ_BoxofficeVO> getKobisData(URL url) throws ParseException {
+		List<LHJ_BoxofficeVO> dataList =  new ArrayList<LHJ_BoxofficeVO>();
+		BufferedReader rd	   = null;
+		HttpURLConnection conn = null;
+		JsonParser jsonParser  = new JsonParser();
 		
-		for(int i=1000; i<72350; i++) {				
+		try{
+			//커넥션 생성
+			conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			conn.setRequestProperty("Content-type", "application/json");
+			
+			//데이터 읽어오기
+			StringBuilder sb = new StringBuilder();
+			String line;
+			rd = new BufferedReader(new InputStreamReader(conn.getInputStream())); 
+			
+			//null이 아니면 한 줄을 읽어서 sb에 덧붙인다.
+			while ((line = rd.readLine()) != null) { 
+				sb.append(line); 
+			} 
+			
+			//읽어 온 데이터를 Json오브젝트로 만든다.
+			JsonObject jsonObject = (JsonObject) jsonParser.parse(sb.toString());			
+			
+			//"boxOfficeResult"를 오브젝트로 만든다.
+			JsonObject resultObject = (JsonObject) jsonObject.get("boxOfficeResult");
+			
+			JsonArray dailyArray = (JsonArray) resultObject.get("dailyBoxOfficeList");
+			
+			//반복문으로 정보 꺼내기. dailyArray의 길이(10개)만큼
+			for(int i=0; i<dailyArray.size(); i++){	
+				JsonObject dailyObj = (JsonObject) dailyArray.get(i);		
+				
+				String rank = dailyObj.get("rank").getAsString();
+				if(rank.length()<2) {
+					rank = "0"+rank;
+				}
+				String movieNm = dailyObj.get("movieNm").getAsString();
+				movieNm = movieNm.split(" ")[0].trim();
+				String openDt = dailyObj.get("openDt").getAsString();
+				
+				
+				LHJ_BoxofficeVO vo = new LHJ_BoxofficeVO();
+				vo.setKortitle(movieNm);
+				vo.setRelDate(openDt);
+				vo.setMovieRank(rank);
+				
+				
+				dataList.add(vo);
+			}
+			
+		}catch(IOException e){
+			LOG.debug("====================================");
+			LOG.debug("IOException:"+e.getMessage());
+			LOG.debug("====================================");
+		}finally{
+			//자원 반납
 			try {
-				url = new URL(url(i));//url
-				DBList=getData(url);//데이터를 List
-				movieDaoImpl.do_save(DBList.get(0));//담아온 정보를 insert	
-			} catch (Exception e) {
-				LOG.debug("============================");
-				LOG.debug("Exception:"+e.toString());
-				LOG.debug("============================");
-				continue; 
-			}	
-		}		
-	} 
+				rd.close();
+				conn.disconnect();
+			} catch (IOException e) {
+				LOG.debug("====================================");
+				LOG.debug("IOException:"+e.getMessage());
+				LOG.debug("====================================");
+			} 
+		}
+		return dataList;
+	}
 	
-	//파싱 url 설정
-	public static String url(int i) throws IOException, ParseException{
-		List<LHJ_MovieVO> parsingList = new ArrayList<LHJ_MovieVO>();
-		
+	
+	
+	//Kmdb 파싱 url 설정
+	public static String KmdbUrl(int i) throws IOException, ParseException{
 		/*URL*/ 
 		StringBuilder urlBuilder = new StringBuilder("http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json.jsp"); 
 		/*collection(검색 대상 컬렉션 지정)*/ 
@@ -101,9 +134,9 @@ public class LHJ_MovieParsingTest {
 
 		return urlBuilder.toString();
 	}
-	
-	//데이터 파싱
-	public static List<LHJ_MovieVO> getData(URL url) throws ParseException {
+		
+	//Kmdb 데이터 파싱
+	public static List<LHJ_MovieVO> getKmdbData(URL url) throws ParseException {
 		List<LHJ_MovieVO> dataList =  new ArrayList<LHJ_MovieVO>();
 		BufferedReader rd	   = null;
 		HttpURLConnection conn = null;
@@ -212,7 +245,7 @@ public class LHJ_MovieParsingTest {
 		return dataList;
 	}
 	
-	//영화에 부제가 있는 경우 !HS, !HE가 삽입되므로 해당 부분을 없애고 다중 공백을 하나의 공백으로 치환하는 메소드
+	//Kmdb : 영화에 부제가 있는 경우 !HS, !HE가 삽입되므로 해당 부분을 없애고 다중 공백을 하나의 공백으로 치환하는 메소드
 	public static String deleteHsHe(String str) {
 		str = str.replace("!HS", "");
 		str = str.replace("!HE", "");
@@ -220,7 +253,7 @@ public class LHJ_MovieParsingTest {
 		return str;
 	}
 	
-	//배열 안의 배열을 새 오브젝트로 만들어 파싱해야 하는데, 기능이 중복되므로 메소드로 만듬
+	//Kmdb : 배열 안의 배열을 새 오브젝트로 만들어 파싱해야 하는데, 기능이 중복되므로 메소드로 만듬
 	public static String arrayToString (JsonArray jsonArray, String objNm) {
 		String str = "";
 		for(int i=0; i<jsonArray.size(); i++){
@@ -232,21 +265,5 @@ public class LHJ_MovieParsingTest {
 			}
 		}
 		return str;
-	}
-	
-	@Test
-	@Ignore
-	public void getBean() {
-		LOG.debug("======================");
-		LOG.debug("context="+context);
-		LOG.debug("codeDaoImpl="+movieDaoImpl);
-		LOG.debug("======================");
-		assertThat(context, is(notNullValue()));
-		assertThat(movieDaoImpl, is(notNullValue()));
-	}
-	
-	@After
-	public void tearDown() {
-		
 	}
 }

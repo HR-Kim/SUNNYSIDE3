@@ -7,16 +7,18 @@
 	
 	
 	<!-- 비밀번호 찾기 -->
-	<select id="pw_find" parameterType="SJH_LoginVO" resultType="SJH_LoginVO">
-		SELECT
-		    passwd
-		FROM
-		    USER_INFO
-		WHERE  user_name = #{userName,jdbcType=VARCHAR} 
-		AND    user_id   = #{userId,jdbcType=VARCHAR}   
-		AND    email   = #{email,jdbcType=VARCHAR}               
-	</select>
-	
+	<update id="pw_find" parameterType="SJH_LoginVO">
+		UPDATE user_info
+		SET
+		    passwd = (	SELECT DBMS_RANDOM.STRING('A', 15)
+		    		 	 FROM DUAL
+		    		 )
+		WHERE
+		    user_id = #{userId,jdbcType=VARCHAR}
+		    AND user_name = #{userName,jdbcType=VARCHAR} 
+		    AND email = #{email,jdbcType=VARCHAR}
+	</update>
+
 	
 	<!-- 아이디 찾기 -->
 	<select id="id_find" parameterType="SJH_LoginVO" resultType="SJH_LoginVO">
@@ -24,7 +26,7 @@
 		    user_id as userId
 		FROM
 		    user_info
-		WHERE   user_id   = #{userId,jdbcType=VARCHAR}
+		WHERE   email  	  = #{email,jdbcType=VARCHAR}  
 		AND     user_name = #{userName,jdbcType=VARCHAR} 
 	</select>
 	
@@ -32,26 +34,26 @@
 	<!-- 등록 -->
 	<insert id="do_save" parameterType="SJH_LoginVO">
 		INSERT INTO user_info (
-						    user_id,
-						    passwd,
-						    user_name,
-						    email,
-						    user_level,
-						    point,
-						    cellphone,
-						    birth,
-						    reg_dt      
-						) VALUES (          
-						    #{userId,jdbcType=VARCHAR},              
-						    #{passwd,jdbcType=VARCHAR},              
-						    #{userName,jdbcType=VARCHAR},
-						    #{email,jdbcType=VARCHAR},              
-						    #{userLevel,jdbcType=NUMERIC},              
-						    #{point,jdbcType=NUMERIC},              
-						    #{cellphone,jdbcType=VARCHAR},
-						    #{birth,jdbcType=VARCHAR}, 
-						    SYSDATE         
-						)                  
+							    user_id,
+							    passwd,
+							    user_name,
+							    email,
+							    user_level,
+							    point,
+							    cellphone,
+							    birth,
+							    reg_dt      
+							) VALUES (          
+							    #{userId,jdbcType=VARCHAR},              
+							    #{passwd,jdbcType=VARCHAR},              
+							    #{userName,jdbcType=VARCHAR},
+							    #{email,jdbcType=VARCHAR},              
+							    #{userLevel,jdbcType=NUMERIC},              
+							    #{point,jdbcType=NUMERIC},              
+							    #{cellphone,jdbcType=VARCHAR},
+							    #{birth,jdbcType=VARCHAR}, 
+							    SYSDATE         
+							)                  
 	</insert>
 	
 	

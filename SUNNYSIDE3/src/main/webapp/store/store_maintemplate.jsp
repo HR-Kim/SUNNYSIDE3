@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<c:set var="context" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +21,13 @@
         <div class="col-md-3 col-sm-6">
             <div class="product-grid">
                 <div class="product-image">
-                    <img class="pic-1" src="../resources/image/plainPopcorn.jpg">		
+               		 <c:choose>
+               			 <c:when test="${list.size()>0}">
+               				 <c:forEach var="vo" items="${list }">
+				                        <img class="pic-1" src="<c:out value="${vo.orgFileNM }"/>">				                       
+				             </c:forEach>
+				         </c:when>
+              		  </c:choose>
                     <ul class="social">
                         <li><a href="" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
                         <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
@@ -41,7 +46,13 @@
         <div class="col-md-3 col-sm-6">
             <div class="product-grid">
                 <div class="product-image">
-       				   <img class="pic-1" src="../resources/image/caramelPopcorn.jpg">		
+                    <c:choose>
+               			 <c:when test="${list.size()>0}">
+               				 <c:forEach var="vo" items="${list }">
+				                        <img class="pic-1" src="<c:out value="${vo.orgFileNM }"/>">				                       
+				             </c:forEach>
+				         </c:when>
+              		  </c:choose>
                     <ul class="social">
                         <li><a href="" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
                         <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
@@ -50,6 +61,13 @@
                     <span class="product-new-label">Sale</span>
                     <span class="product-discount-label">50%</span>
                 </div>
+                <ul class="rating">
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                </ul>
                 <div class="product-content">
                     <h3 class="title"><a href="#">Men's Plain Tshirt</a></h3>
                     <div class="price">$5.00
@@ -62,7 +80,13 @@
         <div class="col-md-3 col-sm-6">
             <div class="product-grid">
                 <div class="product-image">
-                    <img class="pic-1" src="../resources/image/doublecheesePop.jpg">	
+                    <c:choose>
+               			 <c:when test="${list.size()>0}">
+               				 <c:forEach var="vo" items="${list }">
+				                        <img class="pic-1" src="<c:out value="${vo.orgFileNM }"/>">				                       
+				             </c:forEach>
+				         </c:when>
+              		  </c:choose>
                     <ul class="social">
                         <li><a href="" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
                         <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
@@ -71,6 +95,13 @@
                     <span class="product-new-label">Sale</span>
                     <span class="product-discount-label">50%</span>
                 </div>
+                <ul class="rating">
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                </ul>
                 <div class="product-content">
                     <h3 class="title"><a href="#">Men's Plain Tshirt</a></h3>
                     <div class="price">$5.00
@@ -83,7 +114,13 @@
         <div class="col-md-3 col-sm-6">
             <div class="product-grid">
                 <div class="product-image">
-                      <img class="pic-1" src="../resources/image/onionPop.jpg">	
+                   <c:choose>
+               			 <c:when test="${list.size()>0}">
+               				 <c:forEach var="vo" items="${list }">
+				                        <img class="pic-1" src="<c:out value="${vo.orgFileNM }"/>">				                       
+				             </c:forEach>
+				         </c:when>
+              		  </c:choose>
                     <ul class="social">
                         <li><a href="" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
                         <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
@@ -92,6 +129,13 @@
                     <span class="product-new-label">Sale</span>
                     <span class="product-discount-label">50%</span>
                 </div>
+                <ul class="rating">
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                </ul>
                 <div class="product-content">
                     <h3 class="title"><a href="#">Men's Plain Tshirt</a></h3>
                     <div class="price">$5.00
@@ -112,7 +156,13 @@
         <div class="col-md-3 col-sm-6">
             <div class="product-grid2">
                 <div class="product-image2">
-            		  <img class="pic-1" src="../resources/image/coke.jpg">	
+                    <c:choose>
+               			 <c:when test="${list.size()>0}">
+               				 <c:forEach var="vo" items="${list }">
+				                        <img class="pic-1" src="<c:out value="${vo.orgFileNM }"/>">				                       
+				             </c:forEach>
+				         </c:when>
+              		  </c:choose>
                     <ul class="social">
                         <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
                         <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
@@ -129,7 +179,13 @@
         <div class="col-md-3 col-sm-6">
             <div class="product-grid2">
               <div class="product-image2">
-                  <img class="pic-1" src="../resources/image/coke.jpg">	
+                 <c:choose>
+               			 <c:when test="${list.size()>0}">
+               				 <c:forEach var="vo" items="${list }">
+				                        <img class="pic-1" src="<c:out value="${vo.orgFileNM }"/>">				                       
+				             </c:forEach>
+				         </c:when>
+              	 </c:choose>
                   <ul class="social">
                       <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
                       <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
@@ -146,7 +202,13 @@
         <div class="col-md-3 col-sm-6">
             <div class="product-grid2">
                 <div class="product-image2">
-                  <img class="pic-1" src="../resources/image/coke.jpg">	
+                   <c:choose>
+               			 <c:when test="${list.size()>0}">
+               				 <c:forEach var="vo" items="${list }">
+				                        <img class="pic-1" src="<c:out value="${vo.orgFileNM }"/>">				                       
+				             </c:forEach>
+				         </c:when>
+              	  </c:choose>
                     <ul class="social">
                         <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
                         <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
@@ -163,7 +225,13 @@
         <div class="col-md-3 col-sm-6">
             <div class="product-grid2">
                 <div class="product-image2">
-                    <img class="pic-1" src="../resources/image/coke.jpg">	
+                   <c:choose>
+               			 <c:when test="${list.size()>0}">
+               				 <c:forEach var="vo" items="${list }">
+				                        <img class="pic-1" src="<c:out value="${vo.orgFileNM }"/>">				                       
+				             </c:forEach>
+				         </c:when>
+              	  </c:choose>
                     <ul class="social">
                         <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
                         <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
@@ -180,13 +248,153 @@
     </div>
 </div>
 <hr>
+
+<div class="container">
+    <h3 class="h3">스낵 </h3>
+    <div class="row">
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid3">
+                <div class="product-image3">
+                    <c:choose>
+               			 <c:when test="${list.size()>0}">
+               				 <c:forEach var="vo" items="${list }">
+				                        <img class="pic-1" src="<c:out value="${vo.orgFileNM }"/>">				                       
+				             </c:forEach>
+				         </c:when>
+              	    </c:choose>
+                    <ul class="social">
+                        <li><a href="#"><i class="fa fa-shopping-bag"></i></a></li>
+                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
+                    <span class="product-new-label">New</span>
+                </div>
+                <div class="product-content">
+                    <h3 class="title"><a href="#">Men's Blazer</a></h3>
+                    <div class="price">
+                        $63.50
+                        <span>$75.00</span>
+                    </div>
+                    <ul class="rating">
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star disable"></li>
+                        <li class="fa fa-star disable"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid3">
+                <div class="product-image3">
+                    <c:choose>
+               			 <c:when test="${list.size()>0}">
+               				 <c:forEach var="vo" items="${list }">
+				                        <img class="pic-1" src="<c:out value="${vo.orgFileNM }"/>">				                       
+				             </c:forEach>
+				         </c:when>
+              	    </c:choose>
+                    <ul class="social">
+                        <li><a href="#"><i class="fa fa-shopping-bag"></i></a></li>
+                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
+                </div>
+                <div class="product-content">
+                    <h3 class="title"><a href="#">Women's Designer Top</a></h3>
+                    <div class="price">
+                        $43.50
+                    </div>
+                    <ul class="rating">
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid3">
+                <div class="product-image3">
+                   <c:choose>
+               			 <c:when test="${list.size()>0}">
+               				 <c:forEach var="vo" items="${list }">
+				                        <img class="pic-1" src="<c:out value="${vo.orgFileNM }"/>">				                       
+				             </c:forEach>
+				         </c:when>
+              	   </c:choose>
+                    <ul class="social">
+                        <li><a href="#"><i class="fa fa-shopping-bag"></i></a></li>
+                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
+                    <span class="product-new-label">New</span>
+                </div>
+                <div class="product-content">
+                    <h3 class="title"><a href="#">Men's Blazer</a></h3>
+                    <div class="price">
+                        $63.50
+                        <span>$75.00</span>
+                    </div>
+                    <ul class="rating">
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star disable"></li>
+                        <li class="fa fa-star disable"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid3">
+                <div class="product-image3">
+                    <c:choose>
+               			 <c:when test="${list.size()>0}">
+               				 <c:forEach var="vo" items="${list }">
+				                        <img class="pic-1" src="<c:out value="${vo.orgFileNM }"/>">				                       
+				             </c:forEach>
+				         </c:when>
+              	    </c:choose>
+                    <ul class="social">
+                        <li><a href="#"><i class="fa fa-shopping-bag"></i></a></li>
+                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
+                    <span class="product-new-label">New</span>
+                </div>
+                <div class="product-content">
+                    <h3 class="title"><a href="#">Men's Blazer</a></h3>
+                    <div class="price">
+                        $63.50
+                        <span>$75.00</span>
+                    </div>
+                    <ul class="rating">
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star disable"></li>
+                        <li class="fa fa-star disable"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+
 <div class="container">
     <h3 class="h3">영화관람권</h3>
     <div class="row">
         <div class="col-md-3 col-sm-6">
             <div class="product-grid4">
                 <div class="product-image4">
-                   <img class="pic-1" src="../resources/image/movieVoucher.jpg">	
+                    <c:choose>
+               			 <c:when test="${list.size()>0}">
+               				 <c:forEach var="vo" items="${list }">
+				                        <img class="pic-1" src="<c:out value="${vo.orgFileNM }"/>">				                       
+				             </c:forEach>
+				         </c:when>
+              	    </c:choose>
                     <ul class="social">
                         <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
                         <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
@@ -208,7 +416,13 @@
         <div class="col-md-3 col-sm-6">
             <div class="product-grid4">
                 <div class="product-image4">
-                   <img class="pic-1" src="../resources/image/movieVoucher.jpg">
+                   <c:choose>
+               			 <c:when test="${list.size()>0}">
+               				 <c:forEach var="vo" items="${list }">
+				                        <img class="pic-1" src="<c:out value="${vo.orgFileNM }"/>">				                       
+				             </c:forEach>
+				         </c:when>
+              	   </c:choose>
                     <ul class="social">
                         <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
                         <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
@@ -229,7 +443,13 @@
         <div class="col-md-3 col-sm-6">
             <div class="product-grid4">
                 <div class="product-image4">
-                   <img class="pic-1" src="../resources/image/movieVoucher.jpg">
+                   <c:choose>
+               			 <c:when test="${list.size()>0}">
+               				 <c:forEach var="vo" items="${list }">
+				                        <img class="pic-1" src="<c:out value="${vo.orgFileNM }"/>">				                       
+				             </c:forEach>
+				         </c:when>
+                   </c:choose>
                     <ul class="social">
                         <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
                         <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
@@ -251,7 +471,13 @@
         <div class="col-md-3 col-sm-6">
             <div class="product-grid4">
                 <div class="product-image4">
-                  <img class="pic-1" src="../resources/image/movieVoucher.jpg">
+                   <c:choose>
+               			 <c:when test="${list.size()>0}">
+               				 <c:forEach var="vo" items="${list }">
+				                        <img class="pic-1" src="<c:out value="${vo.orgFileNM }"/>">				                       
+				             </c:forEach>
+				         </c:when>
+              	   </c:choose>
                     <ul class="social">
                         <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
                         <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
