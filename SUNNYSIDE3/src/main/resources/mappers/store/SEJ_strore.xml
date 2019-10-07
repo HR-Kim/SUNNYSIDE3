@@ -19,20 +19,14 @@
 				    PRUDUCT_INFO,
 				    CATEGORY,
 				    PRODUCT_COST,
-				    ORG_FILE_NM,
-				    SAVE_FILE_NM,
-				    IMG_SIZE,
-				    EXT
+				    IMG				
 				) VALUES (
 				    #{productId,jdbcType=VARCHAR},
 				    #{productNm,jdbcType=VARCHAR},
 				    #{pruductInfo,jdbcType=VARCHAR},
 				    #{category,jdbcType=NUMERIC},
 				    #{productCost,jdbcType=NUMERIC},
-				    #{orgFileNM,jdbcType=VARCHAR},
-				    #{saveFileNM,jdbcType=VARCHAR},
-				    #{imageSize,javaType=double},
-				    #{ext,jdbcType=VARCHAR}
+				    #{img,jdbcType=VARCHAR}
 				)
 	</insert>
 
@@ -50,10 +44,7 @@
 				    pruduct_info   = #{pruductInfo,jdbcType=VARCHAR},
 				    category       = #{category,jdbcType=NUMERIC},
 				    product_cost   = #{productCost,jdbcType=NUMERIC},
-				    org_file_nm    = #{orgFileNM,jdbcType=VARCHAR},
-				    save_file_nm   = #{saveFileNM,jdbcType=VARCHAR},
-				    img_size       = #{imageSize,javaType=double},
-				    ext 		   = #{ext,jdbcType=VARCHAR}
+				    IMG   		   = #{img,jdbcType=VARCHAR}
 				WHERE
 			   	 	product_id = #{productId,jdbcType=VARCHAR}
 	</update>
@@ -73,10 +64,7 @@
 				    PRUDUCT_INFO as pruductInfo,
 				    CATEGORY,
 				    PRODUCT_COST as productCost,
-				    ORG_FILE_NM as orgFileNM,
-				    SAVE_FILE_NM as saveFileNM,
-				    IMG_SIZE as imageSize,
-				    EXT   
+					IMG 
    </sql>
 
 <!-- 상품 전체조회 -->
@@ -90,10 +78,7 @@
 					B.PRUDUCT_INFO as pruductInfo,
 					B.CATEGORY,
 					B.PRODUCT_COST as productCost,
-					B.ORG_FILE_NM as orgFileNM,
-					B.SAVE_FILE_NM as saveFileNM,
-					B.IMG_SIZE as imageSize,
-					B.EXT                                                     
+					B.IMG                                                     
 		    FROM(
  					SELECT ROWNUM AS rnum,A.*
  					FROM(

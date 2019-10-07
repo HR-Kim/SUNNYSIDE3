@@ -2,7 +2,7 @@
     pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<c:set var="context" value="${pageContext.request.contextPath }"></c:set>
+<c:set var="context" value="${pageContext.request.contextPath }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,9 +34,9 @@
   		<td>분류</td>
   		<td>
 	  		<select>
-	  			<option>팝콘</option>
-	  			<option>음료</option>
-	  			<option>영화예매권</option>
+	  			<option value="001">팝콘</option>
+	  			<option value="002">음료</option>
+	  			<option value="003">영화예매권</option>
 	  		</select>
   		</td>
   	</tr>
@@ -63,38 +63,50 @@
  <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
-    <script src="${context}/resources/js/bootstrap.min.js"></script>   
+ <script src="${context}/resources/js/bootstrap.min.js"></script>   
  <script type="text/javascript">
- $(document).ready(function(){
-	 $("#addBtn").click(function(){
-		 
+ $("#addBtn").on("click",function(){
+		
+		if(confirm("상품을 등록하시겠습니까?")==false) return;
+			
 		var productName =$("#productNm").val();
 		var productPrice =$("#productCost").val();
 		var productInfo =$("#pruductInfo").val();
-		var productImage =$("#orgFileNM").val();
+		var productImage =$("#img").val();
 		
-		if(productName==""){
-			alert("상품명을 입력해 주세요");
-			productName.focus();
-		}else if(productPrice==""){
-			alert("상품 가격을 입력해 주세요");
-			productPrice.focus();
-		}else if(productInfo==""){
-			alert("상품 설명을 입력해 주세요");
-			productInfo.focus();
-		}else if(productImage==""){
-			alert("상품 사진을 첨부해 주세요");
-			productImage.focus();
-		}
+		//ajax
+     $.ajax({
+        type:"POST",
+        url:"${context}/store/do_save.do",
+        dataType:"html",
+        data:{
+	           "productNm":$("#productNm").val(),
+	           "productCost":$("#productCost").val(),
+	           "pruductInfo":$("#pruductInfo").val(),
+	           "img":$("#img").val()
+       }, 
+     success: function(data){ 
+       var jData = JSON.parse(data);
+       if(null != jData && jData.msgId=="1"){
+         alert(jData.msgMsg);
+         location.href ="${context}/store/get_retrieve.do";
+       }else{
+         alert(jData.msgId+"|"+jData.msgMsg);
+       }
+     },
+     complete:function(data){
+      
+     },
+     error:function(xhr,status,error){
+         alert("error:"+error);
+     }
+    }); //--ajax  
 		
-		//상품 정보 전송
-		if(false==confirm('상품을 등록 하시겠습니까?')) return;
-		document.storeForm.action = "${context}/store/do_save.do";
-		document.storeForm.submit();
-		 
 	 });
-	 
-	 
+ 
+ $(document).ready(function(){
+	
+		 
  });
 
 </script>

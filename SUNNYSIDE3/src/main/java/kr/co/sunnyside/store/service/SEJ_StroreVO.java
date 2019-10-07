@@ -14,116 +14,91 @@ public class SEJ_StroreVO extends DTO {
 	private int category;
 	/**상품가격 */
 	private int productCost;
-	/**원본파일 명 */
-	private String orgFileNM ;
-	/**저장파일 명 */
-	private String saveFileNM; 
-	/**사진 사이즈 */
-	private double imageSize ; 
-	/**확장자 */
-	private String ext ; 
+	/**이미지 */
+	private String img ;
+
 	
 	public SEJ_StroreVO() {}
 
-	@Override
-	public String toString() {
-		return "SEJ_StroreVO [productId=" + productId + ", productNm=" + productNm + ", pruductInfo=" + pruductInfo
-				+ ", category=" + category + ", productCost=" + productCost + ", orgFileNM=" + orgFileNM
-				+ ", saveFileNM=" + saveFileNM + ", imageSize=" + imageSize + ", ext=" + ext + ", toString()="
-				+ super.toString() + "]";
-	}
 
 	public SEJ_StroreVO(String productId, String productNm, String pruductInfo, int category, int productCost,
-			String orgFileNM, String saveFileNM, double imageSize, String ext) {
+			String img) {
 		super();
 		this.productId = productId;
 		this.productNm = productNm;
 		this.pruductInfo = pruductInfo;
 		this.category = category;
 		this.productCost = productCost;
-		this.orgFileNM = orgFileNM;
-		this.saveFileNM = saveFileNM;
-		this.imageSize = imageSize;
-		this.ext = ext;
+		this.img = img;
 	}
+
+
+	@Override
+	public String toString() {
+		return "SEJ_StroreVO [productId=" + productId + ", productNm=" + productNm + ", pruductInfo=" + pruductInfo
+				+ ", category=" + category + ", productCost=" + productCost + ", img=" + img + ", toString()="
+				+ super.toString() + "]";
+	}
+
 
 	public String getProductId() {
 		return productId;
 	}
 
+
 	public void setProductId(String productId) {
 		this.productId = productId;
 	}
+
 
 	public String getProductNm() {
 		return productNm;
 	}
 
+
 	public void setProductNm(String productNm) {
 		this.productNm = productNm;
 	}
+
 
 	public String getPruductInfo() {
 		return pruductInfo;
 	}
 
+
 	public void setPruductInfo(String pruductInfo) {
 		this.pruductInfo = pruductInfo;
 	}
+
 
 	public int getCategory() {
 		return category;
 	}
 
+
 	public void setCategory(int category) {
 		this.category = category;
 	}
+
 
 	public int getProductCost() {
 		return productCost;
 	}
 
+
 	public void setProductCost(int productCost) {
 		this.productCost = productCost;
 	}
 
-	public String getOrgFileNM() {
-		return orgFileNM;
+
+	public String getImg() {
+		return img;
 	}
 
-	public void setOrgFileNM(String orgFileNM) {
-		this.orgFileNM = orgFileNM;
+
+	public void setImg(String img) {
+		this.img = img;
 	}
-
-	public String getSaveFileNM() {
-		return saveFileNM;
-	}
-
-	public void setSaveFileNM(String saveFileNM) {
-		this.saveFileNM = saveFileNM;
-	}
-
-	public double getImageSize() {
-		return imageSize;
-	}
-
-	public void setImageSize(double imageSize) {
-		this.imageSize = imageSize;
-	}
-
-	public String getExt() {
-		return ext;
-	}
-
-	public void setExt(String ext) {
-		this.ext = ext;
-	}
-
-	
-
-
-	
-
 	
 	
 }
