@@ -203,11 +203,11 @@ public class LGS_BranchInfoDaoTest {
 	@Before
 	public void getBean() {
 		list = Arrays.asList(
-							new LGS_BranchInfoVO("testId001", "name1")
-							,new LGS_BranchInfoVO("testId002", "name2")
-							,new LGS_BranchInfoVO("testId003", "name3")
-							,new LGS_BranchInfoVO("testId004", "name4")
-							,new LGS_BranchInfoVO("testId005", "name5")
+							new LGS_BranchInfoVO("testId001", "branch1")
+							,new LGS_BranchInfoVO("testId002", "branch2")
+							,new LGS_BranchInfoVO("testId003", "branch3")
+							,new LGS_BranchInfoVO("testId004", "branch4")
+							,new LGS_BranchInfoVO("testId005", "branch5")
 							);
 		
 		LOG.debug("====================");
