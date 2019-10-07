@@ -48,10 +48,10 @@ public class SEJ_StroreDaoTest {
 		
 		//LOG.debug(fileId.length()+"");// 번호 등록될 때 아이디랑 뒤에 번호 아무거나 붙여져서 나온다
 		list = Arrays.asList(
-				new SEJ_StroreVO("20191001-001","고소팝콘(L)","옥수수 본연의 맛을 즐길 수 있는 짭짜름한 클래식 고소팝콘!",001,5000,"J01_사진.jpg","J02_사진.jpg",1000 ,"jpg"),
-				new SEJ_StroreVO("20191001-002","달콤팝콘(L)","달콤한 카라멜 향이 가득한 달콤팝콘을 즐겨보세요!",001,6000,"J01_사진.jpg","J02_사진.jpg",2000 ,"jpg"),
-				new SEJ_StroreVO("20191001-003","더블치즈팝콘(L)","치즈매니아들이라면 놓칠 수 없는 바로 그 팝콘!",001,6000,"J01_사진.jpg","J02_사진.jpg",3000 ,"jpg"),
-				new SEJ_StroreVO("20191001-004","바질어니언팝콘(L)","수많은 매니아를 보유한 바로 그 팝콘! 중독성 200%",001,6000,"J01_사진.jpg","J02_사진.jpg",4000 ,"jpg")
+				new SEJ_StroreVO("20191001-001-001","고소팝콘(L)","옥수수 본연의 맛을 즐길 수 있는 짭짜름한 클래식 고소팝콘!",001,5000,"plainPopcorn.jpg"),
+				new SEJ_StroreVO("20191001-001-002","달콤팝콘(L)","달콤한 카라멜 향이 가득한 달콤팝콘을 즐겨보세요!",001,6000,"caramelPopcorn.jpg"),
+				new SEJ_StroreVO("20191001-001-003","더블치즈팝콘(L)","치즈매니아들이라면 놓칠 수 없는 바로 그 팝콘!",001,6000,"doublecheesePop.jpg"),
+				new SEJ_StroreVO("20191001-001-004","바질어니언팝콘(L)","수많은 매니아를 보유한 바로 그 팝콘! 중독성 200%",001,6000,"onionPop.jpg")
 		
 				);
 	}
@@ -79,13 +79,6 @@ public class SEJ_StroreDaoTest {
 		List<SEJ_StroreVO> list = (List<SEJ_StroreVO>) storeDaoImpl.get_retrieve(search);
 		assertThat(3, is(list.size()));
 		
-//		search.setSearchWord("2");
-//		search.setSearchDiv("20");
-//		search.setPageSize(10);
-//		search.setPageNum(1);
-//		
-//		List<SEJ_StroreVO> list = (List<SEJ_StroreVO>) storeDaoImpl.get_retrieve(search);
-//		assertThat(1, is(list.size()));
 		
 	}
 
@@ -108,10 +101,7 @@ public class SEJ_StroreDaoTest {
 		store.setPruductInfo("콜라,콜라제로,환타오렌지,스프라이트 중 원하는 맛으로 교환하세요! ");
 		store.setCategory(002);
 		store.setProductCost(2700);
-		store.setOrgFileNM("J12_사진.jpg");
-		store.setSaveFileNM("J12_사진.jpg");
-		store.setImageSize(2000);
-		store.setExt("jpg");
+		store.setImg("coke.jpg");
 		
 		int flag = storeDaoImpl.do_update(store);
 		assertThat(flag, is(1));
