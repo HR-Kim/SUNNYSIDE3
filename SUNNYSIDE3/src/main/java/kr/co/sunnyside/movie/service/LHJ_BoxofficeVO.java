@@ -29,12 +29,14 @@ public class LHJ_BoxofficeVO extends DTO{
 	private double expertRate ;
 	/**관람객 평점*/   
 	private double visitorRate;
+	/**순위*/
+	private String movieRank;
 	
 	public LHJ_BoxofficeVO() {}
 
 	public LHJ_BoxofficeVO(String movieId, String kortitle, String engtitle, String limitage, String genre,
 			String relDate, String director, String cast, int runningTime, String synopsis, String poster,
-			double expertRate, double visitorRate) {
+			double expertRate, double visitorRate, String movieRank) {
 		super();
 		this.movieId = movieId;
 		this.kortitle = kortitle;
@@ -49,6 +51,7 @@ public class LHJ_BoxofficeVO extends DTO{
 		this.poster = poster;
 		this.expertRate = expertRate;
 		this.visitorRate = visitorRate;
+		this.movieRank = movieRank;
 	}
 
 	public String getMovieId() {
@@ -155,13 +158,25 @@ public class LHJ_BoxofficeVO extends DTO{
 		this.visitorRate = visitorRate;
 	}
 
+	public String getMovieRank() {
+		return movieRank;
+	}
+
+	public void setMovieRank(String movieRank) {
+		this.movieRank = movieRank;
+	}
+
 	@Override
 	public String toString() {
 		return "LHJ_BoxofficeVO [movieId=" + movieId + ", kortitle=" + kortitle + ", engtitle=" + engtitle
 				+ ", limitage=" + limitage + ", genre=" + genre + ", relDate=" + relDate + ", director=" + director
 				+ ", cast=" + cast + ", runningTime=" + runningTime + ", synopsis=" + synopsis + ", poster=" + poster
-				+ ", expertRate=" + expertRate + ", visitorRate=" + visitorRate + ", toString()=" + super.toString()
-				+ "]";
+				+ ", expertRate=" + expertRate + ", visitorRate=" + visitorRate + ", movieRank=" + movieRank + ", toString()="
+				+ super.toString() + "]";
 	}
+
+	
+
+	
 }
 
