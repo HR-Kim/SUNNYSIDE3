@@ -154,16 +154,16 @@ Logger LOG = LoggerFactory.getLogger(this.getClass());
 		return jsonString;
 	}
 	
-	@RequestMapping(value = "reservationSvc/get_selectOne.do", method = RequestMethod.POST)
-	public String get_selectOne(LGS_TicketVO ticketVO, Model model) {
+	@RequestMapping(value = "reservationSvc/do_selectOne.do", method = RequestMethod.POST)
+	public String do_selectOne(LGS_TicketVO ticketVO, Model model) {
 		LOG.debug("==================================");
-		LOG.debug("Controller : get_selectOne_screenInfo");
+		LOG.debug("Controller : do_selectOne_screenInfo");
 		LOG.debug("==================================");
 		
 		if(ticketVO == null) throw new NullArgumentException(); //null
 		if(ticketVO.getTicketCode() == null || ticketVO.getTicketCode() == "") throw new IllegalArgumentException();
 		
-		LGS_TicketVO outVO = (LGS_TicketVO) reservationSvc.get_selectOne(ticketVO);
+		LGS_TicketVO outVO = (LGS_TicketVO) reservationSvc.do_selectOne(ticketVO);
 		model.addAttribute("vo", outVO);
 		
 		LOG.debug("==================================");
@@ -173,16 +173,16 @@ Logger LOG = LoggerFactory.getLogger(this.getClass());
 		return VIEW_;
 	}
 	
-	@RequestMapping(value = "reservationSvc/get_retrieve.do", method = RequestMethod.POST)
-	public List<?> get_retrieve(SearchVO search, Model model) {
+	@RequestMapping(value = "reservationSvc/do_retrieve.do", method = RequestMethod.POST)
+	public List<?> do_retrieve(SearchVO search, Model model) {
 		LOG.debug("==================================");
-		LOG.debug("Controller : get_retrieve_screenInfo");
+		LOG.debug("Controller : do_retrieve_screenInfo");
 		LOG.debug("==================================");
 		
 		if(search.getPageSize() == 0) search.setPageSize(10);
 		if(search.getPageNum() == 0) search.setPageNum(1);
 		
-		List<LGS_TicketVO> list = (List<LGS_TicketVO>) reservationSvc.get_retrieve(search);
+		List<LGS_TicketVO> list = (List<LGS_TicketVO>) reservationSvc.do_retrieve(search);
 		model.addAttribute("list", list);
 		
 		LOG.debug("==================================");

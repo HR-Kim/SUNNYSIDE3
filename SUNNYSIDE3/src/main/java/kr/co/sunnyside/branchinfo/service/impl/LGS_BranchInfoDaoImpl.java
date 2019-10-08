@@ -92,8 +92,8 @@ public class LGS_BranchInfoDaoImpl implements WorkDiv {
 	}
 
 	@Override
-	public List<?> get_retrieve(DTO dto) {
-		String statement = this.NAMESPACE + ".get_retrieve";
+	public List<?> do_retrieve(DTO dto) {
+		String statement = this.NAMESPACE + ".do_retrieve";
 	
 		LOG.debug("==================================");
 		LOG.debug("statement = " + statement);
@@ -115,8 +115,8 @@ public class LGS_BranchInfoDaoImpl implements WorkDiv {
 	}
 
 	@Override
-	public DTO get_selectOne(DTO dto) {
-		String statement = this.NAMESPACE + ".get_selectOne";
+	public DTO do_selectOne(DTO dto) {
+		String statement = this.NAMESPACE + ".do_selectOne";
 
 		LOG.debug("==================================");
 		LOG.debug("statement = " + statement);
@@ -138,7 +138,7 @@ public class LGS_BranchInfoDaoImpl implements WorkDiv {
 	}
 
 	@Override
-	public List<?> get_excelDown(DTO dto) {
+	public List<?> do_excelDown(DTO dto) {
 		return null;
 	}
 

@@ -147,7 +147,7 @@ public class LGS_RoomCtrl {
 		return jsonString;
 	}
 	
-	@RequestMapping(value = "room/get_selectOne.do", method = RequestMethod.POST)
+	@RequestMapping(value = "room/do_selectOne.do", method = RequestMethod.POST)
 	public String get_selectOne(LGS_RoomVO room, Model model) {
 		LOG.debug("==================================");
 		LOG.debug("Controller : get_selectOne_room");
@@ -166,7 +166,7 @@ public class LGS_RoomCtrl {
 		return VIEW_;
 	}
 	
-	@RequestMapping(value = "room/get_retrieve.do", method = RequestMethod.POST)
+	@RequestMapping(value = "room/do_retrieve.do", method = RequestMethod.POST)
 	public List<?> get_retrieve(SearchVO search, Model model) {
 		LOG.debug("==================================");
 		LOG.debug("Controller : get_retrieve_room");

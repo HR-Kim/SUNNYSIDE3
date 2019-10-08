@@ -137,16 +137,16 @@ public class LGS_BranchInfoCtrl {
 		return jsonString;
 	}
 	
-	@RequestMapping(value = "brachInfo/get_selectOne.do", method = RequestMethod.POST)
-	public String get_selectOne(LGS_BranchInfoVO branchInfo, Model model) {
+	@RequestMapping(value = "brachInfo/do_selectOne.do", method = RequestMethod.POST)
+	public String do_selectOne(LGS_BranchInfoVO branchInfo, Model model) {
 		LOG.debug("==================================");
-		LOG.debug("Controller : get_selectOne_branchInfo");
+		LOG.debug("Controller : do_selectOne_branchInfo");
 		LOG.debug("==================================");
 		
 		if(branchInfo == null) throw new NullArgumentException(); //null
 		if(branchInfo.getBranchId() == null || branchInfo.getBranchId() == "") throw new IllegalArgumentException();	//지점id
 		
-		LGS_BranchInfoVO outVO = (LGS_BranchInfoVO) branchInfoSvc.get_selectOne(branchInfo);
+		LGS_BranchInfoVO outVO = (LGS_BranchInfoVO) branchInfoSvc.do_selectOne(branchInfo);
 		model.addAttribute("vo", outVO);
 		
 		LOG.debug("==================================");
@@ -156,16 +156,16 @@ public class LGS_BranchInfoCtrl {
 		return VIEW_;
 	}
 	
-	@RequestMapping(value = "brachInfo/get_retrieve.do", method = RequestMethod.POST)
-	public List<?> get_retrieve(SearchVO search, Model model) {
+	@RequestMapping(value = "brachInfo/do_retrieve.do", method = RequestMethod.POST)
+	public List<?> do_retrieve(SearchVO search, Model model) {
 		LOG.debug("==================================");
-		LOG.debug("Controller : get_retrieve_branchInfo");
+		LOG.debug("Controller : do_retrieve_branchInfo");
 		LOG.debug("==================================");
 		
 		if(search.getPageSize() == 0) search.setPageSize(10);
 		if(search.getPageNum() == 0) search.setPageNum(1);
 				
-		List<LGS_BranchInfoVO> list = (List<LGS_BranchInfoVO>) branchInfoSvc.get_retrieve(search);
+		List<LGS_BranchInfoVO> list = (List<LGS_BranchInfoVO>) branchInfoSvc.do_retrieve(search);
 		model.addAttribute("list", list);
 		
 		LOG.debug("==================================");
