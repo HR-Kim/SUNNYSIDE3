@@ -70,15 +70,15 @@ public class LHJ_BoxofficeDaoTest {
 	@Before
 	public void setUp() throws IOException, ParseException{
 		testlist = Arrays.asList(
-				 new LHJ_BoxofficeVO("K21186","조커","","","","2019-10-02","","",0,"","",0.0,0.0,"1")
-				,new LHJ_BoxofficeVO("F48336","가장","","","","2019-10-02","","",0,"","",0.0,0.0,"2")
-				,new LHJ_BoxofficeVO("K20477","퍼펙트맨","","","","2019-10-02","","",0,"","",0.0,0.0,"3")
+				 new LHJ_BoxofficeVO("F48336","조커","","","","2019-10-02","","",0,"","",0.0,0.0,"1")
+				,new LHJ_BoxofficeVO("K20477","가장","","","","2019-10-02","","",0,"","",0.0,0.0,"2")
+				,new LHJ_BoxofficeVO("K21186","퍼펙트맨","","","","2019-10-02","","",0,"","",0.0,0.0,"3")
 				,new LHJ_BoxofficeVO("K18372","장사리 ","","","","2019-9-25","","",0,"","",0.0,0.0,"4")
 				,new LHJ_BoxofficeVO("F48958","소피와","","","","2019-10-02","","",0,"","",0.0,0.0,"5")
 				,new LHJ_BoxofficeVO("F49317","몬스터","","","","2019-10-03","","",0,"","",0.0,0.0,"6")
 				,new LHJ_BoxofficeVO("K21060","양자물리학","","","","2019-09-25","","",0,"","",0.0,0.0,"7")
-				,new LHJ_BoxofficeVO("F48214","나쁜","","","","2019-09-11","","",0,"","",0.0,0.0,"8")
-				,new LHJ_BoxofficeVO("K21094","원스","","","","2019-09-25","","",0,"","",0.0,0.0,"9")
+				,new LHJ_BoxofficeVO("K21094","나쁜","","","","2019-09-11","","",0,"","",0.0,0.0,"8")
+				,new LHJ_BoxofficeVO("F48214","원스","","","","2019-09-25","","",0,"","",0.0,0.0,"9")
 				,new LHJ_BoxofficeVO("F48401","47미터","","","","2019-08-28","","",0,"","",0.0,0.0,"10")
 		);		
 		
@@ -131,7 +131,7 @@ public class LHJ_BoxofficeDaoTest {
 	//박스오피스 전체조회
 	@Test
 	@Ignore
-	public void get_retrieve() {
+	public void do_retrieve() {
 		List<LHJ_BoxofficeVO> list = (List<LHJ_BoxofficeVO>) boxofficeDaoImpl.do_retrieve();
 		assertThat(10, is(list.size()));
 		
@@ -164,7 +164,7 @@ public class LHJ_BoxofficeDaoTest {
 	//박스오피스 단건조회
 	@Test
 	@Ignore
-	public void do_boxoffice_selectOne()  {
+	public void do_selectOne()  {
 		LHJ_BoxofficeVO vo = (LHJ_BoxofficeVO) boxofficeDaoImpl.do_selectOne(testlist.get(0));
 		String movieId = vo.getMovieId();
 		LOG.debug("============================");
@@ -175,7 +175,7 @@ public class LHJ_BoxofficeDaoTest {
 	//박스오피스 삭제
 	@Test
 	@Ignore
-	public void do_boxoffice_delete()  {
+	public void do_delete()  {
 		int flag = boxofficeDaoImpl.do_delete();
 		assertThat(flag, is(10)); //10건삭제
 	}
@@ -183,7 +183,7 @@ public class LHJ_BoxofficeDaoTest {
 	//박스오피스 저장
 	@Test
 	@Ignore
-	public void do_boxoffice_insert()  {
+	public void do_save()  {
 		for(LHJ_BoxofficeVO vo : testlist) {
 			int flag = boxofficeDaoImpl.do_save(vo);
 			assertThat(flag, is(1));

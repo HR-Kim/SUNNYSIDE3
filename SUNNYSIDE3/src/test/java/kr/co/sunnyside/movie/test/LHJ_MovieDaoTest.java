@@ -62,11 +62,28 @@ public class LHJ_MovieDaoTest {
 	private LHJ_MovieDaoImpl movieDaoImpl;
 	
 //	List<LHJ_MovieVO> kmdbList = new ArrayList<LHJ_MovieVO>();
+	List<LHJ_MovieVO> list = new ArrayList<LHJ_MovieVO>();
 
 	@Before
 	public void setUp() throws IOException, ParseException{
-
+		list = Arrays.asList(
+				 new LHJ_MovieVO("000001","영화이름01","mn01","전체관람가","판타지","2019-10-01","감독01","배우01",90,"내용01","",0.0,0.0,"000")
+				,new LHJ_MovieVO("000002","영화이름02","mn02","전체관람가","판타지","2019-10-02","감독02","배우02",90,"내용02","",0.0,0.0,"000")
+				,new LHJ_MovieVO("000003","영화이름03","mn03","전체관람가","판타지","2019-10-03","감독03","배우03",90,"내용03","",0.0,0.0,"000")
+				,new LHJ_MovieVO("000004","영화이름04","mn04","전체관람가","판타지","2019-10-04","감독04","배우04",90,"내용04","",0.0,0.0,"000")
+				,new LHJ_MovieVO("000005","영화이름05","mn05","전체관람가","판타지","2019-10-05","감독05","배우05",90,"내용05","",0.0,0.0,"000")		
+		);		
 	}	 
+	
+	/** 영화등록 */
+	@Test
+	@Ignore
+	public void do_save() {
+		for(LHJ_MovieVO vo:list) {
+			int flag = movieDaoImpl.do_save(vo);
+			assertThat(1, is(flag));
+		}
+	}
 	
 	//데이터베이스에 파싱한 kmdb데이터 삽입.
 	//실행금지
