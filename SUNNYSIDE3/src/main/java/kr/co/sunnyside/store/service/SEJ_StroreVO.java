@@ -3,7 +3,8 @@ package kr.co.sunnyside.store.service;
 import kr.co.sunnyside.cmn.DTO;
 
 public class SEJ_StroreVO extends DTO {
-	
+	/**순번*/
+	private int num;
 	/**상품ID 20190927-분류명-001 */ 
 	private String productId;
 	/**상품명 */
