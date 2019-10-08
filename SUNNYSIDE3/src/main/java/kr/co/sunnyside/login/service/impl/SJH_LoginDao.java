@@ -141,7 +141,7 @@ public class SJH_LoginDao implements WorkDiv {
 	 */
 	@Override
 	public DTO do_selectOne(DTO dto) {
-		String statement = this.NAMESPACE+".get_selectOne";
+		String statement = this.NAMESPACE+".do_selectOne";
 		SJH_LoginVO inVO = (SJH_LoginVO) dto;
 		
 		LOG.debug("========================");
