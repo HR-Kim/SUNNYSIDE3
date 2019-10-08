@@ -161,7 +161,7 @@ public class SJH_LoginWebTest {
 	 * @throws Exception
 	 */
 	@Test
-	//@Ignore
+	@Ignore
 	public void pw_find() throws Exception {
 		SJH_LoginVO user = users.get(0);
 		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/login/pw_find.do")

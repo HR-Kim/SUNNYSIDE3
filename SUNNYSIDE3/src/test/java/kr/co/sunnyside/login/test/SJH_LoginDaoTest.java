@@ -78,7 +78,7 @@ private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void pw_find() {
 		SJH_LoginVO user01 = users.get(0);
 		int flag = loginDao.pw_find(user01);
@@ -86,7 +86,7 @@ private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void id_find() {
 		SJH_LoginVO user01 = users.get(0);
 		SJH_LoginVO vsUser = (SJH_LoginVO) loginDao.id_find(user01);
@@ -97,13 +97,13 @@ private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	@Test
 	@Ignore
 	public void do_save() {
-		int flag = loginDao.do_save(users.get(1));
+		int flag = loginDao.do_save(users.get(2));
 		assertThat(1, is(flag));
 	}
 	
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void do_login() {
 		int flag = loginDao.id_check(users.get(0));
 		assertThat(1, is(flag));
