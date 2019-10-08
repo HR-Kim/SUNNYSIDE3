@@ -15,7 +15,7 @@
 	   <!-- locale Change -->
    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
    
-  <!--  <bean class="kr.co.ehr.board.web.LocaleResolverController">
+  	<!--  <bean class="kr.co.ehr.board.web.LocaleResolverController">
       <property name="localeResolver" ref="localeResolver"></property>
    </bean> -->
  
@@ -162,6 +162,11 @@
       <property name="maxUploadSize" value="52428800"/>
       <property name="maxInMemorySize" value="52428800"/>      
    </bean>
-	 
+
+
+	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
+	<bean id="naverLoginBO" class="kr.co.sunnyside.login.service.NaverLoginBO" />
+
+
    
 </beans>

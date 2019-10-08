@@ -48,8 +48,8 @@
 							    #{passwd,jdbcType=VARCHAR},              
 							    #{userName,jdbcType=VARCHAR},
 							    #{email,jdbcType=VARCHAR},              
-							    #{userLevel,jdbcType=NUMERIC},              
-							    #{point,jdbcType=NUMERIC},              
+							    NVL(#{userLevel,jdbcType=VARCHAR},'BASIC'),             
+							    NVL(#{point,jdbcType=NUMERIC},0),             
 							    #{cellphone,jdbcType=VARCHAR},
 							    #{birth,jdbcType=VARCHAR}, 
 							    SYSDATE         
