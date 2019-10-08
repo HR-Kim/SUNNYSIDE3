@@ -68,7 +68,7 @@ public class SEJ_StroreDaoTest {
 
 	//팝콘전체 조회
 	@Test
-	//@Ignore
+	@Ignore
 	public void do_retrieve_popcorn() {
 		SearchVO search = new SearchVO();
 		search.setPageSize(10);
@@ -99,7 +99,7 @@ public class SEJ_StroreDaoTest {
 		search.setPageNum(1);
 		
 		List<SEJ_StroreVO> list = (List<SEJ_StroreVO>) storeDaoImpl.do_retrieve_movieticket(search);
-		assertThat(0, is(list.size()));		
+		assertThat(1, is(list.size()));		
 	}
 
 	
@@ -116,12 +116,19 @@ public class SEJ_StroreDaoTest {
 	@Ignore
 	public void do_update() {
 		
-		SEJ_StroreVO store = list.get(0);
-		store.setProductNm("탄산음료(L)");
-		store.setPruductInfo("콜라,콜라제로,환타오렌지,스프라이트 중 원하는 맛으로 교환하세요! ");
-		store.setCategory(002);
-		store.setProductCost(2700);
-		store.setImg("coke.jpg");
+//		SEJ_StroreVO store = list.get(0);
+//		store.setProductNm("탄산음료(L)");
+//		store.setPruductInfo("콜라,콜라제로,환타오렌지,스프라이트 중 원하는 맛으로 교환하세요! ");
+//		store.setCategory(002);
+//		store.setProductCost(2700);
+//		store.setImg("coke.jpg");
+		
+		SEJ_StroreVO store = list.get(1);
+		store.setProductNm("영화예매권");
+		store.setPruductInfo("영화관람권으로 즐거운 영화관람하세요!");
+		store.setCategory(3);
+		store.setProductCost(10000);
+		store.setImg("movieVoucher.jpg");
 		
 		int flag = storeDaoImpl.do_update(store);
 		assertThat(flag, is(1));

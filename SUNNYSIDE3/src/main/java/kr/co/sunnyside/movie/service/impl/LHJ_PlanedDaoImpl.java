@@ -14,16 +14,16 @@ import kr.co.sunnyside.cmn.WorkDiv;
 import kr.co.sunnyside.movie.service.LHJ_MovieVO;
 
 @Repository
-public class LHJ_ScreeningDaoImpl implements WorkDiv {
+public class LHJ_PlanedDaoImpl implements WorkDiv {
 	Logger LOG=LoggerFactory.getLogger(this.getClass());
 	   
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	      
-	private final String NAMESPACE = "kr.co.sunnyside.screening";
-
-	public int do_update_screenDown(DTO dto) {
-		String statement = NAMESPACE + ".do_update_screenDown";
+	private final String NAMESPACE = "kr.co.sunnyside.planed";
+	
+	public int do_update_planedToScreen(DTO dto) {
+		String statement = NAMESPACE + ".do_update_planedToScreen";
 		LHJ_MovieVO inVO = (LHJ_MovieVO) dto;
 		LOG.debug("=============================");
 		LOG.debug("1. param:"+inVO);
@@ -40,8 +40,26 @@ public class LHJ_ScreeningDaoImpl implements WorkDiv {
 		return flag;
 	}
 	
-	public int do_update_screenUp(DTO dto) {
-		String statement = NAMESPACE + ".do_update_screenUp";
+	public int do_update_planedDown(DTO dto) {
+		String statement = NAMESPACE + ".do_update_planedDown";
+		LHJ_MovieVO inVO = (LHJ_MovieVO) dto;
+		LOG.debug("=============================");
+		LOG.debug("1. param:"+inVO);
+		LOG.debug("=============================");
+		
+		LOG.debug("=============================");
+		LOG.debug("2. statement:"+statement);
+		LOG.debug("=============================");
+		
+		int flag = this.sqlSessionTemplate.update(statement, inVO);		
+		LOG.debug("=============================");
+		LOG.debug("3. flag:"+flag);
+		LOG.debug("=============================");
+		return flag;
+	}
+	
+	public int do_update_planedUp(DTO dto) {
+		String statement = NAMESPACE + ".do_update_planedUp";
 		LHJ_MovieVO inVO = (LHJ_MovieVO) dto;
 		LOG.debug("=============================");
 		LOG.debug("1. param:"+inVO);
@@ -60,7 +78,7 @@ public class LHJ_ScreeningDaoImpl implements WorkDiv {
 	
 	@Override
 	public int do_update(DTO dto) {
-		
+		// TODO Auto-generated method stub
 		return 0;
 	}
 
