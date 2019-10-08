@@ -34,9 +34,9 @@
   		<td>분류</td>
   		<td>
 	  		<select>
-	  			<option value="001">팝콘</option>
-	  			<option value="002">음료</option>
-	  			<option value="003">영화예매권</option>
+	  			<option value="1">팝콘</option>
+	  			<option value="2">음료</option>
+	  			<option value="3">영화예매권</option>
 	  		</select>
   		</td>
   	</tr>
@@ -65,14 +65,9 @@
 <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
  <script src="${context}/resources/js/bootstrap.min.js"></script>   
  <script type="text/javascript">
- $("#addBtn").on("click",function(){
+/*  $("#addBtn").on("click",function(){
 		
 		if(confirm("상품을 등록하시겠습니까?")==false) return;
-			
-		var productName =$("#productNm").val();
-		var productPrice =$("#productCost").val();
-		var productInfo =$("#pruductInfo").val();
-		var productImage =$("#img").val();
 		
 		//ajax
      $.ajax({
@@ -102,7 +97,7 @@
      }
     }); //--ajax  
 		
-	 });
+	 }); */
  
  $(document).ready(function(){
 	
