@@ -36,7 +36,7 @@
 		DELETE FROM SCREEN_INFO WHERE SCREEN_ID = #{screenId, jdbcType=VARCHAR}
 	</delete>
 	
-	<select id="get_selectOne" parameterType="ScreenInfo" resultType="ScreenInfo">
+	<select id="do_selectOne" parameterType="ScreenInfo" resultType="ScreenInfo">
 		SELECT
 		    SCREEN_ID as screenId,
 		    ROOM_ID as roomId,
@@ -96,7 +96,7 @@
 			screen_id = #{screenId, jdbcType=VARCHAR}
 	</update>
 	
-	<select id="get_retrieve" parameterType="Search" resultType="ScreenInfo">
+	<select id="do_retrieve" parameterType="Search" resultType="ScreenInfo">
 		SELECT T1.RNUM as num
 		      ,T1.SCREEN_ID as screenId
 			  ,T1.ROOM_ID as roomId

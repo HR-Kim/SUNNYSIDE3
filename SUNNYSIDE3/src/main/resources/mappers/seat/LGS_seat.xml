@@ -9,13 +9,22 @@
 	<where>
 		<choose>
 			<when test="'10' == searchDiv">
-				BRANCH_ID LIKE '%' || #{searchWord} || '%'
+				BRANCH_ID LIKE '%' || #{searchWord, jdbcType=VARCHAR} || '%'
 			</when>
 			<when test="'20' == searchDiv">
-				ROOM_ID LIKE '%' || #{searchWord} || '%'
+				ROOM_ID LIKE '%' || #{searchWord, jdbcType=VARCHAR} || '%'
 			</when>
 			<when test="'30' == searchDiv">
-				SEAT_NUM LIKE '%' || #{searchWord} || '%'
+				SEAT_NM LIKE '%' || #{searchWord, jdbcType=VARCHAR} || '%'
+			</when>
+			<when test="'40' == searchDiv">
+				SEAT_Y LIKE '%' || #{searchWord, jdbcType=VARCHAR} || '%'
+			</when>
+			<when test="'50' == searchDiv">
+				SEAT_X LIKE '%' || #{searchWord, jdbcType=VARCHAR} || '%'
+			</when>
+			<when test="'60' == searchDiv">
+				USE_YN LIKE '%' || #{searchWord, jdbcType=VARCHAR} || '%'
 			</when>
 			<otherwise></otherwise>
 		</choose>
@@ -23,37 +32,49 @@
 	</sql>
 	 
 	<delete id="do_delete" parameterType="Seat">
-		DELETE FROM SEAT WHERE SEAT_NUM = #{seatNum, jdbcType=NUMERIC}
+		DELETE FROM SEAT WHERE SEAT_NM = #{seatNm, jdbcType=VARCHAR}
 	</delete>
 	
-	<select id="get_selectOne" parameterType="Seat" resultType="Seat">
+	<select id="do_selectOne" parameterType="Seat" resultType="Seat">
 		SELECT
 			BRANCH_ID as branchId,
 		    ROOM_ID as roomId,
-			SEAT_NUM as seatNum
+			SEAT_NM as seatNm,
+			SEAT_Y as seatY,
+			SEAT_X as seatX,
+			USE_YN as useYN
 		FROM
 		    SEAT
 		WHERE
-		    SEAT_NUM = #{seatNum, jdbcType=NUMERIC}
+		    SEAT_NM = #{seatNm, jdbcType=VARCHAR}
 	</select>
 	 
 	<select id="do_save" parameterType="Seat">
 		INSERT INTO SEAT (
 		    BRANCH_ID,
 		    ROOM_ID,
-		    SEAT_NUM
+		    SEAT_NM,
+		    SEAT_Y,
+			SEAT_X,
+			USE_YN
 		) VALUES (
 		    #{branchId, jdbcType=VARCHAR},
 		    #{roomId, jdbcType=VARCHAR},
-		    #{seatNum, jdbcType=NUMERIC}
+		    #{seatY, jdbcType=VARCHAR} || #{seatX, jdbcType=NUMERIC},
+		    #{seatY, jdbcType=VARCHAR},
+		    #{seatX, jdbcType=NUMERIC},
+		    #{useYN, jdbcType=VARCHAR}
 		)
 	</select>
 	
-	<select id="get_retrieve" parameterType="Search" resultType="Seat">
+	<select id="do_retrieve" parameterType="Search" resultType="Seat">
 		SELECT T.RNUM as NUM
 			  ,T.BRANCH_ID as branchId
 			  ,T.ROOM_ID as roomId
-			  ,T.SEAT_NUM as seatNum
+			  ,T.SEAT_NM as seatNm
+			  ,T.SEAT_Y as seatY
+			  ,T.SEAT_X as seatX
+			  ,T.USE_YN as useYN
 		FROM(
 		    SELECT ROWNUM AS RNUM, A.*
 		    FROM(
@@ -63,13 +84,16 @@
 		        )A
 		    WHERE CEIL(ROWNUM/ #{pageSize, jdbcType=VARCHAR} ) = #{pageNum, jdbcType=VARCHAR}
 		    )T
-		ORDER BY 1, 2
+		ORDER BY 1, 2, 3
 	</select>
 
 	<update id="do_update" parameterType="Seat">
 		UPDATE SEAT
 		SET
-			SEAT_NUM = #{seatNum, jdbcType=NUMERIC}
+			SEAT_NM = #{seatNm, jdbcType=VARCHAR},
+			SEAT_Y = #{seatY, jdbcType=VARCHAR},
+			SEAT_X = #{seatX, jdbcType=NUMERIC},
+			USE_YN = #{useYN, jdbcType=NUMERIC}
 		WHERE BRANCH_ID = #{branchId, jdbcType=VARCHAR}
 		AND ROOM_ID = #{roomId, jdbcType=VARCHAR}
 	</update>

@@ -33,12 +33,12 @@ public class LGS_RoomSvcImpl implements LGS_RoomSvc {
 	}
 
 	@Override
-	public List<?> get_retrieve(DTO dto) {
+	public List<?> do_retrieve(DTO dto) {
 		return roomDao.do_retrieve(dto);
 	}
 
 	@Override
-	public DTO get_selectOne(DTO dto) {
+	public DTO do_selectOne(DTO dto) {
 		return roomDao.do_selectOne(dto);
 	}
 

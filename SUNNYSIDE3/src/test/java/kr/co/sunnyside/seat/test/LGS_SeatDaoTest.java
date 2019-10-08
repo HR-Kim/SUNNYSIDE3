@@ -81,7 +81,7 @@ public class LGS_SeatDaoTest {
 		LOG.debug("===========================================================");
 		
 	}
-	
+
 	@Test
 	public void do_selectOne() {
 		LOG.debug("===========================================================");
@@ -104,7 +104,7 @@ public class LGS_SeatDaoTest {
 		LOG.debug("out : "  + out);
 		LOG.debug("===========================================================");
 	}
-	
+
 	@Test
 	public void do_update() {
 		LOG.debug("===========================================================");
@@ -123,13 +123,17 @@ public class LGS_SeatDaoTest {
 		}
 		
 		LGS_SeatVO updateVO = list.get(0);
-		updateVO.setSeatNum(12);
+		updateVO.setSeatNm("B24");
+		updateVO.setSeatY("B");
+		updateVO.setSeatX(24);
+		
 		int flag2 = seatDaoImpl.do_update(updateVO);
 		assertThat(1, is(flag2));
 		
+		seatDaoImpl.do_delete(updateVO);
 		
 	}
-	
+	@Ignore
 	@Test
 	public void do_delete() {
 		LOG.debug("===========================================================");
@@ -155,13 +159,19 @@ public class LGS_SeatDaoTest {
 		
 	}
 
-
+	@Ignore
 	@Test
 	public void do_save() {
 		LOG.debug("===========================================================");
 		LOG.debug("do_save");
 		LOG.debug("===========================================================");
 
+
+		for(LGS_SeatVO vo : list) {
+			seatDaoImpl.do_delete(vo);
+			
+		}
+		
 		for(LGS_SeatVO vo : list) {
 			LOG.debug("vo = " + vo);
 			int flag = seatDaoImpl.do_save(vo);
@@ -175,12 +185,16 @@ public class LGS_SeatDaoTest {
 	@Before
 	public void getBean() {
 		list = Arrays.asList(
-				new LGS_SeatVO("b01", "r01", 1)
-				,new LGS_SeatVO("b02", "r02", 2)
-				,new LGS_SeatVO("b03", "r03", 3)
-				,new LGS_SeatVO("b04", "r04", 4)
-				,new LGS_SeatVO("b05", "r05", 5)
-				
+				new LGS_SeatVO("b01", "r01", "A1", "A", 1, "0")
+				,new LGS_SeatVO("b02", "r02", "A2", "A", 2,"0")
+				,new LGS_SeatVO("b03", "r03", "A3", "A", 3, "0")
+				,new LGS_SeatVO("b04", "r04", "A4", "A", 4, "0")
+				,new LGS_SeatVO("b05", "r05", "A5", "A", 5, "0")
+				,new LGS_SeatVO("b06", "r06", "B1", "B", 1, "0")
+				,new LGS_SeatVO("b07", "r07", "B2", "B", 2, "0")
+				,new LGS_SeatVO("b08", "r08", "B3", "B", 3, "0")
+				,new LGS_SeatVO("b09", "r09", "B4", "B", 4, "0")
+				,new LGS_SeatVO("b10", "r10", "B5", "B", 5, "0")
 	);
 		
 		LOG.debug("====================");
@@ -191,8 +205,6 @@ public class LGS_SeatDaoTest {
 		assertThat(context, is(notNullValue()) );
 		assertThat(seatDaoImpl, is(notNullValue()) );
 		
-		LGS_SeatVO s = new LGS_SeatVO("b01", "r01", 12);
-		seatDaoImpl.do_delete(s);
 	}
 	
 	@After

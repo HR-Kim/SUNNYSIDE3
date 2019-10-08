@@ -23,7 +23,7 @@
 		DELETE FROM ROOM WHERE ROOM_ID = #{roomId, jdbcType=VARCHAR}
 	</delete>
 	
-	<select id="get_selectOne" parameterType="Room" resultType="Room">
+	<select id="do_selectOne" parameterType="Room" resultType="Room">
 		SELECT
 			BRANCH_ID as branchId,
 		    ROOM_ID as roomId,
@@ -55,15 +55,13 @@
 	<update id="do_update" parameterType="Room">
 		UPDATE ROOM
 		SET
-			BRANCH_ID = #{branchId, jdbcType=VARCHAR},
-			ROOM_NM = #{roomNm, jdbcType=VARCHAR},
 			TOTAL_SEAT = #{totalSeat, jdbcType=NUMERIC},
 			REST_SEAT = #{restSeat, jdbcType=NUMERIC}
 		WHERE
 			ROOM_ID = #{roomId, jdbcType=VARCHAR}
 	</update>
 	
-	<select id="get_retrieve" parameterType="Search" resultType="Room">
+	<select id="do_retrieve" parameterType="Search" resultType="Room">
 		SELECT T.RNUM as NUM
 			  ,T.BRANCH_ID as branchId
 			  ,T.ROOM_ID as roomId
