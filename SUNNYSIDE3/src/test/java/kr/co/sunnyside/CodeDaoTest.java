@@ -60,7 +60,7 @@ public class CodeDaoTest {
 	}
 	
 	@Test
-	public void get_retrieve() {
+	public void do_retrieve() {
 		code.setCodeId("PAGE_SIZE");
 		List<CodeVO> list =  (List<CodeVO>) this.codeDaoImpl.get_retrieve(code);
 		LOG.debug("======================");

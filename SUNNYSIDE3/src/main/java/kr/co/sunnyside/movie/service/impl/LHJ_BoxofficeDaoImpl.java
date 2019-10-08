@@ -162,7 +162,7 @@ public class LHJ_BoxofficeDaoImpl implements WorkDiv{
 	 * 박스오피스 삭제
 	 */	
 	public int do_delete() {
-		String statement = NAMESPACE + ".do_boxoffice_delete";
+		String statement = NAMESPACE + ".do_delete";
 		
 		LOG.debug("=============================");
 		LOG.debug("2. statement:"+statement);
@@ -181,7 +181,7 @@ public class LHJ_BoxofficeDaoImpl implements WorkDiv{
 	 */
 	@Override
 	public DTO do_selectOne(DTO dto) {
-		String statement = NAMESPACE + ".do_boxoffice_selectOne";
+		String statement = NAMESPACE + ".do_selectOne";
 		LHJ_BoxofficeVO inVO = (LHJ_BoxofficeVO) dto;
 		LOG.debug("=============================");
 		LOG.debug("1. param:"+inVO);
@@ -202,8 +202,8 @@ public class LHJ_BoxofficeDaoImpl implements WorkDiv{
 	/**
 	 * 박스오피스 전체조회
 	 */
-	public List<?> get_retrieve() {
-		String statement = NAMESPACE + ".do_boxoffice_retrieve";
+	public List<?> do_retrieve() {
+		String statement = NAMESPACE + ".do_retrieve";
 		LOG.debug("=============================");
 		LOG.debug("2. statement:"+statement);
 		List<LHJ_BoxofficeVO> list = this.sqlSessionTemplate.selectList(statement);		

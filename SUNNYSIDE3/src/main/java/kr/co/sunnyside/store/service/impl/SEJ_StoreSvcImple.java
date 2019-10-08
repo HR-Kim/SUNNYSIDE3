@@ -47,16 +47,31 @@ public class SEJ_StoreSvcImple implements SEJ_StroreSvc {
 	
 	/**상품선택*/
 	@Override
-	public DTO get_selectOne(DTO dto) {
+	public DTO do_selectOne(DTO dto) {
 		
-		return storeDaoImpl.get_selectOne(dto);
+		return storeDaoImpl.do_selectOne(dto);
 	}
 	
 	/**상품전체조회*/
 	@Override
-	public List<?> get_retrieve(DTO dto) {
+	public List<?> do_retrieve(DTO dto) {
 		
-		return storeDaoImpl.get_retrieve(dto);
+		return storeDaoImpl.do_retrieve(dto);
+	}
+
+	@Override
+	public List<?> do_retrieve_popcorn(DTO dto) {
+		return storeDaoImpl.do_retrieve_popcorn(dto);
+	}
+
+	@Override
+	public List<?> do_retrieve_drink(DTO dto) {
+		return storeDaoImpl.do_retrieve_drink(dto);
+	}
+
+	@Override
+	public List<?>do_retrieve_movieticket(DTO dto) {
+		return storeDaoImpl.do_retrieve_movieticket(dto);
 	}
 
 

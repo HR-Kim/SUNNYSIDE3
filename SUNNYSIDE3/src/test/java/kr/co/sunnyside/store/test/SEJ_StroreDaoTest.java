@@ -69,36 +69,36 @@ public class SEJ_StroreDaoTest {
 	//팝콘전체 조회
 	@Test
 	//@Ignore
-	public void get_retrieve_popcorn() {
+	public void do_retrieve_popcorn() {
 		SearchVO search = new SearchVO();
 		search.setPageSize(10);
 		search.setPageNum(1);
 		
-		List<SEJ_StroreVO> list = (List<SEJ_StroreVO>) storeDaoImpl.get_retrieve_popcorn(search);
+		List<SEJ_StroreVO> list = (List<SEJ_StroreVO>) storeDaoImpl.do_retrieve_popcorn(search);
 		assertThat(3, is(list.size()));		
 	}
 	
 	//음료전체 조회
 	@Test
 	@Ignore
-	public void get_retrieve_drink() {
+	public void do_retrieve_drink() {
 		SearchVO search = new SearchVO();
 		search.setPageSize(10);
 		search.setPageNum(1);
 		
-		List<SEJ_StroreVO> list = (List<SEJ_StroreVO>) storeDaoImpl.get_retrieve_drink(search);
+		List<SEJ_StroreVO> list = (List<SEJ_StroreVO>) storeDaoImpl.do_retrieve_drink(search);
 		assertThat(1, is(list.size()));		
 	}
 	
 	//영화 예매권 전체 조회
 	@Test
 	@Ignore
-	public void get_retrieve_movieticket() {
+	public void do_retrieve_movieticket() {
 		SearchVO search = new SearchVO();
 		search.setPageSize(10);
 		search.setPageNum(1);
 		
-		List<SEJ_StroreVO> list = (List<SEJ_StroreVO>) storeDaoImpl.get_retrieve_movieticket(search);
+		List<SEJ_StroreVO> list = (List<SEJ_StroreVO>) storeDaoImpl.do_retrieve_movieticket(search);
 		assertThat(0, is(list.size()));		
 	}
 
@@ -106,8 +106,8 @@ public class SEJ_StroreDaoTest {
 	//상품 단건조회
 	@Test
 	@Ignore
-	public void get_selectOne(){
-		storeDaoImpl.get_selectOne(list.get(1));
+	public void do_selectOne(){
+		storeDaoImpl.do_selectOne(list.get(1));
 		
 	}
 	
