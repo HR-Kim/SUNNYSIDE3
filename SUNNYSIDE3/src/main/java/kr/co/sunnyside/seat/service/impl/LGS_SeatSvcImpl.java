@@ -33,13 +33,13 @@ public class LGS_SeatSvcImpl implements LGS_SeatSvc {
 	}
 	
 	@Override
-	public List<?> get_retrieve(DTO dto) {
-		return seatDao.get_retrieve(dto);
+	public List<?> do_retrieve(DTO dto) {
+		return seatDao.do_retrieve(dto);
 	}
 
 	@Override
-	public DTO get_selectOne(DTO dto) {
-		return seatDao.get_selectOne(dto);
+	public DTO do_selectOne(DTO dto) {
+		return seatDao.do_selectOne(dto);
 	}
 
 }

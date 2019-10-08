@@ -50,9 +50,9 @@ public class LGS_SeatDaoTest {
 	
 
 	@Test
-	public void get_retrieve() {
+	public void do_retrieve() {
 		LOG.debug("===========================================================");
-		LOG.debug("get_retrieve");
+		LOG.debug("do_retrieve");
 		LOG.debug("===========================================================");
 
 		for(LGS_SeatVO vo : list) {
@@ -72,7 +72,7 @@ public class LGS_SeatDaoTest {
 		//search.setSearchDiv("20");
 		//search.setSearchWord("name2");
 		
-		List<LGS_SeatVO> getList = (List<LGS_SeatVO>) seatDaoImpl.get_retrieve(search);
+		List<LGS_SeatVO> getList = (List<LGS_SeatVO>) seatDaoImpl.do_retrieve(search);
 		
 		LOG.debug("===========================================================");
 		for(LGS_SeatVO vo : getList) {
@@ -83,9 +83,9 @@ public class LGS_SeatDaoTest {
 	}
 	
 	@Test
-	public void get_selectOne() {
+	public void do_selectOne() {
 		LOG.debug("===========================================================");
-		LOG.debug("get_selectOne");
+		LOG.debug("do_selectOne");
 		LOG.debug("===========================================================");
 
 		for(LGS_SeatVO vo : list) {
@@ -99,7 +99,7 @@ public class LGS_SeatDaoTest {
 			assertThat(1, is(flag));
 		}
 		
-		LGS_SeatVO out = (LGS_SeatVO) seatDaoImpl.get_selectOne(list.get(2));
+		LGS_SeatVO out = (LGS_SeatVO) seatDaoImpl.do_selectOne(list.get(2));
 		LOG.debug("===========================================================");
 		LOG.debug("out : "  + out);
 		LOG.debug("===========================================================");

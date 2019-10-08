@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sunnyside.boxoffice">
+	
+	<!-- select로 가져올 때 사용되는 movie, boxoffice 공통 칼럼 -->
+	<sql id="movieColumns">						
+		 movie_id as movieId
+	    ,kortitle
+	    ,engtitle
+	    ,limitage
+	    ,genre
+	    ,rel_date as relDate
+	    ,director
+	    ,cast
+	    ,running_time as runningTime
+	    ,synopsis
+	    ,poster
+	    ,expert_rate as expertRate
+	    ,visitor_rate as visitorRate
+	    ,movie_rank as movieRank
+	</sql>
+	
+	<!-- DB에서 사용되는 movie, boxoffice 공통 칼럼 -->
+	<sql id="movieDBColumns">						
+		movie_id
+		,kortitle
+		,engtitle
+		,limitage
+		,genre
+		,rel_date
+		,director
+		,cast
+		,running_time
+		,synopsis
+		,poster
+		,expert_rate
+		,visitor_rate
+	</sql>
+
+	<!-- 목록조회 -->
+	<select id="do_retrieve" resultType="Boxoffice">
+		SELECT
+		    <include refid="movieColumns"></include> 
+		FROM
+		    boxoffice
+		ORDER BY 
+			movie_rank
+	</select>
+	
+	<!-- 단건조회 -->
+	<select id="do_selectOne" parameterType="Boxoffice" resultType="Boxoffice">
+		SELECT 
+			<include refid="movieColumns"></include>
+		FROM 
+			boxoffice
+		WHERE 
+			kortitle LIKE '%'|| #{kortitle} || '%'
+	</select>
+	
+	<!-- 박스오피스 삭제 -->
+	<delete id="do_delete" parameterType="Boxoffice">
+		DELETE FROM boxoffice
+	</delete>
+	
+	<!-- 순위 수정 -->
+	<update id="do_rank_update" parameterType="Boxoffice">	
+		UPDATE 
+			boxoffice
+		SET 
+			movie_rank = #{movieRank, jdbcType=VARCHAR}
+		WHERE 
+			movie_id = #{movieId, jdbcType=VARCHAR}
+	</update>
+
+	<!-- 영화 등록(kobis)-->
+	<insert id="do_save" parameterType="Boxoffice">
+		INSERT INTO boxoffice (
+		    <include refid="movieDBColumns"></include> 
+		) 
+		SELECT 
+			<include refid="movieDBColumns"></include>
+		FROM  movie
+		WHERE kortitle LIKE '%'|| #{kortitle} || '%'
+		AND rel_date = #{relDate, jdbcType=VARCHAR}
+	</insert>
+	
+</mapper>

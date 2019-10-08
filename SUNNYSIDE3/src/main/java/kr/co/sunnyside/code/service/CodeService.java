@@ -6,5 +6,5 @@ import kr.co.sunnyside.cmn.DTO;
 
 public interface CodeService {
 	
-	public List<?> get_retrieve(DTO dto);
+	public List<?> do_retrieve(DTO dto);
 }

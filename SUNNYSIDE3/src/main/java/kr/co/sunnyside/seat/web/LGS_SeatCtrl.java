@@ -101,16 +101,16 @@ public class LGS_SeatCtrl {
 		return jsonString;
 	}
 	
-	@RequestMapping(value = "seat/get_selectOne.do", method = RequestMethod.POST)
-	public String get_selectOne(LGS_SeatVO seat, Model model) {
+	@RequestMapping(value = "seat/do_selectOne.do", method = RequestMethod.POST)
+	public String do_selectOne(LGS_SeatVO seat, Model model) {
 		LOG.debug("==================================");
-		LOG.debug("Controller : get_selectOne_seat");
+		LOG.debug("Controller : do_selectOne_seat");
 		LOG.debug("==================================");
 		
 		if(seat == null) throw new NullArgumentException(); //null
 		if( seat.getSeatNum() == 0) throw new IllegalArgumentException();	//지점id
 		
-		LGS_SeatVO outVO = (LGS_SeatVO) seatSvc.get_selectOne(seat);
+		LGS_SeatVO outVO = (LGS_SeatVO) seatSvc.do_selectOne(seat);
 		model.addAttribute("vo", outVO);
 		
 		LOG.debug("==================================");
@@ -120,16 +120,16 @@ public class LGS_SeatCtrl {
 		return VIEW_;
 	}
 	
-	@RequestMapping(value = "seat/get_retrieve.do", method = RequestMethod.POST)
-	public List<?> get_retrieve(SearchVO search, Model model) {
+	@RequestMapping(value = "seat/do_retrieve.do", method = RequestMethod.POST)
+	public List<?> do_retrieve(SearchVO search, Model model) {
 		LOG.debug("==================================");
-		LOG.debug("Controller : get_retrieve_seat");
+		LOG.debug("Controller : do_retrieve_seat");
 		LOG.debug("==================================");
 		
 		if(search.getPageSize() == 0) search.setPageSize(10);
 		if(search.getPageNum() == 0) search.setPageNum(1);
 				
-		List<LGS_SeatVO> list = (List<LGS_SeatVO>) seatSvc.get_retrieve(search);
+		List<LGS_SeatVO> list = (List<LGS_SeatVO>) seatSvc.do_retrieve(search);
 		model.addAttribute("list", list);
 		
 		LOG.debug("==================================");
