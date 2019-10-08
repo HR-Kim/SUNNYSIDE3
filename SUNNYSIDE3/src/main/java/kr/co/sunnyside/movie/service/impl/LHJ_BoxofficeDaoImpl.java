@@ -180,7 +180,7 @@ public class LHJ_BoxofficeDaoImpl implements WorkDiv{
 	 * 박스오피스 단건조회
 	 */
 	@Override
-	public DTO get_selectOne(DTO dto) {
+	public DTO do_selectOne(DTO dto) {
 		String statement = NAMESPACE + ".do_boxoffice_selectOne";
 		LHJ_BoxofficeVO inVO = (LHJ_BoxofficeVO) dto;
 		LOG.debug("=============================");
@@ -194,7 +194,7 @@ public class LHJ_BoxofficeDaoImpl implements WorkDiv{
 	}
 
 	@Override
-	public List<?> get_retrieve(DTO dto) {
+	public List<?> do_retrieve(DTO dto) {
 		// TODO Auto-generated method stub
 		return null;
 	}	
@@ -214,7 +214,7 @@ public class LHJ_BoxofficeDaoImpl implements WorkDiv{
 	}	
 
 	@Override
-	public List<?> get_excelDown(DTO dto) {
+	public List<?> do_excelDown(DTO dto) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -225,7 +225,7 @@ public class LHJ_BoxofficeDaoImpl implements WorkDiv{
 	 */	
 	@Override
 	public int do_save(DTO dto) {
-		String statement = NAMESPACE + ".do_boxoffice_insert";
+		String statement = NAMESPACE + ".do_save";
 		LHJ_BoxofficeVO inVO = (LHJ_BoxofficeVO) dto;
 		LOG.debug("=============================");
 		LOG.debug("1. param:"+inVO);
