@@ -49,15 +49,15 @@ public class LGS_ReservatonDaoTest {
 	
 
 	@Test
-	public void get_retrieve() {
+	public void do_retrieve() {
 		LOG.debug("===========================================================");
-		LOG.debug("get_retrieve");
+		LOG.debug("do_retrieve");
 		LOG.debug("===========================================================");
 		
 		SearchVO search = new SearchVO();
 		search.setPageNum(1);
 		search.setPageSize(1000);
-		List<LGS_TicketVO> tmp = (List<LGS_TicketVO>) reservationDaoImpl.get_retrieve(search);
+		List<LGS_TicketVO> tmp = (List<LGS_TicketVO>) reservationDaoImpl.do_retrieve(search);
 		for(LGS_TicketVO vo : tmp) {
 			int flag = reservationDaoImpl.do_delete(vo);
 		}
@@ -72,7 +72,7 @@ public class LGS_ReservatonDaoTest {
 		//search.setSearchDiv("10");
 		//search.setSearchWord("");
 		
-		List<LGS_TicketVO> getList = (List<LGS_TicketVO>) reservationDaoImpl.get_retrieve(search);
+		List<LGS_TicketVO> getList = (List<LGS_TicketVO>) reservationDaoImpl.do_retrieve(search);
 		
 		LOG.debug("===========================================================");
 		for(LGS_TicketVO vo : getList) {
@@ -83,15 +83,15 @@ public class LGS_ReservatonDaoTest {
 	}
 	
 	@Test
-	public void get_selectOne() {
+	public void do_selectOne() {
 		LOG.debug("===========================================================");
-		LOG.debug("get_selectOne");
+		LOG.debug("do_selectOne");
 		LOG.debug("===========================================================");
 		
 		SearchVO search = new SearchVO();
 		search.setPageNum(1);
 		search.setPageSize(1000);
-		List<LGS_TicketVO> tmp = (List<LGS_TicketVO>) reservationDaoImpl.get_retrieve(search);
+		List<LGS_TicketVO> tmp = (List<LGS_TicketVO>) reservationDaoImpl.do_retrieve(search);
 		for(LGS_TicketVO vo : tmp) {
 			int flag = reservationDaoImpl.do_delete(vo);
 		}
@@ -101,7 +101,7 @@ public class LGS_ReservatonDaoTest {
 			int flag = reservationDaoImpl.do_save(vo);
 		}
 		
-		LGS_TicketVO out = (LGS_TicketVO) reservationDaoImpl.get_selectOne(list.get(0));
+		LGS_TicketVO out = (LGS_TicketVO) reservationDaoImpl.do_selectOne(list.get(0));
 		assertThat(out, is(notNullValue()));
 	}
 
@@ -114,7 +114,7 @@ public class LGS_ReservatonDaoTest {
 		SearchVO search = new SearchVO();
 		search.setPageNum(1);
 		search.setPageSize(1000);
-		List<LGS_TicketVO> tmp = (List<LGS_TicketVO>) reservationDaoImpl.get_retrieve(search);
+		List<LGS_TicketVO> tmp = (List<LGS_TicketVO>) reservationDaoImpl.do_retrieve(search);
 		for(LGS_TicketVO vo : tmp) {
 			int flag = reservationDaoImpl.do_delete(vo);
 		}
@@ -124,7 +124,7 @@ public class LGS_ReservatonDaoTest {
 			int flag = reservationDaoImpl.do_save(vo);
 		}
 		
-		tmp = (List<LGS_TicketVO>) reservationDaoImpl.get_retrieve(search);
+		tmp = (List<LGS_TicketVO>) reservationDaoImpl.do_retrieve(search);
 		LGS_TicketVO updateVO = tmp.get(0);
 		updateVO.setPayDt("2019-09-30 11:11:11");
 		int flag2 = reservationDaoImpl.do_update(updateVO);
@@ -141,7 +141,7 @@ public class LGS_ReservatonDaoTest {
 		SearchVO search = new SearchVO();
 		search.setPageNum(1);
 		search.setPageSize(1000);
-		List<LGS_TicketVO> tmp = (List<LGS_TicketVO>) reservationDaoImpl.get_retrieve(search);
+		List<LGS_TicketVO> tmp = (List<LGS_TicketVO>) reservationDaoImpl.do_retrieve(search);
 		for(LGS_TicketVO vo : tmp) {
 			int flag = reservationDaoImpl.do_delete(vo);
 			assertThat(1, is(flag));
@@ -159,7 +159,7 @@ public class LGS_ReservatonDaoTest {
 		SearchVO search = new SearchVO();
 		search.setPageNum(1);
 		search.setPageSize(1000);
-		List<LGS_TicketVO> tmp = (List<LGS_TicketVO>) reservationDaoImpl.get_retrieve(search);
+		List<LGS_TicketVO> tmp = (List<LGS_TicketVO>) reservationDaoImpl.do_retrieve(search);
 		for(LGS_TicketVO vo : tmp) {
 			int flag = reservationDaoImpl.do_delete(vo);
 		}
@@ -197,7 +197,7 @@ public class LGS_ReservatonDaoTest {
 		SearchVO search = new SearchVO();
 		search.setPageNum(1);
 		search.setPageSize(1000);
-		List<LGS_TicketVO> tmp = (List<LGS_TicketVO>) reservationDaoImpl.get_retrieve(search);
+		List<LGS_TicketVO> tmp = (List<LGS_TicketVO>) reservationDaoImpl.do_retrieve(search);
 		for(LGS_TicketVO vo : tmp) {
 			int flag = reservationDaoImpl.do_delete(vo);
 		}

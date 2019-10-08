@@ -56,9 +56,9 @@ public class LGS_ScreenInfoDaoTest {
 	private List<LGS_ScreenInfoVO> list;
 
 	@Test
-	public void get_retrieve() {
+	public void do_retrieve() {
 		LOG.debug("===========================================================");
-		LOG.debug("get_retrieve");
+		LOG.debug("do_retrieve");
 		LOG.debug("===========================================================");
 
 		this.intro();
@@ -69,7 +69,7 @@ public class LGS_ScreenInfoDaoTest {
 		//search.setSearchDiv("20");
 		//search.setSearchWord("name2");
 		
-		List<LGS_ScreenInfoVO> getList = (List<LGS_ScreenInfoVO>) screenInfoDaoImpl.get_retrieve(search);
+		List<LGS_ScreenInfoVO> getList = (List<LGS_ScreenInfoVO>) screenInfoDaoImpl.do_retrieve(search);
 		
 		LOG.debug("===========================================================");
 		for(LGS_ScreenInfoVO vo : getList) {
@@ -80,9 +80,9 @@ public class LGS_ScreenInfoDaoTest {
 	}
 
 	@Test
-	public void get_selectOne() {
+	public void do_selectOne() {
 		LOG.debug("===========================================================");
-		LOG.debug("get_selectOne");
+		LOG.debug("do_selectOne");
 		LOG.debug("===========================================================");
 		
 		this.intro();
@@ -90,9 +90,9 @@ public class LGS_ScreenInfoDaoTest {
 		SearchVO search = new SearchVO();
 		search.setPageNum(1);
 		search.setPageSize(1000);
-		List<LGS_ScreenInfoVO> tmp = (List<LGS_ScreenInfoVO>) screenInfoDaoImpl.get_retrieve(search);
+		List<LGS_ScreenInfoVO> tmp = (List<LGS_ScreenInfoVO>) screenInfoDaoImpl.do_retrieve(search);
 		
-		LGS_ScreenInfoVO out = (LGS_ScreenInfoVO) screenInfoDaoImpl.get_selectOne(tmp.get(0));
+		LGS_ScreenInfoVO out = (LGS_ScreenInfoVO) screenInfoDaoImpl.do_selectOne(tmp.get(0));
 		LOG.debug("===========================================================");
 		LOG.debug("out : "  + out);
 		LOG.debug("===========================================================");
@@ -109,7 +109,7 @@ public class LGS_ScreenInfoDaoTest {
 		SearchVO search = new SearchVO();
 		search.setPageNum(1);
 		search.setPageSize(1000);
-		List<LGS_ScreenInfoVO> tmp = (List<LGS_ScreenInfoVO>) screenInfoDaoImpl.get_retrieve(search);
+		List<LGS_ScreenInfoVO> tmp = (List<LGS_ScreenInfoVO>) screenInfoDaoImpl.do_retrieve(search);
 		
 		LGS_ScreenInfoVO updateVO = tmp.get(0);
 		updateVO.setAdultCost(990000000);
@@ -129,7 +129,7 @@ public class LGS_ScreenInfoDaoTest {
 		SearchVO search = new SearchVO();
 		search.setPageNum(1);
 		search.setPageSize(1000);
-		List<LGS_ScreenInfoVO> tmp = (List<LGS_ScreenInfoVO>) screenInfoDaoImpl.get_retrieve(search);
+		List<LGS_ScreenInfoVO> tmp = (List<LGS_ScreenInfoVO>) screenInfoDaoImpl.do_retrieve(search);
 		
 		for(LGS_ScreenInfoVO vo : tmp) {
 			LOG.debug("vo = " + vo);
@@ -181,7 +181,7 @@ public class LGS_ScreenInfoDaoTest {
 		SearchVO search = new SearchVO();
 		search.setPageNum(1);
 		search.setPageSize(1000);
-		List<LGS_ScreenInfoVO> tmp = (List<LGS_ScreenInfoVO>) screenInfoDaoImpl.get_retrieve(search);
+		List<LGS_ScreenInfoVO> tmp = (List<LGS_ScreenInfoVO>) screenInfoDaoImpl.do_retrieve(search);
 		
 		if(tmp != null) {
 			for(LGS_ScreenInfoVO vo : tmp) {
@@ -189,7 +189,7 @@ public class LGS_ScreenInfoDaoTest {
 			}
 		}
 		
-		List<LGS_RoomVO> tmp2 = (List<LGS_RoomVO>) roomDaoImpl.get_retrieve(search);
+		List<LGS_RoomVO> tmp2 = (List<LGS_RoomVO>) roomDaoImpl.do_retrieve(search);
 		list = Arrays.asList(
 				new LGS_ScreenInfoVO("", tmp2.get(0).getRoomId(), "b1", "m1", "19/09/30", "19/09/30", "19/09/30", 100,10,1)
 				,new LGS_ScreenInfoVO("", tmp2.get(1).getRoomId(), "b2", "m2", "19/09/30", "19/09/30", "19/09/30", 200,20,2)
@@ -220,14 +220,14 @@ public class LGS_ScreenInfoDaoTest {
 		search.setPageNum(1);
 		search.setPageSize(1000);
 		
-		List<LGS_RoomVO> tmp2 = (List<LGS_RoomVO>) roomDaoImpl.get_retrieve(search);
+		List<LGS_RoomVO> tmp2 = (List<LGS_RoomVO>) roomDaoImpl.do_retrieve(search);
 		if(tmp2 != null) {
 			for(LGS_RoomVO vo : tmp2) {
 				roomDaoImpl.do_delete(vo);
 			}
 		}
 		
-		List<LGS_BranchInfoVO> tmp = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.get_retrieve(search);
+		List<LGS_BranchInfoVO> tmp = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.do_retrieve(search);
 		if(tmp != null) {
 			for(LGS_BranchInfoVO vo : tmp) {
 				branchInfoDaoImpl.do_delete(vo);
@@ -236,7 +236,7 @@ public class LGS_ScreenInfoDaoTest {
 		for(LGS_BranchInfoVO vo : Blist) {
 			branchInfoDaoImpl.do_save(vo);
 		}
-		tmp = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.get_retrieve(search);
+		tmp = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.do_retrieve(search);
 		List<LGS_RoomVO> Rlist = Arrays.asList(
 				new LGS_RoomVO(tmp.get(0).getBranchId(), "testRoom001", "room1", 100, 100)
 				,new LGS_RoomVO(tmp.get(1).getBranchId(), "testRoom002", "room2", 200, 100)

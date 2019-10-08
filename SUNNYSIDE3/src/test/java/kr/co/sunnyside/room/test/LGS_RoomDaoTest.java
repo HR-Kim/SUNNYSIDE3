@@ -51,9 +51,9 @@ public class LGS_RoomDaoTest {
 	private List<LGS_RoomVO> Rlist;
 	
 	@Test
-	public void get_retrieve() {
+	public void do_retrieve() {
 		LOG.debug("===========================================================");
-		LOG.debug("get_retrieve");
+		LOG.debug("do_retrieve");
 		LOG.debug("===========================================================");
 		
 		this.intro();
@@ -64,7 +64,7 @@ public class LGS_RoomDaoTest {
 		//search.setSearchDiv("20");
 		//search.setSearchWord("name2");
 		
-		List<LGS_RoomVO> getList = (List<LGS_RoomVO>) roomDaoImpl.get_retrieve(search);
+		List<LGS_RoomVO> getList = (List<LGS_RoomVO>) roomDaoImpl.do_retrieve(search);
 		
 		LOG.debug("===========================================================");
 		for(LGS_RoomVO vo : getList) {
@@ -75,9 +75,9 @@ public class LGS_RoomDaoTest {
 	}
 	
 	@Test
-	public void get_selectOne() {
+	public void do_selectOne() {
 		LOG.debug("===========================================================");
-		LOG.debug("get_selectOne");
+		LOG.debug("do_selectOne");
 		LOG.debug("===========================================================");
 		
 		this.intro();
@@ -85,9 +85,9 @@ public class LGS_RoomDaoTest {
 		SearchVO search = new SearchVO();
 		search.setPageNum(1);
 		search.setPageSize(1000);
-		List<LGS_RoomVO> tmp = (List<LGS_RoomVO>) roomDaoImpl.get_retrieve(search);
+		List<LGS_RoomVO> tmp = (List<LGS_RoomVO>) roomDaoImpl.do_retrieve(search);
 		
-		LGS_RoomVO out = (LGS_RoomVO) roomDaoImpl.get_selectOne(tmp.get(0));
+		LGS_RoomVO out = (LGS_RoomVO) roomDaoImpl.do_selectOne(tmp.get(0));
 		LOG.debug("===========================================================");
 		LOG.debug("out : "  + out);
 		LOG.debug("===========================================================");
@@ -104,7 +104,7 @@ public class LGS_RoomDaoTest {
 		SearchVO search = new SearchVO();
 		search.setPageNum(1);
 		search.setPageSize(1000);
-		List<LGS_RoomVO> tmp = (List<LGS_RoomVO>) roomDaoImpl.get_retrieve(search);
+		List<LGS_RoomVO> tmp = (List<LGS_RoomVO>) roomDaoImpl.do_retrieve(search);
 		
 		LGS_RoomVO updateVO = tmp.get(0);
 		updateVO.setRoomNm("testtesttesttest");
@@ -124,7 +124,7 @@ public class LGS_RoomDaoTest {
 		SearchVO search = new SearchVO();
 		search.setPageNum(1);
 		search.setPageSize(1000);
-		List<LGS_RoomVO> tmp = (List<LGS_RoomVO>) roomDaoImpl.get_retrieve(search);
+		List<LGS_RoomVO> tmp = (List<LGS_RoomVO>) roomDaoImpl.do_retrieve(search);
 		if(tmp != null) {
 			for(LGS_RoomVO vo : tmp) {
 				int flag = roomDaoImpl.do_delete(vo);
@@ -173,14 +173,14 @@ public class LGS_RoomDaoTest {
 		SearchVO search = new SearchVO();
 		search.setPageNum(1);
 		search.setPageSize(1000);
-		List<LGS_RoomVO> tmp = (List<LGS_RoomVO>) roomDaoImpl.get_retrieve(search);
+		List<LGS_RoomVO> tmp = (List<LGS_RoomVO>) roomDaoImpl.do_retrieve(search);
 		if(tmp != null) {
 			for(LGS_RoomVO vo : tmp) {
 				roomDaoImpl.do_delete(vo);
 			}
 		}
 		
-		List<LGS_BranchInfoVO> tmp2 = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.get_retrieve(search);
+		List<LGS_BranchInfoVO> tmp2 = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.do_retrieve(search);
 		if(tmp2 != null) {
 			for(LGS_BranchInfoVO vo : tmp2) {
 				branchInfoDaoImpl.do_delete(vo);
@@ -190,7 +190,7 @@ public class LGS_RoomDaoTest {
 		for(LGS_BranchInfoVO vo : Blist) {
 			branchInfoDaoImpl.do_save(vo);
 		}
-		tmp2 = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.get_retrieve(search);
+		tmp2 = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.do_retrieve(search);
 		Rlist = Arrays.asList(
 				new LGS_RoomVO(tmp2.get(0).getBranchId(), "testRoom001", "room1", 100, 100)
 				,new LGS_RoomVO(tmp2.get(1).getBranchId(), "testRoom002", "room2", 200, 100)
