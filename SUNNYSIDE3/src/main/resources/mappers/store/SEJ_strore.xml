@@ -67,8 +67,8 @@
 					IMG 
    </sql>
 
-<!-- 상품 전체조회 -->
-	 <select id="get_retrieve" parameterType="Search" resultType="Store">
+<!-- 팝콘상품 조회 -->
+	 <select id="get_retrieve_popcorn" parameterType="Search" resultType="Store">
 		  SELECT T1.*												
 		  FROM                                                              
 		  (                                                                 
@@ -85,23 +85,67 @@
   							SELECT *
  						    FROM PRODUCT   
  						    WHERE  1=1                        
-		  			<include refid="baseCondition"/>                                                                          
+		  					and CATEGORY LIKE '%' || '1' || '%'                                                                         
 		  		)A                                                         
 		  	   WHERE rownum <![CDATA[ <= ]]> (#{pageSize} * (#{pageNum}-1)+#{pageSize})    						       
 		  	) B                                                            
 		  	WHERE B.rnum <![CDATA[ >= ]]> (#{pageSize} * (#{pageNum}-1)+1)                  				   
 		  )T1	
 		</select>
-	 <sql id="baseCondition">   	
-			<choose>
-				<when test="'10' == searchDiv">
-					 and PRODUCT_NM LIKE '%' || #{searchWord} || '%'
-				</when>
-				<when test="'20' == searchDiv">
-					 and CATEGORY LIKE '%' || #{searchWord} || '%'
-				</when>
-				<otherwise></otherwise>
-			</choose>  
-	   </sql>
+
+<!-- 음료상품 조회 -->
+	 <select id="get_retrieve_drink" parameterType="Search" resultType="Store">
+		  SELECT T1.*												
+		  FROM                                                              
+		  (                                                                 
+		  	SELECT  B.rnum as num,
+				  	B.PRODUCT_ID as productId ,
+					B.PRODUCT_NM as productNm,
+					B.PRUDUCT_INFO as pruductInfo,
+					B.CATEGORY,
+					B.PRODUCT_COST as productCost,
+					B.IMG                                                     
+		    FROM(
+ 					SELECT ROWNUM AS rnum,A.*
+ 					FROM(
+  							SELECT *
+ 						    FROM PRODUCT   
+ 						    WHERE  1=1                        
+		  					and CATEGORY LIKE '%' || '2' || '%'                                                                         
+		  		)A                                                         
+		  	   WHERE rownum <![CDATA[ <= ]]> (#{pageSize} * (#{pageNum}-1)+#{pageSize})    						       
+		  	) B                                                            
+		  	WHERE B.rnum <![CDATA[ >= ]]> (#{pageSize} * (#{pageNum}-1)+1)                  				   
+		  )T1	
+		</select>
+		
+
+<!-- 영화예매권 상품 조회 -->
+	 <select id="get_retrieve_movieticket" parameterType="Search" resultType="Store">
+		  SELECT T1.*												
+		  FROM                                                              
+		  (                                                                 
+		  	SELECT  B.rnum as num,
+				  	B.PRODUCT_ID as productId ,
+					B.PRODUCT_NM as productNm,
+					B.PRUDUCT_INFO as pruductInfo,
+					B.CATEGORY,
+					B.PRODUCT_COST as productCost,
+					B.IMG                                                     
+		    FROM(
+ 					SELECT ROWNUM AS rnum,A.*
+ 					FROM(
+  							SELECT *
+ 						    FROM PRODUCT   
+ 						    WHERE  1=1                        
+		  					and CATEGORY LIKE '%' || '3' || '%'                                                                        
+		  		)A                                                         
+		  	   WHERE rownum <![CDATA[ <= ]]> (#{pageSize} * (#{pageNum}-1)+#{pageSize})    						       
+		  	) B                                                            
+		  	WHERE B.rnum <![CDATA[ >= ]]> (#{pageSize} * (#{pageNum}-1)+1)                  				   
+		  )T1	
+		</select>
+		
+
 	
 </mapper>
