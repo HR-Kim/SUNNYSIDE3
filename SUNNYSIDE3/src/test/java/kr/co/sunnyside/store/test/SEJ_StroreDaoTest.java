@@ -48,10 +48,10 @@ public class SEJ_StroreDaoTest {
 		
 		//LOG.debug(fileId.length()+"");// 번호 등록될 때 아이디랑 뒤에 번호 아무거나 붙여져서 나온다
 		list = Arrays.asList(
-				new SEJ_StroreVO("20191001-001-001","고소팝콘(L)","옥수수 본연의 맛을 즐길 수 있는 짭짜름한 클래식 고소팝콘!",001,5000,"plainPopcorn.jpg"),
-				new SEJ_StroreVO("20191001-001-002","달콤팝콘(L)","달콤한 카라멜 향이 가득한 달콤팝콘을 즐겨보세요!",001,6000,"caramelPopcorn.jpg"),
-				new SEJ_StroreVO("20191001-001-003","더블치즈팝콘(L)","치즈매니아들이라면 놓칠 수 없는 바로 그 팝콘!",001,6000,"doublecheesePop.jpg"),
-				new SEJ_StroreVO("20191001-001-004","바질어니언팝콘(L)","수많은 매니아를 보유한 바로 그 팝콘! 중독성 200%",001,6000,"onionPop.jpg")
+				new SEJ_StroreVO("20191008-001-000","고소팝콘(L)","옥수수 본연의 맛을 즐길 수 있는 짭짜름한 클래식 고소팝콘!",001,5000,"plainPopcorn.jpg"),
+				new SEJ_StroreVO("20191008-001-001","달콤팝콘(L)","달콤한 카라멜 향이 가득한 달콤팝콘을 즐겨보세요!",001,6000,"caramelPopcorn.jpg"),
+				new SEJ_StroreVO("20191008-001-002","더블치즈팝콘(L)","치즈매니아들이라면 놓칠 수 없는 바로 그 팝콘!",001,6000,"doublecheesePop.jpg"),
+				new SEJ_StroreVO("20191008-001-003","바질어니언팝콘(L)","수많은 매니아를 보유한 바로 그 팝콘! 중독성 200%",001,6000,"onionPop.jpg")
 		
 				);
 	}
@@ -75,7 +75,7 @@ public class SEJ_StroreDaoTest {
 		search.setPageNum(1);
 		
 		List<SEJ_StroreVO> list = (List<SEJ_StroreVO>) storeDaoImpl.do_retrieve_popcorn(search);
-		assertThat(3, is(list.size()));		
+		assertThat(2, is(list.size()));		
 	}
 	
 	//음료전체 조회
@@ -116,20 +116,18 @@ public class SEJ_StroreDaoTest {
 	@Ignore
 	public void do_update() {
 		
-//		SEJ_StroreVO store = list.get(0);
-//		store.setProductNm("탄산음료(L)");
-//		store.setPruductInfo("콜라,콜라제로,환타오렌지,스프라이트 중 원하는 맛으로 교환하세요! ");
-//		store.setCategory(002);
-//		store.setProductCost(2700);
-//		store.setImg("coke.jpg");
-		
 		SEJ_StroreVO store = list.get(1);
-		store.setProductNm("영화예매권");
-		store.setPruductInfo("영화관람권으로 즐거운 영화관람하세요!");
-		store.setCategory(3);
-		store.setProductCost(10000);
-		store.setImg("movieVoucher.jpg");
+		store.setProductNm("탄산음료(L)");
+		store.setPruductInfo("콜라,콜라제로,환타오렌지,스프라이트 중 원하는 맛으로 교환하세요! ");
+		store.setProductCost(2700);
+		store.setImg("coke.jpg");
 		
+//		SEJ_StroreVO store = list.get(0);
+//		store.setProductNm("영화예매권");
+//		store.setPruductInfo("영화관람권으로 즐거운 영화관람하세요!");
+//		store.setProductCost(10000);
+//		store.setImg("movieVoucher.jpg");
+//		
 		int flag = storeDaoImpl.do_update(store);
 		assertThat(flag, is(1));
 	}

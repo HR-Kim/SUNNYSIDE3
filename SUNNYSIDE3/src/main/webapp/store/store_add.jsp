@@ -2,7 +2,7 @@
     pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<c:set var="context" value="${pageContext.request.contextPath }"/>
+<c:set var="context" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +33,7 @@
   	<tr>
   		<td>분류</td>
   		<td>
-	  		<select>
+	  		<select name="category" id="category">
 	  			<option value="1">팝콘</option>
 	  			<option value="2">음료</option>
 	  			<option value="3">영화예매권</option>
@@ -65,44 +65,70 @@
 <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
  <script src="${context}/resources/js/bootstrap.min.js"></script>   
  <script type="text/javascript">
+  $(document).ready(function(){
 	$("#addBtn").on("click",function(){
-		
-		if(confirm("상품을 등록하시겠습니까?")==false) return;
-		
-		//ajax
-     $.ajax({
-        type:"POST",
-        url:"${context}/store/do_save.do",
-        dataType:"html",
-        data:{
-	           "productNm":$("#productNm").val(),
-	           "productCost":$("#productCost").val(),
-	           "pruductInfo":$("#pruductInfo").val(),
-	           "img":$("#img").val()
-       }, 
-     success: function(data){ 
-       var jData = JSON.parse(data);
-       if(null != jData && jData.msgId=="1"){
-         alert(jData.msgMsg);
-         location.href ="${context}/store/get_retrieve.do";
-       }else{
-         alert(jData.msgId+"|"+jData.msgMsg);
-       }
-     },
-     complete:function(data){
-      
-     },
-     error:function(xhr,status,error){
-         alert("error:"+error);
-     }
-    }); //--ajax  
-		
-	 }); 
- 
- $(document).ready(function(){
+			
+	if(confirm("상품을 등록하시겠습니까?")==false) return;
 	
+	/* var productName = $("#productName").val();
+	var category = $("#category").val();
+	var productPrice = $("#productPrice").val();
+	var productInfo = $("#productInfo").val();
+	var productImage = $("#productImage").val();
+	
+	console.log($("#productName").val());
+	console.log($("#category").val());
+	console.log($("#productPrice").val());
+	console.log($("#productInfo").val());
+	console.log($("#productImage").val());  */
+	
+	if(productName ==""){
+		alert("상품명을 입력해주세요");
+		productName.focus();
+	}else if(productPrice ==""){
+		alert("상품금액을 입력해주세요");
+		productPrice.focus();
+	}else if(productInfo ==""){
+		alert("상품정보를 입력해주세요");
+		productInfo.focus();
+	}else if(productImage ==""){
+		alert("상품이미지를 등록해주세요");
+		productImage.focus();
+	}
+	
+	//ajax
+    $.ajax({
+       type:"get",
+       url:"${context}/store/do_save.do",
+       dataType:"json",
+       data:{
+           "productName":$("#productName").val(),
+           "category":$("#category").val(),
+           "productPrice":$("#productPrice").val(),
+           "productInfo":$("#productInfo").val(),
+           "productImage":$("#productImage").val()
+      }, 
+    success: function(data){ 
+      var jData = JSON.parse(data);
+      if(null != jData && jData.msgId=="1"){
+        alert(jData.msgMsg);
+        location.href ="${context}/store/write.do";
+      }else{
+        alert(jData.msgId+"|"+jData.msgMsg);
+      }
+    },
+    complete:function(data){
+     
+    },
+    error:function(xhr,status,error){
+        alert("error:"+error);
+    }
+   }); //--ajax  
+	/* document.storeForm.action ="${context}/store/do_save.do";
+	document.storeForm.submit(); */
+	});
 		 
- });
+  });
 
 </script>
 </body>

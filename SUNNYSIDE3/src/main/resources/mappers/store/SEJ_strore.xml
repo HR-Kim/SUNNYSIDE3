@@ -19,9 +19,9 @@
 				    PRUDUCT_INFO,
 				    CATEGORY,
 				    PRODUCT_COST,
-				    IMG				
+				    IMG			
 				) VALUES (
-				    #{productId,jdbcType=VARCHAR},
+				    TO_CHAR(SYSDATE,'yyyymmdd')||'-'||'00'||#{category,jdbcType=NUMERIC}||'-'||to_char((SELECT COUNT(*) FROM PRODUCT), 'FM000'),
 				    #{productNm,jdbcType=VARCHAR},
 				    #{pruductInfo,jdbcType=VARCHAR},
 				    #{category,jdbcType=NUMERIC},
@@ -42,9 +42,8 @@
 				UPDATE PRODUCT
 				SET product_nm     = #{productNm,jdbcType=VARCHAR},
 				    pruduct_info   = #{pruductInfo,jdbcType=VARCHAR},
-				    category       = #{category,jdbcType=NUMERIC},
 				    product_cost   = #{productCost,jdbcType=NUMERIC},
-				    IMG   		   = #{img,jdbcType=VARCHAR}
+				    IMG   		   = #{img,jdbcType=VARCHAR}				
 				WHERE
 			   	 	product_id = #{productId,jdbcType=VARCHAR}
 	</update>

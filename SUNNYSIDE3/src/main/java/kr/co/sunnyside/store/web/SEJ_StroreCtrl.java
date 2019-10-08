@@ -48,7 +48,7 @@ public class SEJ_StroreCtrl {
 		  return "/store/store_add";
 	  }
 	  
-	  @RequestMapping(value = "store/do_save.do", method =RequestMethod.POST, produces = "application/json;charset=UTF-8" )
+	  @RequestMapping(value = "store/do_save.do", method =RequestMethod.GET, produces = "application/json;charset=UTF-8" )
 	  @ResponseBody
 	  public String do_save(SEJ_StroreVO store){
 		LOG.debug("==========================");
