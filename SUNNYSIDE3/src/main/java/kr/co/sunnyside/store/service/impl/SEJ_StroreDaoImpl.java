@@ -95,10 +95,21 @@ public class SEJ_StroreDaoImpl implements WorkDiv {
 		return outVO;
 	}
 
-	/**상품 전체조회*/
+	/**상품 전체조회=== 사용안함. */
 	@Override
 	public List<?> get_retrieve(DTO dto) {
-		String statement = NAMESPACE+".get_retrieve";
+		return null;
+
+	}
+
+	@Override
+	public List<?> get_excelDown(DTO dto) {
+		
+		return null;
+	}
+	/**팝콘 조회*/
+	public List<?> get_retrieve_popcorn(DTO dto) {
+		String statement = NAMESPACE+".get_retrieve_popcorn";
 		SearchVO search = (SearchVO) dto;
 		LOG.debug("===================================");
 		LOG.debug("=1. param="+search);
@@ -111,13 +122,46 @@ public class SEJ_StroreDaoImpl implements WorkDiv {
 		LOG.debug("===================================");
 		LOG.debug("=3. flag="+list);
 		LOG.debug("===================================");
+		
 		return list;
 	}
-
-	@Override
-	public List<?> get_excelDown(DTO dto) {
+	
+	/**음료 조회*/
+	public List<?> get_retrieve_drink(DTO dto) {
+		String statement = NAMESPACE+".get_retrieve_drink";
+		SearchVO search = (SearchVO) dto;
+		LOG.debug("===================================");
+		LOG.debug("=1. param="+search);
+		LOG.debug("===================================");
+		LOG.debug("===================================");
+		LOG.debug("=2. statement="+statement);
+		LOG.debug("===================================");
 		
-		return null;
+		List<SEJ_StroreVO> list= this.sqlSessionTemplate.selectList(statement,search);
+		LOG.debug("===================================");
+		LOG.debug("=3. flag="+list);
+		LOG.debug("===================================");
+		
+		return list;
+	}
+	
+	/**영화예매권 조회*/
+	public List<?> get_retrieve_movieticket(DTO dto) {
+		String statement = NAMESPACE+".get_retrieve_movieticket";
+		SearchVO search = (SearchVO) dto;
+		LOG.debug("===================================");
+		LOG.debug("=1. param="+search);
+		LOG.debug("===================================");
+		LOG.debug("===================================");
+		LOG.debug("=2. statement="+statement);
+		LOG.debug("===================================");
+		
+		List<SEJ_StroreVO> list= this.sqlSessionTemplate.selectList(statement,search);
+		LOG.debug("===================================");
+		LOG.debug("=3. flag="+list);
+		LOG.debug("===================================");
+		
+		return list;
 	}
 		
 }
