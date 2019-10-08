@@ -92,7 +92,9 @@ public class LHJ_BoxofficeDaoTest {
 		}
 	}
 	
+	//박스오피스 데이터를 삭제, 등록, 조회, 순위 업데이트 하는 테스트
 	@Test
+	@Ignore
 	public void addAndGet() {
 		int flag = 0;
 		//삭제

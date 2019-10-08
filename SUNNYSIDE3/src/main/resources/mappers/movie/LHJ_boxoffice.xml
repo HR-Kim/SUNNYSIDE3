@@ -2,8 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.sunnyside.boxoffice">
 	
-	<!-- movie, boxoffice 공통 칼럼 -->
+	<!-- select로 가져올 때 사용되는 movie, boxoffice 공통 칼럼 -->
 	<sql id="movieColumns">						
+		 movie_id as movieId
+	    ,kortitle
+	    ,engtitle
+	    ,limitage
+	    ,genre
+	    ,rel_date as relDate
+	    ,director
+	    ,cast
+	    ,running_time as runningTime
+	    ,synopsis
+	    ,poster
+	    ,expert_rate as expertRate
+	    ,visitor_rate as visitorRate
+	    ,movie_rank as movieRank
+	</sql>
+	
+	<!-- DB에서 사용되는 movie, boxoffice 공통 칼럼 -->
+	<sql id="movieDBColumns">						
 		movie_id
 		,kortitle
 		,engtitle
@@ -22,20 +40,7 @@
 	<!-- 목록조회 -->
 	<select id="do_boxoffice_retrieve" resultType="Boxoffice">
 		SELECT
-		     movie_id as movieId
-		    ,kortitle
-		    ,engtitle
-		    ,limitage
-		    ,genre
-		    ,rel_date as relDate
-		    ,director
-		    ,cast
-		    ,running_time as runningTime
-		    ,synopsis
-		    ,poster
-		    ,expert_rate as expertRate
-		    ,visitor_rate as visitorRate
-		    ,movie_rank as movieRank
+		    <include refid="movieColumns"></include> 
 		FROM
 		    boxoffice
 		ORDER BY 
@@ -45,7 +50,7 @@
 	<!-- 단건조회 -->
 	<select id="do_boxoffice_selectOne" parameterType="Boxoffice" resultType="Boxoffice">
 		SELECT 
-			movie_id as movieId
+			<include refid="movieColumns"></include>
 		FROM 
 			boxoffice
 		WHERE 
@@ -70,10 +75,10 @@
 	<!-- 영화 등록(kobis)-->
 	<insert id="do_boxoffice_insert" parameterType="Boxoffice">
 		INSERT INTO boxoffice (
-		    <include refid="movieColumns"></include> 
+		    <include refid="movieDBColumns"></include> 
 		) 
 		SELECT 
-			<include refid="movieColumns"></include>
+			<include refid="movieDBColumns"></include>
 		FROM  movie
 		WHERE kortitle LIKE '%'|| #{kortitle} || '%'
 		AND rel_date = #{relDate, jdbcType=VARCHAR}
