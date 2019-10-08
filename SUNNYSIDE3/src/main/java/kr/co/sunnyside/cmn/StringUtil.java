@@ -394,4 +394,35 @@ public class StringUtil {
 	public static String escapeHtml(String html) {
 		return StringEscapeUtils.escapeHtml4(html);
 	}
+	
+	/**
+	 * 좌석생성
+	 * A부터 max_y열까지 max개의 좌석버튼 생성
+	 * 현재 max_y = O, max = 28 고정
+	 * */
+	public static String makeSeatButton(int setSetting) {
+		//<button class="seatY a.. ..z" disabled="disabled">a.. ..z</button><button data-y=".." data-x=".." disable="..." ">1...</button>
+		
+		//String max_y_axis, String max_x_SeatNum
+		//char max_y = max_y_axis.charAt(0); 
+		//int max = Integer.valueOf(max_x_SeatNum);
+		
+		char max_y = 'O';
+		int max = 28;
+		
+		StringBuilder sb = new StringBuilder();
+		
+		for(int Y='A' ; Y <= max_y ; Y++) {
+			sb.append("<button class='seatY " + (char)Y + "' disabled='disabled'>" + (char)Y);
+			for(int i=1 ; i <= max ; i++) {
+				if(setSetting == 0)
+					sb.append("<button data-y="+(char)Y+" data-x="+i+" class='" + (char)Y + " " + "_" + i + "' disabled='disabled'></button>");
+				else
+					sb.append("<button data-setseat='false' data-use='1' data-y="+(char)Y+" data-x="+i+" class='" + (char)Y + " " + "_" + i + "'></button>");
+			}
+			if(Y != max_y)
+				sb.append("<br/>");
+		}
+		return sb.toString();
+	}
 }
