@@ -24,6 +24,8 @@
 		
 		<!-- SJH -->
 		<typeAlias type="kr.co.sunnyside.login.service.SJH_LoginVO" alias="SJH_LoginVO"/>
+		<typeAlias type="kr.co.sunnyside.usermypage.service.SJH_MypageVO" alias="SJH_MypageVO"/>
+		
 	</typeAliases>
 
 
