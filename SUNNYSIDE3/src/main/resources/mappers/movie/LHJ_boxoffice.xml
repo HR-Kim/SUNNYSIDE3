@@ -73,7 +73,7 @@
 	</update>
 
 	<!-- 영화 등록(kobis)-->
-	<insert id="do_boxoffice_insert" parameterType="Boxoffice">
+	<insert id="do_save" parameterType="Boxoffice">
 		INSERT INTO boxoffice (
 		    <include refid="movieDBColumns"></include> 
 		) 
