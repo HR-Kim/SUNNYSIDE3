@@ -113,7 +113,7 @@ private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 		
 		SJH_LoginVO user01 = users.get(0);
 		
-		SJH_LoginVO vsUser = (SJH_LoginVO) loginDao.get_selectOne(user01);
+		SJH_LoginVO vsUser = (SJH_LoginVO) loginDao.do_selectOne(user01);
 		
 		assertThat(user01.getUserId(), is(vsUser.getUserId()));
 		assertThat(user01.getPasswd(), is(vsUser.getPasswd()));

@@ -15,7 +15,7 @@ pageEncoding="UTF-8"%>
 <c:when test="${sessionId != null}">
 <h2> 네이버 아이디 로그인 성공하셨습니다!! </h2>
 <h3>'${sessionId}' 님 환영합니다! </h3>
-<h3><a href="logout">로그아웃</a></h3>
+<h3><a href="logout.do">로그아웃</a></h3>
 </c:when>
 <c:otherwise>
 <form action="login.userdo" method="post" name="frm" style="width:470px;">
@@ -34,6 +34,3 @@ pageEncoding="UTF-8"%>
 </center>
 </body>
 </html>
-
-
-출처: https://bumcrush.tistory.com/151 [맑음때때로 여름]

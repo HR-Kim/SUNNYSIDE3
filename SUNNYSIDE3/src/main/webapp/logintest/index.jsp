@@ -10,7 +10,7 @@ pageEncoding="UTF-8"%>
 <h1>메인 페이지 입니다.</h1>
 <hr>
 <br>
-<a href="login">로그인 하러 가기 </a>
+<a href="login.do">로그인 하러 가기 </a>
 <hr>
 </body>
 </html>

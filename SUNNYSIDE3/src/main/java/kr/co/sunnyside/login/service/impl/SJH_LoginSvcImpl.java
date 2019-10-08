@@ -39,10 +39,10 @@ public class SJH_LoginSvcImpl implements SJH_LoginSvc{
 
 	@Override
 	public int pw_find(DTO dto) {
-		SJH_LoginVO outVO = (SJH_LoginVO) loginDao.get_selectOne(dto);
+		SJH_LoginVO outVO = (SJH_LoginVO) loginDao.do_selectOne(dto);
 		int flag = loginDao.pw_find(outVO);
 		
-		SJH_LoginVO changedVO = (SJH_LoginVO) loginDao.get_selectOne(dto);
+		SJH_LoginVO changedVO = (SJH_LoginVO) loginDao.do_selectOne(dto);
 		
 		//비밀번호 찾기 성공 시 임시 비밀번호 메일로 전송
 		if(flag>0) {
@@ -57,7 +57,7 @@ public class SJH_LoginSvcImpl implements SJH_LoginSvc{
 	 */
 	private void sendPwFindMail(SJH_LoginVO user) {
 		try {
-			SJH_LoginVO changedVO = (SJH_LoginVO) loginDao.get_selectOne(user);
+			SJH_LoginVO changedVO = (SJH_LoginVO) loginDao.do_selectOne(user);
 			
 			//보내는 사람
 			String host = "smtp.naver.com";
@@ -126,8 +126,8 @@ public class SJH_LoginSvcImpl implements SJH_LoginSvc{
 	
 
 	@Override
-	public DTO get_selectOne(DTO dto) {
-		return loginDao.get_selectOne(dto);
+	public DTO do_selectOne(DTO dto) {
+		return loginDao.do_selectOne(dto);
 	}
 	
 	
