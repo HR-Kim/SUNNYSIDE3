@@ -66,7 +66,7 @@ public class LHJ_MovieDaoTest {
 	@Before
 	public void setUp() throws IOException, ParseException{
 
-	}	
+	}	 
 	
 	//데이터베이스에 파싱한 kmdb데이터 삽입.
 	//실행금지
