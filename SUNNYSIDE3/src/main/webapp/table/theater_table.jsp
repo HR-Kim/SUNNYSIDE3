@@ -257,7 +257,7 @@
     					var msg = JSON.parse(data);
     					if(msg.msgId != 1){
     						alert("좌석 추가 실패.");
-    						location.href = "${context}/table/get_retrieve.do";
+    						location.href = "${context}/table/do_retrieve.do";
     					}
         			},
         			complete:function(data){
@@ -413,7 +413,7 @@
     			
     			$.ajax({
     				type : "POST",
-    				url : "${context}/room/get_retrieve.do",
+    				url : "${context}/room/do_retrieve.do",
     				dataType : "html",
     				data : {
     					"searchWord" : searchWord,
@@ -465,7 +465,7 @@
     				var jsonData = JSON.parse(data);
     				if(jsonData.msgId == 1){
     					alert("추가되었습니다.");
-    					location.href = "${context}/table/get_retrieve.do";
+    					location.href = "${context}/table/do_retrieve.do";
     				}else{
     					alert("실패");
     				}
@@ -504,7 +504,7 @@
     				var jsonData = JSON.parse(data);
     				if(jsonData.msgId == 1){
     					alert("삭제되었습니다.");
-    					location.href = "${context}/table/get_retrieve.do";
+    					location.href = "${context}/table/do_retrieve.do";
     				}else{
     					alert("실패");
     				}
@@ -528,7 +528,7 @@
     			
     			$.ajax({
     				type : "POST",
-    				url : "${context}/seat/get_retrieve.do",
+    				url : "${context}/seat/do_retrieve.do",
     				dataType : "html",
     				data : {
     					"searchWord" : searchWord,
@@ -632,7 +632,7 @@
     			//상영관에 남이있는 좌석리스트
     			$.ajax({
     				type : "POST",
-    				url : "${context}/seat/get_retrieve.do",
+    				url : "${context}/seat/do_retrieve.do",
     				dataType : "html",
     				data : {
     					"pageSize" : "500",
@@ -659,7 +659,7 @@
             			},
             			error:function(xhr,status,error){
             				alert("좌석삭제실패.\n관리자에게 문의하세요.");
-            				location.href = "${context}/table/get_retrieve.do";
+            				location.href = "${context}/table/do_retrieve.do";
             			}
             			});    
         			}
@@ -689,7 +689,7 @@
     			var branchId = $("#hd_branchId").val();
     			$.ajax({
     				type : "POST",
-    				url : "${context}/seat/get_retrieve.do",
+    				url : "${context}/seat/do_retrieve.do",
     				dataType : "html",
     				data : {
     					"searchDiv" : "20",
