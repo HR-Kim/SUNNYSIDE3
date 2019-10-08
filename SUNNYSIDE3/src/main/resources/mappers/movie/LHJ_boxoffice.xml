@@ -38,7 +38,7 @@
 	</sql>
 
 	<!-- 목록조회 -->
-	<select id="do_boxoffice_retrieve" resultType="Boxoffice">
+	<select id="do_retrieve" resultType="Boxoffice">
 		SELECT
 		    <include refid="movieColumns"></include> 
 		FROM
@@ -48,7 +48,7 @@
 	</select>
 	
 	<!-- 단건조회 -->
-	<select id="do_boxoffice_selectOne" parameterType="Boxoffice" resultType="Boxoffice">
+	<select id="do_selectOne" parameterType="Boxoffice" resultType="Boxoffice">
 		SELECT 
 			<include refid="movieColumns"></include>
 		FROM 
@@ -58,7 +58,7 @@
 	</select>
 	
 	<!-- 박스오피스 삭제 -->
-	<delete id="do_boxoffice_delete" parameterType="Boxoffice">
+	<delete id="do_delete" parameterType="Boxoffice">
 		DELETE FROM boxoffice
 	</delete>
 	

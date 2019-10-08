@@ -71,15 +71,16 @@ public class LHJ_MovieDaoTest {
 	//데이터베이스에 파싱한 kmdb데이터 삽입.
 	//실행금지
 	@Test
-//	@Ignore
+	@Ignore
 	public void do_movie_insert() {
 		URL url;
 		List<LHJ_MovieVO> list = new ArrayList<LHJ_MovieVO>();				
-		for(int i=0; i<74300; i++) {								
+//		for(int i=0; i<74300; i++) {								
+		for(int i=0; i<10; i++) {								
 			try {
 				url = new URL(LHJ_MovieParsing.KmdbUrl(i));//url
 				list=LHJ_MovieParsing.getKmdbData(url);//데이터를 List
-				movieDaoImpl.do_movie_insert(list.get(0));//담아온 정보를 insert	
+				movieDaoImpl.do_save(list.get(0));//담아온 정보를 insert	
 			} catch (Exception e) {
 				LOG.debug("============================");
 				LOG.debug("Exception:"+e.toString());

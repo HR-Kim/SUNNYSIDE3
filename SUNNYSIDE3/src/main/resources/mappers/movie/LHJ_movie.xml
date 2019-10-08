@@ -3,7 +3,7 @@
 <mapper namespace="kr.co.sunnyside.movie">
 	
 	<!-- 영화 등록(kmdb) -->
-	<insert id="do_movie_insert" parameterType="Movie">
+	<insert id="do_save" parameterType="Movie">
 		INSERT INTO movie (
 		    movie_id
 			,kortitle

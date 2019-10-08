@@ -94,7 +94,7 @@ public class LHJ_BoxofficeDaoTest {
 	
 	//박스오피스 데이터를 삭제, 등록, 조회, 순위 업데이트 하는 테스트
 	@Test
-	@Ignore
+//	@Ignore
 	public void addAndGet() {
 		int flag = 0;
 		//삭제
@@ -109,13 +109,13 @@ public class LHJ_BoxofficeDaoTest {
 
 		//전체조회
 		List<LHJ_BoxofficeVO> retrieveList = new ArrayList<LHJ_BoxofficeVO>();
-		retrieveList = (List<LHJ_BoxofficeVO>) boxofficeDaoImpl.get_retrieve();
+		retrieveList = (List<LHJ_BoxofficeVO>) boxofficeDaoImpl.do_retrieve();
 		assertThat(10, is(retrieveList.size()));
 				
 		//순위 업데이트
 		int i=0;
 		for(LHJ_BoxofficeVO vo : kobisList) { //받아온 데이터				
-			LHJ_BoxofficeVO idVO = (LHJ_BoxofficeVO) boxofficeDaoImpl.get_selectOne(retrieveList.get(i)); //데이터베이스에 저장되어있는 정보를 가져오고 movieId를 받아옴
+			LHJ_BoxofficeVO idVO = (LHJ_BoxofficeVO) boxofficeDaoImpl.do_selectOne(retrieveList.get(i)); //데이터베이스에 저장되어있는 정보를 가져오고 movieId를 받아옴
 			String movieId = idVO.getMovieId();//movieId를 변수에 담음
 			kobisList.get(i).setMovieId(movieId);//list(받아온 데이터)에 movieId를 넣음
 			flag = boxofficeDaoImpl.do_rank_update(vo);//list의 vo를 넘긴다. 여기에는 rank정보와 movieId가 담겨있음
@@ -132,7 +132,7 @@ public class LHJ_BoxofficeDaoTest {
 	@Test
 	@Ignore
 	public void get_retrieve() {
-		List<LHJ_BoxofficeVO> list = (List<LHJ_BoxofficeVO>) boxofficeDaoImpl.get_retrieve();
+		List<LHJ_BoxofficeVO> list = (List<LHJ_BoxofficeVO>) boxofficeDaoImpl.do_retrieve();
 		assertThat(10, is(list.size()));
 		
 	}
@@ -147,7 +147,7 @@ public class LHJ_BoxofficeDaoTest {
 			url = new URL(LHJ_MovieParsing.kobisUrl());//url
 			List<LHJ_BoxofficeVO> list=LHJ_MovieParsing.getKobisData(url);//데이터를 List형태로 반환
 			for(LHJ_BoxofficeVO vo : list) { //받아온 데이터				
-				LHJ_BoxofficeVO idVO = (LHJ_BoxofficeVO) boxofficeDaoImpl.get_selectOne(testlist.get(i)); //movieId를 받아옴
+				LHJ_BoxofficeVO idVO = (LHJ_BoxofficeVO) boxofficeDaoImpl.do_selectOne(testlist.get(i)); //movieId를 받아옴
 				String movieId = idVO.getMovieId();//movieId를 변수에 담음
 				list.get(i).setMovieId(movieId);//list(받아온 데이터)에 movieId를 넣음
 				int flag = boxofficeDaoImpl.do_rank_update(vo);//list의 vo를 넘긴다. 여기에는 rank정보와 movieId가 담겨있음
@@ -165,7 +165,7 @@ public class LHJ_BoxofficeDaoTest {
 	@Test
 	@Ignore
 	public void do_boxoffice_selectOne()  {
-		LHJ_BoxofficeVO vo = (LHJ_BoxofficeVO) boxofficeDaoImpl.get_selectOne(testlist.get(0));
+		LHJ_BoxofficeVO vo = (LHJ_BoxofficeVO) boxofficeDaoImpl.do_selectOne(testlist.get(0));
 		String movieId = vo.getMovieId();
 		LOG.debug("============================");
 		LOG.debug("=movieId="+movieId);
