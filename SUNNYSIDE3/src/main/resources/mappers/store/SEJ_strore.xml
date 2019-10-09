@@ -29,6 +29,7 @@
 				    #{img,jdbcType=VARCHAR}
 				)
 	</insert>
+	
 
 <!-- 상품 삭제 -->
 	<delete id="do_delete" parameterType="Store">
@@ -49,16 +50,16 @@
 	</update>
 
 <!-- 상품 단건조회 -->
-  <select id="get_selectOne" parameterType="Store" resultType="Store">
+  <select id="do_selectOne" parameterType="Store" resultType="Store">
    	 SELECT                                 
-		   <include refid="boardColumns"/>          
+		   <include refid="storeColumns"/>          
 		 FROM                                   
 		     PRODUCT                              
 		  WHERE product_id=#{productId,jdbcType=VARCHAR}      
    </select>
    
-   <sql id="boardColumns">
-   			  	 	PRODUCT_ID,
+   <sql id="storeColumns">
+   			  	 	PRODUCT_ID as productId,
 				    PRODUCT_NM as productNm,
 				    PRUDUCT_INFO as pruductInfo,
 				    CATEGORY,
@@ -67,7 +68,7 @@
    </sql>
 
 <!-- 팝콘상품 조회 -->
-	 <select id="get_retrieve_popcorn" parameterType="Search" resultType="Store">
+	 <select id="do_retrieve_popcorn" parameterType="Search" resultType="Store">
 		  SELECT T1.*												
 		  FROM                                                              
 		  (                                                                 
@@ -93,7 +94,7 @@
 		</select>
 
 <!-- 음료상품 조회 -->
-	 <select id="get_retrieve_drink" parameterType="Search" resultType="Store">
+	 <select id="do_retrieve_drink" parameterType="Search" resultType="Store">
 		  SELECT T1.*												
 		  FROM                                                              
 		  (                                                                 
@@ -120,7 +121,7 @@
 		
 
 <!-- 영화예매권 상품 조회 -->
-	 <select id="get_retrieve_movieticket" parameterType="Search" resultType="Store">
+	 <select id="do_retrieve_movieticket" parameterType="Search" resultType="Store">
 		  SELECT T1.*												
 		  FROM                                                              
 		  (                                                                 

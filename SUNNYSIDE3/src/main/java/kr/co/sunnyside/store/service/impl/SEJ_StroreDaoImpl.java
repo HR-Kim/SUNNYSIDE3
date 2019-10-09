@@ -83,7 +83,7 @@ public class SEJ_StroreDaoImpl implements WorkDiv {
 	/**상품 단건조회*/
 	@Override
 	public DTO do_selectOne(DTO dto) {
-		String statement = NAMESPACE+".get_selectOne";
+		String statement = NAMESPACE+".do_selectOne";
 		SEJ_StroreVO store = (SEJ_StroreVO) dto;
 		LOG.debug("===================================");
 		LOG.debug("=1. param="+store);
@@ -109,7 +109,7 @@ public class SEJ_StroreDaoImpl implements WorkDiv {
 	}
 	/**팝콘 조회*/
 	public List<?> do_retrieve_popcorn(DTO dto) {
-		String statement = NAMESPACE+".get_retrieve_popcorn";
+		String statement = NAMESPACE+".do_retrieve_popcorn";
 		SearchVO search = (SearchVO) dto;
 		LOG.debug("===================================");
 		LOG.debug("=1. param="+search);
@@ -128,7 +128,7 @@ public class SEJ_StroreDaoImpl implements WorkDiv {
 	
 	/**음료 조회*/
 	public List<?> do_retrieve_drink(DTO dto) {
-		String statement = NAMESPACE+".get_retrieve_drink";
+		String statement = NAMESPACE+".do_retrieve_drink";
 		SearchVO search = (SearchVO) dto;
 		LOG.debug("===================================");
 		LOG.debug("=1. param="+search);
@@ -147,7 +147,7 @@ public class SEJ_StroreDaoImpl implements WorkDiv {
 	
 	/**영화예매권 조회*/
 	public List<?> do_retrieve_movieticket(DTO dto) {
-		String statement = NAMESPACE+".get_retrieve_movieticket";
+		String statement = NAMESPACE+".do_retrieve_movieticket";
 		SearchVO search = (SearchVO) dto;
 		LOG.debug("===================================");
 		LOG.debug("=1. param="+search);

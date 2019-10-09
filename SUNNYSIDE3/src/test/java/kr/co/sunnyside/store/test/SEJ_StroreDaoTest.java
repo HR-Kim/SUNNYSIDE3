@@ -105,7 +105,7 @@ public class SEJ_StroreDaoTest {
 	
 	//상품 단건조회
 	@Test
-	@Ignore
+	//@Ignore
 	public void do_selectOne(){
 		storeDaoImpl.do_selectOne(list.get(1));
 		

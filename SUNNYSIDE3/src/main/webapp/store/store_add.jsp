@@ -24,7 +24,7 @@
 </head>
 <body>
  <h2> 상품등록 </h2>
- <form id="storeForm" name="storeForm" enctype="multipart/form-data" method="post">
+ <form id="storeForm" name="storeForm" method="post" enctype="multipart/form-data">
   <table border="1">
   	<tr>
   		<td>상품명</td>
@@ -50,7 +50,7 @@
   	</tr>
   	<tr>
   		<td>상품이미지</td>
-  		<td><input type="file" name="productImage" id="productImage" /></td>
+  		<td><input type="file" name="productImage" id="productImage"  /></td>
   	</tr>
   	<tr>
   	 <td colspan="2" align="center">
@@ -66,23 +66,17 @@
  <script src="${context}/resources/js/bootstrap.min.js"></script>   
  <script type="text/javascript">
   $(document).ready(function(){
-	$("#addBtn").on("click",function(){
+	 $("#addBtn").on("click",function(){
 			
 	if(confirm("상품을 등록하시겠습니까?")==false) return;
-	
-	/* var productName = $("#productName").val();
-	var category = $("#category").val();
-	var productPrice = $("#productPrice").val();
-	var productInfo = $("#productInfo").val();
-	var productImage = $("#productImage").val();
 	
 	console.log($("#productName").val());
 	console.log($("#category").val());
 	console.log($("#productPrice").val());
 	console.log($("#productInfo").val());
-	console.log($("#productImage").val());  */
+	console.log($("#productImage").val());  
 	
-	if(productName ==""){
+/* 	if(productName ==""){
 		alert("상품명을 입력해주세요");
 		productName.focus();
 	}else if(productPrice ==""){
@@ -94,11 +88,12 @@
 	}else if(productImage ==""){
 		alert("상품이미지를 등록해주세요");
 		productImage.focus();
-	}
+	} */
 	
+    
 	//ajax
     $.ajax({
-       type:"get",
+       type:"post",
        url:"${context}/store/do_save.do",
        dataType:"json",
        data:{
@@ -108,6 +103,7 @@
            "productInfo":$("#productInfo").val(),
            "productImage":$("#productImage").val()
       }, 
+
     success: function(data){ 
       var jData = JSON.parse(data);
       if(null != jData && jData.msgId=="1"){
@@ -124,8 +120,8 @@
         alert("error:"+error);
     }
    }); //--ajax  
-	/* document.storeForm.action ="${context}/store/do_save.do";
-	document.storeForm.submit(); */
+	/*  document.storeForm.action ="${context}/store/do_save.do";
+	document.storeForm.submit();  */
 	});
 		 
   });
