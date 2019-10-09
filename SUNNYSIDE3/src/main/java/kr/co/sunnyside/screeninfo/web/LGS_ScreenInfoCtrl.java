@@ -151,16 +151,16 @@ public class LGS_ScreenInfoCtrl {
 		return jsonString;
 	}
 	
-	@RequestMapping(value = "screenInfo/get_selectOne.do", method = RequestMethod.POST)
-	public String get_selectOne(LGS_ScreenInfoVO screenInfo, Model model) {
+	@RequestMapping(value = "screenInfo/do_selectOne.do", method = RequestMethod.POST)
+	public String do_selectOne(LGS_ScreenInfoVO screenInfo, Model model) {
 		LOG.debug("==================================");
-		LOG.debug("Controller : get_selectOne_screenInfo");
+		LOG.debug("Controller : do_selectOne_screenInfo");
 		LOG.debug("==================================");
 		
 		if(screenInfo == null) throw new NullArgumentException(); //null
 		if(screenInfo.getScreenId() == null || screenInfo.getScreenId() == "") throw new IllegalArgumentException();
 		
-		LGS_ScreenInfoVO outVO = (LGS_ScreenInfoVO) screenInfoSvc.get_selectOne(screenInfo);
+		LGS_ScreenInfoVO outVO = (LGS_ScreenInfoVO) screenInfoSvc.do_selectOne(screenInfo);
 		model.addAttribute("vo", outVO);
 		
 		LOG.debug("==================================");
@@ -170,16 +170,16 @@ public class LGS_ScreenInfoCtrl {
 		return VIEW_;
 	}
 	
-	@RequestMapping(value = "screenInfo/get_retrieve.do", method = RequestMethod.POST)
-	public List<?> get_retrieve(SearchVO search, Model model) {
+	@RequestMapping(value = "screenInfo/do_retrieve.do", method = RequestMethod.POST)
+	public List<?> do_retrieve(SearchVO search, Model model) {
 		LOG.debug("==================================");
-		LOG.debug("Controller : get_retrieve_screenInfo");
+		LOG.debug("Controller : do_retrieve_screenInfo");
 		LOG.debug("==================================");
 		
 		if(search.getPageSize() == 0) search.setPageSize(10);
 		if(search.getPageNum() == 0) search.setPageNum(1);
 		
-		List<LGS_ScreenInfoVO> list = (List<LGS_ScreenInfoVO>) screenInfoSvc.get_retrieve(search);
+		List<LGS_ScreenInfoVO> list = (List<LGS_ScreenInfoVO>) screenInfoSvc.do_retrieve(search);
 		model.addAttribute("list", list);
 		
 		LOG.debug("==================================");

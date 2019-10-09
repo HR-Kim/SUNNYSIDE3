@@ -24,10 +24,10 @@ public class LGS_BranchInfoCtrl {
 	Logger LOG = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	LGS_BranchInfoSvc branchInfoSvc;	//지점정보 지점id, 지점명
+	LGS_BranchInfoSvc branchInfoSvc;
 	
 	//view
-	private final String VIEW_ ="?";
+	private final String VIEW_TABLE ="table/theater_table";
 	
 	@ResponseBody
 	@RequestMapping(value = "brachInfo/do_save.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
@@ -137,41 +137,41 @@ public class LGS_BranchInfoCtrl {
 		return jsonString;
 	}
 	
-	@RequestMapping(value = "brachInfo/get_selectOne.do", method = RequestMethod.POST)
-	public String get_selectOne(LGS_BranchInfoVO branchInfo, Model model) {
+	@RequestMapping(value = "brachInfo/do_selectOne.do", method = RequestMethod.POST)
+	public String do_selectOne(LGS_BranchInfoVO branchInfo, Model model) {
 		LOG.debug("==================================");
-		LOG.debug("Controller : get_selectOne_branchInfo");
+		LOG.debug("Controller : do_selectOne_branchInfo");
 		LOG.debug("==================================");
 		
 		if(branchInfo == null) throw new NullArgumentException(); //null
 		if(branchInfo.getBranchId() == null || branchInfo.getBranchId() == "") throw new IllegalArgumentException();	//지점id
 		
-		LGS_BranchInfoVO outVO = (LGS_BranchInfoVO) branchInfoSvc.get_selectOne(branchInfo);
+		LGS_BranchInfoVO outVO = (LGS_BranchInfoVO) branchInfoSvc.do_selectOne(branchInfo);
 		model.addAttribute("vo", outVO);
 		
 		LOG.debug("==================================");
 		LOG.debug("outVO : " + outVO);
 		LOG.debug("==================================");
 		
-		return VIEW_;
+		return VIEW_TABLE;
 	}
 	
-	@RequestMapping(value = "brachInfo/get_retrieve.do", method = RequestMethod.POST)
-	public List<?> get_retrieve(SearchVO search, Model model) {
+	@RequestMapping(value = "brachInfo/do_retrieve.do", method = RequestMethod.GET)
+	public String do_retrieve(SearchVO search, Model model) {
 		LOG.debug("==================================");
-		LOG.debug("Controller : get_retrieve_branchInfo");
+		LOG.debug("Controller : do_retrieve_branchInfo");
 		LOG.debug("==================================");
 		
 		if(search.getPageSize() == 0) search.setPageSize(10);
 		if(search.getPageNum() == 0) search.setPageNum(1);
 				
-		List<LGS_BranchInfoVO> list = (List<LGS_BranchInfoVO>) branchInfoSvc.get_retrieve(search);
-		model.addAttribute("list", list);
+		List<LGS_BranchInfoVO> branchList = (List<LGS_BranchInfoVO>) branchInfoSvc.do_retrieve(search);
+		model.addAttribute("branchList", branchList);
 		
 		LOG.debug("==================================");
-		LOG.debug("list : " + list);
+		LOG.debug("branchList : " + branchList);
 		LOG.debug("==================================");
 		
-		return list;
+		return VIEW_TABLE;
 	}
 }

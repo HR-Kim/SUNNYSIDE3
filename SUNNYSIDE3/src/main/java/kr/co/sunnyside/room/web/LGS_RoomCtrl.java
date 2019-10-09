@@ -27,7 +27,7 @@ public class LGS_RoomCtrl {
 	LGS_RoomSvc roomSvc;				//상영관정보 지점,상영관id, 상영관명, 총좌석, 잔여좌석
 
 	//view
-	private final String VIEW_ ="?";
+	private final String VIEW_TABLE ="table/theater_table";
 	
 	/**
 	 * 상영관추가
@@ -82,8 +82,7 @@ public class LGS_RoomCtrl {
 		
 		//파라미터검사
 		if(room == null) throw new NullArgumentException();	//null
-		if(room.getRoomNm() == null || room.getRoomNm() == "") throw new IllegalArgumentException();	//상영관이름
-		if(room.getBranchId() == null || room.getBranchId() == "") throw new IllegalArgumentException();	//지점id
+		if(room.getRoomId() == null || room.getRoomId() == "") throw new IllegalArgumentException();	//상영관id
 		if(room.getTotalSeat() < 0) throw new IllegalArgumentException();	//총좌석
 		if(room.getRestSeat() < 0) throw new IllegalArgumentException();	//남은좌석
 		
@@ -147,35 +146,36 @@ public class LGS_RoomCtrl {
 		return jsonString;
 	}
 	
-	@RequestMapping(value = "room/get_selectOne.do", method = RequestMethod.POST)
-	public String get_selectOne(LGS_RoomVO room, Model model) {
+	@RequestMapping(value = "room/do_selectOne.do", method = RequestMethod.POST)
+	public String do_selectOne(LGS_RoomVO room, Model model) {
 		LOG.debug("==================================");
-		LOG.debug("Controller : get_selectOne_room");
+		LOG.debug("Controller : do_selectOne_room");
 		LOG.debug("==================================");
 		
 		if(room == null) throw new NullArgumentException(); //null
 		if(room.getRoomId() == null || room.getRoomId() == "") throw new IllegalArgumentException();	//지점id
 		
-		LGS_RoomVO outVO = (LGS_RoomVO) roomSvc.get_selectOne(room);
+		LGS_RoomVO outVO = (LGS_RoomVO) roomSvc.do_selectOne(room);
 		model.addAttribute("vo", outVO);
 		
 		LOG.debug("==================================");
 		LOG.debug("outVO : " + outVO);
 		LOG.debug("==================================");
 		
-		return VIEW_;
+		return VIEW_TABLE;
 	}
 	
-	@RequestMapping(value = "room/get_retrieve.do", method = RequestMethod.POST)
-	public List<?> get_retrieve(SearchVO search, Model model) {
+	@ResponseBody
+	@RequestMapping(value = "room/do_retrieve.do", method = RequestMethod.POST)
+	public List<?> do_retrieve(SearchVO search, Model model) {
 		LOG.debug("==================================");
-		LOG.debug("Controller : get_retrieve_room");
+		LOG.debug("Controller : do_retrieve_room");
 		LOG.debug("==================================");
 		
 		if(search.getPageSize() == 0) search.setPageSize(10);
 		if(search.getPageNum() == 0) search.setPageNum(1);
 				
-		List<LGS_RoomVO> list = (List<LGS_RoomVO>) roomSvc.get_retrieve(search);
+		List<LGS_RoomVO> list = (List<LGS_RoomVO>) roomSvc.do_retrieve(search);
 		model.addAttribute("list", list);
 		
 		LOG.debug("==================================");

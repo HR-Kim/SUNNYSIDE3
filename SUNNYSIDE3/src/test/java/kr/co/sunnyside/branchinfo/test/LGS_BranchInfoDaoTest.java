@@ -51,19 +51,19 @@ public class LGS_BranchInfoDaoTest {
 	private List<LGS_BranchInfoVO> list;
 
 	@Test
-	public void get_retrieve() {
+	public void do_retrieve() {
 		LOG.debug("===========================================================");
-		LOG.debug("get_retrieve");
+		LOG.debug("do_retrieve");
 		LOG.debug("===========================================================");
 		
 		//테스트전 처리
 		SearchVO search0 = new SearchVO();
 		search0.setPageNum(1);
 		search0.setPageSize(1000);
-		List<LGS_BranchInfoVO> tmp = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.get_retrieve(search0);
+		List<LGS_BranchInfoVO> tmp = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.do_retrieve(search0);
 		if(tmp != null) {
 			for(LGS_BranchInfoVO vo : tmp) {
-				LGS_BranchInfoVO out = (LGS_BranchInfoVO) branchInfoDaoImpl.get_selectOne(vo);
+				LGS_BranchInfoVO out = (LGS_BranchInfoVO) branchInfoDaoImpl.do_selectOne(vo);
 				branchInfoDaoImpl.do_delete(out);
 			}
 		}
@@ -78,7 +78,7 @@ public class LGS_BranchInfoDaoTest {
 		//search.setSearchDiv("20");
 		//search.setSearchWord("name2");
 		
-		List<LGS_BranchInfoVO> getList = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.get_retrieve(search);
+		List<LGS_BranchInfoVO> getList = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.do_retrieve(search);
 		
 		LOG.debug("===========================================================");
 		for(LGS_BranchInfoVO vo : getList) {
@@ -89,19 +89,19 @@ public class LGS_BranchInfoDaoTest {
 	}
 
 	@Test
-	public void get_selectOne() {
+	public void do_selectOne() {
 		LOG.debug("===========================================================");
-		LOG.debug("get_selectOne");
+		LOG.debug("do_selectOne");
 		LOG.debug("===========================================================");
 		
 		//테스트전 처리
 		SearchVO search = new SearchVO();
 		search.setPageNum(1);
 		search.setPageSize(1000);
-		List<LGS_BranchInfoVO> tmp = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.get_retrieve(search);
+		List<LGS_BranchInfoVO> tmp = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.do_retrieve(search);
 		if(tmp != null) {
 			for(LGS_BranchInfoVO vo : tmp) {
-				LGS_BranchInfoVO out = (LGS_BranchInfoVO) branchInfoDaoImpl.get_selectOne(vo);
+				LGS_BranchInfoVO out = (LGS_BranchInfoVO) branchInfoDaoImpl.do_selectOne(vo);
 				branchInfoDaoImpl.do_delete(out);
 			}
 		}
@@ -112,7 +112,7 @@ public class LGS_BranchInfoDaoTest {
 			assertThat(1, is(flag));
 		}
 		
-		LGS_BranchInfoVO out = (LGS_BranchInfoVO) branchInfoDaoImpl.get_selectOne(list.get(0));
+		LGS_BranchInfoVO out = (LGS_BranchInfoVO) branchInfoDaoImpl.do_selectOne(list.get(0));
 		LOG.debug("===========================================================");
 		LOG.debug("out : "  + out);
 		LOG.debug("===========================================================");
@@ -128,10 +128,10 @@ public class LGS_BranchInfoDaoTest {
 		SearchVO search = new SearchVO();
 		search.setPageNum(1);
 		search.setPageSize(1000);
-		List<LGS_BranchInfoVO> tmp = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.get_retrieve(search);
+		List<LGS_BranchInfoVO> tmp = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.do_retrieve(search);
 		if(tmp != null) {
 			for(LGS_BranchInfoVO vo : tmp) {
-				LGS_BranchInfoVO out = (LGS_BranchInfoVO) branchInfoDaoImpl.get_selectOne(vo);
+				LGS_BranchInfoVO out = (LGS_BranchInfoVO) branchInfoDaoImpl.do_selectOne(vo);
 				branchInfoDaoImpl.do_delete(out);
 			}
 		}
@@ -141,9 +141,9 @@ public class LGS_BranchInfoDaoTest {
 			assertThat(1, is(flag));
 		}
 
-		tmp = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.get_retrieve(search);
+		tmp = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.do_retrieve(search);
 		
-		LGS_BranchInfoVO updateVO = (LGS_BranchInfoVO) branchInfoDaoImpl.get_selectOne(tmp.get(0));
+		LGS_BranchInfoVO updateVO = (LGS_BranchInfoVO) branchInfoDaoImpl.do_selectOne(tmp.get(0));
 		updateVO.setBranchNm("updateTEST");
 		int flag2 = branchInfoDaoImpl.do_update(updateVO);
 		assertThat(1, is(flag2));
@@ -160,10 +160,10 @@ public class LGS_BranchInfoDaoTest {
 		SearchVO search = new SearchVO();
 		search.setPageNum(1);
 		search.setPageSize(1000);
-		List<LGS_BranchInfoVO> tmp = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.get_retrieve(search);
+		List<LGS_BranchInfoVO> tmp = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.do_retrieve(search);
 		if(tmp != null) {
 			for(LGS_BranchInfoVO vo : tmp) {
-				LGS_BranchInfoVO out = (LGS_BranchInfoVO) branchInfoDaoImpl.get_selectOne(vo);
+				LGS_BranchInfoVO out = (LGS_BranchInfoVO) branchInfoDaoImpl.do_selectOne(vo);
 				int flag = branchInfoDaoImpl.do_delete(out);
 				assertThat(1, is(flag));
 			}
@@ -181,10 +181,10 @@ public class LGS_BranchInfoDaoTest {
 		SearchVO search = new SearchVO();
 		search.setPageNum(1);
 		search.setPageSize(1000);
-		List<LGS_BranchInfoVO> tmp = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.get_retrieve(search);
+		List<LGS_BranchInfoVO> tmp = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.do_retrieve(search);
 		if(tmp != null) {
 			for(LGS_BranchInfoVO vo : tmp) {
-				LGS_BranchInfoVO out = (LGS_BranchInfoVO) branchInfoDaoImpl.get_selectOne(vo);
+				LGS_BranchInfoVO out = (LGS_BranchInfoVO) branchInfoDaoImpl.do_selectOne(vo);
 				branchInfoDaoImpl.do_delete(out);
 			}
 		}
@@ -223,19 +223,19 @@ public class LGS_BranchInfoDaoTest {
 		search.setPageNum(1);
 		search.setPageSize(1000);
 		
-		List<LGS_RoomVO> tmp0 = (List<LGS_RoomVO>) roomDaoImpl.get_retrieve(search);
+		List<LGS_RoomVO> tmp0 = (List<LGS_RoomVO>) roomDaoImpl.do_retrieve(search);
 		if(tmp0 != null) {
 			for(LGS_RoomVO vo : tmp0) {
-				LGS_RoomVO out = (LGS_RoomVO) roomDaoImpl.get_selectOne(vo);
+				LGS_RoomVO out = (LGS_RoomVO) roomDaoImpl.do_selectOne(vo);
 				int flag = roomDaoImpl.do_delete(out);
 				assertThat(1, is(flag));
 			}
 		}
 		
-		List<LGS_BranchInfoVO> tmp = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.get_retrieve(search);
+		List<LGS_BranchInfoVO> tmp = (List<LGS_BranchInfoVO>) branchInfoDaoImpl.do_retrieve(search);
 		if(tmp != null) {
 			for(LGS_BranchInfoVO vo : tmp) {
-				LGS_BranchInfoVO out = (LGS_BranchInfoVO) branchInfoDaoImpl.get_selectOne(vo);
+				LGS_BranchInfoVO out = (LGS_BranchInfoVO) branchInfoDaoImpl.do_selectOne(vo);
 				int flag = branchInfoDaoImpl.do_delete(out);
 				assertThat(1, is(flag));
 			}

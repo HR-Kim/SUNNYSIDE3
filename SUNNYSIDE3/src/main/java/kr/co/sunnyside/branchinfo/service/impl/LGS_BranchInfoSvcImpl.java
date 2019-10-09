@@ -33,13 +33,13 @@ public class LGS_BranchInfoSvcImpl implements LGS_BranchInfoSvc {
 	}
 
 	@Override
-	public List<?> get_retrieve(DTO dto) {
-		return branchInfoDao.get_retrieve(dto);
+	public List<?> do_retrieve(DTO dto) {
+		return branchInfoDao.do_retrieve(dto);
 	}
 
 	@Override
-	public DTO get_selectOne(DTO dto) {
-		return branchInfoDao.get_selectOne(dto);
+	public DTO do_selectOne(DTO dto) {
+		return branchInfoDao.do_selectOne(dto);
 	}
 
 }

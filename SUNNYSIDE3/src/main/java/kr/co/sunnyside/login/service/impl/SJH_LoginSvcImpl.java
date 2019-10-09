@@ -39,13 +39,14 @@ public class SJH_LoginSvcImpl implements SJH_LoginSvc{
 
 	@Override
 	public int pw_find(DTO dto) {
-		SJH_LoginVO user = (SJH_LoginVO) dto;
-		int flag = loginDao.pw_find(user);
+		SJH_LoginVO outVO = (SJH_LoginVO) loginDao.do_selectOne(dto);
+		int flag = loginDao.pw_find(outVO);
+		
+		SJH_LoginVO changedVO = (SJH_LoginVO) loginDao.do_selectOne(dto);
 		
 		//비밀번호 찾기 성공 시 임시 비밀번호 메일로 전송
 		if(flag>0) {
-			LOG.debug("메일 보내짐");
-			sendPwFindMail(user); // 메일 전송
+			sendPwFindMail(changedVO); // 메일 전송
 		}
 		return flag;
 	}
@@ -56,6 +57,8 @@ public class SJH_LoginSvcImpl implements SJH_LoginSvc{
 	 */
 	private void sendPwFindMail(SJH_LoginVO user) {
 		try {
+			SJH_LoginVO changedVO = (SJH_LoginVO) loginDao.do_selectOne(user);
+			
 			//보내는 사람
 			String host = "smtp.naver.com";
 			final String userName = "아이디";
@@ -68,7 +71,7 @@ public class SJH_LoginSvcImpl implements SJH_LoginSvc{
 			//제목
 			String title = user.getUserName()+"님 임시 비밀번호가 발송되었습니다.";
 			//내용
-			String contents = user.getUserName()+"님의 임시 비밀번호는 "+user.getPasswd()+"입니다. 임시 비밀번호로 로그인 후 회원정보수정에서 비밀번호를 변경해주세요.";
+			String contents = user.getUserName()+"님의 임시 비밀번호는 "+changedVO.getPasswd()+"입니다. 임시 비밀번호로 로그인 후 회원정보수정에서 비밀번호를 변경해주세요.";
 			
 			//SMTP 서버 설정
 			Properties props = System.getProperties();
@@ -123,8 +126,8 @@ public class SJH_LoginSvcImpl implements SJH_LoginSvc{
 	
 
 	@Override
-	public DTO get_selectOne(DTO dto) {
-		return loginDao.get_selectOne(dto);
+	public DTO do_selectOne(DTO dto) {
+		return loginDao.do_selectOne(dto);
 	}
 	
 	

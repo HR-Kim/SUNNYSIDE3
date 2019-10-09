@@ -92,7 +92,7 @@ public class SJH_LoginWebTest {
 	 * @throws Exception
 	 */
 	@Test
-	//@Ignore
+	@Ignore
 	public void do_save() throws Exception {
 		//url, param
 		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/login/do_save.do")
@@ -100,8 +100,6 @@ public class SJH_LoginWebTest {
 														.param("passwd", "1234")
 														.param("userName", "회원이름07")
 														.param("email", "이메일07@naver.com")
-														.param("userLevel", "BASIC")
-														.param("point", "0")
 														.param("cellphone", "010-0000-0007")
 														.param("birth", "19/09/07")
 														;

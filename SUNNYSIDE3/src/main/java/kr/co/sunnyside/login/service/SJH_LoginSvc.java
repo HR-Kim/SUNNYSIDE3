@@ -22,7 +22,7 @@ public interface SJH_LoginSvc {
 	public int pw_find(DTO dto) ;
 	
 	/** 단건조회 */
-	public DTO get_selectOne(DTO dto);
+	public DTO do_selectOne(DTO dto);
 	
 	
 }

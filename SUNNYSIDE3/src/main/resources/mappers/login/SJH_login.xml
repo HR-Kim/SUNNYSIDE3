@@ -48,8 +48,8 @@
 							    #{passwd,jdbcType=VARCHAR},              
 							    #{userName,jdbcType=VARCHAR},
 							    #{email,jdbcType=VARCHAR},              
-							    #{userLevel,jdbcType=NUMERIC},              
-							    #{point,jdbcType=NUMERIC},              
+							    NVL(#{userLevel,jdbcType=VARCHAR},'BASIC'),             
+							    NVL(#{point,jdbcType=NUMERIC},0),             
 							    #{cellphone,jdbcType=VARCHAR},
 							    #{birth,jdbcType=VARCHAR}, 
 							    SYSDATE         
@@ -58,7 +58,7 @@
 	
 	
 	<!-- 단건조회 -->
-	<select id="get_selectOne" parameterType="SJH_LoginVO" resultType="SJH_LoginVO">
+	<select id="do_selectOne" parameterType="SJH_LoginVO" resultType="SJH_LoginVO">
 		SELECT										
 			user_id as userId,
 			passwd,

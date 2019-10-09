@@ -23,32 +23,38 @@ public class LHJ_MovieDaoImpl implements WorkDiv{
 	      
 	private final String NAMESPACE = "kr.co.sunnyside.movie";
 
-	
-	/**
-	 * 영화 데이터베이스 추가(kobis)
-	 */	
-	public int do_boxoffice_insert(DTO dto) {
-		String statement = NAMESPACE + ".do_boxoffice_insert";
-		LHJ_BoxofficeVO inVO = (LHJ_BoxofficeVO) dto;
-		LOG.debug("=============================");
-		LOG.debug("1. param:"+inVO);
-		LOG.debug("=============================");
-		
-		LOG.debug("=============================");
-		LOG.debug("2. statement:"+statement);
-		LOG.debug("=============================");
-		
-		int flag = this.sqlSessionTemplate.insert(statement, inVO);		
-		LOG.debug("=============================");
-		LOG.debug("3. flag:"+flag);
-		LOG.debug("=============================");
-		return flag;
+	@Override
+	public int do_update(DTO dto) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
-	/**
-	 * 영화 데이터베이스 추가(kmdb)
-	 */	
-	public int do_movie_insert(DTO dto) {
-		String statement = NAMESPACE + ".do_movie_insert";
+
+	@Override
+	public int do_delete(DTO dto) {
+		return 0;
+	}
+	
+	@Override
+	public DTO do_selectOne(DTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<?> do_retrieve(DTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}	
+
+	@Override
+	public List<?> do_excelDown(DTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int do_save(DTO dto) {
+		String statement = NAMESPACE + ".do_save";
 		LHJ_MovieVO inVO = (LHJ_MovieVO) dto;
 		LOG.debug("=============================");
 		LOG.debug("1. param:"+inVO);
@@ -63,41 +69,6 @@ public class LHJ_MovieDaoImpl implements WorkDiv{
 		LOG.debug("3. flag:"+flag);
 		LOG.debug("=============================");
 		return flag;
-	}
-
-	@Override
-	public int do_update(DTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int do_delete(DTO dto) {
-		return 0;
-	}
-	
-	@Override
-	public DTO get_selectOne(DTO dto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<?> get_retrieve(DTO dto) {
-		// TODO Auto-generated method stub
-		return null;
-	}	
-
-	@Override
-	public List<?> get_excelDown(DTO dto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int do_save(DTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
 	} 
 
 }

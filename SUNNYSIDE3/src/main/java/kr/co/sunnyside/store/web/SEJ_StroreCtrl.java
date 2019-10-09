@@ -48,7 +48,7 @@ public class SEJ_StroreCtrl {
 		  return "/store/store_add";
 	  }
 	  
-	  @RequestMapping(value = "store/do_save.do", method =RequestMethod.POST, produces = "application/json;charset=UTF-8" )
+	  @RequestMapping(value = "store/do_save.do", method =RequestMethod.GET, produces = "application/json;charset=UTF-8" )
 	  @ResponseBody
 	  public String do_save(SEJ_StroreVO store){
 		LOG.debug("==========================");
@@ -88,8 +88,8 @@ public class SEJ_StroreCtrl {
 	}
 		  
 	  
-	  @RequestMapping(value = "store/get_retrieve.do",method = RequestMethod.GET)
-	  public String get_retrieve(SearchVO search, Model model) {
+	  @RequestMapping(value = "store/do_retrieve.do",method = RequestMethod.GET)
+	  public String do_retrieve(SearchVO search, Model model) {
 		    LOG.debug("1.=====================");
 			LOG.debug("1.= param="+search);
 			LOG.debug("1.=====================");
@@ -117,10 +117,10 @@ public class SEJ_StroreCtrl {
 			code.setCodeId("CATEGORY");
 			
 			//code 정보조회
-			List<CodeVO> codeList = (List<CodeVO>) codeService.get_retrieve(code);
+			List<CodeVO> codeList = (List<CodeVO>) codeService.do_retrieve(code);
 			model.addAttribute("codeList",codeList);
 						
-			List<SEJ_StroreSvc> list = (List<SEJ_StroreSvc>) this.storeService.get_retrieve(search);
+			List<SEJ_StroreSvc> list = (List<SEJ_StroreSvc>) this.storeService.do_retrieve(search);
 			model.addAttribute("list", list);
 			
 			

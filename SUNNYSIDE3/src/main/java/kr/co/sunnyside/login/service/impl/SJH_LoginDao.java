@@ -140,8 +140,8 @@ public class SJH_LoginDao implements WorkDiv {
 	 * 본인 확인
 	 */
 	@Override
-	public DTO get_selectOne(DTO dto) {
-		String statement = this.NAMESPACE+".get_selectOne";
+	public DTO do_selectOne(DTO dto) {
+		String statement = this.NAMESPACE+".do_selectOne";
 		SJH_LoginVO inVO = (SJH_LoginVO) dto;
 		
 		LOG.debug("========================");
@@ -191,13 +191,13 @@ public class SJH_LoginDao implements WorkDiv {
 	
 	
 	@Override
-	public List<?> get_retrieve(DTO dto) {
+	public List<?> do_retrieve(DTO dto) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<?> get_excelDown(DTO dto) {
+	public List<?> do_excelDown(DTO dto) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -214,6 +214,7 @@ public class SJH_LoginDao implements WorkDiv {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 	
 	

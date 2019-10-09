@@ -31,13 +31,13 @@ public class LGS_ReservationSvcImpl implements LGS_ReservationSvc {
 	}
 
 	@Override
-	public List<?> get_retrieve(DTO dto) {
-		return reservationDao.get_retrieve(dto);
+	public List<?> do_retrieve(DTO dto) {
+		return reservationDao.do_retrieve(dto);
 	}
 
 	@Override
-	public DTO get_selectOne(DTO dto) {
-		return reservationDao.get_selectOne(dto);
+	public DTO do_selectOne(DTO dto) {
+		return reservationDao.do_selectOne(dto);
 	}
 
 }

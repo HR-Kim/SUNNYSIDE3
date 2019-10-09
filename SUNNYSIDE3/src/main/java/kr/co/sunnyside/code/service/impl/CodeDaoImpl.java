@@ -57,13 +57,13 @@ public class CodeDaoImpl implements WorkDiv {
 	}
 
 	@Override
-	public DTO get_selectOne(DTO dto) {
+	public DTO do_selectOne(DTO dto) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<?> get_retrieve(DTO dto) {
+	public List<?> do_retrieve(DTO dto) {
 		StringBuilder sb=new StringBuilder();
 		sb.append(" SELECT b.code_id,                   \n");
 		sb.append("        b.code_nm,                   \n");
@@ -95,7 +95,7 @@ public class CodeDaoImpl implements WorkDiv {
 	}
 
 	@Override
-	public List<?> get_excelDown(DTO dto) {
+	public List<?> do_excelDown(DTO dto) {
 		// TODO Auto-generated method stub
 		return null;
 	}

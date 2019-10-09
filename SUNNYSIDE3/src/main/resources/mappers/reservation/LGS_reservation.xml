@@ -20,7 +20,7 @@
 		DELETE FROM TICKET_HISTORY WHERE TICKET_CODE = #{ticketCode, jdbcType=VARCHAR}
 	</delete>
 	
-	<select id="get_selectOne" parameterType="TicketVO" resultType="TicketVO">
+	<select id="do_selectOne" parameterType="TicketVO" resultType="TicketVO">
 		SELECT
 			BRANCH_ID as branchId
 			,ROOM_ID as roomId
@@ -85,7 +85,7 @@
 			TICKET_CODE = #{ticketCode, jdbcType=VARCHAR}
 	</update>
 	
-	<select id="get_retrieve" parameterType="Search" resultType="TicketVO">
+	<select id="do_retrieve" parameterType="Search" resultType="TicketVO">
 		SELECT T.RNUM as num
 			  ,T.TICKET_CODE as ticketCode
 			  ,T.BRANCH_ID as branchId

@@ -14,9 +14,9 @@ public class CodeServiceImpl implements CodeService {
 	private CodeDaoImpl codeDaoImpl;
 	
 	@Override
-	public List<?> get_retrieve(DTO dto) {
+	public List<?> do_retrieve(DTO dto) {
 		
-		return codeDaoImpl.get_retrieve(dto);
+		return codeDaoImpl.do_retrieve(dto);
 	}
 
 }

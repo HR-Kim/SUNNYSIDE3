@@ -23,7 +23,7 @@
 		DELETE FROM BRANCH_INFO WHERE BRANCH_ID = #{branchId, jdbcType=VARCHAR}
 	</delete>
 	
-	<select id="get_selectOne" parameterType="BranchInfo" resultType="BranchInfo">
+	<select id="do_selectOne" parameterType="BranchInfo" resultType="BranchInfo">
 		SELECT
 			BRANCH_ID as branchId,
 		    BRANCH_NM as branchNm
@@ -51,7 +51,7 @@
 			BRANCH_ID = #{branchId, jdbcType=VARCHAR}
 	</update>
 	
-	<select id="get_retrieve" parameterType="Search" resultType="BranchInfo">
+	<select id="do_retrieve" parameterType="Search" resultType="BranchInfo">
 		SELECT T.RNUM as NUM
 			  ,T.BRANCH_ID as branchId
 			  ,T.BRANCH_NM as branchNm

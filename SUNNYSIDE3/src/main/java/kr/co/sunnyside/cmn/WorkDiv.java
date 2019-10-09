@@ -13,12 +13,12 @@ public interface WorkDiv {
 	public int do_save(DTO dto);
 
 	/**단건조회 */
-	public DTO get_selectOne(DTO dto);
+	public DTO do_selectOne(DTO dto);
 	
 	/**목록조회 */
-	public List<?> get_retrieve(DTO dto);
+	public List<?> do_retrieve(DTO dto);
 	
 	/**엑셀다운 */
-	public List<?> get_excelDown(DTO dto);
+	public List<?> do_excelDown(DTO dto);
 
 }

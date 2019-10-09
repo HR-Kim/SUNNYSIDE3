@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sunnyside.planed">
+
+	<sql id="planedColumns">						
+		movie_id as movieId
+	    ,kortitle
+	    ,engtitle
+	    ,limitage
+	    ,genre
+	    ,rel_date as relDate
+	    ,director
+	    ,cast
+	    ,running_time as runningTime
+	    ,synopsis
+	    ,poster
+	    ,expert_rate as expertRate
+	    ,visitor_rate as visitorRate
+	    ,screen_state as screenState
+	</sql>
+	
+	<sql id="planedBaseCondition">
+		<choose>
+			<when test="'10' == searchDiv">
+				and KORTITLE LIKE '%' || #{searchWord} || '%'					
+			</when>
+			<when test="'20' == searchDiv">
+				and DIRECTOR LIKE '%' || #{searchWord} || '%'				
+			</when>
+		</choose>
+	</sql>
+	
+	<!-- 목록조회 -->
+	<select id="do_retrieve" parameterType="Search" resultType="Movie">
+	  SELECT T1.*,T2.*                                       
+     FROM                                                              
+     (                                                                 
+        SELECT                                                         
+			B.movie_id as movieId                       
+			,B.kortitle                                 
+			,B.engtitle                                 
+			,B.limitage                                 
+			,B.genre                                    
+			,TO_CHAR(B.rel_date,'YYYY.MM.DD') as relDate
+			,B.director                                 
+			,B.cast                                     
+			,B.running_time as runningTime              
+			,B.synopsis                                 
+			,B.poster                                   
+			,B.expert_rate as expertRate                
+			,B.visitor_rate as visitorRate              
+			,B.screen_state as screenState 
+		FROM                                                           
+        (    SELECT ROWNUM AS rnum, A.*                                 
+           FROM                                                       
+           (                                                           
+              SELECT  *                                              
+              FROM   movie    
+              WHERE  1=1                          
+              AND screen_state = '020'
+              <include refid="planedBaseCondition"/>                                        
+              ORDER BY rel_date DESC nulls last                                     
+           )A                                                         
+           WHERE rownum <![CDATA[ <= ]]> (#{pageSize} * (#{pageNum}-1)+#{pageSize})                             
+        ) B                                                            
+        WHERE B.rnum <![CDATA[ >= ]]> (#{pageSize} * (#{pageNum}-1)+1)                                 
+     )T1
+     NATURAL JOIN                                                      
+     (                                                                 
+         SELECT COUNT(*) totalCnt                                     
+         FROM movie       
+         WHERE  1=1     
+         AND screen_state = '020'                                           
+          <include refid="planedBaseCondition"/>                                             
+     )T2  
+	</select>	
+	
+	<!-- 단건조회 -->
+	<select id="do_selectOne" parameterType="Movie" resultType="Movie">
+		SELECT
+		    <include refid="planedColumns"></include> 
+		FROM
+		    movie
+		WHERE
+		    movie_id = #{movieId, jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 비 상영상태로 상태 변경 -->
+	<update id="do_update_planedToScreen" parameterType="Movie">	
+		UPDATE 
+			movie
+		SET 
+			SCREEN_STATE = '010'
+		WHERE  
+			movie_id = #{movieId, jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 비 상영상태로 상태 변경 -->
+	<update id="do_update_planedDown" parameterType="Movie">	
+		UPDATE 
+			movie
+		SET 
+			SCREEN_STATE = '000'
+		WHERE  
+			movie_id = #{movieId, jdbcType=VARCHAR}
+	</update>
+
+	<!-- 최신개봉으로 상태 변경(상영중으로 상태 변경) -->
+	<update id="do_update_planedUp" parameterType="Movie">	
+		UPDATE 
+			movie
+		SET 
+			SCREEN_STATE = '020'
+		WHERE  
+			movie_id = #{movieId, jdbcType=VARCHAR}
+	</update>
+	
+</mapper>
