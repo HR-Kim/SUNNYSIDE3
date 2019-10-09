@@ -399,6 +399,7 @@ public class StringUtil {
 	 * 좌석생성
 	 * A부터 max_y열까지 max개의 좌석버튼 생성
 	 * 현재 max_y = O, max = 28 고정
+	 * setSetting = 0(일반) or 1(좌석설정용)
 	 * */
 	public static String makeSeatButton(int setSetting) {
 		//<button class="seatY a.. ..z" disabled="disabled">a.. ..z</button><button data-y=".." data-x=".." disable="..." ">1...</button>

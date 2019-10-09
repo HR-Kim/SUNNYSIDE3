@@ -100,52 +100,21 @@
     			window.self.close();
     		});
     		
-    		//연속좌석설정on
+    		//드래그좌석설정on
     		$(".seatBox").on("mousedown", function(){
-    			$(".seatBox>:button").on("mouseover", function(){
-    				var data = $(this);
-        			var select = $("#select").val();
-        			var y = data.data().y;
-        			var x = data.data().x;
-        			var seat = $('button[data-y='+y+'][data-x='+x+']');
-        			
-        			if(select == 2){
-        				seat.attr("data-use" ,"2");
-        				seat.css("background-color" ,"white");
-        			}else if(select == 0){
-        				seat.attr("data-use" ,"1");
-        				seat.css("background-color" ,"blue");
-        			}else{
-        				seat.attr("data-use" ,"0");
-        				seat.css("background-color" ,"red");
-        			}
-        			seat.attr("data-setseat" ,"true");
-        		});
+	    		$(".seatBox>:button").on("mouseover", function(){
+	    			buttonPaint($(this));
+	    		});
     		});
     		
-    		//연속좌석설정off
-    		$(".seatBox").on("mouseup", function(){
+    		//드래그좌석설정off
+    		$(".seatBox").on("mouseup mouseleave", function(){
     			$(".seatBox>:button").off("mouseover");
     		});
     		
-    		$(".seatBox>:button").on("click", function(){
-				var data = $(this);
-    			var select = $("#select").val();
-    			var y = data.data().y;
-    			var x = data.data().x;
-    			var seat = $('button[data-y='+y+'][data-x='+x+']');
-    			
-    			if(select == -1){
-    				seat.attr("data-use" ,"2");
-    				seat.css("background-color" ,"white");
-    			}else if(select == 0){
-    				seat.attr("data-use" ,"1");
-    				seat.css("background-color" ,"blue");
-    			}else{
-    				seat.attr("data-use" ,"0");
-    				seat.css("background-color" ,"red");
-    			}
-    			seat.attr("data-setseat" ,"true");
+    		//클릭했을때
+    		$(".seatBox>:button").on("click mousedown", function(){
+				buttonPaint($(this));
     		});
     		
     		//통로로 초기화
@@ -162,6 +131,25 @@
     			$(".seatBox>:button[data-use]").attr("data-setseat" ,"true");
     		});
     		
+    		function buttonPaint($this_data){
+    			var data = $this_data;
+    			var select = $("#select").val();
+    			var y = data.data().y;
+    			var x = data.data().x;
+    			var seat = $('button[data-y='+y+'][data-x='+x+']');
+    			
+    			if(select == 2){
+    				seat.attr("data-use" ,"2");
+    				seat.css("background-color" ,"white");
+    			}else if(select == 0){
+    				seat.attr("data-use" ,"1");
+    				seat.css("background-color" ,"blue");
+    			}else{
+    				seat.attr("data-use" ,"0");
+    				seat.css("background-color" ,"red");
+    			}
+    			seat.attr("data-setseat" ,"true");
+    		}
     	</script>
 	</body>
 </html>

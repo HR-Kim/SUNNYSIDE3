@@ -169,7 +169,7 @@
 			</div>
 			
 			<hr/>
-			
+			<p id="seatTableInfo"></p>
 			<div class="seatWrap">
 				<p class="screen">SCREEN</p>
 				<div class="seatbox">
@@ -178,6 +178,14 @@
 			</div>
 
 			<br/>
+			
+			<div id="seatTableInfo2">
+				
+			
+			</div>
+			
+			<br/>
+			
 		</div>
 		
 		<script src="${context}/resources/js/jquery-1.12.4.js"></script>
@@ -190,6 +198,7 @@
     			//alert("ready");
     		});
     		
+    		//상영관 새로고침버튼
     		$("#room_reset").on("click", function(){
     			var branchId = $("#hd_branchId").val();				//지점ID
     			var roomId = $("#hd_roomId").val();
@@ -265,7 +274,6 @@
         			},
         			error:function(xhr,status,error){
         				alert("좌석 추가 실패.");
-        				
         			}
         			}); 
     			
@@ -310,7 +318,6 @@
     				alert("선택한 지점이 없습니다.");
     				return;
     			}
-    			
     			
     			if(confirm("새 상영관 이름 : " + roomNm + "\n상영관을 추가하시겠습니까?")==false) return;
   			
@@ -376,6 +383,7 @@
     			$("#hd_roomNm").val(td.eq(2).text());					//상영관이름 표시(히든)
     			$("#hd_totalSeat").val(td.eq(4).text());				//총좌석(히든)
     			
+    			delete_Seat_Table();
     			create_Seat_Table(td);
     		});
     		
@@ -393,18 +401,7 @@
     			create_Room_Table(branchId);
     		});
     		
-    		//좌석버튼에 마우스 올렸을떄 색 변화
-    		$(".seatWrap>button").on("mouseenter", function(){
-    			$(this).css({"background-color":"#666666"})
-    			
-    		});
-    		
-    		//좌석버튼에 마우스 벗어났을시 색변화
-    		$(".seatWrap>button").on("mouseout", function(){
-    			$(this).css({"background-color":""})
-    		});
-    		
-    		//branch테이블 선택시 room테이블 생성;
+    		//지점테이블 선택시 상영관테이블 생성;
     		function create_Room_Table(branchId){
     			if(branchId == null || branchId.length == 1)return;
     			
@@ -519,9 +516,8 @@
     			});
     		}
     		
-    		//좌석
+    		//좌석테이블 생성
     		function create_Seat_Table(td){
-    			
     			if(td == null || td.length == 1)return;
 				var searchWord = td.eq(1).text();			//상영관ID
     			var searchDiv = "20";
@@ -537,21 +533,23 @@
     			success: function(data){
     				var seatArr = JSON.parse(data);
     				if(seatArr.length != 0){
+    					$("#seatTableInfo").text(td.eq(2).text() + "의 좌석테이블 입니다.");
     					$(".seatWrap").css("display", "block");
     					for(var i=0 ; i< seatArr.length ; i++){
         					var y= seatArr[i].seatY;		//Y축값
         					var x= seatArr[i].seatX;		//X축값
         					var yn = seatArr[i].useYN;		//사용여부
-        					var seat = $('button[data-y='+y+'][data-x='+x+']');	//좌석버튼찾기
+        					var seat = $("button[data-y="+y+"][data-x="+x+"]");	//좌석버튼찾기
+        					seat.css("color", "white");
         					if(yn == '1'){										//사용가능좌석인 것(1)
-        	   					seat.prop("disabled",false);					//해당 버튼을 사용가능하도록 만든다
+        	   					seat.prop("disabled", false);					//해당 버튼을 사용가능하도록 만든다
         	   					seat.text(x);
         	   					seat.css("background-color", "blue");
-        	   					seat.css("color", "white");
-        					}else if(yn == '0') {								//사용불가인것 X표시
+        					}else if(yn == '0') {								//사용불가인것(0) X표시
+        						seat.prop("disabled", false);
         	   					seat.text("X");
         	   					seat.css("background-color", "red");
-        					}else{												// 3 이면 복도
+        					}else{												//(3) 이면 복도
         						seat.css("visibility" ,"hidden");
         					}
         				}		
@@ -564,6 +562,39 @@
     				
     			}
     			}); 
+    		}
+    		
+    		//좌석클릭시 정보
+    		$("button[data-y][data-x]").on("click", function(){
+    			var seat = $(this);
+    			if(seat.prop("disabled", false)){
+    				alert("asd");
+    			}
+    		});
+
+    		//좌석버튼에 마우스 올렸을떄 색 변화
+    		$("button[data-y][data-x]").on("mouseenter", function(){
+    			var seat = $(this);
+    			seat.css("color", "red");
+    		});
+    		
+    		//좌석버튼에 마우스 벗어났을시 색변화
+    		$("button[data-y][data-x]").on("mouseleave", function(){
+    			var seat = $(this);
+    			seat.css("color", "white");
+    		});
+    		
+    		//좌석테이블 제거
+    		function delete_Seat_Table(){
+    			var seat = $("button[data-y][data-x]");
+    			$(".seatWrap").css("display", "none");
+    			seat.css("background-color", false);		
+    			seat.css("color", false);
+    			seat.css("visibility" , "visible");		//보이지 않게 만들었던 버튼을 다시 보이게
+    			seat.css("visibility" , false);			//css를 없앤다. 이 속성을 다시 만들면 이전의 값이 나오므로 false하기전에 visible로 반드시 만들어야한다
+    			seat.prop("disabled", true);
+    			seat.text("");
+    			
     		}
     		
     		//상영관생성
@@ -676,6 +707,7 @@
     			});
     		}
     		
+    		//상영관목록을 제거
     		function room_cancel(){
     			$(".room_Plus_layer").css("display", "none");
     			$("#new_roomNm").val("");
@@ -699,9 +731,13 @@
     				}, 
     			success: function(data){
     				var list = JSON.parse(data);
-    				var cnt = 0;
+    				var enableSeatCnt = 0;
+    				var unableSeatCnt = 0;
+    				
     				for(var i=0 ; i<list.length ; i++){
-    					if(list[i].useYN == '1') cnt++; 
+    					if(list[i].useYN == '1') enableSeatCnt++; 
+    					else if(list[i].useYN == '0') unableSeatCnt++; 
+    					
     				}
     				$.ajax({
         				type : "POST",
@@ -709,8 +745,8 @@
         				dataType : "html",
         				data : {
         					"roomId" : roomId,
-        					"totalSeat" : cnt,
-        					"restSeat" : cnt
+        					"totalSeat" : enableSeatCnt + unableSeatCnt,
+        					"restSeat" : enableSeatCnt
         				}, 
         			success: function(data){
         				var msg = JSON.parse(data);
@@ -734,7 +770,6 @@
     			error:function(xhr,status,error){
     			}
     			});   
-    			
     		}
     	</script>
 	</body>

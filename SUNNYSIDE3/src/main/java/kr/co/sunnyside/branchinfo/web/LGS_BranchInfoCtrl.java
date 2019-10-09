@@ -30,7 +30,7 @@ public class LGS_BranchInfoCtrl {
 	private final String VIEW_TABLE ="table/theater_table";
 	
 	@ResponseBody
-	@RequestMapping(value = "brachInfo/do_save.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	@RequestMapping(value = "branchInfo/do_save.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
 	public String do_save(LGS_BranchInfoVO branchInfo) {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_save_branchInfo");
@@ -67,7 +67,7 @@ public class LGS_BranchInfoCtrl {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "brachInfo/do_update.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	@RequestMapping(value = "branchInfo/do_update.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
 	public String do_update(LGS_BranchInfoVO branchInfo) {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_update_branchInfo");
@@ -103,7 +103,7 @@ public class LGS_BranchInfoCtrl {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "brachInfo/do_delete.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	@RequestMapping(value = "branchInfo/do_delete.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
 	public String do_delete(LGS_BranchInfoVO branchInfo) {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_delete_branchInfo");
@@ -137,7 +137,7 @@ public class LGS_BranchInfoCtrl {
 		return jsonString;
 	}
 	
-	@RequestMapping(value = "brachInfo/do_selectOne.do", method = RequestMethod.POST)
+	@RequestMapping(value = "branchInfo/do_selectOne.do", method = RequestMethod.POST)
 	public String do_selectOne(LGS_BranchInfoVO branchInfo, Model model) {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_selectOne_branchInfo");
@@ -156,7 +156,7 @@ public class LGS_BranchInfoCtrl {
 		return VIEW_TABLE;
 	}
 	
-	@RequestMapping(value = "brachInfo/do_retrieve.do", method = RequestMethod.GET)
+	@RequestMapping(value = "branchInfo/do_retrieve.do", method = RequestMethod.GET)
 	public String do_retrieve(SearchVO search, Model model) {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_retrieve_branchInfo");
