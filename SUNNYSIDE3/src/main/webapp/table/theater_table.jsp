@@ -17,6 +17,18 @@
 		<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 		
 		<style type="text/css">
+			.loadingLayer {
+				position: absolute;
+				width: 200px;
+				height: 50px;
+				padding: 15px;
+				font-weight: bold;
+				text-align: center;
+				background-color: white;
+				border: 1px solid black;
+				z-index: 30;
+				display: none;
+			}
 			.seatSetting_layer {
 				position: absolute;
 				width: 500px;
@@ -27,12 +39,11 @@
 				text-align: center;
 				padding: 10px;
 				z-index: 20;
-			
 			}
 			.room_Plus_layer {
 				position: absolute;
 				width: 200px;
-				height: 280px;
+				height: 180px;
 				display: none;
 				border: 1px solid black;
 				background-color: white;
@@ -77,13 +88,15 @@
 				text-align: center;
 				padding-bottom: 20px;
 			}
-		
-			
 		</style>
 		
 	</head>
 	<body>
 		<div class="container">
+			<div class="loadingLayer">
+				<p>...작업중입니다...</p>
+			</div>
+		
 			<div class="branch_Plus_layer">
 				<p>새로운 지점 이름을 입력하세요.</p>
 				<input type="text" id="new_branchNm" maxlength="20">
@@ -198,10 +211,28 @@
     			//alert("ready");
     		});
     		
+    		//로딩
+    		function loading(bool){
+    			if(bool == true){
+    				var width = $(".loadingLayer").width();
+        			var height = $(".loadingLayer").height();
+        			var outWidth = $(".container").width();
+        			var outHeight = $(".container").height();
+        			
+        			$(".loadingLayer").css("top", (outHeight-height)/2);
+        			$(".loadingLayer").css("left", (outWidth-width)/2);
+        			
+        			$(".loadingLayer").css("display", "block");
+    			}else{
+    				$(".loadingLayer").css("display", "none");
+    			}
+    		}
+    		
     		//상영관 새로고침버튼
     		$("#room_reset").on("click", function(){
     			var branchId = $("#hd_branchId").val();				//지점ID
     			var roomId = $("#hd_roomId").val();
+    			if(roomId == null || roomId == "") roomId = ".";
     			update_room(roomId);
 				create_Room_Table(branchId);
     		});
@@ -229,7 +260,7 @@
     			var pX = xWidth - 240/2;
     			var pY = xHeight - 200/2;
 
-    			var opt = "width=710, height=535, left="+pX+", top="+pY+", status=0, toolbar=0, location=0, menubar=0";
+    			var opt = "width=710, height=545, left="+pX+", top="+pY+", status=0, toolbar=0, location=0, menubar=0";
     			var popup = window.open("<c:url value='/table/theater_table_seat.jsp'/>", "_blank", opt);
     			
     		});
@@ -245,7 +276,6 @@
     			}
     			update_room(roomId);
 				create_Room_Table(branchId);
-				alert("좌석추가성공");
 				
     		}
     		
@@ -266,7 +296,7 @@
     					var msg = JSON.parse(data);
     					if(msg.msgId != 1){
     						alert("좌석 추가 실패.");
-    						location.href = "${context}/table/do_retrieve.do";
+    						location.href = "${context}/branchInfo/do_retrieve.do";
     					}
         			},
         			complete:function(data){
@@ -285,9 +315,7 @@
 				if(roomId.length < 1 || roomId == null) return;
 				
 				if(confirm("좌석을 정말로 삭제합니까?")==false) return; 
-				delete_seat(roomId);
-				alert("작업완료");
-				
+				delete_seat(roomId);				
     		});
     		
     		//상영관추가
@@ -302,7 +330,6 @@
     			$(".room_Plus_layer").css("left", (outWidth-width)/2);
     			
     			$(".room_Plus_layer").css("display", "block");
-    			
     		});
     		
     		//상영관추가버튼
@@ -403,6 +430,7 @@
     		
     		//지점테이블 선택시 상영관테이블 생성;
     		function create_Room_Table(branchId){
+    			loading(true);
     			if(branchId == null || branchId.length == 1)return;
     			
     			var searchWord = branchId;
@@ -439,7 +467,7 @@
     				
     			},
     			complete:function(data){
-    			 
+    				loading(false);
     			},
     			error:function(xhr,status,error){
 
@@ -450,10 +478,10 @@
     		//지점추가
     		function create_branch(){
 				if(confirm("정말로 지점을 추가합니까?")==false) return;
-    			
+				loading(true);
     			$.ajax({
     				type : "POST",
-    				url : "${context}/brachInfo/do_save.do",
+    				url : "${context}/branchInfo/do_save.do",
     				dataType : "html",
     				data : {
     					"branchNm" :  $("#new_branchNm").val()
@@ -462,14 +490,14 @@
     				var jsonData = JSON.parse(data);
     				if(jsonData.msgId == 1){
     					alert("추가되었습니다.");
-    					location.href = "${context}/table/do_retrieve.do";
+    					location.href = "${context}/branchInfo/do_retrieve.do";
     				}else{
     					alert("실패");
     				}
     				
     			},
     			complete:function(data){
-    			 
+    				loading(false);
     			},
     			error:function(xhr,status,error){
 					alert("추가실패");
@@ -488,11 +516,12 @@
 				var id = $("#hd_branchId").val();
 				var nm = $("#hd_branchNm").val();
 				if(id.length == 0 || nm.length == 0) return;
-				if(confirm("대상 : " + id + " (" + nm + ")"+ "\n정말로 삭제합니까?")==false) return;  
+				if(confirm("대상 : " + id + " (" + nm + ")"+ "\n정말로 삭제합니까?")==false) return; 
 				
+				loading(true);
 				$.ajax({
     				type : "POST",
-    				url : "${context}/brachInfo/do_delete.do",
+    				url : "${context}/branchInfo/do_delete.do",
     				dataType : "html",
     				data : {
     					"branchId" : id
@@ -501,14 +530,14 @@
     				var jsonData = JSON.parse(data);
     				if(jsonData.msgId == 1){
     					alert("삭제되었습니다.");
-    					location.href = "${context}/table/do_retrieve.do";
+    					location.href = "${context}/branchInfo/do_retrieve.do";
     				}else{
     					alert("실패");
     				}
     				
     			},
     			complete:function(data){
-    			 
+    				loading(false);
     			},
     			error:function(xhr,status,error){
 					alert("삭제실패");
@@ -518,7 +547,10 @@
     		
     		//좌석테이블 생성
     		function create_Seat_Table(td){
+    			$("#seatTableInfo").text("");
     			if(td == null || td.length == 1)return;
+    			loading(true);
+    			
 				var searchWord = td.eq(1).text();			//상영관ID
     			var searchDiv = "20";
     			
@@ -553,10 +585,12 @@
         						seat.css("visibility" ,"hidden");
         					}
         				}		
+    				}else{
+    					$("#seatTableInfo").text(td.eq(2).text() + "은 좌석이 없습니다.\n좌석을 생성해주세요.");
     				}
     			},
     			complete:function(data){
-    			 
+    				loading(false);
     			},
     			error:function(xhr,status,error){
     				
@@ -599,7 +633,7 @@
     		
     		//상영관생성
     		function create_room(roomNm, branchId){
-    			var roomId = "";
+    			loading(true);
     			$.ajax({
     				type : "POST",
     				url : "${context}/room/do_save.do",
@@ -621,7 +655,7 @@
     					}
         			},
         			complete:function(data){
-        			 
+        				loading(false);
         			},
         			error:function(xhr,status,error){
         				alert("상영관 추가 실패.") 
@@ -629,12 +663,12 @@
         			}); 
     		}
     		
-    		//상영관좌석모두삭제
-    		function delete_roomAll(roomId){    			
-    			delete_seat(roomId);   
-        		var roomId =  $("#hd_roomId").val();
+    		//상영관과 그 좌석모두 삭제
+    		function delete_roomAll(roomId){    	
+    			delete_seat(roomId);  
         		var branchId =  $("#hd_branchId").val();
    				//상영관삭제
+   				loading(true);
    				$.ajax({
        				type : "POST",
        				url : "${context}/room/do_delete.do",
@@ -652,6 +686,7 @@
        			},
        			complete:function(data){
        				$(".seatWrap").css("display", true);
+       				loading(false);
        			},
        			error:function(xhr,status,error){
        				alert("상영관 삭제실패.\n관리자에게 문의하세요.");
@@ -659,8 +694,10 @@
        			}); 	
     		}
     		
+    		//좌석삭제
     		function delete_seat(roomId){
     			//상영관에 남이있는 좌석리스트
+    			loading(true);
     			$.ajax({
     				type : "POST",
     				url : "${context}/seat/do_retrieve.do",
@@ -680,7 +717,7 @@
             				url : "${context}/seat/do_delete.do",
             				dataType : "html",
             				data : {
-            					"seatNm" : seat.seatNm
+            					"roomId" : seat.roomId
             				}, 
             			success: function(data){
             				
@@ -690,16 +727,18 @@
             			},
             			error:function(xhr,status,error){
             				alert("좌석삭제실패.\n관리자에게 문의하세요.");
-            				location.href = "${context}/table/do_retrieve.do";
+            				location.href = "${context}/branchInfo/do_retrieve.do";
             			}
             			});    
         			}
+    				alert("작업완료");
     			},
     			complete:function(data){
     				update_room(roomId);
     				$(".seatWrap").css("display", true);
     				var branchId = $("#hd_branchId").val();
     				create_Room_Table(branchId);
+    				loading(false);
     			},
     			error:function(xhr,status,error){
 					alert("리스트를 불러오는데 실패했습니다.\n관리자에게 문의하세요.");
@@ -718,6 +757,7 @@
     		
     		//상영관의 좌석수를 업데이트한다
     		function update_room(roomId){
+    			loading(true);
     			var branchId = $("#hd_branchId").val();
     			$.ajax({
     				type : "POST",
@@ -758,14 +798,14 @@
         				}
         			},
         			complete:function(data){
-        			 
+        				
         			},
         			error:function(xhr,status,error){
         			}
         			});    
     			},
     			complete:function(data){
-    			 
+    				loading(false);
     			},
     			error:function(xhr,status,error){
     			}
