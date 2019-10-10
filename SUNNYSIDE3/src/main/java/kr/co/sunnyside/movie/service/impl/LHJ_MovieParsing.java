@@ -20,7 +20,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import kr.co.sunnyside.movie.service.LHJ_BoxofficeVO;
 import kr.co.sunnyside.movie.service.LHJ_MovieVO;
 
 public class LHJ_MovieParsing {
@@ -47,8 +46,8 @@ public class LHJ_MovieParsing {
 	}
 	
 	//kobis데이터 파싱
-	public static List<LHJ_BoxofficeVO> getKobisData(URL url) throws ParseException {
-		List<LHJ_BoxofficeVO> dataList =  new ArrayList<LHJ_BoxofficeVO>();
+	public static List<LHJ_MovieVO> getKobisData(URL url) throws ParseException {
+		List<LHJ_MovieVO> dataList =  new ArrayList<LHJ_MovieVO>();
 		BufferedReader rd	   = null;
 		HttpURLConnection conn = null;
 		JsonParser jsonParser  = new JsonParser();
@@ -90,7 +89,7 @@ public class LHJ_MovieParsing {
 				String openDt = dailyObj.get("openDt").getAsString();
 				
 				
-				LHJ_BoxofficeVO vo = new LHJ_BoxofficeVO();
+				LHJ_MovieVO vo = new LHJ_MovieVO();
 				vo.setKortitle(movieNm);
 				vo.setRelDate(openDt);
 				vo.setMovieRank(rank);

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.sunnyside.cmn.DTO;
 import kr.co.sunnyside.cmn.WorkDiv;
-import kr.co.sunnyside.movie.service.LHJ_BoxofficeVO;
 import kr.co.sunnyside.movie.service.LHJ_MovieVO;
 
 
@@ -23,10 +22,25 @@ public class LHJ_BoxofficeDaoImpl implements WorkDiv{
 	      
 	private final String NAMESPACE = "kr.co.sunnyside.boxoffice";
 
-	/**박스오피스 순위 삽입(update)*/	
-	public int do_rank_update(DTO dto) {
-		String statement = NAMESPACE + ".do_rank_update";
-		LHJ_BoxofficeVO inVO = (LHJ_BoxofficeVO) dto;
+	/**박스오피스 상태값 0으로 초기화(OFF)*/	
+	public int do_boxofficeOff_update() {
+		String statement = NAMESPACE + ".do_boxofficeOff_update";
+		
+		LOG.debug("=============================");
+		LOG.debug("2. statement:"+statement);
+		LOG.debug("=============================");
+		
+		int flag = this.sqlSessionTemplate.update(statement);		
+		LOG.debug("=============================");
+		LOG.debug("3. flag:"+flag);
+		LOG.debug("=============================");
+		return flag;
+	}
+	
+	/**박스오피스 상태값 0으로 초기화(On)*/	
+	public int do_boxofficeOn_update(DTO dto) {
+		String statement = NAMESPACE + ".do_boxofficeOn_update";
+		LHJ_MovieVO inVO = (LHJ_MovieVO) dto;
 		LOG.debug("=============================");
 		LOG.debug("1. param:"+inVO);
 		LOG.debug("=============================");
@@ -67,11 +81,11 @@ public class LHJ_BoxofficeDaoImpl implements WorkDiv{
 	@Override
 	public DTO do_selectOne(DTO dto) {
 		String statement = NAMESPACE + ".do_selectOne";
-		LHJ_BoxofficeVO inVO = (LHJ_BoxofficeVO) dto;
+		LHJ_MovieVO inVO = (LHJ_MovieVO) dto;
 		LOG.debug("=============================");
 		LOG.debug("1. param:"+inVO);
 		LOG.debug("2. statement:"+statement);
-		LHJ_BoxofficeVO outVO = this.sqlSessionTemplate.selectOne(statement, inVO);		
+		LHJ_MovieVO outVO = this.sqlSessionTemplate.selectOne(statement, inVO);		
 		LOG.debug("3. outVO:"+outVO);
 		LOG.debug("=============================");
 		
@@ -89,7 +103,7 @@ public class LHJ_BoxofficeDaoImpl implements WorkDiv{
 		String statement = NAMESPACE + ".do_retrieve";
 		LOG.debug("=============================");
 		LOG.debug("2. statement:"+statement);
-		List<LHJ_BoxofficeVO> list = this.sqlSessionTemplate.selectList(statement);		
+		List<LHJ_MovieVO> list = this.sqlSessionTemplate.selectList(statement);		
 		LOG.debug("3. list:"+list);
 		LOG.debug("=============================");
 		
@@ -107,7 +121,7 @@ public class LHJ_BoxofficeDaoImpl implements WorkDiv{
 	@Override
 	public int do_save(DTO dto) {
 		String statement = NAMESPACE + ".do_save";
-		LHJ_BoxofficeVO inVO = (LHJ_BoxofficeVO) dto;
+		LHJ_MovieVO inVO = (LHJ_MovieVO) dto;
 		LOG.debug("=============================");
 		LOG.debug("1. param:"+inVO);
 		LOG.debug("=============================");

@@ -13,10 +13,15 @@ public class LHJ_BoxofficeSvcImpl implements LHJ_BoxofficeSvc {
 
 	@Autowired
 	private LHJ_BoxofficeDaoImpl boxofficeDaoImpl;
-	
+
 	@Override
-	public int do_rank_update(DTO dto) {
-		return boxofficeDaoImpl.do_rank_update(dto);
+	public int do_boxofficeOff_update(DTO dto) {
+		return boxofficeDaoImpl.do_boxofficeOff_update();
+	}
+
+	@Override
+	public int do_boxofficeOn_update(DTO dto) {
+		return boxofficeDaoImpl.do_boxofficeOn_update(dto);
 	}
 
 	@Override
@@ -62,5 +67,7 @@ public class LHJ_BoxofficeSvcImpl implements LHJ_BoxofficeSvc {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
 
 }

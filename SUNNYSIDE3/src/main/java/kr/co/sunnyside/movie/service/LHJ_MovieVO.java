@@ -31,12 +31,16 @@ public class LHJ_MovieVO extends DTO{
 	private double visitorRate;
 	/**상영상태*/     
 	private String screenState;
+	/**박스오피스여부*/
+	private String boxofficeState;
+	/**순위*/
+	private String movieRank;
 	
 	public LHJ_MovieVO() {}
 
 	public LHJ_MovieVO(String movieId, String kortitle, String engtitle, String limitage, String genre, String relDate,
 			String director, String cast, int runningTime, String synopsis, String poster, double expertRate,
-			double visitorRate, String screenState) {
+			double visitorRate, String screenState, String boxofficeState, String movieRank) {
 		super();
 		this.movieId = movieId;
 		this.kortitle = kortitle;
@@ -52,6 +56,8 @@ public class LHJ_MovieVO extends DTO{
 		this.expertRate = expertRate;
 		this.visitorRate = visitorRate;
 		this.screenState = screenState;
+		this.boxofficeState = boxofficeState;
+		this.movieRank = movieRank;
 	}
 
 	public String getMovieId() {
@@ -166,15 +172,30 @@ public class LHJ_MovieVO extends DTO{
 		this.screenState = screenState;
 	}
 
+	public String getBoxofficeState() {
+		return boxofficeState;
+	}
+
+	public void setBoxofficeState(String boxofficeState) {
+		this.boxofficeState = boxofficeState;
+	}
+
+	public String getMovieRank() {
+		return movieRank;
+	}
+
+	public void setMovieRank(String movieRank) {
+		this.movieRank = movieRank;
+	}
+
 	@Override
 	public String toString() {
 		return "LHJ_MovieVO [movieId=" + movieId + ", kortitle=" + kortitle + ", engtitle=" + engtitle + ", limitage="
 				+ limitage + ", genre=" + genre + ", relDate=" + relDate + ", director=" + director + ", cast=" + cast
 				+ ", runningTime=" + runningTime + ", synopsis=" + synopsis + ", poster=" + poster + ", expertRate="
-				+ expertRate + ", visitorRate=" + visitorRate + ", screenState=" + screenState + ", toString()="
-				+ super.toString() + "]";
-	}
+				+ expertRate + ", visitorRate=" + visitorRate + ", screenState=" + screenState + ", boxofficeState="
+				+ boxofficeState + ", movieRank=" + movieRank + ", toString()=" + super.toString() + "]";
+	}	
 
-	
-	
+		
 }

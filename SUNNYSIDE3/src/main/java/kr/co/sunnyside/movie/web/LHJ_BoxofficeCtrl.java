@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import kr.co.sunnyside.cmn.Message;
 import kr.co.sunnyside.code.service.CodeService;
 import kr.co.sunnyside.movie.service.LHJ_BoxofficeVO;
+import kr.co.sunnyside.movie.service.LHJ_MovieVO;
 import kr.co.sunnyside.movie.service.impl.LHJ_BoxofficeSvcImpl;
 
 @Controller
@@ -32,13 +33,13 @@ public class LHJ_BoxofficeCtrl {
 	@RequestMapping(value="boxoffice/do_rank_update.do",method = RequestMethod.POST
 	,produces = "application/json;charset=UTF-8")
 	@ResponseBody		
-	public String do_rank_update(LHJ_BoxofficeVO inVO) {
+	public String do_rank_update(LHJ_MovieVO inVO) {
 		String gsonStr = "";
 		LOG.debug("============================");
 		LOG.debug("=inVO="+inVO);
 		LOG.debug("============================");
 		
-		int flag = service.do_rank_update(inVO);
+		int flag = service.do_save(inVO);
 		Message  message=new Message();
 		
 		if(flag>0) {
@@ -85,7 +86,7 @@ public class LHJ_BoxofficeCtrl {
 	/** 저장 */
 	@RequestMapping(value = "boxoffice/do_save.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String do_save(LHJ_BoxofficeVO inVO) {
+	public String do_save(LHJ_MovieVO inVO) {
 		LOG.debug("===============================");
 		LOG.debug("=inVO=" + inVO);
 		LOG.debug("===============================");

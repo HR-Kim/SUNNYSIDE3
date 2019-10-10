@@ -5,11 +5,17 @@ import java.util.List;
 import kr.co.sunnyside.cmn.DTO;
 
 public interface LHJ_BoxofficeSvc {
-	/**박스오피스 순위 삽입(update)*/	
-	public int do_rank_update(DTO dto);
+	/**박스오피스 상태값 0으로 초기화(OFF)*/	
+	public int do_boxofficeOff_update(DTO dto);
+	
+	/**박스오피스 상태값 0으로 초기화(ON)*/	
+	public int do_boxofficeOn_update(DTO dto);
 	
 	/**박스오피스 삭제 */	
 	public int do_delete();
+	
+	/**박스오피스 추가*/
+	public int do_save(DTO dto);
 	
 	/**박스오피스 단건조회*/
 	public DTO do_selectOne(DTO dto);
@@ -17,8 +23,7 @@ public interface LHJ_BoxofficeSvc {
 	/**박스오피스 전체조회*/
 	public List<?> do_retrieve();
 	
-	/**영화 데이터베이스 추가(kobis)*/
-	public int do_save(DTO dto);
+	
 	
 	
 	/**안쓰는 것들*/
