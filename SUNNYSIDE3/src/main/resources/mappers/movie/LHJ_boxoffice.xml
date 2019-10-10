@@ -3,85 +3,118 @@
 <mapper namespace="kr.co.sunnyside.boxoffice">
 	
 	<!-- select로 가져올 때 사용되는 movie, boxoffice 공통 칼럼 -->
-	<sql id="movieColumns">						
-		 movie_id as movieId
-	    ,kortitle
-	    ,engtitle
-	    ,limitage
-	    ,genre
-	    ,rel_date as relDate
-	    ,director
-	    ,cast
-	    ,running_time as runningTime
-	    ,synopsis
-	    ,poster
-	    ,expert_rate as expertRate
-	    ,visitor_rate as visitorRate
-	    ,movie_rank as movieRank
-	</sql>
-	
-	<!-- DB에서 사용되는 movie, boxoffice 공통 칼럼 -->
-	<sql id="movieDBColumns">						
-		movie_id
-		,kortitle
-		,engtitle
-		,limitage
-		,genre
-		,rel_date
-		,director
-		,cast
-		,running_time
-		,synopsis
-		,poster
-		,expert_rate
-		,visitor_rate
+	<sql id="movieBoxJoinColumns">						
+		m.movie_id 	      as movieId,
+	    m.kortitle, 	      
+	    m.engtitle, 	      
+	    m.limitage, 	      
+	    m.genre,    	     
+	    m.rel_date 	      as relDate,
+	    m.director, 	      
+	    m.cast,     	      
+	    m.running_time    as runningTime,
+	    m.synopsis,       
+	    m.poster,         
+	    m.expert_rate     as expertRate,
+	    m.visitor_rate    as visitorRate,
+	    m.screen_state    as screenState,
+	    m.boxoffice_state as boxofficeState,
+	    b.movie_rank      as movieRank
 	</sql>
 
 	<!-- 목록조회 -->
-	<select id="do_retrieve" resultType="Boxoffice">
+	<select id="do_retrieve" resultType="Movie">
 		SELECT
-		    <include refid="movieColumns"></include> 
+		    <include refid="movieBoxJoinColumns"></include>
 		FROM
-		    boxoffice
-		ORDER BY 
-			movie_rank
+		    movie m JOIN boxoffice b
+		ON
+		    m.movie_id = b.movie_id
+		AND 
+			m.boxoffice_state = '1'
+		ORDER BY
+		    b.movie_rank
 	</select>
 	
 	<!-- 단건조회 -->
-	<select id="do_selectOne" parameterType="Boxoffice" resultType="Boxoffice">
-		SELECT 
-			<include refid="movieColumns"></include>
-		FROM 
-			boxoffice
+	<select id="do_selectOne" parameterType="Movie" resultType="Movie">
+		SELECT
+		    <include refid="movieBoxJoinColumns"></include>
+		FROM
+		    movie m JOIN boxoffice b
+		ON
+		    m.movie_id = b.movie_id
 		WHERE 
-			kortitle LIKE '%'|| #{kortitle} || '%'
+		    m.movie_id = #{movieId, jdbcType=VARCHAR}
+		AND 
+			m.boxoffice_state = '1'
+		ORDER BY
+		    b.movie_rank
 	</select>
-	
+
 	<!-- 박스오피스 삭제 -->
-	<delete id="do_delete" parameterType="Boxoffice">
+	<delete id="do_delete" parameterType="Movie">
 		DELETE FROM boxoffice
 	</delete>
 	
-	<!-- 순위 수정 -->
-	<update id="do_rank_update" parameterType="Boxoffice">	
-		UPDATE 
-			boxoffice
-		SET 
-			movie_rank = #{movieRank, jdbcType=VARCHAR}
-		WHERE 
-			movie_id = #{movieId, jdbcType=VARCHAR}
-	</update>
-
-	<!-- 영화 등록(kobis)-->
-	<insert id="do_save" parameterType="Boxoffice">
+	<!-- 순위 정보 저장 -->
+	<update id="do_save" parameterType="Movie">	
 		INSERT INTO boxoffice (
-		    <include refid="movieDBColumns"></include> 
-		) 
-		SELECT 
-			<include refid="movieDBColumns"></include>
-		FROM  movie
-		WHERE kortitle LIKE '%'|| #{kortitle} || '%'
-		AND rel_date = #{relDate, jdbcType=VARCHAR}
-	</insert>
+		    movie_id,
+		    movie_rank
+		) VALUES (
+		    (SELECT movie_id
+		     from movie
+		     WHERE kortitle LIKE '%'|| #{kortitle} || '%'
+		     AND rel_date = #{relDate, jdbcType=VARCHAR}),
+		    #{movieRank, jdbcType=VARCHAR}
+		)		
+	</update>
+	
+	<!-- 박스오피스 상태 true(0)으로 수정 -->
+	<update id="do_boxofficeOff_update" parameterType="Movie">	
+		UPDATE 
+			movie
+		SET
+		    boxoffice_state = '0'
+		WHERE
+			boxoffice_state = '1'
+	</update>
+	
+	<!-- 박스오피스 상태 true(1)으로 수정 -->
+	<update id="do_boxofficeOn_update" parameterType="Movie">	
+		UPDATE 
+			movie
+		SET
+		    boxoffice_state = '1'
+		WHERE
+		    kortitle LIKE '%'|| #{kortitle} || '%'
+		AND 
+			rel_date = #{relDate, jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 순위 수정 -->
+<!-- 	<update id="do_rank_update" parameterType="Boxoffice">	 -->
+<!-- 		UPDATE  -->
+<!-- 			boxoffice -->
+<!-- 		SET  -->
+<!-- 			movie_rank = #{movieRank, jdbcType=VARCHAR} -->
+<!-- 		WHERE  -->
+<!-- 			movie_id = #{movieId, jdbcType=VARCHAR} -->
+<!-- 	</update> -->
+
+
+
+	<!-- 영화 등록(kobis) -->
+<!-- 	<insert id="do_save" parameterType="Boxoffice"> -->
+<!-- 		INSERT INTO boxoffice ( -->
+<!-- 		    <include refid="movieDBColumns"></include>  -->
+<!-- 		)  -->
+<!-- 		SELECT  -->
+<!-- 			<include refid="movieDBColumns"></include> -->
+<!-- 		FROM  movie -->
+<!-- 		WHERE kortitle LIKE '%'|| #{kortitle} || '%' -->
+<!-- 		AND rel_date = #{relDate, jdbcType=VARCHAR} -->
+<!-- 	</insert> -->
 	
 </mapper>
