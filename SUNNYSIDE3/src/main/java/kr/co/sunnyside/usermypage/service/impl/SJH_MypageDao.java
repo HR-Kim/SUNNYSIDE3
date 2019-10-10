@@ -6,12 +6,14 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import kr.co.sunnyside.cmn.DTO;
 import kr.co.sunnyside.cmn.WorkDiv;
-import kr.co.sunnyside.login.service.SJH_LoginVO;
 import kr.co.sunnyside.login.service.impl.SJH_LoginDao;
+import kr.co.sunnyside.usermypage.service.SJH_MypageVO;
 
+@Repository
 public class SJH_MypageDao implements WorkDiv {
 
 	
@@ -25,10 +27,61 @@ public class SJH_MypageDao implements WorkDiv {
 	
 	
 	
+	/**
+	 * 회원 전체조회
+	 */
+	public List<?> do_getAll() {
+		String statement = this.NAMESPACE+".do_getAll";//kr.co.ehr.user.get_retrieve
+		
+		LOG.debug("========================");
+		LOG.debug("=01.no param=");
+		LOG.debug("========================");
+		
+		LOG.debug("========================");
+		LOG.debug("=02.statement="+statement);
+		LOG.debug("========================");
+		
+		List<SJH_MypageVO> list = this.sqlSessionTemplate.selectList(statement);
+	
+		LOG.debug("========================");
+		LOG.debug("03.list="+list);
+		LOG.debug("========================");	
+		
+		return list;
+	}
+	
+	
+	/**
+	 * 회원 자동 등업
+	 * @param dto
+	 * @return
+	 */
+	public int do_levelUpdate(DTO dto) {
+		String statement = this.NAMESPACE+".do_levelUpdate";
+		SJH_MypageVO user = (SJH_MypageVO) dto;
+		
+		LOG.debug("========================");
+		LOG.debug("=01.param="+user);
+		LOG.debug("========================");
+		
+		LOG.debug("========================");
+		LOG.debug("=02.statement="+statement);
+		LOG.debug("========================");
+		
+		int flag = this.sqlSessionTemplate.update(statement, user);
+		
+		LOG.debug("========================");
+		LOG.debug("03.flag="+flag);
+		LOG.debug("========================");	
+		
+		return flag;
+	}
+	
+	
 	@Override
 	public int do_update(DTO dto) {
 		String statement = this.NAMESPACE+".do_update";
-		SJH_LoginVO user = (SJH_LoginVO) dto;
+		SJH_MypageVO user = (SJH_MypageVO) dto;
 		
 		LOG.debug("========================");
 		LOG.debug("=01.param="+user);
@@ -50,7 +103,7 @@ public class SJH_MypageDao implements WorkDiv {
 	@Override
 	public int do_delete(DTO dto) {
 		String statement = this.NAMESPACE+".do_delete";
-		SJH_LoginVO user = (SJH_LoginVO) dto;
+		SJH_MypageVO user = (SJH_MypageVO) dto;
 		
 		LOG.debug("========================");
 		LOG.debug("=01.param="+user);
@@ -73,7 +126,7 @@ public class SJH_MypageDao implements WorkDiv {
 	@Override
 	public DTO do_selectOne(DTO dto) {
 		String statement = this.NAMESPACE+".do_selectOne";
-		SJH_LoginVO inVO = (SJH_LoginVO) dto;
+		SJH_MypageVO inVO = (SJH_MypageVO) dto;
 		
 		LOG.debug("========================");
 		LOG.debug("=01.param="+inVO);
@@ -83,7 +136,7 @@ public class SJH_MypageDao implements WorkDiv {
 		LOG.debug("=02.statement="+statement);
 		LOG.debug("========================");
 		
-		SJH_LoginVO outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
+		SJH_MypageVO outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
 	
 		LOG.debug("========================");
 		LOG.debug("03.outVO="+outVO);
@@ -92,11 +145,15 @@ public class SJH_MypageDao implements WorkDiv {
 		return outVO;
 	}
 	
+	
+	
+	
+	@Override
+	public List<?> do_excelDown(DTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-	
-	
-	
-	
 	@Override
 	public int do_save(DTO dto) {
 		// TODO Auto-generated method stub
@@ -110,10 +167,6 @@ public class SJH_MypageDao implements WorkDiv {
 		return null;
 	}
 
-	@Override
-	public List<?> do_excelDown(DTO dto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
+	
 }

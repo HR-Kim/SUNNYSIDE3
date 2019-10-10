@@ -5,6 +5,36 @@
 <mapper namespace="kr.co.sunnyside.usermypage">
 
 	
+	
+	<!-- 회원 자동 등업 -->
+	<update id="do_levelUpdate" parameterType="SJH_MypageVO">
+		UPDATE user_info
+		SET
+		    user_level = #{userLevel,jdbcType=VARCHAR}
+		WHERE
+		    user_id = #{userId,jdbcType=VARCHAR}
+	</update>
+	
+	
+	
+	<!-- 전체 회원 조회 -->
+	<select id="do_getAll" resultType="SJH_MypageVO">
+		SELECT
+		    user_id as userId,
+		    passwd,
+		    user_name as userName,
+		    email,
+		    user_level as userLevel,
+		    point,
+		    cellphone,
+		    birth,
+		    reg_dt as regDt,
+		    total_pay as totalPay
+		FROM
+		    user_info
+	</select>
+	
+	
 
 	<!-- 회원정보 수정 -->
 	<update id="do_update" parameterType="SJH_MypageVO">
@@ -21,7 +51,7 @@
 	
 	
 	<!-- 회원선택(수정할 때 정보 가져가기) -->
-	<select id="do_selectOne" parameterType="SJH_MypageVO">
+	<select id="do_selectOne" parameterType="SJH_MypageVO" resultType="SJH_MypageVO">
 		SELECT
 		    user_id as userId,
 		    passwd,

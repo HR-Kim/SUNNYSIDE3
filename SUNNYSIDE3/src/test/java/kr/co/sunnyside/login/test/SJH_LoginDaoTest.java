@@ -24,13 +24,15 @@ import org.springframework.web.context.WebApplicationContext;
 
 import kr.co.sunnyside.login.service.SJH_LoginVO;
 import kr.co.sunnyside.login.service.impl.SJH_LoginDao;
+import kr.co.sunnyside.usermypage.service.SJH_MypageVO;
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/*.xml"})
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) //@Test를 NAME ASC 순으로 진행
 public class SJH_LoginDaoTest {
-private final Logger LOG = LoggerFactory.getLogger(this.getClass());
+	
+	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private WebApplicationContext context;
@@ -48,12 +50,12 @@ private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 		LOG.debug("^^^^^^^^^^^^^^^^^^");
 		
 		users = Arrays.asList(
-				 new SJH_LoginVO("j01_126","1234","회원이름01","이메일01@naver.com","BASIC",0,"010-0000-0001","19/09/01","")
-				,new SJH_LoginVO("j02_126","1234","회원이름02","이메일02@naver.com","BASIC",0,"010-0000-0002","19/09/02","")
-				,new SJH_LoginVO("j03_126","1234","회원이름03","이메일03@naver.com","SILVER",0,"010-0000-0003","19/09/03","")
-				,new SJH_LoginVO("j04_126","1234","회원이름04","이메일04@naver.com","SILVER",0,"010-0000-0004","19/09/04","")
-				,new SJH_LoginVO("j05_126","1234","회원이름05","이메일05@naver.com","GOLD",0,"010-0000-00005","19/09/05","")
-				);
+				 new SJH_LoginVO("j01_126","1234","회원이름01","이메일01@naver.com","BASIC",0,"010-0000-0001","19/09/01","",190000)
+				,new SJH_LoginVO("j02_126","1234","회원이름02","이메일02@naver.com","BASIC",0,"010-0000-0002","19/09/02","",200000) //BASIC -> SILVER
+				,new SJH_LoginVO("j03_126","1234","회원이름03","이메일03@naver.com","SILVER",0,"010-0000-0003","19/09/03","",200000)
+				,new SJH_LoginVO("j04_126","1234","회원이름04","이메일04@naver.com","SILVER",0,"010-0000-0004","19/09/04","",400000) //SILVER -> GOLD
+				,new SJH_LoginVO("j05_126","1234","회원이름05","이메일05@naver.com","GOLD",0,"010-0000-0005","19/09/05","",400000)
+			);
 	}
 	
 	
@@ -95,10 +97,15 @@ private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void do_save() {
-		int flag = loginDao.do_save(users.get(2));
-		assertThat(1, is(flag));
+//		int flag = loginDao.do_save(users.get(4));
+//		assertThat(1, is(flag));
+		
+		for(SJH_LoginVO user:users) {
+			loginDao.do_save(user);
+		}
+		
 	}
 	
 	

@@ -68,7 +68,7 @@ public class SJH_LoginCtrl {
 	}
 	
 	
-	//로그인 첫 화면 요청 메소드
+	/** 로그인 첫 화면 요청 메소드 */
 	@RequestMapping(value = "logintest/login.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(Model model, HttpSession session) {
 		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
@@ -86,10 +86,10 @@ public class SJH_LoginCtrl {
 	}
 	
 	
-	//네이버 로그인 성공시 callback호출 메소드
+	/** 네이버 로그인 성공시 callback호출 메소드 */
 	@RequestMapping(value = "logintest/callback.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
-		System.out.println("여기는 callback");
+		LOG.debug("여기는 callback");
 		OAuth2AccessToken oauthToken;
 		oauthToken = naverLoginBO.getAccessToken(session, code, state);
 		
@@ -111,7 +111,7 @@ public class SJH_LoginCtrl {
 		JSONObject response_obj = (JSONObject)jsonObj.get("response");
 		//response의 nickname값 파싱
 		String nickname = (String)response_obj.get("nickname");
-		System.out.println(nickname);
+		LOG.debug(nickname);
 		
 		//4.파싱 닉네임 세션으로 저장
 		session.setAttribute("sessionId",nickname); //세션 생성
@@ -121,10 +121,16 @@ public class SJH_LoginCtrl {
 	}
 	
 	
-	//로그아웃
+	
+	/**
+	 * 로그아웃
+	 * @param session
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/logout.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String logout(HttpSession session)throws IOException {
-		System.out.println("여기는 logout");
+		LOG.debug("여기는 logout");
 		session.invalidate();
 		return "redirect:index.jsp";
 	}

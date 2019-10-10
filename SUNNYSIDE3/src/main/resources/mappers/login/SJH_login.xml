@@ -31,7 +31,7 @@
 	</select>
 	
 	
-	<!-- 등록 -->
+	<!-- 회원가입 -->
 	<insert id="do_save" parameterType="SJH_LoginVO">
 		INSERT INTO user_info (
 							    user_id,
@@ -42,7 +42,8 @@
 							    point,
 							    cellphone,
 							    birth,
-							    reg_dt      
+							    reg_dt,
+							    total_pay      
 							) VALUES (          
 							    #{userId,jdbcType=VARCHAR},              
 							    #{passwd,jdbcType=VARCHAR},              
@@ -52,7 +53,8 @@
 							    NVL(#{point,jdbcType=NUMERIC},0),             
 							    #{cellphone,jdbcType=VARCHAR},
 							    #{birth,jdbcType=VARCHAR}, 
-							    SYSDATE         
+							    SYSDATE,
+							    NVL(#{totalPay,jdbcType=NUMERIC},0)         
 							)                  
 	</insert>
 	

@@ -13,30 +13,14 @@ public class SJH_LoginVO extends DTO {
 	private String cellphone ;//핸드폰번호
 	private String birth     ;//생년월일
 	private String regDt     ;//등록일
-	
-	/**Level to IntValue*/
-	private int level;
-	
+	private int	   totalPay  ;//총결제금액
 	
 	
 	public SJH_LoginVO() {}
-	
-	
-	
-	public int getLevel() {
-		return level;
-	}
-
-
-	public void setLevel(int level) {
-		this.level = level;
-	}
-	
-
 
 
 	public SJH_LoginVO(String userId, String passwd, String userName, String email, String userLevel, int point,
-			String cellphone, String birth, String regDt) {
+			String cellphone, String birth, String regDt, int totalPay) {
 		super();
 		this.userId = userId;
 		this.passwd = passwd;
@@ -47,6 +31,7 @@ public class SJH_LoginVO extends DTO {
 		this.cellphone = cellphone;
 		this.birth = birth;
 		this.regDt = regDt;
+		this.totalPay = totalPay;
 	}
 
 
@@ -140,14 +125,24 @@ public class SJH_LoginVO extends DTO {
 	}
 
 
+	public int getTotalPay() {
+		return totalPay;
+	}
+
+
+	public void setTotalPay(int totalPay) {
+		this.totalPay = totalPay;
+	}
+
+
 	@Override
 	public String toString() {
 		return "SJH_LoginVO [userId=" + userId + ", passwd=" + passwd + ", userName=" + userName + ", email=" + email
 				+ ", userLevel=" + userLevel + ", point=" + point + ", cellphone=" + cellphone + ", birth=" + birth
-				+ ", regDt=" + regDt + "]";
+				+ ", regDt=" + regDt + ", totalPay=" + totalPay + "]";
 	}
-
-
+	
+	
 	
 	
 	

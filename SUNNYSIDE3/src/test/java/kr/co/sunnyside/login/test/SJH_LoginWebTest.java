@@ -58,11 +58,11 @@ public class SJH_LoginWebTest {
 		LOG.debug("^^^^^^^^^^^^^^^^^^");
 		
 		users = Arrays.asList(
-				 new SJH_LoginVO("j01_126","1234","회원이름01","이메일01@naver.com","BASIC",0,"010-0000-0001","19/09/01","")
-				,new SJH_LoginVO("j02_126","1234","회원이름02","이메일02@naver.com","BASIC",0,"010-0000-0002","19/09/02","")
-				,new SJH_LoginVO("j03_126","1234","회원이름03","이메일03@naver.com","SILVER",0,"010-0000-0003","19/09/03","")
-				,new SJH_LoginVO("j04_126","1234","회원이름04","이메일04@naver.com","SILVER",0,"010-0000-0004","19/09/04","")
-				,new SJH_LoginVO("j05_126","1234","회원이름05","이메일05@naver.com","GOLD",0,"010-0000-00005","19/09/05","")
+					 new SJH_LoginVO("j01_126","1234","회원이름01","이메일01@naver.com","BASIC",0,"010-0000-0001","19/09/01","",0)
+					,new SJH_LoginVO("j02_126","1234","회원이름02","이메일02@naver.com","BASIC",0,"010-0000-0002","19/09/02","",190000)
+					,new SJH_LoginVO("j03_126","1234","회원이름03","이메일03@naver.com","SILVER",0,"010-0000-0003","19/09/03","",200000)
+					,new SJH_LoginVO("j04_126","1234","회원이름04","이메일04@naver.com","SILVER",0,"010-0000-0004","19/09/04","",390000)
+					,new SJH_LoginVO("j05_126","1234","회원이름05","이메일05@naver.com","GOLD",0,"010-0000-0005","19/09/05","",400000)
 				);
 		
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
@@ -96,12 +96,12 @@ public class SJH_LoginWebTest {
 	public void do_save() throws Exception {
 		//url, param
 		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/login/do_save.do")
-														.param("userId", "j07_126")
+														.param("userId", "j08_126")
 														.param("passwd", "1234")
-														.param("userName", "회원이름07")
-														.param("email", "이메일07@naver.com")
-														.param("cellphone", "010-0000-0007")
-														.param("birth", "19/09/07")
+														.param("userName", "회원이름08")
+														.param("email", "이메일08@naver.com")
+														.param("cellphone", "010-0000-0008")
+														.param("birth", "19/09/08")
 														;
 		
 		
