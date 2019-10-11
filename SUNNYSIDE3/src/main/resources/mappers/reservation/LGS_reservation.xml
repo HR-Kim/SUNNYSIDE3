@@ -22,12 +22,13 @@
 	
 	<select id="do_selectOne" parameterType="TicketVO" resultType="TicketVO">
 		SELECT
-			BRANCH_ID as branchId
+			TICKET_CODE as ticketCode
+			,BRANCH_ID as branchId
 			,ROOM_ID as roomId
 			,SCREEN_ID as screenId
 			,USER_ID as userId
 			,MOVIE_ID as movieId
-			,SEAT_NUM as seatNum
+			,SEAT_NM as seatNm
 			,ADULT_CNT as adultCnt
 			,PAY_STATE as payState
 			,COST as cost
@@ -47,11 +48,12 @@
 			,SCREEN_ID
 			,USER_ID
 			,MOVIE_ID
-			,SEAT_NUM
+			,SEAT_NM
 			,ADULT_CNT
 			,PAY_STATE
 			,COST
 			,TICKET_DT
+			,PAY_DT
 		) VALUES (
 		    DBMS_RANDOM.STRING('X', 20)
 		    ,#{branchId, jdbcType=VARCHAR}
@@ -59,10 +61,11 @@
 		    ,#{screenId, jdbcType=VARCHAR}
 		    ,#{userId, jdbcType=VARCHAR}
 		    ,#{movieId, jdbcType=VARCHAR}
-		    ,#{seatNum, jdbcType=NUMERIC}
+		    ,#{seatNm, jdbcType=VARCHAR}
 		    ,#{adultCnt, jdbcType=NUMERIC}
 		    ,#{payState, jdbcType=NUMERIC}
 		    ,#{cost, jdbcType=NUMERIC}
+		    ,SYSDATE
 		    ,SYSDATE
 		)
 	</select>
@@ -75,7 +78,7 @@
 		   ,SCREEN_ID = #{screenId, jdbcType=VARCHAR}
 		   ,USER_ID = #{userId, jdbcType=VARCHAR}
 		   ,MOVIE_ID = #{movieId, jdbcType=VARCHAR}
-		   ,SEAT_NUM = #{seatNum, jdbcType=NUMERIC}
+		   ,SEAT_NM = #{seatNm, jdbcType=VARCHAR}
 		   ,ADULT_CNT = #{adultCnt, jdbcType=NUMERIC}
 		   ,PAY_STATE = #{payState, jdbcType=NUMERIC}
 		   ,COST = #{cost, jdbcType=NUMERIC}
@@ -93,7 +96,7 @@
 			  ,T.SCREEN_ID as screenId
 			  ,T.USER_ID as userId
 			  ,T.MOVIE_ID as movieId
-			  ,T.SEAT_NUM as seatNum
+			  ,T.SEAT_NM as seatNm
 			  ,T.ADULT_CNT as adultCnt
 			  ,T.PAY_STATE as payState
 			  ,T.COST as cost

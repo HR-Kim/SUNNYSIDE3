@@ -36,7 +36,7 @@ import kr.co.sunnyside.reservation.service.impl.LGS_ReservationDaoImpl;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/*.xml"})
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class LGS_ReservatonDaoTest {
+public class LGS_ReservationDaoTest {
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
@@ -178,11 +178,11 @@ public class LGS_ReservatonDaoTest {
 	@Before
 	public void getBean() {
 		list = Arrays.asList(
-				new LGS_TicketVO("co1", "b1", "r1", "s1", "u1", "m1", 100, 0, 1, 10, "", "2019-09-30 00:00:00")
-				,new LGS_TicketVO("co2", "b2", "r2", "s2", "u2", "m2", 101, 1, 0, 20, "", "2019-09-30 00:00:00")
-				,new LGS_TicketVO("co3", "b3", "r3", "s3", "u3", "m3", 102, 0, 1, 30, "", "2019-09-30 00:00:00")
-				,new LGS_TicketVO("co4", "b4", "r4", "s4", "u4", "m4", 103, 1, 0, 40, "", "2019-09-30 00:00:00")
-				,new LGS_TicketVO("co5", "b5", "r5", "s5", "u5", "m5", 104, 0, 1, 50, "", "2019-09-30 00:00:00")
+				new LGS_TicketVO("co1", "b1", "r1", "s1", "u1", "m1", "A1", 0, 1, 10, "", "2019-09-30 00:00:00")
+				,new LGS_TicketVO("co2", "b2", "r2", "s2", "u2", "m2", "A2", 1, 0, 20, "", "2019-09-30 00:00:00")
+				,new LGS_TicketVO("co3", "b3", "r3", "s3", "u3", "m3", "A3", 0, 1, 30, "", "2019-09-30 00:00:00")
+				,new LGS_TicketVO("co4", "b4", "r4", "s4", "u4", "m4", "A4", 1, 0, 40, "", "2019-09-30 00:00:00")
+				,new LGS_TicketVO("co5", "b5", "r5", "s5", "u5", "m5", "A5", 0, 1, 50, "", "2019-09-30 00:00:00")
 							);
 		
 		LOG.debug("====================");

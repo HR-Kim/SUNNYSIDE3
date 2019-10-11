@@ -153,13 +153,13 @@ public class LGS_RoomCtrl {
 		LOG.debug("==================================");
 		
 		if(room == null) throw new NullArgumentException(); //null
-		if(room.getRoomId() == null || room.getRoomId() == "") throw new IllegalArgumentException();	//지점id
+		if(room.getRoomNm() == null || room.getRoomNm() == "") throw new IllegalArgumentException();	//지점id
 		
 		LGS_RoomVO outVO = (LGS_RoomVO) roomSvc.do_selectOne(room);
-		model.addAttribute("vo", outVO);
+		model.addAttribute("roomVO", outVO);
 		
 		LOG.debug("==================================");
-		LOG.debug("outVO : " + outVO);
+		LOG.debug("roomVO : " + outVO);
 		LOG.debug("==================================");
 		
 		return VIEW_TABLE;
@@ -175,14 +175,14 @@ public class LGS_RoomCtrl {
 		if(search.getPageSize() == 0) search.setPageSize(10);
 		if(search.getPageNum() == 0) search.setPageNum(1);
 				
-		List<LGS_RoomVO> list = (List<LGS_RoomVO>) roomSvc.do_retrieve(search);
-		model.addAttribute("list", list);
+		List<LGS_RoomVO> roomList = (List<LGS_RoomVO>) roomSvc.do_retrieve(search);
+		//model.addAttribute("roomList", roomList);
 		
 		LOG.debug("==================================");
-		LOG.debug("list : " + list);
+		LOG.debug("roomList : " + roomList);
 		LOG.debug("==================================");
 		
-		return list;
+		return roomList;
 	}
 	
 }

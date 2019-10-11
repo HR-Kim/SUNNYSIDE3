@@ -106,6 +106,7 @@
 			</div>
 		
 			<div>
+				<button id="branch_retrieve">지점조회</button>
 				<button id="branch_plus">지점추가</button>
 				<button id="branch_delete">지점제거</button>
 			</div>
@@ -205,10 +206,14 @@
 		<script src="${context}/resources/js/bootstrap.min.js"></script>
 		
 		<script type="text/javascript">
-			var seatArr = Array(); 
+			var seatArr = new Array(); 
 			
     		$(document).ready(function(){
     			//alert("ready");
+    		});
+    		
+    		$("#branch_retrieve").on("click", function(){
+    			location.href = "${context}/branchInfo/do_retrieve.do";
     		});
     		
     		//로딩
@@ -257,10 +262,10 @@
     			
     			var xWidth = window.screen.width/2;
     			var xHeight = window.screen.height/2;    	    	
-    			var pX = xWidth - 240/2;
-    			var pY = xHeight - 200/2;
+    			var pX = xWidth - 710/2;
+    			var pY = xHeight - 555/2;
 
-    			var opt = "width=710, height=545, left="+pX+", top="+pY+", status=0, toolbar=0, location=0, menubar=0";
+    			var opt = "width=710, height=555, left="+pX+", top="+pY+", status=0, toolbar=0, location=0, menubar=0";
     			var popup = window.open("<c:url value='/table/theater_table_seat.jsp'/>", "_blank", opt);
     			
     		});

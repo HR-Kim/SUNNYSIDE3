@@ -9,7 +9,7 @@ public class LGS_TicketVO extends DTO {
 	private String screenId;	//편성id
 	private String userId;		//회원id
 	private String movieId;		//영화id
-	private int seatNum;		//좌석번호
+	private String seatNm;		//좌석명
 	private int adultCnt;		//성인유무
 	private int payState;		//결제상태
 	private int cost;			//가격	
@@ -18,8 +18,8 @@ public class LGS_TicketVO extends DTO {
 
 	public LGS_TicketVO() {}
 
-	public LGS_TicketVO(String ticketCode, String branchId, String roomId, String screenId, String userId, String movieId,
-			int seatNum, int adultCnt, int payState, int cost, String payDt, String ticketDt) {
+	public LGS_TicketVO(String ticketCode, String branchId, String roomId, String screenId, String userId,
+			String movieId, String seatNm, int adultCnt, int payState, int cost, String payDt, String ticketDt) {
 		super();
 		this.ticketCode = ticketCode;
 		this.branchId = branchId;
@@ -27,7 +27,7 @@ public class LGS_TicketVO extends DTO {
 		this.screenId = screenId;
 		this.userId = userId;
 		this.movieId = movieId;
-		this.seatNum = seatNum;
+		this.seatNm = seatNm;
 		this.adultCnt = adultCnt;
 		this.payState = payState;
 		this.cost = cost;
@@ -83,12 +83,12 @@ public class LGS_TicketVO extends DTO {
 		this.movieId = movieId;
 	}
 
-	public int getSeatNum() {
-		return seatNum;
+	public String getSeatNm() {
+		return seatNm;
 	}
 
-	public void setSeatNum(int seatNum) {
-		this.seatNum = seatNum;
+	public void setSeatNm(String seatNm) {
+		this.seatNm = seatNm;
 	}
 
 	public int getAdultCnt() {
@@ -133,10 +133,10 @@ public class LGS_TicketVO extends DTO {
 
 	@Override
 	public String toString() {
-		return "TicketVO [ticketCode=" + ticketCode + ", branchId=" + branchId + ", roomId=" + roomId + ", screenId="
-				+ screenId + ", userId=" + userId + ", movieId=" + movieId + ", seatNum=" + seatNum + ", adultCnt="
-				+ adultCnt + ", payState=" + payState + ", cost=" + cost + ", payDt=" + payDt + ", ticketDt=" + ticketDt
-				+ ", toString()=" + super.toString() + "]";
+		return "LGS_TicketVO [ticketCode=" + ticketCode + ", branchId=" + branchId + ", roomId=" + roomId
+				+ ", screenId=" + screenId + ", userId=" + userId + ", movieId=" + movieId + ", seatNm=" + seatNm
+				+ ", adultCnt=" + adultCnt + ", payState=" + payState + ", cost=" + cost + ", payDt=" + payDt
+				+ ", ticketDt=" + ticketDt + ", toString()=" + super.toString() + "]";
 	}
-	
+
 }

@@ -47,6 +47,10 @@ public class LGS_ScreenInfoCtrl {
 		if(screenInfo.getAdultCost() < 0) throw new IllegalArgumentException();
 		if(screenInfo.getEpisode() < 0) throw new IllegalArgumentException();
 		
+		
+		
+		
+		
 		int flag = screenInfoSvc.do_save(screenInfo);
 		
 		LOG.debug("==================================");
@@ -86,6 +90,7 @@ public class LGS_ScreenInfoCtrl {
 		if(screenInfo.getBranchId() == null || screenInfo.getBranchId() == "") throw new IllegalArgumentException();
 		if(screenInfo.getMovieId() == null || screenInfo.getMovieId() == "") throw new IllegalArgumentException();
 		if(screenInfo.getStartTime()== null || screenInfo.getStartTime() == "") throw new IllegalArgumentException();
+		if(screenInfo.getEndTime()== null || screenInfo.getEndTime() == "") throw new IllegalArgumentException();
 		if(screenInfo.getScreenDt() == null || screenInfo.getScreenDt() == "") throw new IllegalArgumentException();
 		if(screenInfo.getStudentCost() < 0) throw new IllegalArgumentException();
 		if(screenInfo.getAdultCost() < 0) throw new IllegalArgumentException();
@@ -151,7 +156,7 @@ public class LGS_ScreenInfoCtrl {
 		return jsonString;
 	}
 	
-	@RequestMapping(value = "screenInfo/do_selectOne.do", method = RequestMethod.POST)
+	@RequestMapping(value = "screenInfo/do_selectOne.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
 	public String do_selectOne(LGS_ScreenInfoVO screenInfo, Model model) {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_selectOne_screenInfo");
@@ -161,7 +166,7 @@ public class LGS_ScreenInfoCtrl {
 		if(screenInfo.getScreenId() == null || screenInfo.getScreenId() == "") throw new IllegalArgumentException();
 		
 		LGS_ScreenInfoVO outVO = (LGS_ScreenInfoVO) screenInfoSvc.do_selectOne(screenInfo);
-		model.addAttribute("vo", outVO);
+		model.addAttribute("screenVO", outVO);
 		
 		LOG.debug("==================================");
 		LOG.debug("outVO : " + outVO);
@@ -170,6 +175,7 @@ public class LGS_ScreenInfoCtrl {
 		return VIEW_;
 	}
 	
+	@ResponseBody
 	@RequestMapping(value = "screenInfo/do_retrieve.do", method = RequestMethod.POST)
 	public List<?> do_retrieve(SearchVO search, Model model) {
 		LOG.debug("==================================");

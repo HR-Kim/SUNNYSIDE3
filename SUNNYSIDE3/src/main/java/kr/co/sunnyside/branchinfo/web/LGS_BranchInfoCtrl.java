@@ -144,7 +144,7 @@ public class LGS_BranchInfoCtrl {
 		LOG.debug("==================================");
 		
 		if(branchInfo == null) throw new NullArgumentException(); //null
-		if(branchInfo.getBranchId() == null || branchInfo.getBranchId() == "") throw new IllegalArgumentException();	//지점id
+		if(branchInfo.getBranchNm() == null || branchInfo.getBranchNm() == "") throw new IllegalArgumentException();	//지점id
 		
 		LGS_BranchInfoVO outVO = (LGS_BranchInfoVO) branchInfoSvc.do_selectOne(branchInfo);
 		model.addAttribute("vo", outVO);
