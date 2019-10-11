@@ -93,10 +93,11 @@ public class LHJ_BoxofficeDaoTest {
 //		}
 	}
 	
+	/**전체 테스트*/
 	//박스오피스 데이터를 삭제, 등록, 조회, 순위 업데이트 하는 테스트
 	@Test
 //	@Ignore
-	public void addAndGet() {
+	public void allTest() {
 		int flag = 0;
 		//박스오피스 상태값 0으로 초기화(OFF)
 		flag = boxofficeDaoImpl.do_boxofficeOff_update();

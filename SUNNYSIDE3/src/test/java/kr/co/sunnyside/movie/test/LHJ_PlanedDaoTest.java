@@ -60,9 +60,10 @@ public class LHJ_PlanedDaoTest {
 		);		
 	}		
 	
+	/**전체 테스트*/
 	@Test
 	@Ignore
-	public void addAndGet() {
+	public void allTest() {
 		//상영상태-최신개봉('010')으로 업데이트
 		for(LHJ_MovieVO vo:list) {
 			int flag = planedDaoImpl.do_update_planedToScreen(vo);

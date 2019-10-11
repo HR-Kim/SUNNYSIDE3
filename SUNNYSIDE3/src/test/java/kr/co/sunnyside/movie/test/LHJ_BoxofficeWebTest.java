@@ -80,9 +80,9 @@ public class LHJ_BoxofficeWebTest {
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 	}
 	
-	//목록
+	/**전체 테스트*/
 	@Test
-	public void addAndGet() throws Exception{
+	public void allTest() throws Exception{
 		LOG.debug("======================================");
 		LOG.debug("=박스오피스 상태 off=");
 		LOG.debug("======================================");

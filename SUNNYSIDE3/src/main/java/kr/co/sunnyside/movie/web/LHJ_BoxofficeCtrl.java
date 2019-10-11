@@ -34,7 +34,8 @@ public class LHJ_BoxofficeCtrl {
 	 private CodeService codeService;
 	 
 	 //view
-	 private final String VIEW_LIST_NM = "boxoffice/boxoffice";
+	 private final String VIEW_LIST_NM = "boxoffice/boxoffice_list";
+	 private final String VIEW_MNG_NM = "boxoffice/boxoffice_mng";
 	 
 	 /**목록조회 */
 	@RequestMapping(value="boxoffice/do_retrieve.do",method = RequestMethod.GET)
@@ -61,7 +62,7 @@ public class LHJ_BoxofficeCtrl {
 		LHJ_MovieVO outVO= (LHJ_MovieVO) this.service.do_selectOne(inVO);
 		model.addAttribute("vo", outVO);
 		
-		return VIEW_LIST_NM;
+		return VIEW_MNG_NM;
 	}
 		
 	 /**박스오피스 상태값 0으로 초기화(OFF)*/

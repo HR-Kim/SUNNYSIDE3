@@ -58,7 +58,7 @@
 	</delete>
 	
 	<!-- 박스오피스 테이블에 movieId, 순위 정보 저장	-->
-	<update id="do_save" parameterType="Movie">	
+	<insert id="do_save" parameterType="Movie">	
 		INSERT INTO boxoffice (
 		    movie_id,
 		    movie_rank
@@ -69,7 +69,7 @@
 		     AND rel_date = #{relDate, jdbcType=VARCHAR}),
 		    #{movieRank, jdbcType=VARCHAR}
 		)		
-	</update>
+	</insert>
 	
 	<!-- 박스오피스 상태 true(0)으로 수정 -->
 	<update id="do_boxofficeOff_update" parameterType="Movie">	

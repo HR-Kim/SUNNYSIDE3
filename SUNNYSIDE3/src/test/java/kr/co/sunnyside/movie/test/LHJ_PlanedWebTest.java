@@ -44,7 +44,7 @@ import kr.co.sunnyside.movie.service.impl.LHJ_PlanedSvcImpl;
 @ContextConfiguration(locations= {"file:src/main/webapp/WEB-INF/spring/**/*.xml"}) 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LHJ_PlanedWebTest {
-private final static Logger LOG = LoggerFactory.getLogger(LHJ_BoxofficeWebTest.class);
+private final static Logger LOG = LoggerFactory.getLogger(LHJ_PlanedWebTest.class);
 	
 	@Autowired
 	private WebApplicationContext context;
@@ -73,9 +73,9 @@ private final static Logger LOG = LoggerFactory.getLogger(LHJ_BoxofficeWebTest.c
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 	}	
 	
-	//목록
+	/**전체 테스트*/
 	@Test
-	public void addAndGet() throws Exception{
+	public void allTest() throws Exception{
 		LOG.debug("======================================");
 		LOG.debug("=기본상태로 상태 변경 (000)=");
 		LOG.debug("======================================");
@@ -113,7 +113,7 @@ private final static Logger LOG = LoggerFactory.getLogger(LHJ_BoxofficeWebTest.c
 		search.setPageSize(5);
 		search.setPageNum(1);
 		
-		List<LHJ_MovieVO> list = this.get_retrieve(search);
+		List<LHJ_MovieVO> list = this.do_retrieve(search);
 		
 		for(LHJ_MovieVO vo :list) {
 			LOG.debug(vo.toString());
@@ -143,7 +143,7 @@ private final static Logger LOG = LoggerFactory.getLogger(LHJ_BoxofficeWebTest.c
 	}
 	
 	/** 목록조회 */
-	private List<LHJ_MovieVO> get_retrieve(SearchVO inVO) throws Exception {
+	private List<LHJ_MovieVO> do_retrieve(SearchVO inVO) throws Exception {
 		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.get("/planed/do_retrieve.do")
 																			.param("pageSize", String.valueOf(inVO.getPageSize()))
 																			.param("pageNum", String.valueOf(inVO.getPageNum()));

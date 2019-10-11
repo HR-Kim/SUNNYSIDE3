@@ -33,7 +33,7 @@ public class LHJ_PlanedCtrl {
 	 private CodeService codeService;
 	 
 	 //view
-	 private final String VIEW_LIST_NM = "planed/planed";
+	 private final String VIEW_LIST_NM = "planed/planed_list";
 	 private final String VIEW_MNG_NM  = "planed/planed_mng";
 	 
 	 /**목록조회 */

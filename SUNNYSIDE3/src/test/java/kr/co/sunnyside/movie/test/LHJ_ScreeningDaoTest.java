@@ -81,9 +81,10 @@ public class LHJ_ScreeningDaoTest {
 		);		
 	}		
 	
+	/**전체 테스트*/
 	@Test
 //	@Ignore
-	public void addAndGet() {
+	public void allTest() {
 		//상영상태-상영안함('000')으로 업데이트
 		for(LHJ_MovieVO vo:list) {
 			int flag = screeningDaoImpl.do_update_screenDown(vo);
