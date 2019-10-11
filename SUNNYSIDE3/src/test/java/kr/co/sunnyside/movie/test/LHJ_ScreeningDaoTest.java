@@ -108,6 +108,7 @@ public class LHJ_ScreeningDaoTest {
 		assertThat(10, is(list.size()));	
 	}
 	
+	/**목록조회*/
 	@Test
 	@Ignore
 	public void do_retrieve() {

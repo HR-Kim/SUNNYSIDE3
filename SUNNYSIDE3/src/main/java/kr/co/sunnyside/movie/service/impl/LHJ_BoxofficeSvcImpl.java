@@ -14,31 +14,37 @@ public class LHJ_BoxofficeSvcImpl implements LHJ_BoxofficeSvc {
 	@Autowired
 	private LHJ_BoxofficeDaoImpl boxofficeDaoImpl;
 
+	/**박스오피스 상태값 0으로 초기화(OFF)*/	
 	@Override
 	public int do_boxofficeOff_update(DTO dto) {
 		return boxofficeDaoImpl.do_boxofficeOff_update();
 	}
 
+	/**박스오피스 상태값 1으로 초기화(On)*/	
 	@Override
 	public int do_boxofficeOn_update(DTO dto) {
 		return boxofficeDaoImpl.do_boxofficeOn_update(dto);
 	}
 
+	/**박스오피스 삭제 */	
 	@Override
 	public int do_delete() {
 		return boxofficeDaoImpl.do_delete();
 	}
 
+	/**박스오피스 단건조회*/
 	@Override
 	public DTO do_selectOne(DTO dto) {
 		return boxofficeDaoImpl.do_selectOne(dto);
 	}
 
+	/**박스오피스 전체조회*/
 	@Override
 	public List<?> do_retrieve() {
 		return boxofficeDaoImpl.do_retrieve();
 	}
 
+	/**박스오피스 테이블에 movieId, 순위 정보 저장*/	
 	@Override
 	public int do_save(DTO dto) {
 		return boxofficeDaoImpl.do_save(dto);

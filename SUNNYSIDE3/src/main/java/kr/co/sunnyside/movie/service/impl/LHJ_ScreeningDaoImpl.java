@@ -22,6 +22,7 @@ public class LHJ_ScreeningDaoImpl implements WorkDiv {
 	      
 	private final String NAMESPACE = "kr.co.sunnyside.screening";
 
+	/** 비 상영상태로 상태 변경 */
 	public int do_update_screenDown(DTO dto) {
 		String statement = NAMESPACE + ".do_update_screenDown";
 		LHJ_MovieVO inVO = (LHJ_MovieVO) dto;
@@ -40,6 +41,7 @@ public class LHJ_ScreeningDaoImpl implements WorkDiv {
 		return flag;
 	}
 	
+	/** 최신개봉으로 상태 변경(상영중으로 상태 변경) */
 	public int do_update_screenUp(DTO dto) {
 		String statement = NAMESPACE + ".do_update_screenUp";
 		LHJ_MovieVO inVO = (LHJ_MovieVO) dto;
@@ -76,6 +78,7 @@ public class LHJ_ScreeningDaoImpl implements WorkDiv {
 		return 0;
 	}
 
+	/**단건조회*/
 	@Override
 	public DTO do_selectOne(DTO dto) {
 		String statement = NAMESPACE + ".do_selectOne";

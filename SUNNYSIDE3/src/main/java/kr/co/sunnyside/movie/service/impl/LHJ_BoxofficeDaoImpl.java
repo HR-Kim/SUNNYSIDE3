@@ -37,7 +37,7 @@ public class LHJ_BoxofficeDaoImpl implements WorkDiv{
 		return flag;
 	}
 	
-	/**박스오피스 상태값 0으로 초기화(On)*/	
+	/**박스오피스 상태값 1으로 초기화(On)*/	
 	public int do_boxofficeOn_update(DTO dto) {
 		String statement = NAMESPACE + ".do_boxofficeOn_update";
 		LHJ_MovieVO inVO = (LHJ_MovieVO) dto;
@@ -117,7 +117,7 @@ public class LHJ_BoxofficeDaoImpl implements WorkDiv{
 	}
 
 
-	/**영화 데이터베이스 추가(kobis)*/	
+	/**박스오피스 테이블에 movieId, 순위 정보 저장*/	
 	@Override
 	public int do_save(DTO dto) {
 		String statement = NAMESPACE + ".do_save";

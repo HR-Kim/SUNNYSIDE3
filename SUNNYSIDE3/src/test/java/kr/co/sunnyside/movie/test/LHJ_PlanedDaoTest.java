@@ -93,6 +93,7 @@ public class LHJ_PlanedDaoTest {
 		assertThat(10, is(list.size()));	
 	}
 	
+	/**전체조회*/
 	@Test
 	@Ignore
 	public void do_retrieve() {

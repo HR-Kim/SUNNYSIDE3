@@ -82,14 +82,15 @@ public class LHJ_BoxofficeDaoTest {
 				,new LHJ_MovieVO("F48401","47미터","","","","2019-08-28","","",0,"","",0.0,0.0,"","","10")
 		);		
 		
-		try {
-			url = new URL(LHJ_MovieParsing.kobisUrl());//url
-			kobisList=LHJ_MovieParsing.getKobisData(url);//데이터를 List형태로 반환
-		} catch (Exception e) {
-			LOG.debug("============================");
-			LOG.debug("Exception:"+e.toString());
-			LOG.debug("============================");
-		}
+		kobisList = LHJ_MovieParsing.getBoxofficeList();
+//		try {
+//			url = new URL(LHJ_MovieParsing.kobisUrl());//url
+//			kobisList=LHJ_MovieParsing.getKobisData(url);//데이터를 List형태로 반환
+//		} catch (Exception e) {
+//			LOG.debug("============================");
+//			LOG.debug("Exception:"+e.toString());
+//			LOG.debug("============================");
+//		}
 	}
 	
 	//박스오피스 데이터를 삭제, 등록, 조회, 순위 업데이트 하는 테스트
@@ -218,24 +219,24 @@ public class LHJ_BoxofficeDaoTest {
 	//--------------------------------------------------------------------------------------------------------
 	
 	//데이터베이스에 파싱한 kobis데이터 삽입.
-	@Test
-	@Ignore
-	public void do_boxoffice_parsing() {
-		URL url;
-		List<LHJ_MovieVO> list = new ArrayList<LHJ_MovieVO>();
-		try {
-			url = new URL(LHJ_MovieParsing.kobisUrl());//url
-			list=LHJ_MovieParsing.getKobisData(url);//데이터를 List형태로 반환
-			for(LHJ_MovieVO vo : list) { //받아온 데이터를 insert
-				int flag = boxofficeDaoImpl.do_save(vo);
-				assertThat(flag, is(1));
-			}
-		} catch (Exception e) {
-			LOG.debug("============================");
-			LOG.debug("Exception:"+e.toString());
-			LOG.debug("============================");
-		}
-	}
+//	@Test
+//	@Ignore
+//	public void do_boxoffice_parsing() {
+//		URL url;
+//		List<LHJ_MovieVO> list = new ArrayList<LHJ_MovieVO>();
+//		try {
+//			url = new URL(LHJ_MovieParsing.kobisUrl());//url
+//			list=LHJ_MovieParsing.getKobisData(url);//데이터를 List형태로 반환
+//			for(LHJ_MovieVO vo : list) { //받아온 데이터를 insert
+//				int flag = boxofficeDaoImpl.do_save(vo);
+//				assertThat(flag, is(1));
+//			}
+//		} catch (Exception e) {
+//			LOG.debug("============================");
+//			LOG.debug("Exception:"+e.toString());
+//			LOG.debug("============================");
+//		}
+//	}
 	
 	
 	@Test

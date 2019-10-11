@@ -25,6 +25,19 @@ import kr.co.sunnyside.movie.service.LHJ_MovieVO;
 public class LHJ_MovieParsing {
 	private final static Logger LOG = LoggerFactory.getLogger(LHJ_MovieParsing.class);
 	
+	public static List<LHJ_MovieVO> getBoxofficeList() {
+		List<LHJ_MovieVO> kobisList = new ArrayList<LHJ_MovieVO>();
+		try {
+			URL url = new URL(LHJ_MovieParsing.kobisUrl());//url
+			kobisList=LHJ_MovieParsing.getKobisData(url);//데이터를 List형태로 반환
+		} catch (Exception e) {
+			LOG.debug("============================");
+			LOG.debug("Exception:"+e.toString());
+			LOG.debug("============================");
+		}
+		return kobisList;
+	}
+	
 	//kobis파싱 url 설정
 	public static String kobisUrl() throws IOException, ParseException{
 		Calendar cal = new GregorianCalendar();
@@ -265,4 +278,5 @@ public class LHJ_MovieParsing {
 		}
 		return str;
 	}
+
 }

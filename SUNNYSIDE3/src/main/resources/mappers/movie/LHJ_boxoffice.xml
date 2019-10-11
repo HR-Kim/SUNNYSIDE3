@@ -57,7 +57,7 @@
 		DELETE FROM boxoffice
 	</delete>
 	
-	<!-- 순위 정보 저장 -->
+	<!-- 박스오피스 테이블에 movieId, 순위 정보 저장	-->
 	<update id="do_save" parameterType="Movie">	
 		INSERT INTO boxoffice (
 		    movie_id,

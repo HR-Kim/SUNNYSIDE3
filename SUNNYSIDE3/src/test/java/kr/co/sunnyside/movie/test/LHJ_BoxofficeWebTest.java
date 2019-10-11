@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,14 +25,15 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.servlet.ModelAndView;
 
-import kr.co.sunnyside.movie.service.LHJ_BoxofficeVO;
 import kr.co.sunnyside.movie.service.LHJ_MovieVO;
 import kr.co.sunnyside.movie.service.impl.LHJ_BoxofficeSvcImpl;
 import kr.co.sunnyside.movie.service.impl.LHJ_MovieParsing;
@@ -49,7 +51,7 @@ public class LHJ_BoxofficeWebTest {
 	private MockMvc mockMvc;//테스트할 컨텍스트를 지정한 MockMvc를 생성
 	
 	@Autowired
-	LHJ_BoxofficeSvcImpl boxofficeDaoImpl;
+	LHJ_BoxofficeSvcImpl boxofficeSvcImpl;
 	
 	//Test Data
 	List<LHJ_MovieVO> list;
@@ -73,25 +75,151 @@ public class LHJ_BoxofficeWebTest {
 				,new LHJ_MovieVO("F48401","47미터","","","","2019-08-28","","",0,"","",0.0,0.0,"","","10")
 		);			
 		
-		try {
-			url = new URL(LHJ_MovieParsing.kobisUrl());//url
-			kobisList=LHJ_MovieParsing.getKobisData(url);//데이터를 List형태로 반환
-		} catch (Exception e) {
-			LOG.debug("============================");
-			LOG.debug("Exception:"+e.toString());
-			LOG.debug("============================");
-		}
+		kobisList = LHJ_MovieParsing.getBoxofficeList();
 		
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 	}
 	
-	/**수정 */
+	//목록
 	@Test
-//	@Ignore
-	public void do_update() throws Exception {
-		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/boxoffice/do_rank_update.do")
-																			.param("movieRank", "01")
+	public void addAndGet() throws Exception{
+		LOG.debug("======================================");
+		LOG.debug("=박스오피스 상태 off=");
+		LOG.debug("======================================");
+		do_boxofficeOff_update();
+
+		LOG.debug("======================================");
+		LOG.debug("=박스오피스 상태 on=");
+		LOG.debug("======================================");
+		for(LHJ_MovieVO vo:kobisList) {
+			do_boxofficeOn_update(vo);
+		}	
+
+		LOG.debug("======================================");
+		LOG.debug("=박스오피스 테이블에 있는 데이터들 delete=");
+		LOG.debug("======================================");
+		do_delete();
+		
+		LOG.debug("======================================");
+		LOG.debug("=박스오피스 테이블에 데이터 insert=");
+		LOG.debug("======================================");
+		for(LHJ_MovieVO vo:kobisList) {
+			do_save(vo);
+		}
+		
+		LOG.debug("======================================");
+		LOG.debug("=단건조회=");
+		LOG.debug("======================================");
+		LHJ_MovieVO data = this.do_selectOne(list.get(0));
+		LOG.debug("======================================");
+		LOG.debug("=단건조회결과="+data);
+		LOG.debug("======================================");
+		
+		LOG.debug("======================================");
+		LOG.debug("=목록조회=");
+		LOG.debug("======================================");
+		List<LHJ_MovieVO> list = this.do_retrieve_param();
+		
+		for(LHJ_MovieVO vo :list) {
+			LOG.debug(vo.toString());
+		}
+	}
+	
+	@Test
+	@Ignore
+	public void do_retrieve() throws Exception{
+		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.get("/boxoffice/do_retrieve.do");
+		  
+		ResultActions resultActions =  mockMvc.perform(createMessage)
+											  .andExpect(status().isOk()) ;
+		String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
+		LOG.debug("=============================");
+		LOG.debug("=result="+result);
+		LOG.debug("=============================");
+	}
+	
+	private List<LHJ_MovieVO> do_retrieve_param() throws Exception {
+		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.get("/boxoffice/do_retrieve.do");
+
+		//url call 결과 return
+		MvcResult result = mockMvc.perform(createMessage)
+				                  .andExpect(status().isOk())
+				                  .andReturn();	
+		
+		ModelAndView   modelAndView= result.getModelAndView();
+		List<LHJ_MovieVO> list = (List<LHJ_MovieVO>) modelAndView.getModel().get("list");
+		
+		LOG.debug("=====================================");
+		LOG.debug("=list="+list);
+		LOG.debug("=====================================");		
+		
+		return list;
+	}
+		
+	/**단건조회*/	
+	@Test
+	@Ignore
+	public void do_selectOne() throws Exception{
+		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.get("/boxoffice/do_selectOne.do")
 																			.param("movieId", "F48336");
+		  
+		ResultActions resultActions =  mockMvc.perform(createMessage)
+									  .andExpect(status().isOk());
+		String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
+		LOG.debug("=============================");
+		LOG.debug("=result="+result);
+		LOG.debug("=============================");
+	}
+	
+	/** 단건조회 */
+	private LHJ_MovieVO do_selectOne(LHJ_MovieVO vo) throws Exception {
+		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.get("/boxoffice/do_selectOne.do")
+																			.param("movieId", vo.getMovieId());
+
+		//url call 결과 return
+		MvcResult result = mockMvc.perform(createMessage)
+				                   .andExpect(status().isOk())
+				                   .andReturn();
+		
+		//result:return VO 객체로 됨.(결과 출력 안됨.)
+		ModelAndView  modelAndView=result.getModelAndView();
+		
+		LHJ_MovieVO outVO = (LHJ_MovieVO) modelAndView.getModel().get("vo");
+		LOG.debug("=====================================");
+		
+		LOG.debug("=outVO="+outVO);
+		LOG.debug("=====================================");		
+		
+		return outVO;
+	}
+	
+	/**박스오피스 상태값 0으로 초기화(OFF)*/
+	@Test
+	@Ignore
+	public void do_boxofficeOff_update() throws Exception {
+		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/boxoffice/do_boxofficeOff_update.do");
+		
+		ResultActions resultActions =mockMvc.perform(createMessage)
+				.andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.msgId", is("10")));
+		
+		String result = resultActions.andDo(print())
+				.andReturn()
+				.getResponse()
+				.getContentAsString();
+		
+		LOG.debug("======================================");
+		LOG.debug("=result="+result);
+		LOG.debug("======================================");	
+	}
+	
+	/**박스오피스 상태값 1으로 초기화(On) */
+	@Test
+	@Ignore
+	public void do_boxofficeOn_update() throws Exception {
+		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/boxoffice/do_boxofficeOn_update.do")
+																			.param("kortitle", "조커")
+																			.param("relDate", "2019-10-02");
 		
 		ResultActions resultActions =mockMvc.perform(createMessage)
 				.andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
@@ -107,12 +235,32 @@ public class LHJ_BoxofficeWebTest {
 		LOG.debug("======================================");	
 	}
 	
-	/** 저장 */
+	/**박스오피스 상태값 1으로 초기화(On) */
+	private void do_boxofficeOn_update(LHJ_MovieVO vo) throws Exception {
+		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/boxoffice/do_boxofficeOn_update.do")
+																			.param("kortitle", vo.getKortitle())
+																			.param("relDate", vo.getRelDate());		
+		ResultActions resultActions =mockMvc.perform(createMessage)
+				.andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.msgId", is("1")));
+		
+		String result = resultActions.andDo(print())
+				.andReturn()
+				.getResponse()
+				.getContentAsString();
+		
+		LOG.debug("======================================");
+		LOG.debug("=result="+result);
+		LOG.debug("======================================");	
+	}
+	
+	/** 박스오피스 테이블에 movieId, 순위 정보 저장 */
 	@Test
 	@Ignore
 	public void do_save() throws Exception {
 		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/boxoffice/do_save.do")
 																			.param("kortitle", "조커")
+																			.param("movieRank", "01")
 																			.param("relDate", "2019-10-02");
 		ResultActions resultActions =mockMvc.perform(createMessage)
 				.andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
@@ -128,6 +276,26 @@ public class LHJ_BoxofficeWebTest {
 		LOG.debug("======================================");	
 	}
 	
+	/** 박스오피스 테이블에 movieId, 순위 정보 저장 */
+	private void do_save(LHJ_MovieVO vo) throws Exception {
+		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/boxoffice/do_save.do")
+																			.param("kortitle", vo.getKortitle())
+																			.param("movieRank", vo.getMovieRank())
+																			.param("relDate", vo.getRelDate());
+		ResultActions resultActions =mockMvc.perform(createMessage)
+				.andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.msgId", is("1")));
+		
+		String result = resultActions.andDo(print())
+				.andReturn()
+				.getResponse()
+				.getContentAsString();
+		
+		LOG.debug("======================================");
+		LOG.debug("=result="+result);
+		LOG.debug("======================================");	
+	}
+	
 	/**삭제*/
 	@Test
 	@Ignore
@@ -135,7 +303,7 @@ public class LHJ_BoxofficeWebTest {
 		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/boxoffice/do_delete.do");
 		ResultActions resultActions =mockMvc.perform(createMessage)
                 							.andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
-                							.andExpect(MockMvcResultMatchers.jsonPath("$.msgId", is("1")));      
+                							.andExpect(MockMvcResultMatchers.jsonPath("$.msgId", is("10")));      
 		
 		String result = resultActions.andDo(print())
 									 .andReturn()
@@ -146,6 +314,7 @@ public class LHJ_BoxofficeWebTest {
 		LOG.debug("=result="+result);
 		LOG.debug("======================================");					
 	}
+	
 	
 	@Test
 	@Ignore

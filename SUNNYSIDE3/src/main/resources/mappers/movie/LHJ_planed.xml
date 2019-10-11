@@ -83,9 +83,11 @@
 		    movie
 		WHERE
 		    movie_id = #{movieId, jdbcType=VARCHAR}
+		AND
+			screen_state = '020'       
 	</select>
 	
-	<!-- 비 상영상태로 상태 변경 -->
+	<!-- 최신개봉으로 상태 변경(상영중으로 상태 변경)(010) -->
 	<update id="do_update_planedToScreen" parameterType="Movie">	
 		UPDATE 
 			movie
@@ -95,7 +97,7 @@
 			movie_id = #{movieId, jdbcType=VARCHAR}
 	</update>
 	
-	<!-- 비 상영상태로 상태 변경 -->
+	<!-- 비 상영상태로 상태 변경(000) -->
 	<update id="do_update_planedDown" parameterType="Movie">	
 		UPDATE 
 			movie
@@ -105,7 +107,7 @@
 			movie_id = #{movieId, jdbcType=VARCHAR}
 	</update>
 
-	<!-- 최신개봉으로 상태 변경(상영중으로 상태 변경) -->
+	<!-- 기본상태로 상태 변경(020) -->
 	<update id="do_update_planedUp" parameterType="Movie">	
 		UPDATE 
 			movie

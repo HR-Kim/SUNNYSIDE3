@@ -22,6 +22,7 @@ public class LHJ_PlanedDaoImpl implements WorkDiv {
 	      
 	private final String NAMESPACE = "kr.co.sunnyside.planed";
 	
+	/** 최신개봉(상영중)으로 상태 변경 */
 	public int do_update_planedToScreen(DTO dto) {
 		String statement = NAMESPACE + ".do_update_planedToScreen";
 		LHJ_MovieVO inVO = (LHJ_MovieVO) dto;
@@ -40,6 +41,7 @@ public class LHJ_PlanedDaoImpl implements WorkDiv {
 		return flag;
 	}
 	
+	/** 기본상태로 상태 변경 */
 	public int do_update_planedDown(DTO dto) {
 		String statement = NAMESPACE + ".do_update_planedDown";
 		LHJ_MovieVO inVO = (LHJ_MovieVO) dto;
@@ -58,6 +60,7 @@ public class LHJ_PlanedDaoImpl implements WorkDiv {
 		return flag;
 	}
 	
+	/** 개봉예정으로 상태 변경  */	
 	public int do_update_planedUp(DTO dto) {
 		String statement = NAMESPACE + ".do_update_planedUp";
 		LHJ_MovieVO inVO = (LHJ_MovieVO) dto;
@@ -94,6 +97,7 @@ public class LHJ_PlanedDaoImpl implements WorkDiv {
 		return 0;
 	}
 
+	/**단건조회*/
 	@Override
 	public DTO do_selectOne(DTO dto) {
 		String statement = NAMESPACE + ".do_selectOne";
@@ -108,6 +112,7 @@ public class LHJ_PlanedDaoImpl implements WorkDiv {
 		return outVO;
 	}
 
+	/**목록조회*/
 	@Override
 	public List<?> do_retrieve(DTO dto) {
 		String statement = NAMESPACE + ".do_retrieve";
