@@ -169,8 +169,8 @@ public class SJH_LoginCtrl {
 			LOG.debug("3=========================");
 			LOG.debug("3=outVO="+outVO);
 			LOG.debug("3=========================");
-//			Locale locale = new Locale(user.getLang());
-//			localeResolver.setLocale(request, response, locale);
+			Locale locale = new Locale(user.getLang());
+			localeResolver.setLocale(request, response, locale);
 			
 			session.setAttribute("user", outVO);
 		}

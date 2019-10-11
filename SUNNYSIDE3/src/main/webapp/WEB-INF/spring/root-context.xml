@@ -12,12 +12,13 @@
       
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	 <!-- db connection -->
-	   <!-- locale Change -->
-   <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
-   
-  	<!--  <bean class="kr.co.ehr.board.web.LocaleResolverController">
-      <property name="localeResolver" ref="localeResolver"></property>
-   </bean> -->
+	 
+	<!-- locale Change -->
+   	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
+<!--   	<bean class="kr.co.sunnyside.cmn.LocaleResolverController">
+		<property name="localeResolver" ref="localeResolver" />
+   	</bean> -->
+   	
  
 	<!-- 다국어 설정 -->
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
