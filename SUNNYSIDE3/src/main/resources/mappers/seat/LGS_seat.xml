@@ -90,11 +90,7 @@
 	<update id="do_update" parameterType="Seat">
 		UPDATE SEAT
 		SET
-			SEAT_NM = #{seatNm, jdbcType=VARCHAR},
-			SEAT_Y = #{seatY, jdbcType=VARCHAR},
-			SEAT_X = #{seatX, jdbcType=NUMERIC},
 			USE_YN = #{useYN, jdbcType=NUMERIC}
-		WHERE BRANCH_ID = #{branchId, jdbcType=VARCHAR}
-		AND ROOM_ID = #{roomId, jdbcType=VARCHAR}
+		WHERE ROOM_ID = #{roomId, jdbcType=VARCHAR}
 	</update>
 </mapper>
