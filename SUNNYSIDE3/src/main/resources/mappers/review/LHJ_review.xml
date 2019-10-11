@@ -2,4 +2,97 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.sunnyside.review">
 	
+	<sql id="reviewColumns">						
+		movie_id as movieId,
+	    user_id as userId,
+	    contents,
+	    visitor_rate as visitorRate,
+	    reg_dt as regDt
+	</sql>
+	
+	<!-- 단건조회 -->
+	<select id="do_selectOne" parameterType="Review" resultType="Review">
+		SELECT
+		    <include refid="reviewColumns"/>
+		FROM
+		    review
+		WHERE
+		    movie_id = #{movieId, jdbcType=VARCHAR}
+		AND
+			user_id = #{userId, jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 목록조회 -->
+	<select id="do_retrieve" resultType="Review">
+		SELECT T1.*,T2.*                                       
+		FROM(                                                                 
+		   SELECT                                                         
+				B.movie_id as movieId
+				,B.user_id as userId
+				,B.contents
+				,B.visitor_rate as visitorRate
+				,B.reg_dt as regDt
+		FROM(    
+	           SELECT ROWNUM AS rnum, A.*                                 
+	           FROM(                                                           
+	               SELECT  *                                              
+	               FROM   review    
+	               --SEARCH CONDITION
+	               WHERE 1=1
+	               ORDER BY reg_dt DESC                              
+	          )A                                                         
+	          WHERE ROWNUM <![CDATA[ <= ]]> (#{pageSize}*(#{pageNum}-1)+#{pageSize})                       
+		   ) B                                                            
+		  WHERE B.rnum <![CDATA[ >= ]]> (#{pageSize}*(#{pageNum}-1)+1)                    
+		)T1
+		NATURAL JOIN                                                      
+		(                                                                 
+		    SELECT COUNT(*) totalCnt                                     
+		    FROM review       
+		    --SEARCH CONDITION
+		    WHERE 1=1           
+		)T2
+	</select>
+	
+	<!-- 삭제 -->
+	<delete id="do_delete" parameterType="Review">
+		DELETE 
+		FROM 
+			review 
+		WHERE 
+			movie_id = #{movieId, jdbcType=VARCHAR}
+		AND
+			user_id = #{userId, jdbcType=VARCHAR}
+	</delete>
+	
+	<!-- 리뷰수정 -->
+	<update id="do_update" parameterType="Review">	
+		UPDATE 
+		    review
+		SET
+		    contents = #{contents, jdbcType=VARCHAR}
+		    ,visitor_rate = #{visitorRate, jdbcType=NUMERIC}
+		    ,reg_dt = SYSDATE
+		WHERE
+		    movie_id = #{movieId, jdbcType=VARCHAR}
+		AND
+		    user_id = #{userId, jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 리뷰저장 -->
+	<insert id="do_save" parameterType="Review">	
+		INSERT INTO review (
+		    movie_id,
+		    user_id,
+		    contents,
+		    visitor_rate,
+		    reg_dt
+		) VALUES (
+		    #{movieId, jdbcType=VARCHAR},
+		    #{userId, jdbcType=VARCHAR},
+		    #{contents, jdbcType=VARCHAR},
+		    #{visitorRate, jdbcType=NUMERIC},
+		    SYSDATE
+		)
+	</insert>
 </mapper>

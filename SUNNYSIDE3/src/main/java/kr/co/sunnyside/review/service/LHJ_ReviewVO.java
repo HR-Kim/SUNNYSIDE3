@@ -4,70 +4,72 @@ import kr.co.sunnyside.cmn.DTO;
 
 public class LHJ_ReviewVO extends DTO{
 	/**영화ID*/
-	private String MOVIE_ID;
+	private String movieId;
 	/**회원ID*/
-	private String USER_ID;
+	private String userId;
 	/**내용*/
-	private String CONTENTS;
+	private String contents;
 	/**관람객 평점*/
-	private double VISITOR_RATE;
+	private double visitorRate;
 	/**등록일*/
-	private String REG_DT;
+	private String regDt;
 	
 	public LHJ_ReviewVO() {}
-	
-	public LHJ_ReviewVO(String mOVIE_ID, String uSER_ID, String cONTENTS, double vISITOR_RATE, String rEG_DT) {
+
+	public LHJ_ReviewVO(String movieId, String userId, String contents, double visitorRate, String regDt) {
 		super();
-		MOVIE_ID = mOVIE_ID;
-		USER_ID = uSER_ID;
-		CONTENTS = cONTENTS;
-		VISITOR_RATE = vISITOR_RATE;
-		REG_DT = rEG_DT;
+		this.movieId = movieId;
+		this.userId = userId;
+		this.contents = contents;
+		this.visitorRate = visitorRate;
+		this.regDt = regDt;
 	}
 
-	public String getMOVIE_ID() {
-		return MOVIE_ID;
+	public String getMovieId() {
+		return movieId;
 	}
 
-	public void setMOVIE_ID(String mOVIE_ID) {
-		MOVIE_ID = mOVIE_ID;
+	public void setMovieId(String movieId) {
+		this.movieId = movieId;
 	}
 
-	public String getUSER_ID() {
-		return USER_ID;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setUSER_ID(String uSER_ID) {
-		USER_ID = uSER_ID;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
-	public String getCONTENTS() {
-		return CONTENTS;
+	public String getContents() {
+		return contents;
 	}
 
-	public void setCONTENTS(String cONTENTS) {
-		CONTENTS = cONTENTS;
+	public void setContents(String contents) {
+		this.contents = contents;
 	}
 
-	public double getVISITOR_RATE() {
-		return VISITOR_RATE;
+	public double getVisitorRate() {
+		return visitorRate;
 	}
 
-	public void setVISITOR_RATE(double vISITOR_RATE) {
-		VISITOR_RATE = vISITOR_RATE;
+	public void setVisitorRate(double visitorRate) {
+		this.visitorRate = visitorRate;
 	}
 
-	public String getREG_DT() {
-		return REG_DT;
+	public String getRegDt() {
+		return regDt;
 	}
 
-	public void setREG_DT(String rEG_DT) {
-		REG_DT = rEG_DT;
+	public void setRegDt(String regDt) {
+		this.regDt = regDt;
 	}
 
 	@Override
 	public String toString() {
-		return "LHJ_ReviewVO [MOVIE_ID=" + MOVIE_ID + ", USER_ID=" + USER_ID + ", CONTENTS=" + CONTENTS
-				+ ", VISITOR_RATE=" + VISITOR_RATE + ", REG_DT=" + REG_DT + ", toString()=" + super.toString() + "]";
+		return "LHJ_ReviewVO [movieId=" + movieId + ", userId=" + userId + ", contents=" + contents + ", visitorRate="
+				+ visitorRate + ", regDt=" + regDt + ", toString()=" + super.toString() + "]";
 	}
+	
+	
 }
