@@ -22,7 +22,7 @@ public class StringUtil {
 	private static Logger LOG = LoggerFactory.getLogger(StringUtil.class);
 
 	// File Root 디렉토리
-	public static final String UPLOAD_ROOT = "D:\\HR_FILE";
+	public static final String UPLOAD_ROOT = "C:\\Users\\sist\\git\\SUNNYSIDE3\\SUNNYSIDE3\\src\\main\\webapp\\resources\\image";
 
 	/**
 	 * D:\\HR_FILE\2019\09

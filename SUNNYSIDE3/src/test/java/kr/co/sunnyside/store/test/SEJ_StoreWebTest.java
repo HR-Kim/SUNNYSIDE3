@@ -59,10 +59,10 @@ public class SEJ_StoreWebTest {
 		
 		//LOG.debug(fileId.length()+"");// 번호 등록될 때 아이디랑 뒤에 번호 아무거나 붙여져서 나온다
 		list = Arrays.asList(
-				new SEJ_StroreVO("20191008-001-000","고소팝콘(L)","옥수수 본연의 맛을 즐길 수 있는 짭짜름한 클래식 고소팝콘!",001,5000,"plainPopcorn.jpg"),
-				new SEJ_StroreVO("20191008-001-001","달콤팝콘(L)","달콤한 카라멜 향이 가득한 달콤팝콘을 즐겨보세요!",001,6000,"caramelPopcorn.jpg"),
-				new SEJ_StroreVO("20191008-001-002","더블치즈팝콘(L)","치즈매니아들이라면 놓칠 수 없는 바로 그 팝콘!",001,6000,"doublecheesePop.jpg"),
-				new SEJ_StroreVO("20191008-001-003","바질어니언팝콘(L)","수많은 매니아를 보유한 바로 그 팝콘! 중독성 200%",001,6000,"onionPop.jpg")
+				new SEJ_StroreVO("20191008-001-000","고소팝콘(L)","옥수수 본연의 맛을 즐길 수 있는 짭짜름한 클래식 고소팝콘!",001,5000,"plainPopcorn.jpg","plainPopcorn.jpg","jpg"),
+				new SEJ_StroreVO("20191008-001-001","달콤팝콘(L)","달콤한 카라멜 향이 가득한 달콤팝콘을 즐겨보세요!",001,6000,"caramelPopcorn.jpg","caramelPopcorn.jpg","jpg"),
+				new SEJ_StroreVO("20191008-001-002","더블치즈팝콘(L)","치즈매니아들이라면 놓칠 수 없는 바로 그 팝콘!",001,6000,"doublecheesePop.jpg","doublecheesePop.jpg","jpg"),
+				new SEJ_StroreVO("20191008-001-003","바질어니언팝콘(L)","수많은 매니아를 보유한 바로 그 팝콘! 중독성 200%",001,6000,"onionPop.jpg","onionPop.jpg","jpg")
 				);
 		
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
@@ -83,10 +83,11 @@ public class SEJ_StoreWebTest {
 	    												  .param("pruductInfo", "영화를 3000원 할인해서 보세요")
 	    												  .param("category", "3")
 	    												  .param("productCost", "7000")
-	    												  .param("img", "ticket.jpg");
+	    												  .param("orgFileNm", "imaxticket.jpg")
+	    												  .param("saveFileNm", "imaxticket.jpg");
 	    
 	    ResultActions resultActions =  mockMvc.perform(createMessage)
-	                                          .andExpect(MockMvcResultMatchers.content().contentType("application/json; charset=UTF-8"))	                              
+	                                          //.andExpect(MockMvcResultMatchers.content().contentType("application/json; charset=UTF-8"))	                              
 	    							          .andExpect(MockMvcResultMatchers.jsonPath("$.msgId", is("1")));
 	    String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
 	    LOG.debug("=============================");
@@ -102,8 +103,8 @@ public class SEJ_StoreWebTest {
 	   @Ignore
 	   public void do_delete() throws Exception{
 	      MockHttpServletRequestBuilder createMessage 
-	      = MockMvcRequestBuilders.post("/store/do_delete.do").param("productId", "20191009-003-004");
-	        
+	      = MockMvcRequestBuilders.post("/store/do_delete.do").param("productId", "20191011-001-010");
+	      													        
 	      ResultActions resultActions =  mockMvc.perform(createMessage)
 	                                  .andExpect(MockMvcResultMatchers.content().contentType("application/json; charset=UTF-8"))	                              
 	      							  .andExpect(MockMvcResultMatchers.jsonPath("$.msgId", is("1")));
@@ -121,11 +122,12 @@ public class SEJ_StoreWebTest {
 	@Ignore
 	public void do_update() throws Exception{
 	    MockHttpServletRequestBuilder createMessage 
-	    = MockMvcRequestBuilders.post("/store/do_update.do").param("productId", "20191009-003-004")
+	    = MockMvcRequestBuilders.post("/store/do_update.do").param("productId", "20191010-003-000")
 	    												    .param("productNm", "IMAX영화예매권")
-	    												    .param("pruductInfo", "IMAX는 사람이 볼 수 있는 최대 영상이라는 뜻으로, 최고의 몰입감을 선사합니다.")
+	    												    .param("productInfo", "IMAX는 사람이 볼 수 있는 최대 영상이라는 뜻으로, 최고의 몰입감을 선사합니다.")
 	    												    .param("productCost", "15000")
-	    												    .param("img", "imaxticket.jpg");
+	    												    .param("orgFileNm", "imaxticket.jpg")
+	    													.param("saveFileNm", "imaxticket.jpg");
 	    
 	    ResultActions resultActions =  mockMvc.perform(createMessage)
 	                                //.andExpect(MockMvcResultMatchers.content().contentType("application/json; charset=UTF-8"))	                              
@@ -144,7 +146,7 @@ public class SEJ_StoreWebTest {
 	@Ignore
 	public void do_selectOne() throws Exception {
 		 MockHttpServletRequestBuilder createMessage 
-	      = MockMvcRequestBuilders.get("/store/do_selectOne.do").param("productId", "20191008-001-003");
+	      = MockMvcRequestBuilders.get("/store/do_selectOne.do").param("productId", "20191010-001-002");
 	        
 	      ResultActions resultActions =  mockMvc.perform(createMessage)
 	    		  						.andExpect(status().is2xxSuccessful());

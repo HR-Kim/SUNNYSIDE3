@@ -13,21 +13,25 @@
 	   
 <!-- 상품등록 -->
 	<insert id="do_save" parameterType="Store">
-				INSERT INTO PRODUCT (
-				    PRODUCT_ID,
-				    PRODUCT_NM,
-				    PRUDUCT_INFO,
-				    CATEGORY,
-				    PRODUCT_COST,
-				    IMG			
+				INSERT INTO product (
+				    product_id,
+				    product_nm,
+				    product_info,
+				    category,
+				    product_cost,
+				    org_file_nm,
+				    save_file_nm,
+				    ext
 				) VALUES (
-				    TO_CHAR(SYSDATE,'yyyymmdd')||'-'||'00'||#{category,jdbcType=NUMERIC}||'-'||to_char((SELECT COUNT(*) FROM PRODUCT), 'FM000'),
+     				TO_CHAR(SYSDATE,'yyyymmdd')||'-'||'00'||#{category,jdbcType=NUMERIC}||'-'||to_char((SELECT COUNT(*) FROM PRODUCT), 'FM000'),
 				    #{productNm,jdbcType=VARCHAR},
-				    #{pruductInfo,jdbcType=VARCHAR},
+				    #{productInfo,jdbcType=VARCHAR},
 				    #{category,jdbcType=NUMERIC},
 				    #{productCost,jdbcType=NUMERIC},
-				    #{img,jdbcType=VARCHAR}
-				)
+				    #{orgFileNm,jdbcType=VARCHAR},
+				    #{saveFileNm,jdbcType=VARCHAR},
+				    #{ext,jdbcType=VARCHAR}
+				)		   
 	</insert>
 	
 
@@ -42,9 +46,11 @@
 	<update id="do_update" parameterType="Store">
 				UPDATE PRODUCT
 				SET product_nm     = #{productNm,jdbcType=VARCHAR},
-				    pruduct_info   = #{pruductInfo,jdbcType=VARCHAR},
+				    product_info   = #{productInfo,jdbcType=VARCHAR},
 				    product_cost   = #{productCost,jdbcType=NUMERIC},
-				    IMG   		   = #{img,jdbcType=VARCHAR}				
+				    org_file_nm    = #{orgFileNm,jdbcType=VARCHAR},
+    				save_file_nm   = #{saveFileNm,jdbcType=VARCHAR},
+   				    ext			   = #{ext,jdbcType=VARCHAR}
 				WHERE
 			   	 	product_id = #{productId,jdbcType=VARCHAR}
 	</update>
@@ -61,10 +67,12 @@
    <sql id="storeColumns">
    			  	 	PRODUCT_ID as productId,
 				    PRODUCT_NM as productNm,
-				    PRUDUCT_INFO as pruductInfo,
+				    PRODUCT_INFO as productInfo,
 				    CATEGORY,
 				    PRODUCT_COST as productCost,
-					IMG 
+					ORG_FILE_NM as orgFileNm,
+   				    SAVE_FILE_NM as saveFileNm,
+  				    EXT
    </sql>
 
 <!-- 팝콘상품 조회 -->
@@ -75,10 +83,12 @@
 		  	SELECT  B.rnum as num,
 				  	B.PRODUCT_ID as productId ,
 					B.PRODUCT_NM as productNm,
-					B.PRUDUCT_INFO as pruductInfo,
+					B.PRODUCT_INFO as productInfo,
 					B.CATEGORY,
 					B.PRODUCT_COST as productCost,
-					B.IMG                                                     
+					B.ORG_FILE_NM as orgFileNm,
+   				    B.SAVE_FILE_NM as saveFileNm,
+  				    B.EXT                                                    
 		    FROM(
  					SELECT ROWNUM AS rnum,A.*
  					FROM(
@@ -101,10 +111,12 @@
 		  	SELECT  B.rnum as num,
 				  	B.PRODUCT_ID as productId ,
 					B.PRODUCT_NM as productNm,
-					B.PRUDUCT_INFO as pruductInfo,
+					B.PRODUCT_INFO as productInfo,
 					B.CATEGORY,
 					B.PRODUCT_COST as productCost,
-					B.IMG                                                     
+					B.ORG_FILE_NM as orgFileNm,
+   				    B.SAVE_FILE_NM as saveFileNm,
+  				    B.EXT                                                     
 		    FROM(
  					SELECT ROWNUM AS rnum,A.*
  					FROM(
@@ -128,10 +140,12 @@
 		  	SELECT  B.rnum as num,
 				  	B.PRODUCT_ID as productId ,
 					B.PRODUCT_NM as productNm,
-					B.PRUDUCT_INFO as pruductInfo,
+					B.PRODUCT_INFO as productInfo,
 					B.CATEGORY,
 					B.PRODUCT_COST as productCost,
-					B.IMG                                                     
+					B.ORG_FILE_NM as orgFileNm,
+   				    B.SAVE_FILE_NM as saveFileNm,
+  				    B.EXT                                                      
 		    FROM(
  					SELECT ROWNUM AS rnum,A.*
  					FROM(

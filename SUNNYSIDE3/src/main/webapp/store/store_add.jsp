@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="context" value="${pageContext.request.contextPath }" />
@@ -9,121 +9,130 @@
 <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- À§ 3°³ÀÇ ¸ŞÅ¸ ÅÂ±×´Â *¹İµå½Ã* head ÅÂ±×ÀÇ Ã³À½¿¡ ¿Í¾ßÇÕ´Ï´Ù; ¾î¶² ´Ù¸¥ ÄÜÅÙÃ÷µéÀº ¹İµå½Ã ÀÌ ÅÂ±×µé *´ÙÀ½¿¡* ¿Í¾ß ÇÕ´Ï´Ù -->
-    <title>»óÇ°µî·Ï</title>
+    <!-- ìœ„ 3ê°œì˜ ë©”íƒ€ íƒœê·¸ëŠ” *ë°˜ë“œì‹œ* head íƒœê·¸ì˜ ì²˜ìŒì— ì™€ì•¼í•©ë‹ˆë‹¤; ì–´ë–¤ ë‹¤ë¥¸ ì½˜í…ì¸ ë“¤ì€ ë°˜ë“œì‹œ ì´ íƒœê·¸ë“¤ *ë‹¤ìŒì—* ì™€ì•¼ í•©ë‹ˆë‹¤ -->
+    <title>ìƒí’ˆë“±ë¡</title>
 
-    <!-- ºÎÆ®½ºÆ®·¦ -->
+    <!-- ë¶€íŠ¸ìŠ¤íŠ¸ë© -->
     <!--<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">  -->
 
-    <!-- IE8 ¿¡¼­ HTML5 ¿ä¼Ò¿Í ¹Ìµğ¾î Äõ¸®¸¦ À§ÇÑ HTML5 shim ¿Í Respond.js -->
-    <!-- WARNING: Respond.js ´Â ´ç½ÅÀÌ file:// À» ÅëÇØ ÆäÀÌÁö¸¦ º¼ ¶§´Â µ¿ÀÛÇÏÁö ¾Ê½À´Ï´Ù. -->
+    <!-- IE8 ì—ì„œ HTML5 ìš”ì†Œì™€ ë¯¸ë””ì–´ ì¿¼ë¦¬ë¥¼ ìœ„í•œ HTML5 shim ì™€ Respond.js -->
+    <!-- WARNING: Respond.js ëŠ” ë‹¹ì‹ ì´ file:// ì„ í†µí•´ í˜ì´ì§€ë¥¼ ë³¼ ë•ŒëŠ” ë™ì‘í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤. -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
 <body>
- <h2> »óÇ°µî·Ï </h2>
- <form id="storeForm" name="storeForm" method="post" enctype="multipart/form-data">
-  <table border="1">
+ <h2> ìƒí’ˆë“±ë¡ </h2>
+ <form id="storeForm" name="storeForm" method="post" enctype="multipart/form-data" action="do_save.do">
+ 	<table border="1">
   	<tr>
-  		<td>»óÇ°¸í</td>
+  		<td>ìƒí’ˆëª…</td>
   		<td><input type="text" name="productName" id="productName" /></td>
   	</tr>
   	<tr>
-  		<td>ºĞ·ù</td>
+  		<td>ë¶„ë¥˜</td>
   		<td>
 	  		<select name="category" id="category">
-	  			<option value="1">ÆËÄÜ</option>
-	  			<option value="2">À½·á</option>
-	  			<option value="3">¿µÈ­¿¹¸Å±Ç</option>
+	  			<option value="1">íŒì½˜</option>
+	  			<option value="2">ìŒë£Œ</option>
+	  			<option value="3">ì˜í™”ì˜ˆë§¤ê¶Œ</option>
 	  		</select>
   		</td>
   	</tr>
   	<tr>
-  		<td>°¡°İ</td>
-  		<td><input type="text" name="productPrice" id="productPrice" />¿ø</td>
+  		<td>ê°€ê²©</td>
+  		<td><input type="text" name="productCost" id="productCost" />ì›</td>
   	</tr> 
   	<tr>
-  		<td>»óÇ°¼³¸í</td>
+  		<td>ìƒí’ˆì„¤ëª…</td>
   		<td><textarea rows="5" cols="60" name="productInfo" id="productInfo"></textarea></td>
   	</tr>
   	<tr>
-  		<td>»óÇ°ÀÌ¹ÌÁö</td>
+  		<td>ìƒí’ˆì´ë¯¸ì§€</td>
   		<td><input type="file" name="productImage" id="productImage"  /></td>
   	</tr>
   	<tr>
   	 <td colspan="2" align="center">
-  	 	<input type="button" value="µî·Ï" id="addBtn">
-  	 	<input type="button" value="¸ñ·Ï" id="listBtn">
+  	 	<input type="submit" value="ë“±ë¡" id="addBtn">
+  	 	<input type="button" value="ëª©ë¡" id="listBtn">
+  	 	<input type="button" value="ì‚­ì œ" id="delBtn">
   	 </td>
   	</tr>
-  </table> 
+  </table>
  </form>
- <!-- jQuery (ºÎÆ®½ºÆ®·¦ÀÇ ÀÚ¹Ù½ºÅ©¸³Æ® ÇÃ·¯±×ÀÎÀ» À§ÇØ ÇÊ¿äÇÕ´Ï´Ù) -->
+ <!-- jQuery (ë¶€íŠ¸ìŠ¤íŠ¸ë©ì˜ ìë°”ìŠ¤í¬ë¦½íŠ¸ í”ŒëŸ¬ê·¸ì¸ì„ ìœ„í•´ í•„ìš”í•©ë‹ˆë‹¤) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<!-- ¸ğµç ÄÄÆÄÀÏµÈ ÇÃ·¯±×ÀÎÀ» Æ÷ÇÔÇÕ´Ï´Ù (¾Æ·¡), ¿øÇÏÁö ¾Ê´Â´Ù¸é ÇÊ¿äÇÑ °¢°¢ÀÇ ÆÄÀÏÀ» Æ÷ÇÔÇÏ¼¼¿ä -->
+<!-- ëª¨ë“  ì»´íŒŒì¼ëœ í”ŒëŸ¬ê·¸ì¸ì„ í¬í•¨í•©ë‹ˆë‹¤ (ì•„ë˜), ì›í•˜ì§€ ì•ŠëŠ”ë‹¤ë©´ í•„ìš”í•œ ê°ê°ì˜ íŒŒì¼ì„ í¬í•¨í•˜ì„¸ìš” -->
  <script src="${context}/resources/js/bootstrap.min.js"></script>   
  <script type="text/javascript">
-  $(document).ready(function(){
+ 
+	 /**ë“±ë¡*/
 	 $("#addBtn").on("click",function(){
-			
-	if(confirm("»óÇ°À» µî·ÏÇÏ½Ã°Ú½À´Ï±î?")==false) return;
-	
-	console.log($("#productName").val());
-	console.log($("#category").val());
-	console.log($("#productPrice").val());
-	console.log($("#productInfo").val());
-	console.log($("#productImage").val());  
-	
-/* 	if(productName ==""){
-		alert("»óÇ°¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä");
-		productName.focus();
-	}else if(productPrice ==""){
-		alert("»óÇ°±İ¾×À» ÀÔ·ÂÇØÁÖ¼¼¿ä");
-		productPrice.focus();
-	}else if(productInfo ==""){
-		alert("»óÇ°Á¤º¸¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä");
-		productInfo.focus();
-	}else if(productImage ==""){
-		alert("»óÇ°ÀÌ¹ÌÁö¸¦ µî·ÏÇØÁÖ¼¼¿ä");
-		productImage.focus();
-	} */
-	
-    
-	//ajax
-    $.ajax({
-       type:"post",
-       url:"${context}/store/do_save.do",
-       dataType:"json",
-       data:{
-           "productName":$("#productName").val(),
-           "category":$("#category").val(),
-           "productPrice":$("#productPrice").val(),
-           "productInfo":$("#productInfo").val(),
-           "productImage":$("#productImage").val()
-      }, 
-
-    success: function(data){ 
-      var jData = JSON.parse(data);
-      if(null != jData && jData.msgId=="1"){
-        alert(jData.msgMsg);
-        location.href ="${context}/store/write.do";
-      }else{
-        alert(jData.msgId+"|"+jData.msgMsg);
-      }
-    },
-    complete:function(data){
-     
-    },
-    error:function(xhr,status,error){
-        alert("error:"+error);
-    }
-   }); //--ajax  
-	/*  document.storeForm.action ="${context}/store/do_save.do";
-	document.storeForm.submit();  */
-	});
-		 
+		  if(confirm("ë“±ë¡í•˜ì‹œê² ìŠµë‹ˆê¹Œ?")==false) return;
+		  
+		//ajax
+	       $.ajax({
+	          type:"POST",
+	          url:"${context}/store/do_save.do",
+	          data:$("#storeForm").serialize(), 
+	          dataType:"html",
+	       
+	       success: function(data){ 
+	         var jData = JSON.parse(data);
+	         if(null != jData && jData.msgId=="1"){
+	           alert(jData.msgMsg);
+	           location.href ="${context}/store/uploadimage.do";
+	         }else{
+	           alert(jData.msgId+"|"+jData.msgMsg);
+	         }
+	       },
+	       complete:function(data){
+	        
+	       },
+	       error:function(xhr,status,error){
+	           alert("error:"+error);
+	       }
+	      }); //--ajax  
+		  }); 
+	 
+	 /**ëª©ë¡ìœ¼ë¡œ ì´ë™*/ 
+	 $("#listBtn").on("click",function(){
+		 location.href ="${context}/store/uploadimage.do";
+	 });
+	 
+	 /**ì‚­ì œ*/ 
+	 $("#delBtn").on("click",function(){
+		 if(confirm("ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?")==false) return;
+		//ajax
+	       $.ajax({
+	          type:"POST",
+	          url:"${context}/store/do_delete.do", 
+	          dataType:"html",
+	          data:{
+	              "boardId":$("#boardId").val()
+	             }, 
+	       
+	       success: function(data){ 
+	         var jData = JSON.parse(data);
+	         if(null != jData && jData.msgId=="1"){
+	           alert(jData.msgMsg);
+	           location.href ="${context}/uploadimage.do";
+	         }else{
+	           alert(jData.msgId+"|"+jData.msgMsg);
+	         }
+	       },
+	       complete:function(data){
+	        
+	       },
+	       error:function(xhr,status,error){
+	           alert("error:"+error);
+	       }
+	      }); //--ajax  
+	 });
+ 
+ $(document).ready(function(){
+	  
   });
 
 </script>
