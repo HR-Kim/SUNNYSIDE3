@@ -126,6 +126,20 @@ public class LHJ_PlanedDaoImpl implements WorkDiv {
 		
 		return list;
 	}
+	
+	/** 개봉 예정 등록 리스트 조회 */
+	public List<?> do_planedUp_retrieve(DTO dto) {
+		String statement = NAMESPACE + ".do_planedUp_retrieve";
+		SearchVO search = (SearchVO) dto;
+		LOG.debug("=============================");
+		LOG.debug("1. param:"+search);
+		LOG.debug("2. statement:"+statement);
+		List<LHJ_MovieVO> list = this.sqlSessionTemplate.selectList(statement, search);		
+		LOG.debug("3. list:"+list);
+		LOG.debug("=============================");
+		
+		return list;
+	}
 
 	@Override
 	public List<?> do_excelDown(DTO dto) {

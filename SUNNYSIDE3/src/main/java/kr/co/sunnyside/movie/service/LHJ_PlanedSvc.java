@@ -5,6 +5,9 @@ import java.util.List;
 import kr.co.sunnyside.cmn.DTO;
 
 public interface LHJ_PlanedSvc {
+	/** 개봉 예정 등록 리스트 조회 */
+	public List<?> do_planedUp_retrieve(DTO dto);
+	
 	/** 개봉예정으로 상태 변경  */
 	public int do_update_planedUp(DTO dto);
 	

@@ -5,6 +5,9 @@ import java.util.List;
 import kr.co.sunnyside.cmn.DTO;
 
 public interface LHJ_ScreeningSvc {
+	/** 최근 개봉(상영중) 등록 리스트 조회 */
+	public List<?> do_screenUp_retrieve(DTO dto);
+	
 	/** 비 상영상태로 상태 변경 */
 	public int do_update_screenDown(DTO dto);
 	

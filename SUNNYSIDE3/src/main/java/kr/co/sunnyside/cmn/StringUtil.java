@@ -426,4 +426,29 @@ public class StringUtil {
 		}
 		return sb.toString();
 	}
+	
+	public static String col1Substring(String str) {
+		if(str.contains("전체")) {
+			str = str.substring(0, 2);
+		}else if(str != null && !str.equals("")) {
+			str = str.substring(0, 3);
+		}
+		return str;
+	}
+	
+	public static String col3Substring(String str) {
+		if(str.length()>16) {
+			return str.substring(0, 15)+"...";
+		}else {
+			return str;
+		}		 
+	}
+	
+	public static String col4Substring(String str) {
+		if(str.length()>25) {
+			return str.substring(0, 24)+"...";
+		}else {
+			return str;
+		}		 
+	}
 }

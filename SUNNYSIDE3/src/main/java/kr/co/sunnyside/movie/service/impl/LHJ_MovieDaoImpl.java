@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.sunnyside.cmn.DTO;
+import kr.co.sunnyside.cmn.SearchVO;
 import kr.co.sunnyside.cmn.WorkDiv;
 import kr.co.sunnyside.movie.service.LHJ_BoxofficeVO;
 import kr.co.sunnyside.movie.service.LHJ_MovieVO;
@@ -34,16 +35,34 @@ public class LHJ_MovieDaoImpl implements WorkDiv{
 		return 0;
 	}
 	
+	/**단건조회*/
 	@Override
 	public DTO do_selectOne(DTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+		String statement = NAMESPACE + ".do_selectOne";
+		LHJ_MovieVO inVO = (LHJ_MovieVO) dto;
+		LOG.debug("=============================");
+		LOG.debug("1. param:"+inVO);
+		LOG.debug("2. statement:"+statement);
+		LHJ_MovieVO outVO = this.sqlSessionTemplate.selectOne(statement, inVO);		
+		LOG.debug("3. outVO:"+outVO);
+		LOG.debug("=============================");
+		
+		return outVO;
 	}
 
+	/**전체조회*/
 	@Override
 	public List<?> do_retrieve(DTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+		String statement = NAMESPACE + ".do_retrieve";
+		SearchVO search = (SearchVO) dto;
+		LOG.debug("=============================");
+		LOG.debug("1. param:"+search);
+		LOG.debug("2. statement:"+statement);
+		List<LHJ_MovieVO> list = this.sqlSessionTemplate.selectList(statement, search);		
+		LOG.debug("3. list:"+list);
+		LOG.debug("=============================");
+		
+		return list;
 	}	
 
 	@Override
@@ -52,6 +71,7 @@ public class LHJ_MovieDaoImpl implements WorkDiv{
 		return null;
 	}
 
+	/**영화정보 저장*/
 	@Override
 	public int do_save(DTO dto) {
 		String statement = NAMESPACE + ".do_save";

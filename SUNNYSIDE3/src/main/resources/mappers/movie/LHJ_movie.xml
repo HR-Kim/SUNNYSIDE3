@@ -2,6 +2,87 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.sunnyside.movie">
 	
+	<sql id="movieColumns">						
+		movie_id as movieId
+	    ,kortitle
+	    ,engtitle
+	    ,limitage
+	    ,genre
+	    ,rel_date as relDate
+	    ,director
+	    ,cast
+	    ,running_time as runningTime
+	    ,synopsis
+	    ,poster
+	    ,expert_rate as expertRate
+	    ,visitor_rate as visitorRate
+	    ,screen_state as screenState
+	</sql>
+	
+	<sql id="movieBaseCondition">
+		<choose>
+			<when test="'10' == searchDiv">
+				and KORTITLE LIKE '%' || #{searchWord} || '%'					
+			</when>
+			<when test="'20' == searchDiv">
+				and DIRECTOR LIKE '%' || #{searchWord} || '%'				
+			</when>
+		</choose>
+	</sql>
+	
+	<!-- 목록조회 -->
+	<select id="do_retrieve" parameterType="Search" resultType="Movie">
+	  SELECT T1.*,T2.*                                       
+     FROM                                                              
+     (                                                                 
+        SELECT                                                         
+			B.movie_id as movieId                       
+			,B.kortitle                                 
+			,B.engtitle                                 
+			,B.limitage                                 
+			,B.genre                                    
+			,TO_CHAR(B.rel_date,'YYYY.MM.DD') as relDate
+			,B.director                                 
+			,B.cast                                     
+			,B.running_time as runningTime              
+			,B.synopsis                                 
+			,B.poster                                   
+			,B.expert_rate as expertRate                
+			,B.visitor_rate as visitorRate              
+			,B.screen_state as screenState 
+		FROM                                                           
+        (    SELECT ROWNUM AS rnum, A.*                                 
+           FROM                                                       
+           (                                                           
+              SELECT  *                                              
+              FROM   movie                        
+              WHERE rel_date > '2019/07/12'
+              <include refid="movieBaseCondition"/>                                        
+              ORDER BY rel_date DESC nulls last                                     
+           )A                                                         
+           WHERE rownum <![CDATA[ <= ]]> (#{pageSize} * (#{pageNum}-1)+#{pageSize})                             
+        ) B                                                            
+        WHERE B.rnum <![CDATA[ >= ]]> (#{pageSize} * (#{pageNum}-1)+1)                                 
+     )T1
+     NATURAL JOIN                                                      
+     (                                                                 
+         SELECT COUNT(*) totalCnt                                     
+         FROM movie       
+         WHERE rel_date > '2019/07/12'                                      
+         <include refid="movieBaseCondition"/>                                             
+     )T2  
+	</select>	
+	
+	<!-- 단건조회 -->
+	<select id="do_selectOne" parameterType="Movie" resultType="Movie">
+		SELECT
+		    <include refid="movieColumns"></include> 
+		FROM
+		    movie
+		WHERE
+		    movie_id = #{movieId, jdbcType=VARCHAR}
+	</select>
+	
 	<!-- 영화 등록(kmdb) -->
 	<insert id="do_save" parameterType="Movie">
 		INSERT INTO movie (

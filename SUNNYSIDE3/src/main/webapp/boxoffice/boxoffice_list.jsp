@@ -7,10 +7,7 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="context" value="${pageContext.request.contextPath }" />
 <%
-//페이지 사이즈
-	List<LHJ_MovieVO> list = (request.getAttribute("list")==null)?
-							  (List<LHJ_MovieVO>) new ArrayList<LHJ_MovieVO>():
-							  (List<LHJ_MovieVO>)(request.getAttribute("list"));
+
 	
 %>
 <!DOCTYPE html>

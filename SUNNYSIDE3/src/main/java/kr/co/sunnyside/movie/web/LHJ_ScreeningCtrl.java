@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 
 import kr.co.sunnyside.cmn.Message;
 import kr.co.sunnyside.cmn.SearchVO;
+import kr.co.sunnyside.cmn.StringUtil;
 import kr.co.sunnyside.code.service.CodeService;
 import kr.co.sunnyside.code.service.CodeVO;
 import kr.co.sunnyside.movie.service.LHJ_MovieVO;
@@ -34,9 +35,101 @@ public class LHJ_ScreeningCtrl {
 	private CodeService codeService;
 	 
 	//view
-	private final String VIEW_LIST_NM = "screening/screening";
+	private final String VIEW_LIST_NM = "screening/screening_list";
 	private final String VIEW_MNG_NM  = "screening/screening_mng";
+	 private final String VIEW_SCREEN_UP  = "screening/screening_up";
+	 private final String VIEW_SCREEN_DOWN  = "screening/screening_down";
 	
+	 /**최신 개봉 삭제 리스트 조회 */
+	 @RequestMapping(value="screening/do_screenDown_retrieve.do",method = RequestMethod.GET)
+	 public String do_screenDown_retrieve(HttpServletRequest req,SearchVO search, Model model) {
+		 //param
+		 if(search.getPageSize()==0) {
+			 search.setPageSize(10);
+		 }
+		 
+		 if(search.getPageNum()==0) {
+			 search.setPageNum(1);
+		 }		
+		 
+		 search.setSearchDiv(StringUtil.nvl(search.getSearchDiv()));
+		 search.setSearchWord(StringUtil.nvl(search.getSearchWord()));
+		 model.addAttribute("vo", search);
+		 
+		 LOG.debug("============================");
+		 LOG.debug("=search="+search);
+		 LOG.debug("============================");		
+		 
+		 CodeVO code=new CodeVO();
+		 //페이지사이즈
+		 code.setCodeId("PAGE_SIZE");
+		 
+		 List<CodeVO> listPageSize=(List<CodeVO>) this.codeService.do_retrieve(code);
+		 model.addAttribute("listPageSize", listPageSize);
+		 
+		 //게시판 검색 구분
+		 code.setCodeId("MOVIE_SEARCH");
+		 List<CodeVO> listBoardSearch=(List<CodeVO>) this.codeService.do_retrieve(code);		
+		 model.addAttribute("listBoardSearch", listBoardSearch);
+		 
+		 //목록조회
+		 List<LHJ_MovieVO> list = (List<LHJ_MovieVO>) this.service.do_retrieve(search);
+		 model.addAttribute("list", list);
+		 
+		 //총건수
+		 int totalCnt = 0;
+		 if(null != list && list.size()>0) {
+			 totalCnt = list.get(0).getTotalCnt();
+		 }
+		 model.addAttribute("totalCnt", totalCnt);
+		 return VIEW_SCREEN_DOWN;
+	 }
+	 
+	/**최신 개봉 등록 리스트 조회 */
+	 @RequestMapping(value="screening/do_screenUp_retrieve.do",method = RequestMethod.GET)
+	 public String do_screenUp_retrieve(HttpServletRequest req,SearchVO search, Model model) {
+	 	//param
+	 	if(search.getPageSize()==0) {
+	 		search.setPageSize(10);
+	 	}
+	 	
+	 	if(search.getPageNum()==0) {
+	 		search.setPageNum(1);
+	 	}		
+	 	
+	 	search.setSearchDiv(StringUtil.nvl(search.getSearchDiv()));
+	 	search.setSearchWord(StringUtil.nvl(search.getSearchWord()));
+	 	model.addAttribute("vo", search);
+	 	
+	 	LOG.debug("============================");
+	 	LOG.debug("=search="+search);
+	 	LOG.debug("============================");		
+	 	
+	 	CodeVO code=new CodeVO();
+	 	//페이지사이즈
+	 	code.setCodeId("PAGE_SIZE");
+	 	
+	 	List<CodeVO> listPageSize=(List<CodeVO>) this.codeService.do_retrieve(code);
+	 	model.addAttribute("listPageSize", listPageSize);
+	 	
+	 	//게시판 검색 구분
+	 	code.setCodeId("MOVIE_SEARCH");
+	 	List<CodeVO> listBoardSearch=(List<CodeVO>) this.codeService.do_retrieve(code);		
+	 	model.addAttribute("listBoardSearch", listBoardSearch);
+	 	
+	 	//목록조회
+	 	List<LHJ_MovieVO> list = (List<LHJ_MovieVO>) this.service.do_screenUp_retrieve(search);
+	 	model.addAttribute("list", list);
+	 	
+	 	//총건수
+	 	int totalCnt = 0;
+	 	if(null != list && list.size()>0) {
+	 		totalCnt = list.get(0).getTotalCnt();
+	 	}
+	 	model.addAttribute("totalCnt", totalCnt);
+	 	return VIEW_SCREEN_UP;
+	 }
+	 
 	 /**목록조회 */
 	 @RequestMapping(value="screening/do_retrieve.do",method = RequestMethod.GET)
 	 public String do_retrieve(HttpServletRequest req,SearchVO search, Model model) {

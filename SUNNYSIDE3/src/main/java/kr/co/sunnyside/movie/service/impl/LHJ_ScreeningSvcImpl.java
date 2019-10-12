@@ -37,5 +37,11 @@ public class LHJ_ScreeningSvcImpl implements LHJ_ScreeningSvc {
 	public List<?> do_retrieve(DTO dto) {
 		return screeningDaoImpl.do_retrieve(dto);
 	}
+	
+	/** 최근 개봉(상영중) 등록 리스트 조회 */
+	@Override
+	public List<?> do_screenUp_retrieve(DTO dto) {
+		return screeningDaoImpl.do_screenUp_retrieve(dto);
+	}
 
 }

@@ -13,6 +13,11 @@ public class LHJ_PlanedSvcImpl implements LHJ_PlanedSvc {
 	@Autowired
 	private LHJ_PlanedDaoImpl planedDaoImpl;
 	
+	/** 개봉 예정 등록 리스트 조회 */
+	public List<?> do_planedUp_retrieve(DTO dto) {
+		return planedDaoImpl.do_planedUp_retrieve(dto);
+	}
+	
 	/** 개봉예정으로 상태 변경(020)  */
 	@Override
 	public int do_update_planedUp(DTO dto) {

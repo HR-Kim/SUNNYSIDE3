@@ -30,6 +30,49 @@
 		</choose>
 	</sql>
 	
+	<!-- 최근 3개월 영화 조회 -->
+	<select id="do_screenUp_retrieve" parameterType="Search" resultType="Movie">
+	  SELECT T1.*,T2.*                                       
+     FROM                                                              
+     (                                                                 
+        SELECT                                                         
+			B.movie_id as movieId                       
+			,B.kortitle                                 
+			,B.engtitle                                 
+			,B.limitage                                 
+			,B.genre                                    
+			,TO_CHAR(B.rel_date,'YYYY.MM.DD') as relDate
+			,B.director                                 
+			,B.cast                                     
+			,B.running_time as runningTime              
+			,B.synopsis                                 
+			,B.poster                                   
+			,B.expert_rate as expertRate                
+			,B.visitor_rate as visitorRate              
+			,B.screen_state as screenState 
+		FROM                                                           
+        (    SELECT ROWNUM AS rnum, A.*                                 
+           FROM                                                       
+           (                                                           
+              SELECT  *                                              
+              FROM   movie                        
+              WHERE rel_date > '2019/07/12'
+              <include refid="screenBaseCondition"/>                                        
+              ORDER BY rel_date DESC nulls last                                     
+           )A                                                         
+           WHERE rownum <![CDATA[ <= ]]> (#{pageSize} * (#{pageNum}-1)+#{pageSize})                             
+        ) B                                                            
+        WHERE B.rnum <![CDATA[ >= ]]> (#{pageSize} * (#{pageNum}-1)+1)                                 
+     )T1
+     NATURAL JOIN                                                      
+     (                                                                 
+         SELECT COUNT(*) totalCnt                                     
+         FROM movie       
+         WHERE rel_date > '2019/07/12'                                      
+         <include refid="screenBaseCondition"/>                                             
+     )T2  
+	</select>	
+	
 	<!-- 목록조회 -->
 	<select id="do_retrieve" parameterType="Search" resultType="Movie">
 	  SELECT T1.*,T2.*                                       
