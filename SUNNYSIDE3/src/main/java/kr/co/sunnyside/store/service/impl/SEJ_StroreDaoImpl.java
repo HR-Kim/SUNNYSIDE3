@@ -95,10 +95,24 @@ public class SEJ_StroreDaoImpl implements WorkDiv {
 		return outVO;
 	}
 
-	/**상품 전체조회=== 사용안함. */
+	/**상품 전체조회*/
 	@Override
 	public List<?> do_retrieve(DTO dto) {
-		return null;
+		String statement = NAMESPACE+".do_retrieve";
+		SearchVO search = (SearchVO) dto;
+		LOG.debug("===================================");
+		LOG.debug("=1. param="+search);
+		LOG.debug("===================================");
+		LOG.debug("===================================");
+		LOG.debug("=2. statement="+statement);
+		LOG.debug("===================================");
+		
+		List<SEJ_StroreVO> list= this.sqlSessionTemplate.selectList(statement,search);
+		LOG.debug("===================================");
+		LOG.debug("=3. flag="+list);
+		LOG.debug("===================================");
+		
+		return list;
 
 	}
 

@@ -52,6 +52,22 @@ public class SEJ_StoreSvcImple implements SEJ_StroreSvc {
 		return storeDaoImpl.do_selectOne(dto);
 	}
 	
+	/**팝콘 조회*/
+	@Override
+	public List<?> do_retrieve_popcorn(DTO dto) {
+		return storeDaoImpl.do_retrieve_popcorn(dto);
+	}
+
+	/**음료조회*/
+	@Override
+	public List<?> do_retrieve_drink(DTO dto) {
+		return storeDaoImpl.do_retrieve_drink(dto);
+	}
+	/**영화예매권조회*/
+	@Override
+	public List<?>do_retrieve_movieticket(DTO dto) {
+		return storeDaoImpl.do_retrieve_movieticket(dto);
+	}
 	/**상품전체조회*/
 	@Override
 	public List<?> do_retrieve(DTO dto) {
@@ -59,20 +75,6 @@ public class SEJ_StoreSvcImple implements SEJ_StroreSvc {
 		return storeDaoImpl.do_retrieve(dto);
 	}
 
-	@Override
-	public List<?> do_retrieve_popcorn(DTO dto) {
-		return storeDaoImpl.do_retrieve_popcorn(dto);
-	}
-
-	@Override
-	public List<?> do_retrieve_drink(DTO dto) {
-		return storeDaoImpl.do_retrieve_drink(dto);
-	}
-
-	@Override
-	public List<?>do_retrieve_movieticket(DTO dto) {
-		return storeDaoImpl.do_retrieve_movieticket(dto);
-	}
 
 
 

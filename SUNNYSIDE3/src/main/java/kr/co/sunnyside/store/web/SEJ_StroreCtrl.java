@@ -283,6 +283,43 @@ public class SEJ_StroreCtrl {
 			return VIEW_MNG_NM;
 		}   
 
+		/**
+		   * 전체조회
+		   * 조회만 get
+		   * @param search
+		   * @param model
+		   * @return
+		   */
+		  @RequestMapping(value = "store/do_retrieve.do", method = RequestMethod.GET)
+		  public String do_retrieve_all(SearchVO search, Model model) {
+			    LOG.debug("1.=====================");
+				LOG.debug("1.= param="+search);
+				LOG.debug("1.=====================");
+				
+				//디폴트 값 설정 페이지사이즈:10	
+				if(search.getPageSize() ==0) {
+					search.setPageSize(10);
+				}
+				
+				//디폴트 값 설정 페이지번호:1
+				if(search.getPageNum() ==0) {
+					search.setPageNum(1);
+				}
+				
+				search.setSearchDiv(StringUtil.nvl(search.getSearchDiv()));
+				
+				LOG.debug("2.=====================");
+				LOG.debug("2.=param="+search);
+				LOG.debug("2.=====================");
+				model.addAttribute("vo", search);
+			
+							
+				List<SEJ_StroreSvc> list = (List<SEJ_StroreSvc>) this.storeService.do_retrieve(search);
+				model.addAttribute("list", list);
+				
+				
+				return VIEW_LIST_NM;
+		  }
 		
 		
 	  

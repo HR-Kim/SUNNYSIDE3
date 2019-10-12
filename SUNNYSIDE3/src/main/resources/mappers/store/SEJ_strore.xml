@@ -75,6 +75,36 @@
   				    EXT
    </sql>
 
+<!-- 상품 조회 -->
+	 <select id="do_retrieve" parameterType="Search" resultType="Store">
+		  SELECT T1.*												
+		  FROM                                                              
+		  (                                                                 
+		  	SELECT  B.rnum as num,
+				  	B.PRODUCT_ID as productId ,
+					B.PRODUCT_NM as productNm,
+					B.PRODUCT_INFO as productInfo,
+					B.CATEGORY,
+					B.PRODUCT_COST as productCost,
+					B.ORG_FILE_NM as orgFileNm,
+   				    B.SAVE_FILE_NM as saveFileNm,
+  				    B.EXT                                                    
+		    FROM(
+ 					SELECT ROWNUM AS rnum,A.*
+ 					FROM(
+  							SELECT *
+ 						    FROM PRODUCT   
+ 						    WHERE  1=1   
+ 					and CATEGORY LIKE '%' || #{searchWord} || '%'  
+ 						                                                                                     
+		  		)A                                                         
+		  	   WHERE rownum <![CDATA[ <= ]]> (#{pageSize} * (#{pageNum}-1)+#{pageSize})    						       
+		  	) B                                                            
+		  	WHERE B.rnum <![CDATA[ >= ]]> (#{pageSize} * (#{pageNum}-1)+1)                  				   
+		  )T1	
+	</select>
+	
+
 <!-- 팝콘상품 조회 -->
 	 <select id="do_retrieve_popcorn" parameterType="Search" resultType="Store">
 		  SELECT T1.*												

@@ -44,12 +44,13 @@
 <title>Insert title here</title>
 </head>
 <body>
+${fileList}
 <div class="container">
     <h3 class="h3">팝콘 </h3>
 	    <div class="row">
 		    <c:choose>
-		    	<c:when test="${fileList.size()>0}">
-		    		<c:forEach var="vo" items="${fileList }">
+		    	<c:when test="${list.size()>0}">
+		    		<c:forEach var="vo" items="${list }">
 				        <div class="col-md-3 col-sm-6">
 				            <div class="product-grid">
 				                <div class="product-image">

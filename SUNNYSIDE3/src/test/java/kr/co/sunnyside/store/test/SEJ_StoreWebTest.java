@@ -158,6 +158,26 @@ public class SEJ_StoreWebTest {
 	}   
 
 	/**
+	 * 전체조회
+	 * 조회만 get
+	 */
+	@Test
+	//@Ignore
+	public void do_retrieve() throws Exception{
+	    MockHttpServletRequestBuilder createMessage 
+	    = MockMvcRequestBuilders.get("/store/do_retrieve.do") .param("pageSize", "10")
+			    										      .param("pageNum", "1")
+			    										      .param("searchWord", ""); //아무것도 입력안하면 전체검색. 
+	                                                                  
+	    ResultActions resultActions =  mockMvc.perform(createMessage)                             
+	    							  .andExpect(status().isOk());
+	    String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
+	    LOG.debug("=============================");
+	    LOG.debug("=result="+result);
+	    LOG.debug("=============================");
+	   }
+	
+	/**
 	 * 팝콘 전체조회
 	 * 조회만 get
 	 */

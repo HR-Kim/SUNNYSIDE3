@@ -29,6 +29,7 @@ public interface SEJ_StroreSvc {
 	/**영화예매권목록조회*/
 	public List<?> do_retrieve_movieticket(DTO dto);
 	
+	
 
 	
 

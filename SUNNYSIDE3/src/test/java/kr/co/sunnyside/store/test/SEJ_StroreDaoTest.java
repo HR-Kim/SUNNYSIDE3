@@ -66,6 +66,21 @@ public class SEJ_StroreDaoTest {
 		assertThat(storeDaoImpl, is(notNullValue()));
 	}
 
+	//전체 조회
+	@Test
+	@Ignore
+	public void do_retrieve() {
+		SearchVO search = new SearchVO();
+		search.setPageSize(10);
+		search.setPageNum(1);
+	//	search.setSearchDiv("1");
+		search.setSearchWord("2");
+		
+		List<SEJ_StroreVO> list = (List<SEJ_StroreVO>) storeDaoImpl.do_retrieve(search);
+		assertThat(3, is(list.size()));		
+	}
+	
+	
 	//팝콘전체 조회
 	@Test
 	@Ignore
@@ -137,7 +152,7 @@ public class SEJ_StroreDaoTest {
 	
 	//상품 삭제
 	@Test
-	//@Ignore
+	@Ignore
 	public void do_delete() {
 		storeDaoImpl.do_delete(list.get(0));
 	}
