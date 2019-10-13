@@ -9,6 +9,8 @@
 <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- 부트스트랩 -->
+    <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
     <title>상품등록</title>
 
@@ -22,9 +24,10 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+
 <body>
- <h2> 상품등록 </h2>
- <form id="storeForm" name="storeForm" method="post" enctype="multipart/form-data" action="do_save.do">
+ <h2 style="margin-left: 40px;"> 상품등록 </h2>
+ <form id="storeForm" name="storeForm" method="post" enctype="multipart/form-data" action="do_save.do" style="margin-left: 40px">
  	<table border="1">
   	<tr>
   		<td>상품명</td>
@@ -55,11 +58,9 @@
   	<tr>
   	 <td colspan="2" align="center">
   	 	<input type="submit" value="등록" id="addBtn">
-  	 	<input type="button" value="목록" id="listBtn">
-  	 	<input type="button" value="삭제" id="delBtn">
   	 </td>
-  	</tr>
-  </table>
+  	</tr> 	
+  </table> 
  </form>
  <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -67,7 +68,7 @@
  <script src="${context}/resources/js/bootstrap.min.js"></script>   
  <script type="text/javascript">
  
-	 /**등록*/
+	 /**등록*/ 
 	 $("#addBtn").on("click",function(){
 		  if(confirm("등록하시겠습니까?")==false) return;
 		  
@@ -78,58 +79,20 @@
 	          data:$("#storeForm").serialize(), 
 	          dataType:"html",
 	       
-	       success: function(data){ 
-	         var jData = JSON.parse(data);
-	         if(null != jData && jData.msgId=="1"){
-	           alert(jData.msgMsg);
-	           location.href ="${context}/store/uploadimage.do";
-	         }else{
-	           alert(jData.msgId+"|"+jData.msgMsg);
-	         }
+	        success: function(data){ 
+	        	 alert("등록되었습니다.");
+		    	 window.close();
 	       },
 	       complete:function(data){
-	        
+	    	   alert("등록되었습니다.");
+	    	   window.close();
 	       },
 	       error:function(xhr,status,error){
-	           alert("error:"+error);
+	          // alert("error:"+error);
 	       }
 	      }); //--ajax  
-		  }); 
+		});
 	 
-	 /**목록으로 이동*/ 
-	 $("#listBtn").on("click",function(){
-		 location.href ="${context}/store/uploadimage.do";
-	 });
-	 
-	 /**삭제*/ 
-	 $("#delBtn").on("click",function(){
-		 if(confirm("삭제하시겠습니까?")==false) return;
-		//ajax
-	       $.ajax({
-	          type:"POST",
-	          url:"${context}/store/do_delete.do", 
-	          dataType:"html",
-	          data:{
-	              "boardId":$("#boardId").val()
-	             }, 
-	       
-	       success: function(data){ 
-	         var jData = JSON.parse(data);
-	         if(null != jData && jData.msgId=="1"){
-	           alert(jData.msgMsg);
-	           location.href ="${context}/uploadimage.do";
-	         }else{
-	           alert(jData.msgId+"|"+jData.msgMsg);
-	         }
-	       },
-	       complete:function(data){
-	        
-	       },
-	       error:function(xhr,status,error){
-	           alert("error:"+error);
-	       }
-	      }); //--ajax  
-	 });
  
  $(document).ready(function(){
 	  

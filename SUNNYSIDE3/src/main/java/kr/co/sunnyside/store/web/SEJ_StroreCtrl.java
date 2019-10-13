@@ -46,6 +46,10 @@ public class SEJ_StroreCtrl {
 	   
 	  //view
 	   private final String VIEW_LIST_NM = "store/store_main";
+	   private final String VIEW_POPCORN_LIST_NM = "store/popcorn_list";
+	   private final String VIEW_DRINK_LIST_NM = "store/drink_list";
+	   private final String VIEW_TICKET_LIST_NM = "store/ticket_list";
+	   private final String VIEW_SELECTONE = "store/selectproduct";
 	   private final String VIEW_MNG_NM = "store/store_add";
 	 
 	   
@@ -280,7 +284,7 @@ public class SEJ_StroreCtrl {
 		     SEJ_StroreVO outVO = (SEJ_StroreVO) this.storeService.do_selectOne(store);
 		     model.addAttribute("vo",outVO);
 			
-			return VIEW_MNG_NM;
+			return VIEW_SELECTONE;
 		}   
 
 		/**
@@ -307,6 +311,7 @@ public class SEJ_StroreCtrl {
 				}
 				
 				search.setSearchDiv(StringUtil.nvl(search.getSearchDiv()));
+				search.setSearchWord(StringUtil.nvl(search.getSearchWord()));
 				
 				LOG.debug("2.=====================");
 				LOG.debug("2.=param="+search);
@@ -358,7 +363,7 @@ public class SEJ_StroreCtrl {
 			model.addAttribute("list", list);
 			
 			
-			return VIEW_LIST_NM;
+			return VIEW_POPCORN_LIST_NM;
 	  }
 	  
 	  /**
@@ -396,7 +401,7 @@ public class SEJ_StroreCtrl {
 			model.addAttribute("list", list);
 			
 			
-			return VIEW_LIST_NM;
+			return VIEW_DRINK_LIST_NM;
 	  }
 	  
 	  /**
@@ -434,7 +439,7 @@ public class SEJ_StroreCtrl {
 			model.addAttribute("list", list);
 			
 			
-			return VIEW_LIST_NM;
+			return VIEW_TICKET_LIST_NM;
 	  }
 	  
 	 
