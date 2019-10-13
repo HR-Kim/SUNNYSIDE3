@@ -82,6 +82,7 @@
 	<div class="container ">
 		<button type="button" class="btn btn-default btn-sm" onclick="location.href='http://localhost:8080/sunnyside/planed/do_planedUp_retrieve.do'">등록</button>
 		<button type="button" class="btn btn-default btn-sm" onclick="location.href='http://localhost:8080/sunnyside/planed/do_planedDown_retrieve.do'">삭제</button>
+		<button type="button" class="btn btn-default btn-sm" onclick="location.href='http://localhost:8080/sunnyside/screening/do_screenUp_retrieve.do'">상영</button>
 		<!-- form -->
 		<form class="form-inline" name="planedFrm" id="planedFrm" method="get">
 			<input type="hidden" name="pageNum" id="pageNum" value="${vo.pageNum}"/>
