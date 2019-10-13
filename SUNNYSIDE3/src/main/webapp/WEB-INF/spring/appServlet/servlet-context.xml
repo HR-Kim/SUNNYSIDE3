@@ -9,6 +9,20 @@
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
+	<!-- Tiles setting -->
+	<beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
+		<beans:property name="order" value="1"/>
+	</beans:bean>
+	
+	<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<beans:property name="definitions">
+			<beans:list>
+				<beans:value>/tiles/tiles.xml</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+	<!--// Tiles setting -->
+	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
@@ -19,6 +33,7 @@
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/" />
 		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="2"/>
 	</beans:bean>
 	
 	<context:component-scan base-package="kr.co.sunnyside" />

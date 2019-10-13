@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+ 
+ 
+<tiles-definitions> 
+    <!-- 레이아웃을 적용하는화면-->
+    <definition name="basede_definition" template="/tiles/layouts/basedLayout.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header" value="/tiles/views/header.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/tiles/views/footer.jsp" />
+        <put-attribute name="menu" value="/tiles/views/defaultResource.jsp" />
+    </definition>
+    
+    <!-- (1) -->    
+    <definition name="planed/*" extends="basede_definition">
+      <put-attribute name="body" value="/planed/planed_list.jsp" />
+      <put-attribute name="title" value="SUNNYSIDE>개봉예정리스트" />
+    </definition>
+ 
+
+</tiles-definitions>
