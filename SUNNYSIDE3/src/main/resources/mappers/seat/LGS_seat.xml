@@ -32,7 +32,7 @@
 	</sql>
 	 
 	<delete id="do_delete" parameterType="Seat">
-		DELETE FROM SEAT WHERE SEAT_NM = #{seatNm, jdbcType=VARCHAR}
+		DELETE FROM SEAT WHERE ROOM_ID = #{roomId, jdbcType=VARCHAR}
 	</delete>
 	
 	<select id="do_selectOne" parameterType="Seat" resultType="Seat">

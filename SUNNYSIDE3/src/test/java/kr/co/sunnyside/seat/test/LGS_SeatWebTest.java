@@ -1,6 +1,7 @@
 package kr.co.sunnyside.seat.test;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -65,19 +66,19 @@ public class LGS_SeatWebTest {
 	public void setUp() {
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 		list = Arrays.asList(
-				new LGS_SeatVO("b01", "r01", "A1", "A", 1, "0")
-				,new LGS_SeatVO("b02", "r02", "A2", "A", 2,"0")
-				,new LGS_SeatVO("b03", "r03", "A3", "A", 3, "0")
-				,new LGS_SeatVO("b04", "r04", "A4", "A", 4, "0")
-				,new LGS_SeatVO("b05", "r05", "A5", "A", 5, "0")
-				,new LGS_SeatVO("b06", "r06", "B1", "B", 1, "0")
-				,new LGS_SeatVO("b07", "r07", "B2", "B", 2, "0")
-				,new LGS_SeatVO("b08", "r08", "B3", "B", 3, "0")
-				,new LGS_SeatVO("b09", "r09", "B4", "B", 4, "0")
-				,new LGS_SeatVO("b10", "r10", "B5", "B", 5, "0")
+				new LGS_SeatVO("b01", "r0", "A1", "A", 1, "0")
+				,new LGS_SeatVO("b02", "r0", "A2", "A", 2,"0")
+				,new LGS_SeatVO("b03", "r0", "A3", "A", 3, "0")
+				,new LGS_SeatVO("b04", "r0", "A4", "A", 4, "0")
+				,new LGS_SeatVO("b05", "r0", "A5", "A", 5, "0")
+				,new LGS_SeatVO("b06", "r0", "B1", "B", 1, "0")
+				,new LGS_SeatVO("b07", "r0", "B2", "B", 2, "0")
+				,new LGS_SeatVO("b08", "r0", "B3", "B", 3, "0")
+				,new LGS_SeatVO("b09", "r0", "B4", "B", 4, "0")
+				,new LGS_SeatVO("b10", "r0", "B5", "B", 5, "0")
 				);
 	}
-	
+
 	@Test
 	public void do_retrieve() throws Exception{
 		LOG.debug("======================================");
@@ -90,10 +91,10 @@ public class LGS_SeatWebTest {
 		JsonParser parser0 = new JsonParser();
 		JsonElement a0 = (JsonElement)parser0.parse(jsonString0);
 		JsonArray jArr0 =a0.getAsJsonArray();
-		for(int i=0 ; i<jArr0.size() ; i++) {
-			LGS_SeatVO vo = new LGS_SeatVO();
-			vo.setSeatNm(jArr0.get(i).getAsJsonObject().get("seatNm").getAsString());	
-			do_delete(vo);
+		if(jArr0.size() > 0) {
+		LGS_SeatVO svo = new LGS_SeatVO();
+		svo.setRoomId(jArr0.get(0).getAsJsonObject().get("roomId").getAsString());	
+		do_delete(svo);
 		}
 		
 		LOG.debug("======================================");
@@ -119,7 +120,7 @@ public class LGS_SeatWebTest {
 		assertThat(10, is(jArr.size()));
 		
 	}
-	
+
 	@Test
 	public void update() throws Exception {
 		LOG.debug("======================================");
@@ -132,10 +133,10 @@ public class LGS_SeatWebTest {
 		JsonParser parser0 = new JsonParser();
 		JsonElement a0 = (JsonElement)parser0.parse(jsonString0);
 		JsonArray jArr0 =a0.getAsJsonArray();
-		for(int i=0 ; i<jArr0.size() ; i++) {
-			LGS_SeatVO vo = new LGS_SeatVO();
-			vo.setSeatNm(jArr0.get(i).getAsJsonObject().get("seatNm").getAsString());	
-			do_delete(vo);
+		if(jArr0.size() > 0) {
+		LGS_SeatVO svo = new LGS_SeatVO();
+		svo.setRoomId(jArr0.get(0).getAsJsonObject().get("roomId").getAsString());	
+		do_delete(svo);
 		}
 		
 		LOG.debug("======================================");
@@ -181,10 +182,10 @@ public class LGS_SeatWebTest {
 		JsonParser parser0 = new JsonParser();
 		JsonElement a0 = (JsonElement)parser0.parse(jsonString0);
 		JsonArray jArr0 =a0.getAsJsonArray();
-		for(int i=0 ; i<jArr0.size() ; i++) {
-			LGS_SeatVO vo = new LGS_SeatVO();
-			vo.setSeatNm(jArr0.get(i).getAsJsonObject().get("seatNm").getAsString());	
-			do_delete(vo);
+		if(jArr0.size() > 0) {
+		LGS_SeatVO svo = new LGS_SeatVO();
+		svo.setRoomId(jArr0.get(0).getAsJsonObject().get("roomId").getAsString());	
+		do_delete(svo);
 		}
 		
 		LOG.debug("======================================");
@@ -319,7 +320,7 @@ public class LGS_SeatWebTest {
 		//url, param
 		MockHttpServletRequestBuilder createMessage = 
 				MockMvcRequestBuilders.post("/seat/do_delete.do")
-										.param("seatNm", vo.getSeatNm().toString());
+										.param("roomId", vo.getRoomId().toString());
 		ResultActions resultAction = mockMvc.perform(createMessage)
 										.andExpect(MockMvcResultMatchers.content().contentType("application/json; charset=UTF-8"))
 										.andExpect(MockMvcResultMatchers.jsonPath("$.msgId", is("1")));
@@ -349,5 +350,6 @@ public class LGS_SeatWebTest {
 	public void tearDown() {
 		
 	}
+
 	
 }

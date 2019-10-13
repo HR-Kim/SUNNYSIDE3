@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -173,5 +174,24 @@ public class LGS_BranchInfoCtrl {
 		LOG.debug("==================================");
 		
 		return VIEW_TABLE;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "branchInfo/do_retrieveList.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	public List<?> do_retrieveList(SearchVO search) {
+		LOG.debug("==================================");
+		LOG.debug("Controller : do_retrieveList_branchInfo(ajax)");
+		LOG.debug("==================================");
+		
+		if(search.getPageSize() == 0) search.setPageSize(10);
+		if(search.getPageNum() == 0) search.setPageNum(1);
+				
+		List<LGS_BranchInfoVO> branchList = (List<LGS_BranchInfoVO>) branchInfoSvc.do_retrieve(search);
+		
+		LOG.debug("==================================");
+		LOG.debug("branchList : " + branchList);
+		LOG.debug("==================================");
+		
+		return branchList;
 	}
 }

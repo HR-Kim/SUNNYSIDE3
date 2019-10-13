@@ -424,11 +424,11 @@ public void intro() {
 		
 		List<LGS_RoomVO> tmp2 = (List<LGS_RoomVO>) roomDaoImpl.do_retrieve(search);
 		list = Arrays.asList(
-				new LGS_ScreenInfoVO("", tmp2.get(0).getRoomId(), "b1", "m1", "19/09/30", "19/09/30", "19/09/30", 100,10,1)
-				,new LGS_ScreenInfoVO("", tmp2.get(1).getRoomId(), "b2", "m2", "19/09/30", "19/09/30", "19/09/30", 200,20,2)
-				,new LGS_ScreenInfoVO("", tmp2.get(2).getRoomId(), "b3", "m3", "19/09/30", "19/09/30", "19/09/30", 300,30,3)
-				,new LGS_ScreenInfoVO("", tmp2.get(3).getRoomId(), "b4", "m4", "19/09/30", "19/09/30", "19/09/30", 400,40,4)
-				,new LGS_ScreenInfoVO("", tmp2.get(4).getRoomId(), "b5", "m5", "19/09/30", "19/09/30", "19/09/30", 500,50,5)
+				new LGS_ScreenInfoVO("", tmp2.get(0).getRoomId(), "b1", "m1", "19/09/30", "19/09/30", "19/09/30", 100,10,1,"","",0,0)
+				,new LGS_ScreenInfoVO("", tmp2.get(1).getRoomId(), "b2", "m2", "19/09/30", "19/09/30", "19/09/30", 200,20,2,"","",0,0)
+				,new LGS_ScreenInfoVO("", tmp2.get(2).getRoomId(), "b3", "m3", "19/09/30", "19/09/30", "19/09/30", 300,30,3,"","",0,0)
+				,new LGS_ScreenInfoVO("", tmp2.get(3).getRoomId(), "b4", "m4", "19/09/30", "19/09/30", "19/09/30", 400,40,4,"","",0,0)
+				,new LGS_ScreenInfoVO("", tmp2.get(4).getRoomId(), "b5", "m5", "19/09/30", "19/09/30", "19/09/30", 500,50,5,"","",0,0)
 				);
 	}
 }

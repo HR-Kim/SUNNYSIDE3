@@ -2,6 +2,8 @@ package kr.co.sunnyside.screeninfo.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.math3.exception.NullArgumentException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +18,9 @@ import com.google.gson.Gson;
 
 import kr.co.sunnyside.cmn.Message;
 import kr.co.sunnyside.cmn.SearchVO;
+import kr.co.sunnyside.code.service.CodeVO;
+import kr.co.sunnyside.movie.service.LHJ_MovieVO;
+import kr.co.sunnyside.movie.service.impl.LHJ_ScreeningSvcImpl;
 import kr.co.sunnyside.screeninfo.service.LGS_ScreenInfoSvc;
 import kr.co.sunnyside.screeninfo.service.LGS_ScreenInfoVO;
 
@@ -25,6 +30,9 @@ public class LGS_ScreenInfoCtrl {
 	
 	@Autowired
 	LGS_ScreenInfoSvc screenInfoSvc;
+	
+	@Autowired
+	LHJ_ScreeningSvcImpl screeningSvc;	
 	
 	//view
 	private final String VIEW_ = "?";
@@ -46,11 +54,7 @@ public class LGS_ScreenInfoCtrl {
 		if(screenInfo.getStudentCost() < 0) throw new IllegalArgumentException();
 		if(screenInfo.getAdultCost() < 0) throw new IllegalArgumentException();
 		if(screenInfo.getEpisode() < 0) throw new IllegalArgumentException();
-		
-		
-		
-		
-		
+				
 		int flag = screenInfoSvc.do_save(screenInfo);
 		
 		LOG.debug("==================================");
@@ -177,7 +181,7 @@ public class LGS_ScreenInfoCtrl {
 	
 	@ResponseBody
 	@RequestMapping(value = "screenInfo/do_retrieve.do", method = RequestMethod.POST)
-	public List<?> do_retrieve(SearchVO search, Model model) {
+	public List<?> do_retrieve(SearchVO search) {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_retrieve_screenInfo");
 		LOG.debug("==================================");
@@ -186,7 +190,6 @@ public class LGS_ScreenInfoCtrl {
 		if(search.getPageNum() == 0) search.setPageNum(1);
 		
 		List<LGS_ScreenInfoVO> list = (List<LGS_ScreenInfoVO>) screenInfoSvc.do_retrieve(search);
-		model.addAttribute("list", list);
 		
 		LOG.debug("==================================");
 		LOG.debug("list : " + list);
@@ -194,4 +197,44 @@ public class LGS_ScreenInfoCtrl {
 		
 		return list;
 	}
+	
+	/**영화목록조회*/
+	@ResponseBody
+	@RequestMapping(value="screenInfo/do_retrieve_movie.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	public List<?> do_retrieve_movie(SearchVO search) {
+		LOG.debug("==================================");
+		LOG.debug("Controller : do_retrieve_screenInfo");
+		LOG.debug("==================================");
+		
+		if(search.getPageSize()==0) search.setPageSize(10);
+		if(search.getPageNum()==0) search.setPageNum(1);
+
+		List<LHJ_MovieVO> list = (List<LHJ_MovieVO>) this.screeningSvc.do_retrieve(search);
+		
+		LOG.debug("============================");
+		LOG.debug("list : " + list);
+		LOG.debug("============================");		
+
+		return list;
+	}
+	
+	/**단건조회*/
+	@ResponseBody
+	@RequestMapping(value="screening/do_selectOne_movie.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	public LHJ_MovieVO do_selectOne_movie(LHJ_MovieVO inVO) {
+		LOG.debug("==================================");
+		LOG.debug("Controller : do_selectOne_movie");
+		LOG.debug("==================================");
+		
+		LOG.debug("============================");
+		LOG.debug("=inVO="+inVO);
+		LOG.debug("============================");
+		
+		if(null == inVO.getMovieId() || "".equals(inVO.getMovieId())) throw new IllegalArgumentException("Movie ID를 입력 하세요.");
+		
+		LHJ_MovieVO outVO = (LHJ_MovieVO) this.screeningSvc.do_selectOne(inVO);
+		
+		return outVO;
+	}
+	
 }

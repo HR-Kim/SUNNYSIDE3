@@ -1,6 +1,7 @@
 package kr.co.sunnyside.seat.test;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.isNotNull;
@@ -55,10 +56,8 @@ public class LGS_SeatDaoTest {
 		LOG.debug("do_retrieve");
 		LOG.debug("===========================================================");
 
-		for(LGS_SeatVO vo : list) {
-			LOG.debug("vo = " + vo);
-			int flag = seatDaoImpl.do_delete(vo);
-		}
+		deleteAll();
+		
 		
 		for(LGS_SeatVO vo : list) {
 			LOG.debug("vo = " + vo);
@@ -88,10 +87,8 @@ public class LGS_SeatDaoTest {
 		LOG.debug("do_selectOne");
 		LOG.debug("===========================================================");
 
-		for(LGS_SeatVO vo : list) {
-			LOG.debug("vo = " + vo);
-			int flag = seatDaoImpl.do_delete(vo);
-		}
+		deleteAll();
+		
 		
 		for(LGS_SeatVO vo : list) {
 			LOG.debug("vo = " + vo);
@@ -111,10 +108,8 @@ public class LGS_SeatDaoTest {
 		LOG.debug("do_update");
 		LOG.debug("===========================================================");
 		
-		for(LGS_SeatVO vo : list) {
-			LOG.debug("vo = " + vo);
-			int flag = seatDaoImpl.do_delete(vo);
-		}
+		deleteAll();
+		
 		
 		for(LGS_SeatVO vo : list) {
 			LOG.debug("vo = " + vo);
@@ -133,17 +128,15 @@ public class LGS_SeatDaoTest {
 		seatDaoImpl.do_delete(updateVO);
 		
 	}
-	@Ignore
+	
 	@Test
 	public void do_delete() {
 		LOG.debug("===========================================================");
 		LOG.debug("do_delete");
 		LOG.debug("===========================================================");
 		
-		for(LGS_SeatVO vo : list) {
-			LOG.debug("vo = " + vo);
-			int flag = seatDaoImpl.do_delete(vo);
-		}
+		deleteAll();
+		
 		
 		for(LGS_SeatVO vo : list) {
 			LOG.debug("vo = " + vo);
@@ -159,7 +152,6 @@ public class LGS_SeatDaoTest {
 		
 	}
 
-	@Ignore
 	@Test
 	public void do_save() {
 		LOG.debug("===========================================================");
@@ -167,10 +159,7 @@ public class LGS_SeatDaoTest {
 		LOG.debug("===========================================================");
 
 
-		for(LGS_SeatVO vo : list) {
-			seatDaoImpl.do_delete(vo);
-			
-		}
+		deleteAll();
 		
 		for(LGS_SeatVO vo : list) {
 			LOG.debug("vo = " + vo);
@@ -210,5 +199,16 @@ public class LGS_SeatDaoTest {
 	@After
 	public void tearDown() {
 		
+	}
+	
+	public void deleteAll() {
+		SearchVO search = new SearchVO();
+		search.setPageNum(1);
+		search.setPageSize(10000);
+		List<LGS_SeatVO> list = (List<LGS_SeatVO>) seatDaoImpl.do_retrieve(search);
+		for(LGS_SeatVO vo : list) {
+			int flag = seatDaoImpl.do_delete(vo);
+			assertThat(flag, not(0) );
+		}
 	}
 }

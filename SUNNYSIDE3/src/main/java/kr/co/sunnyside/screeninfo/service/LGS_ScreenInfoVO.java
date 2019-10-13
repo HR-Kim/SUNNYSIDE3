@@ -14,11 +14,16 @@ public class LGS_ScreenInfoVO extends DTO {
 	private int adultCost;		//성인
 	private int studentCost;	//학생
 	private int episode;		//회차
+	private String korTitle;	//한글제목
+	private String engTitle;	//영어제목
+	private double expertRate;	//전문가평점
+	private double visitorRate;	//관객평점
 	
 	public LGS_ScreenInfoVO(){}
 
-	public LGS_ScreenInfoVO(String screenId, String roomId, String branchId, String movieId, String startTime, String endTime,
-			String screenDt, int adultCost, int studentCost, int episode) {
+	public LGS_ScreenInfoVO(String screenId, String roomId, String branchId, String movieId, String startTime,
+			String endTime, String screenDt, int adultCost, int studentCost, int episode, String korTitle,
+			String engTitle, double expertRate, double visitorRate) {
 		super();
 		this.screenId = screenId;
 		this.roomId = roomId;
@@ -30,6 +35,10 @@ public class LGS_ScreenInfoVO extends DTO {
 		this.adultCost = adultCost;
 		this.studentCost = studentCost;
 		this.episode = episode;
+		this.korTitle = korTitle;
+		this.engTitle = engTitle;
+		this.expertRate = expertRate;
+		this.visitorRate = visitorRate;
 	}
 
 	public String getScreenId() {
@@ -112,12 +121,45 @@ public class LGS_ScreenInfoVO extends DTO {
 		this.episode = episode;
 	}
 
+	public String getKorTitle() {
+		return korTitle;
+	}
+
+	public void setKorTitle(String korTitle) {
+		this.korTitle = korTitle;
+	}
+
+	public String getEngTitle() {
+		return engTitle;
+	}
+
+	public void setEngTitle(String engTitle) {
+		this.engTitle = engTitle;
+	}
+
+	public double getExpertRate() {
+		return expertRate;
+	}
+
+	public void setExpertRate(double expertRate) {
+		this.expertRate = expertRate;
+	}
+
+	public double getVisitorRate() {
+		return visitorRate;
+	}
+
+	public void setVisitorRate(double visitorRate) {
+		this.visitorRate = visitorRate;
+	}
+
 	@Override
 	public String toString() {
-		return "ScreenInfo [screenId=" + screenId + ", roomId=" + roomId + ", branchId=" + branchId + ", movieId="
+		return "LGS_ScreenInfoVO [screenId=" + screenId + ", roomId=" + roomId + ", branchId=" + branchId + ", movieId="
 				+ movieId + ", startTime=" + startTime + ", endTime=" + endTime + ", screenDt=" + screenDt
-				+ ", adultCost=" + adultCost + ", studentCost=" + studentCost + ", episode=" + episode + ", toString()="
-				+ super.toString() + "]";
+				+ ", adultCost=" + adultCost + ", studentCost=" + studentCost + ", episode=" + episode + ", korTitle="
+				+ korTitle + ", engTitle=" + engTitle + ", expertRate=" + expertRate + ", visitorRate=" + visitorRate
+				+ ", toString()=" + super.toString() + "]";
 	}
-	
+
 }

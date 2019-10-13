@@ -11,6 +11,9 @@
 			<when test="'10' == searchDiv">
 				MOVIE_ID LIKE '%' || #{searchWord} || '%'
 			</when>
+			<when test="'20' == searchDiv">
+				ROOM_ID LIKE '%' || #{searchWord} || '%'
+			</when>
 			<otherwise></otherwise>
 		</choose>
 	</where>

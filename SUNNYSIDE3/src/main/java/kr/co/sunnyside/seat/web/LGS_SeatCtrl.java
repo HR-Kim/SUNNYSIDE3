@@ -113,7 +113,7 @@ public class LGS_SeatCtrl {
 		LOG.debug("==================================");
 		
 		if(seat == null) throw new NullArgumentException(); //null
-		if(seat.getSeatNm() == null || seat.getSeatNm() == "") throw new IllegalArgumentException(); //상영관ID
+		if(seat.getRoomId() == null || seat.getRoomId() == "") throw new IllegalArgumentException(); //상영관ID
 		
 		int flag = seatSvc.do_delete(seat);
 		
@@ -183,5 +183,4 @@ public class LGS_SeatCtrl {
 		
 		return list;
 	}
-
 }
