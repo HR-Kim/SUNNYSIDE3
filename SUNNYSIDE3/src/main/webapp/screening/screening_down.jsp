@@ -96,7 +96,7 @@
 	<div class="container">
 		<!-- div title --> 
 		<div class="page-header">
-			<h1>개봉예정 리스트에서 제외</h1>
+			<h1>상영중 리스트에서 제외</h1>
 		</div>
 		<!--// div title -->
 		<!-- 검색영역 -->

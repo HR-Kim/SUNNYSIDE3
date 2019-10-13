@@ -181,7 +181,7 @@
 		//개봉예정리스트로 돌아가기
 		$("#doListRetrieve").on("click", function(){
 			if(confirm("목록으로 이동 하시겠습니까?")==false)return;
-			location.href="${context}/planed/do_planedUp_retrieve.do"
+			location.href="${context}/planed/do_retrieve.do"
 		});
 		
 		function doRetrieve(){
