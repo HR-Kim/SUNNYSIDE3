@@ -113,7 +113,7 @@
 						<input type="text"  class="form-control input-sm" id="searchWord" name="searchWord" placeholder='검색' />
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<button type="button" class="btn btn-default btn-sm" id="doRetrieve">조회</button> 
-						<button type="button" class="btn btn-default btn-sm" id="doListRetrieve">조회</button> 
+						<button type="button" class="btn btn-default btn-sm" id="doListRetrieve">목록</button> 
 					</div>
 				</form>
 			</div> 

@@ -64,22 +64,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
 
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 <!------ Include the above in your HEAD tag ---------->
-<link href="../resources/css/movie_list.css" rel="stylesheet" type="text/css">
+<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="../resources/css/movie_list.css" rel="stylesheet" type="text/css"> 
+
 <!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js -->
 <!-- WARNING: Respond.js 는 당신이 file:// 을 통해 페이지를 볼 때는 동작하지 않습니다. -->
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->	
-<title>Insert title here</title>
+<![endif]-->
 </head>
 
 <body>
+	
+	
 	<div class="container ">
+		<!-- div title --> 
+		<div class="page-header">
+			<h1>개봉예정작</h1>
+		</div>
+		<!--// div title -->
 		<button type="button" class="btn btn-default btn-sm" onclick="location.href='http://localhost:8080/sunnyside/planed/do_planedUp_retrieve.do'">등록</button>
 		<button type="button" class="btn btn-default btn-sm" onclick="location.href='http://localhost:8080/sunnyside/planed/do_planedDown_retrieve.do'">삭제</button>
 		<button type="button" class="btn btn-default btn-sm" onclick="location.href='http://localhost:8080/sunnyside/screening/do_screenUp_retrieve.do'">상영</button>
