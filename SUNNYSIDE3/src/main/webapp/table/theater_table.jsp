@@ -113,14 +113,14 @@
 				<p>새로운 지점 이름을 입력하세요.</p>
 				<input type="text" id="new_branchNm" maxlength="20">
 				<br/><hr/>
-				<button id="branch_add">추가</button>
-				<button id="branch_cancel">취소</button>
+				<button id="branch_add" class="btn btn-default">추가</button>
+				<button id="branch_cancel" class="btn btn-default">취소</button>
 			</div>
 		
 			<div>
-				<button id="branch_retrieve">지점조회</button>
-				<button id="branch_plus">지점추가</button>
-				<button id="branch_delete">지점제거</button>
+				<button id="branch_retrieve" class="btn btn-default">지점조회</button>
+				<button id="branch_plus" class="btn btn-default">지점추가</button>
+				<button id="branch_delete" class="btn btn-default">지점제거</button>
 			</div>
 			<input type="hidden" id="hd_branchId" value="">
 			<input type="hidden" id="hd_branchNm" value="">
@@ -156,8 +156,8 @@
 				<p>새로운 상영관 이름을 입력하세요.</p>
 				<input type="text" id="new_roomNm" maxlength="20">
 				<br/><hr/>
-				<button id="room_add">추가</button>
-				<button id="room_cancel">취소</button>
+				<button id="room_add" class="btn btn-default">추가</button>
+				<button id="room_cancel" class="btn btn-default">취소</button>
 			</div>
 			
 			<div class="seatSetting_layer">
@@ -165,11 +165,11 @@
 			</div>
 			
 			<div>
-				<button id="room_plus">상영관추가</button>
-				<button id="room_delete">상영관제거</button>
-				<button id="seat_add">좌석생성</button>
-				<button id="seat_delete">좌석제거</button>
-				<button id="room_reset">새로고침</button>
+				<button id="room_plus" class="btn btn-default">상영관추가</button>
+				<button id="room_delete" class="btn btn-default">상영관제거</button>
+				<button id="seat_add" class="btn btn-default">좌석생성</button>
+				<button id="seat_delete" class="btn btn-default">좌석제거</button>
+				<button id="room_reset" class="btn btn-default">새로고침</button>
 				<input type="hidden" id="hd_roomzero" value="">
 				<input type="hidden" id="hd_roomId" value="">
 				<input type="hidden" id="hd_roomNm" value="">
@@ -302,7 +302,7 @@
     			}
     			
     			update_room(roomId);
-    			$("$seatTableInfo").text("");
+    			$("#seatTableInfo").text("");
 				create_Room_Table(branchId);
 				
     		}

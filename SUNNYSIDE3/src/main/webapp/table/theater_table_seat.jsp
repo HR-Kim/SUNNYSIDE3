@@ -49,8 +49,8 @@
 				<option value="1">사용불가좌석</option>
 			</select>
 			<br/>
-			<button id="btn_resetA">초기화 : 통로</button>
-			<button id="btn_resetB">초기화 : 사용가능좌석</button>
+			<button id="btn_resetA" class="btn btn-default">초기화 : 통로</button>
+			<button id="btn_resetB" class="btn btn-default">초기화 : 사용가능좌석</button>
 			
 			<div class="seatWrap">
 				<p class="screen">SCREEN</p>
@@ -59,8 +59,8 @@
 				</div>
 			</div>
 			
-			<button id="submit">완료</button>
-			<button id="cancel">취소</button>
+			<button id="submit" class="btn btn-default">완료</button>
+			<button id="cancel" class="btn btn-default">취소</button>
 		</div>
 		
 		<script src="${context}/resources/js/jquery-1.12.4.js"></script>
