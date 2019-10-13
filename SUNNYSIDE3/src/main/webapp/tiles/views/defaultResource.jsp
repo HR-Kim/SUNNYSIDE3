@@ -2,6 +2,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
   <link rel="icon" href="../../sunnyside/resources/image/layout/logo.png">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="../../sunnyside/resources/css/bootstrap.min.css">

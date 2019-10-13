@@ -1,9 +1,11 @@
-<!doctype html>
-<html lang="zxx">
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
 <head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
-
 <body>
   <!--::footer_part start::-->
   <footer class="footer-area">
@@ -33,37 +35,6 @@
               <li><a href="#"><i class="ti-email"></i>ariclaw@law.com</a></li>
               <li><a href="#"><i class="ti-world"></i> ariclawyerfirm.com</a></li>
             </ul>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-6 col-lg-3">
-          <div class="single-footer-widget footer_3">
-            <h4>Instagram</h4>
-            <div class="footer_img">
-              <div class="single_footer_img">
-                <img src="img/footer_img/footer_img_1.png" alt="">
-                <i class="ti-instagram"></i>
-              </div>
-              <div class="single_footer_img">
-                <img src="img/footer_img/footer_img_2.png" alt="">
-                <i class="ti-instagram"></i>
-              </div>
-              <div class="single_footer_img">
-                <img src="img/footer_img/footer_img_3.png" alt="">
-                <i class="ti-instagram"></i>
-              </div>
-              <div class="single_footer_img">
-                <img src="img/footer_img/footer_img_4.png" alt="">
-                <i class="ti-instagram"></i>
-              </div>
-              <div class="single_footer_img">
-                <img src="img/footer_img/footer_img_5.png" alt="">
-                <i class="ti-instagram"></i>
-              </div>
-              <div class="single_footer_img">
-                <img src="img/footer_img/footer_img_6.png" alt="">
-                <i class="ti-instagram"></i>
-              </div>
-            </div>
           </div>
         </div>
         <div class="col-sm-6 col-md-6 col-lg-3">

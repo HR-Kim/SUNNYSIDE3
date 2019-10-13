@@ -14,10 +14,28 @@
         <put-attribute name="menu" value="/tiles/views/defaultResource.jsp" />
     </definition>
     
-    <!-- (1) -->    
+    <!-- main -->    
+    <definition name="main/*" extends="basede_definition">
+      <put-attribute name="body" value="/main/main.jsp" />
+      <put-attribute name="title" value="SUNNYSIDE>메인" />
+    </definition>
+    
+    <!-- boxoffice -->    
+    <definition name="boxoffice/*" extends="basede_definition">
+      <put-attribute name="body" value="/boxoffice/{1}.jsp" />
+      <put-attribute name="title" value="SUNNYSIDE>박스오피스리스트" />
+    </definition>
+    
+    <!-- planed -->    
     <definition name="planed/*" extends="basede_definition">
-      <put-attribute name="body" value="/planed/planed_list.jsp" />
+      <put-attribute name="body" value="/planed/{1}.jsp" />
       <put-attribute name="title" value="SUNNYSIDE>개봉예정리스트" />
+    </definition>
+    
+    <!-- screening -->    
+    <definition name="screening/*" extends="basede_definition">
+      <put-attribute name="body" value="/screening/{1}.jsp" />
+      <put-attribute name="title" value="SUNNYSIDE>최신개봉리스트" />
     </definition>
  
 
