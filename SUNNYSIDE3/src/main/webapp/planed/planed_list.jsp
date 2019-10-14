@@ -92,10 +92,13 @@
 		<!-- form -->
 		<form class="form-inline" name="planedFrm" id="planedFrm" method="get">
 			<input type="hidden" name="pageNum" id="pageNum" value="${vo.pageNum}"/>
-			<div class="container_inner default_template_holder clearfix page_container_inner"><div class="vc_row wpb_row section vc_row-fluid" style=" padding-top:0px; text-align:left;"><div class=" full_section_inner clearfix"><div class="vc_col-sm-12 wpb_column vc_column_container"><div class="wpb_wrapper"><div class="projects_holder_outer v3 portfolio_with_space portfolio_standard "><div class="projects_holder clearfix v3 standard">
+			
+			<div class="container_inner default_template_holder clearfix page_container_inner outer_div"><div class="vc_row wpb_row section vc_row-fluid" style=" padding-top:0px; text-align:left;"><div class=" full_section_inner clearfix"><div class="vc_col-sm-12 wpb_column vc_column_container"><div class="wpb_wrapper"><div class="projects_holder_outer v3 portfolio_with_space portfolio_standard "><div class="projects_holder clearfix v3 standard">
 				<c:choose>
 					<c:when test="${list.size()>0}">
 						<c:forEach var="vo" items="${list}">	
+							<input type="hidden" name="movieId" id="movieId"/>
+							<a class="lightbox qbutton small white movieId" href="#" hidden="true">${vo.movieId}</a>
 							<div class="col-lg-3">				
 <!-- 							<article class="mix mix_all" style="display: inline-block; opacity: 1; width:250px;  margin-bottom: 100;"> -->
 							<article class="mix mix_all" style="display: inline-block; opacity: 1; width:250px; height:500px;">
@@ -108,8 +111,8 @@
 									<!--// 이미지  -->			
 									<!-- 예매하기, 상세보기 버튼 -->
 									<span class="text_holder"><span class="text_outer"><span class="text_inner" ><span class="feature_holder" ><span class="feature_holder_icons">
-										<a class="lightbox qbutton small white" href="#">예매하기</a>
-										<a class="lightbox qbutton small white" href="#">상세보기</a>
+										<a class="lightbox qbutton small white" href="../planed/do_selectOne.do?movieId=<c:out value="${vo.movieId}"/>">예매하기</a>
+										<a class="lightbox qbutton small white" href="#">상세보기</a>										
 									</span></span></span></span></span>			
 									<!--// 예매하기, 상세보기 버튼 -->		
 								</div>
@@ -150,7 +153,7 @@
 	<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
 	<script src="${context}/resources/js/bootstrap.min.js"></script>  
 	
-	<script type="text/javascript">
+	<script type="text/javascript">	
 		//paging
 		function search_page(url, pageNum) {
 			var frm = document.planedFrm;

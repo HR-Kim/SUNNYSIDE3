@@ -35,7 +35,7 @@ public class LHJ_PlanedCtrl {
 	 
 	 //view
 	 private final String VIEW_LIST_NM = "planed/planed_list";
-	 private final String VIEW_MNG_NM  = "planed/planed_mng";
+	 private final String VIEW_MOVIE_DETAIL  = "movie/movie_detail";
 	 private final String VIEW_PLANED_UP  = "planed/planedCtrl/planed_up";
 	 private final String VIEW_PLANED_DOWN  = "planed/planedCtrl/planed_down";
 	 
@@ -181,7 +181,7 @@ public class LHJ_PlanedCtrl {
 		 LHJ_MovieVO outVO= (LHJ_MovieVO) this.service.do_selectOne(inVO);
 		 model.addAttribute("vo", outVO);
 	
-		 return VIEW_MNG_NM;
+		 return VIEW_MOVIE_DETAIL;
 	 }
 		
 	 /** 최신개봉으로 상태 변경(상영중으로 상태 변경)(010)  */

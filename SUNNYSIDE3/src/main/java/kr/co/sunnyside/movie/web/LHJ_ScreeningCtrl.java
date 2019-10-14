@@ -36,7 +36,7 @@ public class LHJ_ScreeningCtrl {
 	 
 	//view
 	private final String VIEW_LIST_NM = "screening/screening_list";
-	private final String VIEW_MNG_NM  = "screening/screening_mng";
+	private final String VIEW_MOVIE_DETAIL  = "movie/movie_detail";
 	 private final String VIEW_SCREEN_UP  = "screening/screeningCtrl/screening_up";
 	 private final String VIEW_SCREEN_DOWN  = "screening/screeningCtrl/screening_down";
 	
@@ -182,7 +182,7 @@ public class LHJ_ScreeningCtrl {
 		 LHJ_MovieVO outVO= (LHJ_MovieVO) this.service.do_selectOne(inVO);
 		 model.addAttribute("vo", outVO);
 	
-		 return VIEW_MNG_NM;
+		 return VIEW_MOVIE_DETAIL;
 	 }
 	 
 	 /** 최신개봉으로 상태 변경(상영중으로 상태 변경)(010)  */
