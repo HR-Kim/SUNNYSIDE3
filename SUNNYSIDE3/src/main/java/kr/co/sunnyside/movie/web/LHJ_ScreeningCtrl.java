@@ -45,7 +45,7 @@ public class LHJ_ScreeningCtrl {
 	 public String do_screenDown_retrieve(HttpServletRequest req,SearchVO search, Model model) {
 		 //param
 		 if(search.getPageSize()==0) {
-			 search.setPageSize(12);
+			 search.setPageSize(10);
 		 }
 		 
 		 if(search.getPageNum()==0) {
@@ -135,7 +135,7 @@ public class LHJ_ScreeningCtrl {
 	 public String do_retrieve(HttpServletRequest req,SearchVO search, Model model) {
 		 //param
 		 if(search.getPageSize()==0) {
-			 search.setPageSize(10);
+			 search.setPageSize(12);
 		 }
 	
 		 if(search.getPageNum()==0) {
