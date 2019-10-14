@@ -131,11 +131,6 @@
 		
 	
 	
-	//naverLogin
-	
-	
-	
-	
 	
 		/** 아이디 찾기 */
 		$("#id_find").on("click",function(){
