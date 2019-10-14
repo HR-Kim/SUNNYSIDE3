@@ -5,7 +5,7 @@ import kr.co.sunnyside.cmn.DTO;
 public class SEJ_PhotoTicketVO extends DTO {
 	private String	kortitle;
 	private String	screen_dt;
-	private String	seat_num;
+	private String	seat_nm;
 	private String	ticket_code;
 	private String	user_id;
 	private String	org_img_nm;
@@ -14,6 +14,7 @@ public class SEJ_PhotoTicketVO extends DTO {
 	private long	img_size;
 	private String	reg_dt;
 	private String ThisFileNm;
+	private	String room_id;
 
 	
 	public SEJ_PhotoTicketVO() {}
@@ -40,12 +41,12 @@ public class SEJ_PhotoTicketVO extends DTO {
 
 
 	public String getSeat_num() {
-		return seat_num;
+		return seat_nm;
 	}
 
 
-	public void setSeat_num(String seat_num) {
-		this.seat_num = seat_num;
+	public void setSeat_nm(String seat_nm) {
+		this.seat_nm = seat_nm;
 	}
 
 
@@ -129,21 +130,32 @@ public class SEJ_PhotoTicketVO extends DTO {
 	}
 
 
+	public String getRoom_id() {
+		return room_id;
+	}
+
+
+	public void setRoom_id(String room_id) {
+		this.room_id = room_id;
+	}
+
+
 	@Override
 	public String toString() {
-		return "SEJ_PhotoTicketVO [kortitle=" + kortitle + ", screen_dt=" + screen_dt + ", seat_num=" + seat_num
+		return "SEJ_PhotoTicketVO [kortitle=" + kortitle + ", screen_dt=" + screen_dt + ", seat_num=" + seat_nm
 				+ ", ticket_code=" + ticket_code + ", user_id=" + user_id + ", org_img_nm=" + org_img_nm
 				+ ", save_img_nm=" + save_img_nm + ", ext=" + ext + ", img_size=" + img_size + ", reg_dt=" + reg_dt
-				+ ", ThisFileNm=" + ThisFileNm + "]";
+				+ ", ThisFileNm=" + ThisFileNm + ", room_id=" + room_id + "]";
 	}
 
 
 	public SEJ_PhotoTicketVO(String kortitle, String screen_dt, String seat_num, String ticket_code, String user_id,
-			String org_img_nm, String save_img_nm, String ext, long img_size, String reg_dt, String thisFileNm) {
+			String org_img_nm, String save_img_nm, String ext, long img_size, String reg_dt, String thisFileNm,
+			String room_id) {
 		super();
 		this.kortitle = kortitle;
 		this.screen_dt = screen_dt;
-		this.seat_num = seat_num;
+		this.seat_nm = seat_num;
 		this.ticket_code = ticket_code;
 		this.user_id = user_id;
 		this.org_img_nm = org_img_nm;
@@ -152,8 +164,10 @@ public class SEJ_PhotoTicketVO extends DTO {
 		this.img_size = img_size;
 		this.reg_dt = reg_dt;
 		ThisFileNm = thisFileNm;
+		this.room_id = room_id;
 	}
 
 
+	
 		
 }

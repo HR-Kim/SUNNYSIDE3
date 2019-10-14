@@ -22,8 +22,7 @@
 	<hr/>
 	<form class="form-inline" enctype="multipart/form-data" method="post" name="saveFrm" id="saveFrm" >
 		<div>포토 티켓을만들 영화 리스트를 선택해 주세요:<select class="form-control input-sm" id="movieList">
-			<option value='' selected>영화목록</option>
-			<option value='' >------------</option>
+			
 			<c:choose>
 			
 					<c:when test="${moiveList.size()>0}">

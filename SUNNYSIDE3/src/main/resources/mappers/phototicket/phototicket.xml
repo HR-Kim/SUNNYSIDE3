@@ -10,9 +10,10 @@
 	<select id="do_retrieve" parameterType="SEJ_PhotoTicketVO" resultType="SEJ_PhotoTicketVO">
 	  	select 	b.kortitle,
 		      	c.screen_dt,
-		      	a.seat_num,
+		      	a.seat_nm,
 			  	a.ticket_code,
-			  	a.user_id
+			  	a.user_id,
+			  	c.room_id
 	  	from ticket_history a JOIN movie b
 		ON a.movie_id=b.movie_id
 		JOIN screen_info c
@@ -21,9 +22,10 @@
         MINUS (
             select  b.kortitle,
                     c.screen_dt,
-                    a.seat_num,
+                    a.seat_nm,
                     a.ticket_code,
-                    a.user_id
+                    a.user_id,
+                    c.room_id
             from ticket_history a JOIN movie b
             ON a.movie_id=b.movie_id
             JOIN screen_info c
@@ -37,9 +39,10 @@
 	<select id="do_selectOne" parameterType="SEJ_PhotoTicketVO" resultType="SEJ_PhotoTicketVO">
 	  	select 	b.kortitle,
 		      	c.screen_dt,
-		      	a.seat_num,
+		      	a.seat_nm,
 			  	a.ticket_code,
-			  	a.user_id
+			  	a.user_id,
+			  	c.room_id
 	  	from ticket_history a JOIN movie b
 		ON a.movie_id=b.movie_id
 		JOIN screen_info c
@@ -53,25 +56,27 @@
 		INSERT INTO photo_ticket (
 			    kortitle,
 			    screen_dt,
-			    seat_num,
+			    seat_nm,
 			    ticket_code,
 			    user_id,
 			    org_img_nm,
 			    save_img_nm,
 			    ext,
 			    img_size,
-			    reg_dt
+			    reg_dt,
+			    room_id
 		) VALUES (
 		    #{kortitle,jdbcType=VARCHAR},
 		    to_date(#{screen_dt,jdbcType=DATE},'YY-MM-DD HH24:mi:SS'),
-		    #{seat_num,jdbcType=NUMERIC},
+		    #{seat_nm,jdbcType=NUMERIC},
 		    #{ticket_code,jdbcType=VARCHAR},
 		    #{user_id,jdbcType=VARCHAR},
 		    #{org_img_nm,jdbcType=VARCHAR},
 		    #{save_img_nm,jdbcType=VARCHAR},
 		    #{ext,jdbcType=VARCHAR},
 		    #{img_size,jdbcType=VARCHAR},
-		    SYSDATE
+		    SYSDATE,
+		    #{room_id,jdbcType=VARCHAR}
 		)
 	</insert>
 
