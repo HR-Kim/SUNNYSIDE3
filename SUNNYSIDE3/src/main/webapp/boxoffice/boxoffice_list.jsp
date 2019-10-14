@@ -55,7 +55,7 @@
 							<!-- 예매하기, 상세보기 버튼 -->
 							<span class="text_holder"><span class="text_outer"><span class="text_inner" ><span class="feature_holder" ><span class="feature_holder_icons">
 								<a class="lightbox qbutton small white" href="#">예매하기</a>
-								<a class="lightbox qbutton small white" href="../boxoffice/do_selectOne.do?movieId=<c:out value="${vo.movieId}"/>">상세보기</a>
+								<a class="lightbox qbutton small white" href="../movie/do_selectOne.do?movieId=<c:out value="${vo.movieId}"/>">상세보기</a>
 								
 							</span></span></span></span></span>			
 							<!--// 예매하기, 상세보기 버튼 -->		
