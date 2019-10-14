@@ -2,10 +2,8 @@ package kr.co.sunnyside.store.service;
 
 import java.util.List;
 
-import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.sunnyside.cmn.DTO;
-import kr.co.sunnyside.cmn.SearchVO;
 
 public interface SEJ_StroreSvc {
 	
@@ -28,6 +26,10 @@ public interface SEJ_StroreSvc {
 	
 	/**영화예매권목록조회*/
 	public List<?> do_retrieve_movieticket(DTO dto);
+	
+	/**이미지 업로드*/
+	public int do_imageUpload(DTO dto);
+	
 	
 	
 

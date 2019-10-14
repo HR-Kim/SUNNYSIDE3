@@ -59,7 +59,7 @@
 					        <div class="col-md-3 col-sm-6" >
 					            <div class="product-grid">							       
 					                <div class="product-image">					                    
-					                    <img class="pic-1" style="height: 270px" width="270px" src="<c:out value="${vo.saveFileNm }"/>">		
+					                    <img class="pic-1" style="height: 270px" width="270px" src='<c:out value="${vo.saveFileNm }"/>'>		
 					                    <ul class="social">
 					                        <li><a href="do_selectOne.do?productId=${vo.productId }" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
 					                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>

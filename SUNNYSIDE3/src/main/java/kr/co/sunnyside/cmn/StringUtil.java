@@ -88,6 +88,18 @@ public class StringUtil {
 
 		return f.getAbsolutePath();
 	}
+	
+	/**
+	 * 파일 Rename
+	 * 
+	 * @param f
+	 * @return 파일 rename명 cloude.jpg->cloude1~9999.jpg
+	 */
+	public static String changePath(String str) {
+		str = ".."+str.substring(str.indexOf("\\resources")).replace("\\", "/");
+		
+		return str;
+	}
 
 	public static String getUUID() {
 		UUID uuid = UUID.randomUUID();
@@ -244,12 +256,8 @@ public class StringUtil {
 		StringBuilder sb = new StringBuilder();
 		// <select name="lvl" id="lvl">
 		sb.append("<select  class=\"form-control input-sm\" name='" + selectBoxNm + "' id='" + selectBoxNm + "' > \n");
-		// 전체
-		if (allYN == true) {
-			sb.append("<option value=''>전체</option> \n");
-		}
 
-		// <option value="1" selected>일반사용자</option>
+		// <option value="1" selected>팝콘</option>
 		for (CodeVO dto : list) {
 			CodeVO vo = dto;
 			sb.append("\t<option value='" + vo.getCodeId() + "' ");

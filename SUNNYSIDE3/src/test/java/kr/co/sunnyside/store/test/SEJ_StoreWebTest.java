@@ -80,14 +80,12 @@ public class SEJ_StoreWebTest {
 	 public void do_save() throws Exception{
 	    MockHttpServletRequestBuilder createMessage 
 	    = MockMvcRequestBuilders.post("/store/do_save.do").param("productNm", "영화 할인권")
-	    												  .param("pruductInfo", "영화를 3000원 할인해서 보세요")
+	    												  .param("productInfo", "영화를 3000원 할인해서 보세요")
 	    												  .param("category", "3")
-	    												  .param("productCost", "7000")
-	    												  .param("orgFileNm", "imaxticket.jpg")
-	    												  .param("saveFileNm", "imaxticket.jpg");
+	    												  .param("productCost", "7000");
 	    
 	    ResultActions resultActions =  mockMvc.perform(createMessage)
-	                                          //.andExpect(MockMvcResultMatchers.content().contentType("application/json; charset=UTF-8"))	                              
+	                                          .andExpect(MockMvcResultMatchers.content().contentType("application/json; charset=UTF-8"))	                              
 	    							          .andExpect(MockMvcResultMatchers.jsonPath("$.msgId", is("1")));
 	    String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
 	    LOG.debug("=============================");
@@ -122,12 +120,10 @@ public class SEJ_StoreWebTest {
 	@Ignore
 	public void do_update() throws Exception{
 	    MockHttpServletRequestBuilder createMessage 
-	    = MockMvcRequestBuilders.post("/store/do_update.do").param("productId", "20191010-003-000")
+	    = MockMvcRequestBuilders.post("/store/do_update.do").param("productId", "20191014-003-021")
 	    												    .param("productNm", "IMAX영화예매권")
 	    												    .param("productInfo", "IMAX는 사람이 볼 수 있는 최대 영상이라는 뜻으로, 최고의 몰입감을 선사합니다.")
-	    												    .param("productCost", "15000")
-	    												    .param("orgFileNm", "imaxticket.jpg")
-	    													.param("saveFileNm", "imaxticket.jpg");
+	    												    .param("productCost", "15000");
 	    
 	    ResultActions resultActions =  mockMvc.perform(createMessage)
 	                                //.andExpect(MockMvcResultMatchers.content().contentType("application/json; charset=UTF-8"))	                              
@@ -162,7 +158,7 @@ public class SEJ_StoreWebTest {
 	 * 조회만 get
 	 */
 	@Test
-	//@Ignore
+	@Ignore
 	public void do_retrieve() throws Exception{
 	    MockHttpServletRequestBuilder createMessage 
 	    = MockMvcRequestBuilders.get("/store/do_retrieve.do") .param("pageSize", "10")

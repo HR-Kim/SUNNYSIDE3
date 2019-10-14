@@ -232,7 +232,7 @@
 	 function popup(){
          var url = "store_add.jsp";
          var name = "상품등록";
-         var option = "width = 600, height = 350, top = 100, left = 400, location = no"
+         var option = "width = 700, height = 400, top = 100, left = 400, location = no"
          window.open(url, name, option);
      }
 
