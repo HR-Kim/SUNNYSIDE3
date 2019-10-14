@@ -17,23 +17,7 @@
 			<otherwise></otherwise>
 		</choose>
 	</where>
-	</sql>
-
-	<!-- 정렬 -->
-	<sql id="orderCondition">
-	<where>
-		<choose>
-			<when test="'10' == order">
-				T2.KORTITLE, T2.ENGTITLE
-			</when>
-			<when test="'20' == order">
-				T2.EXPERT_RATE, T2.VISITOR_RATE
-			</when>
-			<otherwise></otherwise>
-		</choose>
-	</where>
-	</sql>
-	
+	</sql>	
 	 
 	<delete id="do_delete" parameterType="ScreenInfo">
 		DELETE FROM SCREEN_INFO WHERE SCREEN_ID = #{screenId, jdbcType=VARCHAR}
@@ -121,7 +105,7 @@
 		         SELECT *
 		         FROM SCREEN_INFO
 		         <include refid="baseCondition"/>
-		         ORDER BY SCREEN_DT
+		         ORDER BY SCREEN_DT desc, EPISODE desc
 		        )A
 		    WHERE CEIL(ROWNUM/ #{pageSize, jdbcType=VARCHAR} ) = #{pageNum, jdbcType=VARCHAR}
 		    )T1,

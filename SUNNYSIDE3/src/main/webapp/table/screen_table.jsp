@@ -25,6 +25,24 @@
 		<link href="${context}/resources/css/jquery-ui.css" rel="stylesheet">
 		<link  href="${context}/resources/css/jquery.timepicker.min.css" rel="stylesheet">
 		<style type="text/css">
+			.case {
+				border: 1px solid black;
+				padding: 10px;
+			}
+			.movieValidate {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 500px;
+				height: 400px;
+				padding: 15px;
+				font-weight: bold;
+				text-align: center;
+				background-color: white;
+				border: 1px solid black;
+				z-index: 96;
+				display: none;
+			}
 			.loadingLayer {
 				position: absolute;
 				width: 200px;
@@ -90,70 +108,76 @@
 				<p>...작업중입니다...</p>
 			</div>
 			<div class="dim"></div>
-			
-			<label>지점 현황</label>
-			<button id="branchRetrive" class="btn btn-primary btn-xs">지점조회</button>
-			<div class="table-responsive">
-				<table id="branchTable" class="table table-hover table-bordered">
-					<thead class="bg-primary">
-						<tr>
-							<td hidden="hidden">지점ID</td>
-							<td>지점명</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td colspan="99">No Data</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-			<label>상영관 현황</label>
-			<input type="hidden" id="hd_roomId" value="">
-			<div class="table-responsive">
-				<table id="roomTable" class="table table-hover table-bordered">
-					<thead class="bg-primary">
-						<tr>
-							<td hidden="hidden">상영관ID</td>
-							<td>상영관명</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td colspan="99">지점을 선택해주세요.</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-			<label>편성된 영화 현황</label>
-			<div class="table-responsive">
-				<table id="planedMovieTable" class="table table-hover table-bordered">
-					<thead class="bg-primary">
-						<tr>
-							<td>제목</td>
-							<td>상영날짜</td>
-							<td>시작시간</td>
-							<td>종료시간</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td colspan="99">상영관을 선택해주세요.</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="row">
-				<div class="col-md-2">
-					<button id="moviePlan" class="btn btn-default">영화추가</button>
+			<div class="case">
+				<label>지점 현황</label>
+				<input type="hidden" id="hd_branchId" value="">
+				<input type="hidden" id="hd_branchNm" value="">
+				<button id="branchRetrive" class="btn btn-primary btn-xs">지점조회</button>
+				<div class="table-responsive">
+					<table id="branchTable" class="table table-hover table-bordered">
+						<thead class="bg-primary">
+							<tr>
+								<td hidden="hidden">지점ID</td>
+								<td>지점명</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td colspan="99">No Data</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-				<div class="col-md-10 text-right">
-					<button id="planDelete" class="btn btn-default">제거</button>
+	
+				<label>상영관 현황</label>
+				<input type="hidden" id="hd_roomId" value="">
+				<input type="hidden" id="hd_roomNm" value="">
+				<div class="table-responsive">
+					<table id="roomTable" class="table table-hover table-bordered">
+						<thead class="bg-primary">
+							<tr>
+								<td hidden="hidden">상영관ID</td>
+								<td>상영관명</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td colspan="99">지점을 선택해주세요.</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-			</div>
-			
+	
+				<label>편성된 영화 현황</label>
+				<input type="hidden" id="hd_screenId" value="">
+				<div class="table-responsive">
+					<table id="planedMovieTable" class="table table-hover table-bordered">
+						<thead class="bg-primary">
+							<tr>
+								<td hidden="hidden">스크린ID</td>
+								<td>제목</td>
+								<td>상영날짜</td>
+								<td>시작시간</td>
+								<td>종료시간</td>
+								<td>회차</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td colspan="99">상영관을 선택해주세요.</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="row">
+					<div class="col-md-2">
+						<button id="moviePlan" class="btn btn-default">영화추가</button>
+					</div>
+					<div class="col-md-10 text-right">
+						<button id="planDelete" class="btn btn-default">제거</button>
+					</div>
+				</div>
+			</div>	
 			<div class="movieTable-dim"></div>	
 			<div class="layer-MovieTable">
 				<input type="hidden" id="hd_movieId" value="">
@@ -218,7 +242,7 @@
 				<table id="selectedMovieTable" class="table table-hover table-bordered">
 					<thead class="bg-primary">
 						<tr>
-							<td hidden="hidden">영화ID</td>
+							<td>영화ID</td>
 							<td>제목</td>
 							<td>러닝타임</td>
 						</tr>
@@ -227,15 +251,32 @@
 					
 					</tbody>
 				</table>
-				<div>
-					<p>시간대 지정</p>
-					<p>시작날짜  <input type="text" id="datePicker" alt="Click"></p>
-					<p>시작시간 <input type="text" id="timePicker" alt="Click"></p>
-					<button id="testBtn" class="btn btn-danger">유효성 검사</button>
+				<div class="case">
+					<h4>상영시간설정</h4>&nbsp;&nbsp;&nbsp;&nbsp;
+					<label for="datePicker">시작날짜</label> <input type="text" id="datePicker">
+					<label for="timePicker">시작시간</label> <input type="text" id="timePicker">
+					<br/>&nbsp;&nbsp;&nbsp;&nbsp;
+					<button id="testBtn" class="btn btn-danger">검사</button>
+					<br/>&nbsp;&nbsp;&nbsp;&nbsp;
+					<label>종료날짜</label> <input type="text" id="endDate" disabled="disabled">
+					<label>종료시간</label> <input  type="text" id="endTime" disabled="disabled">
 					<br/>
-					<input type="text" id="endDate" disabled="disabled">
-					<input  type="text" id="endTime" disabled="disabled">
+					<h4>가격설정</h4>&nbsp;&nbsp;&nbsp;&nbsp;
+					<label for="adultCost">성인가격</label> <input type="text" id="adultCost">
+					<label for="studentCost">학생가격</label> <input type="text" id="studentCost">
+					<br/>
+					<h4>회차</h4>&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="text" id="episode" size="1" max="2" min="1"> <label for="episode">회차</label>
+					<br/>
+					<br/>
+					<button id="finalValidateMovie" class="btn btn-default btn-sm">편성</button>
 				</div>
+			</div>
+			
+			<div class="movieValidate">
+			
+			<button id="planBtn" class="btn btn-xs">확인</button>
+			<button id="planCancel" class="btn btn-xs">취소</button>
 			</div>
 		</div>
 		<script src="${context}/resources/js/jquery-1.12.4.js"></script>
@@ -283,8 +324,8 @@
                 ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip 텍스트
                 ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
                 ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
-                ,minDate: "-1M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-                ,maxDate: "+1M" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)                    
+                ,minDate: "+0D" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+                ,maxDate: "+3M" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)                    
             });
     		
     		//datePicker 부여
@@ -292,12 +333,12 @@
     		
     		//timepicker 부여
     		$("#timePicker").timepicker({
-    		    timeFormat: 'h:mm p',
+    		    timeFormat: 'HH:mm',
     		    interval: 1,
-    		    minTime: '0',
+    		    minTime: '00:00',
     		    maxTime: '23:59',
-    		    defaultTime: '6:00',
-    		    startTime: '06:00',
+    		    defaultTime: '00:00',
+    		    startTime: '00:00',
     		    dynamic: true,
     		    dropdown: true,
     		    scrollbar: true
@@ -307,17 +348,40 @@
             $("#datePicker").datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
             
             $("#testBtn").on("click", function(){
-            	var startDate = $("#datePicker").val();
-            	var startTime = $("#timePicker").val();
-            	console.log("startDate " + startDate);
-            	console.log("startTime " + startTime);
+            	var runningTime = parseInt($("#hd_movieRTime").val());	//러닝타임
+            	var startDate = $("#datePicker").val();		//시작날짜
+            	var startTime = $("#timePicker").val();		//시작시간
+            	var sDateArr = startDate.split("-");		//날짜분리	
+            	var sTimeArr = startTime.split(":");		//시작시간분리
+
+            	var year = parseInt(sDateArr[0]);			//시작 년도
+            	var month = parseInt(sDateArr[1]);			//시작 달
+            	var day = parseInt(sDateArr[2]);			//시작 날
+            	var hour = parseInt(sTimeArr[0]);			//시작 시
+            	var minute = parseInt(sTimeArr[1]);			//시작 분
+
+            	var endMinute = eval(runningTime + minute);	//종료 분
+            	var plusHour = 0;							//종료시간을 만들어 줄 변수
+
+            	while(endMinute >= 60){
+            		endMinute = eval(endMinute-60);
+            		plusHour++;
+            	}
             	
-            	var sDateArr = startDate.split("-");
-            	var sTimeArr = startTime.split(":");
-            	var AMPM = startTime.split(" ");
-            	console.log("sDateArr " + sDateArr[1]);
-            	console.log("sTimeArr " + sTimeArr[0]);
-            	console.log("AMPM " + AMPM[1]);
+            	var endHour = eval(hour+plusHour);			//종료 시
+            	var plusDay = 0;							//종료날을 만들어 줄 변수
+            	while(endHour >= 24){
+            		endHour = eval(endHour-24);
+            		plusDay++;
+            	}
+            	
+            	var date = new Date(year, month-1, day);
+            	date.setDate(date.getDate() + plusDay);
+            	
+            	var ENDDATE = eval(date.getYear()+1900) + "-" + eval(date.getMonth()+1) + "-" + date.getDate();
+            	var ENDTIME = endHour + ":" + endMinute;
+            	$("#endDate").val(ENDDATE);
+            	$("#endTime").val(ENDTIME);
             });
             
             //지점조회
@@ -361,7 +425,11 @@
     			
             	if(td.eq(1).length == 0)return;
             	
-            	$("#hd_roomId").val();
+            	$("#hd_screenId").val("");
+            	$("#hd_roomId").val("");
+            	$("#hd_roomNm").val("");
+            	$("#hd_branchId").val(td.eq(0).text());
+            	$("#hd_branchNm").val(td.eq(1).text());
             	loading(true);
             	var searchWord = td.eq(0).text();
     			var searchDiv = "10";
@@ -407,9 +475,16 @@
     			
             	if(td.eq(1).length == 0)return;
     			
+            	$("#hd_screenId").val("");
             	$("#hd_roomId").val(td.eq(0).text());
-            	loading(true);
-            	var searchWord = td.eq(0).text();
+            	$("#hd_roomNm").val(td.eq(1).text());
+            	var roomId = $("#hd_roomId").val();
+            	create_RoomTable(roomId);
+            });
+          	
+          	function create_RoomTable(roomId){
+          		loading(true);
+            	var searchWord = roomId;
     			var searchDiv = "20";
             	$.ajax({
     				type : "POST",
@@ -424,12 +499,18 @@
     				$("#planedMovieTable>tbody>tr").detach();
     				if(plandMovieArr.length > 0){
     					for(var i=0 ; i< plandMovieArr.length ; i++){
+    						var screenDt = plandMovieArr[i].screenDt;
+    						var endTime = plandMovieArr[i].endTime;
+    						var date = screenDt.split(" ");
+    						var eTime = endTime.split(" ");
         					$("#planedMovieTable>tbody").append(
         							"<tr>"+
+        							"<td hidden='hidden'>"+plandMovieArr[i].screenId+"</td>"+
         							"<td>"+plandMovieArr[i].korTitle+"("+plandMovieArr[i].engTitle+")</td>"+
-        							"<td>"+plandMovieArr[i].screenDt+"</td>"+
+        							"<td>"+date[0]+"</td>"+
         							"<td>"+plandMovieArr[i].startTime+"</td>"+
-        							"<td>"+plandMovieArr[i].endTime+"</td>"+
+        							"<td>"+eTime[1]+"</td>"+
+        							"<td>"+plandMovieArr[i].episode+"</td>"+        							
         							"</tr>");
         				}
     				}else{
@@ -444,7 +525,7 @@
 
     			}
     			}); 
-            });
+          	}
           	
           	//영화추가버튼
           	$("#moviePlan").on("click", function(){
@@ -492,7 +573,7 @@
 				$("#selectedMovieTable>tbody>tr").detach();
 				$("#selectedMovieTable>tbody").append(
 					"<tr>"+
-					"<td hidden='hidden'>"+movieId+"</td>"+
+					"<td>"+movieId+"</td>"+
 					"<td>"+movieNm+"</td>"+
 					"<td>"+movierunningTime+"</td>"+
 					"</tr>"	
@@ -553,6 +634,8 @@
 			  	var td = tr.children();
 				$("#planedMovieTable>tbody>tr").css("background-color", "");	//tr색 초기화
 				$(tr).css("background-color", "red");							//선택tr 색표시
+				
+				$("#hd_screenId").val(td.eq(0).text());
 			});
 			
 			//영화정보버튼
@@ -741,6 +824,173 @@
     			$("#hd_movieRTime").val(td.eq(3).text());
             });
 			
+			$("#finalValidateMovie").on("click", function(){
+				fianlValidateMovie();
+			});
+			
+			function fianlValidateMovie(){
+				var endDate = $("#endDate").val(); 
+				var endTime = $("#endTime").val();
+				var adultCost = $("#adultCost").val();
+				var studentCost = $("#studentCost").val();
+				var episode = $("#episode").val();
+				var branchId = $("#hd_branchId").val();
+				var branchNm = $("#hd_branchNm").val();
+				var roomId = $("#hd_roomId").val();
+				var roomNm = $("#hd_roomNm").val();
+				var movieId = $("#hd_movieId").val();
+				var movieNm = $("#hd_movieNm").val();
+				var startTime = $("#timePicker").val();
+				var startDate = $("#datePicker").val();
+				if(branchId.length == 0){ alert("선택한 지점이 없습니다."); return;}
+				if(roomId.length == 0){ alert("선택한 상영관이 없습니다."); return;}
+				if(movieId.length == 0){ alert("선택한 영화가 없습니다."); return;}
+				if(endDate.length == 0 || endTime.length == 0 ){alert("상영시간을 확인해주세요."); return;}
+				if(adultCost.length == 0 || studentCost.length == 0){alert("가격을 확인해주세요."); return;}
+				if(episode == 0){ alert("회차를 확인해주세요."); return;}
+				
+				var width = $(".movieValidate").width();
+       			var height = $(".movieValidate").height();
+       			var outWidth = $("body").width();
+       			var outHeight = $("body").height();
+       			$(".movieValidate").css("top", (outHeight/3));
+       			$(".movieValidate").css("left", (outWidth-width)/2);
+
+				$(".movieValidate>.vali").detach();
+				$(".movieValidate").prepend(
+					"<div class='vali'>"+
+					"<label>지점 : </label>"+branchNm+"<br/>"+
+					"<label>상영관 : </label>"+roomNm+"<br/>"+
+					"<label>영화 : </label>"+movieNm+"<br/>"+
+					"<label>상영시작일 : </label>"+startDate+"<br/>"+
+					"<label>상영시간 : </label>"+startTime+"&nbsp;~&nbsp;"+endTime+"<br/>"+
+					"<label>상영종료일 : </label>"+endDate+"<br/>"+
+					"<label>성인가격 : </label>"+adultCost+"<br/>"+
+					"<label>학생가격 : </label>"+studentCost+"<br/>"+
+					"<label>회차 : </label>"+episode+"<br/>"+
+					"<br/><pre>이대로 편성을 진행합니다.</pre>"+
+					"<div>"
+				);
+				$(".dim").css("display", "block");
+				$(".movieValidate").css("display", "block");					
+			}
+				
+				
+			$("#planBtn").on("click", function(){
+				add_NewScreenMovie();				
+			});
+			
+			function add_NewScreenMovie(){
+				loading(true);
+				var eDate = $("#endDate").val(); 
+				var eTime = $("#endTime").val();
+				var adultCost = $("#adultCost").val();
+				var studentCost = $("#studentCost").val();
+				var episode = $("#episode").val();
+				var branchId = $("#hd_branchId").val();
+				var roomId = $("#hd_roomId").val();
+				var movieId = $("#hd_movieId").val();
+				var sTime = $("#timePicker").val();
+				var sDate = $("#datePicker").val();
+				var startTime = sDate + " " + sTime;
+				var endTime = eDate + " " + eTime;
+				var screenDt = eDate;
+				
+				$.ajax({
+    				type : "POST",
+    				url : "${context}/screenInfo/do_save.do",
+    				dataType : "html",
+    				data : {
+    					"roomId" : roomId,
+    					"branchId" : branchId,
+    					"movieId" : movieId,
+    					"startTime" : startTime,
+    					"endTime" : endTime,
+    					"screenDt" : screenDt,
+    					"adultCost" : adultCost,
+    					"studentCost" : studentCost,
+    					"episode" : episode
+    				}, 
+    			success: function(data){
+    				var msg = JSON.parse(data);
+    				if(msg.msgId == 1){
+    					alert("성공");
+    				}else{
+    					alert("실패");
+    				}
+    			},
+    			complete:function(data){
+    				planCancel();
+    				selectedMovie_Off();
+    				var roomId = $("#hd_roomId").val();
+                	create_RoomTable(roomId);
+    				loading(false);
+    			},
+    			error:function(xhr,status,error){
+
+    			}
+    			});
+			}
+			
+			function selectedMovie_Off(){
+				$("#endDate").val("");
+				$("#endTime").val("");
+				$("#adultCost").val("");
+				$("#studentCost").val("");
+				$("#episode").val("");
+				$(".selectedMovie").css("display", "none");
+				$("#selectedMovieTable>tbody>tr").detach();
+			}
+			
+			$("#planCancel").on("click", function(){
+				planCancel();
+			});
+			
+			function planCancel(){
+				$(".dim").css("display", "none");
+				$(".movieValidate").css("display", "none");
+			}
+			
+			$("#planDelete").on("click", function(){
+				var screenId = $("#hd_screenId").val();
+				
+				if(screenId.length == 0){ alert("선택된 영화가 없습니다."); return;}
+				
+				if(confirm("선택된 편성영화를 삭제합니까?")==false) return;
+				
+				delete_Plan(screenId);
+			});
+			
+			function delete_Plan(screenId){
+				
+				$.ajax({
+    				type : "POST",
+    				url : "${context}/screenInfo/do_delete.do",
+    				dataType : "html",
+    				data : {
+    					"screenId" : screenId
+    				}, 
+    			success: function(data){
+    				var msg = JSON.parse(data);
+    				if(msg.msgId == 1){
+    					alert("성공");
+    				}else{
+    					alert("실패");
+    				}
+    			},
+    			complete:function(data){
+    				selectedMovie_Off();
+    				var roomId = $("#hd_roomId").val();
+                	create_RoomTable(roomId);
+    				loading(false);
+    			},
+    			error:function(xhr,status,error){
+
+    			}
+    			});
+				
+				
+			}
 			
     	</script>
 	</body>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.sunnyside.cmn.DTO;
 import kr.co.sunnyside.movie.service.LHJ_BoxofficeSvc;
+import kr.co.sunnyside.movie.service.LHJ_MovieVO;
 
 @Service
 public class LHJ_BoxofficeSvcImpl implements LHJ_BoxofficeSvc {
@@ -41,6 +42,12 @@ public class LHJ_BoxofficeSvcImpl implements LHJ_BoxofficeSvc {
 	/**박스오피스 전체조회*/
 	@Override
 	public List<?> do_retrieve() {
+		//조회시마다 박스오피스 데이터 delete 한 뒤 insert
+		boxofficeDaoImpl.do_delete();
+		List<LHJ_MovieVO> kobisList = LHJ_MovieParsing.getBoxofficeList();
+		for(LHJ_MovieVO vo : kobisList) {
+			boxofficeDaoImpl.do_save(vo);
+		}
 		return boxofficeDaoImpl.do_retrieve();
 	}
 
