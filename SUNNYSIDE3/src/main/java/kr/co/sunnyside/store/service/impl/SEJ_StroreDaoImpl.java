@@ -180,23 +180,5 @@ public class SEJ_StroreDaoImpl implements WorkDiv {
 		
 		return list;
 	}
-	
-	/**이미지 업로드*/
-	public int do_imageUpload(DTO dto) {
-		String statement = NAMESPACE+".do_imageUpload.do";
-		FileVO inVO = (FileVO) dto;
-		LOG.debug("===================================");
-		LOG.debug("=1. param="+inVO);
-		LOG.debug("===================================");
-		LOG.debug("===================================");
-		LOG.debug("=2. statement="+statement);
-		LOG.debug("===================================");
-		int flag = this.sqlSessionTemplate.insert(statement,inVO);
-		LOG.debug("===================================");
-		LOG.debug("=3. flag="+flag);
-		LOG.debug("===================================");
-		
-		return flag;
-	}
 		
 }

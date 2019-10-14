@@ -84,7 +84,7 @@
 	
 	//삭제
 	$("#delbtn").on("click",function(){
-		//alert("delbtn");
+		//alert($("#productId").text());
 		if(false==confirm('상품을 삭제 하시겠습니까?')) return;
 		
 		$.ajax({
@@ -92,7 +92,7 @@
 	         url:"${context}/store/do_delete.do",
 	         dataType:"html",// JSON
 	         data:{
-	         	"productId":$("#productId").val()
+	         	"productId":$("#productId").text()
 	         },
 	         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
 	         	console.log(data); 

@@ -84,11 +84,6 @@ public class SEJ_StoreSvcImple implements SEJ_StroreSvc {
 		return storeDaoImpl.do_retrieve(dto);
 	}
 	
-	/**이미지 업로드*/
-	@Override
-	public int do_imageUpload(DTO dto) {
-		return storeDaoImpl.do_imageUpload(dto); 
-	}
 
 
 

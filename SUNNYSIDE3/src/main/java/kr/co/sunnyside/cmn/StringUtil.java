@@ -255,7 +255,7 @@ public class StringUtil {
 	public static String makeSelectBox(List<CodeVO> list, String selectBoxNm, String selectedNm, boolean allYN) {
 		StringBuilder sb = new StringBuilder();
 		// <select name="lvl" id="lvl">
-		sb.append("<select  class=\"form-control input-sm\" name='" + selectBoxNm + "' id='" + selectBoxNm + "' > \n");
+		sb.append("<select class=\"form-control input-sm\" name='" + selectBoxNm + "' id='" + selectBoxNm + "' > \n");
 
 		// <option value="1" selected>팝콘</option>
 		for (CodeVO dto : list) {
@@ -263,6 +263,46 @@ public class StringUtil {
 			sb.append("\t<option value='" + vo.getCodeId() + "' ");
 			if (selectedNm.equals(vo.getCodeId())) {
 				sb.append("selected='selected' ");
+			}
+
+			sb.append(">");
+			sb.append(vo.getCodeNm());
+			sb.append("</option>\n");
+		}
+		sb.append("</select> \n");
+		LOG.debug("------------------------");
+		LOG.debug(sb.toString());
+		LOG.debug("------------------------");
+		return sb.toString();
+	}
+	
+	/**
+	 * 
+	 * @Method Name : makeSelectBox
+	 * @작성일 : 2019. 7. 22.
+	 * @작성자 : SIST
+	 * @변경이력 : 최초작성
+	 * @Method 설명 :
+	 * @param list:       select에 필용한 코드정보
+	 * @param selectBoxNm : <select name="lvl" id="lvl">
+	 * @param selectedNm  : <option selected
+	 * @param allYN       : 전체 표시
+	 * @return : <select name="lvl" id="lvl"> <option value="">전체</option> <option
+	 *         value="1" selected>일반사용자</option> <option value="9">관리자</option>
+	 *         </select>
+	 */
+	public static String productMakeSelectBox(List<CodeVO> list, String selectBoxNm, String selectedNm, boolean allYN) {
+		StringBuilder sb = new StringBuilder();
+		// <select name="lvl" id="lvl">
+		sb.append("<select disabled=\"disabled\"  class=\"form-control input-sm\" name='" + selectBoxNm + "' id='" + selectBoxNm + "' > \n");
+
+		// <option value="1" selected>팝콘</option>
+		for (CodeVO dto : list) {
+			CodeVO vo = dto;
+			sb.append("\t<option value='" + vo.getCodeId() + "' ");
+			if (selectedNm.equals(vo.getCodeId())) {
+				sb.append("selected='selected' ");
+				sb.append("disabled='disabled' ");
 			}
 
 			sb.append(">");

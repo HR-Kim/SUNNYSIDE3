@@ -26,9 +26,7 @@ public interface SEJ_StroreSvc {
 	
 	/**영화예매권목록조회*/
 	public List<?> do_retrieve_movieticket(DTO dto);
-	
-	/**이미지 업로드*/
-	public int do_imageUpload(DTO dto);
+
 	
 	
 	

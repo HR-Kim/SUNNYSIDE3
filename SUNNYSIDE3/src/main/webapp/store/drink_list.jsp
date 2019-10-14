@@ -96,15 +96,7 @@
 
 	//상품 단건조회
 	$('.productId').click(function(event) {
-		
 		alert("productId");
-	    //var productNo = $(this).find('p').eq(4).text();
-	     //alert("productNo:"+ productNo);         
-	    
-	   /*  var frm = document.listallForm;
-	   frm.work_div.value ="do_detail_select";
-	   frm.action = '/ZIMZALABIM/detail/detail.do?productNo='+productNo;
-	   frm.submit(); */
 	});
 	
 	$(document).ready(function(){

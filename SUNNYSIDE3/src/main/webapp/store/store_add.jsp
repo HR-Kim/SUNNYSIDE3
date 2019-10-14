@@ -27,7 +27,7 @@
 
 <body>
  <h2 style="margin-left: 40px;"> 상품등록 </h2>
- <form id="storeForm" name="storeForm" method="post" enctype="multipart/form-data" action="${context}/store/do_imageUpload.do" style="margin-left: 40px">
+ <form id="storeForm" name="storeForm" method="post" enctype="multipart/form-data" action="do_save.do" style="margin-left: 40px">
  	<table border="1">
   	<tr>
   		<td>상품명</td>
@@ -57,7 +57,7 @@
   	</tr>
   	<tr>
   	 <td colspan="2" align="center">
-  	 	<input type="submit" value="등록" id="addBtn">
+  	 	<input type="submit" value="등록" id="addBtn" >
   	 </td>
   	</tr> 	
   </table> 
@@ -72,12 +72,10 @@
 	 $("#addBtn").on("click",function(){
 		  if(confirm("등록하시겠습니까?")==false) return;
 		  
-		  do_imageUpload();
-		  
 		//ajax
 	       $.ajax({
 	          type:"POST",
-	          url:"${context}/do_save.do",
+	          url:"${context}/store/do_save.do",
 	          data:$("#storeForm").serialize(), 
 	          dataType:"html",
 	       
@@ -86,34 +84,13 @@
 		    	 window.close();
 	       },
 	       complete:function(data){
+	    	   alert("등록되었습니다.");
 	    	   window.close();
-	       },
-	       error:function(xhr,status,error){
-	           alert("error:"+error);
 	       }
 	      }); //--ajax  
 		});
+		
 	
-	 function do_imageUpload(){
-		//ajax
-	       $.ajax({
-	          type:"POST",
-	          url:"${context}/do_imageUpload.do",
-	          data:$("#storeForm").serialize(), 
-	          dataType:"html",
-	       
-	        success: function(data){ 
-	        	 alert("등록되었습니다.");
-		    	 window.close();
-	       },
-	       complete:function(data){
-	    	   window.close();
-	       },
-	       error:function(xhr,status,error){
-	           alert("error:"+error);
-	       }
-	      }); //--ajax  
-	 }
  
  $(document).ready(function(){
   });

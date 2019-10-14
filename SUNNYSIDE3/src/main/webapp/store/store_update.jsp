@@ -48,17 +48,17 @@
  <form id="storeForm" name="storeForm" method="post" enctype="multipart/form-data" action="do_update.do" style="margin-left: 40px">
  	<table border="1">
  	<tr style="display: none;">
- 		<td class="productId" id="productId"> ${vo.productId }</td>
+ 		<td><input id="productId" value="<c:out value=" ${vo.productId }"/>"></td>
  		<td class="category" id="category">${vo.category }</td>
  	</tr>
   	<tr>
   		<td>상품명</td>
-  		<td><input type="text" name="productName" id="productName" value="<c:out value="${vo.productNm}"/>" /></td>
+  		<td><input type="text" name="productNm" id="productNm" value="<c:out value="${vo.productNm}"/>" /></td>
   	</tr>
-  	<tr>
+  	<tr >
   		<td>분류</td>
   		<td>
-  		 <%=StringUtil.makeSelectBox(categoryList, "category", category, false) %>
+  			<%=StringUtil.productMakeSelectBox(categoryList, "category", category, false) %>
   		</td>
   	</tr>
   	<tr>
@@ -67,7 +67,7 @@
   	</tr> 
   	<tr>
   		<td>상품설명</td>
-  		<td><textarea rows="5" cols="60" name="productInfo" id="productInfo">${vo.productInfo}</textarea></td>
+  		<td><textarea rows="5" cols="60" name="productInfo" id="productInfo"><c:out value="${vo.productInfo}"/></textarea></td>
   	</tr>
   	<tr>
   		<td>상품이미지</td>
@@ -78,7 +78,7 @@
   	</tr>
   	<tr>
   	 <td colspan="2" align="center">
-  	 	<input type="button" value="수정완료" id="doUpdate">
+  	 	<input type="submit" value="수정완료" id="doUpdate">
   	 </td>
   	</tr> 	
   </table> 
@@ -90,22 +90,32 @@
  <script type="text/javascript">
 
 
- 
 	//수정
 		$("#doUpdate").on("click",function(){
 			//validation
-			console.log("productId="+$("#productId").text());
+			console.log("productNm="+$("#productNm").val());
+			console.log("productCost="+$("#productCost").val());
+			console.log("productInfo="+$("#productInfo").val());
+			console.log("productId="+$("#productId").val());
+			
 			if(confirm("수정하시겠습니까?")==false) return;
 			
 			//ajax
 		       $.ajax({
 		          type:"POST",
-		          url:"${context}/store/do_update.do",
-		          data:$("#storeForm").serialize(), 
+		          url:"${context}/store/do_update.do",		        
 		          dataType:"html",
-		       
+		       	  data:{
+		       		"productId": $("#productId").val(),
+		       		"productNm": $("#productNm").val(),
+		       		"productCost": $("#productCost").val(),
+		       		"productInfo": $("#productId").val()
+		       			  
+		       	  }, 
+		       			       
 		        success: function(data){ 
 		        	 alert("수정되었습니다.");
+		        	 location.href ="${context}/store/store_main.jsp";
 		       },
 		       complete:function(data){
 		    	   //alert("수정되었습니다.");
@@ -119,6 +129,7 @@
  
  
  $(document).ready(function(){
+	 
   });
 
 </script>
