@@ -54,8 +54,14 @@ public class SJH_LoginCtrl {
 	CodeService codeService;
 	
 	
-	//View
-	//private final String VIEW_NM = "main/main";
+	//view
+	private final String VIEW_ID_FIND_LIST = "login/login_id_find_list";
+	private final String VIEW_PW_FIND_LIST = "login/login_pw_find_list";
+	
+	private final String VIEW_ID_FIND_MNG = "login/login_id_find_mng";
+	private final String VIEW_PW_FIND_MNG = "login/login_pw_find_mng";
+	
+	
 	
 	
 	/* NaverLoginBO */
@@ -68,8 +74,8 @@ public class SJH_LoginCtrl {
 	}
 	
 	
-	/** 로그인 첫 화면 요청 메소드 */
-	@RequestMapping(value = "logintest/login.do", method = { RequestMethod.GET, RequestMethod.POST })
+	/** 로그인 첫 화면 요청 메소드 */ //--->이 부분을 메인이랑 연결해야함. 
+	@RequestMapping(value = "logintest/logintest.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(Model model, HttpSession session) {
 		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
@@ -82,12 +88,12 @@ public class SJH_LoginCtrl {
 		model.addAttribute("url", naverAuthUrl);
 		LOG.debug("ㅋㅋnaverAuthUrl: "+naverAuthUrl);
 		
-		return "logintest/login";
+		return "logintest/logintest";
 	}
 	
 	
 	/** 네이버 로그인 성공시 callback호출 메소드 */
-	@RequestMapping(value = "logintest/callback.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "logintest/callback", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
 		LOG.debug("여기는 callback");
 		OAuth2AccessToken oauthToken;
@@ -194,8 +200,7 @@ public class SJH_LoginCtrl {
 	 * @return
 	 */
 	@RequestMapping(value="login/id_find.do",method = RequestMethod.POST,produces = "application/json; charset=UTF-8")
-	@ResponseBody
-	public String id_find(SJH_LoginVO user) {
+	public String id_find(SJH_LoginVO user,Model model) {
 		LOG.debug("=========================");
 		LOG.debug("=@Controller=user="+user);
 		LOG.debug("=========================");
@@ -209,15 +214,21 @@ public class SJH_LoginCtrl {
 		}
 		
 		SJH_LoginVO outVO = (SJH_LoginVO) loginSvc.id_find(user);
-
-		Gson gson=new Gson();
-		String json = gson.toJson(outVO);
-		LOG.debug("=========================");
-		LOG.debug("=@Controller gson=user="+json);
-		LOG.debug("=========================");		
+		model.addAttribute("vo", outVO);
 		
-		return json;
+		return VIEW_ID_FIND_LIST; //화면으로 리턴
 	}
+	
+	//아이디 찾기 화면call
+	@RequestMapping(value="login/id_find_mng_view.do", method = RequestMethod.GET)
+	public String IdFindMngView() {
+		LOG.debug("========================");
+		LOG.debug("=@Controller=doUserView=");
+		LOG.debug("========================");
+		
+		return VIEW_ID_FIND_MNG;
+	}
+	
 	
 	
 	
@@ -228,7 +239,6 @@ public class SJH_LoginCtrl {
 	 */
 	@RequestMapping(value="login/pw_find.do",method = RequestMethod.POST
 					,produces = "application/json; charset=UTF-8")
-	@ResponseBody		
 	public String pw_find(SJH_LoginVO user) {
 		LOG.debug("1=========================");
 		LOG.debug("=@Controller=user=="+user);
@@ -246,15 +256,21 @@ public class SJH_LoginCtrl {
 			message.setMsgMsg("비밀번호 찾기 실패.");			
 		}
 	
-		//JSON
-		Gson gson=new Gson();
-		String json = gson.toJson(message);
-		LOG.debug("2=========================");
-		LOG.debug("=@Controller=json=="+json);
-		LOG.debug("2=========================");
-		return json;		
+		return VIEW_PW_FIND_LIST; //화면으로 리턴		
 	}
 	
+	
+	
+	
+	//비밀번호 찾기 화면call
+	@RequestMapping(value="login/pw_find_mng_view.do", method = RequestMethod.GET)
+	public String pwFindMngView() {
+		LOG.debug("========================");
+		LOG.debug("=@Controller=doUserView=");
+		LOG.debug("========================");
+		
+		return VIEW_PW_FIND_MNG;
+	}
 	
 	
 	

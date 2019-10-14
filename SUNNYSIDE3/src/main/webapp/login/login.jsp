@@ -100,7 +100,7 @@
 						로그인
 					</button>
 					&nbsp &nbsp
-					<a href="#"><img src="${context}/resources/image/login/naverlogin.png"/></a>	
+					<a href="${url}" id="naverLogin"><img src="${context}/resources/image/login/naverlogin.png"/></a>	
 				</div>
 							
 			</div>
@@ -128,7 +128,25 @@
 	<script src="${context}/resources/js/login/main.js"></script>
 	<script src="${context}/resources/js/login/jquery.validate.js"></script>
 	<script type="text/javascript">
+		
 	
+	
+	//naverLogin
+	
+	
+	
+	
+	
+		/** 아이디 찾기 */
+		$("#id_find").on("click",function(){
+			location.href = "${context}/login/id_find_mng_view.do";
+		});
+		
+		/** 비밀번호 찾기 */
+		$("#pw_find").on("click",function(){
+			location.href = "${context}/login/pw_find_mng_view.do";
+		});
+		
 	
 	
 		/** 로그인 */

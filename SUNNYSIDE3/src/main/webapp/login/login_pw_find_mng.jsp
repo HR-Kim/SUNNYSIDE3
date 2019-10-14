@@ -28,7 +28,7 @@
     }
 </style>
 </style>
-	<title>아이디찾기</title>
+	<title>비밀번호 찾기</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -61,12 +61,19 @@
 			<div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
 			
 			
-				<form class="login100-form validate-form flex-sb flex-w" id="idFindForm" name="idFindForm" method="post">
+				<form class="login100-form validate-form flex-sb flex-w" id="pwFindForm" name="pwFindForm" method="post">
 					
 					<span class="text-center login100-form-title p-b-32">
-						아이디 찾기
+						비밀번호 찾기
 					</span>
 					
+					<span class="txt1 p-b-11">
+						아이디
+					</span>
+					<div class="wrap-input100 validate-input m-b-36">
+						<input class="input100" type="text" id="userId" name="userId" >
+						<span class="focus-input100"></span>
+					</div>
 					<span class="txt1 p-b-11">
 						이름
 					</span>
@@ -74,7 +81,6 @@
 						<input class="input100" type="text" id="userName" name="userName" >
 						<span class="focus-input100"></span>
 					</div>
-					
 					<span class="txt1 p-b-11">
 						이메일
 					</span>
@@ -124,14 +130,14 @@
 	
 
 		
-		/** 아이디찾기 확인 버튼 */
+		/** 비밀번호 찾기 확인 버튼 */
 		$("#confirm").on("click",function(){
 			//console.log($("#userName").val());
 			//console.log($("#email").val());
-			if($("#idFindForm").valid()==false)return;
+			if($("#pwFindForm").valid()==false)return;
 			
-	    	var frm = document.idFindForm;
-			frm.action = "${context}/login/id_find.do"
+	    	var frm = document.pwFindForm;
+			frm.action = "${context}/login/pw_find.do"
 	    	frm.submit();
 		});
 		
