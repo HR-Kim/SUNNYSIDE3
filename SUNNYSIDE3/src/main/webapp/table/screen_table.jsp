@@ -5,13 +5,9 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="context" value="${pageContext.request.contextPath }" />
 <%
-	//영화테이블페이징정보
-	int maxNum = 0;
-	int currPageNo = 1; 
-	int rowPerPage = 10;
-	int bottomCount = 10;
-	String url = "";
-	String scriptName = "paging";
+
+	String movieTableScriptName = "paging_movieT";
+	String planedMovieTableScriptName = "paging_PmovieT";
 	
 %>
 <!DOCTYPE html>
@@ -169,6 +165,7 @@
 						</tbody>
 					</table>
 				</div>
+				<div class="planedTablePaging"></div>
 				<div class="row">
 					<div class="col-md-2">
 						<button id="moviePlan" class="btn btn-default">영화추가</button>
@@ -513,6 +510,8 @@
         							"<td>"+plandMovieArr[i].episode+"</td>"+        							
         							"</tr>");
         				}
+    					var totalCnt = plandMovieArr[0].totalCnt;
+    					tablePaging(".planedTablePaging", totalCnt, 1, 10, 10, "<%=planedMovieTableScriptName%>");
     				}else{
     					$("#planedMovieTable>tbody").append(
     						"<tr><td colspan='99'>편성된 영화가 없습니다.</td></tr>");
@@ -613,7 +612,7 @@
         					);
         				}
     					var totalCnt = movieArr[0].totalCnt;
-    					movieTablePaging(totalCnt, 1, 10, 10, "<%=scriptName%>");
+    					tablePaging(".movieTablePaging", totalCnt, 1, 10, 10, "<%=movieTableScriptName%>");
     				}else{
     					$("#movieTable>tbody").append(
     						"<tr><td colspan='99'>영화가 없습니다.</td></tr>");
@@ -700,60 +699,60 @@
 				rowPerPage : 한페이지에 보여질 글수
 				bottomCount : 바닥에  보여질 페이지수
 			*/
-			function movieTablePaging(maxNum, currPageNo, rowPerPage, bottomCount, scriptName){
+			function tablePaging(divName, maxNum, currPageNo, rowPerPage, bottomCount, scriptName){
 				var maxNum = maxNum;
 				var currPageNo = currPageNo;
 				var rowPerPage = rowPerPage;
 				var bottomCount = bottomCount;
-				var maxPageNo = Math.floor(maxNum/rowPerPage);											
+				var maxPageNo = eval(Math.floor(maxNum/rowPerPage) + 1);											
 				var startPageNo	= eval( (Math.floor( eval(currPageNo-1) /bottomCount)) *bottomCount + 1);
 				var endPageNo = (Math.floor( eval(currPageNo-1) /bottomCount)+1) *bottomCount;
 				var nowBlockNo = eval( Math.floor( eval(currPageNo-1)/bottomCount) + 1);				
 				var maxBlockNo = eval( Math.floor( eval(maxNum-1)/bottomCount) +1);
-
-				$(".movieTablePaging>table").detach();
+				
+				$(divName+">table").detach();
 				
 				if(nowBlockNo > 1 && nowBlockNo <= maxBlockNo){
-					$(".movieTablePaging").append(
+					$(divName).append(
 						'<li class="page-item"><a class="page-link" href="#" onclick="javascript:'+scriptName+'(1);">&laquo;</a></td>'
 					);
 				}
 				
 				if(startPageNo > bottomCount) {
-					$(".movieTablePaging").append(
+					$(divName).append(
 						'<li class="page-item"><a class="page-link" href="#" onclick="javascript:'+scriptName+'('+eval(startPageNo-1)+');"><</a></td>'
 					);
 				}
 				
 				for(var idx=startPageNo ; idx<=maxPageNo && idx<=endPageNo; idx++) {
-					$(".movieTablePaging").append(
+					$(divName).append(
 						'<li class="page-item"><a class="page-link" href="#" onclick="javascript:'+scriptName+'('+idx+');">'+idx+'</a></li>'
 					);
 				}
 				
 				if(maxPageNo >= idx) {
-					$(".movieTablePaging").append(
+					$(divName).append(
 						'<li class="page-item"><a class="page-link" href="#" onclick="javascript:'+scriptName+'('+eval((nowBlockNo*bottomCount)+1) +');">></a></td>'
 					);
 				}
 				
 				if(maxPageNo >= idx){
-					$(".movieTablePaging").append(
+					$(divName).append(
 						'<li class="page-item"><a class="page-link" href="#" onclick="javascript:'+scriptName+'('+maxPageNo+');">&raquo;</a></td>'
 					);
 				}
 
-				$(".movieTablePaging").wrapInner(
+				$(divName).wrapInner(
 						'<ul class="pagination"></ul>'
 				);
-				$(".movieTablePaging").wrapInner(
+				$(divName).wrapInner(
 						'<table border="0" align="center" cellpadding="0" cellspacing="0" width="100%">'+
 						'<tr><td align="center"></td></tr></table>'
 				);
 			}
 			
-			//페이징
-			function paging(idx) {
+			//영화테이블 페이징
+			function paging_movieT(idx) {
 				loading(true);
 				$.ajax({
     				type : "POST",
@@ -779,7 +778,54 @@
         					);
         				}
     					var totalCnt = movieArr[0].totalCnt;
-    					movieTablePaging(totalCnt, idx, 10, 10, "<%=scriptName%>");
+    					tablePaging(".movieTablePaging", totalCnt, idx, 10, 10, "<%=movieTableScriptName%>");
+    				}
+    			},
+    			complete:function(data){
+    				loading(false);
+    			},
+    			error:function(xhr,status,error){
+
+    			}
+    			});
+			};
+			
+			//편성영화테이블 페이징
+			function paging_PmovieT(idx) {
+				loading(true);
+				$.ajax({
+    				type : "POST",
+    				url : "${context}/screenInfo/do_retrieve.do",
+    				dataType : "html",
+    				data : {
+    					"pageNum" : idx,
+    					"searchDiv" : "20",
+    					"searchWord" : $("#hd_roomId").val()
+    				}, 
+    			success: function(data){
+    				var plandMovieArr = JSON.parse(data);
+    				$("#planedMovieTable>tbody>tr").detach();
+    				if(plandMovieArr.length > 0){
+    					for(var i=0 ; i< plandMovieArr.length ; i++){
+    						var screenDt = plandMovieArr[i].screenDt;
+    						var endTime = plandMovieArr[i].endTime;
+    						var date = screenDt.split(" ");
+    						var eTime = endTime.split(" ");
+        					$("#planedMovieTable>tbody").append(
+        							"<tr>"+
+        							"<td hidden='hidden'>"+plandMovieArr[i].screenId+"</td>"+
+        							"<td>"+plandMovieArr[i].korTitle+"("+plandMovieArr[i].engTitle+")</td>"+
+        							"<td>"+date[0]+"</td>"+
+        							"<td>"+plandMovieArr[i].startTime+"</td>"+
+        							"<td>"+eTime[1]+"</td>"+
+        							"<td>"+plandMovieArr[i].episode+"</td>"+        							
+        							"</tr>");
+        					var totalCnt = plandMovieArr[0].totalCnt;
+        					tablePaging(".planedTablePaging", totalCnt, idx, 10, 10, "<%=planedMovieTableScriptName%>");
+        				}
+    				}else{
+    					$("#planedMovieTable>tbody").append(
+    						"<tr><td colspan='99'>편성된 영화가 없습니다.</td></tr>");
     				}
     			},
     			complete:function(data){
