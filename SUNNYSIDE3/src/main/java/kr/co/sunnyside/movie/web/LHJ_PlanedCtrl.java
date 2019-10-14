@@ -36,8 +36,8 @@ public class LHJ_PlanedCtrl {
 	 //view
 	 private final String VIEW_LIST_NM = "planed/planed_list";
 	 private final String VIEW_MNG_NM  = "planed/planed_mng";
-	 private final String VIEW_PLANED_UP  = "planed/planed_up";
-	 private final String VIEW_PLANED_DOWN  = "planed/planed_down";
+	 private final String VIEW_PLANED_UP  = "planed/planedCtrl/planed_up";
+	 private final String VIEW_PLANED_DOWN  = "planed/planedCtrl/planed_down";
 	 
 	 /**개봉예정삭제조회 */
 	 @RequestMapping(value="planed/do_planedDown_retrieve.do",method = RequestMethod.GET)
@@ -134,7 +134,7 @@ public class LHJ_PlanedCtrl {
 	 public String do_retrieve(HttpServletRequest req,SearchVO search, Model model) {
 		 //param
 		 if(search.getPageSize()==0) {
-			 search.setPageSize(10);
+			 search.setPageSize(12);
 		 }
 	
 		 if(search.getPageNum()==0) {

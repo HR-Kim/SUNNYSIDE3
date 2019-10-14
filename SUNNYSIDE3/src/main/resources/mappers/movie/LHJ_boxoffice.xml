@@ -30,8 +30,6 @@
 		    movie m JOIN boxoffice b
 		ON
 		    m.movie_id = b.movie_id
-		AND 
-			m.boxoffice_state = '1'
 		ORDER BY
 		    b.movie_rank
 	</select>

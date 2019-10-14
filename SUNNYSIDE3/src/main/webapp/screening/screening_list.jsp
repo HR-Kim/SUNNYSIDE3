@@ -79,12 +79,12 @@
 <body>	
 	<div class="container ">	
 		<!-- div title --> 
-		<div class="page-header">
+		<div class="page-header row">
 			<h1>상영중</h1>
+			<button type="button" class="btn btn-default btn-sm" onclick="location.href='http://localhost:8080/sunnyside/screening/do_screenUp_retrieve.do'">등록</button>
+			<button type="button" class="btn btn-default btn-sm" onclick="location.href='http://localhost:8080/sunnyside/screening/do_screenDown_retrieve.do'">삭제</button>
 		</div>
 		<!--// div title -->
-		<button type="button" class="btn btn-default btn-sm" onclick="location.href='http://localhost:8080/sunnyside/screening/do_screenUp_retrieve.do'">등록</button>
-		<button type="button" class="btn btn-default btn-sm" onclick="location.href='http://localhost:8080/sunnyside/screening/do_screenDown_retrieve.do'">삭제</button>
 		<!-- form -->
 		<form class="form-inline" name="planedFrm" id="planedFrm" method="get">
 			<input type="hidden" name="pageNum" id="pageNum" value="${vo.pageNum}"/>
@@ -92,20 +92,21 @@
 				<c:choose>
 					<c:when test="${list.size()>0}">
 						<c:forEach var="vo" items="${list}">					
-							<article class="mix mix_all" style="display: inline-block; opacity: 1; ">
+							<div class="col-lg-3">				
+							<article class="mix mix_all" style="display: inline-block; opacity: 1; width:250px; height:500px;">
 								<!-- 포스터 영역 -->
-								<div class="image_holder">			
-									<!-- 이미지  -->
+								<div class="image_holder" >		
+									<!-- 이미지  -->			
 									<span class="image">
-										<img width="110" height="82" src="<c:out value='${vo.poster}'/>" alt="영화포스터">
+										<img src="<c:out value='${vo.poster}'/>" alt="영화포스터" style="height: 350px; width:250px;">
 									</span>
 									<!--// 이미지  -->			
 									<!-- 예매하기, 상세보기 버튼 -->
-									<span class="text_holder"><span class="text_outer"><span class="text_inner"><span class="feature_holder"><span class="feature_holder_icons">
+									<span class="text_holder"><span class="text_outer"><span class="text_inner" ><span class="feature_holder" ><span class="feature_holder_icons">
 										<a class="lightbox qbutton small white" href="#">예매하기</a>
 										<a class="lightbox qbutton small white" href="#">상세보기</a>
 									</span></span></span></span></span>			
-									<!--// 예매하기, 상세보기 버튼 -->			
+									<!--// 예매하기, 상세보기 버튼 -->		
 								</div>
 								<!--// 포스터 영역 -->
 								
@@ -120,8 +121,9 @@
 									<span class="project_category">관람 평점 <c:out value="${vo.visitorRate}"/></span>
 									<!--// 영화정보 -->
 								</div>
-								<!--// 영화정보 영역 -->
+								<!--// 영화정보 영역 -->								
 							</article>	
+							</div>
 						</c:forEach>        			
 					</c:when>        	
 					<c:otherwise>

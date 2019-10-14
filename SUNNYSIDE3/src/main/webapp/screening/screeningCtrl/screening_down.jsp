@@ -62,7 +62,7 @@
 	int bottomCount = 10;
 	int currPageNo = 1; //현재페이지
 	int rowPerPage = 10; //페이지당 보여줄 건수
-	String url = request.getContextPath()+"/screening/do_retrieve.do";
+	String url = request.getContextPath()+"/screening/do_screenDown_retrieve.do";
 	String scriptName = "search_page";
 	
 	//totalCnt
