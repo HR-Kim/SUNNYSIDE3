@@ -45,10 +45,10 @@
 </head>
 <body>
  <h2 style="margin-left: 40px;"> 상품정보 수정 </h2>
- <form id="storeForm" name="storeForm" method="post" enctype="multipart/form-data" action="do_update.do" style="margin-left: 40px">
+ <form id="boardEditFrm" name="boardEditFrm" method="post" enctype="multipart/form-data" action="do_update.do" style="margin-left: 40px">
  	<table border="1">
  	<tr style="display: none;">
- 		<td><input id="productId" value="<c:out value=" ${vo.productId }"/>"></td>
+ 		<td><input id="productId" name="productId" value="<c:out value="${vo.productId }"/>"></td>
  		<td class="category" id="category">${vo.category }</td>
  	</tr>
   	<tr>
@@ -78,13 +78,15 @@
   	</tr>
   	<tr>
   	 <td colspan="2" align="center">
-  	 	<input type="submit" value="수정완료" id="doUpdate">
+  	 	<input type="submit" value="수정" id="doUpdate">
+  	 	<input type="button" value="취소" id="backBtn">
   	 </td>
   	</tr> 	
   </table> 
  </form>
  <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="${context}/resources/js/jquery.validate.js"></script>
 <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
  <script src="${context}/resources/js/bootstrap.min.js"></script>   
  <script type="text/javascript">
@@ -92,7 +94,7 @@
 
 	//수정
 		$("#doUpdate").on("click",function(){
-			//validation
+			
 			console.log("productNm="+$("#productNm").val());
 			console.log("productCost="+$("#productCost").val());
 			console.log("productInfo="+$("#productInfo").val());
@@ -106,16 +108,17 @@
 		          url:"${context}/store/do_update.do",		        
 		          dataType:"html",
 		       	  data:{
-		       		"productId": $("#productId").val(),
 		       		"productNm": $("#productNm").val(),
+		       		"productInfo": $("#productInfo").val(),
 		       		"productCost": $("#productCost").val(),
-		       		"productInfo": $("#productId").val()
+		       		"productId": $("#productId").val()
 		       			  
 		       	  }, 
 		       			       
 		        success: function(data){ 
-		        	 alert("수정되었습니다.");
-		        	 location.href ="${context}/store/store_main.jsp";
+		        	    
+		           alert(jData.msgId+"|"+jData.msgMsg);
+		             
 		       },
 		       complete:function(data){
 		    	   //alert("수정되었습니다.");
@@ -129,8 +132,57 @@
  
  
  $(document).ready(function(){
-	 
-  });
+	//form validate
+		$("#boardEditFrm").validate({
+
+			rules: {
+						productNm: {
+								required: true,
+								minlength: 2								
+								},
+						productCost: {
+								required: true,
+								minlength: 2
+							},
+						productInfo: {
+								required: true,
+								minlength: 2
+							},
+						productImage: {
+								required: true,
+								minlength: 2
+							}
+			},
+			messages: {						
+						productNm: {
+								required: "상품명을 입력하세요",
+								minlength: $.validator.format("{0}자 이상 입력하세요.") 									
+						},
+						productCost: {
+							required: "상품금액을 입력하세요",
+							minlength: $.validator.format("{0}자 이상 입력하세요.")
+						},
+						productInfo: {
+							required: "상품정보를 입력하세요",
+							minlength: $.validator.format("{0}자 이상 입력하세요.")
+						},
+						productImage: {
+							required: "이미지를 추가해주세요"
+						},
+			},
+			errorPlacement : function(error, element) {
+							        //do nothing
+							       },
+							       invalidHandler : function(form, validator) {
+							        var errors = validator.numberOfInvalids();
+							       		 if (errors) {
+							        				 alert(validator.errorList[0].message);
+							      				     validator.errorList[0].element.focus();
+										 }
+									 }
+
+		  })
+});
 
 </script>
 </body>

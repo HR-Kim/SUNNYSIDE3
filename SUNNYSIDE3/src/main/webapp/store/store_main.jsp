@@ -13,7 +13,7 @@
 <!------ Include the above in your HEAD tag ---------->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 <link href="../resources/css/store_main.css" rel="stylesheet" type="text/css">
-<title>Insert title here</title>
+<title>스토어</title>
 </head>
 <body>
 <div class="container">

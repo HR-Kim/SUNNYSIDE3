@@ -91,6 +91,7 @@ public class StringUtil {
 	
 	/**
 	 * 파일 Rename
+	 * C:\\Users\\sist\\git\\SUNNYSIDE3\\SUNNYSIDE3\\src\\main\\webapp\\resources\\image" =>../resources/image  
 	 * 
 	 * @param f
 	 * @return 파일 rename명 cloude.jpg->cloude1~9999.jpg
@@ -100,6 +101,19 @@ public class StringUtil {
 		
 		return str;
 	}
+	
+	/**
+	 * 파일 Rename
+	 * ../resources/image   => C:\\Users\\sist\\git\\SUNNYSIDE3\\SUNNYSIDE3\\src\\main\\webapp\\resources\\image
+	 * @param f
+	 * @return 파일 rename명 cloude.jpg->cloude1~9999.jpg
+	 */
+	public static String backPath(String str) {
+		str = "C:\\Users\\sist\\git\\SUNNYSIDE3\\SUNNYSIDE3\\src\\main\\webapp"+str.substring(str.indexOf("/resources")).replace("/", "\\");
+		
+		return str;
+	}
+	
 
 	public static String getUUID() {
 		UUID uuid = UUID.randomUUID();

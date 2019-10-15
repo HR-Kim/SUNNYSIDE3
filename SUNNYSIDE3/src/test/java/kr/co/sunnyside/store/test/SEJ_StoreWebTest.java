@@ -120,13 +120,12 @@ public class SEJ_StoreWebTest {
 	@Ignore
 	public void do_update() throws Exception{
 	    MockHttpServletRequestBuilder createMessage 
-	    = MockMvcRequestBuilders.post("/store/do_update.do").param("productId", "20191014-003-021")
-	    												    .param("productNm", "IMAX영화예매권")
-	    												    .param("productInfo", "IMAX는 사람이 볼 수 있는 최대 영상이라는 뜻으로, 최고의 몰입감을 선사합니다.")
-	    												    .param("productCost", "15000");
-	    
+	    = MockMvcRequestBuilders.post("/store/do_update.do").param("productId", "20191015-001-021")
+	    												    .param("productNm", "짭잘바다맛")
+	    												    .param("productInfo", "아주 맛있습니다")
+	    												    .param("productCost", "8000");
 	    ResultActions resultActions =  mockMvc.perform(createMessage)
-	                                //.andExpect(MockMvcResultMatchers.content().contentType("application/json; charset=UTF-8"))	                              
+	                                  .andExpect(MockMvcResultMatchers.content().contentType("application/json; charset=UTF-8"))	                              
 	    							  .andExpect(MockMvcResultMatchers.jsonPath("$.msgId", is("1")));
 	    String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
 	    LOG.debug("=============================");
