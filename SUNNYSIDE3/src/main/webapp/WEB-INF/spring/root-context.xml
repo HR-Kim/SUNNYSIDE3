@@ -45,14 +45,14 @@
    
    
     <!-- mail -->
-	<bean id="mailSender" class="kr.co.sunnyside.login.service.impl.SJH_LoginDummiMailSender" />
+<!-- 	<bean id="mailSender" class="kr.co.sunnyside.login.service.impl.SJH_LoginDummiMailSender" /> --><!-- 더미메일 -->
 	
 	<bean id="passwordAuth" class="javax.mail.PasswordAuthentication">
 		<constructor-arg>
-	 		<value>아이디</value>
+	 		<value>glwlzkwp</value>
 		</constructor-arg>
 		<constructor-arg>
-	 		<value>비번</value>
+	 		<value></value>
 		</constructor-arg>
 	</bean>
 	
@@ -77,9 +77,9 @@
 	
 	
 	<!-- 실제로 메일이 보내짐 -->
-<!--  	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+  	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="session" ref="emailSession"></property>
-	</bean> -->
+	</bean> 
 	
 	
    

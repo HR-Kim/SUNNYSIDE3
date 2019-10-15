@@ -56,8 +56,8 @@ public class SJH_MypageDao implements WorkDiv {
 	 * @param dto
 	 * @return
 	 */
-	public int do_levelUpdate(DTO dto) {
-		String statement = this.NAMESPACE+".do_levelUpdate";
+	public int tx_upgradeLevels(DTO dto) {
+		String statement = this.NAMESPACE+".tx_upgradeLevels";
 		SJH_MypageVO user = (SJH_MypageVO) dto;
 		
 		LOG.debug("========================");

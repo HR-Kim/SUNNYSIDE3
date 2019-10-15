@@ -65,7 +65,7 @@ public class SJH_MypageSvcImpl implements SJH_MypageSvc {
 	//등업하고 메일 보내기
 	protected void upgradeLevel(SJH_MypageVO user) throws SQLException {
 		user.upgradeLevel(user); //VO부분에 기능을 만듦
-		mypageDao.do_levelUpdate(user);
+		mypageDao.tx_upgradeLevels(user);
 		
 		sendUpgradeMail(user); //mail send 
 	}
@@ -74,21 +74,24 @@ public class SJH_MypageSvcImpl implements SJH_MypageSvc {
 	
 	//등업 사용자에게 mail전송
 	private void sendUpgradeMail(SJH_MypageVO user) {
+		
 		try {
 			
 			//보내는 사람
 			String host = "smtp.naver.com";
-			final String userName = "아이디";
-			final String password = "비번";
+			final String userName = "glwlzkwp";
+			final String password = "";
 			int port = 465;
-			
 			
 			//받는 사람
 			String recipient = user.getEmail();
 			//제목
 			String title = user.getUserName()+"님의 등급이 변경되었습니다.(SUNNYSIDE THEATER)";
 			//내용
-			String contents = user.getUserId()+"님의 등급이 "+user.getUserLevel()+"로 변경되었습니다.";
+			String contents = "축하합니다.\n"
+							  +user.getUserId()+"님의 등급이 "+user.getUserLevel()+"로 변경되었습니다.\n"
+							  +"발급된 할인쿠폰의 번호를 '마이페이지>쿠폰등록'에 등록하시면 사용할 수 있습니다.\n"
+							  +"쿠폰번호 : "+"임시 쿠폰번호";
 			
 			//SMTP 서버 설정
 			Properties props = System.getProperties();
@@ -111,9 +114,7 @@ public class SJH_MypageSvcImpl implements SJH_MypageSvc {
 				
 			});	
 			
-			
 			session.setDebug(true);
-			
 			
 			SimpleMailMessage mimeMessage = new SimpleMailMessage();
 			// 보내는 사람

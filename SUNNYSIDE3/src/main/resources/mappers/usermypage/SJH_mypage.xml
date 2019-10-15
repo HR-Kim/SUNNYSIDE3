@@ -7,7 +7,7 @@
 	
 	
 	<!-- 회원 자동 등업 -->
-	<update id="do_levelUpdate" parameterType="SJH_MypageVO">
+	<update id="tx_upgradeLevels" parameterType="SJH_MypageVO">
 		UPDATE user_info
 		SET
 		    user_level = #{userLevel,jdbcType=VARCHAR}

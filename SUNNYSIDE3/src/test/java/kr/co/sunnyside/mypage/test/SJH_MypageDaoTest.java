@@ -86,7 +86,7 @@ public class SJH_MypageDaoTest {
 	
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void tx_levelUpdate() throws SQLException {
 		
 		try {

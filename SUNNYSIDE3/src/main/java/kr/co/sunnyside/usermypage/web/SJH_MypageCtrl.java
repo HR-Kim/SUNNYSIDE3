@@ -1,5 +1,7 @@
 package kr.co.sunnyside.usermypage.web;
 
+import java.sql.SQLException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,17 +36,18 @@ public class SJH_MypageCtrl {
 	@RequestMapping(value="usermypage/tx_upgradeLevels.do",method = RequestMethod.POST
 			,produces = "application/json; charset=UTF-8")
 	@ResponseBody	
-	public String tx_upgradeLevels(SJH_MypageVO inVO) {
+	public void tx_upgradeLevels() throws SQLException {
 		LOG.debug("1=========================");
-		LOG.debug("=@Controller=user=="+inVO);
+		LOG.debug("=@Controller=자동등업=");
 		LOG.debug("1=========================");
 		
-		//validation
-		//mypageSvc.tx_upgradeLevels();
-		return "";		
+		mypageSvc.tx_upgradeLevels();
+		
+		LOG.debug("1=========================");
+		LOG.debug("=@Controller=자동등업 확인=");
+		LOG.debug("1=========================");
+		
 	}
-	
-	
 	
 	
 	
