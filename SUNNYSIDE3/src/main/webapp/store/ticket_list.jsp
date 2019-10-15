@@ -5,40 +5,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="context" value="${pageContext.request.contextPath }" />
-<%
-
-		/**페이지 사이즈*/
-		String pageSize="10"       ; 
-		/**페이지 번호*/
-		String pageNum= "1"       ;
-		/**검색조건*/
-		String searchDiv=""    ;
-		/**검색어*/
-		String searchWord=""   ;
-
-		SearchVO vo = (SearchVO)request.getAttribute("vo");
-		if(null!=vo){
-			pageSize = StringUtil.nvl(vo.getPageSize()+"","10");
-			pageNum = StringUtil.nvl(vo.getPageNum()+"","1");
-			searchDiv = StringUtil.nvl(vo.getSearchDiv(),"");
-			searchWord = StringUtil.nvl(vo.getSearchWord(),"");
-		}else{
-			pageSize = "10";
-			pageNum ="1";
-			searchDiv ="";
-			searchWord ="";
-			
-		}
-		//paging
-		int maxNum 	    = 0; //총 글수		:server   O
-		int currPageNo  = 1; //현재 페이지	:pageNum  O
-		int rowPerPage  = 12;//rowCnt	:pageSize O	
-		int bottomCount = 10;//bottom cnt
-		String url =request.getContextPath()+"/store/do_retrieve_movieticket.do"; //호출URL
-		String scriptName = "search_page"; //Javascript함수명		
-		
-
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,17 +49,6 @@
 			</div>
 		</form>
 	 </div>
-	 <div class="container" >
-		<!-- paging -->		
-			<nav class="text-center">
-				<ul class="pagination">
-					<li>
-						<%=StringUtil.renderPaing(maxNum, currPageNo, rowPerPage, bottomCount, url, scriptName) %>
-					</li>
-				</ul>
-			</nav>
-		<!-- //paging -->	
-	</div>
 <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->

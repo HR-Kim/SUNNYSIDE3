@@ -51,6 +51,12 @@
       <put-attribute name="title" value="SUNNYSIDE>마이페이지" />
     </definition>
     
+   <!-- store -->    
+    <definition name="store/*" extends="basede_definition">
+      <put-attribute name="body" value="/store/{1}.jsp" />
+      <put-attribute name="title" value="SUNNYSIDE>스토어" />
+    </definition>
+    
  
 
 </tiles-definitions>
