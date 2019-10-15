@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kr.co.sunnyside.cmn.DTO;
 import kr.co.sunnyside.cmn.SearchVO;
@@ -21,13 +22,17 @@ public class SEJ_StoreSvcImple implements SEJ_StroreSvc {
 	
 	
 	
-	/**상품등록*/
+	/**상품등록
+	 *  1. 파일을 업로드 한다.
+	 *  2. 입력한 정보를 저장 한다.
+	 * 
+	 * */
 	@Override
 	public int do_save(DTO dto) {
 		LOG.debug("==================");
 		LOG.debug("=@Service="+dto);
 		LOG.debug("==================");
-		
+		 
 		return storeDaoImpl.do_save(dto);
 	}
 	
@@ -38,7 +43,9 @@ public class SEJ_StoreSvcImple implements SEJ_StroreSvc {
 		return storeDaoImpl.do_delete(dto);
 	}
 	
-	/**상품정보수정*/
+	/**상품정보수정  
+	 * 
+	 * */
 	@Override
 	public int do_update(DTO dto) {
 		
@@ -74,6 +81,7 @@ public class SEJ_StoreSvcImple implements SEJ_StroreSvc {
 		
 		return storeDaoImpl.do_retrieve(dto);
 	}
+	
 
 
 

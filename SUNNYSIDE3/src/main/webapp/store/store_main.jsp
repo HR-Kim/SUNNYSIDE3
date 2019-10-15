@@ -13,7 +13,7 @@
 <!------ Include the above in your HEAD tag ---------->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 <link href="../resources/css/store_main.css" rel="stylesheet" type="text/css">
-<title>Insert title here</title>
+<title>스토어</title>
 </head>
 <body>
 <div class="container">
@@ -232,7 +232,7 @@
 	 function popup(){
          var url = "store_add.jsp";
          var name = "상품등록";
-         var option = "width = 600, height = 350, top = 100, left = 400, location = no"
+         var option = "width = 700, height = 400, top = 100, left = 400, location = no"
          window.open(url, name, option);
      }
 

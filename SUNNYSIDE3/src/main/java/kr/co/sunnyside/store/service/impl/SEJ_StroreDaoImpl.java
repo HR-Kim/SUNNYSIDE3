@@ -7,11 +7,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kr.co.sunnyside.cmn.DTO;
 import kr.co.sunnyside.cmn.SearchVO;
 import kr.co.sunnyside.cmn.WorkDiv;
+import kr.co.sunnyside.file.service.FileVO;
 import kr.co.sunnyside.store.service.SEJ_StroreVO;
+
 
 @Repository
 public class SEJ_StroreDaoImpl implements WorkDiv {
@@ -73,7 +76,7 @@ public class SEJ_StroreDaoImpl implements WorkDiv {
 		LOG.debug("=2. statement="+statement);
 		LOG.debug("===================================");
 		
-		int flag = this.sqlSessionTemplate.delete(statement,store);
+		int flag = this.sqlSessionTemplate.update(statement,store);
 		LOG.debug("===================================");
 		LOG.debug("=3. flag="+flag);
 		LOG.debug("===================================");

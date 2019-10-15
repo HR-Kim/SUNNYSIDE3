@@ -27,11 +27,15 @@
 
 <body>
  <h2 style="margin-left: 40px;"> 상품등록 </h2>
- <form id="storeForm" name="storeForm" method="post" enctype="multipart/form-data" action="do_save.do" style="margin-left: 40px">
+ <form id="boardEditFrm" name="boardEditFrm" method="post" enctype="multipart/form-data" action="do_save.do" style="margin-left: 40px">
  	<table border="1">
+ 	<tr style="display: none;" >
+  		<td>상품id</td>
+  		<td><input type="text" name="productId" id="productId" /></td>
+  	</tr>
   	<tr>
   		<td>상품명</td>
-  		<td><input type="text" name="productName" id="productName" /></td>
+  		<td><input type="text" name="productNm" id="productNm" /></td>
   	</tr>
   	<tr>
   		<td>분류</td>
@@ -57,13 +61,14 @@
   	</tr>
   	<tr>
   	 <td colspan="2" align="center">
-  	 	<input type="submit" value="등록" id="addBtn">
+  	 	<input type="submit" value="등록" id="addBtn" >
   	 </td>
   	</tr> 	
   </table> 
  </form>
  <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="${context}/resources/js/jquery.validate.js"></script>
 <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
  <script src="${context}/resources/js/bootstrap.min.js"></script>   
  <script type="text/javascript">
@@ -71,31 +76,99 @@
 	 /**등록*/ 
 	 $("#addBtn").on("click",function(){
 		  if(confirm("등록하시겠습니까?")==false) return;
+		  console.log($("#productId").val());
+		  console.log($("#productNm").val());
+	      console.log($("#category").val());
+	      console.log($("#productCost").val());
+	      console.log($("#productInfo").val());
+		  
 		  
 		//ajax
 	       $.ajax({
 	          type:"POST",
 	          url:"${context}/store/do_save.do",
-	          data:$("#storeForm").serialize(), 
 	          dataType:"html",
-	       
+	          data:{
+	        	   "productId":$("#productId").val(),
+	        	   "productNm":$("#productNm").val(),
+	               "category":$("#category").val(),
+	               "productCost":$("#productCost").val(),
+	               "productInfo":$("#productInfo").val()
+	              }, 
 	        success: function(data){ 
-	        	 alert("등록되었습니다.");
-		    	 window.close();
-	       },
-	       complete:function(data){
-	    	   alert("등록되었습니다.");
-	    	   window.close();
-	       },
-	       error:function(xhr,status,error){
-	          // alert("error:"+error);
-	       }
-	      }); //--ajax  
+	        	var jData = JSON.parse(data);
+	            if(jData.msgId=="1"){
+	            	 alert("등록되었습니다.");
+	 		    	 window.close();
+	            }else{
+	            	window.close();
+	                //alert(jData.msgId+"|"+jData.msgMsg);
+	              }
+	           },
+	            complete:function(data){
+	               alert("등록되었습니다.");
+	  	    	   window.close();
+	            },
+	            error:function(xhr,status,error){
+	                //alert("error:"+error);
+	            }
+	           
+	           }); //--ajax  
 		});
-	 
+		
+	
  
  $(document).ready(function(){
-	  
+	//form validate
+		$("#boardEditFrm").validate({
+
+			rules: {
+						productNm: {
+								required: true,
+								minlength: 2								
+								},
+						productCost: {
+								required: true,
+								minlength: 2
+							},
+						productInfo: {
+								required: true,
+								minlength: 2
+							},
+						productImage: {
+								required: true,
+								minlength: 2
+							}
+			},
+			messages: {						
+						productNm: {
+								required: "상품명을 입력하세요",
+								minlength: $.validator.format("{0}자 이상 입력하세요.") 									
+						},
+						productCost: {
+							required: "상품금액을 입력하세요",
+							minlength: $.validator.format("{0}자 이상 입력하세요.")
+						},
+						productInfo: {
+							required: "상품정보를 입력하세요",
+							minlength: $.validator.format("{0}자 이상 입력하세요.")
+						},
+						productImage: {
+							required: "이미지를 추가해주세요"
+						},
+			},
+			errorPlacement : function(error, element) {
+							        //do nothing
+							       },
+							       invalidHandler : function(form, validator) {
+							        var errors = validator.numberOfInvalids();
+							       		 if (errors) {
+							        				 alert(validator.errorList[0].message);
+							      				     validator.errorList[0].element.focus();
+										 }
+									 }
+
+		  })
   });
 
 </script>

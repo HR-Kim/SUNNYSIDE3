@@ -4,7 +4,7 @@
 
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
-  <link rel="icon" href="../../sunnyside/resources/image/layout/logo.png">
+  <link rel="icon" href="../../sunnyside/resources/image/layout/logo_mini.png">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="../../sunnyside/resources/css/bootstrap.min.css">
   <!-- animate CSS -->

@@ -26,9 +26,8 @@
 <h3 class="h4"  style="margin-left: 70px; margin-top: 30px">상품 상세정보</h3>
 <table style="margin-left: 70px;">
 	<tr>
-		<td>
-			<input type="hidden" id="productId" value="${vo.productId }">
-		</td>
+		<td style="display: none;" id="productId" class="productId">${vo.productId }</td>
+		<td style="display: none;" id="category" class="category" >${vo.category }</td>
 		<td>
 			<img width="340" height="300" src="${vo.saveFileNm }">
 		</td>
@@ -68,7 +67,7 @@
 </table>
 <hr>
 <div style="margin-left: 900px;">
-	<input type="button" value="수정" id="updatebtn" name="updatebtn">
+	<input type="submit" value="수정" id="updatebtn" name="updatebtn">
 	<input type="button" value="삭제" id="delbtn" name="delbtn">
 </div>
 		
@@ -77,11 +76,15 @@
 	$("#updatebtn").on("click",function(){
 		//alert("updatebtn");
 		if(false==confirm('상품을 수정 하시겠습니까?')) return;
+		var productId = $("#productId").text();
+		//alert("productId=="+productId);
+		location.href ="${context}/store/do_selectOneToUpdate.do?productId="+productId;
+	
 	});
 	
 	//삭제
 	$("#delbtn").on("click",function(){
-		//alert("delbtn");
+		//alert($("#productId").text());
 		if(false==confirm('상품을 삭제 하시겠습니까?')) return;
 		
 		$.ajax({
@@ -89,14 +92,14 @@
 	         url:"${context}/store/do_delete.do",
 	         dataType:"html",// JSON
 	         data:{
-	         	"productId":$("#productId").val()
+	         	"productId":$("#productId").text()
 	         },
 	         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
 	         	console.log(data); 
 	         	//{"msgId":"1","msgMsg":"삭제되었습니다.","totalCnt":0,"num":0}
 	         	var parseData= $.parseJSON(data);
 	         	if(parseData.msgId =="1"){
-	         		alert(parseData.msgMsg);
+	         		alert("삭제 되었습니다");
 	         		location.href ="${context}/store/do_retrieve.do";
 	         		
 	         	}else{
@@ -106,6 +109,7 @@
 	         
 	         },
 	         complete: function(data){//무조건 수행
+	        		alert("삭제 되었습니다");
 	        		location.href ="${context}/store/do_retrieve.do";
 	         },
 	         error: function(xhr,status,error){
