@@ -55,6 +55,8 @@ public class SJH_LoginCtrl {
 	
 	
 	//view
+	private final String VIEW_JOIN = "login/join";
+	private final String VIEW_LOGIN = "login/login";
 	private final String VIEW_ID_FIND_LIST = "login/login_id_find_list";
 	private final String VIEW_PW_FIND_LIST = "login/login_pw_find_list";
 	
@@ -141,6 +143,29 @@ public class SJH_LoginCtrl {
 		return "redirect:index.jsp";
 	}
 
+	
+	//회원가입 화면call
+	@RequestMapping(value="login/join_view.do", method = RequestMethod.GET)
+	public String joinView() {
+		LOG.debug("========================");
+		LOG.debug("=@Controller=doUserView=");
+		LOG.debug("========================");
+		
+		return VIEW_JOIN;
+	}
+	
+	
+	
+	
+	//로그인 화면call
+	@RequestMapping(value="login/login_view.do", method = RequestMethod.GET)
+	public String loginView() {
+		LOG.debug("========================");
+		LOG.debug("=@Controller=doUserView=");
+		LOG.debug("========================");
+		
+		return VIEW_LOGIN;
+	}
 	
 	
 

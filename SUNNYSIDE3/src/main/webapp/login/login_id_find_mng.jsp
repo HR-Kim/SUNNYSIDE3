@@ -6,28 +6,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style type="text/css">
-<style type="text/css">
-    .layer {
-        position: absolute;
-        text-align: center;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-    }
-    .layer .content {
-        display: inline-block;
-        vertical-align: middle
-    }
-    .layer .blank {
-        display: inline-block;
-        width: 0;
-        height: 100%;
-        vertical-align: middle
-    }
-</style>
-</style>
 	<title>아이디찾기</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,7 +14,7 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/bootstrap.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href=""${context}/resources/css/login/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/font-awesome.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/icon-font.min.css">
 <!--===============================================================================================-->
@@ -70,7 +48,7 @@
 					<span class="txt1 p-b-11">
 						이름
 					</span>
-					<div class="wrap-input100 validate-input m-b-36">
+					<div class="wrap-input100 validate-input m-b-15">
 						<input class="input100" type="text" id="userName" name="userName" >
 						<span class="focus-input100"></span>
 					</div>
@@ -78,14 +56,17 @@
 					<span class="txt1 p-b-11">
 						이메일
 					</span>
-					<div class="wrap-input100 validate-input m-b-36">
+					<div class="wrap-input100 validate-input m-b-15">
 						<input class="input100" type="text" id="email" name="email" >
 						<span class="focus-input100"></span>
 					</div>
 				</form>
 				
-
+				<br/>
+				
+				<!-- 버튼 -->
 				<div class="container-login100-form-btn">
+					&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
 					<button class="login100-form-btn" id="confirm">
 						확인
 					</button>
@@ -139,7 +120,7 @@
 		
 		/** 취소 버튼 */
 		$("#undo").on("click",function(){
-			location.href = "http://localhost:8080/sunnyside/logintest/index.jsp";
+			location.href = "${context}/login/login_view.do";
 		});
 		
 	

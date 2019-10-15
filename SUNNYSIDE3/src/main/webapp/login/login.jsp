@@ -14,7 +14,7 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/bootstrap.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href=""${context}/resources/css/login/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/font-awesome.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/icon-font.min.css">
 <!--===============================================================================================-->
@@ -44,8 +44,6 @@
 							<option value="en">영어</option>
 					     </select>
 				    </div>
-					<div>
-					</div>
 					<span class="text-center login100-form-title p-b-32">
 						SUNNYSIDE LOGIN
 					</span>
@@ -63,7 +61,6 @@
 					</span>
 					<div class="wrap-input100 validate-input m-b-12" data-validate = "Password is required">
 						<span class="btn-show-pass" >
-							<i class="fa fa-eye"></i>
 						</span>
 						<input class="input100" type="password" id="passwd" name="passwd" >
 						<span class="focus-input100"></span>
@@ -95,7 +92,10 @@
 						</a>
 					</div>
 				</div>
+				
+				<!-- 버튼 -->
 				<div class="container-login100-form-btn">
+					&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
 					<button class="login100-form-btn" id="signIn">
 						로그인
 					</button>
@@ -130,6 +130,10 @@
 	<script type="text/javascript">
 		
 	
+		/** 회원가입 */
+		$("#join").on("click",function(){
+			location.href = "${context}/login/join_view.do";
+		});
 	
 	
 		/** 아이디 찾기 */
@@ -164,7 +168,7 @@
 					var jData = JSON.parse(data);
 					if(null != jData){
 						if (jData.msgId == "30") {
-							location.href = "http://localhost:8080/sunnyside/logintest/index.jsp";
+							location.href = "${context}/main/main.do";
 	
 						}else if (jData.msgId == "10") {
 							$("#userId").focus();

@@ -4,50 +4,54 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="context" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>비밀번호 찾기 결과창</title>
-<style type="text/css">
-    .layer {
-        position: absolute;
-        text-align: center;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        font-size: 35px;
-    }
-    .layer .content {
-        display: inline-block;
-        vertical-align: middle
-    }
-    .layer .blank {
-        display: inline-block;
-        width: 0;
-        height: 100%;
-        vertical-align: middle
-    }
-</style>
-
-<!-- 부트스트랩 -->
-<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js -->
-<!-- WARNING: Respond.js 는 당신이 file:// 을 통해 페이지를 볼 때는 동작하지 않습니다. -->
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+	<title>아이디찾기</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="${context}/resources/image/login/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/util.css">
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/main.css">
+<!--===============================================================================================-->
 </head>
 <body>
-	
-	<div class="layer">
-        <span class="content">회원님의 메일로 임시 비밀번호가 전송되었습니다.</span>
-        <span class="blank"></span>
-    </div>
-	
+
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-l-80 p-r-70 p-t-55 p-b-55">
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+					<center>
+						<h1>회원님의 메일로</h1>
+						<h1>임시 비밀번호가 전송되었습니다.</h1>
+					</center>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+			</div>
+		</div>
+	</div>
 	
 </body>
 </html>

@@ -13,6 +13,7 @@
         <put-attribute name="footer" value="/tiles/views/footer.jsp" />
         <put-attribute name="menu" value="/tiles/views/defaultResource.jsp" />
     </definition>
+
     
     <!-- main -->    
     <definition name="main/*" extends="basede_definition">
@@ -37,6 +38,13 @@
       <put-attribute name="body" value="/screening/{1}.jsp" />
       <put-attribute name="title" value="SUNNYSIDE>최신개봉리스트" />
     </definition>
+    
+    <!-- login & join -->    
+    <definition name="login/*" extends="basede_definition">
+      <put-attribute name="body" value="/login/{1}.jsp" />
+      <put-attribute name="title" value="SUNNYSIDE>로그인" />
+    </definition>
+    
  
 
 </tiles-definitions>
