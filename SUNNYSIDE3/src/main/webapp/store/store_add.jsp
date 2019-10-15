@@ -31,7 +31,7 @@
  	<table border="1">
   	<tr>
   		<td>상품명</td>
-  		<td><input type="text" name="productName" id="productName" /></td>
+  		<td><input type="text" name="productNm" id="productNm" /></td>
   	</tr>
   	<tr>
   		<td>분류</td>
@@ -57,7 +57,7 @@
   	</tr>
   	<tr>
   	 <td colspan="2" align="center">
-  	 	<input type="submit" value="등록" id="addBtn">
+  	 	<input type="submit" value="등록" id="addBtn" >
   	 </td>
   	</tr> 	
   </table> 
@@ -86,16 +86,13 @@
 	       complete:function(data){
 	    	   alert("등록되었습니다.");
 	    	   window.close();
-	       },
-	       error:function(xhr,status,error){
-	          // alert("error:"+error);
 	       }
 	      }); //--ajax  
 		});
-	 
+		
+	
  
  $(document).ready(function(){
-	  
   });
 
 </script>

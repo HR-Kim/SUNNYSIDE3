@@ -151,7 +151,7 @@ public class SJH_LoginSvcImpl implements SJH_LoginSvc{
 		flag = loginDao.passwd_check(dto);
 		if(flag<1) {
 			outMsg.setMsgId("20");
-			outMsg.setMsgMsg("비번을 확인하세요."); //나중에 메세지 프로퍼티로 처리
+			outMsg.setMsgMsg("비밀번호를 확인하세요."); //나중에 메세지 프로퍼티로 처리
 			return outMsg;
 		}
 		
