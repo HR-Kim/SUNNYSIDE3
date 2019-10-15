@@ -26,184 +26,182 @@ import kr.co.sunnyside.review.service.impl.LHJ_ReviewSvcImpl;
 @Controller
 public class LHJ_ReviewCtrl {
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
-	  
+
 	@Autowired
-	LHJ_ReviewSvcImpl service;	 
-	
+	LHJ_ReviewSvcImpl service;
+
 	@Autowired
 	private CodeService codeService;
-	
-	//view
+
+	// view
 	private final String VIEW_LIST_NM = "review/review_list";
-	private final String VIEW_MNG_NM  = "review/review_mng";
-	
-	/**목록조회 */
-	@RequestMapping(value="review/do_retrieve.do",method = RequestMethod.GET)
-	public String get_retrieve(HttpServletRequest req,SearchVO search, Model model) {
-		//param
-		if(search.getPageSize()==0) {
+	private final String VIEW_MNG_NM = "review/review_mng";
+
+	/** 목록조회 */
+	@RequestMapping(value = "review/do_retrieve.do", method = RequestMethod.GET)
+	public String do_retrieve(HttpServletRequest req, SearchVO search, Model model) {
+		// param
+		if (search.getPageSize() == 0) {
 			search.setPageSize(10);
 		}
-		
-		if(search.getPageNum()==0) {
+
+		if (search.getPageNum() == 0) {
 			search.setPageNum(1);
-		}		
-		
+		}
+
 		search.setSearchDiv(StringUtil.nvl(search.getSearchDiv()));
 		search.setSearchWord(StringUtil.nvl(search.getSearchWord()));
 		model.addAttribute("vo", search);
-		
+
 		LOG.debug("============================");
-		LOG.debug("=search="+search);
-		LOG.debug("============================");		
-		
-		CodeVO code=new CodeVO();
-		//페이지사이즈
+		LOG.debug("=search=" + search);
+		LOG.debug("============================");
+
+		CodeVO code = new CodeVO();
+		// 페이지사이즈
 		code.setCodeId("PAGE_SIZE");
-		
-		List<CodeVO> listPageSize=(List<CodeVO>) this.codeService.do_retrieve(code);
+
+		List<CodeVO> listPageSize = (List<CodeVO>) this.codeService.do_retrieve(code);
 		model.addAttribute("listPageSize", listPageSize);
-		
-		//목록조회
+
+		// 목록조회
 		List<LHJ_ReviewVO> list = (List<LHJ_ReviewVO>) this.service.do_retrieve(search);
 		model.addAttribute("list", list);
-		
-		//총건수
+
+		// 총건수
 		int totalCnt = 0;
-		if(null != list && list.size()>0) {
+		if (null != list && list.size() > 0) {
 			totalCnt = list.get(0).getTotalCnt();
 		}
 		model.addAttribute("totalCnt", totalCnt);
 		return VIEW_LIST_NM;
 	}
-	
-	/**단건조회 */
-	@RequestMapping(value="review/do_selectOne.do",method = RequestMethod.GET)
-	public String do_selectOne(LHJ_ReviewVO inVO,Model model) {
+
+	/** 단건조회 */
+	@RequestMapping(value = "review/do_selectOne.do", method = RequestMethod.GET)
+	public String do_selectOne(LHJ_ReviewVO inVO, Model model) {
 		LOG.debug("============================");
-		LOG.debug("=inVO="+inVO);
+		LOG.debug("=inVO=" + inVO);
 		LOG.debug("============================");
-		
-		if(null == inVO.getMovieId() || "".equals(inVO.getMovieId().trim())) {
+
+		if (null == inVO.getMovieId() || "".equals(inVO.getMovieId().trim())) {
 			throw new IllegalArgumentException("영화를 선택하세요.");
 		}
-		
-		if(null == inVO.getUserId() || "".equals(inVO.getUserId().trim())) {
+
+		if (null == inVO.getUserId() || "".equals(inVO.getUserId().trim())) {
 			throw new IllegalArgumentException("아이디를 선택해주세요.");
 		}
-		
-		LHJ_ReviewVO outVO= (LHJ_ReviewVO) this.service.do_selectOne(inVO);
+
+		LHJ_ReviewVO outVO = (LHJ_ReviewVO) this.service.do_selectOne(inVO);
 		model.addAttribute("vo", outVO);
-		
+
 		return VIEW_MNG_NM;
 	}
-	
-	/**리뷰 수정 */
-	@RequestMapping(value="review/do_update.do",method = RequestMethod.POST
-			,produces = "application/json;charset=UTF-8")
-	@ResponseBody		
+
+	/** 리뷰 수정 */
+	@RequestMapping(value = "review/do_update.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
 	public String do_update(LHJ_ReviewVO inVO) {
 		String gsonStr = "";
 		LOG.debug("============================");
-		LOG.debug("=inVO="+inVO);
-		LOG.debug("============================");		
-		if(null == inVO.getMovieId() || "".equals(inVO.getMovieId().trim())) {
+		LOG.debug("=inVO=" + inVO);
+		LOG.debug("============================");
+		if (null == inVO.getMovieId() || "".equals(inVO.getMovieId().trim())) {
 			throw new IllegalArgumentException("영화를 선택하세요.");
 		}
-		
-		if(null == inVO.getUserId() || "".equals(inVO.getUserId().trim())) {
+
+		if (null == inVO.getUserId() || "".equals(inVO.getUserId().trim())) {
 			throw new IllegalArgumentException("로그인 후 이용해주세요.");
 		}
-		
-		if(null == inVO.getContents() || "".equals(inVO.getContents().trim())) {
+
+		if (null == inVO.getContents() || "".equals(inVO.getContents().trim())) {
 			throw new IllegalArgumentException("내용을 입력해 주세요.");
 		}
-		
-		if(0.0 == inVO.getVisitorRate()) {
+
+		if (0.0 == inVO.getVisitorRate()) {
 			throw new IllegalArgumentException("평점을 선택해 주세요.");
 		}
-		
+
 		int flag = this.service.do_update(inVO);
-		Message  message=new Message();
-		
-		if(flag>0) {
+		Message message = new Message();
+
+		if (flag > 0) {
 			message.setMsgId(String.valueOf(flag));
 			message.setMsgMsg("수정 되었습니다.");
-		}else {
+		} else {
 			message.setMsgId(String.valueOf(flag));
-			message.setMsgMsg("수정 실패.");			
+			message.setMsgMsg("수정 실패.");
 		}
-		
-		Gson gson=new Gson();
-		gsonStr = gson.toJson(message);		
-		
-		
-		return gsonStr;		
+
+		Gson gson = new Gson();
+		gsonStr = gson.toJson(message);
+
+		return gsonStr;
 	}
-	
-	/**리뷰삭제 */
-	@RequestMapping(value="review/do_delete.do",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+
+	/** 리뷰삭제 */
+	@RequestMapping(value = "review/do_delete.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String do_delete(LHJ_ReviewVO inVO) {
 		LOG.debug("============================");
-		LOG.debug("=inVO="+inVO);
+		LOG.debug("=inVO=" + inVO);
 		LOG.debug("============================");
-		
+
 		int flag = this.service.do_delete(inVO);
-		Message  message=new Message();
-		
-		if(flag>0) {
+		Message message = new Message();
+
+		if (flag > 0) {
 			message.setMsgId(String.valueOf(flag));
 			message.setMsgMsg("삭제 되었습니다.");
-		}else {
+		} else {
 			message.setMsgId(String.valueOf(flag));
-			message.setMsgMsg("삭제 실패.");			
+			message.setMsgMsg("삭제 실패.");
 		}
-		
-		Gson gson=new Gson();
+
+		Gson gson = new Gson();
 		String gsonStr = gson.toJson(message);
-		
+
 		LOG.debug("============================");
-		LOG.debug("=gsonStr="+gsonStr);
-		LOG.debug("============================");		
-		
+		LOG.debug("=gsonStr=" + gsonStr);
+		LOG.debug("============================");
+
 		return gsonStr;
 	}
-	
-	/**리뷰저장 */
-	@RequestMapping(value="review/do_save.do",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
-	@ResponseBody	
+
+	/** 리뷰저장 */
+	@RequestMapping(value = "review/do_save.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
 	public String do_save(LHJ_ReviewVO inVO) {
 		LOG.debug("============================");
-		LOG.debug("=inVO="+inVO);
+		LOG.debug("=inVO=" + inVO);
 		LOG.debug("============================");
-	
-		if(null == inVO.getMovieId() || "".equals(inVO.getMovieId().trim())) {
+
+		if (null == inVO.getMovieId() || "".equals(inVO.getMovieId().trim())) {
 			throw new IllegalArgumentException("영화를 선택하세요.");
 		}
-		
-		if(null == inVO.getUserId() || "".equals(inVO.getUserId().trim())) {
+
+		if (null == inVO.getUserId() || "".equals(inVO.getUserId().trim())) {
 			throw new IllegalArgumentException("로그인 후 이용해주세요.");
 		}
-		
+
 		int flag = this.service.do_save(inVO);
-		Message  message=new Message();
-		
-		if(flag>0) {
+		Message message = new Message();
+
+		if (flag > 0) {
 			message.setMsgId(String.valueOf(flag));
 			message.setMsgMsg("등록 되었습니다.");
-		}else {
+		} else {
 			message.setMsgId(String.valueOf(flag));
-			message.setMsgMsg("등록 실패.");			
+			message.setMsgMsg("등록 실패.");
 		}
-		
-		Gson gson=new Gson();
+
+		Gson gson = new Gson();
 		String gsonStr = gson.toJson(message);
-		
+
 		LOG.debug("============================");
-		LOG.debug("=gsonStr="+gsonStr);
-		LOG.debug("============================");				
-			
+		LOG.debug("=gsonStr=" + gsonStr);
+		LOG.debug("============================");
+
 		return gsonStr;
 	}
 }

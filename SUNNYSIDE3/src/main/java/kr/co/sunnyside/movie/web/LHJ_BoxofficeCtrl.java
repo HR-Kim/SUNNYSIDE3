@@ -39,7 +39,7 @@ public class LHJ_BoxofficeCtrl {
 	 
 	 /**목록조회 */
 	@RequestMapping(value="boxoffice/do_retrieve.do",method = RequestMethod.GET)
-	public String get_retrieve(HttpServletRequest req, Model model) {
+	public String do_retrieve(HttpServletRequest req, Model model) {
 		
 		//목록조회
 		List<LHJ_MovieVO> list = (List<LHJ_MovieVO>) this.service.do_retrieve();

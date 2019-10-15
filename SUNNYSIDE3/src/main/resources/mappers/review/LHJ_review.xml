@@ -7,7 +7,7 @@
 	    user_id as userId,
 	    contents,
 	    visitor_rate as visitorRate,
-	    reg_dt as regDt
+	    TO_CHAR(reg_dt,'YYYY.MM.DD') as regDt
 	</sql>
 	
 	<!-- 단건조회 -->
@@ -31,14 +31,15 @@
 				,B.user_id as userId
 				,B.contents
 				,B.visitor_rate as visitorRate
-				,B.reg_dt as regDt
+				,CASE TO_CHAR(B.reg_dt, 'yyyy.mm.dd') when TO_CHAR(sysdate, 'yyyy.mm.dd') THEN TO_CHAR(sysdate, 'HH24:MI')
+	  			 ELSE TO_CHAR(B.reg_dt, 'yyyy.mm.dd') END AS regDt
 		FROM(    
 	           SELECT ROWNUM AS rnum, A.*                                 
 	           FROM(                                                           
 	               SELECT  *                                              
 	               FROM   review    
 	               --SEARCH CONDITION
-	               WHERE 1=1
+	               WHERE movie_id = #{movieId, jdbcType=VARCHAR}
 	               ORDER BY reg_dt DESC                              
 	          )A                                                         
 	          WHERE ROWNUM <![CDATA[ <= ]]> (#{pageSize}*(#{pageNum}-1)+#{pageSize})                       
@@ -50,7 +51,7 @@
 		    SELECT COUNT(*) totalCnt                                     
 		    FROM review       
 		    --SEARCH CONDITION
-		    WHERE 1=1           
+		    WHERE movie_id = #{movieId, jdbcType=VARCHAR}      
 		)T2
 	</select>
 	

@@ -130,7 +130,7 @@
 					<th class="text-center col-md-3 col-xs-3">장르</th>
 					<th class="text-center col-md-1 col-xs-1">관람연령</th>
 					<th class="text-center col-md-1 col-xs-1">개봉일</th>
-					<th class="text-center col-md-1 col-xs-1">등록</th>
+					<th class="text-center col-md-1 col-xs-1">제외</th>
 				</thead>
 				
 				<tbody>

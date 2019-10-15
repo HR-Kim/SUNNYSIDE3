@@ -68,9 +68,11 @@ public class SearchVO extends DTO {
 
 	@Override
 	public String toString() {
-		return "Search [pageSize=" + pageSize + ", pageNum=" + pageNum + ", searchDiv=" + searchDiv + ", searchWord="
-				+ searchWord + "]";
+		return "SearchVO [pageSize=" + pageSize + ", pageNum=" + pageNum + ", searchDiv=" + searchDiv + ", searchWord="
+				+ searchWord + ", toString()=" + super.toString() + "]";
 	}
+
+	
 	
 	
 	

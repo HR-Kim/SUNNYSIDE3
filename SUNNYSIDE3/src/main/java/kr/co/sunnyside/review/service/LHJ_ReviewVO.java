@@ -1,8 +1,8 @@
 package kr.co.sunnyside.review.service;
 
-import kr.co.sunnyside.cmn.DTO;
+import kr.co.sunnyside.cmn.SearchVO;
 
-public class LHJ_ReviewVO extends DTO{
+public class LHJ_ReviewVO extends SearchVO{
 	/**영화ID*/
 	private String movieId;
 	/**회원ID*/
