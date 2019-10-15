@@ -24,6 +24,29 @@ public class SJH_MypageCtrl {
 	SJH_MypageSvc mypageSvc;
 	
 	
+	//view
+	private final String VIEW_WITHDRAW = "usermypage/user_mypage_withdraw";
+	
+	
+	
+	
+	//자동 등업
+	@RequestMapping(value="usermypage/tx_upgradeLevels.do",method = RequestMethod.POST
+			,produces = "application/json; charset=UTF-8")
+	@ResponseBody	
+	public String tx_upgradeLevels(SJH_MypageVO inVO) {
+		LOG.debug("1=========================");
+		LOG.debug("=@Controller=user=="+inVO);
+		LOG.debug("1=========================");
+		
+		//validation
+		//mypageSvc.tx_upgradeLevels();
+		return "";		
+	}
+	
+	
+	
+	
 	
 	//수정
 	@RequestMapping(value="usermypage/do_update.do",method = RequestMethod.POST
@@ -81,6 +104,17 @@ public class SJH_MypageCtrl {
 	
 	
 	
+	//삭제 화면call
+	@RequestMapping(value="usermypage/withdraw_view.do", method = RequestMethod.GET)
+	public String withdrawView() {
+		LOG.debug("========================");
+		LOG.debug("=@Controller=View=");
+		LOG.debug("========================");
+		
+		return VIEW_WITHDRAW;
+	}
+	
+	
 	//삭제
 	@RequestMapping(value="usermypage/do_delete.do",method = RequestMethod.POST,produces = "application/json; charset=UTF-8")
 	@ResponseBody
@@ -104,7 +138,7 @@ public class SJH_MypageCtrl {
 		Gson gson = new Gson();
 		String json = gson.toJson(message);
 		LOG.debug("=========================");
-		LOG.debug("=@Controller 탈퇴gson=user=="+json);
+		LOG.debug("=@Controller 탈퇴gson=user="+json);
 		LOG.debug("=========================");		
 		
 		return json;

@@ -87,7 +87,7 @@ public class SJH_MypageDaoTest {
 	
 	@Test
 	@Ignore
-	public void do_levelUpdate() throws SQLException {
+	public void tx_levelUpdate() throws SQLException {
 		
 		try {
 			mypageSvc.tx_upgradeLevels();

@@ -72,16 +72,14 @@ public class SJH_MypageSvcImpl implements SJH_MypageSvc {
 	
 	
 	
-	/**
-	 * 등업 사용자에게 mail전송
-	 */
+	//등업 사용자에게 mail전송
 	private void sendUpgradeMail(SJH_MypageVO user) {
 		try {
 			
 			//보내는 사람
 			String host = "smtp.naver.com";
-			final String userName = "사용자아이디";
-			final String password = "사용자비번";
+			final String userName = "아이디";
+			final String password = "비번";
 			int port = 465;
 			
 			

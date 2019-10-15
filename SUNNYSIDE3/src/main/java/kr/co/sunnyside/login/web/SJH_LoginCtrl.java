@@ -148,7 +148,7 @@ public class SJH_LoginCtrl {
 	@RequestMapping(value="login/join_view.do", method = RequestMethod.GET)
 	public String joinView() {
 		LOG.debug("========================");
-		LOG.debug("=@Controller=doUserView=");
+		LOG.debug("=@Controller=View=");
 		LOG.debug("========================");
 		
 		return VIEW_JOIN;
@@ -161,7 +161,7 @@ public class SJH_LoginCtrl {
 	@RequestMapping(value="login/login_view.do", method = RequestMethod.GET)
 	public String loginView() {
 		LOG.debug("========================");
-		LOG.debug("=@Controller=doUserView=");
+		LOG.debug("=@Controller=View=");
 		LOG.debug("========================");
 		
 		return VIEW_LOGIN;
@@ -280,7 +280,7 @@ public class SJH_LoginCtrl {
 	@RequestMapping(value="login/id_find_mng_view.do", method = RequestMethod.GET)
 	public String IdFindMngView() {
 		LOG.debug("========================");
-		LOG.debug("=@Controller=doUserView=");
+		LOG.debug("=@Controller=View=");
 		LOG.debug("========================");
 		
 		return VIEW_ID_FIND_MNG;
@@ -323,7 +323,7 @@ public class SJH_LoginCtrl {
 	@RequestMapping(value="login/pw_find_mng_view.do", method = RequestMethod.GET)
 	public String pwFindMngView() {
 		LOG.debug("========================");
-		LOG.debug("=@Controller=doUserView=");
+		LOG.debug("=@Controller=View=");
 		LOG.debug("========================");
 		
 		return VIEW_PW_FIND_MNG;
