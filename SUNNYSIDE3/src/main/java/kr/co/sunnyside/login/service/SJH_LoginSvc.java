@@ -12,6 +12,9 @@ public interface SJH_LoginSvc {
 	/** 로그인 */
 	public DTO do_login(DTO dto);
 	
+	/** 아이디 중복체크*/
+	public DTO id_check(DTO dto);
+	
 	/** 회원가입 */
 	public int do_save(DTO dto);
 	

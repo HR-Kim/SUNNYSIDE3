@@ -193,6 +193,36 @@ public class SJH_LoginCtrl {
 	}
 	
 	
+	/**
+	 * 아이디 중복체크
+	 * @param user
+	 * @param session
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="login/id_check.do", method = RequestMethod.POST
+			,produces = "application/json; charset=UTF-8")
+	@ResponseBody		
+	public String id_check(SJH_LoginVO user) {
+		LOG.debug("1========================");
+		LOG.debug("1=user="+user);
+		LOG.debug("1========================");
+		
+		Message msg = (Message) loginSvc.id_check(user);
+
+		//json으로 변환
+		Gson gson = new Gson();
+		String json = gson.toJson(msg);
+		LOG.debug("=========================");
+		LOG.debug("=@Controller 등록gson=user=="+json);
+		LOG.debug("=========================");		
+		
+		return json;
+	
+	}
+	
+	
 	
 	/**
 	 * 아이디 찾기
@@ -218,6 +248,8 @@ public class SJH_LoginCtrl {
 		
 		return VIEW_ID_FIND_LIST; //화면으로 리턴
 	}
+	
+	
 	
 	//아이디 찾기 화면call
 	@RequestMapping(value="login/id_find_mng_view.do", method = RequestMethod.GET)
