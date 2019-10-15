@@ -14,6 +14,10 @@
 			<when test="'20' == searchDiv">
 				ROOM_ID LIKE '%' || #{searchWord} || '%'
 			</when>
+			<when test="'30' == searchDiv">
+				TO_CHAR(SCREEN_DT, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+				AND ROOM_ID LIKE '%' || #{searchWord} || '%'
+			</when>
 			<otherwise></otherwise>
 		</choose>
 	</where>
@@ -107,7 +111,7 @@
 			         SELECT *
 			         FROM SCREEN_INFO
 			         <include refid="baseCondition"/>
-			         ORDER BY SCREEN_DT desc, EPISODE desc
+			         ORDER BY SCREEN_DT DESC, EPISODE DESC
 			        )A
 			    )T1,
 			    (
