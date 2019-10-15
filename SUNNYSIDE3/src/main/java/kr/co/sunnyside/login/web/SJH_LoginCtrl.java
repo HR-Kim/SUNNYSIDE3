@@ -77,27 +77,27 @@ public class SJH_LoginCtrl {
 	
 	
 	/** 로그인 첫 화면 요청 메소드 */ //--->이 부분을 메인이랑 연결해야함. 
-	@RequestMapping(value = "logintest/logintest.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "login/naverlogin.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(Model model, HttpSession session) {
 		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
 		
 		//https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
 		//redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
-		LOG.debug("ㅋㅋ네이버:" + naverAuthUrl);
+		LOG.debug("네이버:" + naverAuthUrl);
 		
 		//네이버
 		model.addAttribute("url", naverAuthUrl);
-		LOG.debug("ㅋㅋnaverAuthUrl: "+naverAuthUrl);
+		LOG.debug("naverAuthUrl: "+naverAuthUrl);
 		
-		return "logintest/logintest";
+		return VIEW_LOGIN;
 	}
 	
 	
 	/** 네이버 로그인 성공시 callback호출 메소드 */
-	@RequestMapping(value = "logintest/callback", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "login/callback.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
-		LOG.debug("여기는 callback");
+		LOG.debug("callback");
 		OAuth2AccessToken oauthToken;
 		oauthToken = naverLoginBO.getAccessToken(session, code, state);
 		
@@ -136,11 +136,11 @@ public class SJH_LoginCtrl {
 	 * @return
 	 * @throws IOException
 	 */
-	@RequestMapping(value = "/logout.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "login/logout.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String logout(HttpSession session)throws IOException {
-		LOG.debug("여기는 logout");
+		LOG.debug("logout");
 		session.invalidate();
-		return "redirect:index.jsp";
+		return "main/main.jsp";
 	}
 
 	

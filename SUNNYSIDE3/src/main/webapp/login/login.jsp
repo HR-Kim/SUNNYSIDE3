@@ -100,7 +100,8 @@
 						로그인
 					</button>
 					&nbsp &nbsp
-					<a href="${url}" id="naverLogin"><img src="${context}/resources/image/login/naverlogin.png"/></a>	
+					<input type="hidden" id="naverUrl" value="${url}">
+					<a id="naverLogin"><img src="${context}/resources/image/login/naverlogin.png"/></a>	
 				</div>
 							
 			</div>
@@ -128,6 +129,14 @@
 	<script src="${context}/resources/js/login/main.js"></script>
 	<script src="${context}/resources/js/login/jquery.validate.js"></script>
 	<script type="text/javascript">
+		
+	
+		/** 네이버로 로그인 */
+		$("#naverLogin").on("click",function(){
+			if(confirm("네이버로 로그인 시 등급에 따른 할인혜택을 받을 수 없습니다. 네이버로 로그인 하시겠습니까?")== false)return;
+			location.href = $("#naverUrl").val();
+		});
+		
 		
 	
 		/** 회원가입 */
@@ -222,8 +231,6 @@
 		 });
 		
 
-		
-		
 		
 		
 		$(document).ready(function(){
