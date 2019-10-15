@@ -5,13 +5,9 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="context" value="${pageContext.request.contextPath }" />
 <%
-	//영화테이블페이징정보
-	int maxNum = 0;
-	int currPageNo = 1; 
-	int rowPerPage = 10;
-	int bottomCount = 10;
-	String url = "";
-	String scriptName = "paging";
+
+	String movieTableScriptName = "paging_movieT";
+	String planedMovieTableScriptName = "paging_PmovieT";
 	
 %>
 <!DOCTYPE html>
@@ -25,6 +21,12 @@
 		<link href="${context}/resources/css/jquery-ui.css" rel="stylesheet">
 		<link  href="${context}/resources/css/jquery.timepicker.min.css" rel="stylesheet">
 		<style type="text/css">
+			.expired {
+				background-color: #FFBFBF;
+			}
+			.planed {
+				background-color: #BFFFC3
+			}
 			.case {
 				border: 1px solid black;
 				padding: 10px;
@@ -59,8 +61,8 @@
 				position: absolute;
 				top: 0;
 				left: 0;
-				width: 100%;
-				height: 100%;
+				width: 100000px;
+				height: 100000px;
 				background-color: black;
 				opacity: 0.1;
 				z-index: 95;
@@ -147,8 +149,12 @@
 						</tbody>
 					</table>
 				</div>
-	
-				<label>편성된 영화 현황</label>
+				
+				<div class="row">
+					<label class="col-sm-11">편성된 영화 현황</label>
+					<button class="btn btn-default btn-xs" id="allPMovie">전체</button>
+					<button class="btn btn-default btn-xs" id="todayPMovie">오늘</button>
+				</div>
 				<input type="hidden" id="hd_screenId" value="">
 				<div class="table-responsive">
 					<table id="planedMovieTable" class="table table-hover table-bordered">
@@ -169,6 +175,7 @@
 						</tbody>
 					</table>
 				</div>
+				<div class="planedTablePaging"></div>
 				<div class="row">
 					<div class="col-md-2">
 						<button id="moviePlan" class="btn btn-default">영화추가</button>
@@ -261,10 +268,12 @@
 					<label>종료날짜</label> <input type="text" id="endDate" disabled="disabled">
 					<label>종료시간</label> <input  type="text" id="endTime" disabled="disabled">
 					<br/>
+					<hr/>
 					<h4>가격설정</h4>&nbsp;&nbsp;&nbsp;&nbsp;
 					<label for="adultCost">성인가격</label> <input type="text" id="adultCost">
 					<label for="studentCost">학생가격</label> <input type="text" id="studentCost">
 					<br/>
+					<hr/>
 					<h4>회차</h4>&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="text" id="episode" size="1" max="2" min="1"> <label for="episode">회차</label>
 					<br/>
@@ -273,10 +282,10 @@
 				</div>
 			</div>
 			
-			<div class="movieValidate">
-			
-			<button id="planBtn" class="btn btn-xs">확인</button>
-			<button id="planCancel" class="btn btn-xs">취소</button>
+			<div class="movieValidate" id="movieValidate">
+			<button id="planCancel" class="btn btn-success btn-nm">취소</button>
+			&nbsp;
+			<button id="planBtn" class="btn btn-warning btn-nm">확인</button>
 			</div>
 		</div>
 		<script src="${context}/resources/js/jquery-1.12.4.js"></script>
@@ -339,7 +348,7 @@
     		    maxTime: '23:59',
     		    defaultTime: '00:00',
     		    startTime: '00:00',
-    		    dynamic: true,
+    		    dynamic: false,
     		    dropdown: true,
     		    scrollbar: true
     		});
@@ -471,7 +480,7 @@
             	var tr = $(this);
             	var td = tr.children();
             	$("#roomTable>tbody>tr").css("background-color", "");	//tr색 초기화
-    			$(tr).css("background-color", "red");						//선택tr 색표시
+    			$(tr).css("background-color", "red");					//선택tr 색표시
     			
             	if(td.eq(1).length == 0)return;
     			
@@ -479,20 +488,41 @@
             	$("#hd_roomId").val(td.eq(0).text());
             	$("#hd_roomNm").val(td.eq(1).text());
             	var roomId = $("#hd_roomId").val();
-            	create_RoomTable(roomId);
+            	create_RoomTable(roomId, false);
             });
           	
-          	function create_RoomTable(roomId){
+          	//편성된 영화 오늘자 조회
+          	$("#todayPMovie").on("click", function(){
+          		var roomId = $("#hd_roomId").val();
+          		if(roomId.length == 0) {alert("상영관을 선택해주세요."); return;}
+            	create_RoomTable(roomId, true);
+          	});
+          	
+          	//편성된 영화 전체조회
+          	$("#allPMovie").on("click", function(){
+          		var roomId = $("#hd_roomId").val();
+          		if(roomId.length == 0) {alert("상영관을 선택해주세요."); return;}
+            	create_RoomTable(roomId, false);
+          	});
+          	
+          	function create_RoomTable(roomId, todayBool){
           		loading(true);
             	var searchWord = roomId;
     			var searchDiv = "20";
+    			var pageSize = 10;
+    			if(todayBool == true) {
+    				pageSize = 100;
+    				searchDiv = "30";
+    			}
+    			
             	$.ajax({
     				type : "POST",
     				url : "${context}/screenInfo/do_retrieve.do",
     				dataType : "html",
     				data : {
     					"searchWord" : searchWord,
-    					"searchDiv" : searchDiv 
+    					"searchDiv" : searchDiv,
+    					"pageSize" : pageSize
     				}, 
     			success: function(data){
     				var plandMovieArr = JSON.parse(data);
@@ -501,18 +531,46 @@
     					for(var i=0 ; i< plandMovieArr.length ; i++){
     						var screenDt = plandMovieArr[i].screenDt;
     						var endTime = plandMovieArr[i].endTime;
-    						var date = screenDt.split(" ");
-    						var eTime = endTime.split(" ");
-        					$("#planedMovieTable>tbody").append(
-        							"<tr>"+
-        							"<td hidden='hidden'>"+plandMovieArr[i].screenId+"</td>"+
-        							"<td>"+plandMovieArr[i].korTitle+"("+plandMovieArr[i].engTitle+")</td>"+
-        							"<td>"+date[0]+"</td>"+
-        							"<td>"+plandMovieArr[i].startTime+"</td>"+
-        							"<td>"+eTime[1]+"</td>"+
-        							"<td>"+plandMovieArr[i].episode+"</td>"+        							
-        							"</tr>");
+    						var dateArr = screenDt.split(" ");				//상영날짜Arr
+    						var eTimeArr = endTime.split(" ");				//종료시간Arr
+    						var endDateArr = eTimeArr[0].split("-");		//종료 년도 달 일
+    						var eTimeArr = eTimeArr[1].split(":");			//종료 시분초
+    						console.log(eTimeArr);
+    						//이미 상영한 영화인지 판단
+    						var today = new Date();
+    						var eDate = new Date(endDateArr[0], (parseInt(endDateArr[1]-1)), endDateArr[2], eTimeArr[0], eTimeArr[1], eTimeArr[2]);
+
+    						if(today.getTime() > eDate.getTime() == false){
+    							$("#planedMovieTable>tbody").append(
+            							"<tr>"+
+            							"<td class='planed' hidden='hidden'>"+plandMovieArr[i].screenId+"</td>"+
+            							"<td class='planed'>"+plandMovieArr[i].korTitle+"("+plandMovieArr[i].engTitle+")</td>"+
+            							"<td class='planed'>"+dateArr[0]+"</td>"+
+            							"<td class='planed'>"+plandMovieArr[i].startTime+"</td>"+
+            							"<td class='planed'>"+eTimeArr[1]+"</td>"+
+            							"<td class='planed'>"+plandMovieArr[i].episode+"</td>"+        							
+            							"</tr>"
+            					);
+    						}else{//지난영화
+    							$("#planedMovieTable>tbody").append(
+            							"<tr>"+
+            							"<td class='expired' hidden='hidden'>"+plandMovieArr[i].screenId+"</td>"+
+            							"<td class='expired'>"+plandMovieArr[i].korTitle+"("+plandMovieArr[i].engTitle+")</td>"+
+            							"<td class='expired'>"+dateArr[0]+"</td>"+
+            							"<td class='expired'>"+plandMovieArr[i].startTime+"</td>"+
+            							"<td class='expired'>"+eTimeArr[1]+"</td>"+
+            							"<td class='expired'>"+plandMovieArr[i].episode+"</td>"+        							
+            							"</tr>"
+            					);
+    						}	
         				}
+
+    					if(todayBool != true){
+	    					var totalCnt = plandMovieArr[0].totalCnt;
+	    					tablePaging(".planedTablePaging", totalCnt, 1, 10, 10, "<%=planedMovieTableScriptName%>");
+    					}else{
+    						$(".planedTablePaging>table").detach();
+    					}
     				}else{
     					$("#planedMovieTable>tbody").append(
     						"<tr><td colspan='99'>편성된 영화가 없습니다.</td></tr>");
@@ -546,7 +604,9 @@
 
        			$(".movieTable-dim").css("display", "block");
           		$(".layer-MovieTable").css("display", "block");
-
+          		$("#hd_searchDiv").val("");		//검색구분 초기화
+          		$("#hd_searchWord").val("");	//검색어 초기화
+          		movieRerieve();
           	});
           	
           	//편성취소버튼
@@ -578,6 +638,7 @@
 					"<td>"+movierunningTime+"</td>"+
 					"</tr>"	
 				);
+				$("#datePicker").focus();
           	});
           	
           	//편성할 영화 조회
@@ -613,7 +674,7 @@
         					);
         				}
     					var totalCnt = movieArr[0].totalCnt;
-    					movieTablePaging(totalCnt, 1, 10, 10, "<%=scriptName%>");
+    					tablePaging(".movieTablePaging", totalCnt, 1, 10, 10, "<%=movieTableScriptName%>");
     				}else{
     					$("#movieTable>tbody").append(
     						"<tr><td colspan='99'>영화가 없습니다.</td></tr>");
@@ -700,60 +761,60 @@
 				rowPerPage : 한페이지에 보여질 글수
 				bottomCount : 바닥에  보여질 페이지수
 			*/
-			function movieTablePaging(maxNum, currPageNo, rowPerPage, bottomCount, scriptName){
+			function tablePaging(divName, maxNum, currPageNo, rowPerPage, bottomCount, scriptName){
 				var maxNum = maxNum;
 				var currPageNo = currPageNo;
 				var rowPerPage = rowPerPage;
 				var bottomCount = bottomCount;
-				var maxPageNo = Math.floor(maxNum/rowPerPage);											
+				var maxPageNo = eval(Math.floor(maxNum/rowPerPage) + 1);											
 				var startPageNo	= eval( (Math.floor( eval(currPageNo-1) /bottomCount)) *bottomCount + 1);
 				var endPageNo = (Math.floor( eval(currPageNo-1) /bottomCount)+1) *bottomCount;
 				var nowBlockNo = eval( Math.floor( eval(currPageNo-1)/bottomCount) + 1);				
 				var maxBlockNo = eval( Math.floor( eval(maxNum-1)/bottomCount) +1);
-
-				$(".movieTablePaging>table").detach();
+				
+				$(divName+">table").detach();
 				
 				if(nowBlockNo > 1 && nowBlockNo <= maxBlockNo){
-					$(".movieTablePaging").append(
+					$(divName).append(
 						'<li class="page-item"><a class="page-link" href="#" onclick="javascript:'+scriptName+'(1);">&laquo;</a></td>'
 					);
 				}
 				
 				if(startPageNo > bottomCount) {
-					$(".movieTablePaging").append(
+					$(divName).append(
 						'<li class="page-item"><a class="page-link" href="#" onclick="javascript:'+scriptName+'('+eval(startPageNo-1)+');"><</a></td>'
 					);
 				}
 				
 				for(var idx=startPageNo ; idx<=maxPageNo && idx<=endPageNo; idx++) {
-					$(".movieTablePaging").append(
+					$(divName).append(
 						'<li class="page-item"><a class="page-link" href="#" onclick="javascript:'+scriptName+'('+idx+');">'+idx+'</a></li>'
 					);
 				}
 				
 				if(maxPageNo >= idx) {
-					$(".movieTablePaging").append(
+					$(divName).append(
 						'<li class="page-item"><a class="page-link" href="#" onclick="javascript:'+scriptName+'('+eval((nowBlockNo*bottomCount)+1) +');">></a></td>'
 					);
 				}
 				
 				if(maxPageNo >= idx){
-					$(".movieTablePaging").append(
+					$(divName).append(
 						'<li class="page-item"><a class="page-link" href="#" onclick="javascript:'+scriptName+'('+maxPageNo+');">&raquo;</a></td>'
 					);
 				}
 
-				$(".movieTablePaging").wrapInner(
+				$(divName).wrapInner(
 						'<ul class="pagination"></ul>'
 				);
-				$(".movieTablePaging").wrapInner(
+				$(divName).wrapInner(
 						'<table border="0" align="center" cellpadding="0" cellspacing="0" width="100%">'+
 						'<tr><td align="center"></td></tr></table>'
 				);
 			}
 			
-			//페이징
-			function paging(idx) {
+			//영화테이블 페이징
+			function paging_movieT(idx) {
 				loading(true);
 				$.ajax({
     				type : "POST",
@@ -779,7 +840,73 @@
         					);
         				}
     					var totalCnt = movieArr[0].totalCnt;
-    					movieTablePaging(totalCnt, idx, 10, 10, "<%=scriptName%>");
+    					tablePaging(".movieTablePaging", totalCnt, idx, 10, 10, "<%=movieTableScriptName%>");
+    				}
+    			},
+    			complete:function(data){
+    				loading(false);
+    			},
+    			error:function(xhr,status,error){
+
+    			}
+    			});
+			};
+			
+			//편성영화테이블 페이징
+			function paging_PmovieT(idx) {
+				loading(true);
+				$.ajax({
+    				type : "POST",
+    				url : "${context}/screenInfo/do_retrieve.do",
+    				dataType : "html",
+    				data : {
+    					"pageNum" : idx,
+    					"searchDiv" : "20",
+    					"searchWord" : $("#hd_roomId").val()
+    				}, 
+    			success: function(data){
+    				var plandMovieArr = JSON.parse(data);
+    				$("#planedMovieTable>tbody>tr").detach();
+    				if(plandMovieArr.length > 0){
+    					for(var i=0 ; i< plandMovieArr.length ; i++){
+    						var screenDt = plandMovieArr[i].screenDt;
+    						var endTime = plandMovieArr[i].endTime;
+    						var dateArr = screenDt.split(" ");				//상영날짜Arr
+    						var eTimeArr = endTime.split(" ");				//종료시간Arr
+    						var endDateArr = eTimeArr[0].split("-");		//종료 년도 달 일
+    						var eTimeArr = eTimeArr[1].split(":");			//종료 시분초
+    						
+    						//이미 상영한 영화인지 판단
+    						var today = new Date();
+    						var eDate = new Date(endDateArr[0], (parseInt(endDateArr[1]-1)), endDateArr[2], eTimeArr[0], eTimeArr[1], eTimeArr[2]);
+
+    						if(today.getTime() > eDate.getTime() == false){
+    							$("#planedMovieTable>tbody").append(
+            							"<tr>"+
+            							"<td class='planed' hidden='hidden'>"+plandMovieArr[i].screenId+"</td>"+
+            							"<td class='planed'>"+plandMovieArr[i].korTitle+"("+plandMovieArr[i].engTitle+")</td>"+
+            							"<td class='planed'>"+dateArr[0]+"</td>"+
+            							"<td class='planed'>"+plandMovieArr[i].startTime+"</td>"+
+            							"<td class='planed'>"+eTimeArr[1]+"</td>"+
+            							"<td class='planed'>"+plandMovieArr[i].episode+"</td>"+        							
+            							"</tr>"
+            					);
+    						}else{//지난영화
+    							$("#planedMovieTable>tbody").append(
+            							"<tr>"+
+            							"<td class='expired' hidden='hidden'>"+plandMovieArr[i].screenId+"</td>"+
+            							"<td class='expired'>"+plandMovieArr[i].korTitle+"("+plandMovieArr[i].engTitle+")</td>"+
+            							"<td class='expired'>"+dateArr[0]+"</td>"+
+            							"<td class='expired'>"+plandMovieArr[i].startTime+"</td>"+
+            							"<td class='expired'>"+eTimeArr[1]+"</td>"+
+            							"<td class='expired'>"+plandMovieArr[i].episode+"</td>"+        							
+            							"</tr>"
+            					);
+    						}	
+        				}
+    				}else{
+    					$("#planedMovieTable>tbody").append(
+    						"<tr><td colspan='99'>편성된 영화가 없습니다.</td></tr>");
     				}
     			},
     			complete:function(data){
@@ -872,7 +999,8 @@
 					"<div>"
 				);
 				$(".dim").css("display", "block");
-				$(".movieValidate").css("display", "block");					
+				$(".movieValidate").css("display", "block");
+				document.getElementById("movieValidate").scrollIntoView(true);
 			}
 				
 				
@@ -923,7 +1051,7 @@
     				planCancel();
     				selectedMovie_Off();
     				var roomId = $("#hd_roomId").val();
-                	create_RoomTable(roomId);
+                	create_RoomTable(roomId, false);
     				loading(false);
     			},
     			error:function(xhr,status,error){
@@ -981,7 +1109,7 @@
     			complete:function(data){
     				selectedMovie_Off();
     				var roomId = $("#hd_roomId").val();
-                	create_RoomTable(roomId);
+                	create_RoomTable(roomId, false);
     				loading(false);
     			},
     			error:function(xhr,status,error){

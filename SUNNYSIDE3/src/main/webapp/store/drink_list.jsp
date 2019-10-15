@@ -59,6 +59,7 @@
 			    		<c:forEach var="vo" items="${list }">
 					        <div class="col-md-3 col-sm-6">
 					            <div class="product-grid">
+					            <div style="display: none;" id="productId" class="productId"><c:out value="${vo.productId }"/></div>
 					                <div class="product-image">
 					                    <img class="pic-1" src="<c:out value="${vo.saveFileNm }"/>">		
 					                    <ul class="social">
@@ -92,6 +93,11 @@
 		<!-- //paging -->	
 	</div>
 <script type="text/javascript">
+
+	//상품 단건조회
+	$('.productId').click(function(event) {
+		alert("productId");
+	});
 	
 	$(document).ready(function(){
 		//alert("ready");

@@ -38,7 +38,7 @@ public class LHJ_MovieCtrl {
 	 
 	 //view
 	 private final String VIEW_LIST_NM = "movie/movie_list";
-	 private final String VIEW_MNG_NM = "movie/movie_mng";
+	 private final String VIEW_MOVIE_DETAIL = "movie/movie_detail";
 	 
 	 /**목록조회 */
 	 @RequestMapping(value="movie/do_retrieve.do",method = RequestMethod.GET)
@@ -99,7 +99,7 @@ public class LHJ_MovieCtrl {
 		 LHJ_MovieVO outVO= (LHJ_MovieVO) this.service.do_selectOne(inVO);
 		 model.addAttribute("vo", outVO);
 	
-		 return VIEW_MNG_NM;
+		 return VIEW_MOVIE_DETAIL;
 	 }
 	 
 		/** 영화정보 저장 */
