@@ -74,47 +74,52 @@
  <script type="text/javascript">
  
 	 /**등록*/ 
-	 $("#addBtn").on("click",function(){
-		  if(confirm("등록하시겠습니까?")==false) return;
-		  console.log($("#productId").val());
-		  console.log($("#productNm").val());
-	      console.log($("#category").val());
-	      console.log($("#productCost").val());
-	      console.log($("#productInfo").val());
-		  
-		  
+		$("#addBtn").on("click",function(e){
+			if(confirm("등록하시겠습니까?")==false) return;
+			  console.log($("#productId").val());
+			  console.log($("#productNm").val());
+		      console.log($("#category").val());
+		      console.log($("#productCost").val());
+		      console.log($("#productInfo").val());
+			e.preventDefault();//현재 이벤트가 상위로 전파되지 않도록 중단한다
+			
+			doFileUpload();		
+			});
+
+	 function doFileUpload(){
+		 var form = $('form')[0]; //저장된 파일은 위에서부터 1번, 2번 이므로 이렇게 꺼냄
+		 var formData = new FormData(form); //form 데이터
+		console.log("formData="+formData);
+		 
 		//ajax
-	       $.ajax({
-	          type:"POST",
-	          url:"${context}/store/do_save.do",
-	          dataType:"html",
-	          data:{
-	        	   "productId":$("#productId").val(),
-	        	   "productNm":$("#productNm").val(),
-	               "category":$("#category").val(),
-	               "productCost":$("#productCost").val(),
-	               "productInfo":$("#productInfo").val()
-	              }, 
-	        success: function(data){ 
-	        	var jData = JSON.parse(data);
-	            if(jData.msgId=="1"){
-	            	 alert("등록되었습니다.");
-	 		    	 window.close();
-	            }else{
-	            	window.close();
-	                //alert(jData.msgId+"|"+jData.msgMsg);
-	              }
-	           },
-	            complete:function(data){
-	               alert("등록되었습니다.");
-	  	    	   window.close();
-	            },
-	            error:function(xhr,status,error){
-	                //alert("error:"+error);
-	            }
+	     $.ajax({
+	        type:"POST",
+	        url:"${context}/store/do_save.do",		        
+	        contentType:false,
+	        async:false,
+	        cache:false,
+	        processData:false,
+	        enctype:"multipart/form-data",
+	        data:formData,  
+	      success: function(data){ 
+			  if(null != data && data.msgId=="1"){
+				  alert("등록 되었습니다.");
+				  window.close();
+				
+			  }else{
+				alert(data.msgId+"|"+data.msgMsg);
+				  window.close();
+			  }
 	           
-	           }); //--ajax  
-		});
+	     },
+	     complete:function(data){
+	    	 // window.close();
+	     },
+	     error:function(xhr,status,error){
+	         alert("error:"+error);
+	     }
+	    }); //--ajax  
+	 }
 		
 	
  

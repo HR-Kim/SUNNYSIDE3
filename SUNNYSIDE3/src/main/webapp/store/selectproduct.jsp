@@ -25,9 +25,13 @@
 <body>
 <h3 class="h4"  style="margin-left: 70px; margin-top: 30px">상품 상세정보</h3>
 <table style="margin-left: 70px;">
+
 	<tr>
 		<td style="display: none;" id="productId" class="productId">${vo.productId }</td>
 		<td style="display: none;" id="category" class="category" >${vo.category }</td>
+		<td style="display: none;" id="orgFileNm" class="orgFileNm" >${vo.orgFileNm }</td>
+		<td style="display: none;" id="saveFileNm" class="saveFileNm" >${vo.saveFileNm }</td>
+		
 		<td>
 			<img width="340" height="300" src="${vo.saveFileNm }">
 		</td>
@@ -83,40 +87,45 @@
 	});
 	
 	//삭제
-	$("#delbtn").on("click",function(){
-		//alert($("#productId").text());
-		if(false==confirm('상품을 삭제 하시겠습니까?')) return;
+	$("#delbtn").on("click",function(e){
+		if(confirm("삭제하시겠습니까?")==false) return;
+		console.log("productId"+$("#productId").text());
+		e.preventDefault();//현재 이벤트가 상위로 전파되지 않도록 중단한다
 		
-		$.ajax({
-	         type:"POST",
-	         url:"${context}/store/do_delete.do",
-	         dataType:"html",// JSON
-	         data:{
-	         	"productId":$("#productId").text()
-	         },
-	         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-	         	console.log(data); 
-	         	//{"msgId":"1","msgMsg":"삭제되었습니다.","totalCnt":0,"num":0}
-	         	var parseData= $.parseJSON(data);
-	         	if(parseData.msgId =="1"){
-	         		alert("삭제 되었습니다");
-	         		location.href ="${context}/store/do_retrieve.do";
-	         		
-	         	}else{
-	         		alert(parseData.msgMsg);
-	         	}
-	  
-	         
-	         },
-	         complete: function(data){//무조건 수행
-	        		alert("삭제 되었습니다");
-	        		location.href ="${context}/store/do_retrieve.do";
-	         },
-	         error: function(xhr,status,error){
-	          
-	         }
-	    });
-	});
+		doDeleteFile();		
+		});
+
+	 function doDeleteFile(){
+			 
+		//ajax
+	     $.ajax({
+	        type:"POST",
+	        url:"${context}/store/do_delete.do",		        
+	        dataType:"html",
+	           data:{
+	           "productId":$("#productId").text(),
+	           "orgFileNm":$("#orgFileNm").text(),
+	           "saveFileNm":$("#saveFileNm").text()                    
+	       
+	          },   
+	      success: function(data){ 
+			  if(null != data && data.msgId=="1"){
+				  alert("삭제되었습니다.");		
+				  location.href="${context}/store/store_main.do";
+				
+			  }else{
+				alert("삭제되었습니다.");	
+				location.href="${context}/store/store_main.do";
+			  }
+	     },
+	     complete:function(data){
+	  	   
+	     },
+	     error:function(xhr,status,error){
+	         alert("error:"+error);
+	     }
+	    }); //--ajax  
+	 }
 
 
 	$(document).ready(function(){
