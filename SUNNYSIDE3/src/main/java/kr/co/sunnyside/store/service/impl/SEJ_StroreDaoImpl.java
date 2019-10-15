@@ -76,7 +76,7 @@ public class SEJ_StroreDaoImpl implements WorkDiv {
 		LOG.debug("=2. statement="+statement);
 		LOG.debug("===================================");
 		
-		int flag = this.sqlSessionTemplate.delete(statement,store);
+		int flag = this.sqlSessionTemplate.update(statement,store);
 		LOG.debug("===================================");
 		LOG.debug("=3. flag="+flag);
 		LOG.debug("===================================");

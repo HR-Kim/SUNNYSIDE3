@@ -54,10 +54,10 @@ public class SEJ_StroreCtrl {
 	private final String VIEW_SELECTONETOUPDATE = "store/store_update";
 	private final String VIEW_MNG_NM = "store/store_add";
 
-	@RequestMapping(value = "store/uploadimage.do")
-	public String uploadFileView() {
+	@RequestMapping(value = "store/store_main.do")
+	public String storeMain() {
 		LOG.debug("======================");
-		LOG.debug("=@Controller uploadimage=");
+		LOG.debug("=@Controller storeMain=");
 		LOG.debug("======================");
 
 		return VIEW_MNG_NM;
@@ -88,17 +88,11 @@ public class SEJ_StroreCtrl {
 		String productCost = mReg.getParameter("productCost");
 
 		LOG.debug("======================");
-		LOG.debug("=@Controller productNm=" + productNm);
 		LOG.debug("=@Controller productId=" + productId);
+		LOG.debug("=@Controller productNm=" + productNm);
 		LOG.debug("=@Controller productInfo=" + productInfo);
 		LOG.debug("=@Controller category=" + category);
 		LOG.debug("=@Controller productCost=" + productCost);
-
-		// 상품이름값이 없을 때
-		if (productNm.equals("")) {
-			throw new ArithmeticException("상품이름을 입력해주세요.");
-		}
-		LOG.debug("=****@Controller productName=" + productNm);
 
 		File fileRootDir = new File(UPLOAD_ROOT);
 		if (fileRootDir.isDirectory() == false) {// 디렉토리 유무 체크
@@ -150,16 +144,19 @@ public class SEJ_StroreCtrl {
 
 			// 중복이름일 경우 새 이름으로 rename
 			File orgFileCheck = new File(datePath, orgFileNM);
+			
 			String newFile = orgFileCheck.getAbsolutePath();
+			LOG.debug("=@before newFile=" + newFile);
 			if (orgFileCheck.exists() == true) {// 파일이 존재하면 rename 파일
-				newFile = StringUtil.changePath(StringUtil.fileRename(orgFileCheck));
+				newFile = StringUtil.fileRename(orgFileCheck);
 			}
-			LOG.debug("=@Controller newFile=" + newFile);
+			String changenewFile = StringUtil.changePath(newFile);
+			LOG.debug("=@Controller newFile=" + newFile);		
+			LOG.debug("=@Controller changenewFile=" + changenewFile);		
 
 			stroreVO.setOrgFileNm(orgFileNM);
-			stroreVO.setSaveFileNm(newFile);
+			stroreVO.setSaveFileNm(changenewFile);
 			stroreVO.setExt(ext);
-			stroreVO.setProductId(productId);
 			stroreVO.setProductNm(productNm);
 			stroreVO.setProductInfo(productInfo);
 			stroreVO.setCategory(Integer.parseInt(category));
@@ -203,25 +200,29 @@ public class SEJ_StroreCtrl {
 		LOG.debug("=store=" + store);
 		LOG.debug("===============================");
 
-		// 파일 삭제 // 아직 못함
 		SEJ_StroreVO stroreVO = new SEJ_StroreVO();
-		// File file = new File(stroreVO.getSaveFileNm());
-		LOG.debug("===============================");
-		LOG.debug("=stroreVO.getSaveFileNm()=" + stroreVO.getSaveFileNm());
-		LOG.debug("===============================");
-		// file.delete();
-
+		
+		//데이터 삭제
 		int flag = this.storeService.do_delete(store);
-
+		LOG.debug("===============================");
+		LOG.debug("=flag=" + flag);
+		LOG.debug("===============================");
+		
 		Message message = new Message();
-		if (flag > 0) { // flag가 1이면 성공
-			message.setMsgId(String.valueOf(flag));
+		// 삭제 성공 시 물리적 파일도 삭제 
+		if(flag>0){
+			LOG.debug("store.getSaveFileNm:"+StringUtil.backPath(store.getSaveFileNm()));
+			File delFile = new File(StringUtil.backPath(store.getSaveFileNm()));
+			boolean delFlag = delFile.delete(); //파일 삭제
+			LOG.debug("===============================");
+			LOG.debug("=delFlag=" + delFlag);
+			LOG.debug("===============================");
+			//삭제성공 메시지
 			message.setMsgMsg("삭제되었습니다.");
-		} else {// 아니면 실패
-			message.setMsgId(String.valueOf(flag));
+		}else {
 			message.setMsgMsg("삭제 실패.");
 		}
-
+		//json 데이터 주고받기 
 		Gson gson = new Gson();
 		String gsonStr = gson.toJson(message);
 		LOG.debug("===============================");
@@ -230,41 +231,6 @@ public class SEJ_StroreCtrl {
 
 		return gsonStr;
 	}
-
-	/*  *//**
-			 * 입력값 수정
-			 * 
-			 * @param store
-			 * @return
-			 *//*
-				 * @RequestMapping(value="store/do_update.do", method = RequestMethod.POST,
-				 * produces = "application/json;charset=UTF-8")
-				 * 
-				 * @ResponseBody //이거 없으면 json으로 안나옴 public String do_update(SEJ_StroreVO store)
-				 * {
-				 * 
-				 * LOG.debug("==============================="); LOG.debug("=store="+store);
-				 * LOG.debug("===============================");
-				 * 
-				 * //값이 없을 때 if(null ==store.getProductNm() ||
-				 * "".equals(store.getProductNm().trim())) { throw new
-				 * IllegalArgumentException("상품이름을 입력하세요"); }
-				 * 
-				 * if(0 ==store.getProductCost()) { throw new
-				 * IllegalArgumentException("상품금액을 입력하세요"); }
-				 * 
-				 * int flag = this.storeService.do_update(store); Message message = new
-				 * Message(); if(flag>0) { //flag가 1이면 성공
-				 * message.setMsgId(String.valueOf(flag)); message.setMsgMsg("수정되었습니다."); }else
-				 * {//아니면 실패 message.setMsgId(String.valueOf(flag));
-				 * message.setMsgMsg("수정 실패."); }
-				 * 
-				 * Gson gson = new Gson(); String gsonStr = gson.toJson(message);
-				 * LOG.debug("==============================="); LOG.debug("=gsonStr="+gsonStr);
-				 * LOG.debug("===============================");
-				 * 
-				 * return gsonStr; }
-				 */
 
 	/**
 	 * 상품수정
@@ -355,19 +321,22 @@ public class SEJ_StroreCtrl {
 			if (orgFileCheck.exists() == true) {// 파일이 존재하면 rename 파일
 				newFile = StringUtil.fileRename(orgFileCheck);
 			}
-			LOG.debug("=@Controller do_update newFile=" + newFile);
+			String changenewFile = StringUtil.changePath(newFile);
+			LOG.debug("=@Controller newFile=" + newFile);		
+			LOG.debug("=@Controller changenewFile=" + changenewFile);
 
 			stroreVO.setOrgFileNm(orgFileNM);
-			stroreVO.setSaveFileNm(newFile);
+			stroreVO.setSaveFileNm(changenewFile);
 			stroreVO.setExt(ext);
 			stroreVO.setProductNm(productNm);
-			stroreVO.setProductId("20191015-002-022");
+			stroreVO.setProductId(productId);
 			stroreVO.setProductInfo(productInfo);
 			stroreVO.setProductCost(Integer.parseInt(productCost));
 			fileList.add(stroreVO);
 			LOG.debug("fileList:" + fileList);
 
 			mFile.transferTo(new File(newFile));
+			
 			flag = storeService.do_update(stroreVO);
 			LOG.debug("flag:" + flag);
 		}
@@ -387,7 +356,7 @@ public class SEJ_StroreCtrl {
 		String gsonStr = gson.toJson(message);
 		LOG.debug("gsonStr:" + gsonStr);
 
-		return VIEW_SELECTONETOUPDATE;
+		return gsonStr;
 	}
 
 	/**

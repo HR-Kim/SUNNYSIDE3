@@ -44,8 +44,6 @@ public class SEJ_StoreSvcImple implements SEJ_StroreSvc {
 	}
 	
 	/**상품정보수정  
-	 * 1. 파일을 업로드 한다.
-	 * 2. 입력한 정보를 저장 한다.
 	 * 
 	 * */
 	@Override

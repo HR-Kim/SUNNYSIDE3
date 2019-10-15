@@ -2,6 +2,25 @@
 <!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
+	<!-- Query Loggers:Mybatis -->
+	<appender name="console-infolog" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d [%-5p] %m%n" />
+		</layout>
+	</appender>	
+<!-- SQL Logger -->
+	<logger name="jdbc.sqlonly" additivity="false">
+		<level value ="info"/>
+		<appender-ref ref="console-infolog" />
+		<appender-ref ref="rolling" />
+	</logger>
+	
+	<!-- 결과 -->
+	<logger name="jdbc.resultsettable" additivity="false">
+		<level value ="info"/>
+		<appender-ref ref="console-infolog" />
+		<appender-ref ref="rolling" />
+	</logger>
 	<!-- Appenders -->
 	<appender name="console" class="org.apache.log4j.ConsoleAppender">
 		<param name="Target" value="System.out" />
@@ -27,6 +46,7 @@
 	<logger name="org.springframework.context">
 		<level value="info" />
 	</logger>
+	
 
 	<logger name="org.springframework.web">
 		<level value="info" />

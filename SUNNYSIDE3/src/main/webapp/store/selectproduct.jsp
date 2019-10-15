@@ -99,7 +99,7 @@
 	         	//{"msgId":"1","msgMsg":"삭제되었습니다.","totalCnt":0,"num":0}
 	         	var parseData= $.parseJSON(data);
 	         	if(parseData.msgId =="1"){
-	         		alert(parseData.msgMsg);
+	         		alert("삭제 되었습니다");
 	         		location.href ="${context}/store/do_retrieve.do";
 	         		
 	         	}else{
@@ -109,6 +109,7 @@
 	         
 	         },
 	         complete: function(data){//무조건 수행
+	        		alert("삭제 되었습니다");
 	        		location.href ="${context}/store/do_retrieve.do";
 	         },
 	         error: function(xhr,status,error){
