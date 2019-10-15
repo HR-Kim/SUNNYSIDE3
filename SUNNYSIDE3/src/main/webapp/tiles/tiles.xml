@@ -20,7 +20,7 @@
       <put-attribute name="body" value="/main/main.jsp" />
       <put-attribute name="title" value="SUNNYSIDE>메인" />
     </definition>
-    
+        
     <!-- boxoffice -->    
     <definition name="boxoffice/*" extends="basede_definition">
       <put-attribute name="body" value="/boxoffice/{1}.jsp" />
