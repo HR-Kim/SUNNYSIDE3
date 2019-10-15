@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import kr.co.sunnyside.cmn.DTO;
 import kr.co.sunnyside.cmn.Message;
 import kr.co.sunnyside.cmn.SearchVO;
 import kr.co.sunnyside.cmn.StringUtil;
@@ -25,6 +26,8 @@ import kr.co.sunnyside.movie.service.LHJ_MovieSvc;
 import kr.co.sunnyside.movie.service.LHJ_MovieVO;
 import kr.co.sunnyside.movie.service.impl.LHJ_BoxofficeSvcImpl;
 import kr.co.sunnyside.movie.service.impl.LHJ_MovieSvcImpl;
+import kr.co.sunnyside.review.service.LHJ_ReviewVO;
+import kr.co.sunnyside.review.service.impl.LHJ_ReviewSvcImpl;
 
 @Controller
 public class LHJ_MovieCtrl {
@@ -33,6 +36,9 @@ public class LHJ_MovieCtrl {
 	 @Autowired
 	 LHJ_MovieSvcImpl service;	 
 
+	 @Autowired
+	 LHJ_ReviewSvcImpl reviewService;
+	 
 	 @Autowired
 	 private CodeService codeService;
 	 
@@ -84,23 +90,109 @@ public class LHJ_MovieCtrl {
 	 	model.addAttribute("totalCnt", totalCnt);
 	 	return VIEW_LIST_NM;
 	 }
-		
+
+//	 /**단건조회 */
+//	 @RequestMapping(value="movie/do_selectOne.do",method = RequestMethod.GET)
+//	 public String do_selectOne(LHJ_MovieVO inVO,Model model) {
+//		 LOG.debug("============================");
+//		 LOG.debug("=inVO="+inVO);
+//		 LOG.debug("============================");
+//		 
+//		 if(null == inVO.getMovieId() || "".equals(inVO.getMovieId())) {
+//			 throw new IllegalArgumentException("Movie ID를 입력 하세요.");
+//		 }
+//		 
+//		 LHJ_MovieVO outVO= (LHJ_MovieVO) this.service.do_selectOne(inVO);
+//		 model.addAttribute("vo", outVO);
+//		 
+//		//param
+//	 	if(inVO.getPageSize()==0) {
+//	 		inVO.setPageSize(10);
+//	 	}
+//	 	
+//	 	if(inVO.getPageNum()==0) {
+//	 		inVO.setPageNum(1);
+//	 	}		
+//	 	
+//	 	inVO.setSearchDiv(StringUtil.nvl(inVO.getSearchDiv()));
+//	 	inVO.setSearchWord(StringUtil.nvl(inVO.getSearchWord()));
+//	 	inVO.setMovieId(inVO.getMovieId());
+//	 	model.addAttribute("searchVO", inVO);
+//	 	
+//	 	//목록조회
+//	 	List<LHJ_ReviewVO> list = (List<LHJ_ReviewVO>) this.reviewService.do_retrieve(inVO);
+//	 	model.addAttribute("list", list);
+//		 
+//	 	//총건수
+//	 	
+//		int totalCnt = 0;
+//		if(null != list && list.size()>0) {
+//			totalCnt = list.get(0).getTotalCnt();
+//		}
+//		model.addAttribute("totalCnt", totalCnt);
+//	 			
+//		 return VIEW_MOVIE_DETAIL;
+//	 }
+	 
 	 /**단건조회 */
 	 @RequestMapping(value="movie/do_selectOne.do",method = RequestMethod.GET)
-	 public String do_selectOne(LHJ_MovieVO inVO,Model model) {
+	 public String do_selectOne(LHJ_MovieVO inVO,LHJ_ReviewVO search,Model model) {
 		 LOG.debug("============================");
 		 LOG.debug("=inVO="+inVO);
 		 LOG.debug("============================");
-
+		 
 		 if(null == inVO.getMovieId() || "".equals(inVO.getMovieId())) {
 			 throw new IllegalArgumentException("Movie ID를 입력 하세요.");
 		 }
-
+		 
 		 LHJ_MovieVO outVO= (LHJ_MovieVO) this.service.do_selectOne(inVO);
 		 model.addAttribute("vo", outVO);
-	
+		 
+		//param
+	 	if(search.getPageSize()==0) {
+	 		search.setPageSize(10);
+	 	}
+	 	
+	 	if(search.getPageNum()==0) {
+	 		search.setPageNum(1);
+	 	}		
+	 	
+	 	search.setSearchDiv(StringUtil.nvl(search.getSearchDiv()));
+	 	search.setSearchWord(StringUtil.nvl(search.getSearchWord()));
+	 	search.setMovieId(inVO.getMovieId());
+	 	model.addAttribute("searchVO", search);
+	 	
+	 	//목록조회
+	 	List<LHJ_ReviewVO> list = (List<LHJ_ReviewVO>) this.reviewService.do_retrieve(search);
+	 	model.addAttribute("list", list);
+		 
+	 	//총건수
+	 	
+		int totalCnt = 0;
+		if(null != list && list.size()>0) {
+			totalCnt = list.get(0).getTotalCnt();
+		}
+		model.addAttribute("totalCnt", totalCnt);
+	 			
 		 return VIEW_MOVIE_DETAIL;
 	 }
+	 
+//	 /**단건조회 */
+//	 @RequestMapping(value="movie/do_selectOne.do",method = RequestMethod.GET)
+//	 public String do_selectOne(LHJ_MovieVO inVO,Model model) {
+//		 LOG.debug("============================");
+//		 LOG.debug("=inVO="+inVO);
+//		 LOG.debug("============================");
+//
+//		 if(null == inVO.getMovieId() || "".equals(inVO.getMovieId())) {
+//			 throw new IllegalArgumentException("Movie ID를 입력 하세요.");
+//		 }
+//
+//		 LHJ_MovieVO outVO= (LHJ_MovieVO) this.service.do_selectOne(inVO);
+//		 model.addAttribute("vo", outVO);
+//	
+//		 return VIEW_MOVIE_DETAIL;
+//	 }
 	 
 		/** 영화정보 저장 */
 		@RequestMapping(value = "movie/do_save.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")

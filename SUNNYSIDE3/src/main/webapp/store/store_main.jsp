@@ -28,8 +28,8 @@
                 <div class="product-image">
                     <img class="pic-1" style="height: 270px" width="270px"  src="../resources/image/2019/10/plainPopcorn.jpg">		
                     <ul class="social">
-                        <li><a href="do_selectOne.do?productId=20191011-001-000" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a href="do_selectOne.do?productId=20191011-001-000" data-tip="상세보기"><i class="fa fa-search"></i></a></li>
+                        <li><a href="" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
                 </div>
                 <div class="product-content" >
@@ -46,8 +46,8 @@
                 <div class="product-image">
        				   <img class="pic-1" style="height: 270px" width="270px"  src="../resources/image/2019/10/caramelPopcorn.jpg">		
                     <ul class="social">
-                        <li><a href="do_selectOne.do?productId=20191011-001-001" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a href="do_selectOne.do?productId=20191011-001-001" data-tip="상세보기"><i class="fa fa-search"></i></a></li>
+                        <li><a href="" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
                 </div>
                 <div class="product-content">
@@ -64,8 +64,8 @@
                 <div class="product-image">
                     <img class="pic-1"  style="height: 270px" width="270px" src="../resources/image/2019/10/doublecheesePop.jpg">	
                     <ul class="social">
-                        <li><a href="do_selectOne.do?productId=20191011-001-002" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a href="do_selectOne.do?productId=20191011-001-002" data-tip="상세보기"><i class="fa fa-search"></i></a></li>
+                        <li><a href="" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
                 </div>
                 <div class="product-content">
@@ -82,8 +82,8 @@
                 <div class="product-image">
                       <img class="pic-1" style="height: 270px" width="270px"  src="../resources/image/2019/10/onionPop.jpg">	
                     <ul class="social">
-                        <li><a href="do_selectOne.do?productId=20191011-001-003" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a href="do_selectOne.do?productId=20191011-001-003" data-tip="상세보기"><i class="fa fa-search"></i></a></li>
+                        <li><a href="" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
                 </div>
                 <div class="product-content">
@@ -107,8 +107,8 @@
                 <div class="product-image">
                     <img class="pic-1" style="height: 270px" width="270px"  src="../resources/image/2019/10/coke.jpg">		
                     <ul class="social">
-                        <li><a href="do_selectOne.do?productId=20191011-002-008" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a href="do_selectOne.do?productId=20191011-002-008" data-tip="상세보기"><i class="fa fa-search"></i></a></li>
+                        <li><a href="" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
                 </div>
                 <div class="product-content">
@@ -125,8 +125,8 @@
                 <div class="product-image">
                     <img class="pic-1"  style="height: 270px" width="270px" src="../resources/image/2019/10/orange.jpg">	
                     <ul class="social">
-                        <li><a href="do_selectOne.do?productId=20191011-002-007" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a href="do_selectOne.do?productId=20191011-002-007" data-tip="상세보기"><i class="fa fa-search"></i></a></li>
+                        <li><a href="" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
                 </div>
                 <div class="product-content">
@@ -143,8 +143,8 @@
                 <div class="product-image">
                       <img class="pic-1" style="height: 270px" width="270px"  src="../resources/image/2019/10/americano.jpg">	
                     <ul class="social">
-                        <li><a href="do_selectOne.do?productId=20191011-002-009" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a href="do_selectOne.do?productId=20191011-002-009" data-tip="상세보기"><i class="fa fa-search"></i></a></li>
+                        <li><a href="" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
                 </div>
                 <div class="product-content">
@@ -168,8 +168,8 @@
                 <div class="product-image">
                    <img class="pic-1"  style="height: 270px" width="270px"  src="../resources/image/2019/10/movieVoucher.jpg">
                     <ul class="social">
-                        <li><a href="do_selectOne.do?productId=20191011-003-004" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-                        <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a href="do_selectOne.do?productId=20191011-003-004" data-tip="상세보기"><i class="fa fa-search"></i></a></li>
+                        <li><a href="#" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
                 </div>
                 <div class="product-content"> 
@@ -177,7 +177,7 @@
                     <div class="price">
                         <span>7000원</span>
                     </div>
-                    <a class="add-to-cart" href="">ADD TO CART</a>
+                    <a class="add-to-cart" href="">+ ADD TO CART</a>
                 </div>
             </div>
         </div>
@@ -186,8 +186,8 @@
                 <div class="product-image">
                    <img class="pic-1"  style="height: 270px" width="270px"  src="../resources/image/2019/10/giftcard.jpg">
                     <ul class="social">
-                        <li><a href="do_selectOne.do?productId=20191011-003-005" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-                        <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a href="do_selectOne.do?productId=20191011-003-005" data-tip="상세보기"><i class="fa fa-search"></i></a></li>
+                        <li><a href="#" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
                 </div>
                 <div class="product-content">
@@ -195,7 +195,7 @@
                     <div class="price">
                         <span>10000원</span>
                     </div>
-                    <a class="add-to-cart" href="">ADD TO CART</a>
+                    <a class="add-to-cart" href="">+ ADD TO CART</a>
                 </div>
             </div>
         </div>
@@ -204,8 +204,8 @@
                 <div class="product-image">
                   <img class="pic-1"  style="height: 270px" width="270px"  src="../resources/image/2019/10/imax.jpg">
                     <ul class="social">
-                        <li><a href="do_selectOne.do?productId=20191011-003-006" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-                        <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a href="do_selectOne.do?productId=20191011-003-006" data-tip="상세보기"><i class="fa fa-search"></i></a></li>
+                        <li><a href="#" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
                 </div>
                 <div class="product-content">
@@ -213,7 +213,7 @@
                     <div class="price">
                         <span>15000원</span>
                     </div>
-                    <a class="add-to-cart" href="">ADD TO CART</a>
+                    <a class="add-to-cart" href="">+ ADD TO CART</a>
                 </div>
             </div>
         </div>

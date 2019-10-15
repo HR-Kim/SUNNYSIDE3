@@ -93,44 +93,51 @@
 
 
 	//수정
-		$("#doUpdate").on("click",function(){
-			
+		$("#doUpdate").on("click",function(e){
+			if(confirm("수정하시겠습니까?")==false) return;
 			console.log("productNm="+$("#productNm").val());
 			console.log("productCost="+$("#productCost").val());
 			console.log("productInfo="+$("#productInfo").val());
 			console.log("productId="+$("#productId").val());
+			e.preventDefault();//현재 이벤트가 상위로 전파되지 않도록 중단한다
 			
-			if(confirm("수정하시겠습니까?")==false) return;
-			
-			//ajax
-		       $.ajax({
-		          type:"POST",
-		          url:"${context}/store/do_update.do",		        
-		          dataType:"html",
-		       	  data:{
-		       		"productNm": $("#productNm").val(),
-		       		"productInfo": $("#productInfo").val(),
-		       		"productCost": $("#productCost").val(),
-		       		"productId": $("#productId").val()
-		       			  
-		       	  }, 
-		       			       
-		        success: function(data){ 
-		        	    
-		           alert(jData.msgId+"|"+jData.msgMsg);
-		             
-		       },
-		       complete:function(data){
-		    	   //alert("수정되었습니다.");
-		       },
-		       error:function(xhr,status,error){
-		           alert("error:"+error);
-		       }
-		      }); //--ajax  
+			doFileUpload();		
 			});
  
- 
- 
+	 function doFileUpload(){
+		 var form = $('form')[0]; //저장된 파일은 위에서부터 1번, 2번 이므로 이렇게 꺼냄
+ 		 var formData = new FormData(form); //form 데이터
+ 		console.log("formData="+formData);
+ 		 
+		//ajax
+	     $.ajax({
+	        type:"POST",
+	        url:"${context}/store/do_update.do",		        
+	        contentType:false,
+	        async:false,
+	        cache:false,
+	        processData:false,
+	        enctype:"multipart/form-data",
+	        data:formData,  
+	      success: function(data){ 
+			  if(null != data && data.msgId=="1"){
+				  alert("수정되었습니다.");		
+				  location.href="${context}/store/store_main.do";
+				
+			  }else{
+				alert(data.msgId+"|"+data.msgMsg);
+				//location.href="${context}/store/store_main.do";
+			  }
+	     },
+	     complete:function(data){
+	  	   
+	     },
+	     error:function(xhr,status,error){
+	         alert("error:"+error);
+	     }
+	    }); //--ajax  
+	 }
+	 
  $(document).ready(function(){
 	//form validate
 		$("#boardEditFrm").validate({

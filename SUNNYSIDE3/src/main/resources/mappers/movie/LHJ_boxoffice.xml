@@ -9,7 +9,7 @@
 	    m.engtitle, 	      
 	    m.limitage, 	      
 	    m.genre,    	     
-	    m.rel_date 	      as relDate,
+	    TO_CHAR(m.rel_date, 'yyyy.mm.dd') as relDate,
 	    m.director, 	      
 	    m.cast,     	      
 	    m.running_time    as runningTime,

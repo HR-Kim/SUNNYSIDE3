@@ -54,13 +54,14 @@ public class SEJ_StroreCtrl {
 	private final String VIEW_SELECTONETOUPDATE = "store/store_update";
 	private final String VIEW_MNG_NM = "store/store_add";
 
+	//메인으로 이동
 	@RequestMapping(value = "store/store_main.do")
 	public String storeMain() {
 		LOG.debug("======================");
 		LOG.debug("=@Controller storeMain=");
 		LOG.debug("======================");
 
-		return VIEW_MNG_NM;
+		return VIEW_LIST_NM;
 	}
 
 	/**
