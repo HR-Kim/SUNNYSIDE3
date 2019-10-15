@@ -20,7 +20,7 @@
       <put-attribute name="body" value="/main/main.jsp" />
       <put-attribute name="title" value="SUNNYSIDE>메인" />
     </definition>
-    
+        
     <!-- boxoffice -->    
     <definition name="boxoffice/*" extends="basede_definition">
       <put-attribute name="body" value="/boxoffice/{1}.jsp" />
@@ -49,6 +49,12 @@
     <definition name="usermypage/*" extends="basede_definition">
       <put-attribute name="body" value="/usermypage/{1}.jsp" />
       <put-attribute name="title" value="SUNNYSIDE>마이페이지" />
+    </definition>
+    
+   <!-- store -->    
+    <definition name="store/*" extends="basede_definition">
+      <put-attribute name="body" value="/store/{1}.jsp" />
+      <put-attribute name="title" value="SUNNYSIDE>스토어" />
     </definition>
     
  
