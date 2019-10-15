@@ -48,7 +48,7 @@
  <form id="boardEditFrm" name="boardEditFrm" method="post" enctype="multipart/form-data" action="do_update.do" style="margin-left: 40px">
  	<table border="1">
  	<tr style="display: none;">
- 		<td><input id="productId" name="productId" value="<c:out value=" ${vo.productId }"/>"></td>
+ 		<td><input id="productId" name="productId" value="<c:out value="${vo.productId }"/>"></td>
  		<td class="category" id="category">${vo.category }</td>
  	</tr>
   	<tr>
@@ -108,20 +108,17 @@
 		          url:"${context}/store/do_update.do",		        
 		          dataType:"html",
 		       	  data:{
-		       		"productId": $("#productId").val(),
 		       		"productNm": $("#productNm").val(),
+		       		"productInfo": $("#productInfo").val(),
 		       		"productCost": $("#productCost").val(),
-		       		"productInfo": $("#productInfo").val()
+		       		"productId": $("#productId").val()
 		       			  
 		       	  }, 
 		       			       
 		        success: function(data){ 
-		        	  var jData = JSON.parse(data);
-		              if(null != jData && jData.msgId=="1"){
-		                alert(jData.msgMsg);
-		              }else{
-		                alert(jData.msgId+"|"+jData.msgMsg);
-		              }
+		        	    
+		           alert(jData.msgId+"|"+jData.msgMsg);
+		             
 		       },
 		       complete:function(data){
 		    	   //alert("수정되었습니다.");
