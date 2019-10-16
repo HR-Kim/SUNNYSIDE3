@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sunnyside.store">
+	<!-- 
+		 do_save   : 장바구니 저장
+		 do_delete : 장바구니 삭제
+	     do_update : 장바구니 수정
+	     sumMoney: 장바구니 금액 합계
+	     get_retrieve  : 장바구니 목록
+	     countCart: 장바구니 동일한 상품 레코드 확인
+	     updateCart: 장바구니 상품수량 변경
+	   -->
+	
+<!-- 장바구니 저장(추가) -->
+	<insert id="insertCart">
+	INSERT INTO CART (
+			    cart_id,
+			    user_id,
+			    count,
+			    productId			    
+			) VALUES (
+			    TO_CHAR(SYSDATE,'yyyymmdd')to_char((SELECT COUNT(*) FROM CART), 'FM000'),
+			    #{userId,jdbcType=VARCHAR},
+			    #{count,jdbcType=NUMERIC},
+			    #{productId,jdbcType=VARCHAR}
+			);	
+	</insert>
+
+</mapper>
