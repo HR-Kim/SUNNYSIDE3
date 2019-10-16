@@ -22,7 +22,7 @@
 	<!-- 바디 -->
 	<div id="page-wrapper">
 		<div class="row">                 
-			<tiles:insertAttribute name="body" />                                                  
+			<tiles:insertAttribute name="body" ignore="true" />                                                  
 		</div>
 	</div>    
 	<!--// 바디 -->

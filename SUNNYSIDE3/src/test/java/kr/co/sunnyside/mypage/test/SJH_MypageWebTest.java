@@ -74,6 +74,27 @@ public class SJH_MypageWebTest {
 	
 	
 	
+	
+	@Test
+	@Ignore
+	public void tx_upgradeLevels() throws Exception {
+		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/usermypage/tx_upgradeLevels.do");
+				  
+		ResultActions resultActions =mockMvc.perform(createMessage);
+		
+		String result =	resultActions.andDo(print())
+				.andReturn()
+				.getResponse().getContentAsString();
+
+		LOG.debug("===============================");
+		LOG.debug("=result="+result);
+		LOG.debug("===============================");	
+	
+	}
+	
+	
+	
+	
 	@Test
 	@Ignore
 	public void do_update() throws Exception {

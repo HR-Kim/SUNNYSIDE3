@@ -33,9 +33,8 @@ public class SJH_MypageCtrl {
 	
 	
 	//자동 등업
-	@RequestMapping(value="usermypage/tx_upgradeLevels.do",method = RequestMethod.POST
+	@RequestMapping(value="usermypage/tx_upgradeLevels.do",method = {RequestMethod.GET, RequestMethod.POST}
 			,produces = "application/json; charset=UTF-8")
-	@ResponseBody	
 	public void tx_upgradeLevels() throws SQLException {
 		LOG.debug("1=========================");
 		LOG.debug("=@Controller=자동등업=");
