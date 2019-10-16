@@ -2,14 +2,19 @@ package kr.co.sunnyside.store.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import kr.co.sunnyside.store.service.SEJ_CartSvc;
 import kr.co.sunnyside.store.service.SEJ_CartVO;
 
 public class SEJ_CartSvcImple implements SEJ_CartSvc {
-
+	
+	@Autowired
+	private SEJ_CartDaoImpl cartDaoImpl;
+	
 	@Override
 	public void do_save(SEJ_CartVO vo) {
-		
+		cartDaoImpl.do_save(vo);
 	}
 
 	@Override
@@ -33,7 +38,7 @@ public class SEJ_CartSvcImple implements SEJ_CartSvc {
 	}
 
 	@Override
-	public int countCart(int productId, String userId) {
+	public int countCart(String productId, String userId) {
 		return 0;
 	}
 

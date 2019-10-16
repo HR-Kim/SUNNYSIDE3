@@ -19,7 +19,7 @@ public interface SEJ_CartSvc {
 	public List<SEJ_CartVO> do_retrieve(String userId);
 	
 	/**장바구니 동일한 상품 레코드 확인*/
-	public int countCart(int productId, String userId);
+	public int countCart(String productId, String userId);
 	
 	/**장바구니 상품수량 변경*/
 	public void updateCart(SEJ_CartVO vo);

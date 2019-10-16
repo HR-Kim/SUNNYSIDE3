@@ -2,7 +2,7 @@ package kr.co.sunnyside.store.service;
 
 import java.util.List;
 
-public interface CartDao {
+public interface SEJ_CartDao {
 	/**장바구니 저장 */
 	public void do_save(SEJ_CartVO vo);
 	
@@ -19,7 +19,7 @@ public interface CartDao {
 	public List<SEJ_CartVO> do_retrieve(String userId);
 	
 	/**장바구니 동일한 상품 레코드 확인*/
-	public int countCart(int productId, String userId);
+	public int countCart(String productId, String userId);
 	
 	/**장바구니 상품수량 변경*/
 	public void updateCart(SEJ_CartVO vo);

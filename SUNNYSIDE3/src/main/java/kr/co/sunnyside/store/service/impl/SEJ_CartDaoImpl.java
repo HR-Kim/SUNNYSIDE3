@@ -9,11 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import kr.co.sunnyside.store.service.CartDao;
+import kr.co.sunnyside.store.service.SEJ_CartDao;
 import kr.co.sunnyside.store.service.SEJ_CartVO;
 
 
-public class SEJ_CartDaoImpl implements CartDao {
+public class SEJ_CartDaoImpl implements SEJ_CartDao {
 	Logger LOG=LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
@@ -40,7 +40,6 @@ public class SEJ_CartDaoImpl implements CartDao {
 	/**장바구니 목록*/
 	@Override
 	public List<SEJ_CartVO> do_retrieve(String userId) {
-	
 		return sqlSession.selectList("cart.listCart",userId);
 	}
 	
@@ -52,7 +51,7 @@ public class SEJ_CartDaoImpl implements CartDao {
 	
 	/**장바구니 동일한 상품 레코드 확인*/
 	@Override
-	public int countCart(int productId, String userId) {
+	public int countCart(String productId, String userId) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("productId", productId);
@@ -64,7 +63,6 @@ public class SEJ_CartDaoImpl implements CartDao {
 	/**장바구니 상품수량 변경*/
 	@Override
 	public void updateCart(SEJ_CartVO vo) {
-		
 		sqlSession.update("cart.sumCart",vo);
 	}
 
