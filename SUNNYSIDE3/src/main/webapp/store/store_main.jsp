@@ -15,11 +15,10 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 <link href="../resources/css/store_main.css" rel="stylesheet" type="text/css">
 <title>스토어</title>
-
 </head>
 <body>
 <div class="container">
-	<div class="productadd">
+	<div class="productadd" id="productadd" style="display: none;">
 		<input type="button" value="상품등록" id="addbtn" class="addbtn">
 	</div>
     <h3 class="h3">팝콘</h3>
@@ -280,7 +279,11 @@
      }
 
 	$(document).ready(function(){
-		//alert("ready");
+		//admin일때만 작성가능
+		if("${user.userId}"=="admin"){
+	            $("#productadd").css("display", "inline ");//보이게하기
+	         }
+		
 	});
 
 
