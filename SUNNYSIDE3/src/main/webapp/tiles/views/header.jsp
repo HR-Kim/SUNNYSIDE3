@@ -24,19 +24,23 @@
 						<div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
 							<ul class="navbar-nav">
 								<li class="nav-item dropdown">
-									<a class="nav-link dropdown-toggle" href="/sunnyside/boxoffice/do_retrieve.do" id="navbarDropdownpro" role="button" data-toggle="dropdown"
-									   aria-haspopup="true" aria-expanded="false">영화</a>
+									<a class="nav-link dropdown-toggle" href="/sunnyside/boxoffice/do_retrieve.do">영화</a>
 									<div class="dropdown-menu" aria-labelledby="navbarDropdownpro">
 										<a class="dropdown-item" href="/sunnyside/boxoffice/do_retrieve.do">박스오피스</a>
 										<a class="dropdown-item" href="/sunnyside/screening/do_retrieve.do">상영중</a>
 										<a class="dropdown-item" href="/sunnyside/planed/do_retrieve.do">개봉예정</a>
 									</div>
 								</li>
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="/sunnyside/store/do_retrieve.do">스토어</a>
+									<div class="dropdown-menu" aria-labelledby="navbarDropdownpro">
+										<a class="dropdown-item" href="/sunnyside/store/do_retrieve_popcorn.do">팝콘</a>
+										<a class="dropdown-item" href="/sunnyside/store/do_retrieve_drink.do">음료</a>
+										<a class="dropdown-item" href="/sunnyside/store/do_retrieve_movieticket.do">영화예매권</a>
+									</div>										
+								</li>									
 								<li class="nav-item">
-									<a class="nav-link" href="#">스토어</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="#">VOD</a>
+									<a class="nav-link" href="http://www.seechu.co.kr/index.asp">VOD</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" href="#">고객센터</a>
