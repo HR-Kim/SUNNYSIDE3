@@ -46,7 +46,7 @@
 									<a class="nav-link" href="#">고객센터</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="#">로그인</a>
+									<a class="nav-link" href="/sunnyside/login/login_view.do">로그인</a>
 								</li>									
 							</ul>
 						</div>
