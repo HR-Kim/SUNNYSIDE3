@@ -1,6 +1,9 @@
 package kr.co.sunnyside.branchinfo.web;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.math3.exception.NullArgumentException;
 import org.slf4j.Logger;
@@ -58,13 +61,13 @@ public class LGS_BranchInfoCtrl {
 		}
 		
 		Gson gson = new Gson();
-		String jsonString = gson.toJson(message);
+		String jsonStr = gson.toJson(message);
 		
 		LOG.debug("==================================");
-		LOG.debug("jsonString : " + jsonString);
+		LOG.debug("jsonStr : " + jsonStr);
 		LOG.debug("==================================");
 		
-		return jsonString;
+		return jsonStr;
 	}
 	
 	@ResponseBody
@@ -94,13 +97,13 @@ public class LGS_BranchInfoCtrl {
 		}
 		
 		Gson gson = new Gson();
-		String jsonString = gson.toJson(message);
+		String jsonStr = gson.toJson(message);
 		
 		LOG.debug("==================================");
-		LOG.debug("jsonString : " + jsonString);
+		LOG.debug("jsonStr : " + jsonStr);
 		LOG.debug("==================================");
 		
-		return jsonString;
+		return jsonStr;
 	}
 	
 	@ResponseBody
@@ -129,13 +132,13 @@ public class LGS_BranchInfoCtrl {
 		}
 		
 		Gson gson = new Gson();
-		String jsonString = gson.toJson(message);
+		String jsonStr = gson.toJson(message);
 		
 		LOG.debug("==================================");
-		LOG.debug("jsonString : " + jsonString);
+		LOG.debug("jsonStr : " + jsonStr);
 		LOG.debug("==================================");
 		
-		return jsonString;
+		return jsonStr;
 	}
 	
 	@RequestMapping(value = "branchInfo/do_selectOne.do", method = RequestMethod.POST)
@@ -158,7 +161,7 @@ public class LGS_BranchInfoCtrl {
 	}
 	
 	@RequestMapping(value = "branchInfo/do_retrieve.do", method = RequestMethod.GET)
-	public String do_retrieve(SearchVO search, Model model) {
+	public String do_retrieve(SearchVO search, Model model, HttpServletRequest request) throws UnsupportedEncodingException {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_retrieve_branchInfo");
 		LOG.debug("==================================");
@@ -172,13 +175,13 @@ public class LGS_BranchInfoCtrl {
 		LOG.debug("==================================");
 		LOG.debug("branchList : " + branchList);
 		LOG.debug("==================================");
-		
+		request.setCharacterEncoding("UTF-8");
 		return VIEW_TABLE;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "branchInfo/do_retrieveList.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
-	public List<?> do_retrieveList(SearchVO search) {
+	public String do_retrieveList(SearchVO search) {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_retrieveList_branchInfo(ajax)");
 		LOG.debug("==================================");
@@ -192,6 +195,9 @@ public class LGS_BranchInfoCtrl {
 		LOG.debug("branchList : " + branchList);
 		LOG.debug("==================================");
 		
-		return branchList;
+		Gson gson=new Gson();
+		String gsonStr = gson.toJson(branchList);		
+		
+		return gsonStr;
 	}
 }

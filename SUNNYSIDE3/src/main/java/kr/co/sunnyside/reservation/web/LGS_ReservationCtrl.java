@@ -64,13 +64,13 @@ public class LGS_ReservationCtrl {
 		}
 		
 		Gson gson = new Gson();
-		String jsonString = gson.toJson(message);
+		String jsonStr = gson.toJson(message);
 		
 		LOG.debug("==================================");
-		LOG.debug("jsonString : " + jsonString);
+		LOG.debug("jsonStr : " + jsonStr);
 		LOG.debug("==================================");
 		
-		return jsonString;
+		return jsonStr;
 	}
 	
 	@ResponseBody
@@ -110,13 +110,13 @@ public class LGS_ReservationCtrl {
 		}
 		
 		Gson gson = new Gson();
-		String jsonString = gson.toJson(message);
+		String jsonStr = gson.toJson(message);
 		
 		LOG.debug("==================================");
-		LOG.debug("jsonString : " + jsonString);
+		LOG.debug("jsonStr : " + jsonStr);
 		LOG.debug("==================================");
 		
-		return jsonString;
+		return jsonStr;
 	}
 	
 	@ResponseBody
@@ -145,13 +145,13 @@ public class LGS_ReservationCtrl {
 		}
 		
 		Gson gson = new Gson();
-		String jsonString = gson.toJson(message);
+		String jsonStr = gson.toJson(message);
 		
 		LOG.debug("==================================");
-		LOG.debug("jsonString : " + jsonString);
+		LOG.debug("jsonStr : " + jsonStr);
 		LOG.debug("==================================");
 		
-		return jsonString;
+		return jsonStr;
 	}
 	
 	@RequestMapping(value = "reservation/do_selectOne.do", method = RequestMethod.POST)

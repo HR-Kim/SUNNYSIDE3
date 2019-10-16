@@ -1,6 +1,9 @@
 package kr.co.sunnyside.room.web;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.math3.exception.NullArgumentException;
 import org.slf4j.Logger;
@@ -24,10 +27,10 @@ public class LGS_RoomCtrl {
 	Logger LOG = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	LGS_RoomSvc roomSvc;				//상영관정보 지점,상영관id, 상영관명, 총좌석, 잔여좌석
+	LGS_RoomSvc roomSvc;	//상영관정보 지점,상영관id, 상영관명, 총좌석, 잔여좌석
 
 	//view
-	private final String VIEW_TABLE ="table/theater_table";
+	private final String VIEW_TABLE = "table/theater_table";
 	
 	/**
 	 * 상영관추가
@@ -40,8 +43,8 @@ public class LGS_RoomCtrl {
 		LOG.debug("==================================");
 		
 		//파라미터검사
-		if(room == null) throw new NullArgumentException();	//null
-		if(room.getRoomNm() == null || room.getRoomNm() == "") throw new IllegalArgumentException();	//상영관이름
+		if(room == null) throw new NullArgumentException();
+		if(room.getRoomNm() == null || room.getRoomNm() == "") throw new IllegalArgumentException();		//상영관이름
 		if(room.getBranchId() == null || room.getBranchId() == "") throw new IllegalArgumentException();	//지점id
 		if(room.getTotalSeat() < 0) throw new IllegalArgumentException();	//총좌석
 		
@@ -64,13 +67,13 @@ public class LGS_RoomCtrl {
 		}
 		
 		Gson gson = new Gson();
-		String jsonString = gson.toJson(message);
+		String jsonStr = gson.toJson(message);
 		
 		LOG.debug("==================================");
-		LOG.debug("jsonString : " + jsonString);
+		LOG.debug("jsonStr : " + jsonStr);
 		LOG.debug("==================================");
 		
-		return jsonString;
+		return jsonStr;
 	}
 	
 	@ResponseBody
@@ -82,7 +85,7 @@ public class LGS_RoomCtrl {
 		
 		//파라미터검사
 		if(room == null) throw new NullArgumentException();	//null
-		if(room.getRoomId() == null || room.getRoomId() == "") throw new IllegalArgumentException();	//상영관id
+		if(room.getRoomId() == null || room.getRoomId() == "") throw new IllegalArgumentException();
 		if(room.getTotalSeat() < 0) throw new IllegalArgumentException();	//총좌석
 		if(room.getRestSeat() < 0) throw new IllegalArgumentException();	//남은좌석
 		
@@ -102,13 +105,13 @@ public class LGS_RoomCtrl {
 		}
 		
 		Gson gson = new Gson();
-		String jsonString = gson.toJson(message);
+		String jsonStr = gson.toJson(message);
 		
 		LOG.debug("==================================");
-		LOG.debug("jsonString : " + jsonString);
+		LOG.debug("jsonStr : " + jsonStr);
 		LOG.debug("==================================");
 		
-		return jsonString;
+		return jsonStr;
 	}
 	
 	@ResponseBody
@@ -118,8 +121,8 @@ public class LGS_RoomCtrl {
 		LOG.debug("Controller : do_delete_room");
 		LOG.debug("==================================");
 		
-		if(room == null) throw new NullArgumentException(); //null
-		if(room.getRoomId() == null || room.getRoomId() == "") throw new IllegalArgumentException();	//상영관id
+		if(room == null) throw new NullArgumentException();
+		if(room.getRoomId() == null || room.getRoomId() == "") throw new IllegalArgumentException();
 		
 		int flag = roomSvc.do_delete(room);
 		
@@ -137,23 +140,23 @@ public class LGS_RoomCtrl {
 		}
 		
 		Gson gson = new Gson();
-		String jsonString = gson.toJson(message);
+		String jsonStr = gson.toJson(message);
 		
 		LOG.debug("==================================");
-		LOG.debug("jsonString : " + jsonString);
+		LOG.debug("jsonStr : " + jsonStr);
 		LOG.debug("==================================");
 		
-		return jsonString;
+		return jsonStr;
 	}
 	
-	@RequestMapping(value = "room/do_selectOne.do", method = RequestMethod.POST)
+	@RequestMapping(value = "room/do_selectOne.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
 	public String do_selectOne(LGS_RoomVO room, Model model) {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_selectOne_room");
 		LOG.debug("==================================");
 		
 		if(room == null) throw new NullArgumentException(); //null
-		if(room.getRoomNm() == null || room.getRoomNm() == "") throw new IllegalArgumentException();	//지점id
+		if(room.getRoomNm() == null || room.getRoomNm() == "") throw new IllegalArgumentException();
 		
 		LGS_RoomVO outVO = (LGS_RoomVO) roomSvc.do_selectOne(room);
 		model.addAttribute("roomVO", outVO);
@@ -166,8 +169,8 @@ public class LGS_RoomCtrl {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "room/do_retrieve.do", method = RequestMethod.POST)
-	public List<?> do_retrieve(SearchVO search, Model model) {
+	@RequestMapping(value = "room/do_retrieve.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	public String do_retrieve(SearchVO search, Model model) {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_retrieve_room");
 		LOG.debug("==================================");
@@ -176,13 +179,15 @@ public class LGS_RoomCtrl {
 		if(search.getPageNum() == 0) search.setPageNum(1);
 				
 		List<LGS_RoomVO> roomList = (List<LGS_RoomVO>) roomSvc.do_retrieve(search);
-		//model.addAttribute("roomList", roomList);
 		
 		LOG.debug("==================================");
 		LOG.debug("roomList : " + roomList);
 		LOG.debug("==================================");
 		
-		return roomList;
+		Gson gson=new Gson();
+		String gsonStr = gson.toJson(roomList);		
+		
+		return gsonStr;
 	}
 	
 }

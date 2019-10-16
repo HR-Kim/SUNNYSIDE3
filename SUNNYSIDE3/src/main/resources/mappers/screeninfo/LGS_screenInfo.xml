@@ -18,10 +18,14 @@
 				TO_CHAR(SCREEN_DT, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
 				AND ROOM_ID LIKE '%' || #{searchWord} || '%'
 			</when>
+			<when test="'40' == searchDiv">
+				TO_CHAR(SCREEN_DT, 'YYYY-MM-DD') = #{searchWord_second, jdbcType=VARCHAR}
+				AND ROOM_ID LIKE '%' || #{searchWord} || '%'
+			</when>
 			<otherwise></otherwise>
 		</choose>
 	</where>
-	</sql>	
+	</sql>
 	 
 	<delete id="do_delete" parameterType="ScreenInfo">
 		DELETE FROM SCREEN_INFO WHERE SCREEN_ID = #{screenId, jdbcType=VARCHAR}
@@ -127,7 +131,105 @@
          FROM SCREEN_INFO                                            
           <include refid="baseCondition"/>                                           
      	)A2  
-		
 	</select>
 
+	<select id="do_retrieve_forUser" parameterType="Search" resultType="ScreenInfo">
+		SELECT DISTINCT movieId, korTitle
+		FROM(
+			SELECT T1.RNUM as num
+			      ,T1.SCREEN_ID as screenId
+				  ,T1.ROOM_ID as roomId
+				  ,T1.BRANCH_ID as branchId
+				  ,T1.MOVIE_ID as movieId
+				  ,TO_CHAR(T1.START_TIME, 'YYYY-MM-DD HH24:MI:SS') as startTime
+				  ,TO_CHAR(T1.END_TIME, 'YYYY-MM-DD HH24:MI:SS') as endTime
+				  ,TO_CHAR(T1.SCREEN_DT, 'YYYY-MM-DD HH24:MI:SS') as screenDt
+				  ,T1.ADULT_COST as adultCost
+				  ,T1.STUDENT_COST as studentCost
+				  ,T1.EPISODE as episode
+			      ,T2.KORTITLE as korTitle
+			      ,T2.ENGTITLE as engTitle
+			      ,T2.EXPERT_RATE as expertRate
+			      ,T2.VISITOR_RATE as visitorRate
+			FROM(
+			    SELECT ROWNUM AS RNUM, A.*
+			    FROM(
+			         SELECT *
+			         FROM SCREEN_INFO
+			         WHERE TO_DATE(START_TIME, 'YYYY-MM-DD HH24:MI:SS') <![CDATA[>]]> TO_DATE(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+					 AND TO_DATE(SCREEN_DT, 'YYYY-MM-DD') <![CDATA[<=]]> TO_DATE(SYSDATE+7, 'YYYY-MM-DD')
+			         ORDER BY SCREEN_DT DESC, EPISODE DESC
+			        )A
+			    )T1,
+			    (
+			    SELECT *
+			    FROM MOVIE
+			    )T2
+			WHERE T1.MOVIE_ID = T2.MOVIE_ID(+)
+			AND CEIL(T1.RNUM/ #{pageSize, jdbcType=VARCHAR} ) = #{pageNum, jdbcType=VARCHAR}
+		)
+	</select>
+	
+	<select id="do_retrieve_branchNroom" parameterType="Search" resultType="ScreenInfo">
+		SELECT DISTINCT branchId
+						,roomId
+						,branchNm
+						,roomNm
+		FROM(
+			SELECT T1.RNUM as num
+			      ,T1.SCREEN_ID as screenId
+				  ,T1.ROOM_ID as roomId
+				  ,T1.BRANCH_ID as branchId
+				  ,T1.MOVIE_ID as movieId
+				  ,TO_CHAR(T1.START_TIME, 'YYYY-MM-DD HH24:MI:SS') as startTime
+				  ,TO_CHAR(T1.END_TIME, 'YYYY-MM-DD HH24:MI:SS') as endTime
+				  ,TO_CHAR(T1.SCREEN_DT, 'YYYY-MM-DD HH24:MI:SS') as screenDt
+				  ,T1.ADULT_COST as adultCost
+				  ,T1.STUDENT_COST as studentCost
+				  ,T1.EPISODE as episode
+			      ,T2.KORTITLE as korTitle
+			      ,T2.ENGTITLE as engTitle
+			      ,T2.EXPERT_RATE as expertRate
+			      ,T2.VISITOR_RATE as visitorRate
+			FROM(
+			    SELECT ROWNUM AS RNUM, A.*
+			    FROM(
+			         SELECT *
+			         FROM SCREEN_INFO
+			         WHERE MOVIE_ID = #{searchWord, jdbcType=VARCHAR}
+			         AND START_TIME <![CDATA[>]]> SYSDATE
+					 AND SCREEN_DT <![CDATA[<=]]> SYSDATE+7
+			        )A
+			    )T1,
+			    (
+			    SELECT *
+			    FROM MOVIE
+			    )T2
+			WHERE T1.MOVIE_ID = T2.MOVIE_ID(+)
+			AND CEIL(T1.RNUM/ #{pageSize, jdbcType=VARCHAR} ) = #{pageNum, jdbcType=VARCHAR}
+		)A1,
+		(
+		SELECT BRANCH_ID, BRANCH_NM as branchNm
+		FROM BRANCH_INFO
+		)A2,
+		(
+		SELECT ROOM_ID, ROOM_NM as roomNm
+		FROM ROOM
+		)A3
+		WHERE A1.branchId = A2.BRANCH_ID
+		AND A1.roomId = A3.ROOM_ID
+	</select>
+	
+	<select id="do_retrieve_All_branchNroom" parameterType="Search" resultType="BranchNRoom">
+		SELECT DISTINCT BRANCH_NM || ' - ' || ROOM_NM as branchNroom
+		FROM(
+			SELECT *
+			FROM BRANCH_INFO
+			)T1,
+			(
+			SELECT *
+			FROM ROOM
+			)T2
+        WHERE T1.BRANCH_ID = T2.BRANCH_ID
+	</select>
 </mapper>

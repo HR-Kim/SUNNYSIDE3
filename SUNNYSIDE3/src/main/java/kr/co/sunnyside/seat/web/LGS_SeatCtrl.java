@@ -56,13 +56,13 @@ public class LGS_SeatCtrl {
 		}
 		
 		Gson gson = new Gson();
-		String jsonString = gson.toJson(message);
+		String jsonStr = gson.toJson(message);
 		
 		LOG.debug("==================================");
-		LOG.debug("jsonString : " + jsonString);
+		LOG.debug("jsonStr : " + jsonStr);
 		LOG.debug("==================================");
 		
-		return jsonString;
+		return jsonStr;
 	}
 	
 	@ResponseBody
@@ -96,13 +96,13 @@ public class LGS_SeatCtrl {
 		}
 		
 		Gson gson = new Gson();
-		String jsonString = gson.toJson(message);
+		String jsonStr = gson.toJson(message);
 		
 		LOG.debug("==================================");
-		LOG.debug("jsonString : " + jsonString);
+		LOG.debug("jsonStr : " + jsonStr);
 		LOG.debug("==================================");
 		
-		return jsonString;
+		return jsonStr;
 	}
 	
 	@ResponseBody
@@ -131,13 +131,13 @@ public class LGS_SeatCtrl {
 		}
 		
 		Gson gson = new Gson();
-		String jsonString = gson.toJson(message);
+		String jsonStr = gson.toJson(message);
 		
 		LOG.debug("==================================");
-		LOG.debug("jsonString : " + jsonString);
+		LOG.debug("jsonStr : " + jsonStr);
 		LOG.debug("==================================");
 		
-		return jsonString;
+		return jsonStr;
 	}
 	
 	@RequestMapping(value = "seat/do_selectOne.do", method = RequestMethod.POST)
@@ -160,8 +160,8 @@ public class LGS_SeatCtrl {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "seat/do_retrieve.do", method = RequestMethod.POST)
-	public List<?> do_retrieve(SearchVO search, Model model) {
+	@RequestMapping(value = "seat/do_retrieve.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	public String do_retrieve(SearchVO search, Model model) {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_retrieve_seat");
 		LOG.debug("==================================");
@@ -181,6 +181,9 @@ public class LGS_SeatCtrl {
 		LOG.debug("list : " + list);
 		LOG.debug("==================================");
 		
-		return list;
+		Gson gson=new Gson();
+		String gsonStr = gson.toJson(list);		
+		
+		return gsonStr;
 	}
 }

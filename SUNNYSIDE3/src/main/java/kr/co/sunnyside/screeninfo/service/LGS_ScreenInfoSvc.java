@@ -16,4 +16,9 @@ public interface LGS_ScreenInfoSvc {
 
 	public DTO do_selectOne(DTO dto);
 	
+	public List<?> do_retrieve_forUser(DTO dto);
+	
+	public List<?> do_retrieve_branchNroom(DTO dto);
+	
+	public List<?> do_retrieve_All_branchNroom();
 }

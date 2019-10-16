@@ -21,6 +21,7 @@ import kr.co.sunnyside.cmn.SearchVO;
 import kr.co.sunnyside.code.service.CodeVO;
 import kr.co.sunnyside.movie.service.LHJ_MovieVO;
 import kr.co.sunnyside.movie.service.impl.LHJ_ScreeningSvcImpl;
+import kr.co.sunnyside.screeninfo.service.BranchNRoomVO;
 import kr.co.sunnyside.screeninfo.service.LGS_ScreenInfoSvc;
 import kr.co.sunnyside.screeninfo.service.LGS_ScreenInfoVO;
 
@@ -71,13 +72,13 @@ public class LGS_ScreenInfoCtrl {
 		}
 		
 		Gson gson = new Gson();
-		String jsonString = gson.toJson(message);
+		String jsonStr = gson.toJson(message);
 		
 		LOG.debug("==================================");
-		LOG.debug("jsonString : " + jsonString);
+		LOG.debug("jsonStr : " + jsonStr);
 		LOG.debug("==================================");
 		
-		return jsonString;
+		return jsonStr;
 	}
 	
 	@ResponseBody
@@ -116,13 +117,13 @@ public class LGS_ScreenInfoCtrl {
 		}
 		
 		Gson gson = new Gson();
-		String jsonString = gson.toJson(message);
+		String jsonStr = gson.toJson(message);
 		
 		LOG.debug("==================================");
-		LOG.debug("jsonString : " + jsonString);
+		LOG.debug("jsonStr : " + jsonStr);
 		LOG.debug("==================================");
 		
-		return jsonString;
+		return jsonStr;
 	}
 	
 	@ResponseBody
@@ -151,13 +152,13 @@ public class LGS_ScreenInfoCtrl {
 		}
 		
 		Gson gson = new Gson();
-		String jsonString = gson.toJson(message);
+		String jsonStr = gson.toJson(message);
 		
 		LOG.debug("==================================");
-		LOG.debug("jsonString : " + jsonString);
+		LOG.debug("jsonStr : " + jsonStr);
 		LOG.debug("==================================");
 		
-		return jsonString;
+		return jsonStr;
 	}
 	
 	@RequestMapping(value = "screenInfo/do_selectOne.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
@@ -180,8 +181,8 @@ public class LGS_ScreenInfoCtrl {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "screenInfo/do_retrieve.do", method = RequestMethod.POST)
-	public List<?> do_retrieve(SearchVO search) {
+	@RequestMapping(value = "screenInfo/do_retrieve.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	public String do_retrieve(SearchVO search) {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_retrieve_screenInfo");
 		LOG.debug("==================================");
@@ -195,13 +196,16 @@ public class LGS_ScreenInfoCtrl {
 		LOG.debug("list : " + list);
 		LOG.debug("==================================");
 		
-		return list;
+		Gson gson=new Gson();
+		String gsonStr = gson.toJson(list);		
+		
+		return gsonStr;
 	}
 	
 	/**영화목록조회*/
 	@ResponseBody
 	@RequestMapping(value="screenInfo/do_retrieve_movie.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
-	public List<?> do_retrieve_movie(SearchVO search) {
+	public String do_retrieve_movie(SearchVO search) {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_retrieve_screenInfo");
 		LOG.debug("==================================");
@@ -215,13 +219,16 @@ public class LGS_ScreenInfoCtrl {
 		LOG.debug("list : " + list);
 		LOG.debug("============================");		
 
-		return list;
+		Gson gson=new Gson();
+		String gsonStr = gson.toJson(list);		
+		
+		return gsonStr;
 	}
 	
 	/**단건조회*/
 	@ResponseBody
 	@RequestMapping(value="screening/do_selectOne_movie.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
-	public LHJ_MovieVO do_selectOne_movie(LHJ_MovieVO inVO) {
+	public String do_selectOne_movie(LHJ_MovieVO inVO) {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_selectOne_movie");
 		LOG.debug("==================================");
@@ -234,7 +241,73 @@ public class LGS_ScreenInfoCtrl {
 		
 		LHJ_MovieVO outVO = (LHJ_MovieVO) this.screeningSvc.do_selectOne(inVO);
 		
-		return outVO;
+		Gson gson=new Gson();
+		String gsonStr = gson.toJson(outVO);		
+		
+		return gsonStr;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "screenInfo/do_retrieve_forUser.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	public String do_retrieve_forUser(SearchVO search) {
+		LOG.debug("==================================");
+		LOG.debug("Controller : do_retrieve_forUser");
+		LOG.debug("==================================");
+		
+		if(search.getPageSize() == 0) search.setPageSize(10);
+		if(search.getPageNum() == 0) search.setPageNum(1);
+		
+		List<LGS_ScreenInfoVO> list = (List<LGS_ScreenInfoVO>) screenInfoSvc.do_retrieve_forUser(search);
+		
+		LOG.debug("==================================");
+		LOG.debug("list : " + list);
+		LOG.debug("==================================");
+		
+		Gson gson=new Gson();
+		String gsonStr = gson.toJson(list);		
+		
+		return gsonStr;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "screenInfo/do_retrieve_branchNroom.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	public String do_retrieve_branchNroom(SearchVO search) {
+		LOG.debug("==================================");
+		LOG.debug("Controller : do_retrieve_branchNroom");
+		LOG.debug("==================================");
+		
+		if(search.getPageSize() == 0) search.setPageSize(10);
+		if(search.getPageNum() == 0) search.setPageNum(1);
+		
+		List<LGS_ScreenInfoVO> list = (List<LGS_ScreenInfoVO>) screenInfoSvc.do_retrieve_branchNroom(search);
+		
+		LOG.debug("==================================");
+		LOG.debug("list : " + list);
+		LOG.debug("==================================");
+		
+		Gson gson=new Gson();
+		String gsonStr = gson.toJson(list);		
+		
+		return gsonStr;
+	}
+	
+	/**지점-상영관 이름 List*/
+	@ResponseBody
+	@RequestMapping(value = "screenInfo/do_retrieve_All_branchNroom.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	public String do_retrieve_All_branchNroom() {
+		LOG.debug("==================================");
+		LOG.debug("Controller : do_retrieve_All_branchNroom");
+		LOG.debug("==================================");
+
+		List<BranchNRoomVO> list = (List<BranchNRoomVO>) screenInfoSvc.do_retrieve_All_branchNroom();
+		
+		LOG.debug("==================================");
+		LOG.debug("list : " + list);
+		LOG.debug("==================================");
+		
+		Gson gson=new Gson();
+		String gsonStr = gson.toJson(list);		
+		
+		return gsonStr;
+	}
 }

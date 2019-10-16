@@ -18,6 +18,8 @@ public class LGS_ScreenInfoVO extends DTO {
 	private String engTitle;	//영어제목
 	private double expertRate;	//전문가평점
 	private double visitorRate;	//관객평점
+	private String branchNm;	//지점이름
+	private String roomNm;		//상영관이름
 	
 	public LGS_ScreenInfoVO(){}
 
@@ -153,13 +155,29 @@ public class LGS_ScreenInfoVO extends DTO {
 		this.visitorRate = visitorRate;
 	}
 
+	public String getBranchNm() {
+		return branchNm;
+	}
+
+	public void setBranchNm(String branchNm) {
+		this.branchNm = branchNm;
+	}
+
+	public String getRoomNm() {
+		return roomNm;
+	}
+
+	public void setRoomNm(String roomNm) {
+		this.roomNm = roomNm;
+	}
+
 	@Override
 	public String toString() {
 		return "LGS_ScreenInfoVO [screenId=" + screenId + ", roomId=" + roomId + ", branchId=" + branchId + ", movieId="
 				+ movieId + ", startTime=" + startTime + ", endTime=" + endTime + ", screenDt=" + screenDt
 				+ ", adultCost=" + adultCost + ", studentCost=" + studentCost + ", episode=" + episode + ", korTitle="
 				+ korTitle + ", engTitle=" + engTitle + ", expertRate=" + expertRate + ", visitorRate=" + visitorRate
-				+ ", toString()=" + super.toString() + "]";
+				+ ", branchNm=" + branchNm + ", roomNm=" + roomNm + ", toString()=" + super.toString() + "]";
 	}
 
 }
