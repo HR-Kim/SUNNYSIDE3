@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +14,7 @@ import com.google.gson.Gson;
 import kr.co.sunnyside.cmn.Message;
 import kr.co.sunnyside.coupon.service.SJH_CouponSvc;
 import kr.co.sunnyside.coupon.service.SJH_CouponVO;
+import kr.co.sunnyside.usermypage.service.SJH_MypageVO;
 
 @Controller
 public class SJH_CouponCtrl {
@@ -21,6 +23,33 @@ public class SJH_CouponCtrl {
 	
 	@Autowired
 	SJH_CouponSvc couponSvc;
+	
+	
+	
+	
+	
+	//단건조회
+	@RequestMapping(value="coupon/do_selectOne.do",method = RequestMethod.POST,produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public String do_selectOne(SJH_CouponVO inVO,Model model) {
+		LOG.debug("=========================");
+		LOG.debug("=@Controller=inVO=="+inVO);
+		LOG.debug("=========================");
+		
+		if(inVO.getUserId() == null || "".equals(inVO.getUserId())) {
+			throw new IllegalArgumentException("아이디를 입력하세요.");
+		}
+		
+		SJH_MypageVO outVO = (SJH_MypageVO) couponSvc.do_selectOne(inVO);
+
+		Gson gson=new Gson();
+		String json = gson.toJson(outVO);
+		LOG.debug("=========================");
+		LOG.debug("=@Controller gson=user=="+json);
+		LOG.debug("=========================");		
+		
+		return json;
+	}
 	
 	
 	

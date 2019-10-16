@@ -10,5 +10,8 @@ public interface SJH_CouponSvc {
 	/** 쿠폰발급 */
 	public int do_delete(DTO dto);
 	
+	/** 쿠폰선택 */
+	public DTO do_selectOne(DTO dto);
+	
 	
 }

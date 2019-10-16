@@ -5,6 +5,23 @@
 <mapper namespace="kr.co.sunnyside.coupon">
 
 
+	<!-- 쿠폰 하나 가져오기 -->
+	<select id="do_selectOne" parameterType="SJH_CouponVO" resultType="SJH_CouponVO">
+		SELECT
+		    coupon_code as couponCode,
+		    user_id as userId,
+		    coupon_nm as couponNm,
+		    usable,
+		    use_dt as useDt,
+		    discount
+		FROM
+		    user_coupon
+		WHERE
+		    user_id = #{userId,jdbcType=VARCHAR}
+	</select>
+
+
+
 	<!-- 쿠폰등록 -->
 	<insert id="do_save" parameterType="SJH_CouponVO" >
 		INSERT INTO user_coupon (
@@ -17,8 +34,8 @@
 		) VALUES (
 		    ( SELECT DBMS_RANDOM.STRING('A', 15) FROM DUAL ),
 		    #{userId,jdbcType=VARCHAR},
-		    #{couponNm,jdbcType=VARCHAR},
-		    NVL(#{couponNm,jdbcType=VARCHAR},0),
+		    '3천원 할인쿠폰',
+		    NVL(#{usable,jdbcType=VARCHAR},0),
 		    ADD_MONTHS(SYSDATE, 1),
 		    3000
 		)

@@ -77,6 +77,29 @@ public class SJH_CouponDao implements WorkDiv {
 	}
 	
 	
+	@Override
+	public DTO do_selectOne(DTO dto) {
+		String statement = this.NAMESPACE+".do_selectOne";
+		SJH_CouponVO inVO = (SJH_CouponVO) dto;
+		
+		LOG.debug("========================");
+		LOG.debug("=01.param="+inVO);
+		LOG.debug("========================");
+		
+		LOG.debug("========================");
+		LOG.debug("=02.statement="+statement);
+		LOG.debug("========================");
+		
+		SJH_CouponVO outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
+		
+		LOG.debug("========================");
+		LOG.debug("03.outVO="+outVO);
+		LOG.debug("========================");	
+		
+		return outVO;
+	}	
+	
+	
 	
 	
 	
@@ -87,11 +110,6 @@ public class SJH_CouponDao implements WorkDiv {
 		return 0;
 	}
 
-	@Override
-	public DTO do_selectOne(DTO dto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public List<?> do_retrieve(DTO dto) {

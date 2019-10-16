@@ -29,5 +29,10 @@ public class SJH_CouponSvcImpl implements SJH_CouponSvc {
 		return couponDao.do_delete(dto);
 	}
 
+	@Override
+	public DTO do_selectOne(DTO dto) {
+		return couponDao.do_selectOne(dto);
+	}
+
 	
 }

@@ -53,11 +53,11 @@ public class SJH_CouponWebTest {
 		LOG.debug("^^^^^^^^^^^^^^^^^^");
 		
 		coupons = Arrays.asList(
-				 new SJH_CouponVO("쿠폰코드01","회원아이디01","3천원 할인 쿠폰","","",3000)
-				,new SJH_CouponVO("쿠폰코드02","회원아이디01","3천원 할인 쿠폰","","",3000)
-				,new SJH_CouponVO("쿠폰코드03","회원아이디02","3천원 할인 쿠폰","","",3000)
-				,new SJH_CouponVO("쿠폰코드04","회원아이디02","3천원 할인 쿠폰","","",3000)
-				,new SJH_CouponVO("쿠폰코드05","회원아이디03","3천원 할인 쿠폰","","",3000)
+				 new SJH_CouponVO("쿠폰코드01","회원아이디01","","","",3000)
+				,new SJH_CouponVO("쿠폰코드02","회원아이디01","","","",3000)
+				,new SJH_CouponVO("쿠폰코드03","회원아이디02","","","",3000)
+				,new SJH_CouponVO("쿠폰코드04","회원아이디02","","","",3000)
+				,new SJH_CouponVO("쿠폰코드05","회원아이디03","","","",3000)
 			);
 		
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
@@ -71,13 +71,12 @@ public class SJH_CouponWebTest {
 	}
 	
 	
+	
 	@Test
 	//@Ignore
-	public void do_save() throws Exception {
-		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/coupon/do_save.do")
-														.param("userId", "회원아이디01")
-														.param("couponNm", "쿠폰이름00")
-														.param("usable", "")
+	public void do_selectOne() throws Exception {
+		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/coupon/do_selectOne.do")
+														.param("userId", "회원아이디04")
 														;
 		
 		ResultActions resultActions = mockMvc.perform(createMessage)
@@ -94,6 +93,28 @@ public class SJH_CouponWebTest {
 	}
 	
 	
+	
+	
+	@Test
+	@Ignore
+	public void do_save() throws Exception {
+		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/coupon/do_save.do")
+														.param("userId", "회원아이디04")
+														.param("usable", "")
+														;
+		
+		ResultActions resultActions = mockMvc.perform(createMessage)
+									.andExpect(MockMvcResultMatchers.content().contentType("application/json; charset=UTF-8"))
+									;
+		
+		String result = resultActions.andDo(print())
+						.andReturn()
+						.getResponse().getContentAsString();
+		
+		LOG.debug("==============================");
+		LOG.debug("=result="+result);
+		LOG.debug("==============================");
+	}
 	
 	
 	@Test

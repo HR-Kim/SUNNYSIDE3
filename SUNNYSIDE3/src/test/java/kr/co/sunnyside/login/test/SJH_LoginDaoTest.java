@@ -50,11 +50,11 @@ public class SJH_LoginDaoTest {
 		LOG.debug("^^^^^^^^^^^^^^^^^^");
 		
 		users = Arrays.asList(
-				 new SJH_LoginVO("j01_126","1234","회원이름01","이메일01@naver.com","BASIC",0,"010-0000-0001","19/09/01","",190000)
-				,new SJH_LoginVO("j02_126","1234","회원이름02","이메일02@naver.com","BASIC",0,"010-0000-0002","19/09/02","",200000) //BASIC -> SILVER
-				,new SJH_LoginVO("j03_126","1234","회원이름03","이메일03@naver.com","SILVER",0,"010-0000-0003","19/09/03","",200000)
-				,new SJH_LoginVO("j04_126","1234","회원이름04","이메일04@naver.com","SILVER",0,"010-0000-0004","19/09/04","",400000) //SILVER -> GOLD
-				,new SJH_LoginVO("j05_126","1234","회원이름05","이메일05@naver.com","GOLD",0,"010-0000-0005","19/09/05","",400000)
+				 new SJH_LoginVO("j01_126","1234","회원이름01","glwlzkwp@naver.com","BASIC",0,"01000000001","19990101","",190000)
+				,new SJH_LoginVO("j02_126","1234","회원이름02","glwlzkwp@naver.com","BASIC",0,"01000000002","19990102","",200000) //BASIC -> SILVER
+				,new SJH_LoginVO("j03_126","1234","회원이름03","glwlzkwp@naver.com","SILVER",0,"01000000003","19990103","",200000)
+				,new SJH_LoginVO("j04_126","1234","회원이름04","glwlzkwp@naver.com","SILVER",0,"01000000004","19990104","",400000) //SILVER -> GOLD
+				,new SJH_LoginVO("j05_126","1234","회원이름05","glwlzkwp@naver.com","GOLD",0,"01000000005","19990105","",500000)
 			);
 	}
 	
@@ -99,7 +99,7 @@ public class SJH_LoginDaoTest {
 	@Test
 	//@Ignore
 	public void do_save() {
-//		int flag = loginDao.do_save(users.get(4));
+//		loginDao.do_save(users.get(4));
 //		assertThat(1, is(flag));
 		
 		for(SJH_LoginVO user:users) {

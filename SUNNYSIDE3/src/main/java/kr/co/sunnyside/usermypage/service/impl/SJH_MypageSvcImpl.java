@@ -16,6 +16,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
 import kr.co.sunnyside.cmn.DTO;
+import kr.co.sunnyside.coupon.service.SJH_CouponVO;
+import kr.co.sunnyside.coupon.service.impl.SJH_CouponDao;
 import kr.co.sunnyside.login.service.impl.SJH_LoginDao;
 import kr.co.sunnyside.login.service.impl.SJH_LoginSvcImpl;
 import kr.co.sunnyside.usermypage.service.SJH_MypageSvc;
@@ -28,6 +30,10 @@ public class SJH_MypageSvcImpl implements SJH_MypageSvc {
 	
 	@Autowired
 	private SJH_MypageDao mypageDao;
+	
+	@Autowired
+	private SJH_CouponDao couponDao;
+	
 	
 	@Autowired
 	private MailSender mailSender;
@@ -77,10 +83,16 @@ public class SJH_MypageSvcImpl implements SJH_MypageSvc {
 		
 		try {
 			
+			SJH_CouponVO coupon = new SJH_CouponVO();
+			//쿠폰 발급
+			couponDao.do_save(user);
+			coupon = (SJH_CouponVO) couponDao.do_selectOne(user);
+			
+			
 			//보내는 사람
 			String host = "smtp.naver.com";
 			final String userName = "glwlzkwp";
-			final String password = "";
+			final String password = "1396532sj";
 			int port = 465;
 			
 			//받는 사람
@@ -88,10 +100,10 @@ public class SJH_MypageSvcImpl implements SJH_MypageSvc {
 			//제목
 			String title = user.getUserName()+"님의 등급이 변경되었습니다.(SUNNYSIDE THEATER)";
 			//내용
-			String contents = "축하합니다.\n"
+			String contents = "축하합니다!\n"
 							  +user.getUserId()+"님의 등급이 "+user.getUserLevel()+"로 변경되었습니다.\n"
-							  +"발급된 할인쿠폰의 번호를 '마이페이지>쿠폰등록'에 등록하시면 사용할 수 있습니다.\n"
-							  +"쿠폰번호 : "+"임시 쿠폰번호";
+							  +"결제 시 사용할 수 있는 3천원 할인쿠폰을 발급해드렸으며, 쿠폰은 고객님의 마이페이지에서 확인할 수 있습니다.\n"
+							  +"쿠폰번호 : "+coupon.getCouponCode();
 			
 			//SMTP 서버 설정
 			Properties props = System.getProperties();
@@ -140,8 +152,7 @@ public class SJH_MypageSvcImpl implements SJH_MypageSvc {
 	
 	
 	
-	
-	
+
 	@Override
 	public int do_update(DTO dto) {
 		return mypageDao.do_update(dto);
