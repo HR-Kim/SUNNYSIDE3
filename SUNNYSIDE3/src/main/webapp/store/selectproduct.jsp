@@ -19,7 +19,6 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-<link href="../resources/css/store_main.css" rel="stylesheet" type="text/css">
 <title>상품상세</title>
 </head>
 <body>
@@ -70,12 +69,13 @@
 	</tr>
 </table>
 <hr>
-<div style="margin-left: 900px;">
+<div style="margin-left: 900px; display: none;" id="btns" class="btns" >
 	<input type="submit" value="수정" id="updatebtn" name="updatebtn">
 	<input type="button" value="삭제" id="delbtn" name="delbtn">
 </div>
 		
 <script type="text/javascript">
+
 	//수정
 	$("#updatebtn").on("click",function(){
 		//alert("updatebtn");
@@ -129,7 +129,10 @@
 
 
 	$(document).ready(function(){
-		//alert("ready");
+		//admin일때만 작성가능
+		if("${user.userId}"=="admin"){
+		        $("#btns").css("display", "inline ");//보이게하기
+		     }
 	});
 
 </script>

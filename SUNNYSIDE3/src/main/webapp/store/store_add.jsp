@@ -75,15 +75,21 @@
  
 	 /**등록*/ 
 		$("#addBtn").on("click",function(e){
+			
 			if(confirm("등록하시겠습니까?")==false) return;
+
 			  console.log($("#productId").val());
 			  console.log($("#productNm").val());
 		      console.log($("#category").val());
 		      console.log($("#productCost").val());
 		      console.log($("#productInfo").val());
+		      
 			e.preventDefault();//현재 이벤트가 상위로 전파되지 않도록 중단한다
+			//validation
+	        if($("#boardEditFrm").valid()==false)return;
 			
 			doFileUpload();		
+
 			});
 
 	 function doFileUpload(){
