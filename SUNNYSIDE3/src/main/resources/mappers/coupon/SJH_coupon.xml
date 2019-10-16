@@ -4,15 +4,34 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">	
 <mapper namespace="kr.co.sunnyside.coupon">
 
+
 	<!-- 쿠폰등록 -->
-	<insert id="" >
-		
+	<insert id="do_save" parameterType="SJH_CouponVO" >
+		INSERT INTO user_coupon (
+		    coupon_code,
+		    user_id,
+		    coupon_nm,
+		    usable,
+		    use_dt,
+		    discount
+		) VALUES (
+		    ( SELECT DBMS_RANDOM.STRING('A', 15) FROM DUAL ),
+		    #{userId,jdbcType=VARCHAR},
+		    #{couponNm,jdbcType=VARCHAR},
+		    NVL(#{couponNm,jdbcType=VARCHAR},0),
+		    ADD_MONTHS(SYSDATE, 1),
+		    3000
+		)
 	</insert>
 	
 	
 	<!-- 쿠폰삭제 (사용 시) -->
-	
-	
+	<delete id="do_delete" parameterType="SJH_CouponVO">
+		DELETE FROM user_coupon
+		WHERE
+		    coupon_code = #{couponCode,jdbcType=VARCHAR}
+		    AND user_id = #{userId,jdbcType=VARCHAR}
+	</delete>
 	
 
 </mapper>

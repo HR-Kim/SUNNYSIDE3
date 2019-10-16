@@ -1,21 +1,23 @@
 package kr.co.sunnyside.coupon.service;
 
-public class SJH_CouponVO {
+import kr.co.sunnyside.cmn.DTO;
 
+public class SJH_CouponVO extends DTO {
 	
-	public String couponCod	 ;//쿠폰코드
-	public String userId	 ;//회원ID
-	public String couponNm	 ;//쿠폰이름
-	public String usable	 ;//사용여부
-	public String useDt		 ;//사용기간
-	public int discount		 ;//할인
+	public String couponCode	 ;//쿠폰코드
+	public String userId		 ;//회원ID
+	public String couponNm		 ;//쿠폰이름
+	public String usable		 ;//사용여부
+	public String useDt			 ;//사용기간
+	public int    discount		 ;//할인
 	
 	
 	public SJH_CouponVO() {}
 
-	public SJH_CouponVO(String couponCod, String userId, String couponNm, String usable, String useDt, int discount) {
+
+	public SJH_CouponVO(String couponCode, String userId, String couponNm, String usable, String useDt, int discount) {
 		super();
-		this.couponCod = couponCod;
+		this.couponCode = couponCode;
 		this.userId = userId;
 		this.couponNm = couponNm;
 		this.usable = usable;
@@ -24,13 +26,13 @@ public class SJH_CouponVO {
 	}
 
 
-	public String getCouponCod() {
-		return couponCod;
+	public String getCouponCode() {
+		return couponCode;
 	}
 
 
-	public void setCouponCod(String couponCod) {
-		this.couponCod = couponCod;
+	public void setCouponCode(String couponCode) {
+		this.couponCode = couponCode;
 	}
 
 
@@ -86,9 +88,10 @@ public class SJH_CouponVO {
 
 	@Override
 	public String toString() {
-		return "SJH_CouponVO [couponCod=" + couponCod + ", userId=" + userId + ", couponNm=" + couponNm + ", usable="
+		return "SJH_CouponVO [couponCode=" + couponCode + ", userId=" + userId + ", couponNm=" + couponNm + ", usable="
 				+ usable + ", useDt=" + useDt + ", discount=" + discount + "]";
 	}
+
 	
 	
 	

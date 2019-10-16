@@ -100,6 +100,10 @@ public class SJH_MypageDao implements WorkDiv {
 		return flag;
 	}
 
+	
+	/**
+	 * 회원탈퇴
+	 */
 	@Override
 	public int do_delete(DTO dto) {
 		String statement = this.NAMESPACE+".do_delete";

@@ -28,8 +28,7 @@ public class SJH_MypageCtrl {
 	
 	//view
 	private final String VIEW_WITHDRAW = "usermypage/user_mypage_withdraw";
-	
-	
+
 	
 	
 	//자동 등업
