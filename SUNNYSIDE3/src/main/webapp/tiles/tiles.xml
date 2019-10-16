@@ -11,7 +11,7 @@
         <put-attribute name="header" value="/tiles/views/header.jsp" />
         <put-attribute name="body" value="" />
         <put-attribute name="footer" value="/tiles/views/footer.jsp" />
-        <put-attribute name="menu" value="/tiles/views/defaultResource.jsp" />
+        <put-attribute name="menu" value="" />
     </definition>
 
     
@@ -19,42 +19,49 @@
     <definition name="main/*" extends="basede_definition">
       <put-attribute name="body" value="/main/main.jsp" />
       <put-attribute name="title" value="SUNNYSIDE>메인" />
+      <put-attribute name="menu" value="MAIN" />
     </definition>
         
     <!-- boxoffice -->    
     <definition name="boxoffice/*" extends="basede_definition">
       <put-attribute name="body" value="/boxoffice/{1}.jsp" />
       <put-attribute name="title" value="SUNNYSIDE>박스오피스리스트" />
+      <put-attribute name="menu" value="BOXOFFICE" />
     </definition>
     
     <!-- planed -->    
     <definition name="planed/*" extends="basede_definition">
       <put-attribute name="body" value="/planed/{1}.jsp" />
       <put-attribute name="title" value="SUNNYSIDE>개봉예정리스트" />
+      <put-attribute name="menu" value="PLANED" />
     </definition>
     
     <!-- screening -->    
     <definition name="screening/*" extends="basede_definition">
       <put-attribute name="body" value="/screening/{1}.jsp" />
       <put-attribute name="title" value="SUNNYSIDE>최신개봉리스트" />
+      <put-attribute name="menu" value="SCREENING" />
     </definition>
     
     <!-- login & join -->    
     <definition name="login/*" extends="basede_definition">
       <put-attribute name="body" value="/login/{1}.jsp" />
       <put-attribute name="title" value="SUNNYSIDE>로그인" />
+      <put-attribute name="menu" value="LOGIN" />
     </definition>
     
     <!-- usermypage -->    
     <definition name="usermypage/*" extends="basede_definition">
       <put-attribute name="body" value="/usermypage/{1}.jsp" />
       <put-attribute name="title" value="SUNNYSIDE>마이페이지" />
+      <put-attribute name="menu" value="MYPAGE" />
     </definition>
     
    <!-- store -->    
     <definition name="store/*" extends="basede_definition">
       <put-attribute name="body" value="/store/{1}.jsp" />
       <put-attribute name="title" value="SUNNYSIDE>스토어" />
+      <put-attribute name="menu" value="STORE" />
     </definition>
     
  

@@ -65,15 +65,12 @@
 <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
 
 <!------ Include the above in your HEAD tag ---------->
-<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="../resources/css/movie_list.css" rel="stylesheet" type="text/css"> 
+<%-- <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet"> --%>
+<!-- <link href="../resources/css/movie_list.css" rel="stylesheet" type="text/css">  -->
 
-<!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js -->
-<!-- WARNING: Respond.js 는 당신이 file:// 을 통해 페이지를 볼 때는 동작하지 않습니다. -->
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/main.css">
+<!--===============================================================================================-->
 </head>
 
 <body>	
@@ -104,7 +101,8 @@
 									<!-- 예매하기, 상세보기 버튼 -->
 									<span class="text_holder"><span class="text_outer"><span class="text_inner" ><span class="feature_holder" ><span class="feature_holder_icons">
 										<a class="lightbox qbutton small white" href="#">예매하기</a>
-										<a class="lightbox qbutton small white" href="../movie/do_selectOne.do?movieId=<c:out value="${vo.movieId}"/>">상세보기</a>
+<%-- 										<a class="lightbox qbutton small white" href="../movie/do_selectOne.do?movieId=<c:out value="${vo.movieId}"/>">상세보기</a> --%>
+										<a class="lightbox qbutton small white" onclick="popup('../movie/do_selectOne.do?movieId=<c:out value="${vo.movieId}"/>','개봉예정 리스트에 등록',1300,800,100,400,'no');" href="#">상세보기</a>
 										
 									</span></span></span></span></span>			
 									<!--// 예매하기, 상세보기 버튼 -->		
@@ -145,7 +143,7 @@
 	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 	<script src="${context}/resources/js/jquery-1.12.4.js"></script>
 	<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
-	<script src="${context}/resources/js/bootstrap.min.js"></script>  	
+<%-- 	<script src="${context}/resources/js/bootstrap.min.js"></script>  	 --%>
 	<script type="text/javascript">
 		function popup(url,name,width,height,top,left,location){
 	        var option = "width="+width+",height="+height+",top="+top+",left="+left+",location="+location;
