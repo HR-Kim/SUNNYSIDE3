@@ -95,8 +95,8 @@
 				position: absolute;
 				top: 0;
 				left: 0;
-				width: 100%;
-				height: 100%;
+				width: 100000px;
+				height: 100000px;
 				background-color: black;
 				opacity: 0.1;
 				z-index: 10;
@@ -388,22 +388,21 @@
             	date.setDate(date.getDate() + plusDay);
             	
             	var ENDDATE = eval(date.getYear()+1900) + "-" + eval(date.getMonth()+1) + "-" + date.getDate();
-            	var ENDTIME = endHour + ":" + endMinute;
+            	var endTime = endHour + ":" + endMinute;
             	$("#endDate").val(ENDDATE);
-            	$("#endTime").val(ENDTIME);
+            	$("#endTime").val(endTime);
             });
             
             //지점조회
             $("#branchRetrive").on("click", function(){
-            	loading(true);
             	$.ajax({
     				type : "POST",
     				url : "${context}/branchInfo/do_retrieveList.do",
-    				dataType : "html",
+    				dataType : "json",
     				data : {
     				}, 
     				success: function(data){
-    					branchArr = JSON.parse(data);
+    					branchArr = data;
     					if(branchArr.length > 0){
     						$("#branchTable>tbody>tr").detach();
     						for(var i=0 ; i<branchArr.length ; i++){
@@ -417,7 +416,6 @@
     					}
         			},
         			complete:function(data){
-        				loading(false);
         			},
         			error:function(xhr,status,error){
         				
@@ -439,19 +437,19 @@
             	$("#hd_roomNm").val("");
             	$("#hd_branchId").val(td.eq(0).text());
             	$("#hd_branchNm").val(td.eq(1).text());
-            	loading(true);
+
             	var searchWord = td.eq(0).text();
     			var searchDiv = "10";
             	$.ajax({
     				type : "POST",
     				url : "${context}/room/do_retrieve.do",
-    				dataType : "html",
+    				dataType : "json",
     				data : {
     					"searchWord" : searchWord,
     					"searchDiv" : searchDiv 
     				}, 
     			success: function(data){
-    				var roomArr = JSON.parse(data);
+    				var roomArr = data;
     				$("#roomTable>tbody>tr").detach();
     				if(roomArr.length > 0){
     					for(var i=0 ; i< roomArr.length ; i++){
@@ -467,7 +465,7 @@
     				}
     			},
     			complete:function(data){
-    				loading(false);
+
     			},
     			error:function(xhr,status,error){
 
@@ -518,36 +516,37 @@
             	$.ajax({
     				type : "POST",
     				url : "${context}/screenInfo/do_retrieve.do",
-    				dataType : "html",
+    				dataType : "json",
     				data : {
     					"searchWord" : searchWord,
     					"searchDiv" : searchDiv,
     					"pageSize" : pageSize
     				}, 
     			success: function(data){
-    				var plandMovieArr = JSON.parse(data);
+    				var plandMovieArr = data;
     				$("#planedMovieTable>tbody>tr").detach();
     				if(plandMovieArr.length > 0){
     					for(var i=0 ; i< plandMovieArr.length ; i++){
     						var screenDt = plandMovieArr[i].screenDt;
+    						var startTime = plandMovieArr[i].startTime;
     						var endTime = plandMovieArr[i].endTime;
     						var dateArr = screenDt.split(" ");				//상영날짜Arr
-    						var eTimeArr = endTime.split(" ");				//종료시간Arr
-    						var endDateArr = eTimeArr[0].split("-");		//종료 년도 달 일
-    						var eTimeArr = eTimeArr[1].split(":");			//종료 시분초
-    						console.log(eTimeArr);
+    						var sTimeArr = startTime.split(" ");			//종료시간Arr
+    						var startDateArr = sTimeArr[0].split("-");		//종료 년도 달 일
+    						var sTimeArr = sTimeArr[1].split(":");			//종료 시분초
+    						
     						//이미 상영한 영화인지 판단
     						var today = new Date();
-    						var eDate = new Date(endDateArr[0], (parseInt(endDateArr[1]-1)), endDateArr[2], eTimeArr[0], eTimeArr[1], eTimeArr[2]);
+    						var sDate = new Date(startDateArr[0], (parseInt(startDateArr[1]-1)), startDateArr[2], sTimeArr[0], sTimeArr[1], sTimeArr[2]);
 
-    						if(today.getTime() > eDate.getTime() == false){
+    						if(today.getTime() > sDate.getTime() == false){
     							$("#planedMovieTable>tbody").append(
             							"<tr>"+
             							"<td class='planed' hidden='hidden'>"+plandMovieArr[i].screenId+"</td>"+
             							"<td class='planed'>"+plandMovieArr[i].korTitle+"("+plandMovieArr[i].engTitle+")</td>"+
             							"<td class='planed'>"+dateArr[0]+"</td>"+
-            							"<td class='planed'>"+plandMovieArr[i].startTime+"</td>"+
-            							"<td class='planed'>"+eTimeArr[1]+"</td>"+
+            							"<td class='planed'>"+startTime+"</td>"+
+            							"<td class='planed'>"+endTime+"</td>"+
             							"<td class='planed'>"+plandMovieArr[i].episode+"</td>"+        							
             							"</tr>"
             					);
@@ -557,14 +556,13 @@
             							"<td class='expired' hidden='hidden'>"+plandMovieArr[i].screenId+"</td>"+
             							"<td class='expired'>"+plandMovieArr[i].korTitle+"("+plandMovieArr[i].engTitle+")</td>"+
             							"<td class='expired'>"+dateArr[0]+"</td>"+
-            							"<td class='expired'>"+plandMovieArr[i].startTime+"</td>"+
-            							"<td class='expired'>"+eTimeArr[1]+"</td>"+
+            							"<td class='expired'>"+startTime+"</td>"+
+            							"<td class='expired'>"+endTime+"</td>"+
             							"<td class='expired'>"+plandMovieArr[i].episode+"</td>"+        							
             							"</tr>"
             					);
     						}	
         				}
-
     					if(todayBool != true){
 	    					var totalCnt = plandMovieArr[0].totalCnt;
 	    					tablePaging(".planedTablePaging", totalCnt, 1, 10, 10, "<%=planedMovieTableScriptName%>");
@@ -654,13 +652,13 @@
             	$.ajax({
     				type : "POST",
     				url : "${context}/screenInfo/do_retrieve_movie.do",
-    				dataType : "html",
+    				dataType : "json",
     				data : {
     					"searchDiv" : $("#hd_searchDiv").val(),
     					"searchWord" : $("#hd_searchWord").val()
     				}, 
     			success: function(data){
-    				var movieArr = JSON.parse(data);
+    				var movieArr = data;
     				$("#movieTable>tbody>tr").detach();
     				if(movieArr.length > 0){
     					for(var i=0 ; i< movieArr.length ; i++){
@@ -693,8 +691,8 @@
 			$("#planedMovieTable>tbody").on("click","tr", function(){
 				var tr = $(this);
 			  	var td = tr.children();
-				$("#planedMovieTable>tbody>tr").css("background-color", "");	//tr색 초기화
-				$(tr).css("background-color", "red");							//선택tr 색표시
+				$("#planedMovieTable>tbody>tr").css("border", "");	//tr색 초기화
+				$(tr).css("border", "2px solid black");							//선택tr 색표시
 				
 				$("#hd_screenId").val(td.eq(0).text());
 			});
@@ -714,12 +712,12 @@
           			$.ajax({
         				type : "POST",
         				url : "${context}/screening/do_selectOne_movie.do",
-        				dataType : "html",
+        				dataType : "json",
         				data : {
         					"movieId" : movieId
         				}, 
         			success: function(data){
-        				var movieVO = JSON.parse(data);
+        				var movieVO = data;
         				$(".movieInfo>#infoBox").detach();
         				$(".movieInfo").append(
         					"<div id='infoBox'>"+
@@ -819,14 +817,14 @@
 				$.ajax({
     				type : "POST",
     				url : "${context}/screenInfo/do_retrieve_movie.do",
-    				dataType : "html",
+    				dataType : "json",
     				data : {
     					"pageNum" : idx,
     					"searchDiv" : $("#hd_searchDiv").val(),
     					"searchWord" : $("#hd_searchWord").val()
     				}, 
     			success: function(data){
-    				var movieArr = JSON.parse(data);
+    				var movieArr = data;
     				if(movieArr.length > 0){
     					$("#movieTable>tbody>tr").detach();
     					for(var i=0 ; i< movieArr.length ; i++){
@@ -858,36 +856,37 @@
 				$.ajax({
     				type : "POST",
     				url : "${context}/screenInfo/do_retrieve.do",
-    				dataType : "html",
+    				dataType : "json",
     				data : {
     					"pageNum" : idx,
     					"searchDiv" : "20",
     					"searchWord" : $("#hd_roomId").val()
     				}, 
     			success: function(data){
-    				var plandMovieArr = JSON.parse(data);
+    				var plandMovieArr = data;
     				$("#planedMovieTable>tbody>tr").detach();
     				if(plandMovieArr.length > 0){
     					for(var i=0 ; i< plandMovieArr.length ; i++){
     						var screenDt = plandMovieArr[i].screenDt;
+    						var startTime = plandMovieArr[i].startTime;
     						var endTime = plandMovieArr[i].endTime;
     						var dateArr = screenDt.split(" ");				//상영날짜Arr
-    						var eTimeArr = endTime.split(" ");				//종료시간Arr
-    						var endDateArr = eTimeArr[0].split("-");		//종료 년도 달 일
-    						var eTimeArr = eTimeArr[1].split(":");			//종료 시분초
+    						var sTimeArr = startTime.split(" ");				//종료시간Arr
+    						var startDateArr = sTimeArr[0].split("-");		//종료 년도 달 일
+    						var sTimeArr = sTimeArr[1].split(":");			//종료 시분초
     						
     						//이미 상영한 영화인지 판단
     						var today = new Date();
-    						var eDate = new Date(endDateArr[0], (parseInt(endDateArr[1]-1)), endDateArr[2], eTimeArr[0], eTimeArr[1], eTimeArr[2]);
+    						var sDate = new Date(startDateArr[0], (parseInt(startDateArr[1]-1)), startDateArr[2], sTimeArr[0], sTimeArr[1], sTimeArr[2]);
 
-    						if(today.getTime() > eDate.getTime() == false){
+    						if(today.getTime() > sDate.getTime() == false){
     							$("#planedMovieTable>tbody").append(
             							"<tr>"+
             							"<td class='planed' hidden='hidden'>"+plandMovieArr[i].screenId+"</td>"+
             							"<td class='planed'>"+plandMovieArr[i].korTitle+"("+plandMovieArr[i].engTitle+")</td>"+
             							"<td class='planed'>"+dateArr[0]+"</td>"+
-            							"<td class='planed'>"+plandMovieArr[i].startTime+"</td>"+
-            							"<td class='planed'>"+eTimeArr[1]+"</td>"+
+            							"<td class='planed'>"+startTime+"</td>"+
+            							"<td class='planed'>"+endTime+"</td>"+
             							"<td class='planed'>"+plandMovieArr[i].episode+"</td>"+        							
             							"</tr>"
             					);
@@ -897,8 +896,8 @@
             							"<td class='expired' hidden='hidden'>"+plandMovieArr[i].screenId+"</td>"+
             							"<td class='expired'>"+plandMovieArr[i].korTitle+"("+plandMovieArr[i].engTitle+")</td>"+
             							"<td class='expired'>"+dateArr[0]+"</td>"+
-            							"<td class='expired'>"+plandMovieArr[i].startTime+"</td>"+
-            							"<td class='expired'>"+eTimeArr[1]+"</td>"+
+            							"<td class='expired'>"+startTime+"</td>"+
+            							"<td class='expired'>"+endTime+"</td>"+
             							"<td class='expired'>"+plandMovieArr[i].episode+"</td>"+        							
             							"</tr>"
             					);
@@ -1027,7 +1026,7 @@
 				$.ajax({
     				type : "POST",
     				url : "${context}/screenInfo/do_save.do",
-    				dataType : "html",
+    				dataType : "json",
     				data : {
     					"roomId" : roomId,
     					"branchId" : branchId,
@@ -1040,7 +1039,7 @@
     					"episode" : episode
     				}, 
     			success: function(data){
-    				var msg = JSON.parse(data);
+    				var msg = data;
     				if(msg.msgId == 1){
     					alert("성공");
     				}else{
@@ -1094,12 +1093,12 @@
 				$.ajax({
     				type : "POST",
     				url : "${context}/screenInfo/do_delete.do",
-    				dataType : "html",
+    				dataType : "json",
     				data : {
     					"screenId" : screenId
     				}, 
     			success: function(data){
-    				var msg = JSON.parse(data);
+    				var msg = data;
     				if(msg.msgId == 1){
     					alert("성공");
     				}else{
