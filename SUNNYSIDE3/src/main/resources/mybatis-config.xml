@@ -17,7 +17,7 @@
 		<typeAlias type="kr.co.sunnyside.cmn.SearchVO" alias="Search" />
 		<typeAlias type="kr.co.sunnyside.store.service.SEJ_StroreVO" alias="Store" />
 		
-		<!-- LSG -->
+		<!-- LGS -->
 		<typeAlias type="kr.co.sunnyside.reservation.service.LGS_TicketVO" alias="TicketVO"/>
 		<typeAlias type="kr.co.sunnyside.branchinfo.service.LGS_BranchInfoVO" alias="BranchInfo"/>
 		<typeAlias type="kr.co.sunnyside.room.service.LGS_RoomVO" alias="Room"/>
