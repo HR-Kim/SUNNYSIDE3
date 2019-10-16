@@ -156,8 +156,8 @@
 			    FROM(
 			         SELECT *
 			         FROM SCREEN_INFO
-			         WHERE TO_DATE(START_TIME, 'YYYY-MM-DD HH24:MI:SS') <![CDATA[>]]> TO_DATE(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
-					 AND TO_DATE(SCREEN_DT, 'YYYY-MM-DD') <![CDATA[<=]]> TO_DATE(SYSDATE+7, 'YYYY-MM-DD')
+			         WHERE START_TIME <![CDATA[>]]> SYSDATE
+					 AND SCREEN_DT <![CDATA[<=]]> SYSDATE+14
 			         ORDER BY SCREEN_DT DESC, EPISODE DESC
 			        )A
 			    )T1,
@@ -198,7 +198,7 @@
 			         FROM SCREEN_INFO
 			         WHERE MOVIE_ID = #{searchWord, jdbcType=VARCHAR}
 			         AND START_TIME <![CDATA[>]]> SYSDATE
-					 AND SCREEN_DT <![CDATA[<=]]> SYSDATE+7
+					 AND SCREEN_DT <![CDATA[<=]]> SYSDATE+14
 			        )A
 			    )T1,
 			    (
