@@ -122,7 +122,7 @@ public class SJH_LoginCtrl {
 		LOG.debug(nickname);
 		
 		//4.파싱 닉네임 세션으로 저장
-		session.setAttribute("sessionId",nickname); //세션 생성
+		session.setAttribute("user",nickname); //세션 생성
 		model.addAttribute("result", apiResult);
 		
 		return "logintest/afterlogin";
