@@ -23,8 +23,8 @@
 <title>상품상세</title>
 </head>
 <body>
-<h3 class="h4"  style="margin-left: 70px; margin-top: 30px">상품 상세정보</h3>
-<table style="margin-left: 70px;">
+<h3 class="h4"  style="margin-left: 50px; margin-top: 2em; font-weight: bold; font-size:25">상품 상세정보</h3>
+<table style="margin-top: 150px; margin-bottom: 50px;">
 
 	<tr>
 		<td style="display: none;" id="productId" class="productId">${vo.productId }</td>
@@ -63,7 +63,7 @@
 	</tr>
 </table>
 <hr>
-<table style="margin-left: 70px; margin-top: 20px">
+<table style="margin-top: 20px; margin-left: 50px;">
 	<tr>
 		<td >상품소개</td><tr>
 		<td>${vo.productInfo}</td>

@@ -23,33 +23,34 @@
 		<input type="button" value="상품등록" id="addbtn" class="addbtn">
 	</div>
     <h3 class="h3">팝콘</h3>
-    <a style="margin-left: 1050px" href="do_retrieve_popcorn.do" class="btn_popcorn_product"><i class="fa fa-plus"></i> 더보기</a> 
-    <div class="row" >
+    <hr>
+     <a style="margin-left: 1050px" href="do_retrieve_popcorn.do" class="btn_popcorn_product"><i class="fa fa-plus"></i> 더보기</a> 
+    <div class="row">
         <div class="col-md-3 col-sm-6">
             <div class="product-grid">
                 <div class="product-image">
-                    <img class="pic-1" style="height: 270px" width="270px"  src="../resources/image/2019/10/plainPopcorn.jpg">		
+                   <img class="pic-1"  style="height: 270px" width="270px"  src="../resources/image/2019/10/plainPopcorn.jpg">
                     <ul class="social">
                         <li><a href="do_selectOne.do?productId=20191011-001-000" data-tip="상세보기"><i class="fa fa-search"></i></a></li>
-                        <li><a href="" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a href="#" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
                 </div>
-                <div class="product-content" >
+                <div class="product-content"> 
                     <h3 class="title">고소팝콘(L)</h3>
                     <div class="price">
                         <span>5000원</span>
                     </div>
-                    <a class="add-to-cart" href="">+ Add To Cart</a>
+                    <a class="add-to-cart" href="">+ ADD TO CART</a>
                 </div>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
             <div class="product-grid">
                 <div class="product-image">
-       				   <img class="pic-1" style="height: 270px" width="270px"  src="../resources/image/2019/10/caramelPopcorn.jpg">		
+                   <img class="pic-1"  style="height: 270px" width="270px"  src="../resources/image/2019/10/caramelPopcorn.jpg">
                     <ul class="social">
                         <li><a href="do_selectOne.do?productId=20191011-001-001" data-tip="상세보기"><i class="fa fa-search"></i></a></li>
-                        <li><a href="" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a href="#" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
                 </div>
                 <div class="product-content">
@@ -57,35 +58,35 @@
                     <div class="price">
                         <span>6000원</span>
                     </div>
-                    <a class="add-to-cart" href="">+ Add To Cart</a>
+                    <a class="add-to-cart" href="">+ ADD TO CART</a>
                 </div>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
             <div class="product-grid">
                 <div class="product-image">
-                    <img class="pic-1"  style="height: 270px" width="270px" src="../resources/image/2019/10/doublecheesePop.jpg">	
+                  <img class="pic-1"  style="height: 270px" width="270px"  src="../resources/image/2019/10/doublecheesePop.jpg">
                     <ul class="social">
                         <li><a href="do_selectOne.do?productId=20191011-001-002" data-tip="상세보기"><i class="fa fa-search"></i></a></li>
-                        <li><a href="" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a href="#" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
                 </div>
                 <div class="product-content">
-                    <h3 class="title">더블치즈팝콘(L)</h3>                    
+                    <h3 class="title">더블치즈팝콘(L)</h3>
                     <div class="price">
                         <span>6000원</span>
                     </div>
-                    <a class="add-to-cart" href="">+ Add To Cart</a>
+                    <a class="add-to-cart" href="">+ ADD TO CART</a>
                 </div>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
             <div class="product-grid">
                 <div class="product-image">
-                      <img class="pic-1" style="height: 270px" width="270px"  src="../resources/image/2019/10/onionPop.jpg">	
+                  <img class="pic-1"  style="height: 270px" width="270px"  src="../resources/image/2019/10/onionPop.jpg">
                     <ul class="social">
                         <li><a href="do_selectOne.do?productId=20191011-001-003" data-tip="상세보기"><i class="fa fa-search"></i></a></li>
-                        <li><a href="" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a href="#" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
                 </div>
                 <div class="product-content">
@@ -93,42 +94,42 @@
                     <div class="price">
                         <span>6000원</span>
                     </div>
-                    <a class="add-to-cart" href="">+ Add To Cart</a>
+                    <a class="add-to-cart" href="">+ ADD TO CART</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<hr>
 <div class="container">
     <h3 class="h3">음료</h3>
-    <a style="margin-left: 1050px" href="do_retrieve_drink.do" class="btn_drink_product"><i class="fa fa-plus"></i> 더보기</a> 
+    <hr>
+     <a style="margin-left: 1050px" href="do_retrieve_drink.do" class="btn_drink_product"><i class="fa fa-plus"></i> 더보기</a> 
     <div class="row">
         <div class="col-md-3 col-sm-6">
             <div class="product-grid">
                 <div class="product-image">
-                    <img class="pic-1" style="height: 270px" width="270px"  src="../resources/image/2019/10/coke.jpg">		
+                   <img class="pic-1"  style="height: 270px" width="270px"  src="../resources/image/2019/10/coke.jpg">
                     <ul class="social">
                         <li><a href="do_selectOne.do?productId=20191011-002-008" data-tip="상세보기"><i class="fa fa-search"></i></a></li>
-                        <li><a href="" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a href="#" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
                 </div>
-                <div class="product-content">
+                <div class="product-content"> 
                     <h3 class="title">탄산음료(L)</h3>
                     <div class="price">
                         <span>2700원</span>
                     </div>
-                    <a class="add-to-cart" href="">+ Add To Cart</a>
+                    <a class="add-to-cart" href="">+ ADD TO CART</a>
                 </div>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
             <div class="product-grid">
                 <div class="product-image">
-                    <img class="pic-1"  style="height: 270px" width="270px" src="../resources/image/2019/10/orange.jpg">	
+                   <img class="pic-1"  style="height: 270px" width="270px"  src="../resources/image/2019/10/orange.jpg">
                     <ul class="social">
                         <li><a href="do_selectOne.do?productId=20191011-002-007" data-tip="상세보기"><i class="fa fa-search"></i></a></li>
-                        <li><a href="" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a href="#" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
                 </div>
                 <div class="product-content">
@@ -136,17 +137,17 @@
                     <div class="price">
                         <span>3500원</span>
                     </div>
-                    <a class="add-to-cart" href="">+ Add To Cart</a>
+                    <a class="add-to-cart" href="">+ ADD TO CART</a>
                 </div>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
             <div class="product-grid">
                 <div class="product-image">
-                      <img class="pic-1" style="height: 270px" width="270px"  src="../resources/image/2019/10/americano.jpg">	
+                  <img class="pic-1"  style="height: 270px" width="270px"  src="../resources/image/2019/10/americano.jpg">
                     <ul class="social">
                         <li><a href="do_selectOne.do?productId=20191011-002-009" data-tip="상세보기"><i class="fa fa-search"></i></a></li>
-                        <li><a href="" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a href="#" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
                 </div>
                 <div class="product-content">
@@ -154,17 +155,17 @@
                     <div class="price">
                         <span>4000원</span>
                     </div>
-                    <a class="add-to-cart" href="">+ Add To Cart</a>
+                    <a class="add-to-cart" href="">+ ADD TO CART</a>
                 </div>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
             <div class="product-grid">
                 <div class="product-image">
-                      <img class="pic-1" style="height: 270px" width="270px"  src="../resources/image/2019/10/jamong.jpg">	
+                  <img class="pic-1"  style="height: 270px" width="270px"  src="../resources/image/2019/10/jamong.jpg">
                     <ul class="social">
                         <li><a href="do_selectOne.do?productId=20191013-002-020" data-tip="상세보기"><i class="fa fa-search"></i></a></li>
-                        <li><a href="" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a href="#" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
                 </div>
                 <div class="product-content">
@@ -172,15 +173,15 @@
                     <div class="price">
                         <span>4500원</span>
                     </div>
-                    <a class="add-to-cart" href="">+ Add To Cart</a>
+                    <a class="add-to-cart" href="">+ ADD TO CART</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<hr>
 <div class="container">
     <h3 class="h3">영화관람권</h3>
+    <hr>
      <a style="margin-left: 1050px" href="do_retrieve_movieticket.do" class="btn_movieticket_product"><i class="fa fa-plus"></i> 더보기</a> 
     <div class="row">
         <div class="col-md-3 col-sm-6">
@@ -237,7 +238,7 @@
                 </div>
             </div>
         </div>
-                <div class="col-md-3 col-sm-6">
+        <div class="col-md-3 col-sm-6">
             <div class="product-grid">
                 <div class="product-image">
                   <img class="pic-1"  style="height: 270px" width="270px"  src="../resources/image/2019/10/3dmovie.jpg">

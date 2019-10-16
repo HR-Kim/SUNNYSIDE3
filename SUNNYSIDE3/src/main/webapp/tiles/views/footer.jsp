@@ -37,8 +37,8 @@
                         <h4>CONTACT INFO</h4>
                         <p></p>
                         <ul>
-                            <li><a href="#"><i class="ti-mobile"></i>1544-0013</a></li>
-                            <li><a href="#"><i class="ti-email"></i>sunnyside@helpinfo.com</a></li>                    
+                            <li><a href="#"><i class="ti-mobile"></i> 1544-0013</a></li>
+                            <li><a href="#"><i class="ti-email"></i> sunnyside@helpinfo.com</a></li>                    
                         </ul>
                     </div>
                 </div>

@@ -9,9 +9,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src=" //code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<!-- 부트스트랩 -->
+<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 <!------ Include the above in your HEAD tag ---------->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 <link href="../resources/css/store_main.css" rel="stylesheet" type="text/css">
