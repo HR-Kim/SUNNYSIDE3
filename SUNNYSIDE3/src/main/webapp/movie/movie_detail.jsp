@@ -49,19 +49,18 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
 
-<!------ Include the above in your HEAD tag ---------->
-<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 <link rel="stylesheet" href="${context}/resources/css/fontawesome-stars.css">
 
-<!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js -->
-<!-- WARNING: Respond.js 는 당신이 file:// 을 통해 페이지를 볼 때는 동작하지 않습니다. -->
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<!-- <!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js --> -->
+<!-- <!-- WARNING: Respond.js 는 당신이 file:// 을 통해 페이지를 볼 때는 동작하지 않습니다. --> -->
+<!-- <!--[if lt IE 9]> -->
+<!-- <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script> -->
+<!-- <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script> -->
+<!-- <![endif]--> -->
 </head>
 <body>
 	<!-- div container -->
@@ -74,7 +73,7 @@
 
 		<!-- detail form -->
 		<form class="form-horizontal">
-			<div class="container"><div class="card border-0"><div class="row">
+			<div class="container" ><div class="card border-0"><div class="row">
 				<aside class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></aside>
 				<aside class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 					<article class="gallery-wrap"> 
@@ -124,7 +123,7 @@
 				<div class="table-responsive" style="overflow-x: hidden">
 					
 					<p>한줄평</p>
-					<input type="text" name="userId" id="userId" value="유저01gaz"/>
+					<input type="text" name="userId" id="userId" value="${user.userId}"/>
 <!-- 					<input type="text" name="visitorRate" id="visitorRate" value="3"/> -->
 					<table class="table  table-striped table-bordered table-hover" id="listTable">
 					<tbody>					
@@ -168,49 +167,36 @@
 		<div class="table-responsive">
 			<aside class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></aside>
 			<aside class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-			<table class="table  table-striped table-bordered table-hover" id="listTable">
-				<thead class="bg-primary">
-					<th class="text-center col-md-1 col-xs-1" style="display:none;">영화ID</th>
-					<th class="text-center col-md-2 col-xs-2">작성자ID</th>
-					<th class="text-center col-md-4 col-xs-4">내용</th>
-					<th class="text-center col-md-1 col-xs-1">평점</th>
-					<th class="text-center col-md-2 col-xs-2">작성일</th>
-					<th class="text-center col-md-1 col-xs-1">수정</th>
-					<th class="text-center col-md-1 col-xs-1">삭제</th>
-				</thead>
-				
-				<tbody>
-					<c:choose>
-						<c:when test="${list.size()>0}">
-							<c:forEach var="listVO" items="${list}">
-								<tr>
-									<td class="text-center" style="display:none;"><c:out value="${listVO.movieId}"/></td>
-									<td class="text-center"><c:out value="${listVO.userId}"/></td>
-									<td class="text-center"><c:out value="${listVO.contents}"/></td>
-									<td class="text-center"><c:out value="${listVO.visitorRate}"/></td>									
-									<td class="text-center"><c:out value="${listVO.regDt}"/></td>
-									<!-- 수정/삭제 버튼 -->									
-									<c:set var="name" value="유저01gaz" />
+			<c:choose>
+				<c:when test="${list.size()>0}">
+					<c:forEach var="listVO" items="${list}">
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<div class="panel panel-default">
+								<div class="panel-heading" style="height: 50px">
+									<span style="display:none;"><c:out value="${listVO.movieId}"/></span>
+									<strong><c:out value="${listVO.userId}"/></strong>
+									<span class="text-muted"><c:out value="${listVO.regDt}"/></span>
+									<span class="text-muted"><c:out value="${listVO.visitorRate}"/></span>
+<!-- 									수정/삭제 버튼									 -->
+									<c:set var="name" value="${user.userId}" />
 									<c:choose>
 										<c:when test="${name == listVO.userId}">
-											<td class="text-center"><input type="button" id="doUpdate" name="doUpdate" class="btn btn-default btn-sm doUpdate" value="수정" /></td>
-											<td class="text-center"><input type="button" id="doDelete" name="doDelete" class="btn btn-default btn-sm doDelete" value="삭제" /></td>
+											<span class="text-muted"><input type="button" id="doUpdate" name="doUpdate" class="btn btn-default btn-sm doUpdate" value="수정" /></span>
+											<span class="text-muted"><input type="button" id="doDelete" name="doDelete" class="btn btn-default btn-sm doDelete" value="삭제" /></span>
 										</c:when>
-										<c:otherwise>
-											<td class="text-center"></td>
-											<td class="text-center"></td>
-										</c:otherwise>
-									</c:choose>			
-									<!--// 수정/삭제 버튼 -->							
-								</tr>
-							</c:forEach>        			
-						</c:when>        	
+									</c:choose>
+								</div>
+								<div class="panel-body">
+									<c:out value="${listVO.contents}"/>
+								</div><!-- /panel-body -->
+							</div><!-- /panel panel-default -->
+						</div><!-- /col-sm-5 -->						
+					</c:forEach>        			
+					</c:when>        	
 						<c:otherwise>
-							<tr><td class="text-center" colspan="99">등록된 데이터가 없습니다.</td></tr>
+				
 						</c:otherwise>
 					</c:choose>
-				</tbody>
-			</table>
 			</aside>
 			<aside class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></aside>
 		</div>
@@ -224,6 +210,104 @@
 	</form>
 	<!--// review list form -->
 	
+	
+	<!-- review list form -->
+<!-- 	<form class="form-horizontal" id="reviewFrm" name="reviewFrm"> -->
+<%-- 		<input type="hidden" name="movieId" id="movieId" value="${vo.movieId}"/> --%>
+<%-- 		<input type="hidden" name="pageNum" id="pageNum" value="${searchVO.pageNum}"/> --%>
+<!-- 		<!-- Grid영역 --> -->
+<!-- 		<div class="table-responsive"> -->
+<!-- 			<aside class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></aside> -->
+<!-- 			<aside class="col-xs-6 col-sm-6 col-md-6 col-lg-6"> -->
+<!-- 			<table class="table  table-striped table-bordered table-hover" id="listTable"> -->
+<!-- 				<thead class="bg-primary"> -->
+<!-- 					<th class="text-center col-md-1 col-xs-1" style="display:none;">영화ID</th> -->
+<!-- 					<th class="text-center col-md-2 col-xs-2">작성자ID</th> -->
+<!-- 					<th class="text-center col-md-4 col-xs-4">내용</th> -->
+<!-- 					<th class="text-center col-md-1 col-xs-1">평점</th> -->
+<!-- 					<th class="text-center col-md-2 col-xs-2">작성일</th> -->
+<!-- 					<th class="text-center col-md-1 col-xs-1">수정</th> -->
+<!-- 					<th class="text-center col-md-1 col-xs-1">삭제</th> -->
+<!-- 				</thead> -->
+				
+<!-- 				<tbody> -->
+<%-- 					<c:choose> --%>
+<%-- 						<c:when test="${list.size()>0}"> --%>
+<%-- 							<c:forEach var="listVO" items="${list}"> --%>
+<!-- 								<tr> -->
+<%-- 									<td class="text-center" style="display:none;"><c:out value="${listVO.movieId}"/></td> --%>
+<%-- 									<td class="text-center"><c:out value="${listVO.userId}"/></td> --%>
+<%-- 									<td class="text-center"><c:out value="${listVO.contents}"/></td> --%>
+<%-- 									<td class="text-center"><c:out value="${listVO.visitorRate}"/></td>									 --%>
+<%-- 									<td class="text-center"><c:out value="${listVO.regDt}"/></td> --%>
+<!-- 									수정/삭제 버튼									 -->
+<%-- 									<c:set var="name" value="유저01gaz" /> --%>
+<%-- 									<c:choose> --%>
+<%-- 										<c:when test="${name == listVO.userId}"> --%>
+<!-- 											<td class="text-center"><input type="button" id="doUpdate" name="doUpdate" class="btn btn-default btn-sm doUpdate" value="수정" /></td> -->
+<!-- 											<td class="text-center"><input type="button" id="doDelete" name="doDelete" class="btn btn-default btn-sm doDelete" value="삭제" /></td> -->
+<%-- 										</c:when> --%>
+<%-- 										<c:otherwise> --%>
+<!-- 											<td class="text-center"></td> -->
+<!-- 											<td class="text-center"></td> -->
+<%-- 										</c:otherwise> --%>
+<%-- 									</c:choose>			 --%>
+<!-- 									// 수정/삭제 버튼							 -->
+<!-- 								</tr> -->
+<%-- 							</c:forEach>        			 --%>
+<%-- 						</c:when>        	 --%>
+<%-- 						<c:otherwise> --%>
+<!-- 							<tr><td class="text-center" colspan="99">등록된 데이터가 없습니다.</td></tr> -->
+<%-- 						</c:otherwise> --%>
+<%-- 					</c:choose> --%>
+<!-- 				</tbody> -->
+<!-- 			</table> -->
+<!-- 			</aside> -->
+<!-- 			<aside class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></aside> -->
+<!-- 		</div> -->
+<!-- 		<!--// Grid영역 --> -->
+<!-- 		<!-- pagenation --> -->
+<!-- 		<div class="form-inline text-center"> -->
+			
+<%-- 			<%=StringUtil.renderPaing(maxNum, currPageNo, rowPerPage, bottomCount, url, scriptName) %> --%>
+<!-- 		</div> -->
+		<!--// pagenation -->
+<!-- 	</form> -->
+	<!--// review list form -->
+	
+	<!-- Button trigger modal -->
+    <button id="attrFile" type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#layerpop">파일</button>
+ 
+   		<!-- Modal -->
+		<div class="modal fade" id="layerpop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">File Upload</h4>
+		      </div>
+		      <div class="modal-body">
+		        <form class="form-horizontal" action="${context }/file/do_save.do" 
+		           name="saveFileForm" id="saveFileForm" method="post" enctype="multipart/form-data">
+		            <input type="hidden"  name="work_dir"   id="work_dir" value="com">
+		            <input type="hidden"  name="attrFileId" id="attrFileId" >
+		            <input type="hidden"  name="orgFileNm"  id="orgFileNm" >
+		            <input type="hidden"  name="saveFileNm" id="saveFileNm" >
+		           
+		        	<!-- 첨부파일 -->
+		        	<div class="custom-file">
+		        		<input type="file" class="custom-file-input" id="file01" name="file01">
+		        	</div>
+		        </form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal" id="doFileUpload">저장</button>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+		      </div>
+		    </div>
+		  </div>
+		 </div>
+	
 
 	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 	<script src="${context}/resources/js/jquery-1.12.4.js"></script>
@@ -232,6 +316,9 @@
 	<!-- 별점 -->
 	<script type="text/javascript" src="../resources/js/jquery.barrating.min.js"></script>
 	<script type="text/javascript">	
+	
+	
+	
 		//삭제
 		$("#doDelete").on("click", function(){
 			var movieId = $("#movieId").val();
@@ -323,7 +410,7 @@
 		
 		
 		$(document).ready(function(){
-		//alert("ready");
+
 		});
 	</script>  
 </body>

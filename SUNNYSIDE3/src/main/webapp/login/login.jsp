@@ -12,7 +12,7 @@
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="${context}/resources/image/login/favicon.ico"/>
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/bootstrap.min.css">
+<%-- 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/bootstrap.min.css"> --%>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/font-awesome.min.css">
 <!--===============================================================================================-->
@@ -29,7 +29,7 @@
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/daterangepicker.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/util.css">
-	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/main.css">
+<%-- 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/main.css"> --%>
 <!--===============================================================================================-->
 </head>
 <body>
@@ -117,7 +117,7 @@
 	<script src="${context}/resources/js/login/animsition.min.js"></script>
 <!--===============================================================================================-->
 	<script src="${context}/resources/js/login/popper.js"></script>
-	<script src="${context}/resources/js/login/bootstrap.min.js"></script>
+<%-- 	<script src="${context}/resources/js/login/bootstrap.min.js"></script> --%>
 <!--===============================================================================================-->
 	<script src="${context}/resources/js/login/select2.min.js"></script>
 <!--===============================================================================================-->

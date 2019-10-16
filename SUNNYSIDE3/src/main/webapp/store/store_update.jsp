@@ -29,7 +29,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- 부트스트랩 -->
-    <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
+<%--     <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet"> --%>
     <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
     <title>상품등록</title>
 
@@ -88,7 +88,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${context}/resources/js/jquery.validate.js"></script>
 <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
- <script src="${context}/resources/js/bootstrap.min.js"></script>   
+<%--  <script src="${context}/resources/js/bootstrap.min.js"></script>    --%>
  <script type="text/javascript">
 	//취소
 	$("#backBtn").on("click",function(){

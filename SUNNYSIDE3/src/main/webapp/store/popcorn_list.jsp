@@ -9,12 +9,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<%-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <!-- 부트스트랩 -->
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 <!------ Include the above in your HEAD tag ---------->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" /> --%>
 <link href="../resources/css/store_main.css" rel="stylesheet" type="text/css">
 <title>팝콘</title>
 </head>
@@ -48,6 +47,8 @@
 			    </c:choose>
 			</div>
 	 </div>
+<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
+<script src="${context}/resources/js/jquery-1.12.4.js"></script>
 <script type="text/javascript">
 
 	$(document).ready(function(){

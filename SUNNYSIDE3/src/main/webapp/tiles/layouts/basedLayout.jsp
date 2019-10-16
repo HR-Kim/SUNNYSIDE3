@@ -5,11 +5,6 @@
  
 <html>
 <head>
-
-<!-- 디폴트 리소스 -->
-<tiles:insertAttribute name="menu"/>
-<!--// 디폴트 리소스 -->
-
 <title><tiles:getAsString name="title"/></title>
 </head>
 <body>
@@ -18,6 +13,13 @@
     <tiles:insertAttribute name="header"/>  
 	<!--</nav> -->
 	<!--// 헤더  -->
+	<!-- Page info -->
+	<div class="page-top-info">
+		<div class="container">
+			<h4><tiles:getAsString name="menu"/></h4>
+		</div>
+	</div>
+	<!-- Page info end -->
 	
 	<!-- 바디 -->
 	<div id="page-wrapper">
@@ -34,5 +36,6 @@
         </div>
     </div>	
     <!--// 풋터 -->
+    
 </body>
 </html>

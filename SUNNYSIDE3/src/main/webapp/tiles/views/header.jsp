@@ -3,66 +3,97 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<meta name="description" content=" Divisima | eCommerce Template">
+	<meta name="keywords" content="divisima, eCommerce, creative, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Favicon -->
+	<link href="../../sunnyside/resources/img/divisima/favicon.ico" rel="shortcut icon"/>
+	
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
+	
+	
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="../../sunnyside/resources/css/divisima/bootstrap.min.css"/>
+	<link rel="stylesheet" href="../../sunnyside/resources/css/divisima/font-awesome.min.css"/>
+	<link rel="stylesheet" href="../../sunnyside/resources/css/divisima/flaticon.css"/>
+	<link rel="stylesheet" href="../../sunnyside/resources/css/divisima/slicknav.min.css"/>
+	<link rel="stylesheet" href="../../sunnyside/resources/css/divisima/jquery-ui.min.css"/>
+	<link rel="stylesheet" href="../../sunnyside/resources/css/divisima/owl.carousel.min.css"/>
+	<link rel="stylesheet" href="../../sunnyside/resources/css/divisima/animate.css"/>
+	<link rel="stylesheet" href="../../sunnyside/resources/css/divisima/style.css"/>
+	<link rel="stylesheet" type="text/css" href="../../sunnyside/resources/css/login/main.css">
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
 </head>
 <body>
-	<!--::header part start::-->
-	<header class="main_menu home_menu">
-		<div class="container">
-			<div class="row align-items-center">
-				<div class="col-lg-12">
-					<nav class="navbar navbar-expand-lg navbar-light">					
-						<!-- 로고 아이콘 -->
-						<a class="navbar-brand" href="/sunnyside/main/main.do"> <img src="../../sunnyside/resources/image/layout/logo.png" alt="logo"> </a>
-<!-- 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" -->
-<!-- 								aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> -->
-<!-- 							<span class="menu_icon"><i class="fas fa-bars"></i></span> -->
-<!-- 						</button> -->
-						<!--// 로고 아이콘 -->
-						
-						<div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
-							<ul class="navbar-nav">
-								<li class="nav-item dropdown">
-									<a class="nav-link dropdown-toggle" href="/sunnyside/boxoffice/do_retrieve.do">영화</a>
-									<div class="dropdown-menu" aria-labelledby="navbarDropdownpro">
-										<a class="dropdown-item" href="/sunnyside/boxoffice/do_retrieve.do">박스오피스</a>
-										<a class="dropdown-item" href="/sunnyside/screening/do_retrieve.do">상영중</a>
-										<a class="dropdown-item" href="/sunnyside/planed/do_retrieve.do">개봉예정</a>
-									</div>
-								</li>
-								<li class="nav-item dropdown">
-									<a class="nav-link dropdown-toggle" href="/sunnyside/store/do_retrieve.do">스토어</a>
-									<div class="dropdown-menu" aria-labelledby="navbarDropdownpro">
-										<a class="dropdown-item" href="/sunnyside/store/do_retrieve_popcorn.do">팝콘</a>
-										<a class="dropdown-item" href="/sunnyside/store/do_retrieve_drink.do">음료</a>
-										<a class="dropdown-item" href="/sunnyside/store/do_retrieve_movieticket.do">영화예매권</a>
-									</div>										
-								</li>									
-								<li class="nav-item">
-									<a class="nav-link" href="http://www.seechu.co.kr/index.asp">VOD</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="#">고객센터</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="/sunnyside/login/login_view.do">로그인</a>
-								</li>									
-							</ul>
+	
+</body>
+	<!-- Header section -->
+	<header class="header-section">
+		<div class="header-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-2 text-center text-lg-left">
+						<!-- logo -->
+						<a href="/sunnyside/main/main.do" class="site-logo">
+							<img src="../../sunnyside/resources/img/divisima/logo.png" alt="">
+						</a>
+					</div>
+					<div class="col-xl-6 col-lg-5">
+						<form class="header-search-form">
+							<input type="text" placeholder="Search on divisima ....">
+							<button><i class="flaticon-search"></i></button>
+						</form>
+					</div>
+					<div class="col-xl-4 col-lg-5">
+						<div class="user-panel">
+							<div class="up-item">
+								<i class="flaticon-profile"></i>
+								<a href="#">Sign</a> In or <a href="#">Create Account</a>
+							</div>
+							<div class="up-item">
+								<div class="shopping-card">
+									<i class="flaticon-bag"></i>
+									<span>0</span>
+								</div>
+								<a href="#">Shopping Cart</a>
+							</div>
 						</div>
-						<div class="dropdown cart">
-							<a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown"
-							   aria-haspopup="true" aria-expanded="false">
-								<i class="flaticon-bag"></i>
-							</a>						
-						</div>
-					</nav>
+					</div>
 				</div>
 			</div>
 		</div>
+		<nav class="main-navbar">
+			<div class="container">
+				<!-- menu -->
+				<ul class="main-menu">
+					<li><a href="/sunnyside/main/main.do">홈</a><li>
+						<a href="/sunnyside/boxoffice/do_retrieve.do">영화</a>
+						<ul class="sub-menu">
+							<li><a href="/sunnyside/boxoffice/do_retrieve.do">박스오피스</a></li>
+							<li><a href="/sunnyside/screening/do_retrieve.do">상영중</a></li>
+							<li><a href="/sunnyside/planed/do_retrieve.do">개봉예정</a></li>
+						</ul>
+					</li>					
+					<li>
+						<a href="/sunnyside/store/do_retrieve.do">스토어</a>
+						<ul class="sub-menu">
+							<li><a href="/sunnyside/store/do_retrieve_popcorn.do">팝콘</a></li>
+							<li><a href="/sunnyside/store/do_retrieve_drink.do">음료</a></li>
+							<li><a href="/sunnyside/store/do_retrieve_movieticket.do">영화예매권</a></li>
+						</ul>
+					</li>
+					<li><a href="http://www.seechu.co.kr/index.asp">VOD</a></li>
+					<li><a href="#">고객센터</a></li>
+					<li><a href="/sunnyside/login/login_view.do">로그인</a></li>
+				</ul>
+			</div>
+		</nav>
 	</header>
-	<!-- Header part end-->
-
-</body>
-
+	<!-- Header section end -->
+	
 </html>
