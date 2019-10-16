@@ -233,7 +233,7 @@
 		          	var parseData = $.parseJSON(data); //JSON으로 바꿔줌
 		          	if(parseData.msgId == "1"){
 		          		alert(parseData.msgMsg);
-		          		location.href="https://www.naver.com/" //메인페이지로 바꾸기
+		          		location.href="${context}/main/main.do" //메인페이지로 바꾸기
 		          	}else{
 		          		alert(parseData.msgMsg);
 		          	}
