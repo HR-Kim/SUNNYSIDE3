@@ -41,7 +41,7 @@ public class SJH_CouponDao implements WorkDiv {
 		LOG.debug("=02.statement="+statement);
 		LOG.debug("========================");
 		
-		int flag = this.sqlSessionTemplate.delete(statement, coupon);
+		int flag = this.sqlSessionTemplate.insert(statement, coupon);
 		
 		LOG.debug("========================");
 		LOG.debug("03.flag="+flag);
@@ -49,6 +49,7 @@ public class SJH_CouponDao implements WorkDiv {
 		
 		return flag;
 	}	
+	
 	
 	
 	/**

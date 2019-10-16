@@ -83,10 +83,13 @@ public class SJH_MypageSvcImpl implements SJH_MypageSvc {
 		
 		try {
 			
-			SJH_CouponVO coupon = new SJH_CouponVO();
+			SJH_CouponVO outVO = new SJH_CouponVO();
+			outVO.setUserId(user.getUserId());
+			
 			//쿠폰 발급
-			couponDao.do_save(user);
-			coupon = (SJH_CouponVO) couponDao.do_selectOne(user);
+			couponDao.do_save(outVO);
+			outVO = (SJH_CouponVO) couponDao.do_selectOne(outVO);
+			LOG.debug("outVO:"+outVO);
 			
 			
 			//보내는 사람
@@ -102,8 +105,9 @@ public class SJH_MypageSvcImpl implements SJH_MypageSvc {
 			//내용
 			String contents = "축하합니다!\n"
 							  +user.getUserId()+"님의 등급이 "+user.getUserLevel()+"로 변경되었습니다.\n"
-							  +"결제 시 사용할 수 있는 3천원 할인쿠폰을 발급해드렸으며, 쿠폰은 고객님의 마이페이지에서 확인할 수 있습니다.\n"
-							  +"쿠폰번호 : "+coupon.getCouponCode();
+							  +"결제 시 사용할 수 있는 할인쿠폰을 발급해드렸으며,\n 쿠폰은 고객님의 마이페이지에서 확인할 수 있습니다.\n\n"
+							  +"쿠폰번호 : "+outVO.getCouponCode()
+							  ;
 			
 			//SMTP 서버 설정
 			Properties props = System.getProperties();

@@ -82,6 +82,7 @@ public class SJH_LoginDaoTest {
 	@Test
 	@Ignore
 	public void pw_find() {
+		
 		SJH_LoginVO user01 = users.get(0);
 		int flag = loginDao.pw_find(user01);
 	}
