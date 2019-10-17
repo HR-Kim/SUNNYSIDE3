@@ -179,7 +179,8 @@
 				</div>
 			</div>
 					
-			<input type="hidden" id="hd_selectedroomId" value="">
+			<input type="hidden" id="hd_selectedBranchId" value="">
+			<input type="hidden" id="hd_selectedBranchNm" value="">
 			<div id="selectBranchRoom" class="case">
 				<div class="bar">
 					&nbsp;<label>극장선택</label>
@@ -189,7 +190,7 @@
 					&nbsp;<button id="" class="btn btn-xs">상영극장</button>
 				</div>
 				<div class="tableCase">
-				<table id="branchNroomTable" class="table table-hover table-bordered">
+				<table id="branchTable" class="table table-hover table-bordered">
 					<tbody></tbody>
 				</table>
 				</div>
@@ -280,14 +281,14 @@
 	            ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
 	            ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
 	            ,minDate: "+0D" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년년전)
-	            ,maxDate: "+6D" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
+	            ,maxDate: "+13D" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
 	        });
 			
 			//datePicker 부여
 			$("#datePicker").datepicker({
 				onSelect: function(value){
 					$("#hd_selectedDate").val(value);
-					var roomId = $("#hd_selectedroomId").val();
+					var roomId = $("#hd_selectedBranchId").val();
 	            	if(roomId != null && roomId != "") selectTime();
 				}		
 			});
@@ -344,29 +345,27 @@
     			var movieId = td.eq(0).text();
             	$("#hd_selectedMovieId").val(movieId);
             	
-            	All_branchNroom();
+            	All_branch();
             });			
 			
 			//선택한 영화의 영화ID로 지점-상영관 불러오기
-			function All_branchNroom(){
+			function All_branch(){
 				$.ajax({
     				type : "POST",
-    				url : "${context}/screenInfo/do_retrieve_All_branchNroom.do",
-    				dataType : "json",
-    			success: function(data){
-    			}
+    				url : "${context}/branchInfo/do_retrieveList.do",
+    				dataType : "json"
     			}).done(function(data){
     				var movieId = $("#hd_selectedMovieId").val();
-    				branchNroom(movieId, data);
+    				planedBranch(movieId, data);
     			});
 
 			}
 			
 			//극장목록표시
-			function branchNroom(movieId, AllList){
+			function planedBranch(movieId, AllList){
 				$.ajax({
     				type : "POST",
-    				url : "${context}/screenInfo/do_retrieve_branchNroom.do",
+    				url : "${context}/screenInfo/do_retrieve_branch.do",
     				dataType : "json",
     				data : {
     					"pageSize" : 10000,
@@ -374,15 +373,14 @@
     				}, 
     			success: function(data){
     				var arr = data;
-    				$("#branchNroomTable>tbody>tr").detach();
+    				$("#branchTable>tbody>tr").detach();
     				if(AllList == null){								//상영중인 극장목록만
     					if(arr.length > 0){
     						for(var i=0 ; i< arr.length ; i++){
-    							$("#branchNroomTable").append(
+    							$("#branchTable").append(
     									"<tr>"+
     									"<td hidden='hidden'>"+arr[i].branchId+"</td>"+
-    									"<td hidden='hidden'>"+arr[i].roomId+"</td>"+
-    									"<td>"+arr[i].branchNm+" - "+arr[i].roomNm+"</td>"+
+    									"<td>"+arr[i].branchNm+" - "+arr[i].branchNm+"</td>"+
     									"</tr>"
     							);
     						}
@@ -393,31 +391,27 @@
     					}
     				}else{//전체목록
     					var branchId = "";
-    					var roomId = "";
-    					var name = "";
+    					var branchNm = "";
     					var classNm = "";
     					for(var i=0 ; i< AllList.length ; i++){
     						for(var q=0 ; q< arr.length ; q++){
-    							var existName = arr[q].branchNm + " - " + arr[q].roomNm;
-    							var AllName = AllList[i].branchNroom;
+    							var existName = arr[q].branchNm;
+    							var AllName = AllList[i].branchNm;
     							if(AllName == existName){				//선택영화가 편성된 극장일때
    									branchId = arr[q].branchId;
-       								roomId = arr[q].roomId;
-       								name = AllName;
+   									branchNm = AllName;
        								classNm = "";
        								break;
     							}else{									//편성안된극장
     								branchId = "";
-    								roomId = "";
-    								name = AllName;
+    								branchNm = AllName;
     								classNm = "noPlan";
     							}
     						}
-    						$("#branchNroomTable").append(
+    						$("#branchTable").append(
 								"<tr>"+
 								"<td hidden='hidden'>"+branchId+"</td>"+
-								"<td hidden='hidden'>"+roomId+"</td>"+
-								"<td class='"+classNm+"'>"+name+"</td>"+
+								"<td class='"+classNm+"'>"+branchNm+"</td>"+
 								"</tr>"
 							);						
     					}
@@ -432,24 +426,34 @@
 			}
 			
 			//지점-상영관 테이블 클릭시
-            $("#branchNroomTable>tbody").on("click","tr", function(){
+            $("#branchTable>tbody").on("click","tr", function(){
             	var tr = $(this);
             	var td = tr.children();
-            	$("#branchNroomTable>tbody>tr").css("background-color", "");		//tr색 초기화
+            	$("#branchTable>tbody>tr").css("background-color", "");		//tr색 초기화
     			$(tr).css("background-color", "lightgray");							//선택tr 색표시
     			
             	if(td.eq(1).length == 0)return;
     			
-    			var roomId = td.eq(1).text();
-            	$("#hd_selectedroomId").val(roomId);
-				
+    			var branchId = td.eq(0).text();
+    			var branchNm = td.eq(1).text();
+            	$("#hd_selectedBranchId").val(branchId);
+            	$("#hd_selectedBranchNm").val(branchNm);
+            	
+            	//날짜가 선택되어 있으면 시간포를 띄운다
             	var date = $("#hd_selectedDate").val();
-            	if(date != null && date != "") selectTime();
+            	if(date != null && date != "") selectSchedule();
             });
 			
-			function selectTime(){
-				var roomId = $("#hd_selectedroomId").val();
+			//상영시간표
+			function selectSchedule(){
+				var branchId = $("#hd_selectedBranchId").val();
+				var movieId = $("#hd_selectedMovieId").val();
 				var date = $("#hd_selectedDate").val();
+				
+				if(date == null || date == "") return;
+				if(movieId == null || movieId == "") return;
+				if(branchId == null || branchId == "") return;
+				
 				$.ajax({
     				type : "POST",
     				url : "${context}/screenInfo/do_retrieve.do",
@@ -459,17 +463,18 @@
     					"searchDiv" : "40",
     					"searchWord_second" : date,
     					"searchWord" : roomId
-    				}, 
-    			success: function(data){
-    				var schedule = data;
-    			
-    			},
-    			complete:function(data){
-    			},
-    			error:function(xhr,status,error){
-
-    			}
+    				}
+				}).done(function(data){
+    				var scheduleArr = data;
+    				
     			});
+    			
+			}
+			
+			function schedule(){
+				
+				
+				
 			}
 			
 			

@@ -20,7 +20,7 @@
 
 <!------ Include the above in your HEAD tag ---------->
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="../resources/css/movie_list.css" rel="stylesheet" type="text/css"> 
+<link href="../resources/css/list.css" rel="stylesheet" type="text/css"> 
 
 <!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js -->
 <!-- WARNING: Respond.js 는 당신이 file:// 을 통해 페이지를 볼 때는 동작하지 않습니다. -->

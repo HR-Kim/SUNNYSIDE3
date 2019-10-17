@@ -22,7 +22,6 @@
 		<typeAlias type="kr.co.sunnyside.room.service.LGS_RoomVO" alias="Room"/>
 		<typeAlias type="kr.co.sunnyside.seat.service.LGS_SeatVO" alias="Seat"/>
 		<typeAlias type="kr.co.sunnyside.screeninfo.service.LGS_ScreenInfoVO" alias="ScreenInfo"/>
-		<typeAlias type="kr.co.sunnyside.screeninfo.service.BranchNRoomVO" alias="BranchNRoom"/>
 		
 		<!-- SJH -->
 		<typeAlias type="kr.co.sunnyside.login.service.SJH_LoginVO" alias="SJH_LoginVO"/>

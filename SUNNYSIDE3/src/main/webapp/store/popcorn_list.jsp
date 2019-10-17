@@ -9,11 +9,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<%-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">--%>
 <!-- 부트스트랩 -->
-<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 <!------ Include the above in your HEAD tag ---------->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" /> --%>
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" /> -->
+<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="${context}/resources/css/headerStyle.css" rel="stylesheet" type="text/css"> 
 <link href="../resources/css/store_main.css" rel="stylesheet" type="text/css">
 <title>팝콘</title>
 </head>

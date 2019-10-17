@@ -170,11 +170,9 @@
 		)
 	</select>
 	
-	<select id="do_retrieve_branchNroom" parameterType="Search" resultType="ScreenInfo">
+	<select id="do_retrieve_branch" parameterType="Search" resultType="BranchInfo">
 		SELECT DISTINCT branchId
-						,roomId
 						,branchNm
-						,roomNm
 		FROM(
 			SELECT T1.RNUM as num
 			      ,T1.SCREEN_ID as screenId
@@ -219,17 +217,5 @@
 		WHERE A1.branchId = A2.BRANCH_ID
 		AND A1.roomId = A3.ROOM_ID
 	</select>
-	
-	<select id="do_retrieve_All_branchNroom" parameterType="Search" resultType="BranchNRoom">
-		SELECT DISTINCT BRANCH_NM || ' - ' || ROOM_NM as branchNroom
-		FROM(
-			SELECT *
-			FROM BRANCH_INFO
-			)T1,
-			(
-			SELECT *
-			FROM ROOM
-			)T2
-        WHERE T1.BRANCH_ID = T2.BRANCH_ID
-	</select>
+
 </mapper>
