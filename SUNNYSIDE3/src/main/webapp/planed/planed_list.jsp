@@ -66,7 +66,7 @@
 
 <!------ Include the above in your HEAD tag ---------->
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="../resources/css/movie_list.css" rel="stylesheet" type="text/css"> 
+<!-- <link href="../resources/css/movie_list.css" rel="stylesheet" type="text/css">  -->
 
 <!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js -->
 <!-- WARNING: Respond.js 는 당신이 file:// 을 통해 페이지를 볼 때는 동작하지 않습니다. -->
@@ -77,9 +77,7 @@
 </head>
 
 <body>
-	
-	
-	<div class="container ">
+	<div class="container" style="margin-top: 50px">
 		<!-- div title --> 
 		<div class="page-header row">
 			<h1>개봉예정작</h1>
@@ -89,56 +87,38 @@
 		</div>
 		<!--// div title -->
 		
+		
 		<!-- form -->
 		<form class="form-inline" name="planedFrm" id="planedFrm" method="get">
 			<input type="hidden" name="pageNum" id="pageNum" value="${vo.pageNum}"/>
-			
-			<div class="container_inner default_template_holder clearfix page_container_inner outer_div"><div class="vc_row wpb_row section vc_row-fluid" style=" padding-top:0px; text-align:left;"><div class=" full_section_inner clearfix"><div class="vc_col-sm-12 wpb_column vc_column_container"><div class="wpb_wrapper"><div class="projects_holder_outer v3 portfolio_with_space portfolio_standard "><div class="projects_holder clearfix v3 standard">
+			<!-- Product filter section -->
+			<section class="product-filter-section"><div class="container"><div class="row">
 				<c:choose>
 					<c:when test="${list.size()>0}">
-						<c:forEach var="vo" items="${list}">	
-							<input type="hidden" name="movieId" id="movieId"/>
-							<a class="lightbox qbutton small white movieId" href="#" hidden="true">${vo.movieId}</a>
-							<div class="col-lg-3">				
-<!-- 							<article class="mix mix_all" style="display: inline-block; opacity: 1; width:250px;  margin-bottom: 100;"> -->
-							<article class="mix mix_all" style="display: inline-block; opacity: 1; width:250px; height:500px;">
-								<!-- 포스터 영역 -->
-								<div class="image_holder" >		
-									<!-- 이미지  -->			
-									<span class="image">
-										<img src="<c:out value='${vo.poster}'/>" alt="영화포스터" style="height: 350px; width:250px;">
-									</span>
-									<!--// 이미지  -->			
-									<!-- 예매하기, 상세보기 버튼 -->
-									<span class="text_holder"><span class="text_outer"><span class="text_inner" ><span class="feature_holder" ><span class="feature_holder_icons">
-										<a class="lightbox qbutton small white" href="#">예매하기</a>
-										<a class="lightbox qbutton small white" href="../movie/do_selectOne.do?movieId=<c:out value="${vo.movieId}"/>">상세보기</a>										
-									</span></span></span></span></span>			
-									<!--// 예매하기, 상세보기 버튼 -->		
+						<c:forEach var="vo" items="${list}">					
+							<div class="col-lg-3 col-sm-6"  >
+								<div class="product-item">
+									<div class="pi-pic">
+										<img src="<c:out value='${vo.poster}'/>" style="width:100%;" alt="영화포스터" onerror="this.src='../resources/image/layout/noImage.png'">
+										<div class="pi-links">
+											<a href="#" class="add-card"><i class="flaticon-bag"></i><span>예매하기</span></a>
+											<a class="lightbox qbutton small white" onclick="popup('../movie/do_selectOne.do?movieId=<c:out value="${vo.movieId}"/>','개봉예정 리스트에 등록',1300,800,100,400,'no');" href="#"><i class="flaticon-heart"></i></a>
+										</div>
+									</div>
+									<div style="text-align: right;">
+										<p><c:out value="${vo.relDate}"/></p>
+										<p><c:out value='${vo.kortitle}'/></p>
+									</div>		
 								</div>
-								<!--// 포스터 영역 -->
-								
-								<!-- 영화정보 영역 -->		
-								<div class="portfolio_description ">
-									<!-- 영화제목 -->
-									<h5 class="portfolio_title">
-										<a href="#"><c:out value="${vo.kortitle}"/></a>
-									</h5>
-									<!--// 영화제목 -->
-									<!-- 영화정보 -->
-									<span class="project_category">개봉예정일 <c:out value="${vo.relDate}"/></span>
-									<!--// 영화정보 -->
-								</div>
-								<!--// 영화정보 영역 -->								
-							</article>	
 							</div>
 						</c:forEach>        			
 					</c:when>        	
 					<c:otherwise>
 						<h1>데이터가 없습니다.</h1>
 					</c:otherwise>
-				</c:choose>		
-			</div></div></div></div></div></div></div>
+				</c:choose>						
+			</div></div></section>
+			<!--// Product filter section -->
 		</form>
 		<!--// form -->
 		<!-- pagenation -->

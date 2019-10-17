@@ -15,20 +15,24 @@
 		<typeAlias type="kr.co.sunnyside.movie.service.LHJ_MovieVO" alias="Movie" />
 		<typeAlias type="kr.co.sunnyside.code.service.CodeVO" alias="Code" />
 		<typeAlias type="kr.co.sunnyside.cmn.SearchVO" alias="Search" />
-		<typeAlias type="kr.co.sunnyside.store.service.SEJ_StroreVO" alias="Store" />
 		
+		<!-- LGS -->
 		<typeAlias type="kr.co.sunnyside.reservation.service.LGS_TicketVO" alias="TicketVO"/>
 		<typeAlias type="kr.co.sunnyside.branchinfo.service.LGS_BranchInfoVO" alias="BranchInfo"/>
 		<typeAlias type="kr.co.sunnyside.room.service.LGS_RoomVO" alias="Room"/>
 		<typeAlias type="kr.co.sunnyside.seat.service.LGS_SeatVO" alias="Seat"/>
 		<typeAlias type="kr.co.sunnyside.screeninfo.service.LGS_ScreenInfoVO" alias="ScreenInfo"/>
+		<typeAlias type="kr.co.sunnyside.screeninfo.service.BranchNRoomVO" alias="BranchNRoom"/>
 		
 		<!-- SJH -->
 		<typeAlias type="kr.co.sunnyside.login.service.SJH_LoginVO" alias="SJH_LoginVO"/>
 		<typeAlias type="kr.co.sunnyside.usermypage.service.SJH_MypageVO" alias="SJH_MypageVO"/>
 		<typeAlias type="kr.co.sunnyside.coupon.service.SJH_CouponVO" alias="SJH_CouponVO" />
 		
+		<!-- SEJ -->
+		<typeAlias type="kr.co.sunnyside.store.service.SEJ_StroreVO" alias="Store" />
 		<typeAlias type="kr.co.sunnyside.phototicket.service.SEJ_PhotoTicketVO" alias="SEJ_PhotoTicketVO" />
+		<typeAlias type="kr.co.sunnyside.store.service.SEJ_CartVO" alias="Cart" />
 		
 	</typeAliases>
 

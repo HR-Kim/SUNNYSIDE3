@@ -39,5 +39,20 @@ public class LGS_ScreenInfoSvcImpl implements LGS_ScreenInfoSvc {
 	public DTO do_selectOne(DTO dto) {
 		return screenInfoDao.do_selectOne(dto);
 	}
+	
+	@Override
+	public List<?> do_retrieve_forUser(DTO dto) {
+		return screenInfoDao.do_retrieve_forUser(dto);
+	}
+	
+	@Override
+	public List<?> do_retrieve_branchNroom(DTO dto) {
+		return screenInfoDao.do_retrieve_branchNroom(dto);
+	}
+	
+	@Override
+	public List<?> do_retrieve_All_branchNroom() {
+		return screenInfoDao.do_retrieve_All_branchNroom();
+	}
 
 }

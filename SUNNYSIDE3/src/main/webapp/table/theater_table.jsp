@@ -313,7 +313,7 @@
     			$.ajax({
     				type : "POST",
     				url : "${context}/seat/do_save.do",
-    				dataType : "html",
+    				dataType : "json",
     				data : {
     					"roomId" : roomId,
     					"branchId" : branchId,
@@ -322,7 +322,7 @@
     					"useYN" : use
     				}, 
     				success: function(data){
-    					var msg = JSON.parse(data);
+    					var msg = data;
     					if(msg.msgId != 1){
     						errorCnt++;
     					}
@@ -458,7 +458,6 @@
     		
     		//지점테이블 선택시 상영관테이블 생성;
     		function create_Room_Table(branchId){
-    			loading(true);
     			if(branchId == null || branchId.length == 1)return;
     			
     			var searchWord = branchId;
@@ -467,13 +466,13 @@
     			$.ajax({
     				type : "POST",
     				url : "${context}/room/do_retrieve.do",
-    				dataType : "html",
+    				dataType : "json",
     				data : {
     					"searchWord" : searchWord,
     					"searchDiv" : searchDiv 
     				}, 
     			success: function(data){
-    				var roomArr = JSON.parse(data);					//roomList데이터를 json으로
+    				var roomArr = data;					console.log(data);			//roomList데이터를 json으로
     				$(".roomTr").detach();							//room테이블의 tr을 전부 삭제
     				if(roomArr.length > 0){
     					$("#hd_roomzero").val("1");					//상영관이 하나이상 존재함을 표시
@@ -495,7 +494,7 @@
     				
     			},
     			complete:function(data){
-    				loading(false);
+
     			},
     			error:function(xhr,status,error){
 
@@ -510,12 +509,12 @@
     			$.ajax({
     				type : "POST",
     				url : "${context}/branchInfo/do_save.do",
-    				dataType : "html",
+    				dataType : "json",
     				data : {
     					"branchNm" :  $("#new_branchNm").val()
     				}, 
     			success: function(data){
-    				var jsonData = JSON.parse(data);
+    				var jsonData = data;
     				if(jsonData.msgId == 1){
     					alert("추가되었습니다.");
     					location.href = "${context}/branchInfo/do_retrieve.do";
@@ -550,12 +549,12 @@
 				$.ajax({
     				type : "POST",
     				url : "${context}/branchInfo/do_delete.do",
-    				dataType : "html",
+    				dataType : "json",
     				data : {
     					"branchId" : id
     				}, 
     			success: function(data){
-    				var jsonData = JSON.parse(data);
+    				var jsonData = data;
     				if(jsonData.msgId == 1){
     					alert("삭제되었습니다.");
     					location.href = "${context}/branchInfo/do_retrieve.do";
@@ -585,13 +584,13 @@
     			$.ajax({
     				type : "POST",
     				url : "${context}/seat/do_retrieve.do",
-    				dataType : "html",
+    				dataType : "json",
     				data : {
     					"searchWord" : searchWord,
     					"searchDiv" : searchDiv
     				}, 
     			success: function(data){
-    				var seatArr = JSON.parse(data);
+    				var seatArr = data;
     				if(seatArr.length != 0){
     					$("#seatTableInfo").text(td.eq(2).text() + "의 좌석테이블 입니다.");
     					$(".seatWrap").css("display", "block");
@@ -665,7 +664,7 @@
     			$.ajax({
     				type : "POST",
     				url : "${context}/room/do_save.do",
-    				dataType : "html",
+    				dataType : "json",
     				data : {
     					"roomNm" : roomNm,
     					"branchId" : branchId,
@@ -673,7 +672,7 @@
     					"restSeat" : "0"
     				}, 
     				success: function(data){
-    					var msg = JSON.parse(data);
+    					var msg = data;
     					if(msg.msgId == 1){
 							alert("상영관 추가 성공.");
 							room_cancel();
@@ -700,12 +699,12 @@
    				$.ajax({
        				type : "POST",
        				url : "${context}/room/do_delete.do",
-       				dataType : "html",
+       				dataType : "json",
        				data : {
        					"roomId" : roomId
        				}, 
        			success: function(data){
-       				var msg = JSON.parse(data);
+       				var msg = data;
        				if(msg.msgId == 1){
        					alert("상영관이 삭제되었습니다.");
        					create_Room_Table(branchId);
@@ -729,7 +728,7 @@
     			$.ajax({
     				type : "POST",
     				url : "${context}/seat/do_retrieve.do",
-    				dataType : "html",
+    				dataType : "json",
     				data : {
     					"pageSize" : "500",
     					"pageNum" : "1",
@@ -737,13 +736,13 @@
     					"searchWord" : roomId
     				}, 
     			success: function(data){
-    				var list = JSON.parse(data);
+    				var list = data;
        				if(list.length > 0){
        					var seat = list[0];
            				$.ajax({
                				type : "POST",
                				url : "${context}/seat/do_delete.do",
-               				dataType : "html",
+               				dataType : "json",
                				data : {
                					"roomId" : seat.roomId
                				}, 
@@ -793,7 +792,7 @@
     			$.ajax({
     				type : "POST",
     				url : "${context}/seat/do_retrieve.do",
-    				dataType : "html",
+    				dataType : "json",
     				data : {
     					"searchDiv" : "20",
     					"searchWord" : roomId,
@@ -801,7 +800,7 @@
     					"pageSize" : "1000"
     				}, 
     			success: function(data){
-    				var list = JSON.parse(data);
+    				var list = data;
     				var enableSeatCnt = 0;
     				var unableSeatCnt = 0;
     				
@@ -813,14 +812,14 @@
     				$.ajax({
         				type : "POST",
         				url : "${context}/room/do_update.do",
-        				dataType : "html",
+        				dataType : "json",
         				data : {
         					"roomId" : roomId,
         					"totalSeat" : enableSeatCnt + unableSeatCnt,
         					"restSeat" : enableSeatCnt
         				}, 
         			success: function(data){
-        				var msg = JSON.parse(data);
+        				var msg = data;
         				if(msg.msgId == 1){
         					room_cancel();
         					create_Room_Table(branchId);
