@@ -6,8 +6,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="context" value="${pageContext.request.contextPath }" />
 <%
 //**페이지 사이즈*/
@@ -76,43 +76,38 @@
 <![endif]-->
 </head>
 
-<body>
-	
-	
-	<div class="container ">
+<body>	
+	<div class="container ">	
 		<!-- div title --> 
 		<div class="page-header row">
 			<h1>개봉예정작</h1>
 			<button type="button" class="btn btn-default btn-sm" onclick="popup('do_planedUp_retrieve.do','개봉예정 리스트에 등록',1200,800,100,400,'no');">등록</button>
 			<button type="button" class="btn btn-default btn-sm" onclick="popup('do_planedDown_retrieve.do','개봉예정 리스트에서 제외',1200,800,100,400,'no');">삭제</button>
 			<button type="button" class="btn btn-default btn-sm" onclick="popup('../screening/do_screenUp_retrieve.do','상영중 리스트에 등록',1200,800,100,400,'no');">상영</button>
+			<button id="attrFile" type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#layerpop">파일</button>
 		</div>
 		<!--// div title -->
-		
 		<!-- form -->
 		<form class="form-inline" name="planedFrm" id="planedFrm" method="get">
 			<input type="hidden" name="pageNum" id="pageNum" value="${vo.pageNum}"/>
-			
-			<div class="container_inner default_template_holder clearfix page_container_inner outer_div"><div class="vc_row wpb_row section vc_row-fluid" style=" padding-top:0px; text-align:left;"><div class=" full_section_inner clearfix"><div class="vc_col-sm-12 wpb_column vc_column_container"><div class="wpb_wrapper"><div class="projects_holder_outer v3 portfolio_with_space portfolio_standard "><div class="projects_holder clearfix v3 standard">
+			<div class="container_inner default_template_holder clearfix page_container_inner"><div class="vc_row wpb_row section vc_row-fluid" style=" padding-top:0px; text-align:left;"><div class=" full_section_inner clearfix"><div class="vc_col-sm-12 wpb_column vc_column_container"><div class="wpb_wrapper"><div class="projects_holder_outer v3 portfolio_with_space portfolio_standard "><div class="projects_holder clearfix v3 standard">
 				<c:choose>
 					<c:when test="${list.size()>0}">
-						<c:forEach var="vo" items="${list}">	
-							<input type="hidden" name="movieId" id="movieId"/>
-							<a class="lightbox qbutton small white movieId" href="#" hidden="true">${vo.movieId}</a>
+						<c:forEach var="vo" items="${list}">					
 							<div class="col-lg-3">				
-<!-- 							<article class="mix mix_all" style="display: inline-block; opacity: 1; width:250px;  margin-bottom: 100;"> -->
 							<article class="mix mix_all" style="display: inline-block; opacity: 1; width:250px; height:500px;">
 								<!-- 포스터 영역 -->
 								<div class="image_holder" >		
 									<!-- 이미지  -->			
 									<span class="image">
-										<img src="<c:out value='${vo.poster}'/>" alt="영화포스터" style="height: 350px; width:250px;">
+										<img src="<c:out value='${vo.poster}'/>" alt="영화포스터" style="height: 350px; width:250px;" onerror="this.src='../resources/image/layout/noImage.png'">
 									</span>
 									<!--// 이미지  -->			
 									<!-- 예매하기, 상세보기 버튼 -->
 									<span class="text_holder"><span class="text_outer"><span class="text_inner" ><span class="feature_holder" ><span class="feature_holder_icons">
 										<a class="lightbox qbutton small white" href="#">예매하기</a>
-										<a class="lightbox qbutton small white" href="../movie/do_selectOne.do?movieId=<c:out value="${vo.movieId}"/>">상세보기</a>										
+										<a class="lightbox qbutton small white" href="../movie/do_selectOne.do?movieId=<c:out value="${vo.movieId}"/>">상세보기</a>
+										
 									</span></span></span></span></span>			
 									<!--// 예매하기, 상세보기 버튼 -->		
 								</div>
@@ -126,7 +121,7 @@
 									</h5>
 									<!--// 영화제목 -->
 									<!-- 영화정보 -->
-									<span class="project_category">개봉예정일 <c:out value="${vo.relDate}"/></span>
+									<span class="project_category">관람 평점 <c:out value="${vo.visitorRate}"/></span>
 									<!--// 영화정보 -->
 								</div>
 								<!--// 영화정보 영역 -->								
@@ -140,7 +135,9 @@
 				</c:choose>		
 			</div></div></div></div></div></div></div>
 		</form>
-		<!--// form -->
+		<!--// form -->		
+	</div>
+	<div class="container">	
 		<!-- pagenation -->
 		<div class="form-inline text-center">
 				<%=StringUtil.renderPaing(maxNum, currPageNo, rowPerPage, bottomCount, url, scriptName) %>
@@ -148,17 +145,32 @@
 		<!--// pagenation -->
 	</div>
 	
+	
+	<!-- Modal -->
+	<div class="modal" id="layerpop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><div class="modal-dialog" role="document"><div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" id="myModalLabel">제목</h4>
+		</div>
+		<div class="modal-body">
+			<form class="form-horizontal" action="${context }/file/do_save.do" name="saveFileForm" id="saveFileForm" method="post" enctype="multipart/form-data">
+				<h4 class="modal-title" id="myModalLabel">바디</h4>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal" id="doOk">확인</button>
+		</div>
+	</div></div></div>
+
 	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 	<script src="${context}/resources/js/jquery-1.12.4.js"></script>
 	<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
-	<script src="${context}/resources/js/bootstrap.min.js"></script>  
-	
-	<script type="text/javascript">	
+	<script src="${context}/resources/js/bootstrap.min.js"></script>  	
+	<script type="text/javascript">
 		function popup(url,name,width,height,top,left,location){
 	        var option = "width="+width+",height="+height+",top="+top+",left="+left+",location="+location;
 	        window.open(url, name, option);
 	    }
-		
 		//paging
 		function search_page(url, pageNum) {
 			var frm = document.planedFrm;
@@ -166,10 +178,14 @@
 			frm.action = url;
 			frm.submit();
 		}
+		
+		$("#doUpdate").click(function(){
+			
+	    });
 		  	
-		$(document).ready(function(){
-		//alert("ready");
-		});
+		$(document).ready(function() {
+
+        });
 	</script>  
 </body>
 </html>
