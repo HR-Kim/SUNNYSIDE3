@@ -84,7 +84,6 @@
 			<button type="button" class="btn btn-default btn-sm" onclick="popup('do_planedUp_retrieve.do','개봉예정 리스트에 등록',1200,800,100,400,'no');">등록</button>
 			<button type="button" class="btn btn-default btn-sm" onclick="popup('do_planedDown_retrieve.do','개봉예정 리스트에서 제외',1200,800,100,400,'no');">삭제</button>
 			<button type="button" class="btn btn-default btn-sm" onclick="popup('../screening/do_screenUp_retrieve.do','상영중 리스트에 등록',1200,800,100,400,'no');">상영</button>
-			<button id="attrFile" type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#layerpop">파일</button>
 		</div>
 		<!--// div title -->
 		<!-- form -->
@@ -121,7 +120,7 @@
 									</h5>
 									<!--// 영화제목 -->
 									<!-- 영화정보 -->
-									<span class="project_category">관람 평점 <c:out value="${vo.visitorRate}"/></span>
+									<span class="project_category">개봉예정일 : <c:out value="${vo.relDate}"/></span>
 									<!--// 영화정보 -->
 								</div>
 								<!--// 영화정보 영역 -->								
@@ -145,22 +144,6 @@
 		<!--// pagenation -->
 	</div>
 	
-	 
-	<!-- Modal -->
-	<div class="modal" id="layerpop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><div class="modal-dialog" role="document"><div class="modal-content">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<h4 class="modal-title" id="myModalLabel">제목</h4>
-		</div>
-		<div class="modal-body">
-			<form class="form-horizontal" action="${context }/file/do_save.do" name="saveFileForm" id="saveFileForm" method="post" enctype="multipart/form-data">
-				<h4 class="modal-title" id="myModalLabel">바디</h4>
-			</form>
-		</div>
-		<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal" id="doOk">확인</button>
-		</div>
-	</div></div></div>
 
 	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 	<script src="${context}/resources/js/jquery-1.12.4.js"></script>
@@ -168,7 +151,8 @@
 	<script src="${context}/resources/js/bootstrap.min.js"></script>  	
 	<script type="text/javascript">
 		function popup(url,name,width,height,top,left,location){
-	        var option = "width="+width+",height="+height+",top="+top+",left="+left+",location="+location;
+	        var option = "width="+width+",height="+height+",top="+top+",left="+left+",resizeable=no";
+	        
 	        window.open(url, name, option);
 	    }
 		//paging
