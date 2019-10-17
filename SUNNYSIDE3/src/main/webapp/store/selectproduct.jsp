@@ -5,11 +5,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="context" value="${pageContext.request.contextPath }" />
-<%
 
-	
-
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,6 +24,7 @@
 
 	<tr>
 		<td style="display: none;" id="productId" class="productId">${vo.productId }</td>
+		<td style="display: none;" id="userId" class="userId">${user.userId }</td>
 		<td style="display: none;" id="category" class="category" >${vo.category }</td>
 		<td style="display: none;" id="orgFileNm" class="orgFileNm" >${vo.orgFileNm }</td>
 		<td style="display: none;" id="saveFileNm" class="saveFileNm" >${vo.saveFileNm }</td>
@@ -79,7 +76,15 @@
 <script type="text/javascript">
 	//장바구니에 담기
 	$("#goCart").on("click",function(){
-		alert("goCart");
+		//alert("goCart");
+		
+		//로그인 시 이동가능 
+		if("${user.userId}"!= ""){ //로그인 되어있으면 
+			location.href ="${context}/cart/do_retrieve.do?userId=admin"; //장바구니에 더하기
+	     }else{// 로그인이 안되어있으면
+			alert("회원만 사용가능한 서비스입니다.\n로그인을 해주세요.");
+	    	location.href ="${context}/login/login_view.do";
+	     }
 		
 		
 	});

@@ -8,9 +8,9 @@
 		 do_delete : 장바구니 삭제
 	     do_update : 장바구니 수정
 	     sumMoney: 장바구니 금액 합계
-	     get_retrieve  : 장바구니 목록
+	     do_retrieve  : 장바구니 목록
 	     countCart: 장바구니 동일한 상품 레코드 확인
-	     updateCart: 장바구니 상품수량 변경
+	     updateCountCart: 장바구니 상품수량 변경
 	   -->
 	
 <!-- 장바구니 저장(추가) -->
@@ -39,7 +39,60 @@
 
 <!-- 장바구니 수정 -->
 	<update id="do_update">
-		
+		UPDATE cart
+		SET
+		    count = count+ #{count,jdbcType=NUMERIC}
+		WHERE
+		    user_id =  #{userId,jdbcType=VARCHAR},
+		    AND product_id =  #{productId,jdbcType=VARCHAR}
 	</update>
 
+<!-- 장바구니 금액 합계 -->
+	<select id="sumMoney" resultType="int">
+		SELECT
+		    NVL(SUM(b.product_cost*count),0) productCost
+		FROM
+		   		 cart a , product b
+		WHERE a.product_id = b.product_id 
+		AND a.user_id = #{userId,jdbcType=VARCHAR}	
+	</select>
+	
+<!-- 장바구니 목록 -->
+	<select id="do_retrieve" resultType="Cart" >
+	 	SELECT
+		    a.cart_id as cartId,
+		    c.product_nm as productNm,
+		    b.user_id as userId,
+		    a.count,
+		    a.product_cost as productCost,
+		    c.product_id as productId,
+		    c.save_file_nm as saveFileNm
+		FROM
+		    cart a, user_info b, product c 
+		WHERE
+		    b.user_id = a.user_id
+		    AND c.product_id = a.product_id
+		    AND a.user_id = #{userId,jdbcType=VARCHAR}
+		ORDER BY
+		    a.cart_id 
+	</select>
+
+<!-- 장바구니 동일한 상품 레코드 확인 -->
+	<select id="countCart" resultType="int">
+		SELECT
+		    COUNT(*)
+		FROM
+		    cart
+		WHERE 
+		    user_id =#{userId,jdbcType=VARCHAR}
+		AND product_id = #{productId,jdbcType=VARCHAR}
+	</select>
+
+<!-- 장바구니 상품수량 변경 -->
+	<update id="updateCountCart" >
+		UPDATE cart	
+		SET count = count + #{count} 
+		WHERE user_id= #{userId,jdbcType=VARCHAR}
+		AND product_id = #{productId,jdbcType=VARCHAR}
+	</update>
 </mapper>

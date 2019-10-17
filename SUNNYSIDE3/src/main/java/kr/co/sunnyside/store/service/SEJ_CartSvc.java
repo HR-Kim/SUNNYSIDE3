@@ -22,6 +22,6 @@ public interface SEJ_CartSvc {
 	public int countCart(String productId, String userId);
 	
 	/**장바구니 상품수량 변경*/
-	public void updateCart(SEJ_CartVO vo);
+	public void updateCountCart(SEJ_CartVO vo);
 
 }
