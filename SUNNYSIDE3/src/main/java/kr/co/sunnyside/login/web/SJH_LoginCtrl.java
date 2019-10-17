@@ -66,6 +66,55 @@ public class SJH_LoginCtrl {
 	
 	
 	
+	//로그인 화면call
+	@RequestMapping(value="login/login_view.do", method = RequestMethod.GET)
+	public String loginView() {
+		LOG.debug("========================");
+		LOG.debug("=@Controller=View=");
+		LOG.debug("========================");
+		
+		return VIEW_LOGIN;
+	}
+	
+	
+	
+	//회원가입 화면call
+	@RequestMapping(value="login/join_view.do", method = RequestMethod.GET)
+	public String joinView() {
+		LOG.debug("========================");
+		LOG.debug("=@Controller=View=");
+		LOG.debug("========================");
+		
+		return VIEW_JOIN;
+	}
+	
+	
+	
+	//아이디 찾기 화면call
+	@RequestMapping(value="login/id_find_mng_view.do", method = RequestMethod.GET)
+	public String IdFindMngView() {
+		LOG.debug("========================");
+		LOG.debug("=@Controller=View=");
+		LOG.debug("========================");
+		
+		return VIEW_ID_FIND_MNG;
+	}
+	
+	
+	//비밀번호 찾기 화면call
+	@RequestMapping(value="login/pw_find_mng_view.do", method = RequestMethod.GET)
+	public String pwFindMngView() {
+		LOG.debug("========================");
+		LOG.debug("=@Controller=View=");
+		LOG.debug("========================");
+		
+		return VIEW_PW_FIND_MNG;
+	}
+	
+	
+	
+	
+	
 	/* NaverLoginBO */
 	private NaverLoginBO naverLoginBO;
 	private String apiResult = null;
@@ -118,14 +167,28 @@ public class SJH_LoginCtrl {
 		//Top레벨 단계 _response 파싱
 		JSONObject response_obj = (JSONObject)jsonObj.get("response");
 		//response의 nickname값 파싱
-		String nickname = (String)response_obj.get("nickname");
-		LOG.debug(nickname);
+		String userId = (String)response_obj.get("nickname");
+		String name = (String)response_obj.get("name");
+		String email = (String)response_obj.get("email");
+		String birthday = (String)response_obj.get("birthday");
+		
+		LOG.debug("========================");
+		LOG.debug("userId"+userId);
+		LOG.debug("name"+name);
+		LOG.debug("email"+email);
+		LOG.debug("birthday"+birthday);
+		LOG.debug("========================");
+		
 		
 		//4.파싱 닉네임 세션으로 저장
-		session.setAttribute("sessionId",nickname); //세션 생성
+		session.setAttribute("userId",userId); //세션 생성
+		session.setAttribute("user",name);
+		session.setAttribute("email",email);
+		session.setAttribute("birthday",birthday);
 		model.addAttribute("result", apiResult);
 		
-		return "logintest/afterlogin";
+		
+		return "main/main"; //추가정보 입력하는 페이지로 리턴
 	}
 	
 	
@@ -143,30 +206,6 @@ public class SJH_LoginCtrl {
 		return "main/main.jsp";
 	}
 
-	
-	//회원가입 화면call
-	@RequestMapping(value="login/join_view.do", method = RequestMethod.GET)
-	public String joinView() {
-		LOG.debug("========================");
-		LOG.debug("=@Controller=View=");
-		LOG.debug("========================");
-		
-		return VIEW_JOIN;
-	}
-	
-	
-	
-	
-	//로그인 화면call
-	@RequestMapping(value="login/login_view.do", method = RequestMethod.GET)
-	public String loginView() {
-		LOG.debug("========================");
-		LOG.debug("=@Controller=View=");
-		LOG.debug("========================");
-		
-		return VIEW_LOGIN;
-	}
-	
 	
 
 	/**
@@ -276,18 +315,6 @@ public class SJH_LoginCtrl {
 	
 	
 	
-	//아이디 찾기 화면call
-	@RequestMapping(value="login/id_find_mng_view.do", method = RequestMethod.GET)
-	public String IdFindMngView() {
-		LOG.debug("========================");
-		LOG.debug("=@Controller=View=");
-		LOG.debug("========================");
-		
-		return VIEW_ID_FIND_MNG;
-	}
-	
-	
-	
 	
 	/**
 	 * 비밀번호 찾기
@@ -316,18 +343,6 @@ public class SJH_LoginCtrl {
 		return VIEW_PW_FIND_LIST; //화면으로 리턴		
 	}
 	
-	
-	
-	
-	//비밀번호 찾기 화면call
-	@RequestMapping(value="login/pw_find_mng_view.do", method = RequestMethod.GET)
-	public String pwFindMngView() {
-		LOG.debug("========================");
-		LOG.debug("=@Controller=View=");
-		LOG.debug("========================");
-		
-		return VIEW_PW_FIND_MNG;
-	}
 	
 	
 	
