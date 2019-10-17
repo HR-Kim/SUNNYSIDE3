@@ -6,8 +6,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>SUNNYSIDE LOGIN</title>
-	<meta charset="UTF-8">
+<meta charset="UTF-8">
+<title>SUNNYSIDE LOGIN</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="${context}/resources/image/login/favicon.ico"/>
@@ -29,8 +29,7 @@
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/daterangepicker.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/util.css">
-	<link rel="stylesheet" type="text/css" href="${context}/resources/css/headerStyle.css" > 
-<%-- <link rel="stylesheet" type="text/css" href="${context}/resources/css/login/main.css"> --%>
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/main.css">
 <!--===============================================================================================-->
 
 <!-- 부트스트랩 -->
@@ -42,13 +41,14 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
-				<form class="login100-form validate-form flex-sb flex-w" id="loginForm" name="loginForm" action="${context}/login/do_login.do" method="post">
+				<form class="login100-form validate-form flex-sb flex-w" id="loginForm" name="loginForm">
 					<div class="form-group">
 						<select name="lang" id="lang">
 					        <option value="ko">한글</option>
 							<option value="en">영어</option>
 					     </select>
 				    </div>
+				    
 					<span class="text-center login100-form-title p-b-32">
 						SUNNYSIDE LOGIN
 					</span>
@@ -56,7 +56,7 @@
 					<span class="txt1 p-b-11">
 						ID
 					</span>
-					<div class="wrap-input100 validate-input m-b-36" data-validate = "Username is required">
+					<div class="wrap-input100 validate-input m-b-36" >
 						<input class="input100" type="text" id="userId" name="userId" >
 						<span class="focus-input100"></span>
 					</div>
@@ -64,7 +64,7 @@
 					<span class="txt1 p-b-11">
 						Password
 					</span>
-					<div class="wrap-input100 validate-input m-b-12" data-validate = "Password is required">
+					<div class="wrap-input100 validate-input m-b-12" >
 						<span class="btn-show-pass" >
 						</span>
 						<input class="input100" type="password" id="passwd" name="passwd" >
@@ -132,7 +132,6 @@
 <!--===============================================================================================-->
 
 	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
-	<script src="${context}/resources/js/jquery-1.12.4.js"></script>
 	<script src="${context}/resources/js/login/jquery.validate.js"></script>
 	<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
 	<script src="${context}/resources/js/bootstrap.min.js"></script>
