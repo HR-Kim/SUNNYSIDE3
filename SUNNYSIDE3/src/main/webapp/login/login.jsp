@@ -12,7 +12,7 @@
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="${context}/resources/image/login/favicon.ico"/>
 <!--===============================================================================================-->
-<%-- 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/bootstrap.min.css"> --%>
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/bootstrap.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
@@ -29,8 +29,13 @@
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/daterangepicker.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/util.css">
-<%-- 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/main.css"> --%>
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/headerStyle.css" > 
+<%-- <link rel="stylesheet" type="text/css" href="${context}/resources/css/login/main.css"> --%>
 <!--===============================================================================================-->
+
+<!-- 부트스트랩 -->
+<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 <body>
 	
@@ -109,7 +114,6 @@
 	</div>
 	
 
-	<div id="dropDownSelect1"></div>
 	
 <!--===============================================================================================-->
 	<script src="${context}/resources/js/login/jquery-3.2.1.min.js"></script>
@@ -117,7 +121,7 @@
 	<script src="${context}/resources/js/login/animsition.min.js"></script>
 <!--===============================================================================================-->
 	<script src="${context}/resources/js/login/popper.js"></script>
-<%-- 	<script src="${context}/resources/js/login/bootstrap.min.js"></script> --%>
+	<script src="${context}/resources/js/login/bootstrap.min.js"></script>
 <!--===============================================================================================-->
 	<script src="${context}/resources/js/login/select2.min.js"></script>
 <!--===============================================================================================-->
@@ -126,8 +130,12 @@
 <!--===============================================================================================-->
 	<script src="${context}/resources/js/login/countdowntime.js"></script>
 <!--===============================================================================================-->
-	<script src="${context}/resources/js/login/main.js"></script>
+
+	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
+	<script src="${context}/resources/js/jquery-1.12.4.js"></script>
 	<script src="${context}/resources/js/login/jquery.validate.js"></script>
+	<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
+	<script src="${context}/resources/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 		
 	
