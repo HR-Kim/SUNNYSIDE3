@@ -58,11 +58,13 @@ public class SJH_LoginSvcImpl implements SJH_LoginSvc{
 	}
 
 
+	/** 아이디 찾기 */
 	@Override
 	public DTO id_find(DTO dto) {
 		return loginDao.id_find(dto);
 	}
 
+	/** 비밀번호 찾기 */
 	@Override
 	public int pw_find(DTO dto) {
 		SJH_LoginVO outVO = (SJH_LoginVO) loginDao.do_selectOne(dto);
@@ -78,9 +80,7 @@ public class SJH_LoginSvcImpl implements SJH_LoginSvc{
 	}
 	
 	
-	/**
-	 * 비번  mail전송
-	 */
+    // 비번  mail전송
 	private void sendPwFindMail(SJH_LoginVO user) {
 		try {
 			SJH_LoginVO changedVO = (SJH_LoginVO) loginDao.do_selectOne(user);
@@ -146,18 +146,6 @@ public class SJH_LoginSvcImpl implements SJH_LoginSvc{
 	
 	
 	@Override
-	public int do_save(DTO dto) {
-		return loginDao.do_save(dto);
-	}
-	
-
-	@Override
-	public DTO do_selectOne(DTO dto) {
-		return loginDao.do_selectOne(dto);
-	}
-	
-	
-	@Override
 	public DTO do_login(DTO dto) {
 		Message outMsg = new Message();
 		
@@ -193,5 +181,18 @@ public class SJH_LoginSvcImpl implements SJH_LoginSvc{
 	}
 
 
+	
+	/** 회원가입  */
+	@Override
+	public int do_save(DTO dto) {
+		return loginDao.do_save(dto);
+	}
+	
+	
+	/** 단건조회 */
+	@Override
+	public DTO do_selectOne(DTO dto) {
+		return loginDao.do_selectOne(dto);
+	}
 
 }

@@ -65,17 +65,14 @@ public class SJH_LoginCtrl {
 	
 	
 	
+	/* NaverLoginBO */
+	private NaverLoginBO naverLoginBO;
+	private String apiResult = null;
 	
-	//로그인 화면call
-	@RequestMapping(value="login/login_view.do", method = RequestMethod.GET)
-	public String loginView() {
-		LOG.debug("========================");
-		LOG.debug("=@Controller=View=");
-		LOG.debug("========================");
-		
-		return VIEW_LOGIN;
+	@Autowired
+	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+		this.naverLoginBO = naverLoginBO;
 	}
-	
 	
 	
 	//회원가입 화면call
@@ -88,8 +85,6 @@ public class SJH_LoginCtrl {
 		return VIEW_JOIN;
 	}
 	
-	
-	
 	//아이디 찾기 화면call
 	@RequestMapping(value="login/id_find_mng_view.do", method = RequestMethod.GET)
 	public String IdFindMngView() {
@@ -99,7 +94,6 @@ public class SJH_LoginCtrl {
 		
 		return VIEW_ID_FIND_MNG;
 	}
-	
 	
 	//비밀번호 찾기 화면call
 	@RequestMapping(value="login/pw_find_mng_view.do", method = RequestMethod.GET)
@@ -111,22 +105,9 @@ public class SJH_LoginCtrl {
 		return VIEW_PW_FIND_MNG;
 	}
 	
-	
-	
-	
-	
-	/* NaverLoginBO */
-	private NaverLoginBO naverLoginBO;
-	private String apiResult = null;
-	
-	@Autowired
-	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
-		this.naverLoginBO = naverLoginBO;
-	}
-	
-	
+	//로그인 화면call
 	/** 로그인 첫 화면 요청 메소드 */ //--->이 부분을 메인이랑 연결해야함. 
-	@RequestMapping(value = "login/naverlogin.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "login/login_view.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(Model model, HttpSession session) {
 		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
@@ -149,6 +130,7 @@ public class SJH_LoginCtrl {
 		LOG.debug("callback");
 		OAuth2AccessToken oauthToken;
 		oauthToken = naverLoginBO.getAccessToken(session, code, state);
+		LOG.debug("oauthToken: "+oauthToken);
 		
 		//1. 로그인 사용자 정보를 읽어온다.
 		apiResult = naverLoginBO.getUserProfile(oauthToken); //String형식의 json데이터
@@ -157,6 +139,8 @@ public class SJH_LoginCtrl {
 		"message":"success",
 		"response":{"id":"33666449","nickname":"shinn****","age":"20-29","gender":"M","email":"shinn0608@naver.com","name":"\uc2e0\ubc94\ud638"}}
 		**/
+		
+		LOG.debug("apiResult: "+apiResult);
 		
 		//2. String형식인 apiResult를 json형태로 바꿈
 		JSONParser parser = new JSONParser();
@@ -167,28 +151,31 @@ public class SJH_LoginCtrl {
 		//Top레벨 단계 _response 파싱
 		JSONObject response_obj = (JSONObject)jsonObj.get("response");
 		//response의 nickname값 파싱
-		String userId = (String)response_obj.get("nickname");
-		String name = (String)response_obj.get("name");
+		String userId = (String)response_obj.get("id");
+		String userName = (String)response_obj.get("name");
 		String email = (String)response_obj.get("email");
-		String birthday = (String)response_obj.get("birthday");
+		String birth = (String)response_obj.get("birthday");
 		
 		LOG.debug("========================");
 		LOG.debug("userId"+userId);
-		LOG.debug("name"+name);
+		LOG.debug("userName"+userName);
 		LOG.debug("email"+email);
-		LOG.debug("birthday"+birthday);
+		LOG.debug("birth"+birth);
 		LOG.debug("========================");
 		
 		
 		//4.파싱 닉네임 세션으로 저장
 		session.setAttribute("userId",userId); //세션 생성
-		session.setAttribute("user",name);
-		session.setAttribute("email",email);
-		session.setAttribute("birthday",birthday);
+		
+		model.addAttribute("userId",userId);
+		model.addAttribute("userName",userName);
+		model.addAttribute("email",email);
+		
 		model.addAttribute("result", apiResult);
+		LOG.debug("apiResult: "+apiResult);
 		
 		
-		return "main/main"; //추가정보 입력하는 페이지로 리턴
+		return "login/add_user_info"; //추가정보 입력하는 페이지로 리턴
 	}
 	
 	

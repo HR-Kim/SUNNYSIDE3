@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>추가입력정보</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -46,34 +46,14 @@
 					<input type="hidden" id="isCheck" value="N"/> 
 					
 					<span class="text-center login100-form-title p-b-32">
-						회원가입
+						추가입력정보
 					</span>
 					
 					<span class="txt1 p-b-11">
 						아이디
-						&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 
-						&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 
-						&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-						<button type="button" class="btn btn-default btn-sm" id="idCheck">중복체크</button>
 					</span>
 					<div class="wrap-input100 validate-input m-b-20">
-						<input class="input100" maxlength="20" type="text" id="userId" name="userId" placeholder="아이디 (3~20자)">
-						<span class="focus-input100"></span>
-					</div>
-					
-					<span class="txt1 p-b-11">
-						비밀번호
-					</span>
-					<div class="wrap-input100 validate-input m-b-20">
-						<input class="input100" maxlength="20" type="text" id="passwd" name="passwd" placeholder="비밀번호 (8~20자)" >
-						<span class="focus-input100"></span>
-					</div>
-					
-					<span class="txt1 p-b-11">
-						비밀번호 확인
-					</span>
-					<div class="wrap-input100 validate-input m-b-20">
-						<input class="input100" maxlength="20" type="text" id="passwdCnfrm" name="passwdCnfrm" placeholder="비밀번호 확인"  >
+						<input class="input100" maxlength="20" type="text" id="userId" name="userId" value="${userId}" >
 						<span class="focus-input100"></span>
 					</div>
 					
@@ -81,7 +61,15 @@
 						이름
 					</span>
 					<div class="wrap-input100 validate-input m-b-20">
-						<input class="input100" maxlength="15" type="text" id="userName" name="userName" placeholder="이름" >
+						<input class="input100" maxlength="15" type="text" id="userName" name="userName" value="${userName}" >
+						<span class="focus-input100"></span>
+					</div>
+					
+					<span class="txt1 p-b-11">
+						이메일주소
+					</span>
+					<div class="wrap-input100 validate-input m-b-20">
+						<input class="input100" maxlength: 30 type="text" id="email" name="email" value="${email}" >
 						<span class="focus-input100"></span>
 					</div>
 
@@ -101,13 +89,6 @@
 						<span class="focus-input100"></span>
 					</div>
 					
-					<span class="txt1 p-b-11">
-						이메일주소
-					</span>
-					<div class="wrap-input100 validate-input m-b-20">
-						<input class="input100" maxlength: 30 type="text" id="email" name="email" placeholder="이메일" >
-						<span class="focus-input100"></span>
-					</div>
 				</form>
 				
 				<br/>
@@ -150,67 +131,16 @@
 	<script src="${context}/resources/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 	
-	
 		//취소
 		$("#undo").on("click",function(){
-			if(false==confirm("회원가입을 취소하시겠습니까?"))return;
+			if(false==confirm("추가정보는 반드시 입력해야 합니다.\n회원가입을 취소하시겠습니까?"))return;
 			location.href="${context}/main/main.do"
 		});
-	
-		
-		//아이디 중복체크 idCheck
-		$("#idCheck").on("click",function(){
-			
-			//validation
- 			if( $("#userId").val() == "" ){
-				alert("아이디를 입력해주세요.");
-				return;
-			} 
-			
-			$.ajax({
-		         type:"POST",
-		         url:"${context}/login/id_check.do",
-		         dataType:"html",// JSON
-		         data:{
-		        	 "userId": $("#userId").val()
-		         },
-		         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-		          	//console.log(data); //스트링으로 들어온 데이터
-		          	var parseData = $.parseJSON(data); //JSON으로 바꿔줌
-		          	if(parseData.msgId == "20"){
-		          		alert(parseData.msgMsg);
-		          		$("#isCheck").val("Y");
-		          	}else{
-		          		alert(parseData.msgMsg);
-		          	}
-		          	
-		         },
-		         complete: function(data){//무조건 수행
-		          
-		         },
-		         error: function(xhr,status,error){
-		          
-		         }
-			});
-		});
 		
 		
-		
-		//가입
+		//네이버 추가정보 입력 가입
 		$("#join").on("click",function(){
 			//console.log("join");
-			
-			//아이디 중복체크  validation
- 			if( $("#isCheck").val() != "Y" ){
-				alert("아이디 중복체크는 필수입니다.");
-				return;
-			} 
- 			
-			//비밀번호 validation
- 			if( $("#passwd").val() != $("#passwdCnfrm").val() ){
-				alert("비밀번호가 일치하지 않습니다.");
-				return;
-			}
 
 			if($("#joinForm").valid()==false)return;
 			if(false==confirm("회원가입 하시겠습니까?"))return;
@@ -222,11 +152,10 @@
 		         dataType:"html",// JSON
 		         data:{
 		        	 "userId": $("#userId").val(),
-		        	 "passwd": $("#passwd").val(),
 		        	 "userName": $("#userName").val(),
+		        	 "email": $("#email").val(),
 		        	 "birth": $("#birth").val(),
-		        	 "cellphone": $("#cellphone").val(),
-		        	 "email": $("#email").val()
+		        	 "cellphone": $("#cellphone").val()
 		         },
 		         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
 		          	//console.log(data); //스트링으로 들어온 데이터
@@ -248,31 +177,11 @@
 			});
 	     	 
 		});
-	
 		
-		//form validation
+		
+	    //form validation
 		$("#joinForm").validate({
 				rules: {
-					userId: {
-						required: true,
-						minlength: 3,
-						maxlength: 20
-					},
-					passwd: {
-						required: true,
-						minlength: 8,
-						maxlength: 20
-					},
-					passwdCnfrm: {
-						required: true,
-						minlength: 8,
-						maxlength: 20
-					},
-					userName: {
-						required: true,
-						minlength: 2,
-						maxlength: 15
-					},
 					birth: {
 						required: true,
 						minlength: 8,
@@ -283,33 +192,8 @@
 						minlength: 10,
 						maxlength: 11
 					},
-					email: {
-						required: true,
-						minlength: 5,
-						maxlength: 30
-					}
 				},
 				messages: {
-					userId: {
-						required: "ID를 입력 하세요.",
-						minlength: $.validator.format("ID를 {0}자 이상 입력하세요."),
-						maxlength: $.validator.format("ID를 {0}자 내로 입력하세요.")
-					},
-					passwd: {
-						required: "비밀번호를 입력하세요.",
-						minlength: $.validator.format("비밀번호를 {0}자 이상 입력하세요."),
-						maxlength: $.validator.format("비밀번호를 {0}자 내로 입력하세요.")
-					},
-					passwdCnfrm: {
-						required: "비밀번호 확인을 입력하세요.",
-						minlength: $.validator.format("비밀번호 확인을 {0}자 이상 입력하세요."),
-						maxlength: $.validator.format("비밀번호 확인을 {0}자 내로 입력하세요.")
-					},
-					userName: {
-						required: "이름을 입력하세요.",
-						minlength: $.validator.format("이름을 {0}자 이상 입력하세요."),
-						maxlength: $.validator.format("이름을 {0}자 내로 입력하세요.")
-					},
 					birth: {
 						required: "생년월일을 입력하세요.",
 						minlength: $.validator.format("생년월일을 {0}자로 입력하세요. ex)19990101"),
@@ -320,11 +204,6 @@
 						minlength: $.validator.format("휴대폰번호를 {0}자 이상 입력하세요. ex)01012345678"),
 						maxlength: $.validator.format("휴대폰번호를 {0}자 내로 입력하세요. ex)01012345678")
 					},
-					email: {
-						required: "이메일을 입력하세요.",
-						minlength: $.validator.format("이메일을 {0}자 이상 입력하세요."),
-						maxlength: $.validator.format("이메일을 {0}자 내로 입력하세요.")
-					}
 					
 				},					
 				errorPlacement : function(error, element) {
@@ -337,13 +216,14 @@
 					    validator.errorList[0].element.focus();
 				    }
 				}
-		 });  
+		 });
 		
 		
 		$(document).ready(function() {
 			//alert("ready");
 		});
-		
+	
+	
 	</script>
 
 </body>

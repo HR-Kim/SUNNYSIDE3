@@ -95,12 +95,12 @@
 				
 				<!-- 버튼 -->
 				<div class="container-login100-form-btn">
-					&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+					&nbsp &nbsp &nbsp &nbsp &nbsp
 					<button class="login100-form-btn" id="signIn">
 						로그인
 					</button>
 					&nbsp &nbsp
-					<input type="hidden" id="naverUrl" value="${url}">
+					<input type="hidden" id="naverUrl" name="naverUrl" value="${url}" >
 					<a id="naverLogin"><img src="${context}/resources/image/login/naverlogin.png"/></a>	
 				</div>
 							
@@ -133,11 +133,10 @@
 	
 		/** 네이버로 로그인 */
 		$("#naverLogin").on("click",function(){
-			if(confirm("네이버로 로그인 시 등급에 따른 할인혜택을 받을 수 없습니다. 네이버로 로그인 하시겠습니까?")== false)return;
+			if(confirm("네이버로 로그인 시 등급에 따른 할인혜택을 받을 수 없습니다.\n네이버로 로그인 하시겠습니까?")== false)return;
 			alert($("#naverUrl").val());
 			location.href = $("#naverUrl").val();
 		});
-		
 		
 	
 		/** 회원가입 */
