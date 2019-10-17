@@ -46,7 +46,7 @@
 							    total_pay      
 							) VALUES (          
 							    #{userId,jdbcType=VARCHAR},              
-							    NVL(#{passwd,jdbcType=VARCHAR},'1234'),              
+							    NVL(#{passwd,jdbcType=VARCHAR},'0000'),              
 							    #{userName,jdbcType=VARCHAR},
 							    #{email,jdbcType=VARCHAR},              
 							    NVL(#{userLevel,jdbcType=VARCHAR},'BASIC'),             

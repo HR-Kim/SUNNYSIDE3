@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>추가입력정보</title>
+<title>추가정보 입력</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -42,36 +42,16 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
-				<form class="login100-form validate-form flex-sb flex-w" id="joinForm" name="joinForm">
+				<form class="login100-form flex-sb flex-w" id="joinForm" name="joinForm">
 					<input type="hidden" id="isCheck" value="N"/> 
 					
 					<span class="text-center login100-form-title p-b-32">
-						추가입력정보
+						추가정보 입력
 					</span>
 					
-					<span class="txt1 p-b-11">
-						아이디
-					</span>
-					<div class="wrap-input100 validate-input m-b-20">
-						<input class="input100" maxlength="20" type="text" id="userId" name="userId" value="${userId}" >
-						<span class="focus-input100"></span>
-					</div>
-					
-					<span class="txt1 p-b-11">
-						이름
-					</span>
-					<div class="wrap-input100 validate-input m-b-20">
-						<input class="input100" maxlength="15" type="text" id="userName" name="userName" value="${userName}" >
-						<span class="focus-input100"></span>
-					</div>
-					
-					<span class="txt1 p-b-11">
-						이메일주소
-					</span>
-					<div class="wrap-input100 validate-input m-b-20">
-						<input class="input100" maxlength: 30 type="text" id="email" name="email" value="${email}" >
-						<span class="focus-input100"></span>
-					</div>
+					<input class="input100" maxlength="20" type="hidden" id="userId" name="userId" value="${userId}" >
+					<input class="input100" maxlength="15" type="hidden" id="userName" name="userName" value="${userName}" >
+					<input class="input100" maxlength: 30 type="hidden" id="email" name="email" value="${email}" >
 
 					<span class="txt1 p-b-11">
 						생년월일
@@ -191,7 +171,7 @@
 						required: true,
 						minlength: 10,
 						maxlength: 11
-					},
+					}
 				},
 				messages: {
 					birth: {
@@ -203,8 +183,7 @@
 						required: "휴대폰번호를 입력하세요.",
 						minlength: $.validator.format("휴대폰번호를 {0}자 이상 입력하세요. ex)01012345678"),
 						maxlength: $.validator.format("휴대폰번호를 {0}자 내로 입력하세요. ex)01012345678")
-					},
-					
+					}
 				},					
 				errorPlacement : function(error, element) {
 				     //do nothing
