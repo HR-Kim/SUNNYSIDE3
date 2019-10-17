@@ -15,7 +15,7 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/bootstrap.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href=""${context}/resources/css/login/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/icon-font.min.css">
 <!--===============================================================================================-->
