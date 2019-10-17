@@ -20,7 +20,10 @@
 			</when>
 			<when test="'40' == searchDiv">
 				TO_CHAR(SCREEN_DT, 'YYYY-MM-DD') = #{searchWord_second, jdbcType=VARCHAR}
-				AND ROOM_ID LIKE '%' || #{searchWord} || '%'
+				AND MOVIE_ID LIKE '%' || #{searchWord} || '%'
+			</when>
+			<when test="'50' == searchDiv">
+				MOVIE_ID LIKE '%' || #{searchWord} || '%'
 			</when>
 			<otherwise></otherwise>
 		</choose>
@@ -92,45 +95,54 @@
 	</update>
 	
 	<select id="do_retrieve" parameterType="Search" resultType="ScreenInfo">
-		SELECT A1.*, A2.*
+		SELECT B1.*, B2.roomNm
 		FROM(
-			SELECT T1.RNUM as num
-			      ,T1.SCREEN_ID as screenId
-				  ,T1.ROOM_ID as roomId
-				  ,T1.BRANCH_ID as branchId
-				  ,T1.MOVIE_ID as movieId
-				  ,TO_CHAR(T1.START_TIME, 'YYYY-MM-DD HH24:MI:SS') as startTime
-				  ,TO_CHAR(T1.END_TIME, 'YYYY-MM-DD HH24:MI:SS') as endTime
-				  ,TO_CHAR(T1.SCREEN_DT, 'YYYY-MM-DD HH24:MI:SS') as screenDt
-				  ,T1.ADULT_COST as adultCost
-				  ,T1.STUDENT_COST as studentCost
-				  ,T1.EPISODE as episode
-			      ,T2.KORTITLE as korTitle
-			      ,T2.ENGTITLE as engTitle
-			      ,T2.EXPERT_RATE as expertRate
-			      ,T2.VISITOR_RATE as visitorRate
+			SELECT A1.*, A2.*
 			FROM(
-			    SELECT ROWNUM AS RNUM, A.*
-			    FROM(
-			         SELECT *
-			         FROM SCREEN_INFO
-			         <include refid="baseCondition"/>
-			         ORDER BY SCREEN_DT DESC, EPISODE DESC
-			        )A
-			    )T1,
-			    (
-			    SELECT *
-			    FROM MOVIE
-			    )T2
-			WHERE T1.MOVIE_ID = T2.MOVIE_ID(+)
-			AND CEIL(T1.RNUM/ #{pageSize, jdbcType=VARCHAR} ) = #{pageNum, jdbcType=VARCHAR}
-		)A1
-     	NATURAL JOIN                                                      
-     	(                                                                 
-         SELECT COUNT(*) as totalCnt                                     
-         FROM SCREEN_INFO                                            
-          <include refid="baseCondition"/>                                           
-     	)A2  
+				SELECT T1.RNUM as num
+				      ,T1.SCREEN_ID as screenId
+					  ,T1.ROOM_ID as roomId
+					  ,T1.BRANCH_ID as branchId
+					  ,T1.MOVIE_ID as movieId
+					  ,TO_CHAR(T1.START_TIME, 'YYYY-MM-DD HH24:MI:SS') as startTime
+					  ,TO_CHAR(T1.END_TIME, 'YYYY-MM-DD HH24:MI:SS') as endTime
+					  ,TO_CHAR(T1.SCREEN_DT, 'YYYY-MM-DD HH24:MI:SS') as screenDt
+					  ,T1.ADULT_COST as adultCost
+					  ,T1.STUDENT_COST as studentCost
+					  ,T1.EPISODE as episode
+				      ,T2.KORTITLE as korTitle
+				      ,T2.ENGTITLE as engTitle
+				      ,T2.EXPERT_RATE as expertRate
+				      ,T2.VISITOR_RATE as visitorRate
+				FROM(
+				    SELECT ROWNUM AS RNUM, A.*
+				    FROM(
+				         SELECT *
+				         FROM SCREEN_INFO
+				         <include refid="baseCondition"/>
+				         ORDER BY SCREEN_DT DESC, EPISODE DESC
+				        )A
+				    )T1,
+				    (
+				    SELECT *
+				    FROM MOVIE
+				    )T2
+				WHERE T1.MOVIE_ID = T2.MOVIE_ID(+)
+				AND CEIL(T1.RNUM/ #{pageSize, jdbcType=VARCHAR} ) = #{pageNum, jdbcType=VARCHAR}
+			)A1
+	     	NATURAL JOIN                                                      
+	     	(                                                                 
+	         SELECT COUNT(*) as totalCnt                                     
+	         FROM SCREEN_INFO                                            
+	          <include refid="baseCondition"/>                                           
+	     	)A2
+			)B1,
+			(
+			SELECT ROOM_ID as roomId
+                  ,ROOM_Nm as roomNm
+			FROM ROOM
+			)B2
+			WHERE B1.roomId = B2.roomid
 	</select>
 
 	<select id="do_retrieve_forUser" parameterType="Search" resultType="ScreenInfo">

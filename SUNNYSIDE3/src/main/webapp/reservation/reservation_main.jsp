@@ -19,6 +19,9 @@
 		.ui-datepicker select.ui-datepicker-month{ width:30%; font-size: 11px; }
 		.ui-datepicker select.ui-datepicker-year{ width:40%; font-size: 11px; }
 		.ui-widget-content .ui-icon {background-image: url("../resources/image/jquery_ui/ui-icons_444444_256x240.png");}
+		.enableDate {
+			background-color: yellow;
+		}
 		.timeBtn {
 			margin-left: 10px;
 			margin-right: 10px;
@@ -26,15 +29,25 @@
 			margin-bottom: 5px;
 			
 		}
+		.selectTimeBtnCase {
+			overflow: scroll;
+			width: 5px;
+			height: 5px;
+		}
 		.selectTimeBtnBox {
-			padding: 10px;
+			padding: 0, 5, 0, 5;
 			overflow: auto;
-			height: 70px;
 		}
 		.branchInfo {
-			width: 448px;
-			height: 50px;
-			background-color: lightgray;
+			font-size: 15px;
+			padding-left: 20px;
+			border-bottom: 1px solid #EEEEF0;
+			background-color: #EEEEF0;
+		}
+		.branchInfo label {
+			color: #525572;
+			margin-bottom: 0px;
+			margin-top: 0px;
 		}
 		.noPlan {
 			color: lightgray;
@@ -65,6 +78,7 @@
 			left: 0px;
 			width: 450px;			
 			height: 150px;
+			overflow: auto;
 		}
 		#selectDate {
 			position: absolute;
@@ -125,7 +139,7 @@
 		}
 		::-webkit-scrollbar {
 		  width: 10px;		/* 세로축 스크롤바 길이 */
-		  height: 20px;		/* 가로축 스크롤바 길이 */
+		  height: 5px;		/* 가로축 스크롤바 길이 */
 		}
 		::-webkit-scrollbar-track {
 		
@@ -139,8 +153,8 @@
 		}
 		::-webkit-scrollbar-button {
 		  background-color: #373949;
-		  width: 20px;
-		  height: 10px;
+		  width: 5px;
+		  height: 5px;
 		  border-radius:.3rem;
 		}
 		::-webkit-scrollbar-button:start {
@@ -212,30 +226,9 @@
 				<div id="" class="bar">
 					&nbsp;<label>상영시간표</label>
 				</div>
-				<div class="branchInfo case">
-					
-				</div>
-				<div class="selectTimeBtnBox">
-					<button class="btn btn-default btn-xs timeBtn">11:11</button>
-					<button class="btn btn-default btn-xs timeBtn">11:11</button>
-					<button class="btn btn-default btn-xs timeBtn">11:11</button>
-					<button class="btn btn-default btn-xs timeBtn">11:11</button>
-					<button class="btn btn-default btn-xs timeBtn">11:11</button>
-					<button class="btn btn-default btn-xs timeBtn">11:11</button>
-					<br>
-					<button class="btn btn-default btn-xs timeBtn">11:11</button>
-					<button class="btn btn-default btn-xs timeBtn">11:11</button>
-					<button class="btn btn-default btn-xs timeBtn">11:11</button>
-					<button class="btn btn-default btn-xs timeBtn">11:11</button>
-					<button class="btn btn-default btn-xs timeBtn">11:11</button>
-					<button class="btn btn-default btn-xs timeBtn">11:11</button>
-					<br>
-					<button class="btn btn-default btn-xs timeBtn">11:11</button>
-					<button class="btn btn-default btn-xs timeBtn">11:11</button>
-					<button class="btn btn-default btn-xs timeBtn">11:11</button>
-					<button class="btn btn-default btn-xs timeBtn">11:11</button>
-					<button class="btn btn-default btn-xs timeBtn">11:11</button>
-					<button class="btn btn-default btn-xs timeBtn">11:11</button>
+				<div class="branchInfo"><label></label></div>
+				<div id="selectTimeBtnCase">
+					<div class="selectTimeBtnBox"></div>
 				</div>
 			</div>
 			
@@ -244,7 +237,7 @@
 					&nbsp;<label>인원선택</label>
 				</div>
 				<div>
-				<button id="test">테스트</button>
+					<button id="asd">asd</button>
 				</div>
 			</div>
 
@@ -263,7 +256,8 @@
 			$(document).ready(function(){
 				planedMovieList();
 			});
-		
+			//var availableDates = ["10-17-2019", "10-18-2019", "10-19-2019"];
+			var availableDates = [17,18,19];
 			//datepicker 설정
 			$.datepicker.setDefaults({
 	            dateFormat: 'yy-mm-dd' //Input Display Format 변경
@@ -282,16 +276,18 @@
 	            ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
 	            ,minDate: "+0D" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년년전)
 	            ,maxDate: "+13D" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
-	        });
+			    });
 			
 			//datePicker 부여
 			$("#datePicker").datepicker({
 				onSelect: function(value){
 					$("#hd_selectedDate").val(value);
 					var roomId = $("#hd_selectedBranchId").val();
-	            	if(roomId != null && roomId != "") selectTime();
-				}		
+	            	if(roomId != null && roomId != "") selectSchedule();
+				}
 			});
+			
+			
 			
 			//영화선택테이블 조회
 			$("#movieFBtn").on("click", function(){
@@ -344,11 +340,11 @@
     			
     			var movieId = td.eq(0).text();
             	$("#hd_selectedMovieId").val(movieId);
-            	
+
             	All_branch();
             });			
 			
-			//선택한 영화의 영화ID로 지점-상영관 불러오기
+			//선택한 영화의 영화ID로 지점 불러오기
 			function All_branch(){
 				$.ajax({
     				type : "POST",
@@ -425,12 +421,12 @@
     			});				
 			}
 			
-			//지점-상영관 테이블 클릭시
+			//지점 테이블 클릭시
             $("#branchTable>tbody").on("click","tr", function(){
             	var tr = $(this);
             	var td = tr.children();
             	$("#branchTable>tbody>tr").css("background-color", "");		//tr색 초기화
-    			$(tr).css("background-color", "lightgray");							//선택tr 색표시
+    			$(tr).css("background-color", "lightgray");					//선택tr 색표시
     			
             	if(td.eq(1).length == 0)return;
     			
@@ -439,10 +435,22 @@
             	$("#hd_selectedBranchId").val(branchId);
             	$("#hd_selectedBranchNm").val(branchNm);
             	
+            	branchView();
+            	
+            	//편성없는날은 선택불가처리
+            	datepickerFilter();
+            	
             	//날짜가 선택되어 있으면 시간포를 띄운다
-            	var date = $("#hd_selectedDate").val();
-            	if(date != null && date != "") selectSchedule();
+            	//var date = $("#hd_selectedDate").val();
+            	//if(date != null && date != "") selectSchedule();
             });
+			
+			function branchView(){
+				var branchNm = $("#hd_selectedBranchNm").val();
+				if(branchNm == null || branchNm == "") return;
+				
+				$(".branchInfo>label").text(branchNm);
+			} 
 			
 			//상영시간표
 			function selectSchedule(){
@@ -462,25 +470,239 @@
     					"pageSize" : 10000,
     					"searchDiv" : "40",
     					"searchWord_second" : date,
-    					"searchWord" : roomId
+    					"searchWord" : movieId
     				}
 				}).done(function(data){
-    				var scheduleArr = data;
-    				
+    				var scheduleArr = data;    				
+    				createTimeBtnBox(scheduleArr);
     			});
-    			
 			}
 			
-			function schedule(){
+			//상영시간표 생성
+			function createTimeBtnBox(scheduleArr){
+				$("#selectTimeBtnCase>div").detach();
 				
+				if(scheduleArr.length > 0){
+					//상영관 개수 파악
+					var roomArr = new Array();
+					var unique_roomArr = new Array();
+					for(var i=0 ; i<scheduleArr.length ; i++){
+						roomArr.push(scheduleArr[i].roomNm);
+					}
+					$.each(roomArr, function(i, el){
+						if($.inArray(el, unique_roomArr) === -1) unique_roomArr.push(el);
+					});
+					
+					//상영관 개수만큼 div생성
+					var roomData = unique_roomArr;
+					if(roomData.length > 0){
+						for(var i=0 ; i<roomData.length ; i++){
+							var roomNm = roomData[i];
+							$("#selectTimeBtnCase").append(
+									"<div class='selectTimeBtnBox' data-room='"+roomNm+"'></div>"
+							);
+							$("div[data-room="+roomNm+"]").prepend(
+									"&nbsp;<label>"+roomNm+"</label><br/>"
+							);
+						}
+					}
+
+					//상영관div에 버튼생성
+					var boxData = $("div[data-room]");
+					for(var i=0 ; i<boxData.length ; i++){			//상영관
+						var boxNm = $(boxData[i]).attr("data-room");
+						for(var q=0 ; q<scheduleArr.length ; q++){	//일정
+							var schedule = scheduleArr[q].roomNm;
+							if(boxNm == schedule){
+								var target = $("div[data-room="+boxNm+"]");		
+								var time = convertTime(scheduleArr[q].startTime);
+
+								if(todayFilter(time) == null){
+									$(target).append(
+											"&nbsp;<button class='btn btn-default btn-xs timeBtn' data-room='"+roomNm+"' disabled='disabled'>"+
+											 time+
+											"</button>"
+									);	
+								}else{		
+									$(target).append(
+											"&nbsp;<button class='btn btn-default btn-xs timeBtn' data-room='"+roomNm+"'>"+
+											 time+
+											"</button>"
+									);
+								}
+							}				
+						}
+					}
+				}
+			}
+			
+			//상영시간표 시간정보 변형
+			function convertTime(scheduleData){
+				//scheduleData -> yyyy-mm-dd hh:mm;ss
+				var scheduleDataArr = scheduleData.split(" ");
+				//var dateArr = scheduleDataArr[0].split("-");
+				var timeArr = scheduleDataArr[1].split(":");
+				var format = timeArr[0] + ":" + timeArr[1];
+				return format;
+			}
+			
+			//현재시간보다 늦은 데이터는 null반환
+			function todayFilter(data){
+				//data -> hh:mm
+				var now = new Date();
+				var h = now.getHours();
+				var m = now.getMinutes();
 				
+				var dataArr = data.split(":");
+				var ah = dataArr[0];
+				var am = dataArr[1];
+
+				//같은 Hour일 경우
+				if(h == ah){
+					if(m > am) return null;
+				}
 				
+				//Hour가 다를경우
+				if(h > ah) return null;
+				
+				return data;
 			}
 			
 			
-			$("#test").on("click", function(){
-				
+			$("#asd").on("click", function(){
+				$("#datePicker").datepicker("destroy");
+				$("#datePicker").datepicker({
+					//beforeShowDay: asdasd
+					beforeShowDay: testa
+					
 			});
+			});
+			
+			
+			 function asdasd(d) {
+			        var dmy = 0;//(d.getMonth()+1); 
+			        //if(d.getMonth()<9) 
+			          //  dmy="0"+dmy; 
+			        //dmy+= "-"; 
+
+			        if(d.getDate()<10) dmy+="0"; 
+			            dmy+=d.getDate();
+			            console.log(typeof dmy);console.log(typeof availableDates);
+			        console.log(dmy + ' .' +availableDates+' : '+($.inArray(dmy, availableDates)));
+
+			        if ($.inArray(dmy, availableDates) != -1) {
+			            return [true, "","Available"]; 
+			        } else{
+			             return [false,"","unAvailable"]; 
+			        }
+			    }
+			 
+			 function datepickerFilter(){
+					var branchId = $("#hd_selectedBranchId").val();
+					var movieId = $("#hd_selectedMovieId").val();
+					
+					if(movieId == null || movieId == "") return;
+					if(branchId == null || branchId == "") return;
+					
+					$.ajax({
+	    				type : "POST",
+	    				url : "${context}/screenInfo/do_retrieve.do",
+	    				dataType : "json",
+	    				data : {
+	    					"pageSize" : 10000,
+	    					"searchDiv" : "50",
+	    					"searchWord" : movieId
+	    				}
+					}).done(function(data){
+	    				var scheduleArr = data;    				
+	    				//startTime: "2019-10-17 15:00:00"
+
+	    				if(scheduleArr.length > 0){
+	    					var unique_Arr = new Array();
+	    					var dataArr = new Array();
+	    					for(var i=0 ; i<scheduleArr.length ; i++){
+	    						var time = scheduleArr[i].startTime;
+	    						var dateArr = time.split(" ");
+	    						var timeArr = dateArr[0].split("-");
+	    						var d = parseInt(timeArr[2]);
+	    						
+	    						dataArr.push(d);
+	    					}
+	    					$.each(dataArr, function(i, el){
+	    						if($.inArray(el, unique_Arr) === -1) unique_Arr.push(el);
+	    					});
+	    					
+	    					$("#datePicker").datepicker("destroy");
+	    					$("#datePicker").datepicker({
+	    						beforeShowDay: function(d) {	
+	    							var dmy = 0
+	    							if(d.getDate()<10) dmy+="0"; 
+	    				            dmy+=d.getDate();
+	    				            
+	    				            console.log(typeof dmy); console.log(typeof unique_Arr);
+	    				            console.log(typeof unique_Arr[0]);
+	    							 console.log(dmy + ' .' +unique_Arr+' : '+($.inArray(dmy, unique_Arr)));
+	    							if ($.inArray(dmy, unique_Arr) != -1) {
+	    						           return [true, "","Available"]; 
+	    						       } else{
+	    						            return [false,"","unAvailable"]; 
+	    						       }
+	    						}
+	    					});
+	    				}//if End
+	    			});//done End
+				}//-function End
+				
+				 
+				 function testa(da){
+						var branchId = $("#hd_selectedBranchId").val();
+						var movieId = $("#hd_selectedMovieId").val();
+						
+						
+						$.ajax({
+		    				type : "POST",
+		    				url : "${context}/screenInfo/do_retrieve.do",
+		    				dataType : "json",
+		    				data : {
+		    					"pageSize" : 10000,
+		    					"searchDiv" : "50",
+		    					"searchWord" : movieId
+		    				}
+						}).done(function(data){
+		    				var scheduleArr = data;    				
+		    				//startTime: "2019-10-17 15:00:00"
+
+		    				if(scheduleArr.length > 0){
+		    					var unique_Arr = new Array();
+		    					var dataArr = new Array();
+		    					for(var i=0 ; i<scheduleArr.length ; i++){
+		    						var time = scheduleArr[i].startTime;
+		    						var dateArr = time.split(" ");
+		    						var timeArr = dateArr[0].split("-");
+		    						var d = parseInt(timeArr[2]);
+		    						
+		    						dataArr.push(d);
+		    					}
+		    					$.each(dataArr, function(i, el){
+		    						if($.inArray(el, unique_Arr) == -1) unique_Arr.push(el);
+		    					});
+		    							var dmy = 0
+		    							if(da.getDate()<10) dmy+="0"; 
+		    				            dmy+=da.getDate();
+		    				            
+		    				            console.log(typeof dmy); console.log(typeof unique_Arr);
+		    				            console.log(typeof unique_Arr[0]);
+		    							 console.log(dmy + ' .' +unique_Arr+' : '+($.inArray(dmy, unique_Arr)));
+		    							if ($.inArray(dmy, unique_Arr) != -1) {
+		    						           return [true, "","Available"]; 
+		    						       } else{
+		    						            return [false,"","unAvailable"]; 
+		    						       }
+		    						
+		    				//->ajax제거 피커함수, 아작스 독립필요
+		    				}//if End
+		    			});//done End
+					}//-function End
     	</script>
 	</body>
 </html>
