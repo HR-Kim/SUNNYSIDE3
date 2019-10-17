@@ -164,8 +164,8 @@ public class LGS_ScreenInfoDaoImpl implements WorkDiv {
 		return list;
 	}
 	
-	public List<?> do_retrieve_branchNroom(DTO dto) {
-		String statement = this.NAMESPACE + ".do_retrieve_branchNroom";
+	public List<?> do_retrieve_branch(DTO dto) {
+		String statement = this.NAMESPACE + ".do_retrieve_branch";
 	
 		LOG.debug("==================================");
 		LOG.debug("statement = " + statement);
@@ -186,19 +186,4 @@ public class LGS_ScreenInfoDaoImpl implements WorkDiv {
 		return list;
 	}
 
-	public List<?> do_retrieve_All_branchNroom() {
-		String statement = this.NAMESPACE + ".do_retrieve_All_branchNroom";
-	
-		LOG.debug("==================================");
-		LOG.debug("statement = " + statement);
-		LOG.debug("==================================");
-		
-		List<LGS_ScreenInfoVO> list = sqlSessionTemplate.selectList(statement);
-		
-		LOG.debug("==================================");
-		LOG.debug("list = " + list);
-		LOG.debug("==================================");
-		
-		return list;
-	}
 }

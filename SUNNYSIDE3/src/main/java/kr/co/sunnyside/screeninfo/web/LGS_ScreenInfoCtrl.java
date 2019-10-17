@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import kr.co.sunnyside.branchinfo.service.LGS_BranchInfoVO;
 import kr.co.sunnyside.cmn.Message;
 import kr.co.sunnyside.cmn.SearchVO;
 import kr.co.sunnyside.code.service.CodeVO;
 import kr.co.sunnyside.movie.service.LHJ_MovieVO;
 import kr.co.sunnyside.movie.service.impl.LHJ_ScreeningSvcImpl;
-import kr.co.sunnyside.screeninfo.service.BranchNRoomVO;
 import kr.co.sunnyside.screeninfo.service.LGS_ScreenInfoSvc;
 import kr.co.sunnyside.screeninfo.service.LGS_ScreenInfoVO;
 
@@ -270,16 +270,16 @@ public class LGS_ScreenInfoCtrl {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "screenInfo/do_retrieve_branchNroom.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
-	public String do_retrieve_branchNroom(SearchVO search) {
+	@RequestMapping(value = "screenInfo/do_retrieve_branch.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	public String do_retrieve_branch(SearchVO search) {
 		LOG.debug("==================================");
-		LOG.debug("Controller : do_retrieve_branchNroom");
+		LOG.debug("Controller : do_retrieve_branch");
 		LOG.debug("==================================");
 		
 		if(search.getPageSize() == 0) search.setPageSize(10);
 		if(search.getPageNum() == 0) search.setPageNum(1);
 		
-		List<LGS_ScreenInfoVO> list = (List<LGS_ScreenInfoVO>) screenInfoSvc.do_retrieve_branchNroom(search);
+		List<LGS_ScreenInfoVO> list = (List<LGS_ScreenInfoVO>) screenInfoSvc.do_retrieve_branch(search);
 		
 		LOG.debug("==================================");
 		LOG.debug("list : " + list);
@@ -290,24 +290,5 @@ public class LGS_ScreenInfoCtrl {
 		
 		return gsonStr;
 	}
-	
-	/**지점-상영관 이름 List*/
-	@ResponseBody
-	@RequestMapping(value = "screenInfo/do_retrieve_All_branchNroom.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
-	public String do_retrieve_All_branchNroom() {
-		LOG.debug("==================================");
-		LOG.debug("Controller : do_retrieve_All_branchNroom");
-		LOG.debug("==================================");
 
-		List<BranchNRoomVO> list = (List<BranchNRoomVO>) screenInfoSvc.do_retrieve_All_branchNroom();
-		
-		LOG.debug("==================================");
-		LOG.debug("list : " + list);
-		LOG.debug("==================================");
-		
-		Gson gson=new Gson();
-		String gsonStr = gson.toJson(list);		
-		
-		return gsonStr;
-	}
 }
