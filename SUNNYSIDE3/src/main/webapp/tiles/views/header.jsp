@@ -15,7 +15,7 @@
 	
 	
 	<!-- Stylesheets -->
-	<link rel="stylesheet" href="../../sunnyside/resources/css/divisima/bootstrap.min.css"/>
+<!-- 	<link rel="stylesheet" href="../../sunnyside/resources/css/divisima/bootstrap.min.css"/> -->
 	<link rel="stylesheet" href="../../sunnyside/resources/css/divisima/font-awesome.min.css"/>
 	<link rel="stylesheet" href="../../sunnyside/resources/css/divisima/flaticon.css"/>
 	<link rel="stylesheet" href="../../sunnyside/resources/css/divisima/slicknav.min.css"/>

@@ -22,6 +22,13 @@
       <put-attribute name="menu" value="MAIN" />
     </definition>
         
+    <!-- movie -->    
+    <definition name="movie/*" extends="basede_definition">
+      <put-attribute name="body" value="/movie/{1}.jsp" />
+      <put-attribute name="title" value="SUNNYSIDE>상세보기" />
+      <put-attribute name="menu" value="DETAIL" />
+    </definition>
+    
     <!-- boxoffice -->    
     <definition name="boxoffice/*" extends="basede_definition">
       <put-attribute name="body" value="/boxoffice/{1}.jsp" />
