@@ -134,6 +134,7 @@
 		/** 네이버로 로그인 */
 		$("#naverLogin").on("click",function(){
 			if(confirm("네이버로 로그인 시 등급에 따른 할인혜택을 받을 수 없습니다. 네이버로 로그인 하시겠습니까?")== false)return;
+			alert($("#naverUrl").val());
 			location.href = $("#naverUrl").val();
 		});
 		
