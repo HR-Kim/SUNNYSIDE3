@@ -14,6 +14,7 @@
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <!------ Include the above in your HEAD tag ---------->
 <title>장바구니</title>
+${user.userId}
 </head>
 <h2 style="margin-left: 450px;margin-top: 70px; margin-bottom: 40px; font-weight: bold">장바구니</h2>
 <div class="container">
@@ -47,10 +48,10 @@
 				                            </div>
 				                        </div></td>
 				                        <td class="col-sm-1 col-md-1" style="text-align: center">
-				                        <input type="email" class="form-control" id="exampleInputEmail1" value="3">
+				                        <input type="email" class="form-control" id="exampleInputEmail1" value="${vo.count }">
 				                        </td>
+				                        <td class="col-sm-1 col-md-1 text-center"><strong>${vo.oriProductCost }</strong></td>
 				                        <td class="col-sm-1 col-md-1 text-center"><strong>${vo.productCost }</strong></td>
-				                        <td class="col-sm-1 col-md-1 text-center"><strong>$14.61</strong></td>
 				                        <td class="col-sm-1 col-md-1">
 				                        <button type="button" class="btn btn-danger" style="margin-left: 5px;">
 				                            <span class="glyphicon glyphicon-remove"></span>

@@ -92,7 +92,7 @@ public class SEJ_CartSvcImple implements SEJ_CartSvc {
 		LOG.debug("==================");
 		LOG.debug("=@Service updateCart="+dto);
 		LOG.debug("==================");
-		return cartDaoImpl.do_update(dto);
+		return cartDaoImpl.do_updateCountCart(dto);
 	}
 
 

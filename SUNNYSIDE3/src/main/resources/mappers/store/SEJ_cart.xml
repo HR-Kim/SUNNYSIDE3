@@ -18,13 +18,11 @@
 	<insert id="do_save" parameterType="Cart">
 	INSERT INTO CART (
 			    cart_id,
-          		product_nm,
 			    user_id,
 			    count,
 			    product_id				    
 			) VALUES (
 			    TO_CHAR(SYSDATE,'yyyymmdd')||'-'||to_char((SELECT COUNT(*) FROM CART), 'FM000'),
-			    #{productNm,jdbcType=VARCHAR},
 			    #{userId,jdbcType=VARCHAR},
 			    #{count,jdbcType=NUMERIC},
 			    #{productId,jdbcType=VARCHAR}
@@ -73,7 +71,8 @@
 		    c.product_nm as productNm,
 		    b.user_id as userId,
 		    a.count,
-		    a.product_cost as productCost,
+		    c.product_cost as  oriProductCost,
+		    c.product_cost*a.count as productCost,
 		    c.product_id as productId,
 		    c.save_file_nm as saveFileNm
 		FROM

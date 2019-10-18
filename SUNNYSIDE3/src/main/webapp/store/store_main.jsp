@@ -190,7 +190,7 @@
                    <img class="pic-1"  style="height: 270px" width="270px"  src="../resources/image/2019/10/movieVoucher.jpg">
                     <ul class="social">
                         <li><a href="do_selectOne.do?productId=20191011-003-004" data-tip="상세보기"><i class="fa fa-search"></i></a></li>
-                        <li><a href="#" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a href="" data-tip="장바구니"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
                 </div>
                 <div class="product-content"> 
@@ -263,6 +263,58 @@
 <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
 <script src="${context}/resources/js/bootstrap.min.js"></script>   
 <script type="text/javascript">
+	
+//장바구니에 담기
+$("#goCart").on("click",function(){
+	//alert("goCart");
+	
+	//로그인 시 이동가능 
+	if("${user.userId}"!= ""){ //로그인 되어있으면 
+		if(false==confirm('상품을 담으시겠습니까?')) return;
+		 addToCart(); //카트에 더하기 함수 
+		
+     }else{// 로그인이 안되어있으면
+		alert("회원만 사용가능한 서비스입니다.\n로그인을 해주세요.");
+    	location.href ="${context}/login/login_view.do";
+     }		
+});
+
+ function addToCart(){
+	 console.log("productId="+$("#productId").text());
+	 console.log("userId="+$("#userId").text());
+	 console.log("count="+$("#count option:selected").val());
+	 
+		//ajax
+	     $.ajax({
+	        type:"POST",
+	        url:"${context}/cart/do_save.do",
+	        dataType:"html",
+	           data:{
+	           "productId":$("#productId").text(),
+	           "userId":$("#userId").text(),
+	           "count":$("#count option:selected").val()                       
+	       
+	          },   
+	      success: function(data){ 
+			  if(null != data && data.msgId=="1"){
+				  alert("추가되었습니다.");
+				  var userId = $("#userId").text();
+				  location.href="${context}/cart/do_retrieve.do?userId="+userId;
+				
+			  }else{
+				alert("추가되었습니다.");	
+				  var userId = $("#userId").text();
+				  location.href="${context}/cart/do_retrieve.do?userId="+userId;
+			  }
+	     },
+	     complete:function(data){
+	  	   
+	     },
+	     error:function(xhr,status,error){
+	         alert("error:"+error);
+	     }
+	    }); //--ajax  
+	 }
 	
 	//등록
 	$("#addbtn").on("click",function(){
