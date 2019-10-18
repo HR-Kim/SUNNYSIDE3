@@ -8,14 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <title>추가정보 입력</title>
-	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="${context}/resources/image/login/favicon.ico"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/bootstrap.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href=""${context}/resources/css/login/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/icon-font.min.css">
 <!--===============================================================================================-->
@@ -36,7 +33,7 @@
 <!-- 부트스트랩 -->
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 
-</head>
+</head>>
 <body>
 		
 	<div class="limiter">
@@ -105,7 +102,6 @@
 <!--===============================================================================================-->
 
 	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
-	<script src="${context}/resources/js/jquery-1.12.4.js"></script>
 	<script src="${context}/resources/js/login/jquery.validate.js"></script>
 	<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
 	<script src="${context}/resources/js/bootstrap.min.js"></script>
@@ -122,7 +118,7 @@
 		$("#join").on("click",function(){
 			//console.log("join");
 
-			if($("#joinForm").valid()==false)return;
+			//if($("#joinForm").valid()==false)return;
 			if(false==confirm("회원가입 하시겠습니까?"))return;
 
 			

@@ -49,16 +49,37 @@
 					</div>
 					<div class="col-xl-4 col-lg-5">
 						<div class="user-panel">
-							<div class="up-item">
-								<i class="flaticon-profile"></i>
-								<a href="#">Sign</a> In or <a href="#">Create Account</a>
-							</div>
-							<div class="up-item" >
-								<div class="shopping-card">
-									<i class="flaticon-bag"></i>
-								</div>
-								<a href="/sunnyside/cart/do_retrieve.do">장바구니</a>
-							</div>
+						
+							<!-- 로그인 하면 아이디 보임 -->
+							<c:choose>
+								<c:when test="${user}  ||  ${user.userId} == ''">
+									<div class="up-item">
+										<i class="flaticon-profile"></i>
+										<a href="#">Sign</a> In or <a href="#">Create Account</a>
+									</div>
+								</c:when>
+								<c:otherwise>
+									${user.userId }
+								</c:otherwise>
+							</c:choose>		
+							
+							/// ${user.userId }
+							
+							<!-- 로그인 했을 때만 장바구니 표시 -->
+							<c:choose>
+								<c:when test="${not empty user.userId}">
+									<div class="up-item" >
+										<div class="shopping-card">
+											<i class="flaticon-bag"></i>
+										</div>
+										<a href="/sunnyside/cart/do_retrieve.do">장바구니</a>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div></div>
+								</c:otherwise>
+							</c:choose>		
+							
 						</div>
 					</div>
 				</div>
