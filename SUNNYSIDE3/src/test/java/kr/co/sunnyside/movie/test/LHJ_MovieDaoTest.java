@@ -77,8 +77,19 @@ public class LHJ_MovieDaoTest {
 				,new LHJ_MovieVO("K21094","나쁜","","","","2019-09-11","","",0,"","",0.0,0.0,"000","0","08")
 				,new LHJ_MovieVO("F48214","원스","","","","2019-09-25","","",0,"","",0.0,0.0,"000","0","09")
 				,new LHJ_MovieVO("F48401","47미터","","","","2019-08-28","","",0,"","",0.0,0.0,"000","0","10")
+				,new LHJ_MovieVO("A05778","꼼:수행","","","","2019-08-28","","",0,"","",0.0,0.0,"000","0","10")
 		);			
 	}	 
+	
+	//이거 테스트 해보기
+	@Test
+	@Ignore
+	public void do_visitorRate_update() {
+//		for(LHJ_MovieVO vo:list) {
+			int flag = movieDaoImpl.do_visitorRate_update(list.get(2));
+			assertThat(1, is(flag));
+//		}
+	}
 	
 	/**전체조회*/
 	@Test

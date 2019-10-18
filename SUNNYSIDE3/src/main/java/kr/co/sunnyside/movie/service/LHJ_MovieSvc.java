@@ -13,4 +13,7 @@ public interface LHJ_MovieSvc {
 	
 	/**영화정보 저장*/
 	public int do_save(DTO dto);
+	
+	/**방문자 평점 수정*/
+	public int do_visitorRate_update(DTO dto);
 }

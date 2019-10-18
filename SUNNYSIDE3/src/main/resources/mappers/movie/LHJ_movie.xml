@@ -30,6 +30,21 @@
 		</choose>
 	</sql>
 	
+	<!-- 방문자 평점 수정 -->
+	<update id="do_visitorRate_update" parameterType="Movie">	
+		UPDATE 
+			movie
+		SET 
+			visitor_rate = (SELECT 
+								ROUND(AVG(visitor_rate),1)
+						    FROM
+						    	review
+						    WHERE
+						    	movie_Id=#{movieId, jdbcType=VARCHAR})
+		WHERE 
+			movie_Id=#{movieId, jdbcType=VARCHAR}
+	</update>	
+	
 	<!-- 목록조회 -->
 	<select id="do_retrieve" parameterType="Search" resultType="Movie">
 	  SELECT T1.*,T2.*                                       

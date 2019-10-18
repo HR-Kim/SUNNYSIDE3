@@ -28,4 +28,9 @@ public class LHJ_MovieSvcImpl implements LHJ_MovieSvc {
 		return movieDaoImpl.do_save(dto);
 	}
 
+	@Override
+	public int do_visitorRate_update(DTO dto) {
+		return movieDaoImpl.do_visitorRate_update(dto);
+	}
+
 }

@@ -20,6 +20,8 @@ import kr.co.sunnyside.cmn.SearchVO;
 import kr.co.sunnyside.cmn.StringUtil;
 import kr.co.sunnyside.code.service.CodeService;
 import kr.co.sunnyside.code.service.CodeVO;
+import kr.co.sunnyside.movie.service.LHJ_MovieVO;
+import kr.co.sunnyside.movie.service.impl.LHJ_MovieSvcImpl;
 import kr.co.sunnyside.review.service.LHJ_ReviewVO;
 import kr.co.sunnyside.review.service.impl.LHJ_ReviewSvcImpl;
 
@@ -29,6 +31,9 @@ public class LHJ_ReviewCtrl {
 
 	@Autowired
 	LHJ_ReviewSvcImpl service;
+	
+	@Autowired
+	LHJ_MovieSvcImpl movieService;
 
 	@Autowired
 	private CodeService codeService;
@@ -104,7 +109,7 @@ public class LHJ_ReviewCtrl {
 	public String do_update(LHJ_ReviewVO inVO) {
 		String gsonStr = "";
 		LOG.debug("============================");
-		LOG.debug("=inVO=" + inVO);
+ 		LOG.debug("=inVO=" + inVO);
 		LOG.debug("============================");
 		if (null == inVO.getMovieId() || "".equals(inVO.getMovieId().trim())) {
 			throw new IllegalArgumentException("영화를 선택하세요.");
@@ -124,6 +129,10 @@ public class LHJ_ReviewCtrl {
 
 		int flag = this.service.do_update(inVO);
 		Message message = new Message();
+		
+		LHJ_MovieVO movieVO = new LHJ_MovieVO();
+		movieVO.setMovieId(inVO.getMovieId());
+		movieService.do_visitorRate_update(movieVO);
 
 		if (flag > 0) {
 			message.setMsgId(String.valueOf(flag));
@@ -149,6 +158,10 @@ public class LHJ_ReviewCtrl {
 
 		int flag = this.service.do_delete(inVO);
 		Message message = new Message();
+		
+		LHJ_MovieVO movieVO = new LHJ_MovieVO();
+		movieVO.setMovieId(inVO.getMovieId());
+		movieService.do_visitorRate_update(movieVO);
 
 		if (flag > 0) {
 			message.setMsgId(String.valueOf(flag));
@@ -185,6 +198,11 @@ public class LHJ_ReviewCtrl {
 		}
 
 		int flag = this.service.do_save(inVO);
+
+		LHJ_MovieVO movieVO = new LHJ_MovieVO();
+		movieVO.setMovieId(inVO.getMovieId());
+		movieService.do_visitorRate_update(movieVO);
+		
 		Message message = new Message();
 
 		if (flag > 0) {

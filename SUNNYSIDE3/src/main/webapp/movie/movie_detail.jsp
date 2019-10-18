@@ -1,3 +1,4 @@
+<%@page import="kr.co.sunnyside.movie.service.LHJ_MovieVO"%>
 <%@page import="kr.co.sunnyside.review.service.LHJ_ReviewVO"%>
 <%@page import="kr.co.sunnyside.cmn.StringUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -42,6 +43,7 @@
 	maxNum = Integer.valueOf(tmpTotalCnt);
 	currPageNo = Integer.valueOf(pageNum);
 	rowPerPage = Integer.valueOf(pageSize);
+
 %>  
 <!DOCTYPE html>
 <html>
@@ -88,15 +90,17 @@
 					<article class="card-body m-0 pt-0 pl-5">
 						<h1 class="title text-uppercase"><c:out value='${vo.kortitle}'/></h1>				
 						<h6 class="title text-uppercase"><c:out value='${vo.engtitle}'/></h6>
-						<hr>									
+						<input type="text" id="starVisitorRate" name="starVisitorRate" value="${vo.visitorRate}"/>						
+						<hr>								
 						<p>
 							<!-- 별점 -->
 							<select class="avgRate" id="avgRate" name="avgRate">
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
+								<option value="1" <c:if test="${vo.visitorRate < 1.5}"><c:out value='selected'/></c:if>>1</option>
+								<option value="2" <c:if test="${vo.visitorRate >= 1.5 && vo.visitorRate < 2.5}"><c:out value='selected'/></c:if>>2</option>
+								<option value="3" <c:if test="${vo.visitorRate >= 2.5 && vo.visitorRate < 3.5}"><c:out value='selected'/></c:if>>3</option>
+								<option value="4" <c:if test="${vo.visitorRate >= 3.5 && vo.visitorRate < 4.5}"><c:out value='selected'/></c:if>>4</option>
+								<option value="5" <c:if test="${vo.visitorRate >= 4.5 }"><c:out value='selected'/></c:if>>5</option>
+								
 							</select>	
 							<!--// 별점 -->
 							<b>개봉일</b> | <c:out value='${vo.relDate}'/><br>
@@ -276,10 +280,10 @@
 				success: function(data){
 					var jData = JSON.parse(data);
 					if(null != jData && jData.msgId=="1"){
-						alert(jData.msgContents);
+						alert(jData.msgMsg);
 						location.href="${context}/movie/do_selectOne.do?movieId="+movieId
 					}else{
-						alert(jData.msgId+"|"+jData.msgContents);
+						alert(jData.msgId+"|"+jData.msgMsg);
 					}
 	        	},
 				complete:function(data){
@@ -311,10 +315,10 @@
 				success: function(data){
 					var jData = JSON.parse(data);
 					if(null != jData && jData.msgId=="1"){
-						alert(jData.msgContents);
+						alert(jData.msgMsg);
 						location.href="${context}/movie/do_selectOne.do?movieId="+movieId
 					}else{
-						alert(jData.msgId+"|"+jData.msgContents);
+						alert(jData.msgId+"|"+jData.msgMsg);
 					}
 	        	},
 				complete:function(data){
@@ -345,10 +349,10 @@
 				success: function(data){
 					var jData = JSON.parse(data);
 					if(null != jData && jData.msgId=="1"){
-						alert(jData.msgContents);
+						alert(jData.msgMsg);
 						location.href="${context}/movie/do_selectOne.do?movieId="+movieId
 					}else{
-						alert(jData.msgId+"|"+jData.msgContents);
+						alert(jData.msgId+"|"+jData.msgMsg);
 					}
             	},
 				complete:function(data){
@@ -370,9 +374,10 @@
 			frm.submit();
 		}
 		
-		$('.avgRate').barrating({ 			
-			theme: 'fontawesome-stars', 
-			initialRating: 3,
+		$('.avgRate').barrating({ 		
+// 			var rate = $("#starVisitorRate").val();
+// 			console.log(rate);
+			theme: 'fontawesome-stars',
 			readonly: true
 		});
 		

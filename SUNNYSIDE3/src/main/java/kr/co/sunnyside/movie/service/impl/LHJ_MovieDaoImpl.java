@@ -13,6 +13,7 @@ import kr.co.sunnyside.cmn.SearchVO;
 import kr.co.sunnyside.cmn.WorkDiv;
 import kr.co.sunnyside.movie.service.LHJ_BoxofficeVO;
 import kr.co.sunnyside.movie.service.LHJ_MovieVO;
+import kr.co.sunnyside.review.service.LHJ_ReviewVO;
 
 
 @Repository
@@ -33,6 +34,25 @@ public class LHJ_MovieDaoImpl implements WorkDiv{
 	@Override
 	public int do_delete(DTO dto) {
 		return 0;
+	}
+	
+	/**방문자 평점 수정*/	
+	public int do_visitorRate_update(DTO dto) {
+		String statement = NAMESPACE + ".do_visitorRate_update";
+		LHJ_MovieVO inVO = (LHJ_MovieVO) dto;
+		LOG.debug("=============================");
+		LOG.debug("1. param:"+inVO);
+		LOG.debug("=============================");
+		
+		LOG.debug("=============================");
+		LOG.debug("2. statement:"+statement);
+		LOG.debug("=============================");
+		
+		int flag = this.sqlSessionTemplate.update(statement, inVO);		
+		LOG.debug("=============================");
+		LOG.debug("3. flag:"+flag);
+		LOG.debug("=============================");
+		return flag;
 	}
 	
 	/**단건조회*/

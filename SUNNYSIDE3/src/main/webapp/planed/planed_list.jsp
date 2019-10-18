@@ -83,7 +83,7 @@
 			<h1>개봉예정작</h1>
 			<button type="button" class="btn btn-default btn-sm" onclick="popup('do_planedUp_retrieve.do','개봉예정 리스트에 등록',1200,800,100,400,'no');">등록</button>
 			<button type="button" class="btn btn-default btn-sm" onclick="popup('do_planedDown_retrieve.do','개봉예정 리스트에서 제외',1200,800,100,400,'no');">삭제</button>
-			<button type="button" class="btn btn-default btn-sm" onclick="popup('../screening/do_screenUp_retrieve.do','상영중 리스트에 등록',1200,800,100,400,'no');">상영</button>
+			<button type="button" class="btn btn-default btn-sm" onclick="popup('do_planedToScreen_retrieve.do','상영중 리스트에 등록',1200,800,100,400,'no');">상영</button>
 		</div>
 		<!--// div title -->
 		<!-- form -->

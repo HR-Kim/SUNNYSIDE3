@@ -220,17 +220,17 @@
 				success: function(data){
 					var jData = JSON.parse(data);
 					if(null != jData && jData.msgId=="1"){
-// 						alert(jData.msgContents);
+						alert(jData.msgMsg);
 						location.href="${context}/screening/do_screenUp_retrieve.do";
 					}else{
-// 						alert(jData.msgId+"|"+jData.msgContents);
+						alert(jData.msgId+"|"+jData.msgMsg);
 					}
             	},
 				complete:function(data){
              
            		},
 				error:function(xhr,status,error){
-// 					alert("error:"+error);
+					alert("error:"+error);
             	}
 			}); 
            //--ajax
