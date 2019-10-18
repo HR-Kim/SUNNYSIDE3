@@ -89,20 +89,21 @@
 				<aside class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 					<article class="card-body m-0 pt-0 pl-5">
 						<h1 class="title text-uppercase"><c:out value='${vo.kortitle}'/></h1>				
-						<h6 class="title text-uppercase"><c:out value='${vo.engtitle}'/></h6>
-						<input type="text" id="starVisitorRate" name="starVisitorRate" value="${vo.visitorRate}"/>						
+						<h6 class="title text-uppercase"><c:out value='${vo.engtitle}'/></h6>	
+															
 						<hr>								
-						<p>
-							<!-- 별점 -->
-							<select class="avgRate" id="avgRate" name="avgRate">
-								<option value="1" <c:if test="${vo.visitorRate < 1.5}"><c:out value='selected'/></c:if>>1</option>
-								<option value="2" <c:if test="${vo.visitorRate >= 1.5 && vo.visitorRate < 2.5}"><c:out value='selected'/></c:if>>2</option>
-								<option value="3" <c:if test="${vo.visitorRate >= 2.5 && vo.visitorRate < 3.5}"><c:out value='selected'/></c:if>>3</option>
-								<option value="4" <c:if test="${vo.visitorRate >= 3.5 && vo.visitorRate < 4.5}"><c:out value='selected'/></c:if>>4</option>
-								<option value="5" <c:if test="${vo.visitorRate >= 4.5 }"><c:out value='selected'/></c:if>>5</option>
-								
-							</select>	
-							<!--// 별점 -->
+
+						<!-- 별점 -->
+						<select class="avgRate" id="avgRate" name="avgRate">
+							<option value="1" <c:if test="${vo.visitorRate < 1.5}"><c:out value='selected'/></c:if>>1</option>
+							<option value="2" <c:if test="${vo.visitorRate >= 1.5 && vo.visitorRate < 2.5}"><c:out value='selected'/></c:if>>2</option>
+							<option value="3" <c:if test="${vo.visitorRate >= 2.5 && vo.visitorRate < 3.5}"><c:out value='selected'/></c:if>>3</option>
+							<option value="4" <c:if test="${vo.visitorRate >= 3.5 && vo.visitorRate < 4.5}"><c:out value='selected'/></c:if>>4</option>
+							<option value="5" <c:if test="${vo.visitorRate >= 4.5 }"><c:out value='selected'/></c:if>>5</option>
+						</select>								
+						<!--// 별점 -->
+
+							<b>평점</b> | <c:out value='${vo.visitorRate}'/><br>
 							<b>개봉일</b> | <c:out value='${vo.relDate}'/><br>
 							<b>감독</b> | <c:out value='${vo.director}'/><br>
 							<b>출연진</b> | <c:out value='${vo.cast}'/><br>
@@ -166,6 +167,7 @@
 	</div>
 	<!--// div container -->
 	<hr>	
+
 		<!-- review list form -->
 	<form class="form-horizontal" id="reviewListFrm" name="reviewListFrm">
 		<input type="hidden" name="movieId" id="movieId" value="${vo.movieId}"/>
@@ -182,18 +184,7 @@
 								<div class="panel-heading" style="height: 50px">
 									<span class="list_movieId" style="display:none;"><c:out value="${listVO.movieId}"/></span>
 									<strong class="list_userId"><c:out value="${listVO.userId}"/></strong>
-									<span class="text-muted list_regDt"><c:out value="${listVO.regDt}"/></span>
-									<span class="text-muted list_visitorRate">
-<!-- 									<select class="visitorRate" id="visitorRate" name="visitorRate"> -->
-<!-- 										<option value="1">1</option> -->
-<!-- 										<option value="2">2</option> -->
-<!-- 										<option value="3">3</option> -->
-<!-- 										<option value="4">4</option> -->
-<!-- 										<option value="5">5</option> -->
-<!-- 									</select>	 -->
-									
-									
-									<c:out value="${listVO.visitorRate}"/></span>
+									<span class="text-muted list_regDt"><c:out value="${listVO.regDt}"/></span>									
 <!-- 									수정/삭제 버튼									 -->
 									<c:set var="name" value="${user.userId}" />
 									<c:choose>
@@ -202,6 +193,17 @@
 											<span class="text-muted"><input type="button" id="doDelete" name="doDelete" class="btn btn-default btn-sm doDelete" value="삭제" /></span>
 										</c:when>
 									</c:choose>
+								</div>
+								<div class="panel-heading" style="height: 40px; background-color: #fff;">
+								<span class="text-muted list_visitorRate">
+										<select class="avgRate" id="avgRate" name="avgRate">
+											<option value="1" <c:if test="${listVO.visitorRate == 1.0}"><c:out value='selected'/></c:if>>1</option>
+											<option value="2" <c:if test="${listVO.visitorRate == 2.0}"><c:out value='selected'/></c:if>>2</option>
+											<option value="3" <c:if test="${listVO.visitorRate == 3.0}"><c:out value='selected'/></c:if>>3</option>
+											<option value="4" <c:if test="${listVO.visitorRate == 4.0}"><c:out value='selected'/></c:if>>4</option>
+											<option value="5" <c:if test="${listVO.visitorRate == 5.0}"><c:out value='selected'/></c:if>>5</option>
+										</select>
+									</span>
 								</div>
 								<div class="panel-body list_contents">
 									<c:out value="${listVO.contents}"/>
@@ -261,7 +263,7 @@
 			reviewContents.innerHTML = list_contents;
 		});
 	
-		//등록
+		//수정
 		$("#doUpdate").on("click", function(){
 			var movieId = $("#movieId").val();
 			if(confirm("수정 하시겠습니까?")==false)return;
@@ -299,7 +301,17 @@
 		//등록
 		$("#doSave").on("click", function(){
 			var movieId = $("#movieId").val();
-			if(confirm("등록 하시겠습니까?")==false)return;
+			
+			//로그인 시 이동가능 
+			if("${user.userId}"!= ""){ //로그인 되어있으면 
+				if(confirm("등록 하시겠습니까?")==false)return;
+						
+		     }else{// 로그인이 안되어있으면
+				alert("회원만 사용가능한 서비스입니다.\n로그인을 해주세요.");
+				return;
+		     }		
+			
+			
 			
 			//ajax
 			$.ajax({
@@ -325,7 +337,7 @@
 	         
 	       		},
 				error:function(xhr,status,error){
-					alert("error:"+error);
+					alert("이미 등록된 댓글이 존재합니다.\n기존 댓글을 수정하시거나 삭제 후 다시 등록해 주세요.");
 	        	}
 			}); 
 	       //--ajax
@@ -335,7 +347,7 @@
 		$("#doDelete").on("click", function(){
 			var movieId = $("#movieId").val();
 			//valication
-// 			if(confirm("삭제 하시겠습니까?")==false)return;
+			if(confirm("삭제 하시겠습니까?")==false)return;
 			
 			//ajax
 			$.ajax({
