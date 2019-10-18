@@ -3,11 +3,22 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	
+	<!-- Scheduling -->
+	<!-- 스케쥴러파일이 존재하는 패키지 설정 -->
+ 		<context:component-scan base-package="com.crontab" />
+  	<!-- 해당 태그들은 크론탭을 설정에 필요한 태그들 -->
+   		<task:scheduler id="jobScheduler" pool-size="10" />
+    	<task:annotation-driven scheduler="jobScheduler" />
+
 	
 	<!-- Tiles setting -->
 	<beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">

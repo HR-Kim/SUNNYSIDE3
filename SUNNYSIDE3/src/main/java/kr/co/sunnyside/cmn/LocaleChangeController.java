@@ -25,6 +25,13 @@ public class LocaleChangeController {
 		this.localeResolver = localeResolver;
 	}
 	
+	
+	/**
+	 * 로그인 -> 메인 (일반 다국어)
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value="/change_locale.do",method=RequestMethod.GET)
 	public String changeLocale(HttpServletRequest request,HttpServletResponse response) {
 		String language = StringUtil.nvl(request.getParameter("lang"),"ko");
@@ -38,4 +45,28 @@ public class LocaleChangeController {
 		
 		return "main/main";
 	}
+	
+	
+	/**
+	 * 로그인 -> 로그인 (로그인 다국어)
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/login_change_locale.do",method=RequestMethod.GET)
+	public String loginChangeLocale(HttpServletRequest request,HttpServletResponse response) {
+		String language = StringUtil.nvl(request.getParameter("lang"),"ko");
+		
+		LOG.debug("======================");
+		LOG.debug("=language="+language);
+		LOG.debug("======================");
+		
+		Locale locale = new Locale(language);
+		localeResolver.setLocale(request, response, locale);
+		
+		return "login/login";
+	}
+	
+	
+	
 }
