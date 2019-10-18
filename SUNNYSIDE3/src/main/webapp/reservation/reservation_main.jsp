@@ -19,6 +19,43 @@
 		.ui-datepicker select.ui-datepicker-month{ width:30%; font-size: 11px; }
 		.ui-datepicker select.ui-datepicker-year{ width:40%; font-size: 11px; }
 		.ui-widget-content .ui-icon {background-image: url("../resources/image/jquery_ui/ui-icons_444444_256x240.png");}
+		.costlight {
+			color: yellow;
+			font-weight: bold;
+			font-size: 30px;
+		}
+		.lowlight {
+			color: #BFBFBF;
+			font-weight: bold;
+		}
+		.highlight {
+			color: #EFF0F7;
+			font-weight: bold;
+		}
+		#imgBox img{
+			width: 180px;
+			height: 250px;
+		}
+		#numBtnCase {
+			display: none;
+		}
+		.center {
+			text-align: center;
+		}
+		#numBtnCase button{
+			width: 20px;
+			height: 20px;
+			font-size: 12px;
+			font-weight: bold;
+		}
+		.seatFont {
+			font-size: 5px;
+		}
+		.costFont {
+			font-size: 5px;
+			color: gray;
+			padding-left: 90px;
+		}
 		.enableDate {
 			background-color: yellow;
 		}
@@ -56,12 +93,12 @@
 			width: 150px;
 			border-radius: .5rem;
 		}
-		#selectAllInfo {
+		#summary {
 			position: absolute;
 			top: 0px;
 			left: 650px;
 			width: 200px;
-			height: 510px;
+			height: 560px;
 			background-color: #525572;
 			border-radius: .5rem;
 		}
@@ -70,14 +107,14 @@
 			top: 360px;
 			left: 450px;
 			width: 200px;
-			height: 150px;
+			height: 200px;
 		}
 		#selectTime {
 			position: absolute;
 			top: 360px;
 			left: 0px;
 			width: 450px;			
-			height: 150px;
+			height: 200px;
 			overflow: auto;
 		}
 		#selectDate {
@@ -200,8 +237,8 @@
 					&nbsp;<label>극장선택</label>
 				</div>
 				<div class="formal">
-					&nbsp;<button id="testBtn" class="btn btn-xs">전체극장</button>
-					&nbsp;<button id="" class="btn btn-xs">상영극장</button>
+					&nbsp;<button id="allBranch" class="btn btn-xs">전체극장</button>
+					&nbsp;<button id="liveBranch" class="btn btn-xs">상영극장</button>
 				</div>
 				<div class="tableCase">
 				<table id="branchTable" class="table table-hover table-bordered">
@@ -210,7 +247,7 @@
 				</div>
 				<br/>
 			</div>
-				
+			
 			<input type="hidden" id="hd_selectedDate" value="">
 			<div id="selectDate" class="case">
 				<div class="bar">
@@ -220,8 +257,7 @@
 					<div id="datePicker"></div>
 				</div>
 			</div>
-			
-			
+
 			<div id="selectTime" class="case">
 				<div id="" class="bar">
 					&nbsp;<label>상영시간표</label>
@@ -232,19 +268,51 @@
 				</div>
 			</div>
 			
+			<input type="hidden" id="hd_aNum" value="0">
+			<input type="hidden" id="hd_sNum" value="0">
+			<input type="hidden" id="hd_aCost" value="0">
+			<input type="hidden" id="hd_sCost" value="0">
 			<div id="selectNum" class="case">
 				<div id="" class="bar">
 					&nbsp;<label>인원선택</label>
 				</div>
-				<div>
-					<button id="asd">asd</button>
+				<div id="numBtnCase">
+					&nbsp;<label class="seatFont"></label>
+					<div class="numBtnAdult">
+						&nbsp;<b>성인</b><label class="costFont"></label>
+						<br/>&nbsp;
+						<button class="aBtn" value="0">0</button>
+						<button class="aBtn" value="1">1</button>
+						<button class="aBtn" value="2">2</button>
+						<button class="aBtn" value="3">3</button>
+						<button class="aBtn" value="4">4</button>
+						<button class="aBtn" value="5">5</button>
+						<button class="aBtn" value="6">6</button>
+						<button class="aBtn" value="7">7</button>
+					</div>
+					<br/>
+					<div class="numBtnStudent">
+						&nbsp;<b>학생</b><label class="costFont"></label>
+						<br/>&nbsp;
+						<button class="sBtn" value="0">0</button>
+						<button class="sBtn" value="1">1</button>
+						<button class="sBtn" value="2">2</button>
+						<button class="sBtn" value="3">3</button>
+						<button class="sBtn" value="4">4</button>
+						<button class="sBtn" value="5">5</button>
+						<button class="sBtn" value="6">6</button>
+						<button class="sBtn" value="7">7</button>
+					</div>
 				</div>
 			</div>
 
-			<div id="selectAllInfo">
-				<div id="" class="infoBar">
-					&nbsp;<button id="resetBtn" class="btn btn-warning btn-xs">예매 다시하기</button>
+			<div id="summary">
+				<div id="" class="infoBar center">
+					<button id="resetBtn" class="btn btn-warning btn-xs">예매 다시하기</button>
 				</div>
+				<div id="imgBox" class="center"></div>
+				<div id="infoBox"></div>
+				<div id="infoBox_bottom"></div>
 			</div>
 
 			
@@ -256,8 +324,7 @@
 			$(document).ready(function(){
 				planedMovieList();
 			});
-			//var availableDates = ["10-17-2019", "10-18-2019", "10-19-2019"];
-			var availableDates = [17,18,19];
+
 			//datepicker 설정
 			$.datepicker.setDefaults({
 	            dateFormat: 'yy-mm-dd' //Input Display Format 변경
@@ -279,16 +346,7 @@
 			    });
 			
 			//datePicker 부여
-			$("#datePicker").datepicker({
-				onSelect: function(value){
-					$("#hd_selectedDate").val(value);
-					var roomId = $("#hd_selectedBranchId").val();
-	            	if(roomId != null && roomId != "") selectSchedule();
-				}
-			});
-			
-			
-			
+
 			//영화선택테이블 조회
 			$("#movieFBtn").on("click", function(){
 				planedMovieList();
@@ -340,8 +398,14 @@
     			
     			var movieId = td.eq(0).text();
             	$("#hd_selectedMovieId").val(movieId);
-
+            	$("#datePicker").datepicker("destroy");
+				$("#selectTimeBtnCase>div").detach();
+				$("#hd_selectedBranchId").val("");
+				$(".branchInfo>label").text("");
+				$("#numBtnCase").css("display", "none");
+				
             	All_branch();
+            	infoBox_imgNtitle(movieId);
             });			
 			
 			//선택한 영화의 영화ID로 지점 불러오기
@@ -376,7 +440,7 @@
     							$("#branchTable").append(
     									"<tr>"+
     									"<td hidden='hidden'>"+arr[i].branchId+"</td>"+
-    									"<td>"+arr[i].branchNm+" - "+arr[i].branchNm+"</td>"+
+    									"<td>"+arr[i].branchNm+"</td>"+
     									"</tr>"
     							);
     						}
@@ -421,6 +485,21 @@
     			});				
 			}
 			
+			$("#allBranch").on("click", function(){
+				var movieId = $("#hd_selectedMovieId").val();
+				if(movieId == "") return;
+				
+				All_branch();
+			});
+				
+			$("#liveBranch").on("click", function(){	
+				var movieId = $("#hd_selectedMovieId").val();
+				if(movieId == "") return;
+				
+				planedBranch(movieId, null);
+				
+			});
+			
 			//지점 테이블 클릭시
             $("#branchTable>tbody").on("click","tr", function(){
             	var tr = $(this);
@@ -439,12 +518,9 @@
             	
             	//편성없는날은 선택불가처리
             	datepickerFilter();
-            	
-            	//날짜가 선택되어 있으면 시간포를 띄운다
-            	//var date = $("#hd_selectedDate").val();
-            	//if(date != null && date != "") selectSchedule();
             });
 			
+			//상영시간표에 지점이름 표시
 			function branchView(){
 				var branchNm = $("#hd_selectedBranchNm").val();
 				if(branchNm == null || branchNm == "") return;
@@ -514,10 +590,12 @@
 						for(var q=0 ; q<scheduleArr.length ; q++){	//일정
 							var schedule = scheduleArr[q].roomNm;
 							if(boxNm == schedule){
-								var target = $("div[data-room="+boxNm+"]");		
+								var target = $("div[data-room="+boxNm+"]");
+								var sId = scheduleArr[q].screenId;
+								var script = 'javascript:scheduleBtn("'+sId+'")';
 								var time = convertTime(scheduleArr[q].startTime);
 
-								if(todayFilter(time) == null){
+								if(todayFilter(time) == null){//끝난영화일때
 									$(target).append(
 											"&nbsp;<button class='btn btn-default btn-xs timeBtn' data-room='"+roomNm+"' disabled='disabled'>"+
 											 time+
@@ -525,16 +603,91 @@
 									);	
 								}else{		
 									$(target).append(
-											"&nbsp;<button class='btn btn-default btn-xs timeBtn' data-room='"+roomNm+"'>"+
+											"&nbsp;<button class='btn btn-primary btn-xs timeBtn' data-room='"+roomNm+"' onclick='"+script+"'>"+
 											 time+
 											"</button>"
 									);
 								}
-							}				
-						}
-					}
-				}
+							}//if END				
+						}//for END
+					}//for END
+				}//if END
+			}//function END
+			
+			//상영관 선택시
+			function scheduleBtn(screenId){
+				$.ajax({
+    				type : "POST",
+    				url : "${context}/screenInfo/do_retrieve.do",
+    				dataType : "json",
+    				data : {
+    					"searchDiv" : "60",
+    					"searchWord" : screenId
+    				}
+				}).done(function(data){
+					var screenInfo = data[0];
+					var roomId = screenInfo.roomId;
+					var roomNm = screenInfo.roomNm
+					
+					var adultCost = screenInfo.adultCost;
+					var studentCost = screenInfo.studentCost;
+					$("#hd_aCost").val(adultCost);
+					$("#hd_sCost").val(studentCost);
+					
+					var date = screenInfo.startTime;
+					$.ajax({
+	    				type : "POST",
+	    				url : "${context}/room/do_retrieve.do",
+	    				dataType : "json",
+	    				data : {
+	    					"searchDiv" : "20",
+	    					"searchWord" : roomId
+	    				}
+					}).done(function(data){
+						var roomInfo = data[0];
+						var totolSeat = roomInfo.totalSeat;
+						var restSeat = roomInfo.restSeat;
+						var selectedAdult = 0;
+						var selectedStudent = 0;
+						
+						infoBox_center(roomNm, date);
+						
+						$("#numBtnCase").css("display", "block");
+						
+						$(".seatFont").text("좌석현황: "+restSeat+"/"+totolSeat);
+						$(".costFont").text("1인/"+adultCost+"원");
+						$(".costFont").text("1인/"+studentCost+"원");
+					});
+				});
 			}
+			
+			//좌석선택시 1
+			$(".numBtnAdult>button").on("click", function(){
+				var btn = $(this)[0];
+				
+				$(".numBtnAdult>button").css("background-color", "window");
+				$(".numBtnAdult>button").css("opacity", "0.5");
+				$(this).css("opacity", "1");
+				$(this).css("background-color", "lightblue");
+				
+				var num = $("#hd_aNum").val(btn.value);
+				
+				infoBox_bottom();
+			});
+			
+			//좌석선택시 2
+			$(".numBtnStudent>button").on("click", function(){
+				var btn = $(this)[0];
+				
+				$(".numBtnStudent>button").css("background-color", "window");
+				$(".numBtnStudent>button").css("opacity", "0.5");
+				$(this).css("opacity", "1");
+				$(this).css("background-color", "lightblue");
+				
+				var num = $("#hd_sNum").val(btn.value);
+				
+				infoBox_bottom();
+			});
 			
 			//상영시간표 시간정보 변형
 			function convertTime(scheduleData){
@@ -567,36 +720,8 @@
 				
 				return data;
 			}
-			
-			
-			$("#asd").on("click", function(){
-				$("#datePicker").datepicker("destroy");
-				$("#datePicker").datepicker({
-					//beforeShowDay: asdasd
-					beforeShowDay: testa
-					
-			});
-			});
-			
-			
-			 function asdasd(d) {
-			        var dmy = 0;//(d.getMonth()+1); 
-			        //if(d.getMonth()<9) 
-			          //  dmy="0"+dmy; 
-			        //dmy+= "-"; 
 
-			        if(d.getDate()<10) dmy+="0"; 
-			            dmy+=d.getDate();
-			            console.log(typeof dmy);console.log(typeof availableDates);
-			        console.log(dmy + ' .' +availableDates+' : '+($.inArray(dmy, availableDates)));
-
-			        if ($.inArray(dmy, availableDates) != -1) {
-			            return [true, "","Available"]; 
-			        } else{
-			             return [false,"","unAvailable"]; 
-			        }
-			    }
-			 
+			 //datepicker 설정
 			 function datepickerFilter(){
 					var branchId = $("#hd_selectedBranchId").val();
 					var movieId = $("#hd_selectedMovieId").val();
@@ -632,77 +757,104 @@
 	    						if($.inArray(el, unique_Arr) === -1) unique_Arr.push(el);
 	    					});
 	    					
-	    					$("#datePicker").datepicker("destroy");
-	    					$("#datePicker").datepicker({
-	    						beforeShowDay: function(d) {	
-	    							var dmy = 0
-	    							if(d.getDate()<10) dmy+="0"; 
-	    				            dmy+=d.getDate();
-	    				            
-	    				            console.log(typeof dmy); console.log(typeof unique_Arr);
-	    				            console.log(typeof unique_Arr[0]);
-	    							 console.log(dmy + ' .' +unique_Arr+' : '+($.inArray(dmy, unique_Arr)));
-	    							if ($.inArray(dmy, unique_Arr) != -1) {
-	    						           return [true, "","Available"]; 
+	    					$("#datePicker").datepicker("destroy");			//제거
+	    					$("#datePicker").datepicker({					//생성
+	    						beforeShowDay: function(d) {				//피커 생성 전 처리
+	    							var pd = d.getDate();
+	    							if ($.inArray(pd, unique_Arr) != -1) {
+	    						           return [true, "",""]; 			//Arr에 있는 날짜만 표시
 	    						       } else{
-	    						            return [false,"","unAvailable"]; 
+	    						            return [false,"",""];			//아니면 선택불가
 	    						       }
+	    						},
+	    						onSelect: function(value){					//날짜클릭시
+	    							$("#hd_selectedDate").val(value);
+	    							var roomId = $("#hd_selectedBranchId").val();
+	    			            	if(roomId != null && roomId != "") selectSchedule();
 	    						}
-	    					});
+	    					});//datepicker End
 	    				}//if End
 	    			});//done End
 				}//-function End
 				
-				 
-				 function testa(da){
-						var branchId = $("#hd_selectedBranchId").val();
-						var movieId = $("#hd_selectedMovieId").val();
+				//요약1
+				function infoBox_imgNtitle(movieId){
+					$.ajax({
+	    				type : "POST",
+	    				url : "${context}/screening/do_selectOne_movie.do",
+	    				dataType : "json",
+	    				data : {
+	    					"movieId" : movieId
+	    				}
+					}).done(function(data){
+						var vo = data;
+						var title = vo.kortitle;
 						
+						$("#infoBox>div").detach();
 						
-						$.ajax({
-		    				type : "POST",
-		    				url : "${context}/screenInfo/do_retrieve.do",
-		    				dataType : "json",
-		    				data : {
-		    					"pageSize" : 10000,
-		    					"searchDiv" : "50",
-		    					"searchWord" : movieId
-		    				}
-						}).done(function(data){
-		    				var scheduleArr = data;    				
-		    				//startTime: "2019-10-17 15:00:00"
+						//제목
+						if(title.length > 14){
+							var upper = title.substring(0,14);
+							var lower = title.substr(14,title.length);
+							$("#infoBox").append(
+									"<div>"+
+									"<br/>&nbsp;&nbsp;&nbsp;"+
+									"<label class='highlight'>"+upper+"</label>"+
+									"<br/>&nbsp;&nbsp;&nbsp;&nbsp;<label class='highlight'>"+lower+"</label>"+
+									"<div>"				
+							);
+						}else{
+							$("#infoBox").append(
+									"<div>"+
+									"<br/>&nbsp;&nbsp;&nbsp;"+
+									"<label class='highlight'>"+title+"</label>"+
+									"<div>"				
+							);
+						}
 
-		    				if(scheduleArr.length > 0){
-		    					var unique_Arr = new Array();
-		    					var dataArr = new Array();
-		    					for(var i=0 ; i<scheduleArr.length ; i++){
-		    						var time = scheduleArr[i].startTime;
-		    						var dateArr = time.split(" ");
-		    						var timeArr = dateArr[0].split("-");
-		    						var d = parseInt(timeArr[2]);
-		    						
-		    						dataArr.push(d);
-		    					}
-		    					$.each(dataArr, function(i, el){
-		    						if($.inArray(el, unique_Arr) == -1) unique_Arr.push(el);
-		    					});
-		    							var dmy = 0
-		    							if(da.getDate()<10) dmy+="0"; 
-		    				            dmy+=da.getDate();
-		    				            
-		    				            console.log(typeof dmy); console.log(typeof unique_Arr);
-		    				            console.log(typeof unique_Arr[0]);
-		    							 console.log(dmy + ' .' +unique_Arr+' : '+($.inArray(dmy, unique_Arr)));
-		    							if ($.inArray(dmy, unique_Arr) != -1) {
-		    						           return [true, "","Available"]; 
-		    						       } else{
-		    						            return [false,"","unAvailable"]; 
-		    						       }
-		    						
-		    				//->ajax제거 피커함수, 아작스 독립필요
-		    				}//if End
-		    			});//done End
-					}//-function End
+						//포스터
+						$("#imgBox>img").detach();
+						$("#imgBox").append(
+							"<img class='case' alt='moviePoster' src='"+vo.poster+"'>"		
+						);
+					});
+				}
+				
+				//요약2
+				function infoBox_center(roomNm, date){
+					var branchNm = $("#hd_selectedBranchNm").val();
+					$("#infoBox").append(
+						"<div>"+
+						"<hr/>"+
+						"&nbsp;&nbsp;<label class='lowlight'>극장</label>"+
+						"&nbsp;<label class='highlight'>"+branchNm+" - "+roomNm+"</label>"+
+						"<br/>"+
+						"&nbsp;&nbsp;<label class='lowlight'>날짜</label>"+
+						"&nbsp;<label class='highlight'>"+date+"</label>"+
+						"<br/>"
+					);	
+				}
+				
+				//요약3
+				function infoBox_bottom(){
+					var adult = $("#hd_aNum").val();
+					var student = $("#hd_sNum").val();
+					var aCost = parseInt($("#hd_aCost").val());
+					var sCost = parseInt($("#hd_sCost").val());
+					
+					$("#infoBox_bottom>div").detach();
+							
+					$("#infoBox_bottom").append(
+							"<div>"+
+							"&nbsp;&nbsp;<label class='lowlight'>인원</label>"+
+							"&nbsp;<label class='highlight'>성인 "+adult+", 학생 "+student+"</label>"+
+							"<br/>"+
+							"&nbsp;&nbsp;<label class='lowlight'>금액</label>"+
+							"&nbsp;<label class='costlight'>"+(aCost+sCost)+"</label>"+
+							"<br/>"
+					);	
+					
+				}
     	</script>
 	</body>
 </html>
