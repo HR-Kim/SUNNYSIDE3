@@ -6,8 +6,8 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="context" value="${pageContext.request.contextPath }" />
 <%
-
-	
+	String userId = request.getParameter("userId"); 
+	String productId = request.getParameter("productId"); 
 
 %>
 <!DOCTYPE html>
@@ -24,14 +24,14 @@
 </head>
 <body>
 <h3 class="h4"  style="margin-left: 50px; margin-top: 2em; font-weight: bold; font-size:25">상품 상세정보</h3>
-<table style="margin-top: 150px; margin-bottom: 50px;">
+<table style="margin-top: 150px; margin-bottom: 50px;" >
 
 	<tr>
 		<td style="display: none;" id="productId" class="productId">${vo.productId }</td>
+		<td style="display: none;" id="userId" class="userId">${user.userId }</td>
 		<td style="display: none;" id="category" class="category" >${vo.category }</td>
 		<td style="display: none;" id="orgFileNm" class="orgFileNm" >${vo.orgFileNm }</td>
-		<td style="display: none;" id="saveFileNm" class="saveFileNm" >${vo.saveFileNm }</td>
-		
+		<td style="display: none;" id="saveFileNm" class="saveFileNm" >${vo.saveFileNm }</td>		
 		<td>
 			<img width="340" height="300" src="${vo.saveFileNm }">
 		</td>
@@ -47,8 +47,10 @@
 			</tr>
 			<tr align="center">
 				<td colspan="2">
-					<form action="do_selectOne.do" method="get">
-						수량: <select name="amount">
+					<form action="${context}/cart/do_save.do" name="selectProductForm" id="selectProductForm" method="get">
+						<input type="hidden" value="${vo.productId }" name="productId" id="productId">
+						<input type="hidden" value="${user.userId }" name="userId" id="userId">
+						수량: <select name="count" id="count">
 							<c:forEach begin="1" end="10" var="i">
 								<option value="${i}"> ${i}</option>
 							</c:forEach>
@@ -79,10 +81,51 @@
 <script type="text/javascript">
 	//장바구니에 담기
 	$("#goCart").on("click",function(){
-		alert("goCart");
+		//alert("goCart");
 		
-		
+		//로그인 시 이동가능 
+		if("${user.userId}"!= ""){ //로그인 되어있으면 
+			if(false==confirm('상품을 담으시겠습니까?')) return;
+			//moveToCart();
+			location.href ="${context}/cart/do_retrieve.do"; //장바구니에 더하기
+			
+	     }else{// 로그인이 안되어있으면
+			alert("회원만 사용가능한 서비스입니다.\n로그인을 해주세요.");
+	    	location.href ="${context}/login/login_view.do";
+	     }		
 	});
+
+	 function moveToCart(){
+		 
+			//ajax
+		     $.ajax({
+		        type:"POST",
+		        url:"${context}/cart/do_save.do",		        
+		        dataType:"html",
+		           data:{
+		           "productId":$("#productId").text(),
+		           "userId":$("#user.userId ").text(),
+		           "count":$("#count").text()                    
+		       
+		          },   
+		      success: function(data){ 
+				  if(null != data && data.msgId=="1"){
+					  alert("추가되었습니다.");		
+					  location.href="${context}/cart/do_retrieve.do";
+					
+				  }else{
+					alert("추가되었습니다.");	
+					location.href="${context}/cart/do_retrieve.do";
+				  }
+		     },
+		     complete:function(data){
+		  	   
+		     },
+		     error:function(xhr,status,error){
+		         alert("error:"+error);
+		     }
+		    }); //--ajax  
+		 }
 
 
 	//수정

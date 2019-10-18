@@ -4,7 +4,7 @@ import kr.co.sunnyside.cmn.DTO;
 
 public class SEJ_CartVO extends DTO {
 	/**장바구니코드*/
-	private int cartId      ;   
+	private String cartId      ;   
 	/**상품명*/
 	private String productNm   ; 
 	/**회원ID*/
@@ -28,7 +28,7 @@ public class SEJ_CartVO extends DTO {
 	public SEJ_CartVO() {}
 
 
-	public SEJ_CartVO(int cartId, String productNm, String userId, int count, int oriProductCost, int productCost,
+	public SEJ_CartVO(String cartId, String productNm, String userId, int count, int oriProductCost, int productCost,
 			String productId, String orgFileNm, String saveFileNm, String ext) {
 		super();
 		this.cartId = cartId;
@@ -53,12 +53,12 @@ public class SEJ_CartVO extends DTO {
 	}
 
 
-	public int getCartId() {
+	public String getCartId() {
 		return cartId;
 	}
 
 
-	public void setCartId(int cartId) {
+	public void setCartId(String cartId) {
 		this.cartId = cartId;
 	}
 
@@ -151,6 +151,9 @@ public class SEJ_CartVO extends DTO {
 	public void setExt(String ext) {
 		this.ext = ext;
 	}
+
+
+	
 	
 	
 	

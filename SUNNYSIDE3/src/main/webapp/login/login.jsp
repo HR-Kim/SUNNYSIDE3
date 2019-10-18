@@ -168,7 +168,7 @@
 			//alert("signIn");
 			//console.log($("#userId").val());
 			//console.log($("#passwd").val());
-			if($("#loginForm").valid()==false)return;
+			//if($("#loginForm").valid()==false)return;
 			
 			$.ajax({
 				type : "POST",

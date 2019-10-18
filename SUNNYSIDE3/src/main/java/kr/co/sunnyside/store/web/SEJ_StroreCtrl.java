@@ -53,6 +53,8 @@ public class SEJ_StroreCtrl {
 	private final String VIEW_SELECTONE = "store/selectproduct";
 	private final String VIEW_SELECTONETOUPDATE = "store/store_update";
 	private final String VIEW_MNG_NM = "store/store_add";
+	private final String CART_LIST_VIEW = "cart/cart";
+	
 
 	//메인으로 이동
 	@RequestMapping(value = "store/store_main.do")
@@ -62,6 +64,16 @@ public class SEJ_StroreCtrl {
 		LOG.debug("======================");
 
 		return VIEW_LIST_NM;
+	}
+	
+	//장바구니페이지로 이동
+	@RequestMapping(value = "cart/cart.do")
+	public String cartMain() {
+		LOG.debug("======================");
+		LOG.debug("=@Controller cartMain=");
+		LOG.debug("======================");
+
+		return CART_LIST_VIEW;
 	}
 
 	/**
@@ -461,7 +473,7 @@ public class SEJ_StroreCtrl {
 
 		// 디폴트 값 설정 페이지사이즈:10
 		if (search.getPageSize() == 0) {
-			search.setPageSize(10);
+			search.setPageSize(100);
 		}
 
 		// 디폴트 값 설정 페이지번호:1
@@ -497,7 +509,7 @@ public class SEJ_StroreCtrl {
 
 		// 디폴트 값 설정 페이지사이즈:10
 		if (search.getPageSize() == 0) {
-			search.setPageSize(10);
+			search.setPageSize(100);
 		}
 
 		// 디폴트 값 설정 페이지번호:1
@@ -533,7 +545,7 @@ public class SEJ_StroreCtrl {
 
 		// 디폴트 값 설정 페이지사이즈:10
 		if (search.getPageSize() == 0) {
-			search.setPageSize(10);
+			search.setPageSize(100);
 		}
 
 		// 디폴트 값 설정 페이지번호:1

@@ -30,8 +30,6 @@
 	<![endif]-->
 </head>
 <body>
-	
-</body>
 	<!-- Header section -->
 	<header class="header-section">
 		<div class="header-top">
@@ -55,12 +53,11 @@
 								<i class="flaticon-profile"></i>
 								<a href="#">Sign</a> In or <a href="#">Create Account</a>
 							</div>
-							<div class="up-item">
+							<div class="up-item" >
 								<div class="shopping-card">
 									<i class="flaticon-bag"></i>
-									<span>0</span>
 								</div>
-								<a href="#">Shopping Cart</a>
+								<a href="/sunnyside/cart/do_retrieve.do">장바구니</a>
 							</div>
 						</div>
 					</div>
@@ -94,6 +91,5 @@
 			</div>
 		</nav>
 	</header>
-	<!-- Header section end -->
-	
+</body>
 </html>

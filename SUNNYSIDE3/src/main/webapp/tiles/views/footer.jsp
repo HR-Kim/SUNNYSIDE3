@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 </head>
 <body>
-
  	<!-- Footer section -->
 	<section class="footer-section">
 		<div class="container">

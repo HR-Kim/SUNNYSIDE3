@@ -49,10 +49,11 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="${context}/resources/css/headerStyle.css" rel="stylesheet" type="text/css"> 
 <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
 
+<!------ Include the above in your HEAD tag ---------->
+<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="${context}/resources/css/headerStyle.css" rel="stylesheet"> 
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 <link rel="stylesheet" href="${context}/resources/css/fontawesome-stars.css">
 
@@ -61,7 +62,7 @@
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif] -->
+<![endif]-->
 </head>
 <body>
 	<!-- div container -->
@@ -74,7 +75,7 @@
 
 		<!-- detail form -->
 		<form class="form-horizontal">
-			<div class="container" ><div class="card border-0"><div class="row">
+			<div class="container"><div class="card border-0"><div class="row">
 				<aside class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></aside>
 				<aside class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 					<article class="gallery-wrap"> 
@@ -118,14 +119,14 @@
 		<!-- detail form -->
 		<hr>
 		<!-- review input form -->
-		<form class="form-horizontal">
+		<form class="form-horizontal" id="reviewForm" name="reviewForm">
 			<aside class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></aside>
 			<aside class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
 				<div class="table-responsive" style="overflow-x: hidden">
 					
 					<p>한줄평</p>
+					<input type="hidden" name="movieId" id="movieId" value="${vo.movieId}"/>
 					<input type="text" name="userId" id="userId" value="${user.userId}"/>
-<!-- 					<input type="text" name="visitorRate" id="visitorRate" value="3"/> -->
 					<table class="table  table-striped table-bordered table-hover" id="listTable">
 					<tbody>					
 					<tr style="width: 100%;">
@@ -145,7 +146,8 @@
 							<div class="form-group">
 								<label for="reviewContents" class="col-sm-2 control-label"></label>
 								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-									<button type="button" class="btn btn-default btn-sm" id="doSave">등록</button>
+									<button type="button" class="btn btn-default btn-sm doSave" id="doSave">등록</button>
+									<button type="button" class="btn btn-default btn-sm doUpdate" id="doUpdate" style="display:none;">수정</button>
 								</div>
 							</div>
 						</td>
@@ -160,8 +162,8 @@
 	</div>
 	<!--// div container -->
 	<hr>	
-	<!-- review list form -->
-	<form class="form-horizontal" id="reviewFrm" name="reviewFrm">
+		<!-- review list form -->
+	<form class="form-horizontal" id="reviewListFrm" name="reviewListFrm">
 		<input type="hidden" name="movieId" id="movieId" value="${vo.movieId}"/>
 		<input type="hidden" name="pageNum" id="pageNum" value="${searchVO.pageNum}"/>
 		<!-- Grid영역 -->
@@ -174,20 +176,30 @@
 						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 							<div class="panel panel-default">
 								<div class="panel-heading" style="height: 50px">
-									<span style="display:none;"><c:out value="${listVO.movieId}"/></span>
-									<strong><c:out value="${listVO.userId}"/></strong>
-									<span class="text-muted"><c:out value="${listVO.regDt}"/></span>
-									<span class="text-muted"><c:out value="${listVO.visitorRate}"/></span>
+									<span class="list_movieId" style="display:none;"><c:out value="${listVO.movieId}"/></span>
+									<strong class="list_userId"><c:out value="${listVO.userId}"/></strong>
+									<span class="text-muted list_regDt"><c:out value="${listVO.regDt}"/></span>
+									<span class="text-muted list_visitorRate">
+<!-- 									<select class="visitorRate" id="visitorRate" name="visitorRate"> -->
+<!-- 										<option value="1">1</option> -->
+<!-- 										<option value="2">2</option> -->
+<!-- 										<option value="3">3</option> -->
+<!-- 										<option value="4">4</option> -->
+<!-- 										<option value="5">5</option> -->
+<!-- 									</select>	 -->
+									
+									
+									<c:out value="${listVO.visitorRate}"/></span>
 <!-- 									수정/삭제 버튼									 -->
 									<c:set var="name" value="${user.userId}" />
 									<c:choose>
 										<c:when test="${name == listVO.userId}">
-											<span class="text-muted"><input type="button" id="doUpdate" name="doUpdate" class="btn btn-default btn-sm doUpdate" value="수정" /></span>
+											<span class="text-muted"><input type="button" id="doUpdateSelect" name="doUpdateSelect" class="btn btn-default btn-sm doUpdateSelect" value="수정" /></span>
 											<span class="text-muted"><input type="button" id="doDelete" name="doDelete" class="btn btn-default btn-sm doDelete" value="삭제" /></span>
 										</c:when>
 									</c:choose>
 								</div>
-								<div class="panel-body">
+								<div class="panel-body list_contents">
 									<c:out value="${listVO.contents}"/>
 								</div><!-- /panel-body -->
 							</div><!-- /panel panel-default -->
@@ -211,6 +223,7 @@
 	</form>
 	<!--// review list form -->
 	
+
 	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 	<script src="${context}/resources/js/jquery-1.12.4.js"></script>
 	<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
@@ -218,29 +231,53 @@
 	<!-- 별점 -->
 	<script type="text/javascript" src="../resources/js/jquery.barrating.min.js"></script>
 	<script type="text/javascript">	
+		//리뷰리스트의 수정 버튼 클릭시 리뷰 입력창에서 수정할 수 있도록 하는 기능
+		$("#doUpdateSelect").on("click", function(){
+			var doUpdateSelect = $(this);
+			var div = doUpdateSelect.parent().parent();
+			var list_movieId = div.children('.list_movieId').text(); //수정할 댓글의 영화ID
+			var list_userId = div.children('.list_userId').text(); //수정할 댓글의 사용자ID
+			var list_regDt = div.children('.list_regDt').text(); //수정할 댓글의 작성일
+			var list_visitorRate = div.children('.list_visitorRate').text(); //수정할 댓글의 사용자평점
+			var list_contents = div.parent().children('.list_contents').text().trim(); //수정할 댓글의 리뷰내용
+						
+			var reviewContents = document.getElementById('reviewContents'); //리뷰 작성란의 contents
+			
+			document.getElementById("doSave").style.display ='none';//저장버튼 숨김
+			document.getElementById("doUpdate").style.display ='block';//수정버튼 보이게함
+		
+			console.log(list_movieId);
+			console.log(list_userId);
+			console.log(list_regDt);
+			console.log(list_visitorRate);
+			console.log(list_contents);
+			
+			
+			//수정버튼 클릭시 리뷰 작성란의 contents에 수정할 리뷰의 내용이 전달된다.
+			reviewContents.innerHTML = list_contents;
+		});
 	
-	
-	
-		//삭제
-		$("#doDelete").on("click", function(){
+		//등록
+		$("#doUpdate").on("click", function(){
 			var movieId = $("#movieId").val();
-			//valication
-			if(confirm("삭제 하시겠습니까?")==false)return;
+			if(confirm("수정 하시겠습니까?")==false)return;
 			
 			//ajax
 			$.ajax({
 				type:"POST",
-				url:"${context}/review/do_delete.do",
+				url:"${context}/review/do_update.do",
 				dataType:"html",
 				data:{
-					"movieId":movieId,
-					"userId":$("#userId").val()					
+					"movieId":$("#movieId").val(),
+					"userId":$("#userId").val(),
+					"contents":$("#reviewContents").val(),
+					"visitorRate":$("#visitorRate").val()
 				}, 
 				success: function(data){
 					var jData = JSON.parse(data);
 					if(null != jData && jData.msgId=="1"){
 						alert(jData.msgContents);
-						location.href="${context}/movie/do_selectOne.do?movieId="+movieId;
+						location.href="${context}/movie/do_selectOne.do?movieId="+movieId
 					}else{
 						alert(jData.msgId+"|"+jData.msgContents);
 					}
@@ -266,7 +303,7 @@
 				url:"${context}/review/do_save.do",
 				dataType:"html",
 				data:{
-					"movieId":movieId,
+					"movieId":$("#movieId").val(),
 					"userId":$("#userId").val(),
 					"contents":$("#reviewContents").val(),
 					"visitorRate":$("#visitorRate").val()
@@ -275,7 +312,7 @@
 					var jData = JSON.parse(data);
 					if(null != jData && jData.msgId=="1"){
 						alert(jData.msgContents);
-						location.href="${context}/movie/do_selectOne.do?movieId="+movieId;
+						location.href="${context}/movie/do_selectOne.do?movieId="+movieId
 					}else{
 						alert(jData.msgId+"|"+jData.msgContents);
 					}
@@ -289,10 +326,44 @@
 			}); 
 	       //--ajax
 		});
+		
+		//삭제
+		$("#doDelete").on("click", function(){
+			var movieId = $("#movieId").val();
+			//valication
+// 			if(confirm("삭제 하시겠습니까?")==false)return;
+			
+			//ajax
+			$.ajax({
+				type:"POST",
+				url:"${context}/review/do_delete.do",
+				dataType:"html",
+				data:{
+					"movieId":$("#movieId").val(),
+					"userId":$("#userId").val()
+				}, 
+				success: function(data){
+					var jData = JSON.parse(data);
+					if(null != jData && jData.msgId=="1"){
+						alert(jData.msgContents);
+						location.href="${context}/movie/do_selectOne.do?movieId="+movieId
+					}else{
+						alert(jData.msgId+"|"+jData.msgContents);
+					}
+            	},
+				complete:function(data){
+             
+           		},
+				error:function(xhr,status,error){
+					alert("error:"+error);
+            	}
+			}); 
+           //--ajax
+		});
 	
 		//paging
 		function search_page(url, pageNum) {
-			var frm = document.reviewFrm;
+			var frm = document.reviewListFrm;
 			frm.pageNum.value = pageNum;
 			frm.movieId.value = $("#movieId").val();
 			frm.action = url;
@@ -312,7 +383,7 @@
 		
 		
 		$(document).ready(function(){
-
+		//alert("ready");
 		});
 	</script>  
 </body>
