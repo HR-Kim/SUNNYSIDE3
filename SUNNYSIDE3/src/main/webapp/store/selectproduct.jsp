@@ -39,21 +39,21 @@
 		<table border="1" style="height: 300px; width: 400px;">
 			<tr align="center">
 				<td>상품명</td>
-				<td>${vo.productNm }</td>
+				<td><input id="productNm" name="productNm" value="${vo.productNm }"/></td>
 			</tr>
 			<tr align="center">
 				<td>가격</td>
-				<td>${vo.productCost} 원</td>
+				<td><input id="productCost" name="productCost" value="${vo.productCost}"/>원</td>
 			</tr>
 			<tr align="center">
 				<td colspan="2">
-					<form action="${context}/cart/do_save.do" name="selectProductForm" id="selectProductForm" method="get">
+					<form action="${context}/cart/do_save.do" name="selectProductForm" id="selectProductForm" method="post">
 						<input type="hidden" value="${vo.productId }" name="productId" id="productId">
 						<input type="hidden" value="${user.userId }" name="userId" id="userId">
 						수량: <select name="count" id="count">
-							<c:forEach begin="1" end="10" var="i">
-								<option value="${i}"> ${i}</option>
-							</c:forEach>
+								<c:forEach begin="1" end="10" var="i">
+                        			<option value="${i}">${i}</option>
+                    			</c:forEach>
 						</select> &nbsp; 개		
 					</form>				
 						<input style="margin-top: 30px; margin-right: 30px" id="goCart" name="goCart" type="submit" value="장바구니에 담기" >					
@@ -86,8 +86,7 @@
 		//로그인 시 이동가능 
 		if("${user.userId}"!= ""){ //로그인 되어있으면 
 			if(false==confirm('상품을 담으시겠습니까?')) return;
-			//moveToCart();
-			location.href ="${context}/cart/do_retrieve.do"; //장바구니에 더하기
+			 addToCart(); //카트에 더하기 함수 
 			
 	     }else{// 로그인이 안되어있으면
 			alert("회원만 사용가능한 서비스입니다.\n로그인을 해주세요.");
@@ -95,27 +94,32 @@
 	     }		
 	});
 
-	 function moveToCart(){
+	 function addToCart(){
+		 console.log("productId="+$("#productId").text());
+		 console.log("userId="+$("#userId").text());
+		 console.log("count="+$("#count option:selected").val());
 		 
 			//ajax
 		     $.ajax({
 		        type:"POST",
-		        url:"${context}/cart/do_save.do",		        
+		        url:"${context}/cart/do_save.do",
 		        dataType:"html",
 		           data:{
 		           "productId":$("#productId").text(),
-		           "userId":$("#user.userId ").text(),
-		           "count":$("#count").text()                    
+		           "userId":$("#userId").text(),
+		           "count":$("#count option:selected").val()                       
 		       
 		          },   
 		      success: function(data){ 
 				  if(null != data && data.msgId=="1"){
-					  alert("추가되었습니다.");		
-					  location.href="${context}/cart/do_retrieve.do";
+					  alert("추가되었습니다.");
+					  var userId = $("#userId").text();
+					  location.href="${context}/cart/do_retrieve.do?userId="+userId;
 					
 				  }else{
 					alert("추가되었습니다.");	
-					location.href="${context}/cart/do_retrieve.do";
+					  var userId = $("#userId").text();
+					  location.href="${context}/cart/do_retrieve.do?userId="+userId;
 				  }
 		     },
 		     complete:function(data){
@@ -126,7 +130,8 @@
 		     }
 		    }); //--ajax  
 		 }
-
+	 
+	 
 
 	//수정
 	$("#updatebtn").on("click",function(){

@@ -85,12 +85,12 @@ public class SEJ_CartDaoTest {
 		cartDaoImpl.do_deleteAll();
 	}
 	
-	/**장바구니 수정 ===========> 정지하는 이유? */
+	/**장바구니 수정  */
 	@Test
 	@Ignore
 	public void do_update() {
 				
-		SEJ_CartVO store = list.get(1);
+		SEJ_CartVO store = list.get(0);
 		store.setCount(2);
 		
 		int flag = cartDaoImpl.do_update(store);

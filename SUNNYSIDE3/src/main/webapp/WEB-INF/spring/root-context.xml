@@ -49,10 +49,10 @@
 	
 	<bean id="passwordAuth" class="javax.mail.PasswordAuthentication">
 		<constructor-arg>
-	 		<value>glwlzkwp</value>
+	 		<value>아이디</value>
 		</constructor-arg>
 		<constructor-arg>
-	 		<value>13965232sj</value>
+	 		<value>비번</value>
 		</constructor-arg>
 	</bean>
 	

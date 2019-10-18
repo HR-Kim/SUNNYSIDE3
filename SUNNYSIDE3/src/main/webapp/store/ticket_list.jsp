@@ -33,7 +33,7 @@
 					                    <img class="pic-1" style="height: 270px" width="270px" src="<c:out value="${vo.saveFileNm }"/>">		
 					                    <ul class="social">
 					                        <li><a href="do_selectOne.do?productId=${vo.productId }" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-					                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+					                        <li><a id="goCart" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
 					                    </ul>
 					                </div>
 					                <div class="product-content">
@@ -58,6 +58,9 @@
 <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
     <script src="${context}/resources/js/bootstrap.min.js"></script>   
 	<script type="text/javascript">
+
+	
+	
 	//페이징
 	function search_page(url,pageNum){
 		var frm = document.ticketFrm;

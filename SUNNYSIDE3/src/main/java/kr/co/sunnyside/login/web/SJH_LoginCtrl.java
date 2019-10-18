@@ -165,7 +165,7 @@ public class SJH_LoginCtrl {
 		
 		
 		//4.파싱 닉네임 세션으로 저장
-		session.setAttribute("userId",userId); //세션 생성
+		session.setAttribute("user",userId); //세션 생성
 		
 		model.addAttribute("userId",userId);
 		model.addAttribute("userName",userName);

@@ -94,8 +94,8 @@ public class SJH_MypageSvcImpl implements SJH_MypageSvc {
 			
 			//보내는 사람
 			String host = "smtp.naver.com";
-			final String userName = "glwlzkwp";
-			final String password = "13965232sj";
+			final String userName = "아이디";
+			final String password = "비번";
 			int port = 465;
 			
 			//받는 사람

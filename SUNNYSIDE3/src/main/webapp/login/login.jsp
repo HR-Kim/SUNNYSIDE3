@@ -42,8 +42,8 @@
 				<form class="login100-form validate-form flex-sb flex-w" id="loginForm" name="loginForm">
 					<div class="form-group">
 						<select name="lang" id="lang">
-					        <option value="ko">한글</option>
-							<option value="en">영어</option>
+					        <option value="ko" <c:if test="${lang == ko}">selected</c:if> >한글</option>
+							<option value="en" <c:if test="${lang == en}">selected</c:if> >영어</option>
 					     </select>
 				    </div>
 				    
