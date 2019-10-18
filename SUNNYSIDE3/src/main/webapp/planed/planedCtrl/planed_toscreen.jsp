@@ -62,7 +62,7 @@
 	int bottomCount = 10;
 	int currPageNo = 1; //현재페이지
 	int rowPerPage = 10; //페이지당 보여줄 건수
-	String url = request.getContextPath()+"/screening/do_screenDown_retrieve.do";
+	String url = request.getContextPath()+"/planed/do_planedDown_retrieve.do";
 	String scriptName = "search_page";
 	
 	//totalCnt
@@ -72,13 +72,14 @@
 	currPageNo = Integer.valueOf(pageNum);
 	rowPerPage = Integer.valueOf(pageSize);
 %>  
-<html lang="ko">
+<!DOCTYPE html>
+<html>
 <head>
-	<meta charset="utf-8">
+	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-	<title>상영중 리스트에서 제외</title>
+	<title>개봉예정 리스트에서 제외</title>
 	
 	<!-- 부트스트랩 -->
 	<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -96,7 +97,7 @@
 	<div class="container">
 		<!-- div title --> 
 		<div class="page-header">
-			<h1>상영중 리스트에서 제외</h1>
+			<h1>개봉예정 영화를 상영중으로</h1>
 		</div>
 		<!--// div title -->
 		<!-- 검색영역 -->
@@ -113,7 +114,7 @@
 						<input type="text"  class="form-control input-sm" id="searchWord" name="searchWord" placeholder='검색' />
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<button type="button" class="btn btn-default btn-sm" id="doRetrieve">조회</button> 
-						<button type="button" class="btn btn-default btn-sm" id="doListRetrieve">목록</button> 
+						<button type="button" class="btn btn-default btn-sm" id="doListRetrieve">목록</button><br><br>
 					</div>
 				</form>
 			</div> 
@@ -143,7 +144,7 @@
 									<td class="text-center"><c:out value="${StringUtil.col3Substring(vo.getGenre())}"/></td>					
 									<td class="text-center"><c:out value="${StringUtil.col1Substring(vo.getLimitage())}"/></td>
 									<td class="text-center"><c:out value="${vo.relDate}"/></td>
-									<td class="text-center"><input type="button" id="doDelete" name="doDelete" class="btn btn-default btn-sm doDelete" value="삭제" /></td>
+									<td class="text-center"><input type="button" id="doUpdate" name="doUpdate" class="btn btn-default btn-sm doUpdate" value="상영" /></td>
 								</tr>
 							</c:forEach>        			
 						</c:when>        	
@@ -178,10 +179,10 @@
 			frm.submit();
 		}
 		
-		//상영중 리스트로 돌아가기
+		//개봉예정리스트로 돌아가기
 		$("#doListRetrieve").on("click", function(){
 			if(confirm("목록으로 이동 하시겠습니까?")==false)return;
-			location.href="${context}/screening/do_retrieve.do"
+			location.href="${context}/planed/do_retrieve.do"
 		});
 		
 		function doRetrieve(){
@@ -197,9 +198,9 @@
 		});
 		
 		
-		$('.doDelete').click(function(event) {
-	 		var doDelete = $(this);
-	 		var tr = doDelete.parent().parent();
+		$('.doUpdate').click(function(event) {
+	 		var doUpdate = $(this);
+	 		var tr = doUpdate.parent().parent();
 	 		var td = tr.children();
 	 		
 	 		var movieId = td.eq(0).text();
@@ -212,7 +213,7 @@
 	 		//ajax
 			$.ajax({
 				type:"POST",
-				url:"${context}/screening/do_update_screenDown.do",
+				url:"${context}/planed/do_update_planedToScreen.do",
 				dataType:"html",
 				data:{
 					"movieId":$("#movieId").val()
@@ -221,7 +222,7 @@
 					var jData = JSON.parse(data);
 					if(null != jData && jData.msgId=="1"){
 						alert(jData.msgMsg);
-						location.href="${context}/screening/do_screenDown_retrieve.do";
+						location.href="${context}/planed/do_planedDown_retrieve.do";
 					}else{
 						alert(jData.msgId+"|"+jData.msgMsg);
 					}
@@ -230,7 +231,7 @@
              
            		},
 				error:function(xhr,status,error){
-					alert("error:"+error);
+// 					alert("error:"+error);
             	}
 			}); 
            //--ajax

@@ -221,10 +221,10 @@
 				success: function(data){
 					var jData = JSON.parse(data);
 					if(null != jData && jData.msgId=="1"){
-// 						alert(jData.msgContents);
+						alert(jData.msgMsg);
 						location.href="${context}/planed/do_planedDown_retrieve.do";
 					}else{
-// 						alert(jData.msgId+"|"+jData.msgContents);
+						alert(jData.msgId+"|"+jData.msgMsg);
 					}
             	},
 				complete:function(data){

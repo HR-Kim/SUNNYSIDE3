@@ -38,6 +38,52 @@ public class LHJ_PlanedCtrl {
 	 private final String VIEW_MOVIE_DETAIL  = "movie/movie_detail";
 	 private final String VIEW_PLANED_UP  = "planed/planedCtrl/planed_up";
 	 private final String VIEW_PLANED_DOWN  = "planed/planedCtrl/planed_down";
+	 private final String VIEW_PLANED_TO_SCREEN  = "planed/planedCtrl/planed_toscreen";
+	 
+	 /**개봉예정영화를 상영중으로 */
+	 @RequestMapping(value="planed/do_planedToScreen_retrieve.do",method = RequestMethod.GET)
+	 public String do_planedToScreen_retrieve(HttpServletRequest req,SearchVO search, Model model) {
+		 //param
+		 if(search.getPageSize()==0) {
+			 search.setPageSize(10);
+		 }
+		 
+		 if(search.getPageNum()==0) {
+			 search.setPageNum(1);
+		 }		
+		 
+		 search.setSearchDiv(StringUtil.nvl(search.getSearchDiv()));
+		 search.setSearchWord(StringUtil.nvl(search.getSearchWord()));
+		 model.addAttribute("vo", search);
+		 
+		 LOG.debug("============================");
+		 LOG.debug("=search="+search);
+		 LOG.debug("============================");		
+		 
+		 CodeVO code=new CodeVO();
+		 //페이지사이즈
+		 code.setCodeId("PAGE_SIZE");
+		 
+		 List<CodeVO> listPageSize=(List<CodeVO>) this.codeService.do_retrieve(code);
+		 model.addAttribute("listPageSize", listPageSize);
+		 
+		 //게시판 검색 구분
+		 code.setCodeId("MOVIE_SEARCH");
+		 List<CodeVO> listBoardSearch=(List<CodeVO>) this.codeService.do_retrieve(code);		
+		 model.addAttribute("listBoardSearch", listBoardSearch);
+		 
+		 //목록조회
+		 List<LHJ_MovieVO> list = (List<LHJ_MovieVO>) this.service.do_retrieve(search);
+		 model.addAttribute("list", list);
+		 
+		 //총건수
+		 int totalCnt = 0;
+		 if(null != list && list.size()>0) {
+			 totalCnt = list.get(0).getTotalCnt();
+		 }
+		 model.addAttribute("totalCnt", totalCnt);
+		 return VIEW_PLANED_TO_SCREEN;
+	 }
 	 
 	 /**개봉예정삭제조회 */
 	 @RequestMapping(value="planed/do_planedDown_retrieve.do",method = RequestMethod.GET)

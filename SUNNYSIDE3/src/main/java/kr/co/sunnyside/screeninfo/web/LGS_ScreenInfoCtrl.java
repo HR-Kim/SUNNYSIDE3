@@ -21,6 +21,7 @@ import kr.co.sunnyside.cmn.Message;
 import kr.co.sunnyside.cmn.SearchVO;
 import kr.co.sunnyside.code.service.CodeVO;
 import kr.co.sunnyside.movie.service.LHJ_MovieVO;
+import kr.co.sunnyside.movie.service.impl.LHJ_MovieSvcImpl;
 import kr.co.sunnyside.movie.service.impl.LHJ_ScreeningSvcImpl;
 import kr.co.sunnyside.screeninfo.service.LGS_ScreenInfoSvc;
 import kr.co.sunnyside.screeninfo.service.LGS_ScreenInfoVO;
