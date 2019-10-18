@@ -1,23 +1,37 @@
 package kr.co.sunnyside.cmn;
 
+import java.sql.SQLException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import kr.co.sunnyside.usermypage.service.SJH_MypageSvc;
 
 @Component
 public class Schecduler {
 	
-	/** * 1. 오후 05:50:00에 호출이 되는 스케쥴러 */ 
-	@Scheduled(cron = "0 50 17 * * *")
-	public void cronTest1(){ 
-		System.out.println("오후 05:50:00에 호출이 됩니다 "); 
-
+	Logger LOG = LoggerFactory.getLogger(this.getClass());
+	
+	@Autowired
+	SJH_MypageSvc mypageSvc;
+	
+	
+	/**
+	 * 자동등업 스케줄러 (cron 초 분 시 일 월 요일) --- 현재 돌아오는 1초마다 돌게 해놓음.
+	 * @throws SQLException
+	 */ 
+	@Scheduled(cron = "1 * * * * *")
+	public void tx_upgradeLevels() throws SQLException{ 
+		LOG.debug("======================");
+		LOG.debug("=    자동등업 스케줄러       =");
+		LOG.debug("======================");
+		
+		mypageSvc.tx_upgradeLevels();
+		
 	}
 	
-	/** * 2. 오후 05:51:00에 호출이 되는 스케쥴러 */ 
-	@Scheduled(cron = "0 51 17 * * *") 
-	public void cronTest2(){ 
-		System.out.println("오후 05:51:00에 호출이 됩니다 "); 
-	}
-
 }
 

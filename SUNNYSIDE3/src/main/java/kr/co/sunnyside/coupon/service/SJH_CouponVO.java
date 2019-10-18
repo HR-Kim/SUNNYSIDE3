@@ -10,12 +10,14 @@ public class SJH_CouponVO extends DTO {
 	public String usable		 ;//사용여부
 	public String useDt			 ;//사용기간
 	public int    discount		 ;//할인
+	public String regDt			 ;//등록일
 	
 	
 	public SJH_CouponVO() {}
 
 
-	public SJH_CouponVO(String couponCode, String userId, String couponNm, String usable, String useDt, int discount) {
+	public SJH_CouponVO(String couponCode, String userId, String couponNm, String usable, String useDt, int discount,
+			String regDt) {
 		super();
 		this.couponCode = couponCode;
 		this.userId = userId;
@@ -23,6 +25,7 @@ public class SJH_CouponVO extends DTO {
 		this.usable = usable;
 		this.useDt = useDt;
 		this.discount = discount;
+		this.regDt = regDt;
 	}
 
 
@@ -86,12 +89,24 @@ public class SJH_CouponVO extends DTO {
 	}
 
 
+	public String getRegDt() {
+		return regDt;
+	}
+
+
+	public void setRegDt(String regDt) {
+		this.regDt = regDt;
+	}
+
+
 	@Override
 	public String toString() {
 		return "SJH_CouponVO [couponCode=" + couponCode + ", userId=" + userId + ", couponNm=" + couponNm + ", usable="
-				+ usable + ", useDt=" + useDt + ", discount=" + discount + "]";
+				+ usable + ", useDt=" + useDt + ", discount=" + discount + ", regDt=" + regDt + "]";
 	}
 
+
+	
 	
 	
 	

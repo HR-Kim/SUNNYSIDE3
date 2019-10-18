@@ -53,11 +53,11 @@ public class SJH_CouponWebTest {
 		LOG.debug("^^^^^^^^^^^^^^^^^^");
 		
 		coupons = Arrays.asList(
-				 new SJH_CouponVO("쿠폰코드01","회원아이디01","","","",3000)
-				,new SJH_CouponVO("쿠폰코드02","회원아이디01","","","",3000)
-				,new SJH_CouponVO("쿠폰코드03","회원아이디02","","","",3000)
-				,new SJH_CouponVO("쿠폰코드04","회원아이디02","","","",3000)
-				,new SJH_CouponVO("쿠폰코드05","회원아이디03","","","",3000)
+				 new SJH_CouponVO("쿠폰코드01","회원아이디01","","","",3000,"")
+				,new SJH_CouponVO("쿠폰코드02","회원아이디01","","","",3000,"")
+				,new SJH_CouponVO("쿠폰코드03","회원아이디02","","","",3000,"")
+				,new SJH_CouponVO("쿠폰코드04","회원아이디02","","","",3000,"")
+				,new SJH_CouponVO("쿠폰코드05","회원아이디03","","","",3000,"")
 			);
 		
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();

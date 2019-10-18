@@ -52,11 +52,11 @@ private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 		LOG.debug("^^^^^^^^^^^^^^^^^^");
 		
 		coupons = Arrays.asList(
-				 new SJH_CouponVO("쿠폰코드01","회원이름01","3천원 할인 쿠폰","","",3000)
-				,new SJH_CouponVO("쿠폰코드02","회원이름01","3천원 할인 쿠폰","","",3000)
-				,new SJH_CouponVO("쿠폰코드03","회원이름02","3천원 할인 쿠폰","","",3000)
-				,new SJH_CouponVO("쿠폰코드04","회원이름02","3천원 할인 쿠폰","","",3000)
-				,new SJH_CouponVO("쿠폰코드05","회원이름03","3천원 할인 쿠폰","","",3000)
+				 new SJH_CouponVO("쿠폰코드01","회원이름01","3천원 할인 쿠폰","","",3000,"")
+				,new SJH_CouponVO("쿠폰코드02","회원이름01","3천원 할인 쿠폰","","",3000,"")
+				,new SJH_CouponVO("쿠폰코드03","회원이름02","3천원 할인 쿠폰","","",3000,"")
+				,new SJH_CouponVO("쿠폰코드04","회원이름02","3천원 할인 쿠폰","","",3000,"")
+				,new SJH_CouponVO("쿠폰코드05","회원이름03","3천원 할인 쿠폰","","",3000,"")
 			);
 	}
 	

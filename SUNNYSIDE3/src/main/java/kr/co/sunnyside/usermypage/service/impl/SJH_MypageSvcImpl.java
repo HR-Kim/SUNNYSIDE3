@@ -60,7 +60,7 @@ public class SJH_MypageSvcImpl implements SJH_MypageSvc {
 		String currLevel = user.getUserLevel();
 		
 		switch(currLevel) {
-			case "BASIC" : return (user.getTotalPay() >= MIN_PAY_FOR_SILVER);
+			case "BASIC" : return (user.getTotalPay() >= MIN_PAY_FOR_SILVER || user.getTotalPay() >= MIN_PAY_FOR_GOLD);
 			case "SILVER" : return (user.getTotalPay() >= MIN_PAY_FOR_GOLD);
 			case "GOLD" : return false;
 			default : throw new IllegalArgumentException("Unknown Level:"+currLevel);
@@ -95,13 +95,13 @@ public class SJH_MypageSvcImpl implements SJH_MypageSvc {
 			//보내는 사람
 			String host = "smtp.naver.com";
 			final String userName = "glwlzkwp";
-			final String password = "";
+			final String password = "13965232sj";
 			int port = 465;
 			
 			//받는 사람
 			String recipient = user.getEmail();
 			//제목
-			String title = user.getUserName()+"님의 등급이 변경되었습니다.(SUNNYSIDE THEATER)";
+			String title = user.getUserName()+"님의 등급이 "+user.getUserLevel()+"로 변경되었습니다.(SUNNYSIDE THEATER)";
 			//내용
 			String contents = "축하합니다!\n"
 							  +user.getUserId()+"님의 등급이 "+user.getUserLevel()+"로 변경되었습니다.\n"

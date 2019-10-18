@@ -9,15 +9,18 @@
 	<select id="do_selectOne" parameterType="SJH_CouponVO" resultType="SJH_CouponVO">
 		SELECT
 		    coupon_code as couponCode,
-		    user_id as userId,
+            user_id as userId,
 		    coupon_nm as couponNm,
 		    usable,
 		    use_dt as useDt,
-		    discount
+		    discount,
+            reg_dt as regDt
 		FROM
 		    user_coupon
 		WHERE
 		    user_id = #{userId,jdbcType=VARCHAR}
+        AND 
+            to_char(reg_dt) = to_char(sysdate)
 	</select>
 
 
@@ -30,15 +33,18 @@
 		    coupon_nm,
 		    usable,
 		    use_dt,
-		    discount
+		    discount,
+		    reg_dt
 		) VALUES (
 		    ( SELECT DBMS_RANDOM.STRING('A', 15) FROM DUAL ),
 		    #{userId,jdbcType=VARCHAR},
 		    '3천원 할인쿠폰',
 		    NVL(#{usable,jdbcType=VARCHAR},0),
 		    ADD_MONTHS(SYSDATE, 1),
-		    3000
-		)
+		    3000,
+		    SYSDATE
+        )
+
 	</insert>
 	
 	

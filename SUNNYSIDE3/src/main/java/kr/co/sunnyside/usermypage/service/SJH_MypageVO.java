@@ -153,11 +153,11 @@ public class SJH_MypageVO extends DTO {
 		if(userLevel == null) {
 			throw new IllegalStateException("업그레이드가 불가능합니다.");
 		//베이직->실버	
-		}else if(user.getUserLevel().equals("BASIC")) {
+		}else if(user.getTotalPay() >= 200000 && user.getTotalPay() < 400000) {
 			//userLevel = "SILVER";
 			user.setUserLevel("SILVER");
 		//실버 ->골드	
-		}else if(user.getUserLevel().equals("SILVER")) {
+		}else if(user.getTotalPay() >= 400000) {
 			//userLevel = "GOLD";
 			user.setUserLevel("GOLD");
 		}

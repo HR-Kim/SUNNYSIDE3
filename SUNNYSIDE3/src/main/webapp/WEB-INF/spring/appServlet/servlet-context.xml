@@ -14,7 +14,7 @@
 	
 	<!-- Scheduling -->
 	<!-- 스케쥴러파일이 존재하는 패키지 설정 -->
- 		<context:component-scan base-package="com.crontab" />
+ 		<context:component-scan base-package="kr.co.sunnyside.cmn" />
   	<!-- 해당 태그들은 크론탭을 설정에 필요한 태그들 -->
    		<task:scheduler id="jobScheduler" pool-size="10" />
     	<task:annotation-driven scheduler="jobScheduler" />
