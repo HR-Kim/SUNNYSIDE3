@@ -22,7 +22,7 @@
 			    count,
 			    product_id				    
 			) VALUES (
-			    TO_CHAR(SYSDATE,'yyyymmdd')||'-'||to_char((SELECT COUNT(*) FROM CART), 'FM000'),
+			    TO_CHAR(SYSDATE,'yyyymmdd')||'-'||to_char(CART_SEQ.NEXTVAL, 'FM000'),
 			    #{userId,jdbcType=VARCHAR},
 			    #{count,jdbcType=NUMERIC},
 			    #{productId,jdbcType=VARCHAR}
@@ -54,16 +54,16 @@
 		     
 	</update>
 
-<!-- 장바구니 금액 합계 -->
-	<select id="do_selectOne" parameterType="Cart" resultType="Cart">
+<!-- 장바구니 총금액 합계 -->
+	<select id="do_totalCost" resultType="int">
 		SELECT
-		    NVL(SUM(b.product_cost*count),0) productCost
+		    NVL(SUM(b.product_cost*count),0) totalCost
 		FROM
 		   		 cart a , product b
 		WHERE a.product_id = b.product_id 
 		AND a.user_id = #{userId,jdbcType=VARCHAR}	
 	</select>
-	
+
 <!-- 장바구니 목록 -->
 	<select id="do_retrieve" parameterType="Cart" resultType="Cart" >
 	 	SELECT

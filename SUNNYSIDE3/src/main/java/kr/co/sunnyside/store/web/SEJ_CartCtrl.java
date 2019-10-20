@@ -107,7 +107,9 @@ public class SEJ_CartCtrl {
 		LOG.debug("1.=====================");
 
 		List<SEJ_CartVO> list = (List<SEJ_CartVO>) this.cartService.do_retrieve(inVO);
+		int totalCost=cartService.do_totalCost(inVO.getUserId());
 		model.addAttribute("list", list);
+		model.addAttribute("totalCost", totalCost);
 
 		return CART_LIST_VIEW;
 	}

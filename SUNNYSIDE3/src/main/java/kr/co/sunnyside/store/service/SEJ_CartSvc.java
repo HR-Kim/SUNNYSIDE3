@@ -20,8 +20,11 @@ public interface SEJ_CartSvc {
 	/**장바구니 목록 */
 	public List<?> do_retrieve(DTO dto);
 	
-	/**장바구니 금액 총합계 */    
-	public DTO do_selectOne(DTO dto);
+   
+	public int do_selectOne(DTO dto);
+	
+	/**장바구니 금액 총합계 */ 
+	public int do_totalCost(String userId);
 	
 	/**장바구니 동일한 상품 레코드 확인*/
 	public int do_countCart(String productId, String userId);

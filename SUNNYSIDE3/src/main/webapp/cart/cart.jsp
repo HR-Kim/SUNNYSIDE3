@@ -4,7 +4,6 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <c:set var="context" value="${pageContext.request.contextPath }" />
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +13,6 @@
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <!------ Include the above in your HEAD tag ---------->
 <title>장바구니</title>
-${user.userId}
 </head>
 <h2 style="margin-left: 450px;margin-top: 70px; margin-bottom: 40px; font-weight: bold">장바구니</h2>
 <div class="container">
@@ -42,44 +40,51 @@ ${user.userId}
 				                    <tr>
 				                        <td class="col-sm-8 col-md-6">
 				                        <div class="media">
-				                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="${vo.saveFileNm }" style="width: 72px; height: 72px;"> </a>
+				                            <a class="thumbnail pull-left"> <img class="media-object" src="${vo.saveFileNm }" style="width: 72px; height: 72px;"> </a>
 				                            <div class="media-body">
-				                                <h4 class="media-heading"><a href="#">${vo.productNm }</a></h4>                  
+				                                <h4 class="media-heading"><a href="http://localhost:8080/sunnyside/store/do_selectOne.do?productId=${vo.productId }">${vo.productNm }</a></h4>                  
 				                            </div>
 				                        </div></td>
-				                        <td class="col-sm-1 col-md-1" style="text-align: center">
-				                        <input type="email" class="form-control" id="exampleInputEmail1" value="${vo.count }">
+				                        <td class="col-sm-1 col-md-1" style="text-align: center" >				                     
+				                       	   <input type="text" class="form-control" id="count" value="${vo.count }">
 				                        </td>
 				                        <td class="col-sm-1 col-md-1 text-center"><strong>${vo.oriProductCost }</strong></td>
+				                        <td style="display: none;" id="cartId"><strong>${vo.cartId }</strong></td>
+				                        <td style="display: none;" id="productId"><strong>${vo.productId }</strong></td>
+				                        <td style="display: none;" id="userId"><strong>${user.userId }</strong></td>
 				                        <td class="col-sm-1 col-md-1 text-center"><strong>${vo.productCost }</strong></td>
-				                        <td class="col-sm-1 col-md-1">
-				                        <button type="button" class="btn btn-danger" style="margin-left: 5px;">
-				                            <span class="glyphicon glyphicon-remove"></span>
-				                        </button></td>
-				                    </tr>
+				                        <td class="col-sm-1 col-md-1" >
+					                        <button type="button" class="btn btn-danger" id="deleteBtn"  style="margin-left: 5px;">
+					                            <span class="glyphicon glyphicon-remove"></span>
+					                        </button>
+					                         <button type="button" class="btn btn-success" id="updateBtn"  style="margin-left: 5px;">
+					                            <span class="glyphicon glyphicon-ok"></span>
+					                        </button>
+				                        </td>				                        				                   
                           		</c:forEach>
-			        		</c:otherwise>
-                	</c:choose>                                
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td><h3>총금액</h3></td>
-                        <td class="text-right"><h3><strong>$31.53</strong></h3></td>
-                    </tr>                 
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>
-                        <button type="button" class="btn btn-default" id="btnList" name="btnList">
-                            <span class="glyphicon glyphicon-shopping-cart"></span> 쇼핑계속하기
-                        </button></td>
-                        <td>
-                        <button type="button" class="btn btn-success">
-                           	 결제하기 <span class="glyphicon glyphicon-play"></span>
-                        </button></td>
-                    </tr>
+			        		                       
+					                    <tr>
+					                        <td>   </td>
+					                        <td>   </td>
+					                        <td>   </td>
+					                        <td><h3>총금액</h3></td>
+					                        <td class="text-right"><h3><strong>${totalCost }원</strong></h3></td>
+					                    </tr>                         
+					                    <tr>
+					                        <td>   </td>
+					                        <td>   </td>
+					                        <td>   </td>
+					                        <td>
+					                        <button type="button" class="btn btn-default" id="btnList" name="btnList">
+					                            <span class="glyphicon glyphicon-shopping-cart"></span> 쇼핑계속하기
+					                        </button></td>
+					                        <td>
+						                        <button type="button" class="btn btn-success" id="paybtn">
+						                           	 결제하기 <span class="glyphicon glyphicon-play"></span>
+						                        </button></td>
+					                     </tr>
+                  			  </c:otherwise>
+                		</c:choose> 
                 </tbody>
             </table>
         </div>
@@ -90,7 +95,97 @@ ${user.userId}
 <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
 <script src="${context}/resources/js/bootstrap.min.js"></script>   
 <script type="text/javascript">
-$(document).ready(function(){
+
+//리스트 삭제
+
+$("[id^=deleteBtn]").on("click",function(){
+	if(false==confirm('상품을 삭제하시겠습니까?')) return;
+	var tr    = $(this).parent().parent();
+	var tds   = tr.children();	
+	console.log("tds="+tds);
+	var cartId = tds.eq(3).text();
+	var userId    = tds.eq(5).text();
+	console.log("cartId="+cartId);
+	console.log("userId="+userId);
+
+		//ajax
+	     $.ajax({
+	        type:"POST",
+	        url:"${context}/cart/do_delete.do",
+	        dataType:"html",
+	           data:{
+	           "cartId":cartId
+	          },   
+	      success: function(data){ 
+			  if(null != data && data.msgId=="1"){
+				  alert("삭제되었습니다.");
+				  var userId = $("#userId").text();
+				  location.href="${context}/cart/do_retrieve.do?userId="+userId;
+				
+			  }else{
+				alert("삭제되었습니다.");	
+				  var userId = $("#userId").text();
+				  location.href="${context}/cart/do_retrieve.do?userId="+userId;
+			  }
+	     },
+	     complete:function(data){
+	  	   
+	     },
+	     error:function(xhr,status,error){
+	         alert("error:"+error);
+	     }
+	    }); //--ajax  
+	
+	 
+});
+
+//수량변경
+$("[id^=updateBtn]").on("click",function(){
+	if(false==confirm('상품 수량을 변경하시겠습니까?')) return;
+	var tr    = $(this).parent().parent();
+	var tds   = tr.children();	
+	console.log("tds="+tds);
+	var productId = tds.eq(4).text();
+	var userId    = tds.eq(5).text();
+	var count    = tds.eq(1).find("input").val();
+	console.log("productId="+productId);
+	console.log("userId="+userId);
+	console.log("count="+count);
+
+		//ajax
+	     $.ajax({
+	        type:"POST",
+	        url:"${context}/cart/do_update.do",
+	        dataType:"html",
+	           data:{
+	           "productId":productId,
+	           "userId":userId,
+	           "count":count
+	          },   
+	      success: function(data){ 
+			  if(null != data && data.msgId=="1"){
+				  alert("수량이 변경되었습니다.");
+				  var userId = $("#userId").text();
+				  location.href="${context}/cart/do_retrieve.do?userId="+userId;
+				
+			  }else{
+				alert("수량이 변경되었습니다.");	
+				  var userId = $("#userId").text();
+				  location.href="${context}/cart/do_retrieve.do?userId="+userId;
+			  }
+	     },
+	     complete:function(data){
+	  	   
+	     },
+	     error:function(xhr,status,error){
+	         alert("error:"+error);
+	     }
+	    }); //--ajax  
+});
+
+
+
+$(document).ready(function(){	
 	// 리스트 페이지로 이동
 	$("#btnList").on("click",function(){
 		alert("메인 페이지로 이동합니다.");

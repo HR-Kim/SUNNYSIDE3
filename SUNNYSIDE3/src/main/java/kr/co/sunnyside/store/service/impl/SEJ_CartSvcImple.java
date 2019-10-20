@@ -68,11 +68,8 @@ public class SEJ_CartSvcImple implements SEJ_CartSvc {
 	
 	/**장바구니 금액 총합계 */    
 	@Override
-	public DTO do_selectOne(DTO dto) {
-		LOG.debug("==================");
-		LOG.debug("=@Service sumMoney="+dto);
-		LOG.debug("==================");
-		return cartDaoImpl.do_selectOne(dto);
+	public int do_selectOne(DTO dto) {
+		return 0;	
 	}
 
 	/**장바구니 동일한 상품 레코드 확인*/
@@ -93,6 +90,14 @@ public class SEJ_CartSvcImple implements SEJ_CartSvc {
 		LOG.debug("=@Service updateCart="+dto);
 		LOG.debug("==================");
 		return cartDaoImpl.do_updateCountCart(dto);
+	}
+	/**장바구니 금액 총합계 */   
+	@Override
+	public int do_totalCost(String userId) {
+		LOG.debug("==================");
+		LOG.debug("=@Service do_totalCost="+userId);
+		LOG.debug("==================");
+		return cartDaoImpl.do_totalCost(userId);
 	}
 
 

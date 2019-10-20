@@ -60,7 +60,7 @@
 <script type="text/javascript">
 
 //장바구니에 담기
-$("#goCart").on("click",function(){
+$("[id^=goCart]").on("click",function(){
 	//alert("goCart");
 	
 	//로그인 시 이동가능 
@@ -74,10 +74,13 @@ $("#goCart").on("click",function(){
      }		
 });
 
- function addToCart(){
-	 console.log("productId"+$("#productId").val());
-	 console.log("userId"+$("#userId").val());
-	 console.log("count"+$("#count").val());
+ function addToCart(){	
+	 var tds    = $('.product-grid').children();
+	 console.log("tds="+tds);
+	 var productId = tds.eq(0).text();
+	 console.log("productId="+productId);
+	 console.log("userId="+$("#userId").val());
+	 console.log("count="+$("#count").val());
 	 
 		//ajax
 	     $.ajax({
@@ -85,7 +88,7 @@ $("#goCart").on("click",function(){
 	        url:"${context}/cart/do_save.do",
 	        dataType:"html",
 	           data:{                               
-	        		   "productId":$("#productId").val(), 
+	        		   "productId":productId, 
 	        		   "userId":$("#userId").val(),       
 	        		   "count":$("#count").val()                              
 	       

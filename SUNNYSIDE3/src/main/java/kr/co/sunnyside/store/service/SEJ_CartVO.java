@@ -15,6 +15,8 @@ public class SEJ_CartVO extends DTO {
 	private int oriProductCost   ; 
 	/**상품가격*/
 	private int productCost    ; 
+	/**상품총가격*/
+	private int totalCost    ; 
 	/**상품ID*/
 	private String productId   ;  
 	/**원본파일명*/
@@ -47,9 +49,9 @@ public class SEJ_CartVO extends DTO {
 	@Override
 	public String toString() {
 		return "SEJ_CartVO [cartId=" + cartId + ", productNm=" + productNm + ", userId=" + userId + ", count=" + count
-				+ ", oriProductCost=" + oriProductCost + ", productCost=" + productCost + ", productId=" + productId
-				+ ", orgFileNm=" + orgFileNm + ", saveFileNm=" + saveFileNm + ", ext=" + ext + ", toString()="
-				+ super.toString() + "]";
+				+ ", oriProductCost=" + oriProductCost + ", productCost=" + productCost + ", totalCost=" + totalCost
+				+ ", productId=" + productId + ", orgFileNm=" + orgFileNm + ", saveFileNm=" + saveFileNm + ", ext="
+				+ ext + ", toString()=" + super.toString() + "]";
 	}
 
 
@@ -150,6 +152,16 @@ public class SEJ_CartVO extends DTO {
 
 	public void setExt(String ext) {
 		this.ext = ext;
+	}
+
+
+	public int getTotalCost() {
+		return totalCost;
+	}
+
+
+	public void setTotalCost(int totalCost) {
+		this.totalCost = totalCost;
 	}
 
 
