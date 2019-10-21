@@ -190,7 +190,7 @@ public class SJH_LoginCtrl {
 	public String logout(HttpSession session)throws IOException {
 		LOG.debug("logout");
 		session.invalidate();
-		return "main/main.jsp";
+		return "main/main";
 	}
 
 	

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<c:set var="context" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,18 +55,16 @@
 						
 							<!-- 로그인 하면 아이디 보임 -->
 							<c:choose>
-								<c:when test="${user}  ||  ${user.userId} == ''">
+								<c:when test="${not empty user.userId}">
+									${user.userId } 님 환영합니다.
+								</c:when>
+								<c:otherwise>
 									<div class="up-item">
 										<i class="flaticon-profile"></i>
 										<a href="#">Sign</a> In or <a href="#">Create Account</a>
 									</div>
-								</c:when>
-								<c:otherwise>
-									${user.userId }
 								</c:otherwise>
 							</c:choose>		
-							
-							/// ${user.userId }
 							
 							<!-- 로그인 했을 때만 장바구니 표시 -->
 							<c:choose>
@@ -107,7 +108,17 @@
 					</li>
 					<li><a href="http://www.seechu.co.kr/index.asp">VOD</a></li>
 					<li><a href="#">고객센터</a></li>
-					<li><a href="/sunnyside/login/login_view.do">로그인</a></li>
+					
+					<!-- 로그인한 상태면 로그아웃 출력 -->
+					<c:choose>
+						<c:when test="${not empty user.userId}">
+							<li><a href="/sunnyside/login/logout.do">로그아웃</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="/sunnyside/login/login_view.do">로그인</a></li>
+						</c:otherwise>
+					</c:choose>		
+					
 				</ul>
 			</div>
 		</nav>
