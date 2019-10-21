@@ -297,21 +297,10 @@
 			}); 
 	       //--ajax
 		});
-		
-		//등록
-		$("#doSave").on("click", function(){
+
+		//등록 함수
+		function saveReview(){	
 			var movieId = $("#movieId").val();
-			
-			//로그인 시 이동가능 
-			if("${user.userId}"!= ""){ //로그인 되어있으면 
-				if(confirm("등록 하시겠습니까?")==false)return;
-						
-		     }else{// 로그인이 안되어있으면
-				alert("회원만 사용가능한 서비스입니다.\n로그인을 해주세요.");
-				return;
-		     }		
-			
-			
 			
 			//ajax
 			$.ajax({
@@ -341,6 +330,18 @@
 	        	}
 			}); 
 	       //--ajax
+		}
+		
+		//버튼 등록 클릭시
+		$("#doSave").on("click", function(){			
+			//로그인 체크
+			if("${user.userId}"!= ""){ //로그인 되어있으면 
+				if(confirm("등록 하시겠습니까?")==false)return;
+				saveReview();
+		     }else{// 로그인이 안되어있으면
+				alert("회원만 사용가능한 서비스입니다.\n로그인을 해주세요.");
+				location.href ="${context}/login/login_view.do";
+		     }					
 		});
 		
 		//삭제
@@ -400,7 +401,7 @@
 		
 		
 		$(document).ready(function(){
-		//alert("ready");
+			
 		});
 	</script>  
 </body>
