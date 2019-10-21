@@ -48,11 +48,11 @@
 				                        <td class="col-sm-1 col-md-1" style="text-align: center" >				                     
 				                       	   <input type="text" class="form-control" id="count" value="${vo.count }">
 				                        </td>
-				                        <td class="col-sm-1 col-md-1 text-center"><strong>${vo.oriProductCost }</strong></td>
+				                        <td class="col-sm-1 col-md-1 text-center"><strong><fmt:formatNumber value="${vo.oriProductCost}" pattern="#,###,###"/>원</strong></td>
 				                        <td style="display: none;" id="cartId"><strong>${vo.cartId }</strong></td>
 				                        <td style="display: none;" id="productId"><strong>${vo.productId }</strong></td>
 				                        <td style="display: none;" id="userId"><strong>${user.userId }</strong></td>
-				                        <td class="col-sm-1 col-md-1 text-center"><strong>${vo.productCost }</strong></td>
+				                        <td class="col-sm-1 col-md-1 text-center"><strong><fmt:formatNumber value="${vo.productCost}" pattern="#,###,###"/>원</strong></td>
 				                        <td class="col-sm-1 col-md-1" >
 					                        <button type="button" class="btn btn-danger" id="deleteBtn"  style="margin-left: 5px;">
 					                            <span class="glyphicon glyphicon-remove"></span>
@@ -68,7 +68,7 @@
 					                        <td>   </td>
 					                        <td>   </td>
 					                        <td><h3>총금액</h3></td>
-					                        <td class="text-right"><h3><strong>${totalCost }원</strong></h3></td>
+					                        <td class="text-right"><h3><strong><fmt:formatNumber value="${totalCost}" pattern="#,###,###"/>원</strong></h3></td>
 					                    </tr>                         
 					                    <tr>
 					                        <td>   </td>

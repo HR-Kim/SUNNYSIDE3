@@ -51,7 +51,7 @@ public class SEJ_StroreCtrl {
 	private final String VIEW_DRINK_LIST_NM = "store/drink_list";
 	private final String VIEW_TICKET_LIST_NM = "store/ticket_list";
 	private final String VIEW_SELECTONE = "store/selectproduct";
-	private final String VIEW_SELECTONETOUPDATE = "store/store_update";
+	private final String VIEW_SELECTONETOUPDATE = "noTileStore/store_update";
 	private final String VIEW_MNG_NM = "store/store_add";
 	private final String CART_LIST_VIEW = "cart/cart";
 	
@@ -379,7 +379,7 @@ public class SEJ_StroreCtrl {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "store/do_selectOneToUpdate.do", method = RequestMethod.GET)
+	@RequestMapping(value = "noTileStore/do_selectOneToUpdate.do", method = RequestMethod.GET)
 	public String do_selectOneToUpdate(SEJ_StroreVO store, Model model) {
 		LOG.debug("===============================");
 		LOG.debug("=store=" + store);

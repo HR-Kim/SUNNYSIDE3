@@ -45,7 +45,8 @@
 </head>
 <body>
  <h2 style="margin-left: 40px;"> 상품정보 수정 </h2>
- <form id="boardEditFrm" name="boardEditFrm" method="post" enctype="multipart/form-data" action="do_update.do" style="margin-left: 40px">
+ <hr>
+ <form id="updateFrm" name="updateFrm" method="post" enctype="multipart/form-data" action="do_update.do" style="margin-left: 90px; margin-top: 35px;">
  	<table border="1">
  	<tr style="display: none;">
  		<td><input id="productId" name="productId" value="<c:out value="${vo.productId }"/>"></td>
@@ -85,10 +86,10 @@
   </table> 
  </form>
  <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="${context}/resources/js/divisima/jquery-3.2.1.min.js"></script>
 <script src="${context}/resources/js/jquery.validate.js"></script>
 <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
- <script src="${context}/resources/js/bootstrap.min.js"></script>   
+ <script src="${context}/resources/js/bootstrap.min.js"></script> 
  <script type="text/javascript">
 
 
@@ -122,11 +123,15 @@
 	      success: function(data){ 
 			  if(null != data && data.msgId=="1"){
 				  alert("수정되었습니다.");		
-				  location.href="${context}/store/store_main.do";
+				  opener.parent.location.reload();
+				  window.close();
+			
 				
 			  }else{
 				alert(data.msgId+"|"+data.msgMsg);
-				//location.href="${context}/store/store_main.do";
+				  opener.parent.location.reload();
+				  window.close();
+				
 			  }
 	     },
 	     complete:function(data){
@@ -140,7 +145,7 @@
 	 
  $(document).ready(function(){
 	//form validate
-		$("#boardEditFrm").validate({
+		$("#updateFrm").validate({
 
 			rules: {
 						productNm: {

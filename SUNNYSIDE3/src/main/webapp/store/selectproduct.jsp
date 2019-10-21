@@ -4,6 +4,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <c:set var="context" value="${pageContext.request.contextPath }" />
 <%
 	String userId = request.getParameter("userId"); 
@@ -43,7 +44,7 @@
 			</tr>
 			<tr align="center">
 				<td>가격</td>
-				<td><input id="productCost" name="productCost" value="${vo.productCost}"/>원</td>
+				<td><input id="productCost" name="productCost" value="<fmt:formatNumber value="${vo.productCost }" pattern="#,###,###"/>"/>원</td>
 			</tr>
 			<tr align="center">
 				<td colspan="2">
@@ -137,11 +138,20 @@
 	$("#updatebtn").on("click",function(){
 		//alert("updatebtn");
 		if(false==confirm('상품을 수정 하시겠습니까?')) return;
-		var productId = $("#productId").text();
+		productId = $("#productId").text();
 		//alert("productId=="+productId);
-		location.href ="${context}/store/do_selectOneToUpdate.do?productId="+productId;
+		//location.href ="${context}/store/do_selectOneToUpdate.do?productId="+productId;
+		popup();
 	
 	});
+	
+	function popup(){
+        var url = "${context}/noTileStore/do_selectOneToUpdate.do?productId="+productId;
+        var name = "상품수정";
+        var option = "width = 700, height = 700, top = 100, left = 400, location = no"
+        window.open(url, name, option);
+    }
+	
 	
 	//삭제
 	$("#delbtn").on("click",function(e){
@@ -168,11 +178,11 @@
 	      success: function(data){ 
 			  if(null != data && data.msgId=="1"){
 				  alert("삭제되었습니다.");		
-				  location.href="${context}/store/store_main.do";
+				  location.href="${context}/store/do_main.do";
 				
 			  }else{
 				alert("삭제되었습니다.");	
-				location.href="${context}/store/store_main.do";
+				location.href="${context}/store/do_main.do";
 			  }
 	     },
 	     complete:function(data){

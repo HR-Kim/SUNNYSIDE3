@@ -4,6 +4,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <c:set var="context" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
@@ -40,9 +41,8 @@
 					                <div class="product-content">					                  
 					                    <h3 class="title"><c:out value="${vo.productNm }"/></h3>
 					                    <div class="price">
-					                        <span><c:out value="${vo.productCost }"/>원</span>
-					                    </div>
-					                    <a class="add-to-cart" href="">+ Add To Cart</a>					          
+					                        <span><fmt:formatNumber value="${vo.productCost }" pattern="#,###,###"/>원</span>
+					                    </div>				          
 					                </div>
 					            </div>
 					        </div>

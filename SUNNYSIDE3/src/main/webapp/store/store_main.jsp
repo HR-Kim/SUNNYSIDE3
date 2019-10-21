@@ -2,13 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <c:set var="context" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <!-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
-<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">  -->
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> 
 <!-- 부트스트랩 -->
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="${context}/resources/css/headerStyle.css" rel="stylesheet" type="text/css"> 
@@ -18,21 +19,22 @@
 <title>스토어</title>
 </head>
 <body>
-<div class="container">
+<div class="container" style="margin-right: 420px;">
 	<div class="productadd" id="productadd" style="display: none;">
-		<input type="button" value="상품등록" id="addbtn" class="addbtn">
+		<input type="button" value="상품등록" id="addbtn" class="btn btn-outline-dark" style="margin-top: 40px;">
 	</div>
-     <a style="margin-left: 1050px" href="do_retrieve_popcorn.do" class="btn_popcorn_product"><i class="fa fa-plus"></i> 더보기</a> 
+</div>
    	<div class="container">
 	    <h3 class="h3">팝콘</h3>
 		    <div class="row">
+		    <a style="margin-left: 1100px; margin-bottom: 50px;" href="do_retrieve_popcorn.do" class="btn_popcorn_product"><i class="fa fa-plus"></i> 더보기</a> 
 			    <c:choose>
 			    	<c:when test="${popcornlist.size()>0 }">
 			    		<c:forEach var="vo" items="${popcornlist }">			    		
 					        <div class="col-md-3 col-sm-6" >
 					            <div class="product-grid">							       
 					                <div class="product-image">					                    
-					                    <img class="pic-1" style="height: 270px" width="270px" src='<c:out value="${vo.saveFileNm }"/>'>		
+					                    <img class="pic-1" style="height: 270px" width="250px" src='<c:out value="${vo.saveFileNm }"/>'>		
 					                    <ul class="social">
 					                        <li><a href="do_selectOne.do?productId=${vo.productId }" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
 					                        <li><a id="goCart" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
@@ -44,23 +46,21 @@
 					                <div class="product-content">					                  
 					                    <h3 class="title"><c:out value="${vo.productNm }"/></h3>
 					                    <div class="price">
-					                        <span><c:out value="${vo.productCost }"/>원</span>
-					                    </div>
-					                    <a class="add-to-cart" href="">+ Add To Cart</a>					          
+					                        <span><fmt:formatNumber value="${vo.productCost }" pattern="#,###,###"/>원</span>
+					                    </div>						                    			          
 					                </div>
 					            </div>
 					        </div>
 					    </c:forEach>
 			        </c:when>
-			    </c:choose>
-			</div>
+			    </c:choose>			   
+			</div>			 
 	 </div>
-</div>
 <hr>
 	<div class="container">
 	    <h3 class="h3">음료</h3>
-	         <a style="margin-left: 1050px" href="do_retrieve_drink.do" class="btn_drink_product"><i class="fa fa-plus"></i> 더보기</a> 
 		    <div class="row">
+		       <a style="margin-left: 1100px; margin-bottom: 50px;" href="do_retrieve_drink.do" class="btn_drink_product"><i class="fa fa-plus"></i> 더보기</a> 
 			    <c:choose>
 			    	<c:when test="${drinklist.size()>0 }">
 			    		<c:forEach var="vo" items="${drinklist }">
@@ -80,9 +80,8 @@
 					                <div class="product-content">
 					                    <h3 class="title"><c:out value="${vo.productNm }"/></h3>
 					                    <div class="price">
-					                        <span><c:out value="${vo.productCost }"/>원</span>
+					                        <span><fmt:formatNumber value="${vo.productCost }" pattern="#,###,###"/>원</span>
 					                    </div>
-					                    <a class="add-to-cart" href="">+ Add To Cart</a>
 					                </div>
 					            </div>
 					        </div>
@@ -94,9 +93,9 @@
 <hr>
 <div class="container">
 	   <h3 class="h3">영화관람권</h3>
-	    <a style="margin-left: 1050px" href="do_retrieve_movieticket.do" class="btn_movieticket_product"><i class="fa fa-plus"></i> 더보기</a>
 	     <form name="ticketFrm" id="ticketFrm"  method="get">
 		    <div class="row">
+		    <a style="margin-left: 1100px; margin-bottom: 50px;" href="do_retrieve_movieticket.do" class="btn_movieticket_product"><i class="fa fa-plus"></i> 더보기</a>
 			    <c:choose>
 			    	<c:when test="${ticketlist.size()>0 }">
 			    		<c:forEach var="vo" items="${ticketlist }">
@@ -115,9 +114,8 @@
 					                <div class="product-content">
 					                    <h3 class="title"><c:out value="${vo.productNm }"/></h3>
 					                    <div class="price">
-					                        <span><c:out value="${vo.productCost }"/>원</span>
+					                        <span><fmt:formatNumber value="${vo.productCost }" pattern="#,###,###"/>원</span>
 					                    </div>
-					                    <a class="add-to-cart" href="">+ Add To Cart</a>
 					                </div>
 					            </div>
 					        </div>
@@ -134,12 +132,16 @@
 <script type="text/javascript">
 	
 //장바구니에 담기
-$("#goCart").on("click",function(){
+$("[id^=goCart]").on("click",function(){
 	//alert("goCart");
 	
 	//로그인 시 이동가능 
 	if("${user.userId}"!= ""){ //로그인 되어있으면 
 		if(false==confirm('상품을 담으시겠습니까?')) return;
+		 var tr    = $(this).parent().parent().parent();
+		 var tds = tr.children(); 
+		 productId = tds.eq(4).val();
+		 //alert( productId );
 		 addToCart(); //카트에 더하기 함수 
 		
      }else{// 로그인이 안되어있으면
@@ -148,31 +150,32 @@ $("#goCart").on("click",function(){
      }		
 });
 
- function addToCart(){
-	 console.log("productId="+$("#productId").text());
-	 console.log("userId="+$("#userId").text());
-	 console.log("count="+$("#count option:selected").val());
+ function addToCart(){	
+
+	 console.log("productId="+productId);
+	 console.log("userId="+$("#userId").val());
+	 console.log("count="+$("#count").val());
 	 
 		//ajax
 	     $.ajax({
 	        type:"POST",
 	        url:"${context}/cart/do_save.do",
 	        dataType:"html",
-	           data:{
-	           "productId":$("#productId").text(),
-	           "userId":$("#userId").text(),
-	           "count":$("#count option:selected").val()                       
+	           data:{                               
+	        		   "productId":productId, 
+	        		   "userId":$("#userId").val(),       
+	        		   "count":$("#count").val()                              
 	       
 	          },   
 	      success: function(data){ 
 			  if(null != data && data.msgId=="1"){
 				  alert("추가되었습니다.");
-				  var userId = $("#userId").text();
+				  var userId = $("#userId").val();
 				  location.href="${context}/cart/do_retrieve.do?userId="+userId;
 				
 			  }else{
 				alert("추가되었습니다.");	
-				  var userId = $("#userId").text();
+				  var userId = $("#userId").val();
 				  location.href="${context}/cart/do_retrieve.do?userId="+userId;
 			  }
 	     },
@@ -184,6 +187,7 @@ $("#goCart").on("click",function(){
 	     }
 	    }); //--ajax  
 	 }
+ 
 	
 	//등록
 	$("#addbtn").on("click",function(){
@@ -196,7 +200,7 @@ $("#goCart").on("click",function(){
 	 function popup(){
          var url = "store_add.jsp";
          var name = "상품등록";
-         var option = "width = 700, height = 400, top = 100, left = 400, location = no"
+         var option = "width = 700, height = 550, top = 100, left = 400, location = no"
          window.open(url, name, option);
      }
 
