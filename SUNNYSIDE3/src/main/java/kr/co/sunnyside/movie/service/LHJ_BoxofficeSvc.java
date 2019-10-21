@@ -5,6 +5,10 @@ import java.util.List;
 import kr.co.sunnyside.cmn.DTO;
 
 public interface LHJ_BoxofficeSvc {
+	
+	/**매일 오전 9시마다 박스오피스 데이터 delete 한 뒤 insert*/
+	public void do_deleteAndSave();
+	
 	/**박스오피스 상태값 0으로 초기화(OFF)*/	
 	public int do_boxofficeOff_update(DTO dto);
 	
@@ -22,6 +26,9 @@ public interface LHJ_BoxofficeSvc {
 	
 	/**박스오피스 전체조회*/
 	public List<?> do_retrieve();
+	
+	/**박스오피스 메인 전체조회(8개)*/
+	public List<?> do_retrieve_main();
 	
 	
 	

@@ -98,6 +98,18 @@ public class LHJ_BoxofficeDaoImpl implements WorkDiv{
 		return null;
 	}	
 	
+	/**박스오피스 메인 전체조회(8개)*/
+	public List<?> do_retrieve_main() {
+		String statement = NAMESPACE + ".do_retrieve_main";
+		LOG.debug("=============================");
+		LOG.debug("2. statement:"+statement);
+		List<LHJ_MovieVO> list = this.sqlSessionTemplate.selectList(statement);		
+		LOG.debug("3. list:"+list);
+		LOG.debug("=============================");
+		
+		return list;
+	}	
+	
 	/**박스오피스 전체조회*/
 	public List<?> do_retrieve() {
 		String statement = NAMESPACE + ".do_retrieve";

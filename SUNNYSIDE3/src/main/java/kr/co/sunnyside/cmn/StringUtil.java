@@ -508,7 +508,7 @@ public class StringUtil {
 	
 	public static String col4Substring(String str) {
 		if(str.length()>25) {
-			return str.substring(0, 24)+"...";
+			return str.substring(0, 22)+"...";
 		}else {
 			return str;
 		}		 

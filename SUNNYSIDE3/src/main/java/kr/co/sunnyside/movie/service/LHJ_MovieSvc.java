@@ -16,4 +16,7 @@ public interface LHJ_MovieSvc {
 	
 	/**방문자 평점 수정*/
 	public int do_visitorRate_update(DTO dto);
+	
+	/**영화 존재 확인*/
+	public int do_exist(DTO dto);
 }

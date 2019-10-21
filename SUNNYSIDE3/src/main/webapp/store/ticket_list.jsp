@@ -4,6 +4,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <c:set var="context" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
@@ -11,7 +12,6 @@
 <meta charset="UTF-8">
 <%-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <!-- 부트스트랩 -->
-<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 <!------ Include the above in your HEAD tag ---------->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" /> --%>
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -42,9 +42,8 @@
 					                <div class="product-content">
 					                    <h3 class="title"><c:out value="${vo.productNm }"/></h3>
 					                    <div class="price">
-					                        <span><c:out value="${vo.productCost }"/>원</span>
+					                        <span><fmt:formatNumber value="${vo.productCost }" pattern="#,###,###"/>원</span>
 					                    </div>
-					                    <a class="add-to-cart" href="">+ Add To Cart</a>
 					                </div>
 					            </div>
 					        </div>

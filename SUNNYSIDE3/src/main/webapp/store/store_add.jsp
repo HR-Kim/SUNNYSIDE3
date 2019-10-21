@@ -15,7 +15,7 @@
     <title>상품등록</title>
 
     <!-- 부트스트랩 -->
-    <!--<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">  -->
+	<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">  
 
     <!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js -->
     <!-- WARNING: Respond.js 는 당신이 file:// 을 통해 페이지를 볼 때는 동작하지 않습니다. -->
@@ -27,10 +27,11 @@
 
 <body>
  <h2 style="margin-left: 40px;"> 상품등록 </h2>
- <form id="boardEditFrm" name="boardEditFrm" method="post" enctype="multipart/form-data" action="do_save.do" style="margin-left: 40px">
- 	<table border="1">
+ <hr>
+ <form id="boardEditFrm" name="boardEditFrm" method="post" enctype="multipart/form-data" action="do_save.do" style="margin-left: 75px; margin-top: 42px; margin-right: 80px;">
+ 	<table class="table">
  	<tr style="display: none;" >
-  		<td>상품id</td>
+  		<td  >상품id</td>
   		<td><input type="text" name="productId" id="productId" /></td>
   	</tr>
   	<tr>
@@ -57,11 +58,11 @@
   	</tr>
   	<tr>
   		<td>상품이미지</td>
-  		<td><input type="file" name="productImage" id="productImage"  /></td>
+  		<td><input type="file" name="productImage" id="productImage" class="btn btn-outline-dark" /></td>
   	</tr>
   	<tr>
   	 <td colspan="2" align="center">
-  	 	<input type="submit" value="등록" id="addBtn" >
+  	 	<input type="submit" value="등록" id="addBtn" class="btn btn-outline-dark" >
   	 </td>
   	</tr> 	
   </table> 
@@ -72,7 +73,7 @@
 <!--     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
     <script src="${context}/resources/js/jquery.validate.js"></script>
 <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
-<%--  <script src="${context}/resources/js/bootstrap.min.js"></script>    --%>
+ <script src="${context}/resources/js/bootstrap.min.js"></script>  
  <script type="text/javascript">
  
 	 /**등록*/ 

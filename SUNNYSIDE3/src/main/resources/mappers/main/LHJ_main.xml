@@ -2,4 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.sunnyside.main"> 
 	 
+	 	<!-- 목록조회 -->
+	<select id="do_banner_retrieve" resultType="MainImage">
+		SELECT
+		    image_id as imageId,
+		    org_img_nm as orgImgNm,
+		    save_img_nm saveImgNm,
+		    ext,
+		    img_size as imgSize
+		FROM
+		    main_image
+	</select>
 </mapper>
