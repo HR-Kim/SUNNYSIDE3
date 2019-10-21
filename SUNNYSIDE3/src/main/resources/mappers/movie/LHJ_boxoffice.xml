@@ -22,6 +22,20 @@
 	    b.movie_rank      as movieRank
 	</sql>
 
+	<!-- 메인 박스오피스 목록조회(8개) -->
+	<select id="do_retrieve_main" resultType="Movie">
+		SELECT
+		    <include refid="movieBoxJoinColumns"></include>
+		FROM
+		    movie m JOIN boxoffice b
+		ON
+		    m.movie_id = b.movie_id
+		WHERE 
+			b.movie_rank <![CDATA[ <= ]]>  8
+		ORDER BY
+		    b.movie_rank
+	</select>
+	
 	<!-- 목록조회 -->
 	<select id="do_retrieve" resultType="Movie">
 		SELECT

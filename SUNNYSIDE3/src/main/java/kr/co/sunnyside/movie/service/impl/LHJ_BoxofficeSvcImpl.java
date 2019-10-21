@@ -80,6 +80,12 @@ public class LHJ_BoxofficeSvcImpl implements LHJ_BoxofficeSvc {
 		return boxofficeDaoImpl.do_selectOne(dto);
 	}
 
+	/**박스오피스 메인 전체조회(8)*/
+	@Override
+	public List<?> do_retrieve_main() {
+		return boxofficeDaoImpl.do_retrieve_main();
+	}
+	
 	/**박스오피스 전체조회*/
 	@Override
 	public List<?> do_retrieve() {

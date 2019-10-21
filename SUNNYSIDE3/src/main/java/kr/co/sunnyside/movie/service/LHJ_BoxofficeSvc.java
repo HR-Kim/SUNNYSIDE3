@@ -27,6 +27,9 @@ public interface LHJ_BoxofficeSvc {
 	/**박스오피스 전체조회*/
 	public List<?> do_retrieve();
 	
+	/**박스오피스 메인 전체조회(8개)*/
+	public List<?> do_retrieve_main();
+	
 	
 	
 	
