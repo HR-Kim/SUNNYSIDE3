@@ -43,7 +43,7 @@
 					<input type="hidden" id="isCheck" value="N"/> 
 					
 					<span class="text-center login100-form-title p-b-32">
-						추가정보 입력
+						추가정보 입력 (필수)
 					</span>
 					
 					<input class="input100" maxlength="20" type="hidden" id="userId" name="userId" value="${userId}" >

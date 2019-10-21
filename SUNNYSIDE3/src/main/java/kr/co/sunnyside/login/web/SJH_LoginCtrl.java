@@ -164,29 +164,25 @@ public class SJH_LoginCtrl {
 		
 		
 		//4.파싱 닉네임 세션으로 저장
-		session.setAttribute("user",response_obj); //세션 생성
+		SJH_LoginVO user = new SJH_LoginVO();
+		user.setUserId(userId);
+		user.setUserName(userName);
+		user.setEmail(email);
 		
+		session.setAttribute("user",user); //세션 생성
 		model.addAttribute("userId",userId);
 		model.addAttribute("userName",userName);
 		model.addAttribute("email",email);
 		model.addAttribute("result", apiResult);
 
 		//추가정보 입력했는지 확인
-		SJH_LoginVO tmpUserId = new SJH_LoginVO();
-		tmpUserId.setUserId(userId);
-		LOG.debug("tmpUserId: "+tmpUserId);
-		int flag = loginSvc.id_check(tmpUserId);
-		LOG.debug("flag: "+flag);
-		
-		
+		int flag = loginSvc.id_check(user);
 		
 		if(flag<1) { //유저의 이메일 또는 전화번호가 없다면 추가정보 입력 페이지로 리턴
-			return "login/add_user_info"; //추가정보 입력하는 페이지로 리턴
-			
-		}else { //정보가 다 있으면 메인으로 리턴
-			return "main/main";
+			return "login/add_user_info";
 		}
 		
+		return "main/main";
 	}
 	
 	

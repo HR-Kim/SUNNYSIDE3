@@ -56,9 +56,6 @@
 								<c:when test="${not empty user.userId}">
 									${user.userName} 님 환영합니다.
 								</c:when>
- 								<c:when test="${not empty userId}">
-									${userName} 님 환영합니다.
-								</c:when>
 								<c:otherwise>
 									<div class="up-item">
 										<i class="flaticon-profile"></i>
@@ -70,14 +67,6 @@
     						<!-- 로그인 했을 때만 장바구니 표시 -->
 							<c:choose>
  								<c:when test="${not empty user.userId}">
-									<div class="up-item" >
-										<div class="shopping-card">
-											<i class="flaticon-bag"></i>
-										</div>
-										<a href="/sunnyside/cart/do_retrieve.do">장바구니</a>
-									</div>
-								</c:when>
- 								<c:when test="${not empty userId}">
 									<div class="up-item" >
 										<div class="shopping-card">
 											<i class="flaticon-bag"></i>
@@ -121,10 +110,6 @@
   					<!-- 로그인한 상태면 로그아웃 출력 -->
 					<c:choose>
   						<c:when test="${not empty user.userId}">
-							<li><a href="/sunnyside/login/logout.do">로그아웃</a></li>
-						</c:when>
-						
- 						<c:when test="${not empty userId}">
 							<li><a href="/sunnyside/login/logout.do">로그아웃</a></li>
 						</c:when>
 						
