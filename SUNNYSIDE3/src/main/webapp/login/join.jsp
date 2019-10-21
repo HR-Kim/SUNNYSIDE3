@@ -107,6 +107,7 @@
 						<input class="input100" maxlength: 30 type="text" id="email" name="email" placeholder="이메일" >
 						<span class="focus-input100"></span>
 					</div>
+					
 				</form>
 				
 				<br/>
