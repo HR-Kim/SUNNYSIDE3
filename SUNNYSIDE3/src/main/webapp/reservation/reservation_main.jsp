@@ -19,12 +19,52 @@
 		.ui-datepicker select.ui-datepicker-month{ width:30%; font-size: 11px; }
 		.ui-datepicker select.ui-datepicker-year{ width:40%; font-size: 11px; }
 		.ui-widget-content .ui-icon {background-image: url("../resources/image/jquery_ui/ui-icons_444444_256x240.png");}
+		.seatPage p {
+			padding-left: 10px;
+		}
+		.screen {
+			width: 100%;
+			height: 30px;
+			text-align: center;
+			background-color: #ececec;
+			margin: 0 auto 30px auto;
+			font-weight: bold;	
+			padding: 5px;
+		}
+		.seatbox {
+			position: inherit;
+			text-align: center;
+			padding-bottom: 20px;
+		}
+		.seatWrap {
+			border-bottom: 1px solid black;
+			width: 648px;
+		}
+		.seatWrap .seatY {
+			font-weight: bold;
+		}
+		.seatWrap button {
+			width: 20px;
+			height: 20px;
+			padding: 0;
+		}
+		.seatPage {
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			height: 560px;
+			width: 650px;
+			z-index: 50;
+			background-color: white;
+			border-radius: .5rem;
+			border: 1px solid black;
+			display: none;
+		}
 		.submit {
 			width: 150px;
 			border-radius: .5rem;
 			margin-left: 25px;
-			margin-top: 10px;
-			
+			margin-top: 10px;	
 		}
 		.costlight {
 			color: yellow;
@@ -222,6 +262,21 @@
 	<body>
 		<div class="container">
 
+			<div class="seatPage">
+				<div class="bar">
+					&nbsp;<label>좌석선택</label>
+				</div>
+				<div class="seatWrap">
+					<p class="screen">SCREEN</p>
+					<div class="seatbox">
+						<%= StringUtil.makeSeatButton(0) %>
+					</div>
+				</div>
+				<p>선택한 인원 수 만큼 좌석을 선택해주세요.</p>
+			</div>
+			<input type="hidden" id="hd_personTotal" value="0">
+			<input type="hidden" id="hd_selectedSeatTotal" value="0">
+			
 			<form action="/sunnyside/test" method="post" id="mainForm">
 				<input type="hidden" id="hd_selectedMovieId" value="">
 				<input type="hidden" id="hd_selectedScreenId" value="">
@@ -229,8 +284,8 @@
 				<input type="hidden" id="hd_selectedRoomId" value="">
 				<input type="hidden" id="hd_resultCost" value="">
 				<input type="hidden" id="hd_adultYN" value="">
+				<input type="hidden" id="hd_selectedSeat" value="">
 			</form>
-
 			
 			<div id="selectMovie" class="case">
 				<div class="bar">
@@ -330,6 +385,7 @@
 				<div id="infoBox"></div>
 				<div id="infoBox_middle"></div>
 				<div id="infoBox_bottom"></div>
+				<div id="submit_btn"></div>
 			</div>
 
 			
@@ -886,7 +942,8 @@
 					if(adult > 0) $("#hd_adultYN").val("1");
 					
 					$("#infoBox_bottom>div").detach();
-							
+					$("#submit_btn>div").detach();
+					
 					$("#infoBox_bottom").append(
 							"<div>"+
 							"&nbsp;&nbsp;<label class='lowlight'>인원</label>"+
@@ -898,23 +955,237 @@
 							"<br/>"
 					);	
 					
-					$("#infoBox_bottom").append(
-							"<div>"+
-							"<button class='submit btn btn-danger btn-lg' onclick='javascript:submit();'>예매하기</button>"+
-							"</div>"
-					);
+					submit_btn(1);
+
 				}
 				
-				//예매하기 버튼
-				function submit(){
-					if(confirm("예매하시겠습니까?")==false) return;
-					
-					var form = $("#mainForm");
-					form.submit();
-					//넘어가는 정보
-					//지점id, 상영관id, 영화id, 스크린id, 성인유무, 가격
-					
+				//단계버튼		1:좌석선택으로, 2:결제단계로
+				function submit_btn(select){
+					if(select == 1){
+						$("#submit_btn").append(
+								"<div>"+
+								"<button class='submit btn btn-danger btn-lg' onclick='javascript:go_seat();'>다음단계</button>"+
+								"</div>"
+						);
+						return;
+					}else if(select == 2){
+						$("#submit_btn").append(
+								"<div>"+
+								"<button class='submit btn btn-danger btn-lg' onclick='javascript:go_pay();'>다음단계</button>"+
+								"</div>"
+						);
+						return;
+					}
 				}
+				
+				//오른쪽 요약박스를 지운다
+				function reset_infoBox(){
+					$("#infoBox_middle>div").detach();
+					$("#infoBox_bottom>div").detach();
+					$("#infoBox_bottom>div").detach();
+					$("#infoBox>div").detach();
+					$("#submit_btn>div").detach();
+				}
+				
+				//좌석선택으로 가는 버튼
+				function go_seat(){
+					$(".seatPage").css("display", "block");
+					create_Seat_Table();
+					$("#submit_btn>div").detach();
+				}
+				
+				//예매다시하기버튼
+				$("#resetBtn").on("click", function(){
+					if(confirm("기록을 지우고 처음으로 돌아갑니다.")==false) return;
+					
+					$(".seatPage").css("display", "none");
+					
+					$("#selectTimeBtnCase>div").detach();
+					$("#numBtnCase").css("display", "none");
+					$("#branchTable>tbody>tr").detach();
+					$("#datePicker").datepicker("destroy");
+					$("#submit_btn>div").detach();
+					
+					delete_Seat_Table();
+					
+					reset_infoBox();
+					
+					$(".branchInfo>label").text("");
+					$("#hd_selectedMovieId").val("");
+					$("#hd_selectedScreenId").val("");
+					$("#hd_selectedBranchId").val("");
+					$("#hd_selectedRoomId").val("");
+					$("#hd_resultCost").val("");
+					$("#hd_adultYN").val("");
+					$("#hd_selectedBranchNm").val("");
+					$("#hd_selectedDate").val("");
+					$("#hd_aNum").val("0");
+					$("#hd_sNum").val("0");
+					$("#hd_aCost").val("0");
+					$("#hd_sCost").val("0");
+					$("#hd_personTotal").val("0");
+    				$("#hd_selectedSeatTotal").val("0");
+				});
+				
+				//좌석테이블 생성
+	    		function create_Seat_Table(){
+					var roomId = $("#hd_selectedRoomId").val();						//상영관ID
+	    			var searchDiv = "20";
+	    			
+	    			$.ajax({
+	    				type : "POST",
+	    				url : "${context}/seat/do_retrieve.do",
+	    				dataType : "json",
+	    				data : {
+	    					"searchWord" : roomId,
+	    					"searchDiv" : searchDiv
+	    				}, 
+	    			success: function(data){
+	    				var seatArr = data;
+	    				if(seatArr.length != 0){
+	    					
+	    					$(".seatPage").css("display", "block");
+	    					
+	    					for(var i=0 ; i< seatArr.length ; i++){
+	        					var y= seatArr[i].seatY;		//Y축값
+	        					var x= seatArr[i].seatX;		//X축값
+	        					var yn = seatArr[i].useYN;		//사용여부
+	        					var seat = $("button[data-y="+y+"][data-x="+x+"]");	//좌석버튼찾기
+	        					seat.css("color", "white");
+	        					if(yn == '1'){										//사용가능좌석인 것(1)
+	        	   					seat.prop("disabled", false);					//해당 버튼을 사용가능하도록 만든다
+	        	   					seat.text(x);
+	        	   					seat.css("background-color", "blue");
+	        					}else if(yn == '0') {								//사용불가인것(0) X표시
+	        						seat.prop("disabled", false);
+	        	   					seat.text("X");
+	        	   					seat.css("background-color", "red");
+	        					}else{												//(3) 이면 복도
+	        						seat.css("visibility" ,"hidden");
+	        					}
+	        				}	
+	    					var adult = parseInt($("#hd_aNum").val());
+	    					var student = parseInt($("#hd_sNum").val());
+	    					var total = eval(adult + student);
+	    					$("#hd_personTotal").val(total);
+	    				}
+	    			},
+	    			complete:function(data){
+	    				
+	    			},
+	    			error:function(xhr,status,error){
+	    				
+	    			}
+	    			}); 
+	    		}
+				
+	    		//좌석테이블 제거
+	    		function delete_Seat_Table(){
+	    			var seat = $("button[data-y][data-x]");
+	    			seat.css("background-color", false);		
+	    			seat.css("color", false);
+	    			seat.css("visibility", "visible");		//보이지 않게 만들었던 버튼을 다시 보이게
+	    			seat.css("visibility", false);			//css를 없앤다. 이 속성을 다시 만들면 이전의 값이 나오므로 false하기전에 visible로 반드시 만들어야한다
+	    			seat.prop("disabled", true);
+	    			seat.text("");
+	    		}
+	    		
+	    		//좌석클릭시
+	    		$("button[data-y][data-x]").on("click", function(){console.log("===================");
+	    			var seat = $(this);
+	    			var Y = seat.attr("data-y");
+					var X = seat.attr("data-x");
+					var seatNm = Y+""+X;
+					
+					$("#submit_btn>div").detach();
+					
+					//저장한 좌석정보를 문자열->배열로 전환
+					var seatInfo = $("#hd_selectedSeat").val();	
+	    			var seatArr = convert_arrayNstring(true, seatInfo);
+	    			
+	    			if(seat.prop("disabled", false)){						//좌석이 사용가능할때
+	    				var nowSelect = seat.attr("data-nowSelect");
+	    				
+	    				var total = parseInt($("#hd_personTotal").val());
+	    				var now = parseInt($("#hd_selectedSeatTotal").val());
+	    				var d = total - now; 
+
+		    			if(nowSelect != 1 && d > 0){						//선택
+	    					seat.css("background-color", "yellow");
+	    					seat.attr("data-nowSelect", 1);
+	    					$("#hd_selectedSeatTotal").val( eval(now+1) );
+	    					
+	    					seatArr.push(seatNm);
+	    					
+	    					//배열->문자열
+	    					var seatString = convert_arrayNstring(false, seatArr);
+	    					
+	    					$("#hd_selectedSeat").val(seatString);
+
+		    				now = parseInt($("#hd_selectedSeatTotal").val());
+							d = total - now; 
+	    					if(d <= 0) submit_btn(2);
+		    			}else if(nowSelect == 1){							//취소
+		    				seat.attr("data-nowSelect", 0);
+		    				seat.css("background-color", "blue");
+		    				$("#hd_selectedSeatTotal").val( eval(now-1) );
+		    				
+		    				//배열요소삭제
+		    				var index = seatArr.indexOf(seatNm);
+							seatArr.splice(index, 1);
+							
+							//배열->문자열
+							var seatString = convert_arrayNstring(false, seatArr);
+							$("#hd_selectedSeat").val(seatString);
+		    			}else if(d <= 0){									//선택불가
+		    				alert("좌석을 모두 선택했습니다.\n다음단계로 진행해주세요.");
+		    				submit_btn(2);
+		    			}
+		    			
+		    			
+	    			}
+	    		});
+
+	    		//배열을 문자열로 혹은 문자열을 배열로, 문자열= %A1%A2... , 배열= [],[A1],[A2],.. 
+	    		function convert_arrayNstring(bool, value){			//[0]번째 존재X
+	    			if(bool == true){//문자열을 배열로
+	    				var stringInfo = value;
+		    			var arr = stringInfo.split("%");		
+	    				return arr;
+	    			}else{			//배열을 문자열로
+	    				//중복제거작업
+    					var uniqueArr = new Array();
+    					$.each(value, function(i, el){
+    						if($.inArray(el, uniqueArr) == -1) uniqueArr.push(el);
+    					});
+    					
+    					var stringValue = "";
+    					for(var i=1 ; i<uniqueArr.length ; i++){
+    						stringValue += "%" + uniqueArr[i];
+    					}	    				
+    					return stringValue;
+	    			}
+	    		}
+	    		
+	    		//좌석버튼에 마우스 올렸을떄 색 변화
+	    		$("button[data-y][data-x]").on("mouseenter", function(){
+	    			var seat = $(this);
+	    			seat.css("color", "red");
+	    		});
+	    		
+	    		//좌석버튼에 마우스 벗어났을시 색변화
+	    		$("button[data-y][data-x]").on("mouseleave", function(){
+	    			var seat = $(this);
+	    			seat.css("color", "white");
+	    		});
+	    		
+	    		function go_pay(){
+	    			if(confirm("결제페이지로 이동하시겠습니까?")==false) return;
+	    			
+	    			var frm = $("#mainForm");
+	    			frm.submit();
+	    		}
+	    		
     	</script>
 	</body>
 </html>
