@@ -4,12 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.sunnyside.cmn.StringUtil;
+import kr.co.sunnyside.login.service.SJH_LoginVO;
 import kr.co.sunnyside.store.service.SEJ_CartSvc;
 import kr.co.sunnyside.store.service.SEJ_CartVO;
 import kr.co.sunnyside.store.service.SEJ_StroreSvc;
@@ -31,67 +35,82 @@ public class SEJ_CartCtrl {
 	@Autowired
 	SEJ_StroreSvc storeService;
 	
+	// view
+	private final String CART_LIST_VIEW = "cart/cart";
+	
 	// 1. 장바구니 저장(추가)
 	@RequestMapping(value ="cart/do_save.do", method = RequestMethod.POST)
-	public String do_save(@ModelAttribute SEJ_CartVO vo, HttpSession session){
-		String userId = (String) session.getAttribute("user");
+	public String do_save(SEJ_CartVO inVO, HttpSession session){
+		LOG.debug("============================");
+		LOG.debug("=do_save inVo="+inVO);
+		LOG.debug("============================");
+		
+		//로그인 확인
+		SJH_LoginVO userId = (SJH_LoginVO) session.getAttribute("user");
 		LOG.debug("**userId"+userId);
-		vo.setUserId(userId);
+		if(null !=userId) {
+			inVO.setUserId(userId.getUserId()); //아이디로 입력되게 처리한 것 . 이러면 세션 처리 끝. 
+		}
 		// 장바구니에 기존 상품이 있는지 검사
-		int count = cartService.do_countCart(vo.getProductId(), userId);
+		int count = cartService.do_countCart(inVO.getProductId(), inVO.getUserId());
 		if(count == 0){		
 			// 없으면 insert
-			cartService.do_save(vo);
+			cartService.do_save(inVO);
 		} else {
 			// 있으면 update
-			cartService.do_updateCountCart(vo);
+			cartService.do_updateCountCart(inVO);
 		}
-		return "cart/do_retrieve.do";
+		return CART_LIST_VIEW;
+	}
+	 
+	// 2. 장바구니 삭제
+	@RequestMapping(value ="cart/do_delete.do", method = RequestMethod.POST)
+	public String do_delete(SEJ_CartVO inVO){
+		LOG.debug("============================");
+		LOG.debug("=do_delete inVO="+inVO);
+		LOG.debug("============================");
+		
+		cartService.do_delete(inVO);
+		
+		return CART_LIST_VIEW;
 	}
 	
-//	// 2. 장바구니 삭제
-//	@RequestMapping(value ="cart/do_delete.do", method = RequestMethod.POST)
-//	public String delete(@RequestParam int cartId){
-//		cartService.do_delete(cartId);
-//		return "cart/do_retrieve.do";
-//	}
-//	
-//	// 3. 장바구니 수정
-//	@RequestMapping(value ="cart/do_update.do",method = RequestMethod.POST )
-//	public String update(@RequestParam int[] count, @RequestParam String[] productId, HttpSession session) {
-//		// session의 id
-//		String userId = (String) session.getAttribute("userId");
-//		LOG.debug("userId"+userId);
-//		
-//		// 레코드의 갯수 만큰 반복문 실행
-//		for(int i=0; i<productId.length; i++){
-//			SEJ_CartVO vo = new SEJ_CartVO();
-//			vo.setUserId(userId);
-//			vo.setCount(count[i]);
-//			vo.setProductId(productId[i]);
-//			cartService.do_update(vo);
-//		}
-//		return "redirect:/cart/do_retrieve.do";
-//	}
-//		
-//	// 4. 장바구니 목록
-//	@RequestMapping(value ="cart/do_retrieve.do",method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-//	@ResponseBody
-//	public ModelAndView do_retrieve(HttpSession session, ModelAndView mav){
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		String userId = (String) session.getAttribute("userId"); // session에 저장된 userId
-//		LOG.debug("userId"+userId);
-//		List<SEJ_CartVO> list = cartService.do_retrieve(userId); // 장바구니 정보 
-//		LOG.debug("list"+list);
-//		int sumMoney = cartService.sumMoney(userId); // 장바구니 전체 금액 호출
-//		LOG.debug("sumMoney"+sumMoney);
-//		
-//		// 장바구니 전체 긍액
-//		map.put("list", list);				// 장바구니 정보를 map에 저장
-//		map.put("count", list.size());		// 장바구니 상품의 유무
-//		map.put("sumMoney", sumMoney);		// 주문 상품 전체 금액 
-//		mav.setViewName("cart/cart");	// view(jsp)의 이름 저장
-//		mav.addObject("map", map);			// map 변수 저장
-//		return mav;
-//	}
+	// 2-1. 장바구니 전체 삭제
+	@RequestMapping(value ="cart/do_deleteAll.do", method = RequestMethod.POST)
+	public String do_deleteAll(){
+		LOG.debug("============================");
+		LOG.debug("=do_deleteAll");
+		LOG.debug("============================");
+		
+		cartService.do_deleteAll();
+		
+		return CART_LIST_VIEW;
+	}
+	
+	// 3. 장바구니 수정
+	@RequestMapping(value ="cart/do_update.do",method = RequestMethod.POST )
+	public String do_update(SEJ_CartVO inVO) {
+		LOG.debug("============================");
+		LOG.debug("=do_update inVO="+inVO);
+		LOG.debug("============================");		
+		
+		cartService.do_update(inVO);
+
+		return CART_LIST_VIEW;
+	}
+	
+	// 4. 장바구니 목록
+	@RequestMapping(value ="cart/do_retrieve.do",method = RequestMethod.GET)
+	public String do_retrieve(SEJ_CartVO inVO,Model model){
+		LOG.debug("1.=====================");
+		LOG.debug("1.= do_retrieve param=" + inVO);
+		LOG.debug("1.=====================");
+
+		List<SEJ_CartVO> list = (List<SEJ_CartVO>) this.cartService.do_retrieve(inVO);
+		int totalCost=cartService.do_totalCost(inVO.getUserId());
+		model.addAttribute("list", list);
+		model.addAttribute("totalCost", totalCost);
+
+		return CART_LIST_VIEW;
+	}
 }

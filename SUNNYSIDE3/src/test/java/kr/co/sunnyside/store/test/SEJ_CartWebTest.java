@@ -70,159 +70,81 @@ public class SEJ_CartWebTest {
 			LOG.debug("================================");
 	}
 	
-//	/**장바구니 저장 */
-//	@Test
-//	//@Ignore
-//	 public void do_save() throws Exception{
-//	    MockHttpServletRequestBuilder createMessage 
-//	    = MockMvcRequestBuilders.post("/cart/do_save.do").param("productNm", "영화 할인권")
-//	    												  .param("productInfo", "영화를 3000원 할인해서 보세요")
-//	    												  .param("category", "3")
-//	    												  .param("productCost", "7000");
-//	    
-//	    ResultActions resultActions =  mockMvc.perform(createMessage)
-//	                                          .andExpect(MockMvcResultMatchers.content().contentType("application/json; charset=UTF-8"))	                              
-//	    							          .andExpect(MockMvcResultMatchers.jsonPath("$.msgId", is("1")));
-//	    String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
-//	    LOG.debug("=============================");
-//	    LOG.debug("=result="+result);
-//	    LOG.debug("=============================");
-//	   }
-//	
-//	/**
-//	* 삭제
-//	*
-//	*/
-//	   @Test
-//	   @Ignore
-//	   public void do_delete() throws Exception{
-//	      MockHttpServletRequestBuilder createMessage 
-//	      = MockMvcRequestBuilders.post("/store/do_delete.do").param("productId", "20191011-001-010");
-//	      													        
-//	      ResultActions resultActions =  mockMvc.perform(createMessage)
-//	                                  .andExpect(MockMvcResultMatchers.content().contentType("application/json; charset=UTF-8"))	                              
-//	      							  .andExpect(MockMvcResultMatchers.jsonPath("$.msgId", is("1")));
-//	      String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
-//	      LOG.debug("=============================");
-//	      LOG.debug("=result="+result);
-//	      LOG.debug("=============================");
-//	   }
-//	   
-//	   
-//   /**
-//	 * 수정
-//	 */
-//	@Test
-//	@Ignore
-//	public void do_update() throws Exception{
-//	    MockHttpServletRequestBuilder createMessage 
-//	    = MockMvcRequestBuilders.post("/store/do_update.do").param("productId", "20191015-001-021")
-//	    												    .param("productNm", "짭잘바다맛")
-//	    												    .param("productInfo", "아주 맛있습니다")
-//	    												    .param("productCost", "8000");
-//	    ResultActions resultActions =  mockMvc.perform(createMessage)
-//	                                  .andExpect(MockMvcResultMatchers.content().contentType("application/json; charset=UTF-8"))	                              
-//	    							  .andExpect(MockMvcResultMatchers.jsonPath("$.msgId", is("1")));
-//	    String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
-//	    LOG.debug("=============================");
-//	    LOG.debug("=result="+result);
-//	    LOG.debug("=============================");
-//	 }
-//	
-//   /**
-//	 * 단건선택
-//	 * 조회만 get
-//	 */
-//	@Test
-//	@Ignore
-//	public void do_selectOne() throws Exception {
-//		 MockHttpServletRequestBuilder createMessage 
-//	      = MockMvcRequestBuilders.get("/store/do_selectOne.do").param("productId", "20191010-001-002");
-//	        
-//	      ResultActions resultActions =  mockMvc.perform(createMessage)
-//	    		  						.andExpect(status().is2xxSuccessful());
-//	      String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
-//	    		  						
-//	      LOG.debug("=============================");
-//	      LOG.debug("=result="+result);
-//	      LOG.debug("=============================");
-//	}   
-//
-//	/**
-//	 * 전체조회
-//	 * 조회만 get
-//	 */
-//	@Test
-//	@Ignore
-//	public void do_retrieve() throws Exception{
-//	    MockHttpServletRequestBuilder createMessage 
-//	    = MockMvcRequestBuilders.get("/store/do_retrieve.do") .param("pageSize", "10")
-//			    										      .param("pageNum", "1")
-//			    										      .param("searchWord", ""); //아무것도 입력안하면 전체검색. 
-//	                                                                  
-//	    ResultActions resultActions =  mockMvc.perform(createMessage)                             
-//	    							  .andExpect(status().isOk());
-//	    String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
-//	    LOG.debug("=============================");
-//	    LOG.debug("=result="+result);
-//	    LOG.debug("=============================");
-//	   }
-//	
-//	/**
-//	 * 팝콘 전체조회
-//	 * 조회만 get
-//	 */
-//	@Test
-//	@Ignore
-//	public void do_retrieve_popcorn() throws Exception{
-//	    MockHttpServletRequestBuilder createMessage 
-//	    = MockMvcRequestBuilders.get("/store/do_retrieve_popcorn.do") .param("pageSize", "10")
-//			    												      .param("pageNum", "1");
-//	                                                                  
-//	    ResultActions resultActions =  mockMvc.perform(createMessage)                             
-//	    							  .andExpect(status().isOk());
-//	    String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
-//	    LOG.debug("=============================");
-//	    LOG.debug("=result="+result);
-//	    LOG.debug("=============================");
-//	   }
-//	
-//	/**
-//	 * 음료 전체조회
-//	 * 조회만 get
-//	 */
-//	@Test
-//	@Ignore
-//	public void do_retrieve_drink() throws Exception{
-//	    MockHttpServletRequestBuilder createMessage 
-//	    = MockMvcRequestBuilders.get("/store/do_retrieve_drink.do") .param("pageSize", "10")
-//			    												      .param("pageNum", "1");
-//	                                                                  
-//	    ResultActions resultActions =  mockMvc.perform(createMessage)                             
-//	    							  .andExpect(status().isOk());
-//	    String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
-//	    LOG.debug("=============================");
-//	    LOG.debug("=result="+result);
-//	    LOG.debug("=============================");
-//	   }
-//	
-//	/**
-//	 * 영화예매권 전체조회
-//	 * 조회만 get
-//	 */
-//	@Test
-//	@Ignore
-//	public void do_retrieve_movieticket() throws Exception{
-//	    MockHttpServletRequestBuilder createMessage 
-//	    = MockMvcRequestBuilders.get("/store/do_retrieve_movieticket.do") .param("pageSize", "10")
-//			    												          .param("pageNum", "1");
-//	                                                                  
-//	    ResultActions resultActions =  mockMvc.perform(createMessage)                             
-//	    							  .andExpect(status().isOk());
-//	    String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
-//	    LOG.debug("=============================");
-//	    LOG.debug("=result="+result);
-//	    LOG.debug("=============================");
-//	   }
-//	
+	/**장바구니 저장 */
+	@Test
+	@Ignore
+	 public void do_save() throws Exception{
+	    MockHttpServletRequestBuilder createMessage 
+	    = MockMvcRequestBuilders.post("/cart/do_save.do") .param("productNm", "기프트카드")
+	    												  .param("userId", "admin")
+	    												  .param("count", "3")
+	    												  .param("productCost", "30000")
+	    												  .param("productId", "20191011-003-005");
+	    
+	    ResultActions resultActions =  mockMvc.perform(createMessage);
+	    String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
+	    LOG.debug("=============================");
+	    LOG.debug("=result="+result);
+	    LOG.debug("=============================");
+	   }
+
+	/**장바구니 삭제 */
+	   @Test
+	   @Ignore
+	   public void do_delete() throws Exception{
+	      MockHttpServletRequestBuilder createMessage 
+	      = MockMvcRequestBuilders.post("/cart/do_delete.do").param("cartId", "20191018-002");
+	      													        
+	      ResultActions resultActions =  mockMvc.perform(createMessage);
+	      String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
+	      LOG.debug("=============================");
+	      LOG.debug("=result="+result);
+	      LOG.debug("=============================");
+	   }
+	   
+	   /**장바구니 전체삭제 */
+	   @Test
+	   @Ignore
+	   public void do_deleteAll() throws Exception{
+	      MockHttpServletRequestBuilder createMessage 
+	      = MockMvcRequestBuilders.post("/cart/do_deleteAll.do");
+	      													        
+	      ResultActions resultActions =  mockMvc.perform(createMessage);
+	      String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
+	      LOG.debug("=============================");
+	      LOG.debug("=result="+result);
+	      LOG.debug("=============================");
+	   }
+	   
+	/**장바구니 수정 */
+	@Test
+	@Ignore
+	public void do_update() throws Exception{
+	    MockHttpServletRequestBuilder createMessage 
+	    = MockMvcRequestBuilders.post("/cart/do_update.do").param("count", "12")
+	    												    .param("productId", "20191011-003-005")
+	    												    .param("userId", "admin");
+	    ResultActions resultActions =  mockMvc.perform(createMessage);
+	    String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
+	    LOG.debug("=============================");
+	    LOG.debug("=result="+result);
+	    LOG.debug("=============================");
+	 }
+	
+	/**장바구니 목록 */
+	@Test
+	@Ignore
+	public void do_retrieve() throws Exception{
+	    MockHttpServletRequestBuilder createMessage 
+	    = MockMvcRequestBuilders.get("/cart/do_retrieve.do") .param("userId", "admin");
+	                                                                  
+	    ResultActions resultActions =  mockMvc.perform(createMessage)                             
+	    							  .andExpect(status().isOk());
+	    String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
+	    LOG.debug("=============================");
+	    LOG.debug("=result="+result);
+	    LOG.debug("=============================");
+	   }
+	
+
 }

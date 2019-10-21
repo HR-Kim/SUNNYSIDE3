@@ -13,13 +13,19 @@
         <put-attribute name="footer" value="/tiles/views/footer.jsp" />
         <put-attribute name="menu" value="" />
     </definition>
-
+    
+    <!-- 메인 레이아웃 -->
+    <definition name="main_definition" template="/tiles/layouts/mainLayout.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header" value="/tiles/views/header.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/tiles/views/footer.jsp" />
+    </definition>
     
     <!-- main -->    
-    <definition name="main/*" extends="basede_definition">
+    <definition name="main/*" extends="main_definition">
       <put-attribute name="body" value="/main/main.jsp" />
       <put-attribute name="title" value="SUNNYSIDE>메인" />
-      <put-attribute name="menu" value="MAIN" />
     </definition>
         
     <!-- movie -->    

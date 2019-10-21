@@ -15,28 +15,32 @@
 			<div class="row">
 				<div class="col-lg-4 col-sm-7">
 					<div class="footer-widget about-widget">
-						<h2>SUNNYSIDE THEATER</h2>
-						<p><a style="font-weight: bold">=홍대점=</a><br>
-						<a>서울특별시 마포구 월드컵북로 21 2층 풍성빌딩</a><br>
-						<a>--------------------------------------------</a><br>
-						<a style="font-weight: bold">=강남점=</a><br>
-						<a>서울특별시 강남구 테헤란로 132 한독약품빌딩</a>
-						</p>
-				</div>
+						<div class="fw-latest-post-widget">
+							<h2>SUNNYSIDE THEATER</h2>
+							<p><a style="font-weight: bold">=홍대점=</a><br>
+							<a>서울특별시 마포구 월드컵북로 21 2층 풍성빌딩</a><br>
+							<a>--------------------------------------------</a><br>
+							<a style="font-weight: bold">=강남점=</a><br>
+							<a>서울특별시 강남구 테헤란로 132 한독약품빌딩</a>
+							</p>
+						</div>
+					</div>
 				</div>
 				<div class="col-lg-3 col-sm-6">
 					<div class="footer-widget about-widget">
 						<h2>REPRESENTATIVE</h2>
-						<p><a style="font-weight: bold">대표자 김도연</a><br>
-                        <a>사업자 등록번호 211-86-45871 </a></p>    						
+						<div class="fw-latest-post-widget">
+							<p><a style="font-weight: bold">대표자 김도연</a><br>
+                        	<a>사업자 등록번호 211-86-45871 </a></p>    
+                        </div>						
 					</div>
 				</div>
 				<div class="col-lg-3 col-sm-6">
 					<div class="footer-widget about-widget">
 						<h2>CONTACT INFO</h2>
 						<div class="fw-latest-post-widget">
-							<p><i class="ti-mobile"></i> 1544-0013</a><br>
-							   <i class="ti-email"></i> sunnyside@helpinfo.com</a>
+							<p><i class="ti-mobile"></i><a>1544-0013</a><br>
+							   <i class="ti-email"></i><a>sunnyside@helpinfo.com</a>
 							</p>							
 						</div>
 					</div>

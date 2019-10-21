@@ -115,17 +115,16 @@ public class SEJ_CartDaoImpl implements WorkDiv{
 		
 		return list;
 	}
-	
-	/**장바구니 금액 총합계 */    
+	  
 	@Override
 	public DTO do_selectOne(DTO dto) {
-		String statement = NAMESPACE+".do_selectOne";
-		SEJ_CartVO store = (SEJ_CartVO) dto;
-		LOG.debug("===================================");
-		LOG.debug("=1. param="+store);
-		LOG.debug("=2. statement="+statement);
-		
-		SEJ_CartVO outVO = this.sqlSessionTemplate.selectOne(statement,store); //이 역할을 해주는 것이 mybatis
+		return dto;
+	}
+	
+	/**장바구니 금액 총합계 */  
+	public int do_totalCost(String userId) {
+		String statement = NAMESPACE+".do_totalCost";
+		int outVO = this.sqlSessionTemplate.selectOne(statement,userId); //이 역할을 해주는 것이 mybatis
 		LOG.debug("=3. outVO="+outVO);
 		LOG.debug("===================================");
 		return outVO;
