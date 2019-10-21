@@ -27,6 +27,14 @@ public interface SEJ_StroreSvc {
 	/**영화예매권목록조회*/
 	public List<?> do_retrieve_movieticket(DTO dto);
 
+	/**메인페이지 팝콘조회*/
+	public List<?> do_main_popcorn(DTO dto);
+	
+	/**메인페이지 음료조회*/
+	public List<?> do_main_drink(DTO dto);
+	
+	/**메인페이지 영화예매권조회*/
+	public List<?> do_main_ticket(DTO dto);
 	
 	
 	

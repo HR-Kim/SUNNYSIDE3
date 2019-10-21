@@ -29,7 +29,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- 부트스트랩 -->
-<%--     <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet"> --%>
+    <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
     <title>상품등록</title>
 
@@ -88,26 +88,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${context}/resources/js/jquery.validate.js"></script>
 <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
-<%--  <script src="${context}/resources/js/bootstrap.min.js"></script>    --%>
+ <script src="${context}/resources/js/bootstrap.min.js"></script>   
  <script type="text/javascript">
-	//취소
-	$("#backBtn").on("click",function(){
-		//alert("backBtn");
-		if(confirm("수정을 취소하시겠습니까?")==false) return;
-		if(confirm("메인페이지로 이동합니다.")==false) return;
-		location.href="${context}/store/store_main.do";	
-	});
+
 
 	//수정
-		   $("#doUpdate").on("click",function(e){
+		$("#doUpdate").on("click",function(e){
 			if(confirm("수정하시겠습니까?")==false) return;
 			console.log("productNm="+$("#productNm").val());
 			console.log("productCost="+$("#productCost").val());
 			console.log("productInfo="+$("#productInfo").val());
 			console.log("productId="+$("#productId").val());
 			e.preventDefault();//현재 이벤트가 상위로 전파되지 않도록 중단한다
-			//validation
-	        if($("#boardEditFrm").valid()==false)return;
 			
 			doFileUpload();		
 			});
@@ -127,7 +119,7 @@
 	        processData:false,
 	        enctype:"multipart/form-data",
 	        data:formData,  
-	        success: function(data){ 
+	      success: function(data){ 
 			  if(null != data && data.msgId=="1"){
 				  alert("수정되었습니다.");		
 				  location.href="${context}/store/store_main.do";

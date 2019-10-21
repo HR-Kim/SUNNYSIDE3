@@ -14,11 +14,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 ---- Include the above in your HEAD tag --------
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" /> -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" /> --> 
 <link href="../resources/css/store_main.css" rel="stylesheet" type="text/css">
 <title>상품상세</title>
 </head>
@@ -77,7 +77,7 @@
 	<input type="button" value="삭제" id="delbtn" name="delbtn">
 </div>
 <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
-<script src="${context}/resources/js/jquery-1.12.4.js"></script>		
+<%-- <script src="${context}/resources/js/jquery-1.12.4.js"></script>		 --%>
 <script type="text/javascript">
 	//장바구니에 담기
 	$("#goCart").on("click",function(){
