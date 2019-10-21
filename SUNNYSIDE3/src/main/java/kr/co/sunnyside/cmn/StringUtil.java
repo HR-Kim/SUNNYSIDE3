@@ -479,7 +479,7 @@ public class StringUtil {
 			sb.append("<button class='seatY " + (char)Y + "' disabled='disabled'>" + (char)Y);
 			for(int i=1 ; i <= max ; i++) {
 				if(setSetting == 0)
-					sb.append("<button data-y="+(char)Y+" data-x="+i+" class='" + (char)Y + " " + "_" + i + "' disabled='disabled'></button>");
+					sb.append("<button data-nowSelect='0' data-y="+(char)Y+" data-x="+i+" class='" + (char)Y + " " + "_" + i + "' disabled='disabled'></button>");
 				else
 					sb.append("<button data-setseat='false' data-use='1' data-y="+(char)Y+" data-x="+i+" class='" + (char)Y + " " + "_" + i + "'></button>");
 			}

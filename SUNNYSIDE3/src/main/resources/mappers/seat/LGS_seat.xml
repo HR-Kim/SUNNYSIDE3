@@ -92,5 +92,6 @@
 		SET
 			USE_YN = #{useYN, jdbcType=NUMERIC}
 		WHERE ROOM_ID = #{roomId, jdbcType=VARCHAR}
+		AND SEAT_NM = #{seatNm, jdbcType=VARCHAR}
 	</update>
 </mapper>
