@@ -47,7 +47,7 @@ public class NaverLoginBO {
 													.state(state) //앞서 생성한 난수값을 인증 URL생성시 사용함
 													.build(NaverLoginApi.instance());
 		
-		LOG.debug("ㅋㅋoauthService: "+oauthService);
+		LOG.debug("oauthService: "+oauthService);
 		
 		return oauthService.getAuthorizationUrl();
 	}

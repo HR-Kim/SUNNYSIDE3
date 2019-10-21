@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<c:set var="context" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,11 +51,13 @@
 					</div>
 					<div class="col-xl-4 col-lg-5">
 						<div class="user-panel">
-						
-							<!-- 로그인 하면 아이디 보임 -->
+   							<!-- 로그인 하면 아이디 보임 -->
 							<c:choose>
 								<c:when test="${not empty user.userId}">
-									${user.userId } 님 환영합니다.
+									${user.userName} 님 환영합니다.
+								</c:when>
+ 								<c:when test="${not empty userId}">
+									${userName} 님 환영합니다.
 								</c:when>
 								<c:otherwise>
 									<div class="up-item">
@@ -64,11 +65,19 @@
 										<a href="#">Sign</a> In or <a href="#">Create Account</a>
 									</div>
 								</c:otherwise>
-							</c:choose>		
+							</c:choose>
 							
-							<!-- 로그인 했을 때만 장바구니 표시 -->
+    						<!-- 로그인 했을 때만 장바구니 표시 -->
 							<c:choose>
-								<c:when test="${not empty user.userId}">
+ 								<c:when test="${not empty user.userId}">
+									<div class="up-item" >
+										<div class="shopping-card">
+											<i class="flaticon-bag"></i>
+										</div>
+										<a href="/sunnyside/cart/do_retrieve.do">장바구니</a>
+									</div>
+								</c:when>
+ 								<c:when test="${not empty userId}">
 									<div class="up-item" >
 										<div class="shopping-card">
 											<i class="flaticon-bag"></i>
@@ -79,7 +88,7 @@
 								<c:otherwise>
 									<div></div>
 								</c:otherwise>
-							</c:choose>		
+							</c:choose>
 							
 						</div>
 					</div>
@@ -109,15 +118,21 @@
 					<li><a href="http://www.seechu.co.kr/index.asp">VOD</a></li>
 					<li><a href="#">고객센터</a></li>
 					
-					<!-- 로그인한 상태면 로그아웃 출력 -->
+  					<!-- 로그인한 상태면 로그아웃 출력 -->
 					<c:choose>
-						<c:when test="${not empty user.userId}">
+  						<c:when test="${not empty user.userId}">
 							<li><a href="/sunnyside/login/logout.do">로그아웃</a></li>
 						</c:when>
+						
+ 						<c:when test="${not empty userId}">
+							<li><a href="/sunnyside/login/logout.do">로그아웃</a></li>
+						</c:when>
+						
 						<c:otherwise>
 							<li><a href="/sunnyside/login/login_view.do">로그인</a></li>
 						</c:otherwise>
-					</c:choose>		
+						
+					</c:choose>
 					
 				</ul>
 			</div>

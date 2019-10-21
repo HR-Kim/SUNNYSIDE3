@@ -34,29 +34,11 @@ public class SJH_LoginSvcImpl implements SJH_LoginSvc{
 	
 	/** 아이디 중복체크 */
 	@Override
-	public DTO id_check(DTO dto) {
+	public int id_check(DTO dto) {
 		Message outMsg = new Message();
-		//-----------------------------
-		//1.ID체크
-		//-----------------------------
 		int flag = loginDao.id_check(dto);
-		if(flag>0) {
-			outMsg.setMsgId("10");
-			outMsg.setMsgMsg("이미 존재하는 아이디입니다."); //나중에 메세지 프로퍼티로 처리
-			return outMsg;
-		}else if(flag<1) {
-			outMsg.setMsgId("20");
-			outMsg.setMsgMsg("사용가능한 아이디 입니다."); //나중에 메세지 프로퍼티로 처리
-			return outMsg;
-		}
-		
-		LOG.debug("=================");
-		LOG.debug("=outMsg="+outMsg);
-		LOG.debug("=================");
-		
-		return outMsg;
+		return flag;
 	}
-
 
 	/** 아이디 찾기 */
 	@Override

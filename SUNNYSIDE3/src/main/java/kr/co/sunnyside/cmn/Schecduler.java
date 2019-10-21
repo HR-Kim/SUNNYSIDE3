@@ -23,7 +23,7 @@ public class Schecduler {
 	 * 자동등업 스케줄러 (cron 초 분 시 일 월 요일) --- 현재 돌아오는 1초마다 돌게 해놓음.
 	 * @throws SQLException
 	 */ 
-	@Scheduled(cron = "1 * * * * *")
+	@Scheduled(cron = "0 0 9 * * *")
 	public void tx_upgradeLevels() throws SQLException{ 
 		LOG.debug("======================");
 		LOG.debug("=    자동등업 스케줄러       =");

@@ -140,42 +140,53 @@ public class SJH_LoginCtrl {
 		"response":{"id":"33666449","nickname":"shinn****","age":"20-29","gender":"M","email":"shinn0608@naver.com","name":"\uc2e0\ubc94\ud638"}}
 		**/
 		
-		LOG.debug("apiResult: "+apiResult);
-		
 		//2. String형식인 apiResult를 json형태로 바꿈
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(apiResult);
 		JSONObject jsonObj = (JSONObject) obj;
 		
+		
 		//3. 데이터 파싱
 		//Top레벨 단계 _response 파싱
 		JSONObject response_obj = (JSONObject)jsonObj.get("response");
 		//response의 nickname값 파싱
-		String userId = (String)response_obj.get("id");
+		String userId = (String) response_obj.get("id");
 		String userName = (String)response_obj.get("name");
 		String email = (String)response_obj.get("email");
-		String birth = (String)response_obj.get("birthday");
-		
+
 		LOG.debug("========================");
-		LOG.debug("userId"+userId);
-		LOG.debug("userName"+userName);
-		LOG.debug("email"+email);
-		LOG.debug("birth"+birth);
+		LOG.debug("apiResult: "+apiResult);
+		LOG.debug("response_obj: "+response_obj);
+		LOG.debug("userId: "+userId);
+		LOG.debug("userName: "+userName);
+		LOG.debug("email: "+email);
 		LOG.debug("========================");
 		
 		
 		//4.파싱 닉네임 세션으로 저장
-		session.setAttribute("user",userId); //세션 생성
+		session.setAttribute("user",response_obj); //세션 생성
 		
 		model.addAttribute("userId",userId);
 		model.addAttribute("userName",userName);
 		model.addAttribute("email",email);
-		
 		model.addAttribute("result", apiResult);
-		LOG.debug("apiResult: "+apiResult);
+
+		//추가정보 입력했는지 확인
+		SJH_LoginVO tmpUserId = new SJH_LoginVO();
+		tmpUserId.setUserId(userId);
+		LOG.debug("tmpUserId: "+tmpUserId);
+		int flag = loginSvc.id_check(tmpUserId);
+		LOG.debug("flag: "+flag);
 		
 		
-		return "login/add_user_info"; //추가정보 입력하는 페이지로 리턴
+		
+		if(flag<1) { //유저의 이메일 또는 전화번호가 없다면 추가정보 입력 페이지로 리턴
+			return "login/add_user_info"; //추가정보 입력하는 페이지로 리턴
+			
+		}else { //정보가 다 있으면 메인으로 리턴
+			return "main/main";
+		}
+		
 	}
 	
 	
@@ -260,17 +271,25 @@ public class SJH_LoginCtrl {
 		LOG.debug("1=user="+user);
 		LOG.debug("1========================");
 		
-		Message msg = (Message) loginSvc.id_check(user);
+		int flag = loginSvc.id_check(user);
 
+		Message message = new Message();
+		if(flag>0) {
+			message.setMsgId(flag+"");
+			message.setMsgMsg("이미 존재하는 아이디입니다.");
+		}else {
+			message.setMsgId(flag+"");
+			message.setMsgMsg("사용 가능한 아이디입니다.");			
+		}
+		
 		//json으로 변환
 		Gson gson = new Gson();
-		String json = gson.toJson(msg);
+		String json = gson.toJson(message);
 		LOG.debug("=========================");
 		LOG.debug("=@Controller 등록gson=user=="+json);
 		LOG.debug("=========================");		
 		
 		return json;
-	
 	}
 	
 	
@@ -350,10 +369,10 @@ public class SJH_LoginCtrl {
 		Message message = new Message();
 		if(flag>0) {
 			message.setMsgId(flag+"");
-			message.setMsgMsg(user.getUserId()+"님 등록되었습니다.");
+			message.setMsgMsg(user.getUserName()+"님 등록되었습니다.");
 		}else {
 			message.setMsgId(flag+"");
-			message.setMsgMsg(user.getUserId()+"님 등록실패.");
+			message.setMsgMsg(user.getUserName()+"님 등록실패.");
 		}
 
 		//json으로 변환
