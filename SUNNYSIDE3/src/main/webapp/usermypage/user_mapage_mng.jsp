@@ -49,7 +49,7 @@
 						아이디
 					</span>
 					<div class="wrap-input100 validate-input m-b-20">
-						<input class="input100" maxlength="20" type="text" id="userId" name="userId" value="${vo.boardId }" >
+						<input class="input100" maxlength="20" type="text" id="userId" name="userId" value="${user.userId}" >
 						<span class="focus-input100"></span>
 					</div>
 					
@@ -57,7 +57,7 @@
 						비밀번호
 					</span>
 					<div class="wrap-input100 validate-input m-b-20">
-						<input class="input100" maxlength="20" type="text" id="passwd" name="passwd" >
+						<input class="input100" maxlength="20" type="text" id="passwd" name="passwd" value="${user.userId}" >
 						<span class="focus-input100"></span>
 					</div>
 					
@@ -73,7 +73,7 @@
 						이름
 					</span>
 					<div class="wrap-input100 validate-input m-b-20">
-						<input class="input100" maxlength="15" type="text" id="userName" name="userName" >
+						<input class="input100" maxlength="15" type="text" id="userName" name="userName" value="${user.userId}">
 						<span class="focus-input100"></span>
 					</div>
 
@@ -81,7 +81,7 @@
 						생년월일
 					</span>
 					<div class="wrap-input100 validate-input m-b-20">
-						<input class="input100"  maxlength="8" type="text" id="birth" name="birth" >
+						<input class="input100"  maxlength="8" type="text" id="birth" name="birth" value="${user.userId}">
 						<span class="focus-input100"></span>
 					</div>
 					
@@ -89,7 +89,7 @@
 						휴대폰번호
 					</span>
 					<div class="wrap-input100 validate-input m-b-20">
-						<input class="input100" maxlength="11" type="text" id="cellphone" name="cellphone" >
+						<input class="input100" maxlength="11" type="text" id="cellphone" name="cellphone" value="${user.userId}">
 						<span class="focus-input100"></span>
 					</div>
 					
@@ -97,7 +97,7 @@
 						이메일주소
 					</span>
 					<div class="wrap-input100 validate-input m-b-20">
-						<input class="input100" maxlength: 30 type="text" id="email" name="email" >
+						<input class="input100" maxlength: 30 type="text" id="email" name="email" value="${user.userId}">
 						<span class="focus-input100"></span>
 					</div>
 					
