@@ -14,13 +14,14 @@ public class SJH_MypageVO extends DTO {
 	private String birth     ;//생년월일
 	private String regDt     ;//등록일
 	private int	   totalPay  ;//총결제금액
+	private String flag      ;//네이버로그인 플래그
 	
 	
 	public SJH_MypageVO() {}
 	
 	
 	public SJH_MypageVO(String userId, String passwd, String userName, String email, String userLevel, int point,
-			String cellphone, String birth, String regDt, int totalPay) {
+			String cellphone, String birth, String regDt, int totalPay, String flag) {
 		super();
 		this.userId = userId;
 		this.passwd = passwd;
@@ -32,13 +33,14 @@ public class SJH_MypageVO extends DTO {
 		this.birth = birth;
 		this.regDt = regDt;
 		this.totalPay = totalPay;
+		this.flag = flag;
 	}
 
 
-	
 	public String getUserId() {
 		return userId;
 	}
+
 
 
 	public void setUserId(String userId) {
@@ -46,9 +48,11 @@ public class SJH_MypageVO extends DTO {
 	}
 
 
+
 	public String getPasswd() {
 		return passwd;
 	}
+
 
 
 	public void setPasswd(String passwd) {
@@ -56,9 +60,11 @@ public class SJH_MypageVO extends DTO {
 	}
 
 
+
 	public String getUserName() {
 		return userName;
 	}
+
 
 
 	public void setUserName(String userName) {
@@ -66,9 +72,11 @@ public class SJH_MypageVO extends DTO {
 	}
 
 
+
 	public String getEmail() {
 		return email;
 	}
+
 
 
 	public void setEmail(String email) {
@@ -76,9 +84,11 @@ public class SJH_MypageVO extends DTO {
 	}
 
 
+
 	public String getUserLevel() {
 		return userLevel;
 	}
+
 
 
 	public void setUserLevel(String userLevel) {
@@ -86,9 +96,11 @@ public class SJH_MypageVO extends DTO {
 	}
 
 
+
 	public int getPoint() {
 		return point;
 	}
+
 
 
 	public void setPoint(int point) {
@@ -96,9 +108,11 @@ public class SJH_MypageVO extends DTO {
 	}
 
 
+
 	public String getCellphone() {
 		return cellphone;
 	}
+
 
 
 	public void setCellphone(String cellphone) {
@@ -106,9 +120,11 @@ public class SJH_MypageVO extends DTO {
 	}
 
 
+
 	public String getBirth() {
 		return birth;
 	}
+
 
 
 	public void setBirth(String birth) {
@@ -116,9 +132,11 @@ public class SJH_MypageVO extends DTO {
 	}
 
 
+
 	public String getRegDt() {
 		return regDt;
 	}
+
 
 
 	public void setRegDt(String regDt) {
@@ -126,9 +144,11 @@ public class SJH_MypageVO extends DTO {
 	}
 
 
+
 	public int getTotalPay() {
 		return totalPay;
 	}
+
 
 
 	public void setTotalPay(int totalPay) {
@@ -136,17 +156,31 @@ public class SJH_MypageVO extends DTO {
 	}
 
 
+
+	public String getFlag() {
+		return flag;
+	}
+
+
+
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+
+
 	
+
 	@Override
 	public String toString() {
 		return "SJH_MypageVO [userId=" + userId + ", passwd=" + passwd + ", userName=" + userName + ", email=" + email
 				+ ", userLevel=" + userLevel + ", point=" + point + ", cellphone=" + cellphone + ", birth=" + birth
-				+ ", regDt=" + regDt + ", totalPay=" + totalPay + "]";
+				+ ", regDt=" + regDt + ", totalPay=" + totalPay + ", flag=" + flag + "]";
 	}
 
 
 	
 	
+
 	//등업 NextLevel	---> User가 VO로 들어오고 있기 때문에 VO에 메소드를 만듦
 	public void upgradeLevel(SJH_MypageVO user){
 		//업그레이드 불가능

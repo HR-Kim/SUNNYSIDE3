@@ -49,6 +49,7 @@
 					<input class="input100" maxlength="20" type="hidden" id="userId" name="userId" value="${user.userId}" >
 					<input class="input100" maxlength="15" type="hidden" id="userName" name="userName" value="${user.userName}" >
 					<input class="input100" maxlength: 30 type="hidden" id="email" name="email" value="${user.email}" >
+					<input class="input100" maxlength: 30 type="hidden" id="flag" name="flag" value="${user.flag}" >
 
 					<span class="txt1 p-b-11">
 						생년월일
@@ -130,6 +131,7 @@
 		        	 "userId": $("#userId").val(),
 		        	 "userName": $("#userName").val(),
 		        	 "email": $("#email").val(),
+		        	 "flag": $("#flag").val(),
 		        	 "birth": $("#birth").val(),
 		        	 "cellphone": $("#cellphone").val()
 		         },

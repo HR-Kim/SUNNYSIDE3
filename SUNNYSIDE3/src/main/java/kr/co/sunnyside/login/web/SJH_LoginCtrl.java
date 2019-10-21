@@ -168,6 +168,7 @@ public class SJH_LoginCtrl {
 		user.setUserId(userId);
 		user.setUserName(userName);
 		user.setEmail(email);
+		user.setFlag("1");
 		
 		session.setAttribute("user",user); //세션 생성
 		model.addAttribute("userId",userId);
@@ -176,9 +177,8 @@ public class SJH_LoginCtrl {
 		model.addAttribute("result", apiResult);
 
 		//추가정보 입력했는지 확인
-		int flag = loginSvc.id_check(user);
-		
-		if(flag<1) { //유저의 이메일 또는 전화번호가 없다면 추가정보 입력 페이지로 리턴
+		Message message = (Message) loginSvc.id_check(user);
+		if(message.getMsgId().equals("20")) {
 			return "login/add_user_info";
 		}
 		
@@ -267,14 +267,14 @@ public class SJH_LoginCtrl {
 		LOG.debug("1=user="+user);
 		LOG.debug("1========================");
 		
-		int flag = loginSvc.id_check(user);
-
-		Message message = new Message();
-		if(flag>0) {
-			message.setMsgId(flag+"");
+		
+		Message message = (Message) loginSvc.id_check(user);
+		
+		if(message.getMsgId().equals("10")) {
+			message.setMsgId("10");
 			message.setMsgMsg("이미 존재하는 아이디입니다.");
 		}else {
-			message.setMsgId(flag+"");
+			message.setMsgId("20");
 			message.setMsgMsg("사용 가능한 아이디입니다.");			
 		}
 		

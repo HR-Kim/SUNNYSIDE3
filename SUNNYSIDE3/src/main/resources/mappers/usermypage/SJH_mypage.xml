@@ -29,7 +29,8 @@
 		    cellphone,
 		    birth,
 		    reg_dt as regDt,
-		    total_pay as totalPay
+		    total_pay as totalPay,
+		    flag
 		FROM
 		    user_info
 	</select>
@@ -57,7 +58,8 @@
 		    passwd,
 		    user_name as userName,
 		    email,
-		    cellphone
+		    cellphone,
+		    flag
 		FROM
 		    user_info
 		WHERE

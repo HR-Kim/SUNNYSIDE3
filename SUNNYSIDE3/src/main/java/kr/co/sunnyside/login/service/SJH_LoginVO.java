@@ -14,13 +14,14 @@ public class SJH_LoginVO extends DTO {
 	private String birth     ;//생년월일
 	private String regDt     ;//등록일
 	private int	   totalPay  ;//총결제금액
+	private String flag      ;//네이버로그인 플래그
 	
 	
 	public SJH_LoginVO() {}
 
 
 	public SJH_LoginVO(String userId, String passwd, String userName, String email, String userLevel, int point,
-			String cellphone, String birth, String regDt, int totalPay) {
+			String cellphone, String birth, String regDt, int totalPay, String flag) {
 		super();
 		this.userId = userId;
 		this.passwd = passwd;
@@ -32,6 +33,7 @@ public class SJH_LoginVO extends DTO {
 		this.birth = birth;
 		this.regDt = regDt;
 		this.totalPay = totalPay;
+		this.flag = flag;
 	}
 
 
@@ -135,12 +137,25 @@ public class SJH_LoginVO extends DTO {
 	}
 
 
+	public String getFlag() {
+		return flag;
+	}
+
+
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+
+
 	@Override
 	public String toString() {
 		return "SJH_LoginVO [userId=" + userId + ", passwd=" + passwd + ", userName=" + userName + ", email=" + email
 				+ ", userLevel=" + userLevel + ", point=" + point + ", cellphone=" + cellphone + ", birth=" + birth
-				+ ", regDt=" + regDt + ", totalPay=" + totalPay + "]";
+				+ ", regDt=" + regDt + ", totalPay=" + totalPay + ", flag=" + flag + "]";
 	}
+
+
+	
 	
 	
 	

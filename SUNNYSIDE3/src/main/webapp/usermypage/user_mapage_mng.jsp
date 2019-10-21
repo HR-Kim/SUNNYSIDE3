@@ -45,43 +45,58 @@
 						회원정보수정
 					</span>
 					
-					<span class="txt1 p-b-11">
-						아이디
-					</span>
-					<div class="wrap-input100 validate-input m-b-20">
-						<input class="input100" maxlength="20" type="text" id="userId" name="userId" value="${user.userId}" >
-						<span class="focus-input100"></span>
-					</div>
-					
-					<span class="txt1 p-b-11">
-						비밀번호
-					</span>
-					<div class="wrap-input100 validate-input m-b-20">
-						<input class="input100" maxlength="20" type="text" id="passwd" name="passwd" value="${user.userId}" >
-						<span class="focus-input100"></span>
-					</div>
-					
-					<span class="txt1 p-b-11">
-						비밀번호 확인
-					</span>
-					<div class="wrap-input100 validate-input m-b-20">
-						<input class="input100" maxlength="20" type="text" id="passwdCnfrm" name="passwdCnfrm" >
-						<span class="focus-input100"></span>
-					</div>
-					
-					<span class="txt1 p-b-11">
-						이름
-					</span>
-					<div class="wrap-input100 validate-input m-b-20">
-						<input class="input100" maxlength="15" type="text" id="userName" name="userName" value="${user.userId}">
-						<span class="focus-input100"></span>
-					</div>
+<%-- 					<c:choose>
+						<c:when test="${user.flag != '1'}"> --%>
+							<span class="txt1 p-b-11">
+								아이디
+							</span>
+							<div class="wrap-input100 validate-input m-b-20">
+								<input class="input100" maxlength="20" type="text" id="userId" name="userId" value="${user.userId}" disabled="disabled" >
+								<span class="focus-input100"></span>
+							</div>
+							
+							<span class="txt1 p-b-11">
+								비밀번호
+							</span>
+							<div class="wrap-input100 validate-input m-b-20">
+								<input class="input100" maxlength="20" type="password" id="passwd" name="passwd" value="${user.passwd}" >
+								<span class="focus-input100"></span>
+							</div>
+							
+							<span class="txt1 p-b-11">
+								비밀번호 확인
+							</span>
+							<div class="wrap-input100 validate-input m-b-20">
+								<input class="input100" maxlength="20" type="password" id="passwdCnfrm" name="passwdCnfrm" value="${user.passwd}" >
+								<span class="focus-input100"></span>
+							</div>
+							
+							<span class="txt1 p-b-11">
+								이메일주소
+							</span>
+							<div class="wrap-input100 validate-input m-b-20">
+								<input class="input100" maxlength: 30 type="text" id="email" name="email" value="${user.email}">
+								<span class="focus-input100"></span>
+							</div>
+							
+							<span class="txt1 p-b-11">
+								이름
+							</span>
+							<div class="wrap-input100 validate-input m-b-20">
+								<input class="input100" maxlength="15" type="text" id="userName" name="userName" value="${user.userName}">
+								<span class="focus-input100"></span>
+							</div>
+<%-- 						</c:when>
+						<c:otherwise>
+							<div></div>
+						</c:otherwise>
+					</c:choose> --%>
 
 					<span class="txt1 p-b-11">
 						생년월일
 					</span>
 					<div class="wrap-input100 validate-input m-b-20">
-						<input class="input100"  maxlength="8" type="text" id="birth" name="birth" value="${user.userId}">
+						<input class="input100"  maxlength="8" type="text" id="birth" name="birth" value="${user.birth}">
 						<span class="focus-input100"></span>
 					</div>
 					
@@ -89,15 +104,7 @@
 						휴대폰번호
 					</span>
 					<div class="wrap-input100 validate-input m-b-20">
-						<input class="input100" maxlength="11" type="text" id="cellphone" name="cellphone" value="${user.userId}">
-						<span class="focus-input100"></span>
-					</div>
-					
-					<span class="txt1 p-b-11">
-						이메일주소
-					</span>
-					<div class="wrap-input100 validate-input m-b-20">
-						<input class="input100" maxlength: 30 type="text" id="email" name="email" value="${user.userId}">
+						<input class="input100" maxlength="11" type="text" id="cellphone" name="cellphone" value="${user.cellphone}">
 						<span class="focus-input100"></span>
 					</div>
 					
@@ -143,7 +150,7 @@
 	<script type="text/javascript">
 		
 	
-		//가입
+		//수정
 		$("#confirm").on("click",function(){
 			//console.log("join");
 			
@@ -153,17 +160,20 @@
 				return;
 			}
 	
-			if($("#withdrawForm").valid()==false)return;
-			if(false==confirm("탈퇴 하시겠습니까?"))return;
+			//if($("#withdrawForm").valid()==false)return;
+			if(false==confirm("수정 하시겠습니까?"))return;
 	
 			
 			$.ajax({
 		         type:"POST",
-		         url:"${context}/usermypage/do_delete.do",
+		         url:"${context}/usermypage/do_update.do",
 		         dataType:"html",// JSON
 		         data:{
 		        	 "userId": $("#userId").val(),
-		        	 "passwd": $("#passwd").val()
+		        	 "passwd": $("#passwd").val(),
+		        	 "userName": $("#userName").val(),
+		        	 "cellphone": $("#cellphone").val(),
+		        	 "email": $("#email").val()
 		         },
 		         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
 		          	//console.log(data); //스트링으로 들어온 데이터

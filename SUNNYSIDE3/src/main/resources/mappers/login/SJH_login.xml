@@ -43,7 +43,8 @@
 							    cellphone,
 							    birth,
 							    reg_dt,
-							    total_pay      
+							    total_pay,
+							    flag      
 							) VALUES (          
 							    #{userId,jdbcType=VARCHAR},              
 							    NVL(#{passwd,jdbcType=VARCHAR},'0000'),              
@@ -54,7 +55,8 @@
 							    #{cellphone,jdbcType=VARCHAR},
 							    #{birth,jdbcType=VARCHAR}, 
 							    SYSDATE,
-							    NVL(#{totalPay,jdbcType=NUMERIC},0)         
+							    NVL(#{totalPay,jdbcType=NUMERIC},0),
+							    NVL(#{flag,jdbcType=NUMERIC},0)        
 							)                  
 	</insert>
 	
@@ -70,7 +72,9 @@
 			point,
 			cellphone,
 			birth,
-			reg_dt as regDt
+			reg_dt as regDt,
+			total_pay as totalPay,
+			flag
 		FROM                                     
 		    user_info                                
 		WHERE user_id = #{userId,jdbcType=VARCHAR}                         

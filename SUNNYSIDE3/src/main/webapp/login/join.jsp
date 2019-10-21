@@ -64,7 +64,7 @@
 						비밀번호
 					</span>
 					<div class="wrap-input100 validate-input m-b-20">
-						<input class="input100" maxlength="20" type="text" id="passwd" name="passwd" placeholder="비밀번호 (8~20자)" >
+						<input class="input100" maxlength="20" type="password" id="passwd" name="passwd" placeholder="비밀번호 (8~20자)" >
 						<span class="focus-input100"></span>
 					</div>
 					
@@ -72,7 +72,7 @@
 						비밀번호 확인
 					</span>
 					<div class="wrap-input100 validate-input m-b-20">
-						<input class="input100" maxlength="20" type="text" id="passwdCnfrm" name="passwdCnfrm" placeholder="비밀번호 확인"  >
+						<input class="input100" maxlength="20" type="password" id="passwdCnfrm" name="passwdCnfrm" placeholder="비밀번호 확인"  >
 						<span class="focus-input100"></span>
 					</div>
 					
@@ -211,7 +211,7 @@
 				return;
 			}
 
-			if($("#joinForm").valid()==false)return;
+			//if($("#joinForm").valid()==false)return;
 			if(false==confirm("회원가입 하시겠습니까?"))return;
 
 			

@@ -1,3 +1,7 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.co.sunnyside.cmn.DTO"%>
+<%@page import="kr.co.sunnyside.cmn.StringUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -41,9 +45,10 @@
 			<div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
 				<form class="login100-form validate-form flex-sb flex-w" id="loginForm" name="loginForm">
 					<div class="form-group">
+						<!-- 로그인 다국어 -->
 						<select name="lang" id="lang">
-					        <option value="ko" <c:if test="${lang == ko}">selected</c:if> >한글</option>
-							<option value="en" <c:if test="${lang == en}">selected</c:if> >영어</option>
+					        <option value="ko" <c:if test="${lang == 'ko'}">selected</c:if> >한글</option>
+							<option value="en" <c:if test="${lang == 'en'}">selected</c:if> >영어</option>
 					     </select>
 				    </div>
 				    
@@ -236,16 +241,35 @@
 				}
 		 });
 		
-
+		
+		/** 로그인창 다국어처리 */
+		$("#lang").on('change', function() {
+	        //alert($("#lang option:selected").val());
+	        
+	        $.ajax({
+		         type:"GET",
+		         url:"${context}/login_change_locale.do",
+		         dataType:"html",// JSON
+		         data:{
+		        	 "lang": $("#lang option:selected").val()
+		         },
+		         success: function(data){
+		        	 alert($("#lang option:selected").val()+"가 선택되었습니다.");
+		         },
+		         complete: function(data){//무조건 수행
+		          
+		         },
+		         error: function(xhr,status,error){
+		          
+		         }
+			});
+	        
+	    });
+		
 		
 		
 		$(document).ready(function(){
 			
-			/** 로그인창 다국어처리 */
-			$("#lang").on('change', function() {
-		        //alert(this.value);
-		        location.href = "${context}/login_change_locale.do";
-		    });
 			
 			/** 쿠키 저장 */
 		    var key = getCookie("key");

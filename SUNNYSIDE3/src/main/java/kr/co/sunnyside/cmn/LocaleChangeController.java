@@ -11,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.LocaleResolver;
+
+import com.google.gson.Gson;
 
 @Controller
 public class LocaleChangeController {
@@ -54,6 +57,7 @@ public class LocaleChangeController {
 	 * @return
 	 */
 	@RequestMapping(value="/login_change_locale.do",method=RequestMethod.GET)
+	@ResponseBody
 	public String loginChangeLocale(HttpServletRequest request,HttpServletResponse response) {
 		String language = StringUtil.nvl(request.getParameter("lang"),"ko");
 		
@@ -65,6 +69,7 @@ public class LocaleChangeController {
 		localeResolver.setLocale(request, response, locale);
 		
 		return "login/login";
+		
 	}
 	
 	

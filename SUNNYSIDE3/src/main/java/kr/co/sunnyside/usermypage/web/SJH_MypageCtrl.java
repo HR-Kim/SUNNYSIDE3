@@ -28,7 +28,30 @@ public class SJH_MypageCtrl {
 	
 	//view
 	private final String VIEW_WITHDRAW = "usermypage/user_mypage_withdraw";
+	private final String VIEW_UPDATE = "usermypage/user_mapage_mng";
 
+	
+	
+	//회원정보수정 화면call
+	@RequestMapping(value="usermypage/update_view.do", method = RequestMethod.GET)
+	public String updateView() {
+		LOG.debug("========================");
+		LOG.debug("=@Controller=View=");
+		LOG.debug("========================");
+		return VIEW_UPDATE;
+	}
+	
+	
+	//삭제 화면call
+	@RequestMapping(value="usermypage/withdraw_view.do", method = RequestMethod.GET)
+	public String withdrawView() {
+		LOG.debug("========================");
+		LOG.debug("=@Controller=View=");
+		LOG.debug("========================");
+		
+		return VIEW_WITHDRAW;
+	}
+	
 	
 	
 	//자동 등업
@@ -46,7 +69,6 @@ public class SJH_MypageCtrl {
 		LOG.debug("1=========================");
 		
 	}
-	
 	
 	
 	//수정
@@ -103,17 +125,6 @@ public class SJH_MypageCtrl {
 		return json;
 	}
 	
-	
-	
-	//삭제 화면call
-	@RequestMapping(value="usermypage/withdraw_view.do", method = RequestMethod.GET)
-	public String withdrawView() {
-		LOG.debug("========================");
-		LOG.debug("=@Controller=View=");
-		LOG.debug("========================");
-		
-		return VIEW_WITHDRAW;
-	}
 	
 	
 	//삭제
