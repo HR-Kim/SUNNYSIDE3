@@ -12,9 +12,9 @@
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet"> 
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <!------ Include the above in your HEAD tag ---------->
-<title>장바구니</title>
+<title>주문하기</title>
 </head>
-<h2 style="margin-left: 450px;margin-top: 70px; margin-bottom: 40px; font-weight: bold">장바구니</h2>
+<h2 style="margin-left: 450px;margin-top: 70px; margin-bottom: 40px; font-weight: bold">주문하기</h2>
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-10 col-md-offset-1">
@@ -32,21 +32,21 @@
 	                <c:choose>
 	                        <c:when test="${list.size() ==0 }">
 	                            <tr>
-	                             <td colspan="6">장바구니가 비었습니다.</td>
+	                             <td colspan="6">주문내역이 없습니다.</td>
 	                            </tr>
 	                        </c:when>
 	                        <c:otherwise>
 	                     	   <c:forEach items="${list }" var="vo">	
 				                    <tr>
-				                        <td class="col-sm-8 col-md-5">
+				                        <td class="col-sm-8 col-md-6">
 				                        <div class="media">
-				                            <a class="thumbnail pull-left"> <img class="media-object" src="${vo.saveFileNm }" style="width: 100px; height: 100px;"> </a>
+				                            <a class="thumbnail pull-left"> <img class="media-object" src="${vo.saveFileNm }" style="width: 72px; height: 72px;"> </a>
 				                            <div class="media-body">
 				                                <h4 class="media-heading"><a href="http://localhost:8080/sunnyside/store/do_selectOne.do?productId=${vo.productId }">${vo.productNm }</a></h4>                  
 				                            </div>
 				                        </div></td>
 				                        <td class="col-sm-1 col-md-1" style="text-align: center" >				                     
-				                       	   <input type="text" class="form-control" id="count" value="${vo.count }">
+				                       	   <a class="form-control" id="count "><c:out value="${vo.count }"/></a>
 				                        </td>
 				                        <td class="col-sm-1 col-md-1 text-center"><strong><fmt:formatNumber value="${vo.oriProductCost}" pattern="#,###,###"/>원</strong></td>
 				                        <td style="display: none;" id="cartId"><strong>${vo.cartId }</strong></td>
@@ -54,10 +54,10 @@
 				                        <td style="display: none;" id="userId"><strong>${user.userId }</strong></td>
 				                        <td class="col-sm-1 col-md-1 text-center"><strong><fmt:formatNumber value="${vo.productCost}" pattern="#,###,###"/>원</strong></td>
 				                        <td class="col-sm-1 col-md-1" >
-					                        <button type="button" class="btn btn-danger" id="deleteBtn"  style="margin-left: 5px; padding-bottom: 12px;">
+					                        <button type="button" class="btn btn-danger" id="deleteBtn"  style="margin-left: 5px;">
 					                            <span class="glyphicon glyphicon-remove"></span>
 					                        </button>
-					                         <button type="button" class="btn btn-success" id="updateBtn"  style="margin-left: 5px; padding-bottom: 12px;">
+					                         <button type="button" class="btn btn-success" id="updateBtn"  style="margin-left: 5px;">
 					                            <span class="glyphicon glyphicon-ok"></span>
 					                        </button>
 				                        </td>				                        				                   
@@ -75,12 +75,12 @@
 					                        <td>   </td>
 					                        <td>   </td>
 					                        <td>
-					                        <button type="button" class="btn btn-default" id="btnList" name="btnList">
-					                            <span class="glyphicon glyphicon-shopping-cart"></span> 쇼핑계속하기
+					                        <button type="button" class="btn btn-default" id="cancleBtn" name="cancleBtn">
+					                            <span class="glyphicon"></span>취소
 					                        </button></td>
 					                        <td>
-						                        <button type="button" class="btn btn-success" id="paybtn" name="paybtn">
-						                           	 결제하기 <span class="glyphicon glyphicon-play"></span>
+						                        <button type="button" class="btn btn-success" id="paybtn">
+						                           	 결제 <span class="glyphicon glyphicon-play"></span>
 						                        </button></td>
 					                     </tr>
                   			  </c:otherwise>
@@ -96,109 +96,14 @@
 <script src="${context}/resources/js/bootstrap.min.js"></script>   
 <script type="text/javascript">
 
-//리스트 삭제
 
-$("[id^=deleteBtn]").on("click",function(){
-	if(false==confirm('상품을 삭제하시겠습니까?')) return;
-	var tr    = $(this).parent().parent();
-	var tds   = tr.children();	
-	console.log("tds="+tds);
-	var cartId = tds.eq(3).text();
-	var userId    = tds.eq(5).text();
-	console.log("cartId="+cartId);
-	console.log("userId="+userId);
-
-		//ajax
-	     $.ajax({
-	        type:"POST",
-	        url:"${context}/cart/do_delete.do",
-	        dataType:"html",
-	           data:{
-	           "cartId":cartId
-	          },   
-	      success: function(data){ 
-			  if(null != data && data.msgId=="1"){
-				  alert("삭제되었습니다.");
-				  var userId = $("#userId").text();
-				  location.href="${context}/cart/do_retrieve.do?userId="+userId;
-				
-			  }else{
-				alert("삭제되었습니다.");	
-				  var userId = $("#userId").text();
-				  location.href="${context}/cart/do_retrieve.do?userId="+userId;
-			  }
-	     },
-	     complete:function(data){
-	  	   
-	     },
-	     error:function(xhr,status,error){
-	         alert("error:"+error);
-	     }
-	    }); //--ajax  
-	
-	 
-});
-
-//수량변경
-$("[id^=updateBtn]").on("click",function(){
-	if(false==confirm('상품 수량을 변경하시겠습니까?')) return;
-	var tr    = $(this).parent().parent();
-	var tds   = tr.children();	
-	console.log("tds="+tds);
-	var productId = tds.eq(4).text();
-	var userId    = tds.eq(5).text();
-	var count    = tds.eq(1).find("input").val();
-	console.log("productId="+productId);
-	console.log("userId="+userId);
-	console.log("count="+count);
-
-		//ajax
-	     $.ajax({
-	        type:"POST",
-	        url:"${context}/cart/do_update.do",
-	        dataType:"html",
-	           data:{
-	           "productId":productId,
-	           "userId":userId,
-	           "count":count
-	          },   
-	      success: function(data){ 
-			  if(null != data && data.msgId=="1"){
-				  alert("수량이 변경되었습니다.");
-				  var userId = $("#userId").text();
-				  location.href="${context}/cart/do_retrieve.do?userId="+userId;
-				
-			  }else{
-				alert("수량이 변경되었습니다.");	
-				  var userId = $("#userId").text();
-				  location.href="${context}/cart/do_retrieve.do?userId="+userId;
-			  }
-	     },
-	     complete:function(data){
-	  	   
-	     },
-	     error:function(xhr,status,error){
-	         alert("error:"+error);
-	     }
-	    }); //--ajax  
-});
-
-	// 리스트 페이지로 이동
-	$("#btnList").on("click",function(){
-		alert("메인 페이지로 이동합니다.");
-		location.href="${context}/store/do_main.do";
-	});
-
-	
-	// 주문하기 페이지로 이동
-	$("#paybtn").on("click",function(){
-		alert("paybtn");
-		if(false==confirm('결제하시겠습니까?')) return;
-		location.href="${context}/store/do_main.do";
-	});
-	
 $(document).ready(function(){	
-
+	// 리스트 페이지로 이동
+	$("#cancleBtn").on("click",function(){
+		if(false==confirm('결제를 취소하시겠습니까?')) return;
+		alert("상품목록화면으로 이동합니다");
+		location.href="${context}/store/do_main.do";
+	});
 });
 </script>
 </body>

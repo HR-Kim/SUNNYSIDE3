@@ -22,7 +22,8 @@
 </head>
 <body>
 	<div class="container">
-	    <h4 class="h4">음료</h4>
+	    <h3 class="h4">음료</h3>
+	    <hr>
 		    <div class="row">
 			    <c:choose>
 			    	<c:when test="${list.size()>0 }">

@@ -17,11 +17,12 @@
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="${context}/resources/css/headerStyle.css" rel="stylesheet" type="text/css">
 <link href="../resources/css/store_main.css" rel="stylesheet" type="text/css">
-<title>영화관람권</title>
+<title>영화예매권</title>
 </head>
 <body>
 	<div class="container">
-	   <h4 class="h4">영화관람권</h4>
+	   <h3 class="h4">영화예매권</h3>
+	   <hr>
 	     <form name="ticketFrm" id="ticketFrm"  method="get">
 		    <div class="row">
 			    <c:choose>
