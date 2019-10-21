@@ -10,6 +10,7 @@
 	</settings>
 	<!-- 타입 별칭은 자바 타입에 대한 짧은 이름이다. 오직 XML 설정에서만 사용되며, 타이핑을 줄이기 위해 존재한다 -->
 	<typeAliases>
+		<typeAlias type="kr.co.sunnyside.main.service.LHJ_MainImageVO" alias="MainImage" />
 		<typeAlias type="kr.co.sunnyside.review.service.LHJ_ReviewVO" alias="Review" />
 		<typeAlias type="kr.co.sunnyside.movie.service.LHJ_BoxofficeVO" alias="Boxoffice" />
 		<typeAlias type="kr.co.sunnyside.movie.service.LHJ_MovieVO" alias="Movie" />
