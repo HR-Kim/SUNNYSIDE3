@@ -196,22 +196,21 @@ public class LHJ_MovieCtrl {
 	 
 		/** 영화정보 저장 */
 		@RequestMapping(value = "movie/do_save.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-		@ResponseBody
-		public String do_save(LHJ_MovieVO inVO) {
-			LOG.debug("===============================");
-			LOG.debug("=inVO=" + inVO);
-			LOG.debug("===============================");
+//		@ResponseBody
+		public String do_save(int startNum, int lastNum) {
 			
-			int flag = this.service.do_save(inVO);
+			this.service.do_save(startNum, lastNum);
 			
 			Message message = new Message();
-			if (flag > 0) { // flag가 1이면 성공
-				message.setMsgId(String.valueOf(flag));
-				message.setMsgMsg("등록되었습니다.");
-			} else {// 아니면 실패
-				message.setMsgId(String.valueOf(flag));
-				message.setMsgMsg("등록 실패.");
-			}
+//			if (flag > 0) { // flag가 1이면 성공
+//				message.setMsgId(String.valueOf(flag));
+//				message.setMsgMsg("등록되었습니다.");
+//			} else {// 아니면 실패
+//				message.setMsgId(String.valueOf(flag));
+//				message.setMsgMsg("등록 실패.");
+//			}
+			
+			message.setMsgMsg("완료되었습니다.");
 			
 			Gson gson = new Gson();
 			String gsonStr = gson.toJson(message);

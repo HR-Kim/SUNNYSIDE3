@@ -56,7 +56,7 @@
            (                                                           
               SELECT  *                                              
               FROM   movie                        
-              WHERE rel_date > '2019/07/12'
+              WHERE 1=1
               <include refid="planedBaseCondition"/>                                        
               ORDER BY rel_date DESC nulls last                                     
            )A                                                         
@@ -68,7 +68,7 @@
      (                                                                 
          SELECT COUNT(*) totalCnt                                     
          FROM movie       
-         WHERE rel_date > '2019/07/12'                                      
+         WHERE 1=1                                   
          <include refid="planedBaseCondition"/>                                             
      )T2  
 	</select>	

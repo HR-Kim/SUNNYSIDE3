@@ -36,6 +36,11 @@
 	<!-- div title --> 
 	<div class="page-header">
 		<h1>박스오피스</h1>
+		<form class="form-inline" name="movieSaveFrm" id="movieSaveFrm" method="get">
+			<input type="text" class="form-control" id="startNum" name="startNum">
+			<input type="text" class="form-control" id="lastNum" name="lastNum">
+			<button type="button" class="btn btn-default btn-sm" id="doMovieSave">등록</button>
+		</form> 
 	</div>
 	<!--// div title -->
 	
@@ -49,7 +54,7 @@
 						<div class="image_holder" >		
 							<!-- 이미지  -->			
 							<span class="image">
-								<img src="<c:out value='${vo.poster}'/>" alt="영화포스터" style="height: 350px; width:250px;">
+								<img src="<c:out value='${vo.poster}'/>" alt="영화포스터" style="height: 350px; width:250px;" onerror="this.src='../resources/image/layout/noImage.png'">
 							</span>
 							<!--// 이미지  -->			
 							<!-- 예매하기, 상세보기 버튼 -->
@@ -66,7 +71,7 @@
 						<div class="portfolio_description ">
 							<!-- 영화제목 -->
 							<h5 class="portfolio_title">
-								<a href="#"><c:out value="${vo.kortitle}"/></a>
+								<a href="../movie/do_selectOne.do?movieId=<c:out value="${vo.movieId}"/>"><c:out value="${vo.kortitle}"/></a>
 							</h5>
 							<!--// 영화제목 -->
 							<!-- 영화정보 -->
@@ -84,5 +89,41 @@
 		</c:choose>
 		
 	</div></div></div></div></div></div></div></div>
+	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
+	<script src="${context}/resources/js/jquery-1.12.4.js"></script>
+	<script type="text/javascript">
+		//paging
+		$("#doMovieSave").on("click", function(){		
+			var startNum = $("#startNum").val();
+			var lastNum = $("#lastNum").val();
+			
+			$.ajax({
+				type:"POST",
+				url:"${context}/movie/do_save.do",
+				dataType:"html",
+				data:{
+					"startNum":startNum,
+					"lastNum":lastNum
+				}, 
+				success: function(data){
+					var jData = JSON.parse(data);
+					
+					alert(jData.msgMsg);
+					
+            	},
+				complete:function(data){
+             
+           		},
+				error:function(xhr,status,error){
+					alert("error:"+error);
+            	}
+			}); 
+	    });
+		  	
+		$(document).ready(function() {
+
+        });
+	</script>  
+	
 </body>
 </html>

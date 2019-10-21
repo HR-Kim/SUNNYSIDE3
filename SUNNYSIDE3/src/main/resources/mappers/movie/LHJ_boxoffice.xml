@@ -64,7 +64,7 @@
 		    (SELECT movie_id
 		     from movie
 		     WHERE kortitle LIKE '%'|| #{kortitle} || '%'
-		     AND rel_date = #{relDate, jdbcType=VARCHAR}),
+		     AND rel_date >= #{relDate, jdbcType=VARCHAR}),
 		    #{movieRank, jdbcType=VARCHAR}
 		)		
 	</insert>

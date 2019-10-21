@@ -88,6 +88,16 @@
      )T2  
 	</select>	
 	
+	<!-- 영화 존재 확인 -->
+	<select id="do_exist" parameterType="Movie" resultType="int">
+		SELECT 
+			count(*)
+		FROM 
+			movie
+		WHERE 
+			kortitle LIKE '%' || #{kortitle} || '%'	
+	</select>
+	
 	<!-- 단건조회 -->
 	<select id="do_selectOne" parameterType="Movie" resultType="Movie">
 		SELECT

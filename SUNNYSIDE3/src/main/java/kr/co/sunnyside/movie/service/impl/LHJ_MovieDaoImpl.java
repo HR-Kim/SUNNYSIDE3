@@ -55,6 +55,20 @@ public class LHJ_MovieDaoImpl implements WorkDiv{
 		return flag;
 	}
 	
+	/**영화 존재 확인*/
+	public int do_exist(DTO dto) {
+		String statement = NAMESPACE + ".do_exist";
+		LHJ_MovieVO inVO = (LHJ_MovieVO) dto;
+		LOG.debug("=============================");
+		LOG.debug("1. param:"+inVO);
+		LOG.debug("2. statement:"+statement);
+		int count = this.sqlSessionTemplate.selectOne(statement, inVO);		
+		LOG.debug("3. count:"+count);
+		LOG.debug("=============================");
+		
+		return count;
+	}
+	
 	/**단건조회*/
 	@Override
 	public DTO do_selectOne(DTO dto) {

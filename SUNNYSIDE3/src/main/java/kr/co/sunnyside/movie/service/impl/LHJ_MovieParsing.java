@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.ParseException;
@@ -24,6 +25,28 @@ import kr.co.sunnyside.movie.service.LHJ_MovieVO;
 
 public class LHJ_MovieParsing {
 	private final static Logger LOG = LoggerFactory.getLogger(LHJ_MovieParsing.class);
+	
+	//특정 영화명, 날짜로 영화정보 받아오기
+	public static List<LHJ_MovieVO> getMovieSearchList(String title, String date) {
+		List<LHJ_MovieVO> list = new ArrayList<LHJ_MovieVO>();
+		
+		title = title.replace(" ", "%20");
+		try {
+			URL url = new URL(KmdbUrlTitle(title, date));//url
+			list=getKmdbData(url);//데이터를 List형태로 반환
+			LOG.debug("==여기~~~=====================");
+			LOG.debug("url:"+url);
+			LOG.debug("list:"+list);
+			LOG.debug("============================");
+		} catch (Exception e) {
+			LOG.debug("============================");
+			LOG.debug("Exception:"+e.toString());
+			LOG.debug("============================");
+		}
+		
+		
+		return list;
+	}
 	
 	public static List<LHJ_MovieVO> getBoxofficeList() {
 		List<LHJ_MovieVO> kobisList = new ArrayList<LHJ_MovieVO>();
@@ -98,9 +121,9 @@ public class LHJ_MovieParsing {
 					rank = "0"+rank;
 				}
 				String movieNm = dailyObj.get("movieNm").getAsString();
-				movieNm = movieNm.split(" ")[0].trim();
+//				movieNm = movieNm.split(" ")[0].trim();
 				String openDt = dailyObj.get("openDt").getAsString();
-				
+				openDt = openDt.replace("-", "").trim();				
 				
 				LHJ_MovieVO vo = new LHJ_MovieVO();
 				vo.setKortitle(movieNm);
@@ -131,6 +154,26 @@ public class LHJ_MovieParsing {
 	
 	
 	
+	//Kmdb 파싱 url 설정 : 제목으로 검색하기
+	public static String KmdbUrlTitle(String title, String date) throws IOException, ParseException{
+		/*URL*/ 
+		StringBuilder urlBuilder = new StringBuilder("http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json.jsp"); 
+		/*collection(검색 대상 컬렉션 지정)*/ 
+		urlBuilder.append("?" + URLEncoder.encode("collection","UTF-8") + "=" + "kmdb_new");
+		/*Service Key(API 서비스 인증키	)*/ 
+		urlBuilder.append("&" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + "3PHZT44D63RX801282VJ");
+		/*detail(상세정보 출력여부)*/ 
+		urlBuilder.append("&" + URLEncoder.encode("detail","UTF-8") + "=" + "Y");
+		/*title(영화명)*/ 
+		urlBuilder.append("&" + URLEncoder.encode("title","UTF-8") + "=\"" + title +"\"");
+//		/*releaseDts(개봉일 시작)*/ 
+//		urlBuilder.append("&" + URLEncoder.encode("releaseDts","UTF-8") + "=" + date);
+//		/*releaseDte(개봉일 종료)*/ 
+//		urlBuilder.append("&" + URLEncoder.encode("releaseDte","UTF-8") + "=" + date);
+		
+		return urlBuilder.toString();
+	}
+	
 	//Kmdb 파싱 url 설정
 	public static String KmdbUrl(int i) throws IOException, ParseException{
 		/*URL*/ 
@@ -148,7 +191,7 @@ public class LHJ_MovieParsing {
 	}
 		
 	//Kmdb 데이터 파싱
-	public static List<LHJ_MovieVO> getKmdbData(URL url) throws ParseException {
+	public static List<LHJ_MovieVO> getKmdbData(URL url) throws ParseException, MalformedURLException {
 		List<LHJ_MovieVO> dataList =  new ArrayList<LHJ_MovieVO>();
 		BufferedReader rd	   = null;
 		HttpURLConnection conn = null;
