@@ -77,7 +77,15 @@
 		    TO_DATE(#{screenDt, jdbcType=VARCHAR}, 'YYYY-MM-DD HH24:MI:SS'),
 		    #{adultCost, jdbcType=NUMERIC},
 		    #{studentCost, jdbcType=NUMERIC},
-		    #{episode, jdbcType=NUMERIC}
+		    (
+			SELECT (
+			        SELECT COUNT(SCREEN_DT)
+			        FROM SCREEN_INFO
+			        WHERE SCREEN_DT = TO_DATE(#{screenDt, jdbcType=VARCHAR},'yyyy-mm-dd')
+			        AND ROOM_ID = #{roomId, jdbcType=VARCHAR}
+			        )
+			FROM DUAL
+			)+1
 		)
 	</select>
 	
