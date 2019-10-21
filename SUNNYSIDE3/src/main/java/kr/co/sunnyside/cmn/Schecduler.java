@@ -24,10 +24,9 @@ public class Schecduler {
 	
 	
 	/**
-	 * 자동등업 스케줄러 (cron 초 분 시 일 월 요일) --- 현재 돌아오는 1초마다 돌게 해놓음.
-	 * @throws SQLException
+	 * 박스오피스 데이터 갱신 스케줄러 (cron 초 분 시 일 월 요일)
 	 */ 
-	@Scheduled(cron = "0 0 12 * * *")
+	@Scheduled(cron = "0 0 11 * * *")
 	public void do_deleteAndSave() { 
 		LOG.debug("======================");
 		LOG.debug("=  박스오피스 데이터 갱신   =");
