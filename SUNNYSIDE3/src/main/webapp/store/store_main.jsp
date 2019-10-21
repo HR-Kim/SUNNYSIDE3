@@ -21,7 +21,7 @@
 <body>
 <div class="container" style="margin-right: 420px;">
 	<div class="productadd" id="productadd" style="display: none;">
-		<input type="button" value="상품등록" id="addbtn" class="btn btn-outline-dark" style="margin-top: 40px;">
+		<input type="button" value="상품등록" id="addbtn" class="btn btn-outline-dark" style="margin-top: 40px; margin-left: 150px;">
 	</div>
 </div>
    	<div class="container">
@@ -103,7 +103,7 @@
 					            <div class="product-grid">
 					                <div class="product-image">
 					                    <img class="pic-1" style="height: 270px" width="270px" src="<c:out value="${vo.saveFileNm }"/>">		
-					                    <ul class="social">
+					                    <ul class="social" style="width:150px;padding:0;margin:0;list-style:none;opacity:0;transform:translateY(-50%) translateX(-50%);position:absolute;top:50%;left:50%;z-index:1;transition:all .3s ease 0s">
 					                        <li><a href="do_selectOne.do?productId=${vo.productId }" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
 					                        <li><a id="goCart" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
 					                    </ul>
@@ -200,7 +200,7 @@ $("[id^=goCart]").on("click",function(){
 	 function popup(){
          var url = "store_add.jsp";
          var name = "상품등록";
-         var option = "width = 700, height = 550, top = 100, left = 400, location = no"
+         var option = "width = 800, height = 520, top = 100, left = 400, location = no"
          window.open(url, name, option);
      }
 

@@ -15,17 +15,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
----- Include the above in your HEAD tag --------
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" /> --> 
+<%-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">--%>
+<!-- 부트스트랩 -->
+<!------ Include the above in your HEAD tag ---------->
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" /> -->
+<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="${context}/resources/css/headerStyle.css" rel="stylesheet" type="text/css"> 
 <link href="../resources/css/store_main.css" rel="stylesheet" type="text/css">
 <title>상품상세</title>
 </head>
 <body>
-<h3 class="h4"  style="margin-left: 50px; margin-top: 2em; font-weight: bold; font-size:25">상품 상세정보</h3>
-<table style="margin-top: 150px; margin-bottom: 50px;" >
+<h3 class="h4"  style="margin-left: 400px; margin-top: 2em;">상품 상세정보</h3>
+<table style="margin-top: 150px; margin-bottom: 50px; margin-left: 350px;" >
 
 	<tr>
 		<td style="display: none;" id="productId" class="productId">${vo.productId }</td>
@@ -40,11 +41,11 @@
 		<table border="1" style="height: 300px; width: 400px;">
 			<tr align="center">
 				<td>상품명</td>
-				<td><input id="productNm" name="productNm" value="${vo.productNm }"/></td>
+				<td><input readonly="readonly" id="productNm" name="productNm" value="${vo.productNm }"/></td>
 			</tr>
 			<tr align="center">
 				<td>가격</td>
-				<td><input id="productCost" name="productCost" value="<fmt:formatNumber value="${vo.productCost }" pattern="#,###,###"/>"/>원</td>
+				<td><input readonly="readonly" id="productCost" name="productCost" value="<fmt:formatNumber value="${vo.productCost }" pattern="#,###,###"/>"/>원</td>
 			</tr>
 			<tr align="center">
 				<td colspan="2">
@@ -57,8 +58,8 @@
                     			</c:forEach>
 						</select> &nbsp; 개		
 					</form>				
-						<input style="margin-top: 30px; margin-right: 30px" id="goCart" name="goCart" type="submit" value="장바구니에 담기" >					
-						<input id="pay" name="pay" type="button" value="바로 결제하기" >
+						<input style="margin-left:35px; margin-top: 30px; margin-right: 30px;" id="goCart" name="goCart" type="submit" value="장바구니에 담기" class="btn btn-outline-dark" >					
+						<input style="margin-top: 30px; margin-right: 30px;" id="pay" name="pay" type="button" class="btn btn-outline-dark" value="바로 결제하기" >
 				</td>
 			</tr>			
 		</table>
@@ -66,19 +67,21 @@
 	</tr>
 </table>
 <hr>
-<table style="margin-top: 20px; margin-left: 50px;">
+<table style="margin-top: 20px; margin-left: 400px;">
 	<tr>
-		<td >상품소개</td><tr>
-		<td>${vo.productInfo}</td>
+		<td style="text-align:left;margin:1em;text-transform:capitalize; font-size:18px; font-weight: bold">상품소개</td><tr>
+		<td style="text-align:left;margin:1em;text-transform:capitalize; font-size:15px; padding-top: 10px;">${vo.productInfo}</td>
 	</tr>
 </table>
 <hr>
-<div style="margin-left: 900px; display: none;" id="btns" class="btns" >
-	<input type="submit" value="수정" id="updatebtn" name="updatebtn">
-	<input type="button" value="삭제" id="delbtn" name="delbtn">
-</div>
+<table style="margin-left: 970px;display: none;" id="btns" class="btns">
+	<tr>
+		<td style="padding-right: 10px; padding-bottom:30px;"><input type="submit" value="수정" id="updatebtn" name="updatebtn" class="btn btn-outline-dark" ></td>
+		<td style="padding-bottom:30px;"><input type="button" value="삭제" id="delbtn" name="delbtn" class="btn btn-outline-dark" ></td>	
+	</tr>
+</table>
 <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
-<%-- <script src="${context}/resources/js/jquery-1.12.4.js"></script>		 --%>
+<script src="${context}/resources/js/jquery-1.12.4.js"></script>
 <script type="text/javascript">
 	//장바구니에 담기
 	$("#goCart").on("click",function(){

@@ -55,16 +55,6 @@ public class SEJ_StroreCtrl {
 	private final String VIEW_MNG_NM = "store/store_add";
 	private final String CART_LIST_VIEW = "cart/cart";
 	
-
-	//메인으로 이동
-	@RequestMapping(value = "store/store_main.do")
-	public String storeMain() {
-		LOG.debug("======================");
-		LOG.debug("=@Controller storeMain=");
-		LOG.debug("======================");
-
-		return VIEW_LIST_NM;
-	}
 	
 	//장바구니페이지로 이동
 	@RequestMapping(value = "cart/cart.do")
