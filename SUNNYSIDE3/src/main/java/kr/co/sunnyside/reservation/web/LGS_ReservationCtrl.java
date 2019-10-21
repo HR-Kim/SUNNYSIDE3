@@ -27,7 +27,7 @@ public class LGS_ReservationCtrl {
 	LGS_ReservationSvc reservationSvc;
 	
 	//view
-	private final String VIEW_ ="?";
+	private final String VIEW_PAY ="reservation/reservation_pay";
 	
 	@ResponseBody
 	@RequestMapping(value = "reservation/do_save.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
@@ -170,7 +170,7 @@ public class LGS_ReservationCtrl {
 		LOG.debug("outVO : " + outVO);
 		LOG.debug("==================================");
 		
-		return VIEW_;
+		return "";
 	}
 	
 	@RequestMapping(value = "reservation/do_retrieve.do", method = RequestMethod.POST)
@@ -189,6 +189,25 @@ public class LGS_ReservationCtrl {
 		LOG.debug("list : " + list);
 		LOG.debug("==================================");
 		
-		return VIEW_;
+		return "";
+	}
+	
+	@RequestMapping(value = "reservation/do_pay.do", method = RequestMethod.POST)
+	public String do_payPage(LGS_TicketVO vo, String seatInfo, Model model) {
+		LOG.debug("==================================");
+		LOG.debug("Controller : do_payPage");
+		LOG.debug("==================================");
+	
+		String[] seatArr = (String[])seatInfo.split("%");
+		
+		model.addAttribute("vo", vo);
+		model.addAttribute("seatArr", seatArr);
+		
+		LOG.debug("==================================");
+		LOG.debug("vo : " + vo);
+		LOG.debug("seatArr : " + seatArr);
+		LOG.debug("==================================");
+		
+		return VIEW_PAY;
 	}
 }

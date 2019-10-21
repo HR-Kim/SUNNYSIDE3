@@ -277,14 +277,14 @@
 			<input type="hidden" id="hd_personTotal" value="0">
 			<input type="hidden" id="hd_selectedSeatTotal" value="0">
 			
-			<form action="/sunnyside/test" method="post" id="mainForm">
-				<input type="hidden" id="hd_selectedMovieId" value="">
-				<input type="hidden" id="hd_selectedScreenId" value="">
-				<input type="hidden" id="hd_selectedBranchId" value="">
-				<input type="hidden" id="hd_selectedRoomId" value="">
-				<input type="hidden" id="hd_resultCost" value="">
-				<input type="hidden" id="hd_adultYN" value="">
-				<input type="hidden" id="hd_selectedSeat" value="">
+			<form action="${context}/reservation/do_pay.do" method="post" id="mainForm">
+				<input type="hidden" id="hd_selectedMovieId" name="movieId" value="">
+				<input type="hidden" id="hd_selectedScreenId" name="screenId" value="">
+				<input type="hidden" id="hd_selectedBranchId" name="branchIn" value="">
+				<input type="hidden" id="hd_selectedRoomId" name="roomId" value="">
+				<input type="hidden" id="hd_resultCost" name="cost" value="">
+				<input type="hidden" id="hd_adultYN" name="adultCnt	" value="">
+				<input type="hidden" id="hd_selectedSeat" name="seatInfo" value="">
 			</form>
 			
 			<div id="selectMovie" class="case">
@@ -954,9 +954,7 @@
 							"<label class='highlight'>원</label>"+
 							"<br/>"
 					);	
-					
 					submit_btn(1);
-
 				}
 				
 				//단계버튼		1:좌석선택으로, 2:결제단계로
@@ -989,6 +987,14 @@
 				
 				//좌석선택으로 가는 버튼
 				function go_seat(){
+					var adult = parseInt($("#hd_aNum").val());
+					var student = parseInt($("#hd_sNum").val());
+					var personTotal = eval(adult + student);
+					if(personTotal == 0){
+						alert("인원 수가 0명 입니다.");
+						return;
+					}
+					
 					$(".seatPage").css("display", "block");
 					create_Seat_Table();
 					$("#submit_btn>div").detach();
@@ -1025,6 +1031,7 @@
 					$("#hd_sCost").val("0");
 					$("#hd_personTotal").val("0");
     				$("#hd_selectedSeatTotal").val("0");
+    				$("#hd_selectedSeat").val("");
 				});
 				
 				//좌석테이블 생성
@@ -1179,6 +1186,7 @@
 	    			seat.css("color", "white");
 	    		});
 	    		
+	    		//결제페이지로
 	    		function go_pay(){
 	    			if(confirm("결제페이지로 이동하시겠습니까?")==false) return;
 	    			
