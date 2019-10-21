@@ -33,11 +33,9 @@
 					                        <li><a href="do_selectOne.do?productId=${vo.productId }" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
 					                        <li><a id="goCart" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
 					                    </ul>
-					                </div>	
-					                <div>
-					                	<input type="hidden" id="productId" name="productId" value="${vo.productId}">
 					                    <input type="hidden" id="count" name="count" value="1">
 					                    <input type="hidden" id="userId" name="userId" value="${user.userId}">
+					                    <input type="hidden" id="productId" name="productId" value="${vo.productId}">
 					                </div>			 
 					                <div class="product-content">					                  
 					                    <h3 class="title"><c:out value="${vo.productNm }"/></h3>
@@ -57,12 +55,16 @@
 <script src="${context}/resources/js/jquery-1.12.4.js"></script>
 <script type="text/javascript">
 	//장바구니에 담기
-	$("#goCart").on("click",function(){
+	$("[id^=goCart]").on("click",function(){
 		//alert("goCart");
 		
 		//로그인 시 이동가능 
 		if("${user.userId}"!= ""){ //로그인 되어있으면 
 			if(false==confirm('상품을 담으시겠습니까?')) return;
+			 var tr    = $(this).parent().parent().parent();
+			 var tds = tr.children(); 
+			 productId = tds.eq(4).val();
+			 //alert( productId );
 			 addToCart(); //카트에 더하기 함수 
 			
 	     }else{// 로그인이 안되어있으면
@@ -71,10 +73,11 @@
 	     }		
 	});
 	
-	 function addToCart(){
-		 console.log("productId"+$("#productId").val());
-		 console.log("userId"+$("#userId").val());
-		 console.log("count"+$("#count").val());
+	 function addToCart(){	
+	
+		 console.log("productId="+productId);
+		 console.log("userId="+$("#userId").val());
+		 console.log("count="+$("#count").val());
 		 
 			//ajax
 		     $.ajax({
@@ -82,7 +85,7 @@
 		        url:"${context}/cart/do_save.do",
 		        dataType:"html",
 		           data:{                               
-		        		   "productId":$("#productId").val(), 
+		        		   "productId":productId, 
 		        		   "userId":$("#userId").val(),       
 		        		   "count":$("#count").val()                              
 		       

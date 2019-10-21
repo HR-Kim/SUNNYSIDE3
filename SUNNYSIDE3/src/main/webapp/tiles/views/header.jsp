@@ -108,7 +108,7 @@
 						</ul>
 					</li>					
 					<li>
-						<a href="/sunnyside/store/do_retrieve.do">스토어</a>
+						<a href="/sunnyside/store/do_main.do">스토어</a>
 						<ul class="sub-menu">
 							<li><a href="/sunnyside/store/do_retrieve_popcorn.do">팝콘</a></li>
 							<li><a href="/sunnyside/store/do_retrieve_drink.do">음료</a></li>

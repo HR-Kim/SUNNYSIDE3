@@ -274,16 +274,13 @@
 					<label for="studentCost">학생가격</label> <input type="text" id="studentCost">
 					<br/>
 					<hr/>
-					<h4>회차</h4>&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="text" id="episode" size="1" max="2" min="1"> <label for="episode">회차</label>
-					<br/>
 					<br/>
 					<button id="finalValidateMovie" class="btn btn-default btn-sm">편성</button>
 				</div>
 			</div>
 			
 			<div class="movieValidate" id="movieValidate">
-			<button id="planCancel" class="btn btn-success btn-nm">취소</button>
+			<button id="planVdOff" class="btn btn-success btn-nm">취소</button>
 			&nbsp;
 			<button id="planBtn" class="btn btn-warning btn-nm">확인</button>
 			</div>
@@ -959,7 +956,6 @@
 				var endTime = $("#endTime").val();
 				var adultCost = $("#adultCost").val();
 				var studentCost = $("#studentCost").val();
-				var episode = $("#episode").val();
 				var branchId = $("#hd_branchId").val();
 				var branchNm = $("#hd_branchNm").val();
 				var roomId = $("#hd_roomId").val();
@@ -973,7 +969,6 @@
 				if(movieId.length == 0){ alert("선택한 영화가 없습니다."); return;}
 				if(endDate.length == 0 || endTime.length == 0 ){alert("상영시간을 확인해주세요."); return;}
 				if(adultCost.length == 0 || studentCost.length == 0){alert("가격을 확인해주세요."); return;}
-				if(episode == 0){ alert("회차를 확인해주세요."); return;}
 				
 				var width = $(".movieValidate").width();
        			var height = $(".movieValidate").height();
@@ -993,7 +988,6 @@
 					"<label>상영종료일 : </label>"+endDate+"<br/>"+
 					"<label>성인가격 : </label>"+adultCost+"<br/>"+
 					"<label>학생가격 : </label>"+studentCost+"<br/>"+
-					"<label>회차 : </label>"+episode+"<br/>"+
 					"<br/><pre>이대로 편성을 진행합니다.</pre>"+
 					"<div>"
 				);
@@ -1007,13 +1001,13 @@
 				add_NewScreenMovie();				
 			});
 			
+			//상영영화추가
 			function add_NewScreenMovie(){
 				loading(true);
 				var eDate = $("#endDate").val(); 
 				var eTime = $("#endTime").val();
 				var adultCost = $("#adultCost").val();
 				var studentCost = $("#studentCost").val();
-				var episode = $("#episode").val();
 				var branchId = $("#hd_branchId").val();
 				var roomId = $("#hd_roomId").val();
 				var movieId = $("#hd_movieId").val();
@@ -1021,7 +1015,7 @@
 				var sDate = $("#datePicker").val();
 				var startTime = sDate + " " + sTime;
 				var endTime = eDate + " " + eTime;
-				var screenDt = eDate;
+				var screenDt = sDate;
 				
 				$.ajax({
     				type : "POST",
@@ -1035,8 +1029,7 @@
     					"endTime" : endTime,
     					"screenDt" : screenDt,
     					"adultCost" : adultCost,
-    					"studentCost" : studentCost,
-    					"episode" : episode
+    					"studentCost" : studentCost
     				}, 
     			success: function(data){
     				var msg = data;
@@ -1047,8 +1040,8 @@
     				}
     			},
     			complete:function(data){
-    				planCancel();
-    				selectedMovie_Off();
+    				planVdOff();
+    				//selectedMovie_Off();
     				var roomId = $("#hd_roomId").val();
                 	create_RoomTable(roomId, false);
     				loading(false);
@@ -1064,16 +1057,15 @@
 				$("#endTime").val("");
 				$("#adultCost").val("");
 				$("#studentCost").val("");
-				$("#episode").val("");
 				$(".selectedMovie").css("display", "none");
 				$("#selectedMovieTable>tbody>tr").detach();
 			}
 			
-			$("#planCancel").on("click", function(){
-				planCancel();
+			$("#planVdOff").on("click", function(){
+				planVdOff();
 			});
 			
-			function planCancel(){
+			function planVdOff(){
 				$(".dim").css("display", "none");
 				$(".movieValidate").css("display", "none");
 			}
@@ -1083,7 +1075,7 @@
 				
 				if(screenId.length == 0){ alert("선택된 영화가 없습니다."); return;}
 				
-				if(confirm("선택된 편성영화를 삭제합니까?")==false) return;
+				if(confirm("선택된 편성영화를 삭제합니다")==false) return;
 				
 				delete_Plan(screenId);
 			});
@@ -1100,9 +1092,9 @@
     			success: function(data){
     				var msg = data;
     				if(msg.msgId == 1){
-    					alert("성공");
+    					//alert("성공");
     				}else{
-    					alert("실패");
+    					//alert("실패");
     				}
     			},
     			complete:function(data){

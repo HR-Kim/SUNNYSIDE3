@@ -457,6 +457,7 @@ public class SEJ_StroreCtrl {
 
 		return VIEW_LIST_NM;
 	}
+	
 
 	/**
 	 * 팝콘 전체조회 조회만 get
@@ -566,4 +567,36 @@ public class SEJ_StroreCtrl {
 		return VIEW_TICKET_LIST_NM;
 	}
 
+	/**
+	 * 메인페이지 조회 
+	 * 조회만 get
+	 * 
+	 * @param search
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "store/do_main.do", method = RequestMethod.GET)
+	public String do_main(SearchVO search, Model model) {
+		LOG.debug("1.=====================");
+		LOG.debug("1.= param=" + search);
+		LOG.debug("1.=====================");
+
+		search.setSearchDiv(StringUtil.nvl(search.getSearchDiv()));
+
+		LOG.debug("2.=====================");
+		LOG.debug("2.=param=" + search);
+		LOG.debug("2.=====================");
+		model.addAttribute("vo", search);
+
+		List<SEJ_StroreSvc> poplist = (List<SEJ_StroreSvc>) this.storeService.do_main_popcorn(search);
+		List<SEJ_StroreSvc> drinklist = (List<SEJ_StroreSvc>) this.storeService.do_main_drink(search);
+		List<SEJ_StroreSvc> ticketlist = (List<SEJ_StroreSvc>) this.storeService.do_main_ticket(search);
+		model.addAttribute("popcornlist", poplist);
+		model.addAttribute("drinklist", drinklist);
+		model.addAttribute("ticketlist", ticketlist);
+
+
+		return VIEW_LIST_NM;
+	}
+	
 }

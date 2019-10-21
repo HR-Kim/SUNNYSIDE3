@@ -19,6 +19,13 @@
 		.ui-datepicker select.ui-datepicker-month{ width:30%; font-size: 11px; }
 		.ui-datepicker select.ui-datepicker-year{ width:40%; font-size: 11px; }
 		.ui-widget-content .ui-icon {background-image: url("../resources/image/jquery_ui/ui-icons_444444_256x240.png");}
+		.submit {
+			width: 150px;
+			border-radius: .5rem;
+			margin-left: 25px;
+			margin-top: 10px;
+			
+		}
 		.costlight {
 			color: yellow;
 			font-weight: bold;
@@ -215,7 +222,16 @@
 	<body>
 		<div class="container">
 
-			<input type="hidden" id="hd_selectedMovieId" value="">
+			<form action="/sunnyside/test" method="post" id="mainForm">
+				<input type="hidden" id="hd_selectedMovieId" value="">
+				<input type="hidden" id="hd_selectedScreenId" value="">
+				<input type="hidden" id="hd_selectedBranchId" value="">
+				<input type="hidden" id="hd_selectedRoomId" value="">
+				<input type="hidden" id="hd_resultCost" value="">
+				<input type="hidden" id="hd_adultYN" value="">
+			</form>
+
+			
 			<div id="selectMovie" class="case">
 				<div class="bar">
 					&nbsp;<label>영화선택</label>
@@ -230,7 +246,7 @@
 				</div>
 			</div>
 					
-			<input type="hidden" id="hd_selectedBranchId" value="">
+			
 			<input type="hidden" id="hd_selectedBranchNm" value="">
 			<div id="selectBranchRoom" class="case">
 				<div class="bar">
@@ -312,6 +328,7 @@
 				</div>
 				<div id="imgBox" class="center"></div>
 				<div id="infoBox"></div>
+				<div id="infoBox_middle"></div>
 				<div id="infoBox_bottom"></div>
 			</div>
 
@@ -485,13 +502,15 @@
     			});				
 			}
 			
+			//모든상영관만 표시
 			$("#allBranch").on("click", function(){
 				var movieId = $("#hd_selectedMovieId").val();
 				if(movieId == "") return;
 				
 				All_branch();
 			});
-				
+
+			//상영중인 상영관만 표시
 			$("#liveBranch").on("click", function(){	
 				var movieId = $("#hd_selectedMovieId").val();
 				if(movieId == "") return;
@@ -593,9 +612,11 @@
 								var target = $("div[data-room="+boxNm+"]");
 								var sId = scheduleArr[q].screenId;
 								var script = 'javascript:scheduleBtn("'+sId+'")';
+								var startTime = scheduleArr[q].startTime;
 								var time = convertTime(scheduleArr[q].startTime);
-
-								if(todayFilter(time) == null){//끝난영화일때
+								$("#hd_selectedScreenId").val(sId);
+								
+								if(todayFilter(startTime) == null){//끝난영화일때
 									$(target).append(
 											"&nbsp;<button class='btn btn-default btn-xs timeBtn' data-room='"+roomNm+"' disabled='disabled'>"+
 											 time+
@@ -633,6 +654,7 @@
 					var studentCost = screenInfo.studentCost;
 					$("#hd_aCost").val(adultCost);
 					$("#hd_sCost").val(studentCost);
+					$("#hd_selectedRoomId").val(roomId);
 					
 					var date = screenInfo.startTime;
 					$.ajax({
@@ -661,7 +683,7 @@
 				});
 			}
 			
-			//좌석선택시 1
+			//좌석선택시 (성인)
 			$(".numBtnAdult>button").on("click", function(){
 				var btn = $(this)[0];
 				
@@ -670,12 +692,12 @@
 				$(this).css("opacity", "1");
 				$(this).css("background-color", "lightblue");
 				
-				var num = $("#hd_aNum").val(btn.value);
+				$("#hd_aNum").val(btn.value);
 				
 				infoBox_bottom();
 			});
 			
-			//좌석선택시 2
+			//좌석선택시 (학생)
 			$(".numBtnStudent>button").on("click", function(){
 				var btn = $(this)[0];
 				
@@ -684,8 +706,8 @@
 				$(this).css("opacity", "1");
 				$(this).css("background-color", "lightblue");
 				
-				var num = $("#hd_sNum").val(btn.value);
-				
+				$("#hd_sNum").val(btn.value);
+
 				infoBox_bottom();
 			});
 			
@@ -701,23 +723,36 @@
 			
 			//현재시간보다 늦은 데이터는 null반환
 			function todayFilter(data){
-				//data -> hh:mm
+				//data -> yyyy-mm-dd hh:mm:ss
 				var now = new Date();
+				var y = now.getYear() + 1900;
+				var mt = now.getMonth() + 1;
+				var d = now.getDate();
 				var h = now.getHours();
 				var m = now.getMinutes();
 				
-				var dataArr = data.split(":");
-				var ah = dataArr[0];
-				var am = dataArr[1];
-
-				//같은 Hour일 경우
-				if(h == ah){
-					if(m > am) return null;
+				var dataArr = data.split(" ");
+				var indateArr = dataArr[0];
+				var inTimeArr = dataArr[1];
+				
+				var inDate = indateArr.split("-");
+				var inTime = inTimeArr.split(":");
+				
+				var inY = inDate[0];
+				var inMt = inDate[1];
+				var inD = inDate[2];
+				var inH = inTime[0];
+				var inM = inTime[1];
+				
+				if(d == inD){
+					//같은 Hour일 경우
+					if(h == inH){
+						if(m > inM) return null;
+					}
+					
+					//Hour가 다를경우
+					if(h > inH) return null;
 				}
-				
-				//Hour가 다를경우
-				if(h > ah) return null;
-				
 				return data;
 			}
 
@@ -777,7 +812,7 @@
 	    			});//done End
 				}//-function End
 				
-				//요약1
+				//요약 - 포스터, 제목
 				function infoBox_imgNtitle(movieId){
 					$.ajax({
 	    				type : "POST",
@@ -820,10 +855,14 @@
 					});
 				}
 				
-				//요약2
+				//요약 - 극장, 날짜
 				function infoBox_center(roomNm, date){
 					var branchNm = $("#hd_selectedBranchNm").val();
-					$("#infoBox").append(
+					
+					$("#infoBox_middle>div").detach();
+					$("#infoBox_bottom>div").detach();
+					
+					$("#infoBox_middle").append(
 						"<div>"+
 						"<hr/>"+
 						"&nbsp;&nbsp;<label class='lowlight'>극장</label>"+
@@ -835,12 +874,16 @@
 					);	
 				}
 				
-				//요약3
+				//요약 - 인원, 금액, 예매버튼
 				function infoBox_bottom(){
-					var adult = $("#hd_aNum").val();
-					var student = $("#hd_sNum").val();
+					var adult = parseInt($("#hd_aNum").val());
+					var student = parseInt($("#hd_sNum").val());
 					var aCost = parseInt($("#hd_aCost").val());
 					var sCost = parseInt($("#hd_sCost").val());
+					var resultCost = eval( eval(adult*aCost) + eval(student*sCost) );
+					
+					$("#hd_resultCost").val(resultCost);
+					if(adult > 0) $("#hd_adultYN").val("1");
 					
 					$("#infoBox_bottom>div").detach();
 							
@@ -850,9 +893,26 @@
 							"&nbsp;<label class='highlight'>성인 "+adult+", 학생 "+student+"</label>"+
 							"<br/>"+
 							"&nbsp;&nbsp;<label class='lowlight'>금액</label>"+
-							"&nbsp;<label class='costlight'>"+(aCost+sCost)+"</label>"+
+							"&nbsp;<label class='costlight'>"+resultCost+"</label>"+
+							"<label class='highlight'>원</label>"+
 							"<br/>"
 					);	
+					
+					$("#infoBox_bottom").append(
+							"<div>"+
+							"<button class='submit btn btn-danger btn-lg' onclick='javascript:submit();'>예매하기</button>"+
+							"</div>"
+					);
+				}
+				
+				//예매하기 버튼
+				function submit(){
+					if(confirm("예매하시겠습니까?")==false) return;
+					
+					var form = $("#mainForm");
+					form.submit();
+					//넘어가는 정보
+					//지점id, 상영관id, 영화id, 스크린id, 성인유무, 가격
 					
 				}
     	</script>

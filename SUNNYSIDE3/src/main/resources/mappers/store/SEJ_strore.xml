@@ -23,7 +23,7 @@
 				    save_file_nm,
 				    ext
 				) VALUES (
-     				TO_CHAR(SYSDATE,'yyyymmdd')||'-'||'00'||#{category,jdbcType=NUMERIC}||'-'||to_char((SELECT COUNT(*) FROM PRODUCT), 'FM000'),
+     				TO_CHAR(SYSDATE,'yyyymmdd')||'-'||'00'||#{category,jdbcType=NUMERIC}||'-'||to_char(PRODUCT_SEQ.NEXTVAL, 'FM000'),
 				    #{productNm,jdbcType=VARCHAR},
 				    #{productInfo,jdbcType=VARCHAR},
 				    #{category,jdbcType=NUMERIC},
@@ -103,7 +103,7 @@
 		  	WHERE B.rnum <![CDATA[ >= ]]> (#{pageSize} * (#{pageNum}-1)+1)                  				   
 		  )T1	
 	</select>
-	
+
 
 <!-- 팝콘상품 조회 -->
 	 <select id="do_retrieve_popcorn" parameterType="Search" resultType="Store">
@@ -190,6 +190,90 @@
 		  )T1	
 		</select>
 		
+<!-- 메인페이지  -->
+	<!-- 팝콘상품 4개 조회 -->
+	 <select id="do_main_popcorn" parameterType="Search" resultType="Store">
+		  SELECT T1.*												
+		  FROM                                                              
+		  (                                                                 
+		  	SELECT  B.rnum as num,
+				  	B.PRODUCT_ID as productId ,
+					B.PRODUCT_NM as productNm,
+					B.PRODUCT_INFO as productInfo,
+					B.CATEGORY,
+					B.PRODUCT_COST as productCost,
+					B.ORG_FILE_NM as orgFileNm,
+   				    B.SAVE_FILE_NM as saveFileNm,
+  				    B.EXT                                                    
+		    FROM(
+ 					SELECT ROWNUM AS rnum,A.*
+ 					FROM(
+  							SELECT *
+ 						    FROM PRODUCT   
+ 						    WHERE  1=1                        
+		  					and CATEGORY LIKE '%' || '1' || '%'                                                                         
+		  		)A                                                         
+		  	   WHERE rownum <![CDATA[ <= ]]> 4  						       
+		  	) B                                                            
+		  	WHERE B.rnum <![CDATA[ >= ]]> 0                				   
+		  )T1	
+		</select>
+	<!-- 음료상품 4개 조회 -->
+	 <select id="do_main_drink" parameterType="Search" resultType="Store">
+		  SELECT T1.*												
+		  FROM                                                              
+		  (                                                                 
+		  	SELECT  B.rnum as num,
+				  	B.PRODUCT_ID as productId ,
+					B.PRODUCT_NM as productNm,
+					B.PRODUCT_INFO as productInfo,
+					B.CATEGORY,
+					B.PRODUCT_COST as productCost,
+					B.ORG_FILE_NM as orgFileNm,
+   				    B.SAVE_FILE_NM as saveFileNm,
+  				    B.EXT                                                    
+		    FROM(
+ 					SELECT ROWNUM AS rnum,A.*
+ 					FROM(
+  							SELECT *
+ 						    FROM PRODUCT   
+ 						    WHERE  1=1                        
+		  					and CATEGORY LIKE '%' || '2' || '%'                                                                         
+		  		)A                                                         
+		  	   WHERE rownum <![CDATA[ <= ]]> 4  						       
+		  	) B                                                            
+		  	WHERE B.rnum <![CDATA[ >= ]]> 0                				   
+		  )T1	
+		</select>
+	<!-- 영화예매권상품 4개 조회 -->
+	 <select id="do_main_ticket" parameterType="Search" resultType="Store">
+		  SELECT T1.*												
+		  FROM                                                              
+		  (                                                                 
+		  	SELECT  B.rnum as num,
+				  	B.PRODUCT_ID as productId ,
+					B.PRODUCT_NM as productNm,
+					B.PRODUCT_INFO as productInfo,
+					B.CATEGORY,
+					B.PRODUCT_COST as productCost,
+					B.ORG_FILE_NM as orgFileNm,
+   				    B.SAVE_FILE_NM as saveFileNm,
+  				    B.EXT                                                    
+		    FROM(
+ 					SELECT ROWNUM AS rnum,A.*
+ 					FROM(
+  							SELECT *
+ 						    FROM PRODUCT   
+ 						    WHERE  1=1                        
+		  					and CATEGORY LIKE '%' || '3' || '%'                                                                         
+		  		)A                                                         
+		  	   WHERE rownum <![CDATA[ <= ]]> 4  						       
+		  	) B                                                            
+		  	WHERE B.rnum <![CDATA[ >= ]]> 0                				   
+		  )T1	
+		</select>
+
+
 
 	
 </mapper>
