@@ -80,7 +80,7 @@
 					                        </button></td>
 					                        <td>
 						                        <button type="button" class="btn btn-success" id="paybtn" name="paybtn">
-						                           	 결제하기 <span class="glyphicon glyphicon-play"></span>
+						                           	 구매하기 <span class="glyphicon glyphicon-play"></span>
 						                        </button></td>
 					                     </tr>
                   			  </c:otherwise>
@@ -97,7 +97,6 @@
 <script type="text/javascript">
 
 //리스트 삭제
-
 $("[id^=deleteBtn]").on("click",function(){
 	if(false==confirm('상품을 삭제하시겠습니까?')) return;
 	var tr    = $(this).parent().parent();
@@ -190,11 +189,12 @@ $("[id^=updateBtn]").on("click",function(){
 	});
 
 	
-	// 주문하기 페이지로 이동
+	// 구매하기 페이지로 이동
 	$("#paybtn").on("click",function(){
-		alert("paybtn");
-		if(false==confirm('결제하시겠습니까?')) return;
-		location.href="${context}/store/do_main.do";
+		//alert("paybtn");
+		if(false==confirm('주문하시겠습니까?')) return;
+		var userId = $("#userId").text();
+		location.href="${context}/cart/do_payRetrieve.do?userId="+userId;
 	});
 	
 $(document).ready(function(){	

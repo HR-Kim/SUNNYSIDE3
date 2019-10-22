@@ -37,6 +37,7 @@ public class SEJ_CartCtrl {
 	
 	// view
 	private final String CART_LIST_VIEW = "cart/cart";
+	private final String AFTER_PAY_LIST_VIEW = "cart/payment";
 	
 	// 1. 장바구니 저장(추가)
 	@RequestMapping(value ="cart/do_save.do", method = RequestMethod.POST)
@@ -113,4 +114,19 @@ public class SEJ_CartCtrl {
 
 		return CART_LIST_VIEW;
 	}
+	
+	// 5. 주문하기 목록
+		@RequestMapping(value ="cart/do_payRetrieve.do",method = RequestMethod.GET)
+		public String do_payRetrieve(SEJ_CartVO inVO,Model model){
+			LOG.debug("1.=====================");
+			LOG.debug("1.= do_retrieve param=" + inVO);
+			LOG.debug("1.=====================");
+
+			List<SEJ_CartVO> list = (List<SEJ_CartVO>) this.cartService.do_retrieve(inVO);
+			int totalCost=cartService.do_totalCost(inVO.getUserId());
+			model.addAttribute("list", list);
+			model.addAttribute("totalCost", totalCost);
+
+			return AFTER_PAY_LIST_VIEW;
+		}
 }

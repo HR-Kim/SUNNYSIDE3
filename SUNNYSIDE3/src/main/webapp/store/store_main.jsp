@@ -21,7 +21,7 @@
 <body>
 <div class="container" style="margin-right: 420px;">
 	<div class="productadd" id="productadd" style="display: none;">
-		<input type="button" value="상품등록" id="addbtn" class="btn btn-outline-dark" style="margin-top: 40px; margin-left: 150px;">
+		<input type="button" value="상품등록" id="addbtn" class="btn btn-outline-dark" style="margin-top: 40px;">
 	</div>
 </div>
    	<div class="container">
@@ -91,7 +91,7 @@
 			</div>
 	 </div>
 <hr>
-<div class="container">
+<div class="container" style="margin-bottom: 30px;">
 	   <h3 class="h3">영화관람권</h3>
 	     <form name="ticketFrm" id="ticketFrm"  method="get">
 		    <div class="row">

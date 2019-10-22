@@ -28,7 +28,7 @@
 <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- 부트스트랩 -->
+  <!-- 부트스트랩 -->
     <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
     <title>상품등록</title>
@@ -44,10 +44,10 @@
     <![endif]-->
 </head>
 <body>
- <h2 style="margin-left: 40px;"> 상품정보 수정 </h2>
+ <h2 style="margin-left: 40px; font-weight: bold"> 상품정보 수정 </h2>
  <hr>
- <form id="updateFrm" name="updateFrm" method="post" enctype="multipart/form-data" action="do_update.do" style="margin-left: 90px; margin-top: 35px;">
- 	<table border="1">
+ <form id="updateFrm" name="updateFrm" method="post" enctype="multipart/form-data" action="do_update.do" style="margin-left: 60px; margin-top: 35px; margin-right: 50px;">
+ 	<table class="table">
  	<tr style="display: none;">
  		<td><input id="productId" name="productId" value="<c:out value="${vo.productId }"/>"></td>
  		<td class="category" id="category">${vo.category }</td>
@@ -79,8 +79,8 @@
   	</tr>
   	<tr>
   	 <td colspan="2" align="center">
-  	 	<input type="submit" value="수정" id="doUpdate">
-  	 	<input type="button" value="취소" id="backBtn">
+  	 	<input type="submit" value="수정" id="doUpdate"  class="btn btn-outline-dark">
+  	 	<input type="button" value="취소" id="backBtn"  class="btn btn-outline-dark">
   	 </td>
   	</tr> 	
   </table> 
@@ -128,7 +128,7 @@
 			
 				
 			  }else{
-				alert(data.msgId+"|"+data.msgMsg);
+				alert("수정실패: 이미지를 등록해주세요");
 				  opener.parent.location.reload();
 				  window.close();
 				

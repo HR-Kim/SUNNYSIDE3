@@ -26,7 +26,7 @@
 </head>
 
 <body>
- <h2 style="margin-left: 40px;"> 상품등록 </h2>
+ <h2 style="margin-left: 40px; font-weight: bold""> 상품등록 </h2>
  <hr>
  <form id="boardEditFrm" name="boardEditFrm" method="post" enctype="multipart/form-data" action="do_save.do" style="margin-left: 75px; margin-top: 42px; margin-right: 80px;">
  	<table class="table">

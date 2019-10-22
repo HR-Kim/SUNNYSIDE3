@@ -151,7 +151,7 @@
 	function popup(){
         var url = "${context}/noTileStore/do_selectOneToUpdate.do?productId="+productId;
         var name = "상품수정";
-        var option = "width = 700, height = 700, top = 100, left = 400, location = no"
+        var option = "width = 700, height = 800, top = 100, left = 400, location = no"
         window.open(url, name, option);
     }
 	
