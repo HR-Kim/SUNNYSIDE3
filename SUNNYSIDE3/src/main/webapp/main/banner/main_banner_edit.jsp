@@ -211,8 +211,7 @@
 				}
 			}); 
 			//--ajax 			
-		}		
-		
+		}				
 	
 		$(document).ready(function() {
 			//alert("ready");
