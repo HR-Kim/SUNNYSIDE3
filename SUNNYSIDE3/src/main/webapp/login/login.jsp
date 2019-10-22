@@ -1,7 +1,3 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
-<%@page import="kr.co.sunnyside.cmn.DTO"%>
-<%@page import="kr.co.sunnyside.cmn.StringUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -48,12 +44,12 @@
 						<!-- 로그인 다국어 -->
 						<select name="lang" id="lang">
 					        <option value="ko" <c:if test="${lang == 'ko'}">selected</c:if> >한글</option>
-							<option value="en" <c:if test="${lang == 'en'}">selected</c:if> >영어</option>
+							<option value="en" <c:if test="${lang == 'en'}">selected</c:if> >English</option>
 					     </select>
 				    </div>
 				    
 					<span class="text-center login100-form-title p-b-32">
-						SUNNYSIDE LOGIN
+						<spring:message code="message.login.login"/>
 					</span>
 
 					<span class="txt1 p-b-11">

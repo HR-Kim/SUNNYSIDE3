@@ -47,7 +47,33 @@
 					</span>
 					
   					<c:choose>
-						<c:when test="${user.flag == '0'}">
+						<c:when test="${user.flag == '1'}">
+						
+							<input type="hidden" id="userId" name="userId" value="${user.userId}" >
+							<input type="hidden" id="passwd" name="passwd" value="${user.passwd}" >
+							<input type="hidden" id="passwdCnfrm" name="passwdCnfrm" value="${user.passwd}" >
+							<input type="hidden" id="email" name="email" value="${user.email}" >
+							<input type="hidden" id="userName" name="userName" value="${user.userName}" >
+							
+							<span class="txt1 p-b-11">
+								생년월일
+							</span>
+							<div class="wrap-input100  m-b-20">
+								<input class="input100"  maxlength="8" type="text" id="birth" name="birth" value="${user.birth}">
+								<span class="focus-input100"></span>
+							</div>
+							
+							<span class="txt1 p-b-11">
+								휴대폰번호
+							</span>
+							<div class="wrap-input100  m-b-20">
+								<input class="input100" maxlength="11" type="text" id="cellphone" name="cellphone" value="${user.cellphone}">
+								<span class="focus-input100"></span>
+							</div>		
+											
+  						</c:when>
+						<c:otherwise>
+						
 							<span class="txt1 p-b-11">
 								아이디
 							</span>
@@ -103,30 +129,7 @@
 								<input class="input100" maxlength="11" type="text" id="cellphone" name="cellphone" value="${user.cellphone}">
 								<span class="focus-input100"></span>
 							</div>
-  						</c:when>
-						<c:otherwise>
-						
-							<input type="hidden" id="userId" name="userId" value="${user.userId}" >
-							<input type="hidden" id="passwd" name="passwd" value="${user.passwd}" >
-							<input type="hidden" id="passwdCnfrm" name="passwdCnfrm" value="${user.passwd}" >
-							<input type="hidden" id="email" name="email" value="${user.email}" >
-							<input type="hidden" id="userName" name="userName" value="${user.userName}" >
 							
-							<span class="txt1 p-b-11">
-								생년월일
-							</span>
-							<div class="wrap-input100  m-b-20">
-								<input class="input100"  maxlength="8" type="text" id="birth" name="birth" value="${user.birth}">
-								<span class="focus-input100"></span>
-							</div>
-							
-							<span class="txt1 p-b-11">
-								휴대폰번호
-							</span>
-							<div class="wrap-input100  m-b-20">
-								<input class="input100" maxlength="11" type="text" id="cellphone" name="cellphone" value="${user.cellphone}">
-								<span class="focus-input100"></span>
-							</div>
 						</c:otherwise>
 					</c:choose> 
 				</form>

@@ -15,9 +15,9 @@
 	 
 	<!-- locale Change -->
    	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
-<!--   	<bean class="kr.co.sunnyside.cmn.LocaleResolverController">
+   	<bean class="kr.co.sunnyside.cmn.LocaleChangeController">
 		<property name="localeResolver" ref="localeResolver" />
-   	</bean> -->
+   	</bean>
    	
  
 	<!-- 다국어 설정 -->
