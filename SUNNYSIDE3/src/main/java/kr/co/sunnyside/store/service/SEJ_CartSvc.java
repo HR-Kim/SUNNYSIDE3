@@ -5,6 +5,12 @@ import java.util.List;
 import kr.co.sunnyside.cmn.DTO;
 
 public interface SEJ_CartSvc {
+	/**결제내역 추가 */
+	public int do_payComplete(DTO dto);
+	
+	/**결제내역 목록 */
+	public List<?> do_payCompleteList(DTO dto);
+	
 	/**장바구니 저장 */
 	public int do_save(DTO dto);
 	
@@ -19,8 +25,7 @@ public interface SEJ_CartSvc {
 
 	/**장바구니 목록 */
 	public List<?> do_retrieve(DTO dto);
-	
-   
+
 	public int do_selectOne(DTO dto);
 	
 	/**장바구니 금액 총합계 */ 

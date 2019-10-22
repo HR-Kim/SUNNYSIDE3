@@ -31,9 +31,30 @@
 			    #{productId,jdbcType=VARCHAR},
 			    TO_CHAR(SYSDATE,'yyyymmdd')||'-'||to_char(STORE_PAY_SEQ.NEXTVAL, 'FM000'),
 			    #{payCost,jdbcType=NUMERIC},
-			    #{payDt,jdbcType=VARCHAR},
+			    SYSDATE,
 			)		
 	</insert>
+
+<!-- 결제완료 목록 -->
+	<select id="do_payCompleteList" parameterType="Pay" resultType="Pay" >
+	 	SELECT
+	 		a.pay_code as payCode,
+		    a.cart_id as cartId,
+		    c.product_nm as productNm,
+		    b.user_id as userId,
+		    a.count,
+		    a.pay_cost as payCost,
+		    c.product_id as productId,
+		    a.pay_dt as payDt
+		FROM
+		    pay_history a, user_info b, product c 
+		WHERE
+		    b.user_id = a.user_id
+		    AND c.product_id = a.product_id
+		    AND a.user_id = #{userId,jdbcType=VARCHAR}
+		ORDER BY
+		    a.pay_code 
+	</select>
 
  
 

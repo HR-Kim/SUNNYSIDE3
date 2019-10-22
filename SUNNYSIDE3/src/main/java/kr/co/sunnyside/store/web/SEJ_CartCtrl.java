@@ -23,6 +23,7 @@ import kr.co.sunnyside.cmn.StringUtil;
 import kr.co.sunnyside.login.service.SJH_LoginVO;
 import kr.co.sunnyside.store.service.SEJ_CartSvc;
 import kr.co.sunnyside.store.service.SEJ_CartVO;
+import kr.co.sunnyside.store.service.SEJ_PayVO;
 import kr.co.sunnyside.store.service.SEJ_StroreSvc;
 
 @Controller
@@ -37,7 +38,44 @@ public class SEJ_CartCtrl {
 	
 	// view
 	private final String CART_LIST_VIEW = "cart/cart";
-	private final String AFTER_PAY_LIST_VIEW = "cart/payment";
+	private final String BEFORE_PAY_LIST_VIEW = "cart/payment";
+	private final String AFTER_PAY_LIST_VIEW = "cart/successPay";
+	
+	// 0. 결제내역 저장(추가)
+		@RequestMapping(value ="cart/do_payComplete.do", method = RequestMethod.POST)
+		public String do_payComplete(SEJ_PayVO inVO, HttpSession session){
+			LOG.debug("============================");
+			LOG.debug("=do_save inVo="+inVO);
+			LOG.debug("============================");
+			
+			//로그인 확인
+			SJH_LoginVO userId = (SJH_LoginVO) session.getAttribute("user");
+			LOG.debug("**userId"+userId);
+			if(null !=userId) {
+				inVO.setUserId(userId.getUserId()); //아이디로 입력되게 처리한 것 . 이러면 세션 처리 끝. 
+			}
+				cartService.do_payComplete(inVO);
+				cartService.do_deleteAll();
+		
+			return AFTER_PAY_LIST_VIEW;
+		}
+		
+	// 0. 결제내역 목록
+		@RequestMapping(value ="cart/do_payCompleteList.do",method = RequestMethod.GET)
+		public String do_payCompleteList(SEJ_PayVO inVO,Model model){
+			LOG.debug("1.=====================");
+			LOG.debug("1.= do_retrieve param=" + inVO);
+			LOG.debug("1.=====================");
+			
+			cartService.do_payComplete(inVO);
+			cartService.do_deleteAll();
+			
+			List<SEJ_PayVO> list = (List<SEJ_PayVO>) this.cartService.do_payCompleteList(inVO);
+			model.addAttribute("list", list);
+			
+			return AFTER_PAY_LIST_VIEW;
+		}
+	
 	
 	// 1. 장바구니 저장(추가)
 	@RequestMapping(value ="cart/do_save.do", method = RequestMethod.POST)
@@ -127,6 +165,6 @@ public class SEJ_CartCtrl {
 			model.addAttribute("list", list);
 			model.addAttribute("totalCost", totalCost);
 
-			return AFTER_PAY_LIST_VIEW;
+			return BEFORE_PAY_LIST_VIEW;
 		}
 }

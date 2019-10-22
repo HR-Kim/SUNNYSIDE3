@@ -19,6 +19,26 @@ public class SEJ_CartSvcImple implements SEJ_CartSvc {
 	@Autowired
 	private SEJ_CartDaoImpl cartDaoImpl;
 
+	
+	/**결제내역 추가 */
+	@Override
+	public int do_payComplete(DTO dto) {
+		LOG.debug("==================");
+		LOG.debug("=@Service do_payComplete="+dto);
+		LOG.debug("==================");
+		
+		return cartDaoImpl.do_payComplete(dto);
+	}
+	
+	/**결제내역 목록 */
+	@Override
+	public List<?> do_payCompleteList(DTO dto) {
+		LOG.debug("==================");
+		LOG.debug("=@Service do_payCompleteList="+dto);
+		LOG.debug("==================");
+		return cartDaoImpl.do_payCompleteList(dto);
+	}
+	
 	/**장바구니 저장 */
 	@Override
 	public int do_save(DTO dto) {

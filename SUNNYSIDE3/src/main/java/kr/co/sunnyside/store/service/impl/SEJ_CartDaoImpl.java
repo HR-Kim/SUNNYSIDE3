@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import kr.co.sunnyside.cmn.DTO;
 import kr.co.sunnyside.cmn.WorkDiv;
 import kr.co.sunnyside.store.service.SEJ_CartVO;
+import kr.co.sunnyside.store.service.SEJ_PayVO;
 
 @Repository
 public class SEJ_CartDaoImpl implements WorkDiv{
@@ -22,6 +23,44 @@ public class SEJ_CartDaoImpl implements WorkDiv{
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	private final String NAMESPACE = "kr.co.sunnyside.cart"; 
+	
+	/**결제내역 추가*/
+	public int do_payComplete(DTO dto) {
+		String statement = NAMESPACE+".do_payComplete";
+		SEJ_PayVO store = (SEJ_PayVO) dto;
+		LOG.debug("===================================");
+		LOG.debug("=1. param="+store);
+		LOG.debug("===================================");
+		LOG.debug("===================================");
+		LOG.debug("=2. statement="+statement);
+		LOG.debug("===================================");
+		int flag = this.sqlSessionTemplate.insert(statement,store);
+		LOG.debug("===================================");
+		LOG.debug("=3. flag="+flag);
+		LOG.debug("===================================");
+		
+		return flag;
+	}
+	
+	/**결제내역 목록*/
+	public List<?> do_payCompleteList(DTO dto) {
+		String statement = NAMESPACE+".do_payCompleteList";
+		SEJ_PayVO store = (SEJ_PayVO) dto;
+		LOG.debug("===================================");
+		LOG.debug("=1. param="+store);
+		LOG.debug("===================================");
+		LOG.debug("===================================");
+		LOG.debug("=2. statement="+statement);
+		LOG.debug("===================================");
+		
+		List<SEJ_PayVO> list= this.sqlSessionTemplate.selectList(statement,store);
+		LOG.debug("===================================");
+		LOG.debug("=3. flag="+list);
+		LOG.debug("===================================");
+		
+		return list;
+	}
+	
 	
 	/**장바구니 추가*/
 	@Override

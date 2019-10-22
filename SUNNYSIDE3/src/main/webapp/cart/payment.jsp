@@ -111,7 +111,6 @@
 		    buyer_email : email,
 		    buyer_name : userName,
 		    buyer_tel : cellphone
-		    //m_redirect_url : 'https://www.yourdomain.com/payments/complete'
 		}, function(rsp) {
 		    if ( rsp.success ) {
 		    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
@@ -131,7 +130,6 @@
                         msg += '\n상점 거래ID : ' + rsp.merchant_uid;
                         msg += '\결제 금액 : ' + rsp.paid_amount;
                         msg += '카드 승인번호 : ' + rsp.apply_num;
-                        
                         alert(msg);
                     } else {
                         //[3] 아직 제대로 결제가 되지 않았습니다.
@@ -139,7 +137,7 @@
                     }
 				});
                 //성공시 이동할 페이지
-                location.href='${context}/order/paySuccess?msg='+msg;
+                location.href='${context}/cart/do_payCompleteList.do?userId='+userId;
 			 } else {
 		        msg = '결제에 실패하였습니다.  \n';
 		        msg += '에러내용 : ' + rsp.error_msg;
@@ -151,6 +149,10 @@
 			});
 		}
 
+	
+	
+	
+	
 $(document).ready(function(){	
 	// 리스트 페이지로 이동
 	$("#cancleBtn").on("click",function(){
