@@ -71,7 +71,7 @@
 										<div class="shopping-card">
 											<i class="flaticon-bag"></i>
 										</div>
-										<a href="/sunnyside/cart/do_retrieve.do?userId="+${user.userId}>장바구니</a>
+										<a href="/sunnyside/cart/do_retrieve.do?userId=<c:out value="${user.userId}"/> ">장바구니</a>
 									</div>
 								</c:when>
 								<c:otherwise>
