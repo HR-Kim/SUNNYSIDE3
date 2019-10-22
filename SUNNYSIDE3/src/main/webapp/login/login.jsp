@@ -49,7 +49,7 @@
 				    </div>
 				    
 					<span class="text-center login100-form-title p-b-32">
-						<spring:message code="message.login.login"/>
+						LOGIN
 					</span>
 
 					<span class="txt1 p-b-11">
@@ -76,23 +76,20 @@
 				<div class="flex-sb-m w-full p-b-48">
 					<div>
 						<label class="txt2" for="ckb1">
-				           <input  class="txt2 hov1" type="checkbox" id="ckb1" name="ckb1"> 아이디 저장
+				           <input  class="txt2 hov1" type="checkbox" id="ckb1" name="ckb1"> &nbsp <spring:message code="message.login.id_save"/>
 				        </label>
 					</div>	
 					<div>
 						<a href="#" class="txt2 hov1" id="id_find">
-							ID
+							<spring:message code="message.login.id_find"/>
 						</a>
 						<a>/</a>
 						<a href="#" class="txt2 hov1" id="pw_find">
-							Password
+							<spring:message code="message.login.pw_find"/>
 						</a>
-						<span class="txt2">
-							찾기
-						</span>
 						<br/>
 						<a href="#" class=" txt2 hov1 text-left" id="join">
-							회원가입
+							<spring:message code="message.login.join"/>
 						</a>
 					</div>
 				</div>
@@ -101,7 +98,7 @@
 				<div class="container-login100-form-btn">
 					&nbsp &nbsp &nbsp &nbsp &nbsp
 					<button class="login100-form-btn" id="signIn">
-						로그인
+						LOGIN
 					</button>
 					&nbsp &nbsp
 					<input type="hidden" id="naverUrl" name="naverUrl" value="${url}" >

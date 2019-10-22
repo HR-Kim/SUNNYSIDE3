@@ -45,15 +45,15 @@
 					<input type="hidden" id="isCheck" value="N"/> 
 					
 					<span class="text-center login100-form-title p-b-32">
-						회원가입
+						<spring:message code="message.login.join"/>
 					</span>
 					
 					<span class="txt1 p-b-11">
-						아이디
+						<spring:message code="message.login.user_id"/>
 						&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 
 						&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 
 						&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-						<button type="button" class="btn btn-default btn-sm" id="idCheck">중복체크</button>
+						<button type="button" class="btn btn-default btn-sm" id="idCheck"><spring:message code="message.login.duplicate_check"/></button>
 					</span>
 					<div class="wrap-input100 validate-input m-b-20">
 						<input class="input100" maxlength="20" type="text" id="userId" name="userId" placeholder="아이디 (3~20자)">
@@ -61,7 +61,7 @@
 					</div>
 					
 					<span class="txt1 p-b-11">
-						비밀번호
+						<spring:message code="message.login.passwd"/>
 					</span>
 					<div class="wrap-input100 validate-input m-b-20">
 						<input class="input100" maxlength="20" type="password" id="passwd" name="passwd" placeholder="비밀번호 (8~20자)" >
@@ -69,7 +69,7 @@
 					</div>
 					
 					<span class="txt1 p-b-11">
-						비밀번호 확인
+						<spring:message code="message.login.passwd_confirm"/>
 					</span>
 					<div class="wrap-input100 validate-input m-b-20">
 						<input class="input100" maxlength="20" type="password" id="passwdCnfrm" name="passwdCnfrm" placeholder="비밀번호 확인"  >
@@ -77,7 +77,7 @@
 					</div>
 					
 					<span class="txt1 p-b-11">
-						이름
+						<spring:message code="message.login.user_name"/>
 					</span>
 					<div class="wrap-input100 validate-input m-b-20">
 						<input class="input100" maxlength="15" type="text" id="userName" name="userName" placeholder="이름" >
@@ -85,7 +85,7 @@
 					</div>
 
 					<span class="txt1 p-b-11">
-						생년월일
+						<spring:message code="message.login.birth"/>
 					</span>
 					<div class="wrap-input100 validate-input m-b-20">
 						<input class="input100"  maxlength="8" type="text" id="birth" name="birth" placeholder="생년월일 8자리 (ex.19990101)" >
@@ -93,7 +93,7 @@
 					</div>
 					
 					<span class="txt1 p-b-11">
-						휴대폰번호
+						<spring:message code="message.login.cellphone"/>
 					</span>
 					<div class="wrap-input100 validate-input m-b-20">
 						<input class="input100" maxlength="11" type="text" id="cellphone" name="cellphone" placeholder="휴대폰번호 11자리(숫자만) (ex.01012345678)" >
@@ -101,7 +101,7 @@
 					</div>
 					
 					<span class="txt1 p-b-11">
-						이메일주소
+						<spring:message code="message.login.email"/>
 					</span>
 					<div class="wrap-input100 validate-input m-b-20">
 						<input class="input100" maxlength: 30 type="text" id="email" name="email" placeholder="이메일" >
@@ -115,11 +115,11 @@
 				<div class="container-login100-form-btn">
 					&nbsp &nbsp &nbsp &nbsp &nbsp
 					<button class="login100-form-btn" id="join">
-						가입
+						<spring:message code="message.common.confirm"/>
 					</button>
 					&nbsp &nbsp 
 					<button class="login100-form-btn" id="undo">
-						취소
+						<spring:message code="message.common.undo"/>
 					</button>
 				</div>
 				

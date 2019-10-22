@@ -33,9 +33,6 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
-	
-	
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-83 p-r-67 p-t-55 p-b-55">
@@ -43,7 +40,20 @@
 				<br/>
 				<br/>
 				<br/>
-					<h1>회원님의 아이디는   &nbsp <c:out value="${vo.userId }" /> &nbsp  입니다.</h1>
+				
+				<c:choose>
+					<c:when test="${not empty vo.userId}">
+						<center>
+							<spring:message code="message.msg.id_find"/>${vo.userId}
+						</center>					
+ 					</c:when>
+					<c:otherwise>
+						<center>
+							<spring:message code="message.msg.id_not_found"/> 
+						</center>
+					</c:otherwise>
+				</c:choose> 
+
 				<br/>
 				<br/>
 				<br/>

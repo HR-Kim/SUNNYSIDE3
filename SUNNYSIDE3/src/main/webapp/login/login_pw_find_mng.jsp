@@ -9,12 +9,11 @@
 	<title>비밀번호 찾기</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="${context}/resources/image/login/favicon.ico"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/bootstrap.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/icon-font.min.css">
 <!--===============================================================================================-->
@@ -42,25 +41,25 @@
 				<form class="login100-form validate-form flex-sb flex-w" id="pwFindForm" name="pwFindForm" method="post">
 					
 					<span class="text-center login100-form-title p-b-32">
-						비밀번호 찾기
+						<spring:message code="message.login.pw_find"/>
 					</span>
 					
 					<span class="txt1 p-b-11">
-						아이디
+						<spring:message code="message.login.user_id"/>
 					</span>
 					<div class="wrap-input100 validate-input m-b-15">
 						<input class="input100" type="text" id="userId" name="userId" >
 						<span class="focus-input100"></span>
 					</div>
 					<span class="txt1 p-b-11">
-						이름
+						<spring:message code="message.login.user_name"/>
 					</span>
 					<div class="wrap-input100 validate-input m-b-15">
 						<input class="input100" type="text" id="userName" name="userName" >
 						<span class="focus-input100"></span>
 					</div>
 					<span class="txt1 p-b-11">
-						이메일
+						<spring:message code="message.login.email"/>
 					</span>
 					<div class="wrap-input100 validate-input m-b-15">
 						<input class="input100" type="text" id="email" name="email" >
@@ -72,13 +71,13 @@
 				
 				<!-- 버튼 -->
 				<div class="container-login100-form-btn">
-					&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+					&nbsp &nbsp &nbsp &nbsp &nbsp
 					<button class="login100-form-btn" id="confirm">
-						확인
+						<spring:message code="message.common.confirm"/>
 					</button>
 					&nbsp &nbsp  &nbsp
 					<button class="login100-form-btn" id="undo">
-						취소
+						<spring:message code="message.common.undo"/>
 					</button>
 				</div>
 			
@@ -113,9 +112,7 @@
 		
 		/** 비밀번호 찾기 확인 버튼 */
 		$("#confirm").on("click",function(){
-			//console.log($("#userName").val());
-			//console.log($("#email").val());
-			if($("#pwFindForm").valid()==false)return;
+			//if($("#pwFindForm").valid()==false)return;
 			
 	    	var frm = document.pwFindForm;
 			frm.action = "${context}/login/pw_find.do"

@@ -3,37 +3,45 @@ message.common.confirm=확인
 message.common.undo=취소	
 				
 				
-#message				
+#message
+message.msg.id_find=아이디 : 
 message.msg.pw_find=임시 비밀번호가 회원님의 이메일로 전송 되었습니다.
+message.msg.id_not_found=아이디가 존재하지 않습니다.
+
 				
 				
 #login				
 message.login.login=로그인	
-message.login.join=회원가입	
+message.login.join=회원가입
+message.login.add_info=추가정보 입력 (필수)	
 message.login.id_save=아이디 저장	
 message.login.user_id=회원ID	
-message.login.passwd=비번	
+message.login.passwd=비밀번호
+message.login.passwd_confirm=비밀번호 확인
 message.login.user_name=이름	
 message.login.email=이메일	
 message.login.user_level=등급	
 message.login.point=포인트	
-message.login.cellphone=핸드폰번호	
+message.login.cellphone=휴대폰번호	
 message.login.birth=생년월일	
-message.login.reg_dt=등록일	
-message.login.id_find=아이디찾기	
+message.login.reg_dt=등록일
+message.login.id_save=아이디저장	
+message.login.id_find=아이디 찾기	
 message.login.pw_find=비밀번호 찾기
+message.login.duplicate_check=중복체크
 message.login.id_validation=ID를 입력해주세요.	
 message.login.pw_validation=비밀번호를 입력해주세요.	
 
 				
 				
-#usermypage				
+#usermypage	
 message.usermypage.my_cinema=마이시네마	
 message.usermypage.level=회원등급	
 message.usermypage.purchase_history=총 구매내역	
 message.usermypage.my_coupon=나의 쿠폰함	
 message.usermypage.movie_history=무비 히스토리	
-message.usermypage.QNA=나의 문의내역	
+message.usermypage.QNA=나의 문의내역
+message.usermypage.modi_info=님 회원정보수정		
 message.usermypage.info_change=회원정보변경	
 message.usermypage.withdrawal=회원탈퇴	
 				
