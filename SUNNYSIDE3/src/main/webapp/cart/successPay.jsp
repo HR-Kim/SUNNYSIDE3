@@ -15,39 +15,40 @@
 <title>결제완료</title>
 </head>
 <hr>
-<h2 style="margin-top: 100px; margin-bottom: 80px; font-weight: bold; text-align: center;">결제가 <h style="color: red;">완료</h>되었습니다.</h2>
+<h2 style="margin-top: 100px; margin-bottom: 90px; font-weight: bold; text-align: center;">결제가 <h style="color: red;">완료</h>되었습니다.</h2>
 <hr>
 <div class="container">
     <div class="row">
-        <div class="col-sm-8 col-md-10 col-md-offset-1">
+        <div class="col-sm-8 col-md-6 col-md-offset-1" style="margin-left: 300px;">
         <h4>결제 내역</h4>
             <table class="table table-bordered">
             	<c:choose>
 	                 <c:when test="${list.size() >0 }">
-		                 <c:otherwise>
+		            
 		                  	<c:forEach items="${list }" var="vo">
 					            <tr>
-					            	<td>결제번호</td>
+					            	<td align="center">결제번호</td>
 					           		<td><c:out value="${vo.payCode}"/></td>
 					           	</tr>
 					           	<tr>
-					            	<td>상품명</td>
+					            	<td align="center">상품이름</td>
 					           		<td><c:out value="${vo.productNm}"/></td>
 					           	</tr>
 					           	<tr>
-					            	<td>결제금액</td>
-					           		<td><c:out value="${vo.payCost}"/></td>
+					            	<td align="center">결제금액</td>
+					           		<td><fmt:formatNumber value="${vo.payCost}" pattern="#,###,###"/>원</td>
 					           	</tr>
 					           	<tr>
-					            	<td>결제일</td>
+					            	<td align="center">결제일</td>
 					           		<td><c:out value="${vo.payDt}"/></td>
 					           	</tr>
 				       		</c:forEach>
-				        </c:otherwise>
-			       	</c:when>
+				    </c:when>
+				    <c:otherwise>
+				    </c:otherwise>			       
 	           	</c:choose>
            </table>
-             <button type="button" class="btn btn-default" id="goHomeBtn" name="goHomeBtn" style="margin-left: 400px;">
+             <button type="button" class="btn btn-default" id="goHomeBtn" name="goHomeBtn" style="margin-left: 180px; margin-bottom: 50px;">
 				<span class="glyphicon glyphicon-home"></span> 메인으로 돌아가기
 			 </button>
         </div>

@@ -44,8 +44,9 @@
 					                            </div>
 					                        </div>
 				                        </td>
-				                        <td class="col-sm-4 col-md-2"><c:out value="${vo.count }"/>개</td>
+				                        <td class="col-sm-4 col-md-2" ><c:out value="${vo.count }"/>개</td>
 				                        <td style="display: none;" id="cartId"><strong>${vo.cartId }</strong></td>
+				                        <td style="display: none;" id="count"><strong>${vo.count }</strong></td>
 				                        <td style="display: none;" id="userName"><strong>${user.userName }</strong></td>
 				                        <td style="display: none;" id="email"><strong>${user.email }</strong></td>
 				                        <td style="display: none;" id="cellphone"><strong>${user.cellphone }</strong></td>
@@ -137,7 +138,8 @@
                     }
 				});
                 //성공시 이동할 페이지
-                location.href='${context}/cart/do_payCompleteList.do?userId='+userId;
+                goPayList();
+                
 			 } else {
 		        msg = '결제에 실패하였습니다.  \n';
 		        msg += '에러내용 : ' + rsp.error_msg;
@@ -149,6 +151,45 @@
 			});
 		}
 
+	function goPayList(){
+		 console.log("productId="+$("#productId").text());
+		 console.log("userId="+$("#userId").text());
+		 console.log("count="+$("#count").text());
+		 console.log("payCost="+$("#tatalCost").val());
+		 console.log("cartId="+$("#cartId").text());
+		 
+			//ajax
+		    $.ajax({
+		        type:"POST",
+		        url:"${context}/cart/do_payComplete.do",
+		        dataType:"html",
+		           data:{                               
+		        		   "productId":$("#productId").text(), 
+		        		   "userId":$("#userId").text(),       
+		        		   "count":$("#count").text(),                              
+		        		   "payCost":$("#tatalCost").val(),                              
+		        		   "cartId":$("#cartId").text()
+		          },   
+		      success: function(data){ 
+				  if(null != data && data.msgId=="1"){
+					  alert("결제되었습니다.");
+					  var userId = $("#userId").text();
+					  location.href="${context}/cart/do_payCompleteList.do?userId="+userId;
+					
+				  }else{
+					alert("결제되었습니다.");	
+					  var userId = $("#userId").text();
+					  location.href="${context}/cart/do_payCompleteList.do?userId="+userId;
+				  }
+		     },
+		     complete:function(data){
+		  	   
+		     },
+		     error:function(xhr,status,error){
+		         alert("error:"+error);
+		     }
+		    }); //--ajax  
+	}
 	
 	
 	

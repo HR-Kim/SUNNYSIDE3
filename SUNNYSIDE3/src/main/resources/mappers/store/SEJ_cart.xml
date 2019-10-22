@@ -23,7 +23,7 @@
 			    product_id,	
 			    pay_code,
 			    pay_cost,
-    			pay_dt,   
+    			pay_dt   
 			) VALUES (
 			    #{cartId,jdbcType=VARCHAR},
 			    #{userId,jdbcType=VARCHAR},
@@ -31,7 +31,7 @@
 			    #{productId,jdbcType=VARCHAR},
 			    TO_CHAR(SYSDATE,'yyyymmdd')||'-'||to_char(STORE_PAY_SEQ.NEXTVAL, 'FM000'),
 			    #{payCost,jdbcType=NUMERIC},
-			    SYSDATE,
+			    SYSDATE
 			)		
 	</insert>
 

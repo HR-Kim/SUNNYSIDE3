@@ -17,11 +17,13 @@ public class SEJ_PayVO extends DTO {
 	private String cartId      ;  
 	/**상품명*/
 	private String productNm   ;  
+	/**상품ID*/
+	private String productId   ;  
 	
 	public SEJ_PayVO() {}
 
 	public SEJ_PayVO(String payCode, String userId, String payCost, int count, String payDt, String cartId,
-			String productNm) {
+			String productNm, String productId) {
 		super();
 		this.payCode = payCode;
 		this.userId = userId;
@@ -30,13 +32,7 @@ public class SEJ_PayVO extends DTO {
 		this.payDt = payDt;
 		this.cartId = cartId;
 		this.productNm = productNm;
-	}
-
-	@Override
-	public String toString() {
-		return "SEJ_PayVO [payCode=" + payCode + ", userId=" + userId + ", payCost=" + payCost + ", count="
-				+ count + ", payDt=" + payDt + ", cartId=" + cartId + ", productNm=" + productNm + ", toString()="
-				+ super.toString() + "]";
+		this.productId = productId;
 	}
 
 	public String getPayCode() {
@@ -55,11 +51,11 @@ public class SEJ_PayVO extends DTO {
 		this.userId = userId;
 	}
 
-	public String getpayCost() {
+	public String getPayCost() {
 		return payCost;
 	}
 
-	public void setpayCost(String payCost) {
+	public void setPayCost(String payCost) {
 		this.payCost = payCost;
 	}
 
@@ -94,5 +90,22 @@ public class SEJ_PayVO extends DTO {
 	public void setProductNm(String productNm) {
 		this.productNm = productNm;
 	}
+
+	public String getProductId() {
+		return productId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+
+	@Override
+	public String toString() {
+		return "SEJ_PayVO [payCode=" + payCode + ", userId=" + userId + ", payCost=" + payCost + ", count=" + count
+				+ ", payDt=" + payDt + ", cartId=" + cartId + ", productNm=" + productNm + ", productId=" + productId
+				+ ", toString()=" + super.toString() + "]";
+	}
+
+	
 
 }

@@ -45,15 +45,9 @@ public class SEJ_CartCtrl {
 		@RequestMapping(value ="cart/do_payComplete.do", method = RequestMethod.POST)
 		public String do_payComplete(SEJ_PayVO inVO, HttpSession session){
 			LOG.debug("============================");
-			LOG.debug("=do_save inVo="+inVO);
+			LOG.debug("=do_payComplete inVo="+inVO);
 			LOG.debug("============================");
 			
-			//로그인 확인
-			SJH_LoginVO userId = (SJH_LoginVO) session.getAttribute("user");
-			LOG.debug("**userId"+userId);
-			if(null !=userId) {
-				inVO.setUserId(userId.getUserId()); //아이디로 입력되게 처리한 것 . 이러면 세션 처리 끝. 
-			}
 				cartService.do_payComplete(inVO);
 				cartService.do_deleteAll();
 		
@@ -64,11 +58,8 @@ public class SEJ_CartCtrl {
 		@RequestMapping(value ="cart/do_payCompleteList.do",method = RequestMethod.GET)
 		public String do_payCompleteList(SEJ_PayVO inVO,Model model){
 			LOG.debug("1.=====================");
-			LOG.debug("1.= do_retrieve param=" + inVO);
+			LOG.debug("1.= do_payCompleteList param=" + inVO);
 			LOG.debug("1.=====================");
-			
-			cartService.do_payComplete(inVO);
-			cartService.do_deleteAll();
 			
 			List<SEJ_PayVO> list = (List<SEJ_PayVO>) this.cartService.do_payCompleteList(inVO);
 			model.addAttribute("list", list);
