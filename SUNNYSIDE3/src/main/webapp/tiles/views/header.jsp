@@ -120,6 +120,21 @@
 						
 					</c:choose>
 					
+					<!-- 관리자로 로그인한 상태면 지점, 상영관 EDIT 출력 -->
+					<c:choose>
+  						<c:when test="${not empty user.userId && user.userId == 'admin'}">
+  						<li>
+							<a href="#">극장관리</a>
+							<ul class="sub-menu">
+								<li><a href="/sunnyside/branchInfo/do_retrieve.do">극장편성</a></li>
+								<li><a href="/sunnyside/screenInfo/do_goingPage.do">영화편성</a></li>							</ul>
+						</li>				
+						</c:when>
+						
+						<c:otherwise>
+						</c:otherwise>			
+					</c:choose>
+					
 				</ul>
 			</div>
 		</nav>

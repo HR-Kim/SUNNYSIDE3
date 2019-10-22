@@ -37,7 +37,7 @@ public class LGS_ScreenInfoCtrl {
 	LHJ_ScreeningSvcImpl screeningSvc;	
 	
 	//view
-	private final String VIEW_ = "?";
+	private final String VIEW_SCREEN_SETTING = "table/screen_table";
 	
 	@ResponseBody
 	@RequestMapping(value = "screenInfo/do_save.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
@@ -178,7 +178,7 @@ public class LGS_ScreenInfoCtrl {
 		LOG.debug("outVO : " + outVO);
 		LOG.debug("==================================");
 		
-		return VIEW_;
+		return "";
 	}
 	
 	@ResponseBody
@@ -292,4 +292,8 @@ public class LGS_ScreenInfoCtrl {
 		return gsonStr;
 	}
 
+	@RequestMapping(value = "screenInfo/do_goingPage.do")
+	public String do_goingPage() {
+		return VIEW_SCREEN_SETTING;
+	}
 }
