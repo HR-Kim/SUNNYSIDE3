@@ -110,7 +110,7 @@
   					<!-- 로그인한 상태면 로그아웃 출력 -->
 					<c:choose>
   						<c:when test="${not empty user.userId}">
-							<li><a href="/sunnyside/login/logout.do">로그아웃</a></li>
+							<li><a href="/sunnyside/main/main.do">로그아웃</a></li>
 						</c:when>
 						
 						<c:otherwise>
