@@ -47,7 +47,7 @@
 							    flag      
 							) VALUES (          
 							    #{userId,jdbcType=VARCHAR},              
-							    NVL(#{passwd,jdbcType=VARCHAR},'0000'),              
+							    NVL(#{passwd,jdbcType=VARCHAR},'00000000'),              
 							    #{userName,jdbcType=VARCHAR},
 							    #{email,jdbcType=VARCHAR},              
 							    NVL(#{userLevel,jdbcType=VARCHAR},'BASIC'),             

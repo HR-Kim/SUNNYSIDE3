@@ -111,6 +111,7 @@
 					<c:choose>
   						<c:when test="${not empty user.userId}">
 							<li><a href="/sunnyside/login/logout.do">로그아웃</a></li>
+							<li><a href="/sunnyside/usermypage/tmp_update_view.do">(임시)회원정보수정</a></li>
 						</c:when>
 						
 						<c:otherwise>
