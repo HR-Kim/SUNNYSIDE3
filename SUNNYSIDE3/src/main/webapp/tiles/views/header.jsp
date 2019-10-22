@@ -130,7 +130,7 @@
 								<li><a href="/sunnyside/screenInfo/do_goingPage.do">영화편성</a></li>							</ul>
 						</li>				
 						</c:when>
-						
+
 						<c:otherwise>
 						</c:otherwise>			
 					</c:choose>

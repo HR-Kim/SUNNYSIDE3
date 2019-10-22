@@ -32,7 +32,7 @@ public class LGS_BranchInfoCtrl {
 	
 	//view
 	private final String VIEW_TABLE ="table/theater_table";
-	
+
 	@ResponseBody
 	@RequestMapping(value = "branchInfo/do_save.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
 	public String do_save(LGS_BranchInfoVO branchInfo) {
