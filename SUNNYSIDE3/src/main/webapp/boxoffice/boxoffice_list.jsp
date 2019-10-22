@@ -37,9 +37,9 @@
 	<div class="page-header">
 		<h1>박스오피스</h1>
 		<form class="form-inline" name="movieSaveFrm" id="movieSaveFrm" method="get">
-			<input type="text" class="form-control" id="startNum" name="startNum">
-			<input type="text" class="form-control" id="lastNum" name="lastNum">
-			<button type="button" class="btn btn-default btn-sm" id="doMovieSave">등록</button>
+<!-- 			<input type="text" class="form-control" id="startNum" name="startNum"> -->
+<!-- 			<input type="text" class="form-control" id="lastNum" name="lastNum"> -->
+<!-- 			<button type="button" class="btn btn-default btn-sm" id="doMovieSave">등록</button> -->
 		</form> 
 	</div>
 	<!--// div title -->

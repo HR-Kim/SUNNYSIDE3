@@ -43,23 +43,21 @@
 							<img src="../../sunnyside/resources/img/divisima/logo.png" alt="">
 						</a>
 					</div>
-					<div class="col-xl-6 col-lg-5">
-						<form class="header-search-form">
-							<input type="text" placeholder="Search on divisima ....">
-							<button><i class="flaticon-search"></i></button>
-						</form>
+					<div class="col-xl-5 col-lg-4">
+						
 					</div>
 					<div class="col-xl-4 col-lg-5">
 						<div class="user-panel">
    							<!-- 로그인 하면 아이디 보임 -->
 							<c:choose>
 								<c:when test="${not empty user.userId}">
-									${user.userName} 님 환영합니다.
+									<!-- 님 환영합니다. -->
+									${user.userName} <spring:message code="message.header.welcome"/>
 								</c:when>
 								<c:otherwise>
 									<div class="up-item">
-										<i class="flaticon-profile"></i>
-										<a href="../../sunnyside/login/login.jsp">Sign</a> In or <a href="#">Create Account</a>
+<!-- 										<i class="flaticon-profile"></i> -->
+<!-- 										<a href="../../sunnyside/login/login.jsp">Sign</a> In or <a href="#">Create Account</a> -->
 									</div>
 								</c:otherwise>
 							</c:choose>
@@ -71,7 +69,8 @@
 										<div class="shopping-card">
 											<i class="flaticon-bag"></i>
 										</div>
-										<a href="/sunnyside/cart/do_retrieve.do?userId=<c:out value="${user.userId}"/>">장바구니</a>
+										<!-- 장바구니 -->
+										<a href="/sunnyside/cart/do_retrieve.do?userId=<c:out value="${user.userId}"/>"><spring:message code="message.header.cart"/></a>
 									</div>
 								</c:when>
 								<c:otherwise>
@@ -81,6 +80,12 @@
 							
 						</div>
 					</div>
+					<div class="col-xl-1 col-lg-1">
+						<select name="lang" id="lang">
+					        <option value="ko" <c:if test="${lang == 'ko'}">selected</c:if> >한글</option>
+							<option value="en" <c:if test="${lang == 'en'}">selected</c:if> >English</option>
+					     </select>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -88,34 +93,46 @@
 			<div class="container">
 				<!-- menu -->
 				<ul class="main-menu">
-					<li><a href="/sunnyside/main/main.do">홈</a><li>
-						<a href="/sunnyside/boxoffice/do_retrieve.do">영화</a>
+						<!-- 홈 -->
+					<li><a href="/sunnyside/main/main.do"><spring:message code="message.header.home"/></a><li>
+						<!-- 영화 -->
+						<a href="/sunnyside/boxoffice/do_retrieve.do"><spring:message code="message.header.movie"/></a>
 						<ul class="sub-menu">
-							<li><a href="/sunnyside/boxoffice/do_retrieve.do">박스오피스</a></li>
-							<li><a href="/sunnyside/screening/do_retrieve.do">상영중</a></li>
-							<li><a href="/sunnyside/planed/do_retrieve.do">개봉예정</a></li>
+							<!-- 박스오피스 -->
+							<li><a href="/sunnyside/boxoffice/do_retrieve.do"><spring:message code="message.header.boxoffice"/></a></li>
+							<!-- 상영중 -->
+							<li><a href="/sunnyside/screening/do_retrieve.do"><spring:message code="message.header.screening"/></a></li>
+							<!-- 개봉예정 -->
+							<li><a href="/sunnyside/planed/do_retrieve.do"><spring:message code="message.header.planed"/></a></li>
 						</ul>
 					</li>					
 					<li>
-						<a href="/sunnyside/store/do_main.do">스토어</a>
+						<!-- 스토어 -->
+						<a href="/sunnyside/store/do_main.do"><spring:message code="message.header.store"/></a>
 						<ul class="sub-menu">
-							<li><a href="/sunnyside/store/do_retrieve_popcorn.do">팝콘</a></li>
-							<li><a href="/sunnyside/store/do_retrieve_drink.do">음료</a></li>
-							<li><a href="/sunnyside/store/do_retrieve_movieticket.do">영화예매권</a></li>
+							<!-- 팝콘 -->
+							<li><a href="/sunnyside/store/do_retrieve_popcorn.do"><spring:message code="message.header.popcon"/></a></li>
+							<!-- 음료 -->
+							<li><a href="/sunnyside/store/do_retrieve_drink.do"><spring:message code="message.header.drink"/></a></li>
+							<!-- 영화예매권 -->
+							<li><a href="/sunnyside/store/do_retrieve_movieticket.do"><spring:message code="message.header.ticket"/></a></li>
 						</ul>
 					</li>
 					<li><a href="http://www.seechu.co.kr/index.asp">VOD</a></li>
-					<li><a href="#">고객센터</a></li>
+					<!-- 고객센터 -->
+					<li><a href="#"><spring:message code="message.header.customer"/></a></li>
 					
   					<!-- 로그인한 상태면 로그아웃 출력 -->
 					<c:choose>
   						<c:when test="${not empty user.userId}">
 							<li><a href="/sunnyside/login/logout.do">로그아웃</a></li>
-							<li><a href="/sunnyside/usermypage/tmp_update_view.do">(임시)회원정보수정</a></li>
+							<!-- (임시)회원정보수정 -->
+							<li><a href="/sunnyside/usermypage/tmp_update_view.do"><spring:message code="message.header.userpage"/></a></li>
 						</c:when>
 						
 						<c:otherwise>
-							<li><a href="/sunnyside/login/login_view.do">로그인</a></li>
+							<!-- 로그인 -->
+							<li><a href="/sunnyside/login/login_view.do"><spring:message code="message.header.login"/></a></li>
 						</c:otherwise>
 						
 					</c:choose>
@@ -124,10 +141,13 @@
 					<c:choose>
   						<c:when test="${not empty user.userId && user.userId == 'admin'}">
   						<li>
-							<a href="#">극장관리</a>
+  							<!-- 극장관리 -->
+							<a href="#"><spring:message code="message.header.theatermanagement"/></a>
 							<ul class="sub-menu">
-								<li><a href="/sunnyside/branchInfo/do_retrieve.do">극장편성</a></li>
-								<li><a href="/sunnyside/screenInfo/do_goingPage.do">영화편성</a></li>							</ul>
+								<!-- 극장편성 -->
+								<li><a href="/sunnyside/branchInfo/do_retrieve.do"><spring:message code="message.header.theater"/></a></li>
+								<!-- 영화편성 -->
+								<li><a href="/sunnyside/screenInfo/do_goingPage.do"><spring:message code="message.header.moviemanagement"/></a></li>							</ul>
 						</li>				
 						</c:when>
 
