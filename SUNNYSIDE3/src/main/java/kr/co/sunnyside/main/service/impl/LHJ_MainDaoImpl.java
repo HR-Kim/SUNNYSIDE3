@@ -33,6 +33,25 @@ public class LHJ_MainDaoImpl implements WorkDiv{
 		return 0;
 	}
 
+	/**메인 이미지 삭제*/
+	public int do_image_delete(DTO dto) {
+		String statement = NAMESPACE + ".do_image_delete";
+		LHJ_MainImageVO inVO = (LHJ_MainImageVO) dto;
+		LOG.debug("=============================");
+		LOG.debug("1. param:"+inVO);
+		LOG.debug("=============================");
+		
+		LOG.debug("=============================");
+		LOG.debug("2. statement:"+statement);
+		LOG.debug("=============================");
+		
+		int flag = this.sqlSessionTemplate.delete(statement, inVO);		
+		LOG.debug("=============================");
+		LOG.debug("3. flag:"+flag);
+		LOG.debug("=============================");
+		return flag;
+	}
+	
 	/**메인 이미지 저장*/
 	public int do_image_save(DTO dto) {
 		String statement = NAMESPACE + ".do_image_save";
@@ -64,19 +83,6 @@ public class LHJ_MainDaoImpl implements WorkDiv{
 		return null;
 	}
 
-	public List<?> do_banner_List(DTO dto) {
-		String statement = NAMESPACE + ".do_banner_List";
-		LHJ_MainImageVO inVO = (LHJ_MainImageVO) dto;
-		LOG.debug("=============================");
-		LOG.debug("1. param:"+inVO);
-		LOG.debug("2. statement:"+statement);
-		List<LHJ_MainImageVO> list = this.sqlSessionTemplate.selectList(statement, inVO);		
-		LOG.debug("3. list:"+list);
-		LOG.debug("=============================");
-		
-		return list;
-	}
-	
 	public List<?> do_banner_retrieve() {
 		String statement = NAMESPACE + ".do_banner_retrieve";
 		LOG.debug("=============================");

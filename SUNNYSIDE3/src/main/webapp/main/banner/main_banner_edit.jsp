@@ -53,6 +53,7 @@
 		<div class="row">
 			<div class="col-md-12 text-right">
 				<form class="form-inline" name="frm" id="frm" method="get">
+					<input type="hidden" name="imageId" id="imageId"/>
 					<div class="form-group">
 						<button id="attrFile" type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#layerpop">이미지 등록</button>
 					</div>
@@ -74,7 +75,7 @@
 						<c:when test="${bannerList.size()>0}">
 							<c:forEach var="vo" items="${bannerList}">
 								<tr>
-									<td class="text-center"><c:out value="${vo.imageId}"/></td>
+									<td class="text-center "><c:out value="${vo.imageId}"/></td>
 									<td class="text-center"><c:out value="${vo.orgImgNm}"/></td>
 									<td class="text-center"><input type="button" id="doDelete" name="doDelete" class="btn btn-default btn-sm doDelete" value="삭제" /></td>
 								</tr>
@@ -131,16 +132,55 @@
 	<script src="${context}/resources/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 	
-	    //파일업로드 
+		$('.doDelete').click(function(event) {
+	 		var doDelete = $(this);
+	 		var tr = doDelete.parent().parent();
+	 		var td = tr.children();
+	 		
+	 		var imageId = td.eq(0).text();
+	 		
+	 		console.log("imageId:"+ imageId);	    
+	 				
+			var frm = document.frm;
+			frm.imageId.value=imageId;
+	
+	 		//ajax
+			$.ajax({
+				type:"POST",
+				url:"${context}/main/do_image_delete.do",
+				dataType:"html",
+				data:{
+					"imageId":$("#imageId").val()
+				}, 
+				success: function(data){
+					var jData = JSON.parse(data);
+					if(null != jData && jData.msgId=="1"){
+						alert(jData.msgMsg);
+						location.href="${context}/main/do_banner_retrieve.do";
+					}else{
+						alert(jData.msgId+"|"+jData.msgMsg);
+					}
+	        	},
+				complete:function(data){
+	         
+	       		},
+				error:function(xhr,status,error){
+						alert("error:"+error);
+	        	}
+			}); 
+	       //--ajax
+		});
+	
+	    //파일업로드 버튼 클릭 
 		$("#doFileUpload").on("click",function(e){
 			//console.log("doFileUpload>>");
 			if(confirm("등록 하시겠습니까?")== false)return;
 			e.preventDefault();
 			
-			doUploadFile();
-			
+			doUploadFile();			
 		});
 		
+	    //파일 업로드 함수
 		function doUploadFile(){
 			var form = $('form')[1];
 			var formData = new FormData(form);
@@ -157,7 +197,8 @@
 				   data:formData,
 				success: function(data){	 
 					if(null != data && data.msgId=="1"){' '
-						alert(data.msgMsg);					
+						alert(data.msgMsg);	
+						location.href="${context}/main/do_banner_retrieve.do";
 					}else{
 						alert(data.msgId+"|"+data.msgMsg);
 					}

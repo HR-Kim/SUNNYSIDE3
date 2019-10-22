@@ -49,7 +49,34 @@ public class LHJ_MainCtrl {
 	private final String VIEW_MAIN_NM = "main/main";
 	private final String VIEW_BANNER_LIST = "main/banner/main_banner_edit";
 	
-	/**목록조회 */
+	
+	/**베너이미지 삭제*/
+	@RequestMapping(value="main/do_image_delete.do",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String do_image_delete(LHJ_MainImageVO inVO) {
+		int flag = this.service.do_image_delete(inVO);
+		
+		Message  message=new Message();
+		
+		if(flag>0) {
+			message.setMsgId(String.valueOf(flag));
+			message.setMsgMsg("삭제 되었습니다.");
+		}else {
+			message.setMsgId(String.valueOf(flag));
+			message.setMsgMsg("삭제 실패.");			
+		}
+		
+		Gson gson=new Gson();
+		String gsonStr = gson.toJson(message);
+		
+		LOG.debug("============================");
+		LOG.debug("=gsonStr="+gsonStr);
+		LOG.debug("============================");		
+		
+		return gsonStr;
+	}	
+	
+	/**베너이미지 전체 조회*/
 	@RequestMapping(value="main/do_banner_retrieve.do",method = RequestMethod.GET)
 	public String do_banner_retrieve(LHJ_MovieVO inVO,Model model) {
 		
@@ -58,32 +85,8 @@ public class LHJ_MainCtrl {
 
 		return VIEW_BANNER_LIST;
 	}
-	
-	//ModelAndView : Model + View
-		@RequestMapping(value="main/do_banner_List.do",method = RequestMethod.POST
-				,produces = "application/json;charset=UTF-8")
-		@ResponseBody	
-		public String do_banner_List(LHJ_MainImageVO inVO){
-			LOG.debug("===============================");
-			LOG.debug("=inVO="+inVO);
-			LOG.debug("===============================");
-			
-			List<LHJ_MainImageVO> fileList = (List<LHJ_MainImageVO>) service.do_banner_List(inVO);
-			LOG.debug("===============================");
-			LOG.debug("=fileList="+fileList);
-			LOG.debug("===============================");
-			
-			Gson gson=new Gson();
-			String json = gson.toJson(fileList);
-			LOG.debug("=============================");
-			LOG.debug("=json=="+json);
-			LOG.debug("=============================");		
-			
-			
-			return json;
-		}
-	
-	//ModelAndView : Model + View
+		
+	/**베너이미지 저장*/
 	@RequestMapping(value="main/do_image_save.do",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
 	@ResponseBody	
 	public String do_image_save(MultipartHttpServletRequest mReg) throws IllegalStateException, IOException {
