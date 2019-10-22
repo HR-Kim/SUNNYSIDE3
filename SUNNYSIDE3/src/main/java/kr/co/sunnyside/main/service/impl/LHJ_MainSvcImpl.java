@@ -14,8 +14,18 @@ public class LHJ_MainSvcImpl implements LHJ_MainSvc{
 	private LHJ_MainDaoImpl mainDaoImpl;
 	
 	@Override
+	public List<?> do_banner_List(DTO dto) {
+		return mainDaoImpl.do_banner_List(dto);
+	}
+	
+	@Override
 	public List<?> do_banner_retrieve() {
 		return mainDaoImpl.do_banner_retrieve();
+	}
+
+	@Override
+	public int do_image_save(DTO dto) {
+		return mainDaoImpl.do_image_save(dto);
 	}
 
 }

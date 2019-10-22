@@ -3,15 +3,15 @@ package kr.co.sunnyside.main.service;
 import kr.co.sunnyside.cmn.DTO;
 
 public class LHJ_MainImageVO extends DTO{
-	public String imageId;
-	public String orgImgNm;
-	public String saveImgNm;
-	public String ext;
-	public String imgSize;
+	private String imageId;
+	private String orgImgNm;
+	private String saveImgNm;
+	private String ext;
+	private long imgSize;
 	
 	public LHJ_MainImageVO() {}
 	
-	public LHJ_MainImageVO(String imageId, String orgImgNm, String saveImgNm, String ext, String imgSize) {
+	public LHJ_MainImageVO(String imageId, String orgImgNm, String saveImgNm, String ext, long imgSize) {
 		super();
 		this.imageId = imageId;
 		this.orgImgNm = orgImgNm;
@@ -52,11 +52,11 @@ public class LHJ_MainImageVO extends DTO{
 		this.ext = ext;
 	}
 
-	public String getImgSize() {
+	public long getImgSize() {
 		return imgSize;
 	}
 
-	public void setImgSize(String imgSize) {
+	public void setImgSize(long imgSize) {
 		this.imgSize = imgSize;
 	}
 

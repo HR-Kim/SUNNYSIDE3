@@ -9,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.sunnyside.cmn.DTO;
-import kr.co.sunnyside.cmn.SearchVO;
 import kr.co.sunnyside.cmn.WorkDiv;
 import kr.co.sunnyside.main.service.LHJ_MainImageVO;
-import kr.co.sunnyside.movie.service.LHJ_MovieVO;
 
 @Repository
 public class LHJ_MainDaoImpl implements WorkDiv{
@@ -35,6 +33,25 @@ public class LHJ_MainDaoImpl implements WorkDiv{
 		return 0;
 	}
 
+	/**메인 이미지 저장*/
+	public int do_image_save(DTO dto) {
+		String statement = NAMESPACE + ".do_image_save";
+		LHJ_MainImageVO inVO = (LHJ_MainImageVO) dto;
+		LOG.debug("=============================");
+		LOG.debug("1. param:"+inVO);
+		LOG.debug("=============================");
+		
+		LOG.debug("=============================");
+		LOG.debug("2. statement:"+statement);
+		LOG.debug("=============================");
+		
+		int flag = this.sqlSessionTemplate.insert(statement, inVO);		
+		LOG.debug("=============================");
+		LOG.debug("3. flag:"+flag);
+		LOG.debug("=============================");
+		return flag;
+	}
+	
 	@Override
 	public int do_save(DTO dto) {
 		// TODO Auto-generated method stub
@@ -47,6 +64,19 @@ public class LHJ_MainDaoImpl implements WorkDiv{
 		return null;
 	}
 
+	public List<?> do_banner_List(DTO dto) {
+		String statement = NAMESPACE + ".do_banner_List";
+		LHJ_MainImageVO inVO = (LHJ_MainImageVO) dto;
+		LOG.debug("=============================");
+		LOG.debug("1. param:"+inVO);
+		LOG.debug("2. statement:"+statement);
+		List<LHJ_MainImageVO> list = this.sqlSessionTemplate.selectList(statement, inVO);		
+		LOG.debug("3. list:"+list);
+		LOG.debug("=============================");
+		
+		return list;
+	}
+	
 	public List<?> do_banner_retrieve() {
 		String statement = NAMESPACE + ".do_banner_retrieve";
 		LOG.debug("=============================");
