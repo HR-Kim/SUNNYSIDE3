@@ -13,7 +13,7 @@
 		<meta charset="utf-8">
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>영화관 관리</title>
+		<title>극장 관리</title>
 		<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 		
 		<style type="text/css">
@@ -104,6 +104,8 @@
 	</head>
 	<body>
 		<div class="container">
+		<h3>극장관리</h3>
+		<hr/><br/>
 			<div class="loadingLayer">
 				<p>...작업중입니다...</p>
 			</div>

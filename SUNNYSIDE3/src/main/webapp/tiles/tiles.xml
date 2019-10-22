@@ -83,5 +83,19 @@
       <put-attribute name="title" value="SUNNYSIDE>장바구니" />
       <put-attribute name="menu" value="CART" />
     </definition>
+    
+    <!-- table_movie -->    
+ 	<definition  name="table/screen_table" extends="basede_definition">
+      <put-attribute name="body" value="/table/screen_table.jsp" />
+      <put-attribute name="title" value="SUNNYSIDE>영화편성" />
+      <put-attribute name="menu" value="TABLE_MOVIE" />
+    </definition>
+    
+    <!-- table_theater -->    
+ 	<definition  name="table/theater_table" extends="basede_definition">
+      <put-attribute name="body" value="/table/theater_table.jsp" />
+      <put-attribute name="title" value="SUNNYSIDE>극장편성" />
+      <put-attribute name="menu" value="TABLE_THEATER" />
+    </definition>
 
 </tiles-definitions>

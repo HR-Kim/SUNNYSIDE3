@@ -21,6 +21,9 @@
 		<link href="${context}/resources/css/jquery-ui.css" rel="stylesheet">
 		<link  href="${context}/resources/css/jquery.timepicker.min.css" rel="stylesheet">
 		<style type="text/css">
+			#datePicker, #timePicker, #adultCost, #studentCost{
+				border: 1px solid grey;
+			}
 			.expired {
 				background-color: #FFBFBF;
 			}
@@ -61,8 +64,8 @@
 				position: absolute;
 				top: 0;
 				left: 0;
-				width: 100000px;
-				height: 100000px;
+				width: 100%;
+				height: 706px;
 				background-color: black;
 				opacity: 0.1;
 				z-index: 95;
@@ -74,7 +77,7 @@
 			.layer-MovieTable {
 				position: absolute;
 				width: 700px;
-				height: 620px;
+				height: 650px;
 				display: none;
 				background-color: white;
 				border: 1px solid black;
@@ -95,8 +98,8 @@
 				position: absolute;
 				top: 0;
 				left: 0;
-				width: 100000px;
-				height: 100000px;
+				width: 100%;
+				height: 706px;
 				background-color: black;
 				opacity: 0.1;
 				z-index: 10;
@@ -106,6 +109,7 @@
 	</head>
 	<body>
 		<div class="container">
+		<h3>영화편성</h3>
 			<div class="loadingLayer">
 				<p>...작업중입니다...</p>
 			</div>
@@ -263,7 +267,7 @@
 					<label for="datePicker">시작날짜</label> <input type="text" id="datePicker">
 					<label for="timePicker">시작시간</label> <input type="text" id="timePicker">
 					<br/>&nbsp;&nbsp;&nbsp;&nbsp;
-					<button id="testBtn" class="btn btn-danger">검사</button>
+					<button id="testBtn" class="btn btn-xs btn-danger">검사</button>
 					<br/>&nbsp;&nbsp;&nbsp;&nbsp;
 					<label>종료날짜</label> <input type="text" id="endDate" disabled="disabled">
 					<label>종료시간</label> <input  type="text" id="endTime" disabled="disabled">
@@ -292,7 +296,7 @@
 		
 		<script type="text/javascript">
     		$(document).ready(function(){
-    			//alert("ready");
+    			branchRetrieve();
     		});
     		
     		//로딩
@@ -354,6 +358,10 @@
             $("#datePicker").datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
             
             $("#testBtn").on("click", function(){
+            	test();
+            });
+            
+            function test(){
             	var runningTime = parseInt($("#hd_movieRTime").val());	//러닝타임
             	var startDate = $("#datePicker").val();		//시작날짜
             	var startTime = $("#timePicker").val();		//시작시간
@@ -388,10 +396,14 @@
             	var endTime = endHour + ":" + endMinute;
             	$("#endDate").val(ENDDATE);
             	$("#endTime").val(endTime);
-            });
+            }
             
             //지점조회
             $("#branchRetrive").on("click", function(){
+            	branchRetrieve();
+            });
+            
+            function branchRetrieve(){
             	$.ajax({
     				type : "POST",
     				url : "${context}/branchInfo/do_retrieveList.do",
@@ -418,7 +430,7 @@
         				
         			}
         		});
-            });
+            }
 
             //지점선택시 상영관조회
             $("#branchTable>tbody").on("click","tr", function(){
@@ -948,6 +960,7 @@
             });
 			
 			$("#finalValidateMovie").on("click", function(){
+				test();
 				fianlValidateMovie();
 			});
 			
