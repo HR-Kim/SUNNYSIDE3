@@ -40,7 +40,7 @@ public class SJH_CouponCtrl {
 			throw new IllegalArgumentException("아이디를 입력하세요.");
 		}
 		
-		SJH_MypageVO outVO = (SJH_MypageVO) couponSvc.do_selectOne(inVO);
+		SJH_CouponVO outVO = (SJH_CouponVO) couponSvc.do_selectOne(inVO);
 
 		Gson gson=new Gson();
 		String json = gson.toJson(outVO);

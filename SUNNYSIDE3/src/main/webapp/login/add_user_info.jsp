@@ -43,7 +43,7 @@
 					<input type="hidden" id="isCheck" value="N"/> 
 					
 					<span class="text-center login100-form-title p-b-32">
-						추가정보 입력 (필수)
+						<spring:message code="message.login.add_info"/>
 					</span>
 					
 					<input class="input100" maxlength="20" type="hidden" id="userId" name="userId" value="${user.userId}" >
@@ -52,7 +52,7 @@
 					<input class="input100" maxlength: 30 type="hidden" id="flag" name="flag" value="${user.flag}" >
 
 					<span class="txt1 p-b-11">
-						생년월일
+						<spring:message code="message.login.birth"/>
 					</span>
 					<div class="wrap-input100 validate-input m-b-20">
 						<input class="input100"  maxlength="8" type="text" id="birth" name="birth" placeholder="생년월일 8자리 (ex.19990101)" >
@@ -60,7 +60,7 @@
 					</div>
 					
 					<span class="txt1 p-b-11">
-						휴대폰번호
+						<spring:message code="message.login.cellphone"/>
 					</span>
 					<div class="wrap-input100 validate-input m-b-20">
 						<input class="input100" maxlength="11" type="text" id="cellphone" name="cellphone" placeholder="휴대폰번호 11자리(숫자만) (ex.01012345678)" >
@@ -74,11 +74,11 @@
 				<div class="container-login100-form-btn">
 					&nbsp &nbsp &nbsp &nbsp &nbsp
 					<button class="login100-form-btn" id="join">
-						가입
+						<spring:message code="message.common.confirm"/>
 					</button>
 					&nbsp &nbsp 
 					<button class="login100-form-btn" id="undo">
-						취소
+						<spring:message code="message.common.undo"/>
 					</button>
 				</div>
 				
