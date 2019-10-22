@@ -14,7 +14,7 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/bootstrap.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/icon-font.min.css">
 <!--===============================================================================================-->
@@ -39,14 +39,14 @@
 			<div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
 			
 			
-				<form class="login100-form validate-form flex-sb flex-w" id="withdrawForm" name="withdrawForm" method="post">
+				<form class="login100-form validate-form flex-sb flex-w" id="updateForm" name="updateForm" method="post">
 					
 					<span class="text-center login100-form-title p-b-32">
 						회원정보수정
 					</span>
 					
-<%-- 					<c:choose>
-						<c:when test="${user.flag != '1'}"> --%>
+<%--  					<c:choose>
+						<c:when test="${user.flag == '0'}"> --%>
 							<span class="txt1 p-b-11">
 								아이디
 							</span>
@@ -86,7 +86,7 @@
 								<input class="input100" maxlength="15" type="text" id="userName" name="userName" value="${user.userName}">
 								<span class="focus-input100"></span>
 							</div>
-<%-- 						</c:when>
+<%--  						</c:when>
 						<c:otherwise>
 							<div></div>
 						</c:otherwise>
@@ -145,8 +145,11 @@
 <!--===============================================================================================-->
 	<script src="${context}/resources/js/login/countdowntime.js"></script>
 <!--===============================================================================================-->
-	<script src="${context}/resources/js/login/main.js"></script>
+
+	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 	<script src="${context}/resources/js/login/jquery.validate.js"></script>
+	<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
+	<script src="${context}/resources/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 		
 	
@@ -155,12 +158,13 @@
 			//console.log("join");
 			
 			//비밀번호 validation
-				if( $("#passwd").val() != $("#passwdCnfrm").val() ){
-				alert("비밀번호가 일치하지 않습니다.");
-				return;
+			if( $("#passwd").val() != $("#passwdCnfrm").val() ){
+			alert("비밀번호가 일치하지 않습니다.");
+			return;
 			}
+			
 	
-			//if($("#withdrawForm").valid()==false)return;
+			//if($("#updateForm").valid()==false)return;
 			if(false==confirm("수정 하시겠습니까?"))return;
 	
 			
@@ -195,8 +199,98 @@
 			});
 	     	 
 		});
-	
-	
+		
+		
+		//form validation
+		$("#updateForm").validate({
+				rules: {
+					userId: {
+						required: true,
+						minlength: 3,
+						maxlength: 20
+					},
+					passwd: {
+						required: true,
+						minlength: 8,
+						maxlength: 20
+					},
+					passwdCnfrm: {
+						required: true,
+						minlength: 8,
+						maxlength: 20
+					},
+					userName: {
+						required: true,
+						minlength: 2,
+						maxlength: 15
+					},
+					birth: {
+						required: true,
+						minlength: 8,
+						maxlength: 8
+					},
+					cellphone: {
+						required: true,
+						minlength: 10,
+						maxlength: 11
+					},
+					email: {
+						required: true,
+						minlength: 5,
+						maxlength: 30
+					}
+				},
+				messages: {
+					userId: {
+						required: "ID를 입력 하세요.",
+						minlength: $.validator.format("ID를 {0}자 이상 입력하세요."),
+						maxlength: $.validator.format("ID를 {0}자 내로 입력하세요.")
+					},
+					passwd: {
+						required: "비밀번호를 입력하세요.",
+						minlength: $.validator.format("비밀번호를 {0}자 이상 입력하세요."),
+						maxlength: $.validator.format("비밀번호를 {0}자 내로 입력하세요.")
+					},
+					passwdCnfrm: {
+						required: "비밀번호 확인을 입력하세요.",
+						minlength: $.validator.format("비밀번호 확인을 {0}자 이상 입력하세요."),
+						maxlength: $.validator.format("비밀번호 확인을 {0}자 내로 입력하세요.")
+					},
+					userName: {
+						required: "이름을 입력하세요.",
+						minlength: $.validator.format("이름을 {0}자 이상 입력하세요."),
+						maxlength: $.validator.format("이름을 {0}자 내로 입력하세요.")
+					},
+					birth: {
+						required: "생년월일을 입력하세요.",
+						minlength: $.validator.format("생년월일을 {0}자로 입력하세요. ex)19990101"),
+						maxlength: $.validator.format("생년월일을 {0}자로 입력하세요. ex)19990101")
+					},
+					cellphone: {
+						required: "휴대폰번호를 입력하세요.",
+						minlength: $.validator.format("휴대폰번호를 {0}자 이상 입력하세요. ex)01012345678"),
+						maxlength: $.validator.format("휴대폰번호를 {0}자 내로 입력하세요. ex)01012345678")
+					},
+					email: {
+						required: "이메일을 입력하세요.",
+						minlength: $.validator.format("이메일을 {0}자 이상 입력하세요."),
+						maxlength: $.validator.format("이메일을 {0}자 내로 입력하세요.")
+					}
+					
+				},					
+				errorPlacement : function(error, element) {
+				     //do nothing
+			    },
+			    invalidHandler : function(form, validator) {
+				    var errors = validator.numberOfInvalids();
+				    if (errors) {
+					    alert(validator.errorList[0].message);
+					    validator.errorList[0].element.focus();
+				    }
+				}
+		 });  
+		
+		
 	
 
 		

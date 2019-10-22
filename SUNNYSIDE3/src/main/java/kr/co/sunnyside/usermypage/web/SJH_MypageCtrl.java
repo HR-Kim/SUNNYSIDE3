@@ -32,6 +32,16 @@ public class SJH_MypageCtrl {
 
 	
 	
+	//임시테스트화면
+	@RequestMapping(value="usermypage/tmp_update_view.do", method = RequestMethod.GET)
+	public String tmpUpdateView() {
+		LOG.debug("========================");
+		LOG.debug("=@Controller=View=");
+		LOG.debug("========================");
+		return "usermypage/tmp_update";
+	}
+	
+	
 	//회원정보수정 화면call
 	@RequestMapping(value="usermypage/update_view.do", method = RequestMethod.GET)
 	public String updateView() {
@@ -104,7 +114,6 @@ public class SJH_MypageCtrl {
 	
 	//단건조회
 	@RequestMapping(value="usermypage/do_selectOne.do",method = RequestMethod.POST,produces = "application/json; charset=UTF-8")
-	@ResponseBody
 	public String do_selectOne(SJH_MypageVO inVO,Model model) {
 		LOG.debug("=========================");
 		LOG.debug("=@Controller=user=="+inVO);
@@ -115,14 +124,16 @@ public class SJH_MypageCtrl {
 		}
 		
 		SJH_MypageVO outVO = (SJH_MypageVO) mypageSvc.do_selectOne(inVO);
-
+		model.addAttribute("user", outVO);
+		
+		
 		Gson gson=new Gson();
 		String json = gson.toJson(outVO);
 		LOG.debug("=========================");
 		LOG.debug("=@Controller gson=user=="+json);
 		LOG.debug("=========================");		
 		
-		return json;
+		return VIEW_UPDATE;
 	}
 	
 	
