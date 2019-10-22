@@ -42,11 +42,11 @@
 				<form class="login100-form validate-form flex-sb flex-w" id="withdrawForm" name="withdrawForm" method="post">
 					
 					<span class="text-center login100-form-title p-b-32">
-						회원탈퇴
+						<spring:message code="message.usermypage.withdrawal"/>
 					</span>
 					
 					<span class="txt1 p-b-11">
-						아이디
+						<spring:message code="message.login.user_id"/>
 					</span>
 					<div class="wrap-input100 validate-input m-b-20">
 						<input class="input100" maxlength="20" type="text" id="userId" name="userId" placeholder="아이디 ">
@@ -54,7 +54,7 @@
 					</div>
 					
 					<span class="txt1 p-b-11">
-						비밀번호
+						<spring:message code="message.login.passwd"/>
 					</span>
 					<div class="wrap-input100 validate-input m-b-20">
 						<input class="input100" maxlength="20" type="password" id="passwd" name="passwd" placeholder="비밀번호" >
@@ -62,7 +62,7 @@
 					</div>
 					
 					<span class="txt1 p-b-11">
-						비밀번호 확인
+						<spring:message code="message.login.passwd_confirm"/>
 					</span>
 					<div class="wrap-input100 validate-input m-b-20">
 						<input class="input100" maxlength="20" type="password" id="passwdCnfrm" name="passwdCnfrm" placeholder="비밀번호 확인"  >
@@ -76,11 +76,11 @@
 				<div class="container-login100-form-btn">
 					&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
 					<button class="login100-form-btn" id="confirm">
-						확인
+						<spring:message code="message.common.confirm"/>
 					</button>
 					&nbsp &nbsp  &nbsp
 					<button class="login100-form-btn" id="undo">
-						취소
+						<spring:message code="message.common.undo"/>
 					</button>
 				</div>
 			

@@ -42,8 +42,7 @@
 				<br/>
 				<br/>
 					<center>
-						<h1>회원님의 메일로</h1>
-						<h1>임시 비밀번호가 전송되었습니다.</h1>
+						<spring:message code="message.msg.pw_find"/>
 					</center>
 				<br/>
 				<br/>
