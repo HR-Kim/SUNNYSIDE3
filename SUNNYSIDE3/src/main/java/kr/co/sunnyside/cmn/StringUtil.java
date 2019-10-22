@@ -23,6 +23,7 @@ public class StringUtil {
 
 	// File Root 디렉토리
 	public static final String UPLOAD_ROOT = "C:\\Users\\sist\\git\\SUNNYSIDE3\\SUNNYSIDE3\\src\\main\\webapp\\resources\\image";
+	public static final String MAIN_IMAGE_ROOT = "C:\\Users\\sist\\git\\SUNNYSIDE3\\SUNNYSIDE3\\src\\main\\webapp\\resources\\img\\banner";
 
 	/**
 	 * D:\\HR_FILE\2019\09
