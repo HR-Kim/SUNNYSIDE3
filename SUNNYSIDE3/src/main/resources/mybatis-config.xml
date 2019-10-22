@@ -33,6 +33,7 @@
 		<typeAlias type="kr.co.sunnyside.store.service.SEJ_StroreVO" alias="Store" />
 		<typeAlias type="kr.co.sunnyside.phototicket.service.SEJ_PhotoTicketVO" alias="SEJ_PhotoTicketVO" />
 		<typeAlias type="kr.co.sunnyside.store.service.SEJ_CartVO" alias="Cart" />
+		<typeAlias type="kr.co.sunnyside.store.service.SEJ_PayVO" alias="Pay" />
 		
 	</typeAliases>
 
