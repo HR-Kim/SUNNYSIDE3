@@ -929,7 +929,7 @@
 						"<br/>"
 					);	
 				}
-				
+	
 				//요약 - 인원, 금액, 예매버튼
 				function infoBox_bottom(){
 					var adult = parseInt($("#hd_aNum").val());

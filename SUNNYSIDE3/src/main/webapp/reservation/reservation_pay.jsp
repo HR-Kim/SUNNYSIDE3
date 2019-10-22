@@ -13,63 +13,196 @@
 		<title>결제페이지</title>
 		<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 		<style type="text/css">
+		#startPay{
+			position: inherit;
+			top: 18px;
+			left: 50px;
+		}
+		#cancel{
+			position: inherit;
+			top: 18px;
+			left: 230px;
+		}
+		.bottom button {
+			width: 120px;
+		}
+		.CHKAll{
+			background-color: lightgreen;
+		}
+		.agreeBox {
+			position: inherit;
+			top: 330px;
+			left: 0px;
+			font-size: 11px;
+			border-top: 1px solid gray;
+			width: 100%;
+		}
+		.COUPON {
+			font-size: 11px;
+		}
+		#couponInfo button {
+			float: right;
+			margin-right: 5px;
+			margin-top: -3px;
+		}
+		.finalCostInfo {
+			background-color: lightyellow;
+		}
+		#couponBox {
+			border-bottom: 1px dotted gray;
+		}
+		.BAR {
+			padding-left: 5px;
+			font-size: 17px;
+			width: 100%;
+			border-bottom: 1px solid gray;
+		}
+		.FINAL_COST {
+			font-size: 10px;
+			padding-left: 10px;
+			margin: 0 auto;
+		}
+		#final_cost {
+			font-size: 20px;
+			padding-left: 10px;
+			width: 100%;
+			border-bottom: 1px dotted gray;
+		}
+		.PRODUCT_COST, .COUPON {
+			float: left;
+			font-size: 12px;
+			color: gray;
+			padding-left: 5px;
+		}
+		#rawCost {
+			float: right;
+			font-size: 8px;
+			color: gray;
+			padding-right: 5px;
+		}
+		#couponValue {
+			float: right;
+			font-size: 8px;
+			color: gray;
+			padding-right: 5px;
+		}
+		#topBarCost {
+			float: right;
+			padding-top: 17px;
+			padding-right: 30px;
+		}
+		#topBarTitle {
+			float: left;
+			padding-left: 30px;
+			padding-top: 17px;
+		}
+		.topBar {
+			position: inherit;
+			width: 100%;
+			height: 5px;
+			background-color: #282828;
+		}
 		.top {
 			position: absolute;
 			top: 0px;
 			left: 0px;
-			height: 80px;
+			height: 50px;
 			width: 430px;
 			background-color: white;
 			border-radius: .5rem;
-			border: 1px solid black;
+			border: 1px solid gray;
 		}
 		.main {
 			position: absolute;
-			top: 80px;
+			top: 50px;
 			left: 0px;
 			height: 400px;
-			width: 330px;
+			width: 320px;
 			background-color: white;
 			border-radius: .5rem;
-			border: 1px solid black;
+			border: 1px solid gray;
 		}
 		.sub {
 			position: absolute;
-			top: 80px;
-			left: 330px;
+			top: 50px;
+			left: 320px;
 			height: 400px;
-			width: 100px;
+			width: 110px;
 			background-color: white;
 			border-radius: .5rem;
-			border: 1px solid black;
+			border: 1px solid gray;
+			padding: 5px;
+			background-color: #f2f2f2;
 		}
 		.bottom {
 			position: absolute;
-			top: 480px;
+			top: 450px;
 			left: 0px;
 			height: 80px;
 			width: 430px;
 			background-color: white;
 			border-radius: .5rem;
-			border: 1px solid black;
+			border: 1px solid gray;
 		}
 		</style>
 	</head>
 	<body>
-		<div class="container">
+		<c:choose>
+			<c:when test="${vo != null}">
+				<div class="container">
+			<input type="hidden" id="hd_kortitle" value="">
+			<input type="hidden" id="hd_cost" value="">
+			<input type="hidden" id="hd_final" value="">
+			<input type="hidden" id="hd_coupon" value="">
+			
 			<div class="top">
-				${seatArr }
+				<div class="topBar"></div>
+				<label id="topBarTitle"></label>
+				<label id="topBarCost"></label>
 			</div>
 			<div class="main">
-				${vo }
+				<div id="couponBox">
+					<label class="BAR">쿠폰</label>
+					<br/>
+				</div>
+				<div class="agreeBox">
+					&nbsp;<input type="checkbox" id="chkAll" value="0" onclick="javascript:chkAll();">
+							<b class="CHKAll">전체 동의하기</b>
+							<br/>
+					&nbsp;&nbsp;&nbsp;<input type="checkbox" id="chkA" value="0">
+						위 상품의 구매조건 확인 결제진행 동의
+					<br/>
+					&nbsp;&nbsp;&nbsp;<input type="checkbox" id="chkB" value="0">
+						거래정보 제공 동의 (제공 받는 판매자: SunnySide Theater)
+
+				</div>
 			</div>
 			<div class="sub">
-				
+				<div class="finalCostInfo">
+					<label class="FINAL_COST">총 결제금액</label>
+					<br/>
+					<label id="final_cost"></label>
+					<br/>
+					<div>
+						<label class="PRODUCT_COST">상품금액</label>
+						<br/>
+						<label id="rawCost"></label>
+						<br/>
+						<label class="COUPON">쿠폰할인금액</label>
+						<br/>
+						<label id="couponValue">-</label>
+						<br/>
+					</div>
+				</div>
 			</div>
 			<div class="bottom">
-				<button id="asd">결제</button>
+				<button id="startPay" class="btn btn-success btn-lg">결제</button>
+				<button id="cancel" class="btn btn-default btn-lg">취소</button>
 			</div>
 		</div>
+			</c:when>
+			<c:otherwise></c:otherwise>
+		</c:choose>
 	
 	
 		<script src="${context}/resources/js/jquery-1.12.4.js"></script>
@@ -78,26 +211,47 @@
 		<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 		<script type="text/javascript">
     		$(document).ready(function(){
+    			var vo = "${vo.screenId}";
+    			if(vo.length < 1){
+    				alert("잘못된 접근입니다.");
+    				location.href = "${context}/main/main.do";
+    				return;
+    			}
     			
+    			var userId = "${user.userId}";
+    			if(userId.length < 1){
+    				alert("로그인이 필요한 페이지입니다.");
+    				location.href = "${context}/login/login.jsp";
+    				return;
+    			}   			
+    			
+    			//넘어오는정보 -> 영화id 스크린id 지점id 상영관id 가격 성인유무 좌석정보
+    			setTitle();
+    			setRawCost();
+    			setCoupon();
+    			setFinalCost();
     		});
     		
     		function startPay(){
+    			var userCellphone = ${user.cellphone};
+    			var userName = ${user.userName};
+    			var email = ${user.email};
+    			var productNm = $("#topBarTitle").text();
+    			var cost = $("#hd_final").val();
     			var IMP = window.IMP; // 생략가능
-    	        IMP.init('iamport'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+    	        IMP.init('imp42104945'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
     	        var msg;
     	        
     	        IMP.request_pay({
     	            pg : 'kakaopay',
     	            pay_method : 'card',
     	            merchant_uid : 'merchant_' + new Date().getTime(),
-    	            name : '그냥결제',
-    	            amount : 100,					//totalPrice
-    	            buyer_email : 'lgs1130@naver.com',		//email
-    	            buyer_name : '박철수',					//name
-    	            buyer_tel : '010-6779-357',				//phone
-    	            buyer_addr : '서울시서울',					//address
-    	            buyer_postcode : '123-456',
-    	            //m_redirect_url : 'http://www.naver.com'
+    	            name : productNm,
+    	            amount : cost,								//totalPrice
+    	            buyer_email : email,
+    	            buyer_name : userName,
+    	            buyer_tel : '010-6779-3570'
+    	            //m_redirect_url : 'http://www.naver.com'	//모바일 결제 후 이동될 주소
     	        }, function(rsp) {
     	            if ( rsp.success ) {
     	                //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
@@ -125,20 +279,156 @@
     	                    }
     	                });
     	                //성공시 이동할 페이지
-    	                location.href='${context}/order/paySuccess?msg='+msg;
+    	                location.href='${context}/reservation/reservation_result.jsp;
     	            } else {
-    	                msg = '결제에 실패하였습니다.';
+    	                msg = '결제에 실패하였습니다.\n';
     	                msg += '에러내용 : ' + rsp.error_msg;
-    	                //실패시 이동할 페이지
-    	                location.href="${context}/order/payFail";
     	                alert(msg);
     	            }
     	        });
     		}
     		
-    		$("#asd").on("click", function(){
+    		//영화제목
+    		function setTitle(){
+    			var movieId = "${vo.movieId}";
+    			$.ajax({
+    				type : "POST",
+    				url : "${context}/screening/do_selectOne_movie.do",
+    				dataType : "json",
+    				data : {
+    					"movieId" : movieId
+    				}
+				}).done(function(data){
+					var movieInfo = data;
+					var kortitle = movieInfo.kortitle;
+					$("#topBarTitle").text("[영화] " + kortitle);
+				});
+    		};
+        		
+    		//영화의 원래 가격
+    		function setRawCost(){
+    			var cost = "${vo.cost}";
+    			$("#hd_cost").val(cost);
+    			$("#topBarCost").text(cost + "원");
+    			$("#rawCost").text(cost + "원");
+    			$("#hd_final").val(cost);
+    		}
+	
+    		//쿠폰정보
+    		function setCoupon(){
+    			var userId = "${user.userId}";
+    			$.ajax({
+    				type : "POST",
+    				url : "${context}/coupon/do_selectOne.do",
+    				dataType : "json",
+    				data : {
+    					"userId" : userId
+    				}
+				}).done(function(data){
+					var coupon = data;
+					
+					$("#couponBox>.couponInfo").detach();
+					if(coupon == null){
+						$("#couponBox").append(
+								"<div id='couponInfo'>"+
+								"&nbsp;<label class='COUPON'>쿠폰이 없습니다.</label>"+
+								"</div>"
+						);
+					}else{
+						var cNm = coupon.couponNm;
+						var usable = coupon.usable;
+						var discount = coupon.discount;
+						
+						$("#couponBox").append(
+							"<div id='couponInfo'>"+
+							"&nbsp;<label class='COUPON'>쿠폰이름: " + cNm + "</label>"+
+							"</div>"
+						);
+						
+						if(usable == '1'){
+							$("#couponInfo").append(
+									"<button class='btn btn-xs btn-danger'>이미사용</button>"
+								);
+						}else{
+							$("#couponInfo").append(
+									"<button onclick='javascript:cpON("+discount+");' class='btn btn-xs btn-success'>적용</button>"
+								);
+							
+						}
+					}
+				});	
+    		}
+    		
+    		//쿠폰적용
+    		function cpON(discount){
+    			$("#couponInfo>button").detach();
+    			
+    			$("#couponValue").text("(-)" + discount + "원");
+    			$("#hd_coupon").val(discount);
+    			setFinalCost();
+    			
+    			$("#couponInfo").append(
+						"<button onclick='javascript:cpOFF("+discount+");' class='btn btn-xs btn-danger'>취소</button>"
+					);
+    			
+    			
+    		}
+    		
+    		//쿠폰해제
+    		function cpOFF(discount){
+    			$("#couponInfo>button").detach();
+    			
+    			$("#couponValue").text("-");
+    			$("#hd_coupon").val("");
+    			setFinalCost();
+    			
+    			$("#couponInfo").append(
+						"<button onclick='javascript:cpON("+discount+");' class='btn btn-xs btn-success'>적용</button>"
+					);
+    		}
+    		
+    		//최종금액표시
+    		function setFinalCost(){
+    			var rawCost = $("#hd_cost").val();
+    			var coupon = ($("#hd_coupon").val())? $("#hd_coupon").val():"0";
+    			var finalCost = eval(parseInt(rawCost) - parseInt(coupon));
+    			if(finalCost < 0) finalCost = 0;
+    			$("#final_cost").text(finalCost + "원");
+    		}
+    		
+    		//체크박스 모두체크
+    		function chkAll(){
+    			var chkAll = $("#chkAll").prop("checked");
+    			if(chkAll == false){
+    				$("#chkA").prop("checked", false);
+        			$("#chkB").prop("checked", false);
+    			}else{
+    				$("#chkA").prop("checked", true);
+        			$("#chkB").prop("checked", true);
+    			}
+    		}
+
+    		//결제버튼
+    		$("#startPay").on("click", function(){
+    			var A = $("#chkA").prop("checked");
+    			var B = $("#chkB").prop("checked");
+    			if(A == false || B == false){
+    				alert("약관에 동의해주세요.");
+    				return;
+    			}
+    			
+    			getUsername();
     			startPay();
     		});
+    		
+    		//취소버튼
+    		$("#cancel").on("click", function(){
+    			if(confirm("결제를 취소하시겠습니까?")==false) return;
+    			alert("결제를 취소합니다.");
+    			self.opener = self;
+    			window.close();
+    		});
+    		
     	</script>
 	</body>
 </html>

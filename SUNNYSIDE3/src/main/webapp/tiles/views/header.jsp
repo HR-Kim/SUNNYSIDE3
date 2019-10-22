@@ -59,7 +59,7 @@
 								<c:otherwise>
 									<div class="up-item">
 										<i class="flaticon-profile"></i>
-										<a href="#">Sign</a> In or <a href="#">Create Account</a>
+										<a href="../../sunnyside/login/login.jsp">Sign</a> In or <a href="#">Create Account</a>
 									</div>
 								</c:otherwise>
 							</c:choose>
@@ -71,7 +71,7 @@
 										<div class="shopping-card">
 											<i class="flaticon-bag"></i>
 										</div>
-										<a href="/sunnyside/cart/do_retrieve.do?userId="+${user.userId}>장바구니</a>
+										<a href="/sunnyside/cart/do_retrieve.do?userId=<c:out value="${user.userId}"/>">장바구니</a>
 									</div>
 								</c:when>
 								<c:otherwise>
@@ -118,6 +118,21 @@
 							<li><a href="/sunnyside/login/login_view.do">로그인</a></li>
 						</c:otherwise>
 						
+					</c:choose>
+					
+					<!-- 관리자로 로그인한 상태면 지점, 상영관 EDIT 출력 -->
+					<c:choose>
+  						<c:when test="${not empty user.userId && user.userId == 'admin'}">
+  						<li>
+							<a href="#">극장관리</a>
+							<ul class="sub-menu">
+								<li><a href="/sunnyside/branchInfo/do_retrieve.do">극장편성</a></li>
+								<li><a href="/sunnyside/screenInfo/do_goingPage.do">영화편성</a></li>							</ul>
+						</li>				
+						</c:when>
+
+						<c:otherwise>
+						</c:otherwise>			
 					</c:choose>
 					
 				</ul>
