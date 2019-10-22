@@ -123,7 +123,7 @@
 		<!-- Grid영역 -->
 		<div class="table-responsive">
 			<table class="table  table-striped table-bordered table-hover" id="listTable">
-				<thead class="bg-primary">
+				<thead class="bg-default" style="background-color: #333333; color: #f0f0f0">
 					<th class="text-center col-md-1 col-xs-1">영화ID</th>
 					<th class="text-center col-md-4 col-xs-4">영화제목</th>
 					<th class="text-center col-md-3 col-xs-3">감독</th>
