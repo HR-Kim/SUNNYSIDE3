@@ -88,11 +88,11 @@
 				</aside>
 				<aside class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 					<article class="card-body m-0 pt-0 pl-5">
+						<!-- 제목 -->
 						<h1 class="title text-uppercase"><c:out value='${vo.kortitle}'/></h1>				
 						<h6 class="title text-uppercase"><c:out value='${vo.engtitle}'/></h6>	
-															
-						<hr>								
-
+						<!--// 제목 -->							
+						<hr>	
 						<!-- 별점 -->
 						<select class="avgRate" id="avgRate" name="avgRate">
 							<option value="1" <c:if test="${vo.visitorRate < 1.5}"><c:out value='selected'/></c:if>>1</option>
@@ -102,20 +102,20 @@
 							<option value="5" <c:if test="${vo.visitorRate >= 4.5 }"><c:out value='selected'/></c:if>>5</option>
 						</select>								
 						<!--// 별점 -->
-
-							<b>평점</b> | <c:out value='${vo.visitorRate}'/><br>
-							<b>개봉일</b> | <c:out value='${vo.relDate}'/><br>
-							<b>감독</b> | <c:out value='${vo.director}'/><br>
-							<b>출연진</b> | <c:out value='${vo.cast}'/><br>
-							<b>장르</b> | <c:out value='${vo.genre}'/><br>
-							<b>러닝타임</b> | <c:out value='${vo.runningTime}'/><br>
-							<b>관람연령</b> | <c:out value='${vo.limitage}'/><br>					
-						</p>						
+						<!-- 상세설명 -->
+						<b>평점</b> | <c:out value='${vo.visitorRate}'/><br>
+						<b>개봉일</b> | <c:out value='${vo.relDate}'/><br>
+						<b>감독</b> | <c:out value='${vo.director}'/><br>
+						<b>출연진</b> | <c:out value='${vo.cast}'/><br>
+						<b>장르</b> | <c:out value='${vo.genre}'/><br>
+						<b>러닝타임</b> | <c:out value='${vo.runningTime}'/><br>
+						<b>관람연령</b> | <c:out value='${vo.limitage}'/><br>	
 						<hr>				
 						<dl class="item-property">
 							<dt>줄거리</dt>
 							<dd><p><c:out value='${vo.synopsis}'/></p></dd>
 						</dl>
+						<!--// 상세설명 -->
 					</article>
 				</aside>
 				<aside class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></aside>
@@ -186,9 +186,8 @@
 									<strong class="list_userId"><c:out value="${listVO.userId}"/></strong>
 									<span class="text-muted list_regDt"><c:out value="${listVO.regDt}"/></span>									
 <!-- 									수정/삭제 버튼									 -->
-									<c:set var="name" value="${user.userId}" />
 									<c:choose>
-										<c:when test="${name == listVO.userId}">
+										<c:when test="${user.userId == listVO.userId}">
 											<span class="text-muted"><input type="button" id="doUpdateSelect" name="doUpdateSelect" class="btn btn-default btn-sm doUpdateSelect" value="수정" /></span>
 											<span class="text-muted"><input type="button" id="doDelete" name="doDelete" class="btn btn-default btn-sm doDelete" value="삭제" /></span>
 										</c:when>
