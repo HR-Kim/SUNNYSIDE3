@@ -1,6 +1,7 @@
 package kr.co.sunnyside.login.web;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 
 import javax.annotation.Resource;
@@ -30,6 +31,12 @@ import kr.co.sunnyside.cmn.Message;
 import kr.co.sunnyside.code.service.CodeService;
 import kr.co.sunnyside.login.service.SJH_LoginSvc;
 import kr.co.sunnyside.login.service.SJH_LoginVO;
+import kr.co.sunnyside.main.service.LHJ_MainImageVO;
+import kr.co.sunnyside.main.service.LHJ_MainSvc;
+import kr.co.sunnyside.main.service.impl.LHJ_MainSvcImpl;
+import kr.co.sunnyside.movie.service.LHJ_BoxofficeSvc;
+import kr.co.sunnyside.movie.service.LHJ_MovieVO;
+import kr.co.sunnyside.movie.service.impl.LHJ_BoxofficeSvcImpl;
 import kr.co.sunnyside.login.service.NaverLoginBO;
 
 import org.json.simple.parser.ParseException;
@@ -40,6 +47,12 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 public class SJH_LoginCtrl {
 
 	Logger LOG = LoggerFactory.getLogger(this.getClass());
+	
+	@Autowired
+	LHJ_MainSvc mainService;
+	
+	@Autowired
+	LHJ_BoxofficeSvc boxofficeService;	 
 	
 	@Autowired
 	private LocaleResolver localeResolver;
@@ -194,9 +207,16 @@ public class SJH_LoginCtrl {
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "login/logout.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String logout(HttpSession session)throws IOException {
+	public String logout(HttpSession session, Model model)throws IOException {
 		LOG.debug("logout");
 		session.invalidate();
+		
+		List<LHJ_MainImageVO> bannerList = (List<LHJ_MainImageVO>) this.mainService.do_banner_retrieve();
+		model.addAttribute("bannerList", bannerList);
+		
+		List<LHJ_MovieVO> boxofficeList = (List<LHJ_MovieVO>) this.boxofficeService.do_retrieve_main();
+		model.addAttribute("boxofficeList", boxofficeList);
+		
 		return "main/main";
 	}
 
