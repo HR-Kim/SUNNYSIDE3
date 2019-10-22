@@ -15,7 +15,7 @@
     	<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>극장 관리</title>
 		<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
-		
+
 		<style type="text/css">
 			.loadingLayer {
 				position: absolute;

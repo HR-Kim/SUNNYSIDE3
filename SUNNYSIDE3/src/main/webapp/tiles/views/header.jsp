@@ -63,7 +63,7 @@
 									</div>
 								</c:otherwise>
 							</c:choose>
-							
+				
     						<!-- 로그인 했을 때만 장바구니 표시 -->
 							<c:choose>
  								<c:when test="${not empty user.userId}">
