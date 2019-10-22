@@ -59,7 +59,7 @@
 								<c:otherwise>
 									<div class="up-item">
 										<i class="flaticon-profile"></i>
-										<a href="#">Sign</a> In or <a href="#">Create Account</a>
+										<a href="../../sunnyside/login/login.jsp">Sign</a> In or <a href="#">Create Account</a>
 									</div>
 								</c:otherwise>
 							</c:choose>
