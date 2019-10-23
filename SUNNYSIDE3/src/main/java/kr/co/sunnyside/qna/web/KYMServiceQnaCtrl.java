@@ -84,7 +84,6 @@ public class KYMServiceQnaCtrl {
 		Gson gson=new Gson();
 		gsonStr = gson.toJson(message);		
 		
-		
 		return gsonStr;
 		
 	}

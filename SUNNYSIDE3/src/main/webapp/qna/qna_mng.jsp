@@ -153,7 +153,7 @@
 					"userId" : $("#userId").val(),
 					"title" : $("#title").val(),
 					"contents" : $("#contents").val(),
-					"regId" : $("#regId").val()
+					"status" : "답변대기"
 				},
 				success : function(data) {
 					var jData = JSON.parse(data);
