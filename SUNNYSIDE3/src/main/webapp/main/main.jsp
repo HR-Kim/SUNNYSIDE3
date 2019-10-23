@@ -82,7 +82,8 @@
 						<div class="image_holder" >		
 							<!-- 이미지  -->			
 							<span class="image">
-								<img src="<c:out value='${vo.poster}'/>" alt="영화포스터" style="height: 350px; width:250px;" onerror="this.src='../resources/image/layout/noImage.png'">
+								<!-- 영화포스터 -->
+								<img src="<c:out value='${vo.poster}'/>" alt='<spring:message code="message.movie.poster"/>' style="height: 350px; width:250px;" onerror="this.src='../resources/image/layout/noImage.png'">
 							</span>
 							<!--// 이미지  -->			
 							<!-- 예매하기, 상세보기 버튼 -->

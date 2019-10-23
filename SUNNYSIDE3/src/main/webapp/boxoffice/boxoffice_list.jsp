@@ -35,7 +35,8 @@
 	<div class="container ">
 	<!-- div title --> 
 	<div class="page-header">
-		<h1>박스오피스</h1>
+		<!-- 박스오피스 -->
+		<h1><spring:message code="message.movie.boxoffice"/></h1>
 		<form class="form-inline" name="movieSaveFrm" id="movieSaveFrm" method="get">
 <!-- 			<input type="text" class="form-control" id="startNum" name="startNum"> -->
 <!-- 			<input type="text" class="form-control" id="lastNum" name="lastNum"> -->
@@ -54,13 +55,16 @@
 						<div class="image_holder" >		
 							<!-- 이미지  -->			
 							<span class="image">
-								<img src="<c:out value='${vo.poster}'/>" alt="영화포스터" style="height: 350px; width:250px;" onerror="this.src='../resources/image/layout/noImage.png'">
+								<!-- 영화포스터 -->
+								<img src="<c:out value='${vo.poster}'/>" alt='<spring:message code="message.movie.poster"/>' style="height: 350px; width:250px;" onerror="this.src='../resources/image/layout/noImage.png'">
 							</span>
 							<!--// 이미지  -->			
 							<!-- 예매하기, 상세보기 버튼 -->
 							<span class="text_holder"><span class="text_outer"><span class="text_inner" ><span class="feature_holder" ><span class="feature_holder_icons">
-								<a class="lightbox qbutton small white" href="#" onclick="javascript:reservationPage();">예매하기</a>
-								<a class="lightbox qbutton small white" href="../movie/do_selectOne.do?movieId=<c:out value="${vo.movieId}"/>">상세보기</a>
+								<!-- 예매하기 -->
+								<a class="lightbox qbutton small white" href="#" onclick="javascript:reservationPage();"><spring:message code="message.movie.ticketing"/></a>
+								<!-- 상세보기 -->
+								<a class="lightbox qbutton small white" href="../movie/do_selectOne.do?movieId=<c:out value="${vo.movieId}"/>"><spring:message code="message.movie.detail"/></a>
 								
 							</span></span></span></span></span>			
 							<!--// 예매하기, 상세보기 버튼 -->		
@@ -74,9 +78,9 @@
 								<a href="../movie/do_selectOne.do?movieId=<c:out value="${vo.movieId}"/>"><c:out value="${vo.kortitle}"/></a>
 							</h5>
 							<!--// 영화제목 -->
-							<!-- 영화정보 -->
-							<span class="project_category">관람 평점 <c:out value="${vo.visitorRate}"/></span>
-							<!--// 영화정보 -->
+							<!-- 관람평점 -->
+							<span class="project_category"><spring:message code="message.movie.visitor_rate"/> <c:out value="${vo.visitorRate}"/></span>
+							<!--// 관람평점 -->
 						</div>
 						<!--// 영화정보 영역 -->								
 					</article>	
