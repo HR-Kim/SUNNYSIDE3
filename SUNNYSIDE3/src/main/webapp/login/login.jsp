@@ -34,7 +34,7 @@
 <%-- <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet"> --%>
 
 </head>
-<body>
+<body> 
 	
 	<div class="limiter">
 		<div class="container-login100">
