@@ -29,9 +29,9 @@
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/util.css">
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/main.css">
 <!--===============================================================================================-->
-
+<link href="${context}/resources/css/headerStyle.css" rel="stylesheet"> 
 <!-- 부트스트랩 -->
-<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
+<%-- <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet"> --%>
 
 </head>
 <body>
