@@ -11,7 +11,7 @@
 	<section class="footer-section">
 		<div class="container">
 			<div class="footer-logo text-center">
-				<a href="index.html"><img src="../../sunnyside/resources/img/divisima//logo-light.png" alt="/sunnyside/main/main.do"></a>
+				<a href="index.html"><img src="../../sunnyside/resources/img/divisima/logo-light.png" alt="/sunnyside/main/main.do"></a>
 			</div>
 			<div class="row">
 				<div class="col-lg-4 col-sm-7">
