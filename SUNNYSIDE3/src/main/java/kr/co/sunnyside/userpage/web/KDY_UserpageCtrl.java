@@ -48,7 +48,7 @@ public class KDY_UserpageCtrl {
 		LOG.debug("==================================");
 		LOG.debug("Controller : tiketHistory");
 		LOG.debug("==================================");
-		search.setUser_id("u5");
+//		search.setUser_id("u5");
 		if(search.getPageSize() == 0) search.setPageSize(10);
 		if(search.getPageNum() == 0) search.setPageNum(1);
 		
@@ -102,7 +102,7 @@ public class KDY_UserpageCtrl {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_movieHistory");
 		LOG.debug("==================================");
-		inVO.setUser_id("u5");
+//		inVO.setUser_id("u5");
 		List<SEJ_PhotoTicketVO> couponList = (List<SEJ_PhotoTicketVO>) SPT.do_retrieve_user(inVO);
 		
 		
@@ -122,7 +122,7 @@ public class KDY_UserpageCtrl {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_coupon_retrieve");
 		LOG.debug("==================================");
-		search.setUser_id("j05_126");
+//		search.setUser_id("j05_126");
 		if(search.getPageSize() == 0) search.setPageSize(10);
 		if(search.getPageNum() == 0) search.setPageNum(1);
 		
@@ -143,7 +143,7 @@ public class KDY_UserpageCtrl {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_userpage");
 		LOG.debug("==================================");
-		search.setUser_id("j02_126");
+//		search.setUser_id("j02_126");
 		
 		List<KDY_UserinfoVO> list = (List<KDY_UserinfoVO>) userpageSvc.do_membership(search);
 		
@@ -163,7 +163,7 @@ public class KDY_UserpageCtrl {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_qnaList");
 		LOG.debug("==================================");
-		search.setUser_id("370");
+
 		if(search.getPageSize() == 0) search.setPageSize(10);
 		if(search.getPageNum() == 0) search.setPageNum(1);
 		List<KDY_QnalistVO> list = (List<KDY_QnalistVO>) userpageSvc.do_qnaList(search);
@@ -184,7 +184,7 @@ public class KDY_UserpageCtrl {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_reservationList");
 		LOG.debug("==================================");
-		search.setUser_id("admin");
+
 		if(search.getPageSize() == 0) search.setPageSize(10);
 		if(search.getPageNum() == 0) search.setPageNum(1);
 		List<KDY_ReservationVO> list = (List<KDY_ReservationVO>) userpageSvc.do_reservationList(search);

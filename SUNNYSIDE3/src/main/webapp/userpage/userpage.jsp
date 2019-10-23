@@ -12,11 +12,11 @@
 </head>
 <body>
 
-
 	<div class="container">
       <div class="row">
         <div class="col">
           <div>
+           	<input type="hidden" id="userId" value="${user.userId}" >
           <c:choose>
 			
 					<c:when test="${membershiplist.size()>0}">
@@ -83,7 +83,8 @@
 	$("#tab_id").on("click","li",function(event){
 		var location = $(this).attr('name');
 		console.log("${context}/userpage/"+location);
-		
+		var User_id=$("#userId").val();
+		console.log("userId "+userId);
 		if(location!=null){
 			
 	
@@ -93,6 +94,8 @@
 				   url:"${context}/userpage/"+location,
 				   dataType:"html",
 				   data:{
+					   "User_id" :User_id
+					   
 				   }, 
 				success: function(data){
 					var event_data = '';

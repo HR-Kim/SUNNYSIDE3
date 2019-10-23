@@ -131,7 +131,7 @@
   						<c:when test="${not empty user.userId}">
 							<li><a href="/sunnyside/login/logout.do"><spring:message code="message.header.logout"/></a></li>
 							<!-- (임시)회원정보수정 -->
-							<li><a href="/sunnyside/usermypage/tmp_update_view.do"><spring:message code="message.header.userpage"/></a></li>
+							<li><a href="/sunnyside/userpage/do_userpage.do"><spring:message code="message.header.userpage"/></a></li>
 						</c:when>
 						
 						<c:otherwise>
