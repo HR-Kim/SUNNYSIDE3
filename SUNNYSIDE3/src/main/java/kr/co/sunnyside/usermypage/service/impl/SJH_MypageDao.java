@@ -31,7 +31,7 @@ public class SJH_MypageDao implements WorkDiv {
 	 * 회원 전체조회
 	 */
 	public List<?> do_getAll() {
-		String statement = this.NAMESPACE+".do_getAll";//kr.co.ehr.user.get_retrieve
+		String statement = this.NAMESPACE+".do_getAll";
 		
 		LOG.debug("========================");
 		LOG.debug("=01.no param=");

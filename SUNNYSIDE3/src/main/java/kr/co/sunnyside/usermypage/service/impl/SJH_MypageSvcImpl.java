@@ -58,11 +58,11 @@ public class SJH_MypageSvcImpl implements SJH_MypageSvc {
 	//등업 대상자 파악 : true
 	private boolean canUpgradeLevel(SJH_MypageVO user) {
 		String currLevel = user.getUserLevel();
-		
 		switch(currLevel) {
 			case "BASIC" : return (user.getTotalPay() >= MIN_PAY_FOR_SILVER || user.getTotalPay() >= MIN_PAY_FOR_GOLD);
 			case "SILVER" : return (user.getTotalPay() >= MIN_PAY_FOR_GOLD);
 			case "GOLD" : return false;
+			case "admin" : return false; //관리자용
 			default : throw new IllegalArgumentException("Unknown Level:"+currLevel);
 		}
 	}
@@ -72,7 +72,6 @@ public class SJH_MypageSvcImpl implements SJH_MypageSvc {
 	protected void upgradeLevel(SJH_MypageVO user) throws SQLException {
 		user.upgradeLevel(user); //VO부분에 기능을 만듦
 		mypageDao.tx_upgradeLevels(user);
-		
 		sendUpgradeMail(user); //mail send 
 	}
 	
@@ -94,8 +93,8 @@ public class SJH_MypageSvcImpl implements SJH_MypageSvc {
 			
 			//보내는 사람
 			String host = "smtp.naver.com";
-			final String userName = "아이디";
-			final String password = "비번";
+			final String userName = "glwlzkwp";
+			final String password = "";
 			int port = 465;
 			
 			//받는 사람

@@ -23,10 +23,10 @@
 		    user_id as userId,
 		    passwd,
 		    user_name as userName,
-		    email,
+		    encryption_aes.dec_aes(email) as email,
 		    user_level as userLevel,
 		    point,
-		    cellphone,
+		    encryption_aes.dec_aes(cellphone) as cellphone,
 		    birth,
 		    reg_dt as regDt,
 		    total_pay as totalPay,
@@ -43,8 +43,8 @@
 		SET
 		    passwd = #{passwd,jdbcType=VARCHAR},
 		    user_name = #{userName,jdbcType=VARCHAR},
-		    cellphone = #{cellphone,jdbcType=VARCHAR},
-		    email = #{email,jdbcType=VARCHAR}
+		    cellphone = encryption_aes.enc_aes(#{cellphone,jdbcType=VARCHAR}),
+		    email = encryption_aes.enc_aes(#{email,jdbcType=VARCHAR})
 		WHERE
 		    user_id = #{userId,jdbcType=VARCHAR}
 	</update>
@@ -53,18 +53,17 @@
 	
 	<!-- 회원선택(수정할 때 정보 가져가기) -->
 	<select id="do_selectOne" parameterType="SJH_MypageVO" resultType="SJH_MypageVO">
-		SELECT
+      SELECT										
 		    user_id as userId,
 		    passwd,
 		    user_name as userName,
-		    email,
-		    cellphone,
+		    encryption_aes.dec_aes(email) as email,
+		    encryption_aes.dec_aes(cellphone) as cellphone,
 		    birth,
 		    flag
-		FROM
-		    user_info
-		WHERE
-		    user_id = #{userId,jdbcType=VARCHAR}
+		FROM                                     
+		    user_info                                
+		WHERE user_id = #{userId,jdbcType=VARCHAR} 
 	</select>
 	
 	

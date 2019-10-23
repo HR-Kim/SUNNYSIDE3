@@ -97,7 +97,7 @@ public class SJH_LoginSvcImpl implements SJH_LoginSvc{
 			//제목
 			String title = user.getUserName()+"님 임시 비밀번호가 발송되었습니다.";
 			//내용
-			String contents = user.getUserName()+"님의 임시 비밀번호는 "+changedVO.getPasswd()+"입니다. 임시 비밀번호로 로그인 후 회원정보수정에서 비밀번호를 변경해주세요.";
+			String contents = user.getUserName()+"님의 임시 비밀번호는 "+changedVO.getPasswd()+"입니다.\n임시 비밀번호로 로그인 후 회원정보수정에서 비밀번호를 변경해주세요.";
 			
 			//SMTP 서버 설정
 			Properties props = System.getProperties();

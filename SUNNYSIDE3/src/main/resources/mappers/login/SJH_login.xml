@@ -10,23 +10,23 @@
 	<update id="pw_find" parameterType="SJH_LoginVO">
 		UPDATE user_info
 		SET
-		    passwd = (	SELECT DBMS_RANDOM.STRING('A', 15)
-		    		 	 FROM DUAL
-		    		 )
+			passwd = (	SELECT DBMS_RANDOM.STRING('A', 15)
+						 FROM DUAL
+					 )
 		WHERE
-		    user_id = #{userId,jdbcType=VARCHAR}
-		    AND user_name = #{userName,jdbcType=VARCHAR} 
-		    AND email = #{email,jdbcType=VARCHAR}
+			user_id 		= #{userId,jdbcType=VARCHAR}
+			AND user_name 	= #{userName,jdbcType=VARCHAR}
+			AND email 		= encryption_aes.enc_aes(#{email,jdbcType=VARCHAR})
 	</update>
 
 	
 	<!-- 아이디 찾기 -->
 	<select id="id_find" parameterType="SJH_LoginVO" resultType="SJH_LoginVO">
-    	SELECT
+		SELECT
 		    user_id as userId
 		FROM
 		    user_info
-		WHERE   email  	  = #{email,jdbcType=VARCHAR}  
+		WHERE   email =  encryption_aes.enc_aes(#{email,jdbcType=VARCHAR})
 		AND     user_name = #{userName,jdbcType=VARCHAR} 
 	</select>
 	
@@ -34,50 +34,50 @@
 	<!-- 회원가입 -->
 	<insert id="do_save" parameterType="SJH_LoginVO">
 		INSERT INTO user_info (
-							    user_id,
-							    passwd,
-							    user_name,
-							    email,
-							    user_level,
-							    point,
-							    cellphone,
-							    birth,
-							    reg_dt,
-							    total_pay,
-							    flag      
-							) VALUES (          
-							    #{userId,jdbcType=VARCHAR},              
-							    NVL(#{passwd,jdbcType=VARCHAR},'00000000'),              
-							    #{userName,jdbcType=VARCHAR},
-							    #{email,jdbcType=VARCHAR},              
-							    NVL(#{userLevel,jdbcType=VARCHAR},'BASIC'),             
-							    NVL(#{point,jdbcType=NUMERIC},0),             
-							    #{cellphone,jdbcType=VARCHAR},
-							    #{birth,jdbcType=VARCHAR}, 
-							    SYSDATE,
-							    NVL(#{totalPay,jdbcType=NUMERIC},0),
-							    NVL(#{flag,jdbcType=NUMERIC},0)        
-							)                  
+		                    user_id,
+		                    passwd,
+		                    user_name,
+		                    email,
+		                    user_level,
+		                    point,
+		                    cellphone,
+		                    birth,
+		                    reg_dt,
+		                    total_pay,
+		                    flag      
+		                ) VALUES (          
+		                    #{userId,jdbcType=VARCHAR},              
+		                    NVL(#{passwd,jdbcType=VARCHAR},'00000000'),              
+		                    #{userName,jdbcType=VARCHAR},
+		                    encryption_aes.enc_aes(#{email,jdbcType=VARCHAR}),              
+		                    NVL(#{userLevel,jdbcType=VARCHAR},'BASIC'),             
+		                    NVL(#{point,jdbcType=NUMERIC},0),            
+		                    encryption_aes.enc_aes(#{cellphone,jdbcType=VARCHAR}),
+		                    #{birth,jdbcType=VARCHAR},  
+		                    SYSDATE,
+		                    NVL(#{totalPay,jdbcType=NUMERIC},0),
+		                    NVL(#{flag,jdbcType=NUMERIC},0)           
+		                )               
 	</insert>
 	
 	
 	<!-- 단건조회 -->
 	<select id="do_selectOne" parameterType="SJH_LoginVO" resultType="SJH_LoginVO">
 		SELECT										
-			user_id as userId,
-			passwd,
-			user_name as userName,
-			email,
-			user_level as userLevel,
-			point,
-			cellphone,
-			birth,
-			reg_dt as regDt,
-			total_pay as totalPay,
-			flag
+		    user_id as userId,
+		    passwd,
+		    user_name as userName,
+		    encryption_aes.dec_aes(email) as email,
+		    user_level as userLevel,
+		    point,
+            encryption_aes.dec_aes(cellphone) as cellphone,
+		    birth,
+		    reg_dt as regDt,
+		    total_pay as totalPay,
+		    flag
 		FROM                                     
 		    user_info                                
-		WHERE user_id = #{userId,jdbcType=VARCHAR}                         
+		WHERE user_id = #{userId,jdbcType=VARCHAR}                       
 	</select>
 	
 	
