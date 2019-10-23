@@ -68,13 +68,12 @@ public class SJH_LoginSvcImpl implements SJH_LoginSvc{
 	/** 비밀번호 찾기 */
 	@Override
 	public int pw_find(DTO dto) {
-		SJH_LoginVO outVO = (SJH_LoginVO) loginDao.do_selectOne(dto);
-		int flag = loginDao.pw_find(outVO);
-		
+		int flag = loginDao.pw_find(dto);
 		SJH_LoginVO changedVO = (SJH_LoginVO) loginDao.do_selectOne(dto);
 		
 		//비밀번호 찾기 성공 시 임시 비밀번호 메일로 전송
 		if(flag>0) {
+			SJH_LoginVO outVO = (SJH_LoginVO) loginDao.do_selectOne(dto);
 			sendPwFindMail(changedVO); // 메일 전송
 		}
 		return flag;

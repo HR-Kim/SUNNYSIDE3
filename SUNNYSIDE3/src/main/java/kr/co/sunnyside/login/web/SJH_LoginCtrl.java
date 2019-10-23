@@ -28,6 +28,7 @@ import com.google.gson.Gson;
 
 import kr.co.sunnyside.cmn.DTO;
 import kr.co.sunnyside.cmn.Message;
+import kr.co.sunnyside.cmn.StringUtil;
 import kr.co.sunnyside.code.service.CodeService;
 import kr.co.sunnyside.login.service.SJH_LoginSvc;
 import kr.co.sunnyside.login.service.SJH_LoginVO;
@@ -119,19 +120,22 @@ public class SJH_LoginCtrl {
 	}
 	
 	//로그인 화면call
-	/** 로그인 첫 화면 요청 메소드 */ //--->이 부분을 메인이랑 연결해야함. 
 	@RequestMapping(value = "login/login_view.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String login(Model model, HttpSession session) {
-		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
+	public String login(Model model, HttpSession session,HttpServletRequest request,HttpServletResponse response) {
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-		
-		//https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
-		//redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
 		LOG.debug("네이버:" + naverAuthUrl);
-		
-		//네이버
 		model.addAttribute("url", naverAuthUrl);
 		LOG.debug("naverAuthUrl: "+naverAuthUrl);
+
+		//다국어
+		String language = StringUtil.nvl(request.getParameter("lang"),"ko");
+		
+		LOG.debug("======================");
+		LOG.debug("=language="+language);
+		LOG.debug("======================");
+		
+		Locale locale = new Locale(language);
+		localeResolver.setLocale(request, response, locale);
 		
 		return VIEW_LOGIN;
 	}

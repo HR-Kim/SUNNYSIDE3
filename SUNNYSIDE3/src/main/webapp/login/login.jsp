@@ -237,26 +237,10 @@
 		
 		/** 로그인창 다국어처리 */
 		$("#lang").on('change', function() {
-	        //alert($("#lang option:selected").val());
-	        
-	        $.ajax({
-		         type:"GET",
-		         url:"${context}/login_change_locale.do",
-		         dataType:"html",// JSON
-		         data:{
-		        	 "lang": $("#lang option:selected").val()
-		         },
-		         success: function(data){
-		        	 alert($("#lang option:selected").val()+"가 선택되었습니다.");
-		         },
-		         complete: function(data){//무조건 수행
-		          
-		         },
-		         error: function(xhr,status,error){
-		          
-		         }
-			});
-	        
+			var frm = document.loginForm;
+	    	frm.lang.value = $("#lang").val();
+	    	frm.action = "${context}/login/login_view.do";
+	    	frm.submit();
 	    });
 		
 		
