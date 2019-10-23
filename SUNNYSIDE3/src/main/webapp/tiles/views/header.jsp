@@ -85,8 +85,8 @@
 						<div class="row">
 						<form class="form-inline" name="langFrm" id="langFrm">
 							<input type="hidden" id="lang" name="lang"/>
-							<button type="button" id="koBtn" name="koBtn" class="btn btn-default btn-sm" style="padding: 0px;"><img class="btn-img" width="35px" src="http://localhost:8080/sunnyside/resources/img/icon/kor.png"></button>
-							<button type="button" id="enBtn" name="enBtn" class="btn btn-default btn-sm" style="padding: 0px;"><img class="btn-img" width="35px" src="http://localhost:8080/sunnyside/resources/img/icon/usa.png"></button>
+							<button type="button" id="koBtn" name="koBtn" class="btn btn-default btn-sm" style="padding: 0px;"><img class="btn-img" width="35px" src="../../sunnyside/resources/img/icon/kor.png"></button>
+							<button type="button" id="enBtn" name="enBtn" class="btn btn-default btn-sm" style="padding: 0px;"><img class="btn-img" width="35px" src="../../sunnyside/resources/img/icon/usa.png"></button>
 						</form>
 						</div>
 					</div>
@@ -171,7 +171,7 @@
 			var lang = 'ko';
 			
 	    	frm.lang.value = lang;
-	    	frm.action = "${context}/change_locale.do";
+	    	frm.action = "${context}/locale/change_locale.do";
 	    	frm.submit();
 	    });
 		
@@ -180,7 +180,7 @@
 			var lang = 'en';
 			
 	    	frm.lang.value = lang;
-	    	frm.action = "${context}/change_locale.do";
+	    	frm.action = "${context}/locale/change_locale.do";
 	    	frm.submit();
 	    });
 	</script>

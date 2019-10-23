@@ -11,7 +11,7 @@
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 <%-- <link href="${context}/resources/css/headerStyle.css" rel="stylesheet" type="text/css"> --%>
 <!-- <link href="../resources/css/list.css" rel="stylesheet" type="text/css">  -->
-<link href="http://localhost:8080/sunnyside/resources/css/list.css" rel="stylesheet" type="text/css"> 
+<link href="../resources/css/list.css" rel="stylesheet" type="text/css"> 
 </head>
 <style>
 .btn-sq-lg {
@@ -48,7 +48,7 @@
 						<div class="hs-item set-bg" data-setbg="<c:out value='${vo.saveImgNm}'/>" style="text-align: right">
 							<c:choose>
 								<c:when test="${'admin' == user.userLevel}">
-									<a href="#" onclick="popup('do_banner_retrieve.do','베너 이미지 수정',1200,800,100,400,'no');" class="site-btn sb-white" style="margin-top: 20px; margin-right: 30px;">Banner Edit</a>
+									<a href="#" onclick="popup('do_banner_retrieve.do','베너 이미지 수정',1200,800,100,400,'no');" class="site-btn sb-white" style="margin-top: 20px; margin-right: 30px;"><spring:message code="message.main.banner_edit"/></a>
 								</c:when>
 							</c:choose>								
 						</div>
@@ -82,7 +82,7 @@
 						<div class="image_holder" >		
 							<!-- 이미지  -->			
 							<span class="image">
-								<img src="<c:out value='${vo.poster}'/>" alt="영화포스터" style="height: 350px; width:250px;" onerror="this.src='http://localhost:8080/sunnyside/resources/image/layout/noImage.png'">
+								<img src="<c:out value='${vo.poster}'/>" alt="영화포스터" style="height: 350px; width:250px;" onerror="this.src='../resources/image/layout/noImage.png'">
 							</span>
 							<!--// 이미지  -->			
 							<!-- 예매하기, 상세보기 버튼 -->
@@ -123,15 +123,19 @@
 		<aside class="col-md-6">
 			<div class="section-title" style="margin-bottom: 10px">
 				<a href="#">
-					<h3 style="font-size: 22px; letter-spacing: 1px;">공지사항</h3>
+					<!-- 공지사항 -->
+					<h3 style="font-size: 22px; letter-spacing: 1px;"><spring:message code="message.main.notice"/></h3>
 				</a>
 			</div>
 			<table class="table table-condensed">
 				<thead style="border: none">
 					<tr>
-						<th class="text-center col-md-1 col-xs-1">분류</th>
-						<th class="text-center col-md-3 col-xs-3">작성일</th>
-						<th class="text-center col-md-8 col-xs-8">제목</th>
+						<!-- 분류 -->
+						<th class="text-center col-md-1 col-xs-1"><spring:message code="message.main.type"/></th>
+						<!-- 작성일 -->
+						<th class="text-center col-md-3 col-xs-3"><spring:message code="message.main.regdt"/></th>
+						<!-- 제목 -->
+						<th class="text-center col-md-8 col-xs-8"><spring:message code="message.main.title"/></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -166,16 +170,19 @@
 		<aside class="col-md-6">
 			<div class="section-title">
 				<a href="#">
-					<h3 style="font-size: 22px; letter-spacing: 1px;">고객센터</h3>
+					<!-- 고객센터 -->
+					<h3 style="font-size: 22px; letter-spacing: 1px;"><spring:message code="message.header.customer"/></h3>
 				</a>
 				<hr>
 			</div>
 			<div class="container"><div class="row"><div class="col-md-6 col-lg-6"><div style="text-align: center">
 				<p style="text-align: center">
 				<a href="#" class="btn btn-sq-lg col-md-6 col-lg-6" style="background-color: #f6f6f6; margin-left: 90px;">
-					<i class="fa fa-pencil-square-o fa-5x" style="margin-top: 20px; margin-left: 15px"></i><br/>1:1문의</a>
+					<!-- 1:1문의 -->
+					<i class="fa fa-pencil-square-o fa-5x" style="margin-top: 20px; margin-left: 15px"></i><br/><spring:message code="message.main.questions"/></a>
 				<a href="#" class="btn btn-sq-lg col-md-6 col-lg-6" style="background-color: #f6f6f6; margin-left: 30px;">
-					<i class="fa fa-question-circle-o fa-5x" style="margin-top: 20px;"></i><br/>자주하는 질문</a>
+					<!-- 고객센터 -->
+					<i class="fa  fa-user-circle-o fa-5x" style="margin-top: 20px;"></i><br/><spring:message code="message.main.customer"/></a>
 				</p>
 			</div></div></div></div>
 		</aside>
@@ -187,7 +194,7 @@
 	<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
     <script src="${context}/resources/js/bootstrap.min.js"></script>
     <!-- reservation 페이지 팝업 -->
-	<script src="${context}/resources/js/reservationPopup.js"></script> 
+	<script src="${context}/resources/js/reservationPopup.js"></script>  
     <script type="text/javascript">
 		function popup(url,name,width,height,top,left,location){
 	        var option = "width="+width+",height="+height+",top="+top+",left="+left+",resizeable=no";
