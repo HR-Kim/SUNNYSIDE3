@@ -18,7 +18,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-10 col-md-offset-1">
-            <table class="table table-hover">
+            <table class="table table-hover" id="cartFrm">
                 <thead>
                     <tr>
                         <th>상품명</th>
@@ -28,7 +28,7 @@
                         <th> </th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tbody">
 	                <c:choose>
 	                        <c:when test="${list.size() ==0 }">
 	                            <tr>
@@ -36,15 +36,16 @@
 	                            </tr>
 	                        </c:when>
 	                        <c:otherwise>
-	                     	   <c:forEach items="${list }" var="vo">	
+	                     	   <c:forEach items="${list }" var="vo">
 				                    <tr>
 				                        <td class="col-sm-8 col-md-5">
-				                        <div class="media">
-				                            <a class="thumbnail pull-left"> <img class="media-object" src="${vo.saveFileNm }" style="width: 100px; height: 100px;"> </a>
-				                            <div class="media-body">
-				                                <h4 class="media-heading"><a href="http://localhost:8080/sunnyside/store/do_selectOne.do?productId=${vo.productId }">${vo.productNm }</a></h4>                  
-				                            </div>
-				                        </div></td>
+					                        <div class="media">
+					                            <a class="thumbnail pull-left"> <img class="media-object" src="${vo.saveFileNm }" style="width: 100px; height: 100px;"> </a>
+					                            <div class="media-body">
+					                                <h4 class="media-heading"><a href="http://localhost:8080/sunnyside/store/do_selectOne.do?productId=${vo.productId }">${vo.productNm }</a></h4>                  
+					                            </div>
+					                        </div>
+				                        </td>
 				                        <td class="col-sm-1 col-md-1" style="text-align: center" >				                     
 				                       	   <input type="text" class="form-control" id="count" value="${vo.count }">
 				                        </td>
@@ -60,9 +61,9 @@
 					                         <button type="button" class="btn btn-success" id="updateBtn"  style="margin-left: 5px; padding-bottom: 12px;">
 					                            <span class="glyphicon glyphicon-ok"></span>
 					                        </button>
-				                        </td>				                        				                   
-                          		</c:forEach>
-			        		                       
+				                        </td>
+				                   </tr>				                        				                   
+                          		</c:forEach>            
 					                    <tr>
 					                        <td>   </td>
 					                        <td>   </td>
@@ -81,7 +82,8 @@
 					                        <td>
 						                        <button type="button" class="btn btn-success" id="paybtn" name="paybtn">
 						                           	 구매하기 <span class="glyphicon glyphicon-play"></span>
-						                        </button></td>
+						                        </button>
+						                   </td>
 					                     </tr>
                   			  </c:otherwise>
                 		</c:choose> 
@@ -191,10 +193,17 @@ $("[id^=updateBtn]").on("click",function(){
 	
 	// 구매하기 페이지로 이동
 	$("#paybtn").on("click",function(){
-		//alert("paybtn");
-		if(false==confirm('주문하시겠습니까?')) return;
+        
+        var tbody = $('#tbody');
+        var tr = tbody.children();
+        var productId = tr.children('#productId').text();
+        
+        console.log("productId="+productId); //20191022-001-02120191011-002-00720191013-001-017 라고 출력
+        		
+	 	if(false==confirm('주문하시겠습니까?')) return;
 		var userId = $("#userId").text();
-		location.href="${context}/cart/do_payRetrieve.do?userId="+userId;
+
+		location.href="${context}/cart/do_make_codeNm.do?userId="+userId+"&&productId="+productId;
 	});
 	
 $(document).ready(function(){	

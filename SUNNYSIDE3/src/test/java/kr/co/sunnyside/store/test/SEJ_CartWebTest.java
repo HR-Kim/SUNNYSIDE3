@@ -57,10 +57,6 @@ public class SEJ_CartWebTest {
 		
 		//LOG.debug(fileId.length()+"");// 번호 등록될 때 아이디랑 뒤에 번호 아무거나 붙여져서 나온다
 		list = Arrays.asList(
-				new SEJ_CartVO("20191018-001","고소팝콘(L)","admin",1,5000,5000,"20191011-001-000","","",""),
-				new SEJ_CartVO("20191018-002","아메리카노(ICE)","admin",2,4000,8000,"20191011-002-009","","",""),
-				new SEJ_CartVO("20191018-003","3D관람권","admin",1,12000,12000,"20191013-003-010","","",""),
-				new SEJ_CartVO("20191018-004","달콤팝콘(M)","admin",1,5500,5500,"20191013-001-018","","","")
 				);
 		
 			mockMvc = MockMvcBuilders.webAppContextSetup(context).build();

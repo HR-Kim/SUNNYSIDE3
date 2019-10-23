@@ -36,5 +36,8 @@ public interface SEJ_CartSvc {
 	
 	/**장바구니 상품수량 변경*/
 	public int do_updateCountCart(DTO dto);
+	
+	/**주문코드 생성후 업데이트*/
+	public int do_make_codeNm(DTO dto);
 
 }

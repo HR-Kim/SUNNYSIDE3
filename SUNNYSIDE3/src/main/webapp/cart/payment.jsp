@@ -1,9 +1,15 @@
+<%@page import="java.util.Enumeration"%>
+<%@page import="kr.co.sunnyside.store.service.SEJ_PayVO"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <c:set var="context" value="${pageContext.request.contextPath }" />
+
+<%  String payCode = (String)session.getAttribute("payCode"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +23,7 @@
 <h2 style="margin-left: 450px;margin-top: 70px; margin-bottom: 40px; font-weight: bold">주문/결제 </h2>
 <div class="container">
     <div class="row">
-        <div class="col-sm-12 col-md-10 col-md-offset-1">
+        <div class="col-sm-12 col-md-10 col-md-offset-1">  
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -48,10 +54,9 @@
 				                        <td style="display: none;" id="cartId"><strong>${vo.cartId }</strong></td>
 				                        <td style="display: none;" id="count"><strong>${vo.count }</strong></td>
 				                        <td style="display: none;" id="userName"><strong>${user.userName }</strong></td>
-				                        <td style="display: none;" id="email"><strong>${user.email }</strong></td>
-				                        <td style="display: none;" id="cellphone"><strong>${user.cellphone }</strong></td>
 				                        <td style="display: none;" id="productId"><strong>${vo.productId }</strong></td>
 				                        <td style="display: none;" id="userId"><strong>${user.userId }</strong></td>
+				                        <td id="payCode"><strong>${vo.payCode }</strong></td>
 				                        <td class="col-sm-4 col-md-10 text-center"><strong><fmt:formatNumber value="${vo.productCost}" pattern="#,###,###"/>원</strong></td>	
 				                    </tr>			                      			                        				                   
                           		</c:forEach>			        		                       
@@ -93,8 +98,6 @@
 		userId = $("#userId").text();
 		tatalCost = $("#tatalCost").val();
 		userName =$("#userName").text();	
-		email =$("#email").text();
-		cellphone = $("#cellphone").text();
 		payProduct();	
 	});
 	
@@ -109,9 +112,7 @@
 		    merchant_uid : 'merchant_' + new Date().getTime(),
 		    name : 'SUNNYSIDE',
 		    amount : tatalCost,
-		    buyer_email : email,
 		    buyer_name : userName,
-		    buyer_tel : cellphone
 		}, function(rsp) {
 		    if ( rsp.success ) {
 		    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
@@ -174,12 +175,12 @@
 				  if(null != data && data.msgId=="1"){
 					  alert("결제되었습니다.");
 					  var userId = $("#userId").text();
-					  location.href="${context}/cart/do_payCompleteList.do?userId="+userId;
+					  location.href="${context}/cart/do_payCompleteList.do?userId="+userId+"&&payCode=<%=payCode%>";
 					
 				  }else{
 					alert("결제되었습니다.");	
 					  var userId = $("#userId").text();
-					  location.href="${context}/cart/do_payCompleteList.do?userId="+userId;
+					  location.href="${context}/cart/do_payCompleteList.do?userId="+userId+"&&payCode=<%=payCode%>";
 				  }
 		     },
 		     complete:function(data){
