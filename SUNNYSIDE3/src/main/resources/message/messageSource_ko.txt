@@ -184,7 +184,7 @@ message.header.moviemanagement=영화편성
 #main
 message.main.banner_edit=베너수정
 message.main.notice=공지사항
-message.main.type=분류
+message.main.writerId=작성자
 message.main.regdt=작성일
 message.main.title=제목
 message.main.questions=1:1문의
