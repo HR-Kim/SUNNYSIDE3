@@ -18,6 +18,7 @@ import kr.co.sunnyside.cmn.Message;
 import kr.co.sunnyside.cmn.SearchVO;
 import kr.co.sunnyside.reservation.service.LGS_ReservationSvc;
 import kr.co.sunnyside.reservation.service.LGS_TicketVO;
+import kr.co.sunnyside.screeninfo.service.LGS_ScreenInfoVO;
 
 @Controller
 public class LGS_ReservationCtrl {
@@ -28,6 +29,7 @@ public class LGS_ReservationCtrl {
 	
 	//view
 	private final String VIEW_PAY ="reservation/reservation_pay";
+	private final String VIEW_RESULT ="reservation/reservation_result";
 	
 	@ResponseBody
 	@RequestMapping(value = "reservation/do_save.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
@@ -208,5 +210,46 @@ public class LGS_ReservationCtrl {
 		
 		return VIEW_PAY;
 	}
+	
+	@RequestMapping(value = "reservation/reservation_result.do", method = RequestMethod.POST)
+	public String do_payResultPage(LGS_ScreenInfoVO vo, String cost, String seatData, Model model) {
+		LOG.debug("==================================");
+		LOG.debug("Controller : reservation_result.do");
+		LOG.debug("==================================");
+		
+		model.addAttribute("cost", cost);
+		model.addAttribute("vo", vo);
+		model.addAttribute("seatData", seatData);
+		
+		LOG.debug("==================================");
+		LOG.debug("vo : " + vo);
+		LOG.debug("cost : " + cost);
+		LOG.debug("seatData : " + seatData);
+		LOG.debug("==================================");
+		
+		return VIEW_RESULT;
+	}
 
+	@ResponseBody
+	@RequestMapping(value = "reservation/do_selectOne_result.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	public String do_selectOne_result(LGS_TicketVO ticketVO) {
+		LOG.debug("==================================");
+		LOG.debug("Controller : do_selectOne_result");
+		LOG.debug("==================================");
+
+		LGS_TicketVO outVO = (LGS_TicketVO) reservationSvc.do_selectOne_result(ticketVO);
+		
+		LOG.debug("==================================");
+		LOG.debug("outVO" + outVO);
+		LOG.debug("==================================");
+		
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(outVO);
+		
+		LOG.debug("==================================");
+		LOG.debug("jsonStr : " + jsonStr);
+		LOG.debug("==================================");
+		
+		return jsonStr;
+	}
 }

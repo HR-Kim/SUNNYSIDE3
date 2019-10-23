@@ -21,7 +21,7 @@
 		#cancel{
 			position: inherit;
 			top: 18px;
-			left: 230px;
+			left: 260px;
 		}
 		.bottom button {
 			width: 120px;
@@ -150,56 +150,63 @@
 		<c:choose>
 			<c:when test="${vo != null}">
 				<div class="container">
-			<input type="hidden" id="hd_kortitle" value="">
-			<input type="hidden" id="hd_cost" value="">
-			<input type="hidden" id="hd_final" value="">
-			<input type="hidden" id="hd_coupon" value="">
-			
-			<div class="top">
-				<div class="topBar"></div>
-				<label id="topBarTitle"></label>
-				<label id="topBarCost"></label>
-			</div>
-			<div class="main">
-				<div id="couponBox">
-					<label class="BAR">쿠폰</label>
-					<br/>
-				</div>
-				<div class="agreeBox">
-					&nbsp;<input type="checkbox" id="chkAll" value="0" onclick="javascript:chkAll();">
-							<b class="CHKAll">전체 동의하기</b>
+					<form action="${context}/reservation/reservation_result.do" method="post" id="mainForm">
+						<input type="hidden" id="hd_kortitle" name="korTitle" value="">
+						<input type="hidden" id="hd_engtitle" name="engTitle" value="">
+						<input type="hidden" id="hd_final" name="cost" value="">
+						<input type="hidden" id="hd_userId" name="userId" value="${user.userId}">
+	    				<input type="hidden" id="hd_screenId" name="screenId" value="${vo.screenId}">
+	    				<input type="hidden" id="hd_seatData" name="seatData" value="${seatInfo}">
+					</form>
+	
+					<input type="hidden" id="hd_coupon" value="">
+					<input type="hidden" id="hd_cost" value="">
+					
+					<div class="top">
+						<div class="topBar"></div>
+						<label id="topBarTitle"></label>
+						<label id="topBarCost"></label>
+					</div>
+					<div class="main">
+						<div id="couponBox">
+							<label class="BAR">쿠폰</label>
 							<br/>
-					&nbsp;&nbsp;&nbsp;<input type="checkbox" id="chkA" value="0">
-						위 상품의 구매조건 확인 결제진행 동의
-					<br/>
-					&nbsp;&nbsp;&nbsp;<input type="checkbox" id="chkB" value="0">
-						거래정보 제공 동의 (제공 받는 판매자: SunnySide Theater)
-
-				</div>
-			</div>
-			<div class="sub">
-				<div class="finalCostInfo">
-					<label class="FINAL_COST">총 결제금액</label>
-					<br/>
-					<label id="final_cost"></label>
-					<br/>
-					<div>
-						<label class="PRODUCT_COST">상품금액</label>
-						<br/>
-						<label id="rawCost"></label>
-						<br/>
-						<label class="COUPON">쿠폰할인금액</label>
-						<br/>
-						<label id="couponValue">-</label>
-						<br/>
+						</div>
+						<div class="agreeBox">
+							&nbsp;<input type="checkbox" id="chkAll" value="0" onclick="javascript:chkAll();">
+									<b class="CHKAll">전체 동의하기</b>
+									<br/>
+							&nbsp;&nbsp;&nbsp;<input type="checkbox" id="chkA" value="0">
+								위 상품의 구매조건 확인 결제진행 동의
+							<br/>
+							&nbsp;&nbsp;&nbsp;<input type="checkbox" id="chkB" value="0">
+								거래정보 제공 동의 (제공받는 판매자: <b>SunnySide Theater</b>)
+		
+						</div>
+					</div>
+					<div class="sub">
+						<div class="finalCostInfo">
+							<label class="FINAL_COST">총 결제금액</label>
+							<br/>
+							<label id="final_cost"></label>
+							<br/>
+							<div>
+								<label class="PRODUCT_COST">상품금액</label>
+								<br/>
+								<label id="rawCost"></label>
+								<br/>
+								<label class="COUPON">쿠폰할인금액</label>
+								<br/>
+								<label id="couponValue">-</label>
+								<br/>
+							</div>
+						</div>
+					</div>
+					<div class="bottom">
+						<button id="startPay" class="btn btn-success btn-lg">결제</button>
+						<button id="cancel" class="btn btn-default btn-lg">취소</button>
 					</div>
 				</div>
-			</div>
-			<div class="bottom">
-				<button id="startPay" class="btn btn-success btn-lg">결제</button>
-				<button id="cancel" class="btn btn-default btn-lg">취소</button>
-			</div>
-		</div>
 			</c:when>
 			<c:otherwise></c:otherwise>
 		</c:choose>
@@ -211,17 +218,17 @@
 		<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 		<script type="text/javascript">
     		$(document).ready(function(){
-    			resizeTo(465, 580);
+    			resizeTo(446, 594);				//리사이즈 430(+16) 530(+64)
     			
     			var vo = "${vo.screenId}";
-    			if(vo.length < 1){
+    			if(vo.length < 1){				//예매정보없이 들어왔을때
     				alert("잘못된 접근입니다.");
     				self.close();
     				return;
     			}
     			
     			var userId = "${user.userId}";
-    			if(userId.length < 1){
+    			if(userId.length < 1){			//로그인없이 들어왔을때
     				alert("로그인이 필요한 페이지입니다.");
     				self.close();
     				return;
@@ -240,15 +247,15 @@
     			var email = '${user.email}';
     			var productNm = $("#topBarTitle").text();
     			var cost = $("#hd_final").val();
-    			var IMP = window.IMP; // 생략가능
-    	        IMP.init('imp42104945'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+    			var IMP = window.IMP; 							// 생략가능
+    	        IMP.init('imp42104945');						// 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
     	        var msg;
     	        
     	        IMP.request_pay({
     	            pg : 'kakaopay',
     	            pay_method : 'card',
     	            merchant_uid : 'merchant_' + new Date().getTime(),
-    	            name : productNm,
+    	            name : productNm,							//상품이름
     	            amount : cost,								//totalPrice
     	            buyer_email : email,
     	            buyer_name : userName,
@@ -258,7 +265,7 @@
     	            if ( rsp.success ) {
     	                //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
     	                jQuery.ajax({
-    	                    url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
+    	                    url: "/payments/complete",			//cross-domain error가 발생하지 않도록 주의해주세요
     	                    type: 'POST',
     	                    dataType: 'json',
     	                    data: {
@@ -283,7 +290,9 @@
     	                success();
     	                seatUpdateUnable();
     	                //성공시 이동할 페이지
-    	                location.replace='${context}/reservation/reservation_result.jsp';
+    	                var mainForm = $("#mainForm");
+    	                mainForm.submit();
+    	               	//location.replace='${context}/reservation/reservation_result.jsp';
     	            } else {
     	                msg = '결제에 실패하였습니다.\n';
     	                msg += '에러내용 : ' + rsp.error_msg;
@@ -305,7 +314,20 @@
 				}).done(function(data){
 					var movieInfo = data;
 					var kortitle = movieInfo.kortitle;
-					$("#topBarTitle").text("[영화] " + kortitle);
+					var engtitle = movieInfo.engtitle;
+					if(kortitle == "undefined" || kortitle.length < 1) kortitle = "";
+					if(engtitle == "undefined" || engtitle.length < 1) engtitle = "";
+					$("#hd_kortitle").val(kortitle);
+					$("#hd_engtitle").val(engtitle);
+
+					//이름이 너무 길 경우 처리
+					var mdKT = kortitle;
+					var mdET = engtitle;
+					if(mdKT.length > 10){mdKT = mdKT.substr(0, 10).concat("...");}
+					if(mdET.length > 10){mdET = mdET.substr(0, 10).concat("...");}
+					var topBarTitle = mdKT + "(" + mdET + ")";
+					
+					$("#topBarTitle").text("[영화] " + topBarTitle);
 				});
     		};
         		
@@ -317,7 +339,7 @@
     			$("#rawCost").text(cost + "원");
     			$("#hd_final").val(cost);
     		}
-	
+
     		//쿠폰정보
     		function setCoupon(){
     			var userId = "${user.userId}";
@@ -330,13 +352,13 @@
     				}
 				}).done(function(data){
 					var coupon = data;
-					
+					console.log(data);
 					$("#couponBox>.couponInfo").detach();
 					if(coupon == null){
 						$("#couponBox").append(
-								"<div id='couponInfo'>"+
-								"&nbsp;<label class='COUPON'>쿠폰이 없습니다.</label>"+
-								"</div>"
+							"<div id='couponInfo'>"+
+							"&nbsp;<label class='COUPON'>쿠폰이 없습니다.</label>"+
+							"</div>"
 						);
 					}else{
 						var cNm = coupon.couponNm;
@@ -351,13 +373,12 @@
 						
 						if(usable == '1'){
 							$("#couponInfo").append(
-									"<button class='btn btn-xs btn-danger'>이미사용</button>"
-								);
+								"<button class='btn btn-xs btn-danger'>이미사용</button>"
+							);
 						}else{
 							$("#couponInfo").append(
-									"<button onclick='javascript:cpON("+discount+");' class='btn btn-xs btn-success'>적용</button>"
-								);
-							
+								"<button onclick='javascript:cpON("+discount+");' class='btn btn-xs btn-success'>적용</button>"
+							);
 						}
 					}
 				});	
@@ -374,8 +395,6 @@
     			$("#couponInfo").append(
 						"<button onclick='javascript:cpOFF("+discount+");' class='btn btn-xs btn-danger'>취소</button>"
 					);
-    			
-    			
     		}
     		
     		//쿠폰해제
@@ -446,7 +465,7 @@
     			var arr = stringInfo.split("%");
 
 				for(var i=1 ; i<arr.length ; i++){
-					var seatNm = arr[i];console.log(seatNm + "  " + i);
+					var seatNm = arr[i];
 					$.ajax({
 	    				type : "POST",
 	    				url : "${context}/reservation/do_save.do",
@@ -463,7 +482,7 @@
 	    					"cost" : cost
 	    				}
 					}).done(function(data){
-						var msg = data;console.log(seatNm + "  " + i);
+						var msg = data;
 						if(msg.msgId == "1"){
 							//alert("1");
 						}else{

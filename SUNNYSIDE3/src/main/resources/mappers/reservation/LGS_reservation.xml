@@ -114,4 +114,27 @@
 		    )T
 	</select>
 
+	<select id="do_selectOne_result" parameterType="TicketVO" resultType="TicketVO">
+		SELECT
+			TICKET_CODE as ticketCode
+			,BRANCH_ID as branchId
+			,ROOM_ID as roomId
+			,SCREEN_ID as screenId
+			,USER_ID as userId
+			,MOVIE_ID as movieId
+			,SEAT_NM as seatNm
+			,ADULT_CNT as adultCnt
+			,PAY_STATE as payState
+			,COST as cost
+			,TO_CHAR(PAY_DT, 'YYYY-MM-DD HH24:MI:SS') as payDt
+			,TO_CHAR(TICKET_DT, 'YYYY-MM-DD HH24:MI:SS') as ticketDt
+		FROM
+		    TICKET_HISTORY
+		WHERE
+		    USER_ID = #{userId, jdbcType=VARCHAR}
+        AND
+            SCREEN_ID = #{screenId, jdbcType=VARCHAR}
+        AND
+            SEAT_NM = #{seatNm, jdbcType=VARCHAR}
+	</select>
 </mapper>

@@ -41,5 +41,10 @@ public class LGS_ReservationSvcImpl implements LGS_ReservationSvc {
 	public DTO do_selectOne(DTO dto) {
 		return reservationDao.do_selectOne(dto);
 	}
+	
+	@Override
+	public DTO do_selectOne_result(DTO dto) {
+		return reservationDao.do_selectOne_result(dto);
+	}
 
 }
