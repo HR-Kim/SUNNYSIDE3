@@ -168,7 +168,7 @@
 				url : "${context}/login/do_login.do",
 				dataType : "html",
 				data : {
-					"lang" :  $("#lang").val(),
+					"userId" :  $("#userId").val(),
 					"userId" : $("#userId").val(),
 					"passwd" : $("#passwd").val()
 				},
@@ -230,7 +230,6 @@
 		 });
 		
 		
-		
 		/** 로그인창 다국어처리 */
 		$("#loginLang").on('change', function() {
 			var frm = document.loginForm;
@@ -239,10 +238,6 @@
 	    	frm.submit();
 		});
 
-
-		
-		
-		
 		
 		$(document).ready(function(){
 			

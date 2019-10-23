@@ -119,6 +119,16 @@ public class SJH_LoginCtrl {
 		return VIEW_PW_FIND_MNG;
 	}
 	
+	//비밀번호 찾기 성공 시 화면 call
+	@RequestMapping(value="login/pw_find_list_view.do", method = RequestMethod.GET)
+	public String pwFindListView() {
+		LOG.debug("========================");
+		LOG.debug("=@Controller=View=");
+		LOG.debug("========================");
+		
+		return VIEW_PW_FIND_LIST;
+	}
+	
 	//로그인 화면call
 	@RequestMapping(value = "login/login_view.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(Model model, HttpSession session,HttpServletRequest request,HttpServletResponse response) {
@@ -349,6 +359,7 @@ public class SJH_LoginCtrl {
 	 */
 	@RequestMapping(value="login/pw_find.do",method = RequestMethod.POST
 					,produces = "application/json; charset=UTF-8")
+	@ResponseBody
 	public String pw_find(SJH_LoginVO user) {
 		LOG.debug("1=========================");
 		LOG.debug("=@Controller=user=="+user);
@@ -359,14 +370,22 @@ public class SJH_LoginCtrl {
 		
 		Message message=new Message();
 		if(flag>0) {
-			message.setMsgId(flag+"");
+			message.setMsgId("10");
 			message.setMsgMsg(user.getUserName()+"님의 메일로 임시 비밀번호가 전송 되었습니다.");
 		}else {
 			message.setMsgId(flag+"");
-			message.setMsgMsg("비밀번호 찾기 실패.");			
+			message.setMsgMsg("비밀번호 찾기 실패. 입력한 정보를 찾을 수 없습니다.");		
 		}
 	
-		return VIEW_PW_FIND_LIST; //화면으로 리턴		
+		//json으로 변환
+		Gson gson = new Gson();
+		String json = gson.toJson(message);
+		LOG.debug("=========================");
+		LOG.debug("=@Controller 등록gson=user=="+json);
+		LOG.debug("=========================");		
+		
+		return json;
+		
 	}
 	
 	

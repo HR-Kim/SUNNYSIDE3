@@ -73,7 +73,8 @@ public class SJH_LoginSvcImpl implements SJH_LoginSvc{
 		//비밀번호 찾기 성공 시 임시 비밀번호 메일로 전송
 		if(flag>0) {
 			SJH_LoginVO changedVO = (SJH_LoginVO) loginDao.do_selectOne(dto);
-			sendPwFindMail(changedVO); // 메일 전송
+			LOG.debug("ㅋㅋchangedVO: "+changedVO);
+			sendPwFindMail(changedVO);
 		}
 		return flag;
 	}

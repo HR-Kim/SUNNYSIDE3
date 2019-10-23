@@ -50,28 +50,5 @@ public class LocaleChangeController {
 	}
 	
 	
-	/**
-	 * 로그인 -> 로그인 (로그인 다국어)
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	@RequestMapping(value="/login_change_locale.do",method=RequestMethod.GET)
-	@ResponseBody
-	public String loginChangeLocale(HttpServletRequest request,HttpServletResponse response) {
-		String language = StringUtil.nvl(request.getParameter("lang"),"ko");
-		
-		LOG.debug("======================");
-		LOG.debug("=language="+language);
-		LOG.debug("======================");
-		
-		Locale locale = new Locale(language);
-		localeResolver.setLocale(request, response, locale);
-		
-		return "login/login";
-		
-	}
-	
-	
 	
 }

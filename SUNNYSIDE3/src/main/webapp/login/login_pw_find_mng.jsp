@@ -112,11 +112,32 @@
 		
 		/** 비밀번호 찾기 확인 버튼 */
 		$("#confirm").on("click",function(){
-			//if($("#pwFindForm").valid()==false)return;
+			$.ajax({
+		         type:"POST",
+		         url:"${context}/login/pw_find.do",
+		         dataType:"html",
+		         data:{
+					"userId" : $("#userId").val(),
+					"userName" :  $("#userName").val(),
+					"email" : $("#email").val()
+		         },
+		         success: function(data){
+		        	var jData = JSON.parse(data);
+		          	if(jData.msgId == "10"){
+		          		location.href="${context}/login/pw_find_list_view.do"
+		          	}else{
+		          		alert(jData.msgMsg);
+		          	}
+		          	
+		         },
+		         complete: function(data){//무조건 수행
+		          
+		         },
+		         error: function(xhr,status,error){
+		          
+		         }
+			});
 			
-	    	var frm = document.pwFindForm;
-			frm.action = "${context}/login/pw_find.do"
-	    	frm.submit();
 		});
 		
 		
@@ -127,9 +148,6 @@
 		});
 		
 	
-		$(document).ready(function(){
-			
-		});
 		
 	</script>
 </body>
