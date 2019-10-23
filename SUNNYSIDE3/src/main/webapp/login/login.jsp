@@ -42,9 +42,9 @@
 				<form class="login100-form validate-form flex-sb flex-w" id="loginForm" name="loginForm">
 					<div class="form-group">
 						<!-- 로그인 다국어 -->
-						<select name="lang" id="lang">
-					        <option value="ko" <c:if test="${lang == 'ko'}">selected</c:if> >한글</option>
-							<option value="en" <c:if test="${lang == 'en'}">selected</c:if> >English</option>
+						<select name="loginLang" id="loginLang">
+					        <option value="ko" <c:if test="${loginLang == 'ko'}">selected</c:if> >한글</option>
+							<option value="en" <c:if test="${loginLang == 'en'}">selected</c:if> >English</option>
 					     </select>
 				    </div>
 				    
@@ -138,7 +138,6 @@
 		/** 네이버로 로그인 */
 		$("#naverLogin").on("click",function(){
 			if(confirm("네이버로 로그인 하시겠습니까?")== false)return;
-			alert($("#naverUrl").val());
 			location.href = $("#naverUrl").val();
 		});
 		
@@ -163,10 +162,6 @@
 	
 		/** 로그인 */
 		$("#signIn").on("click",function(){
-			//alert("signIn");
-			//console.log($("#userId").val());
-			//console.log($("#passwd").val());
-			//if($("#loginForm").valid()==false)return;
 			
 			$.ajax({
 				type : "POST",
@@ -235,18 +230,21 @@
 		 });
 		
 		
+		
 		/** 로그인창 다국어처리 */
-		$("#lang").on('change', function() {
+		$("#loginLang").on('change', function() {
 			var frm = document.loginForm;
-	    	frm.lang.value = $("#lang").val();
+	    	frm.lang.value = $("#loginLang").val();
 	    	frm.action = "${context}/login/login_view.do";
 	    	frm.submit();
-	    });
+		});
+
+
+		
 		
 		
 		
 		$(document).ready(function(){
-			
 			
 			/** 쿠키 저장 */
 		    var key = getCookie("key");

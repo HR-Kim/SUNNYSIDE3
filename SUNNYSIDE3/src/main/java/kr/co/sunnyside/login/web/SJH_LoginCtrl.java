@@ -128,14 +128,14 @@ public class SJH_LoginCtrl {
 		LOG.debug("naverAuthUrl: "+naverAuthUrl);
 
 		//다국어
-		String language = StringUtil.nvl(request.getParameter("lang"),"ko");
-		
+		String language = StringUtil.nvl(request.getParameter("loginLang"),"ko");
 		LOG.debug("======================");
 		LOG.debug("=language="+language);
 		LOG.debug("======================");
 		
 		Locale locale = new Locale(language);
 		localeResolver.setLocale(request, response, locale);
+		model.addAttribute("loginLang", language);
 		
 		return VIEW_LOGIN;
 	}
