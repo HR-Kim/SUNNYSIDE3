@@ -16,6 +16,7 @@ public interface KDY_UserpageSvc {
 	public List<?> do_membership(DTO dto);
 	
 	public List<?> do_qnaList(DTO dto);
-
+	
+	public List<?> do_reservationList(DTO dto);
 
 }

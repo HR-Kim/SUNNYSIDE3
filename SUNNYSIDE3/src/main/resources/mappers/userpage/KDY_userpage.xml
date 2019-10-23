@@ -103,6 +103,33 @@
 		    )T
 	</select>
 	
+	<select id="do_reservationList" parameterType="listSearchVO" resultType="KDY_ReservationVO"> 
+		SELECT T.RNUM as num
+			  ,T.pay_code as pay_code
+			  ,T.product_nm as product_nm
+			  ,T.pay_cost as pay_cost
+			  ,T.pay_dt as pay_dt
+		FROM(
+		    SELECT ROWNUM AS RNUM, A.*
+		    FROM(
+		        SELECT
+					b.pay_code,
+					a.product_nm,
+					b.pay_cost,
+					b.pay_dt
+				FROM
+					PRODUCT a JOIN PAY_HISTORY b
+					
+					ON 
+						a.product_id =b.product_id
+				WHERE
+					user_id=#{user_id,jdbcType=VARCHAR}
+			         
+			        )A
+		    WHERE CEIL(ROWNUM/ #{pageSize, jdbcType=VARCHAR} ) = #{pageNum, jdbcType=VARCHAR}
+		    )T
+	</select>
+	
 	
 
 </mapper>

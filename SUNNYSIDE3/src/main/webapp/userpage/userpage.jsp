@@ -16,16 +16,29 @@
 	<div class="container">
       <div class="row">
         <div class="col">
-          <p>Tab</p>
+          <div>
+          <c:choose>
+			
+					<c:when test="${membershiplist.size()>0}">
+							<c:forEach var="vo" items="${membershiplist}">
+								<h3>${vo.user_name}회원님 환영합니다</h3>
+								<h3>회원 등급은 ${vo.user_level} 입니다</h3>
+							</c:forEach>		
+					</c:when>
+						<c:otherwise>
+							
+						</c:otherwise>
+			</c:choose>
+          </div>
             <ul class="nav nav-pills" id="tab_id">
               <li class="nav-item" name="do_tiketHistory.do">
                 <a name="tiketHistory" class="nav-link" data-toggle="tab" href="#tiketHistory">예매/구매 내역</a>
               </li>
-              <li class="nav-item" name="do_coupon_retrieve.do">
-                <a class="nav-link" data-toggle="tab" href="#couponList">나의 쿠폰함</a>
+              <li class="nav-item" name="do_reservationList.do">
+                <a class="nav-link" data-toggle="tab" href="#reservationList">상품결제 내역</a>
               </li>
-              <li class="nav-item" name="do_membership.do">
-                <a class="nav-link" data-toggle="tab" href="#membership">VIP</a>
+               <li class="nav-item" name="do_coupon_retrieve.do">
+                <a class="nav-link" data-toggle="tab" href="#couponList">나의 쿠폰함</a>
               </li>
               <li class="nav-item" name="do_movieHistory.do">
                 <a class="nav-link" data-toggle="tab" href="#movieHistory">무비히스토리</a>
@@ -41,13 +54,12 @@
               <div class="tab-pane fade" id="tiketHistory">
                 <%@include file="../userpage/tiketHistory.jsp"%>
 			  </div>
-			  
-              <div class="tab-pane fade" id="couponList">
+			  <div class="tab-pane fade" id="reservationList">
+               <%@include file="../userpage/reservationList.jsp"%>
+               </div>
+			   <div class="tab-pane fade" id="couponList">
                <%@include file="../userpage/couponList.jsp"%>
                </div>
-              <div class="tab-pane fade" id="membership">
-                <%@include file="../userpage/membership.jsp"%>
-              </div>
               <div class="tab-pane fade" id="movieHistory">
                 <%@include file="../userpage/movieHistory.jsp"%> 
               </div>
@@ -104,6 +116,23 @@
 					
 					 $("#tiketHistoryTable>tbody").append(event_data);
 					}
+					
+					else if(location=="do_reservationList.do"){
+						$("#reservationTable>tbody").empty();
+						 $.each(jData,function(index, value){
+							 
+							 event_data += '<tr>' ;
+							 event_data += '<td>'+value.product_nm+'</td>' ;
+							 event_data += '<td>'+value.pay_code+'</td>' ;
+							 event_data += '<td>'+value.pay_cost+'</td>' ;
+							 event_data += '<td>'+value.pay_dt+'</td>' ;
+							 event_data += '</tr>';
+							 
+						 });
+						 console.log(event_data);
+						
+						 $("#reservationTable>tbody").append(event_data);
+					}
 					else if(location=="do_movieHistory.do"){
 						$("#movielistTable>tbody").empty();
 						 $.each(jData,function(index, value){
@@ -122,35 +151,22 @@
 						
 						$("#couponlistTable>tbody").empty();
 						 $.each(jData,function(index, value){
-							
+							if(value.usable==0){
+								var useable="사용가능";
+							}
 							 event_data += '<tr> ' ;
 							 event_data += '<td>'+value.num+'</td>' ;
 							 event_data += '<td>'+value.coupon_nm+'</td>'  ;
 							 event_data += '<td>'+value.coupon_code+'</td> ' ;
 							 event_data += '<td>'+value.use_dt+'</td>'  ;
-							 event_data += '<td>'+value.usable+'</td> ' ;
+							 event_data += '<td>'+useable+'</td> ' ;
 							 event_data += '</tr>';
 						 });
 						 console.log(event_data);
 						
 						 $("#couponlistTable>tbody").append(event_data);
 						}
-						else if(location=="do_membership.do"){
 						
-						
-						$("#membership>div").empty();
-						 $.each(jData,function(index, value){
-							 
-							
-							 event_data += '<h3>'+value.user_name+' 고객님의 </h3>' ;
-							 event_data += '<h3>2019년 회원 등급은 '+value.user_level+'</h3>'  ;
-							 event_data += '<h3>보유 포인트 : '+value.total_pay+' 포인트</h3> ' ;
-							
-						 });
-						 console.log(event_data);
-						
-						 $("#membership>div").append(event_data);
-						}
 					
 						else if(location=="do_qnaList.do"){
 						

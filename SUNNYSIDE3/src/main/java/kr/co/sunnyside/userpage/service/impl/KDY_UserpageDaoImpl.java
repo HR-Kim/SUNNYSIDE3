@@ -15,6 +15,7 @@ import kr.co.sunnyside.phototicket.service.SEJ_PhotoTicketVO;
 import kr.co.sunnyside.reservation.service.LGS_TicketVO;
 import kr.co.sunnyside.userpage.service.KDY_CouponVO;
 import kr.co.sunnyside.userpage.service.KDY_MoviehistoryVO;
+import kr.co.sunnyside.userpage.service.KDY_ReservationVO;
 import kr.co.sunnyside.userpage.service.KDY_UserinfoVO;
 import kr.co.sunnyside.userpage.service.listSearchVO;
 
@@ -28,6 +29,24 @@ public class KDY_UserpageDaoImpl implements WorkDiv {
 	private final String NAMESPACE = "userpage";
 	
 	
+	public List<?> do_reservationList(DTO dto) {
+		String statement = this.NAMESPACE+".do_reservationList";//kr.co.ehr.user.get_retrieve
+		listSearchVO search = (listSearchVO) dto;
+		LOG.debug("========================");
+		LOG.debug("01.param="+search);
+		LOG.debug("========================");
+		
+		LOG.debug("========================");
+		LOG.debug("02.statement="+statement);
+		LOG.debug("========================");
+		
+		List<KDY_ReservationVO> list = this.sqlSessionTemplate.selectList(statement, search);
+		
+		LOG.debug("========================");
+		LOG.debug("03.outVO="+list);
+		LOG.debug("========================");		
+		return list;
+	}
 	public List<?> do_qnaList(DTO dto) {
 		String statement = this.NAMESPACE+".do_qnaList";//kr.co.ehr.user.get_retrieve
 		listSearchVO search = (listSearchVO) dto;

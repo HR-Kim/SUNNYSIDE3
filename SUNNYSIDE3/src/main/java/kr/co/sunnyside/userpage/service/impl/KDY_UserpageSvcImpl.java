@@ -54,6 +54,13 @@ public class KDY_UserpageSvcImpl implements KDY_UserpageSvc {
 		
 		return UserpageDao.do_qnaList(dto);
 	}
-	
 
+
+
+	@Override
+	public List<?> do_reservationList(DTO dto) {
+		return UserpageDao.do_reservationList(dto);
+	}
+	
+	
 }

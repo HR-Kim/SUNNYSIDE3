@@ -41,6 +41,7 @@
 		<typeAlias type="kr.co.sunnyside.userpage.service.KDY_CouponVO" alias="KDY_CouponVO" />
 		<typeAlias type="kr.co.sunnyside.userpage.service.KDY_UserinfoVO" alias="KDY_UserinfoVO" />
 		<typeAlias type="kr.co.sunnyside.userpage.service.KDY_QnalistVO" alias="KDY_QnalistVO" />
+		<typeAlias type="kr.co.sunnyside.userpage.service.KDY_ReservationVO" alias="KDY_ReservationVO" />
 		
 	</typeAliases>
 

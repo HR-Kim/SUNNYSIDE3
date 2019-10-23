@@ -22,6 +22,7 @@ import kr.co.sunnyside.reservation.service.LGS_TicketVO;
 import kr.co.sunnyside.userpage.service.KDY_CouponVO;
 import kr.co.sunnyside.userpage.service.KDY_MoviehistoryVO;
 import kr.co.sunnyside.userpage.service.KDY_QnalistVO;
+import kr.co.sunnyside.userpage.service.KDY_ReservationVO;
 import kr.co.sunnyside.userpage.service.KDY_UserinfoVO;
 import kr.co.sunnyside.userpage.service.KDY_UserpageSvc;
 import kr.co.sunnyside.userpage.service.listSearchVO;
@@ -137,11 +138,10 @@ public class KDY_UserpageCtrl {
 		return gsonStr;
 		
 	}
-	@RequestMapping(value = "userpage/do_membership.do", method = RequestMethod.POST ,produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public String do_membership(listSearchVO search) {
+	@RequestMapping(value = "userpage/do_userpage.do", method = RequestMethod.GET)
+	public String do_userpage(listSearchVO search, Model model) {
 		LOG.debug("==================================");
-		LOG.debug("Controller : do_coupon_retrieve");
+		LOG.debug("Controller : do_userpage");
 		LOG.debug("==================================");
 		search.setUser_id("j02_126");
 		
@@ -152,9 +152,8 @@ public class KDY_UserpageCtrl {
 		LOG.debug("list : " + list);
 		LOG.debug("==================================");
 		
-		Gson gson=new Gson();
-		String gsonStr = gson.toJson(list);
-		return gsonStr;
+		model.addAttribute("membershiplist",list);
+		return VIEW_NAME;
 		
 	}
 	
@@ -162,12 +161,33 @@ public class KDY_UserpageCtrl {
 	@ResponseBody
 	public String do_qnaList(listSearchVO search) {
 		LOG.debug("==================================");
-		LOG.debug("Controller : do_coupon_retrieve");
+		LOG.debug("Controller : do_qnaList");
 		LOG.debug("==================================");
 		search.setUser_id("370");
 		if(search.getPageSize() == 0) search.setPageSize(10);
 		if(search.getPageNum() == 0) search.setPageNum(1);
 		List<KDY_QnalistVO> list = (List<KDY_QnalistVO>) userpageSvc.do_qnaList(search);
+	
+		
+		LOG.debug("==================================");
+		LOG.debug("list : " + list);
+		LOG.debug("==================================");
+		
+		Gson gson=new Gson();
+		String gsonStr = gson.toJson(list);
+		return gsonStr;
+		
+	}
+	@RequestMapping(value = "userpage/do_reservationList.do", method = RequestMethod.POST ,produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String do_reservationList(listSearchVO search) {
+		LOG.debug("==================================");
+		LOG.debug("Controller : do_reservationList");
+		LOG.debug("==================================");
+		search.setUser_id("admin");
+		if(search.getPageSize() == 0) search.setPageSize(10);
+		if(search.getPageNum() == 0) search.setPageNum(1);
+		List<KDY_ReservationVO> list = (List<KDY_ReservationVO>) userpageSvc.do_reservationList(search);
 	
 		
 		LOG.debug("==================================");
