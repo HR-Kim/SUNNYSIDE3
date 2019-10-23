@@ -57,8 +57,12 @@
 								</c:when>
 								<c:otherwise>
 									<div class="up-item">
-<!-- 										<i class="flaticon-profile"></i> -->
-<!-- 										<a href="../../sunnyside/login/login.jsp">Sign</a> In or <a href="#">Create Account</a> -->
+										<div class="user-panel">
+											<div class="up-item">
+												<i class="flaticon-profile"></i>
+												<a href="#">Sign</a> In or <a href="#">Create Account</a>
+											</div>							
+										</div>
 									</div>
 								</c:otherwise>
 							</c:choose>
