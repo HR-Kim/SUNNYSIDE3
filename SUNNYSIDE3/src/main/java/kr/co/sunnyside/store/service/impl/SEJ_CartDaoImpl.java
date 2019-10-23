@@ -13,8 +13,6 @@ import org.springframework.stereotype.Repository;
 import kr.co.sunnyside.cmn.DTO;
 import kr.co.sunnyside.cmn.WorkDiv;
 import kr.co.sunnyside.store.service.SEJ_CartVO;
-import kr.co.sunnyside.store.service.SEJ_PayVO;
-
 @Repository
 public class SEJ_CartDaoImpl implements WorkDiv{
 	Logger LOG=LoggerFactory.getLogger(this.getClass());
@@ -27,7 +25,7 @@ public class SEJ_CartDaoImpl implements WorkDiv{
 	/**결제내역 추가*/
 	public int do_payComplete(DTO dto) {
 		String statement = NAMESPACE+".do_payComplete";
-		SEJ_PayVO store = (SEJ_PayVO) dto;
+		SEJ_CartVO store = (SEJ_CartVO) dto;
 		LOG.debug("===================================");
 		LOG.debug("=1. param="+store);
 		LOG.debug("===================================");
@@ -45,7 +43,7 @@ public class SEJ_CartDaoImpl implements WorkDiv{
 	/**결제내역 목록*/
 	public List<?> do_payCompleteList(DTO dto) {
 		String statement = NAMESPACE+".do_payCompleteList";
-		SEJ_PayVO store = (SEJ_PayVO) dto;
+		SEJ_CartVO store = (SEJ_CartVO) dto;
 		LOG.debug("===================================");
 		LOG.debug("=1. param="+store);
 		LOG.debug("===================================");
@@ -53,7 +51,7 @@ public class SEJ_CartDaoImpl implements WorkDiv{
 		LOG.debug("=2. statement="+statement);
 		LOG.debug("===================================");
 		
-		List<SEJ_PayVO> list= this.sqlSessionTemplate.selectList(statement,store);
+		List<SEJ_CartVO> list= this.sqlSessionTemplate.selectList(statement,store);
 		LOG.debug("===================================");
 		LOG.debug("=3. flag="+list);
 		LOG.debug("===================================");
@@ -224,7 +222,24 @@ public class SEJ_CartDaoImpl implements WorkDiv{
 		return flag;
 	}
 
-
+	/**주문하기창 목록*/
+	public List<?> do_payRetrieve(DTO dto) {
+		String statement = NAMESPACE+".do_payRetrieve";
+		SEJ_CartVO store = (SEJ_CartVO) dto;
+		LOG.debug("===================================");
+		LOG.debug("=1. param="+store);
+		LOG.debug("===================================");
+		LOG.debug("===================================");
+		LOG.debug("=2. statement="+statement);
+		LOG.debug("===================================");
+		
+		List<SEJ_CartVO> list= this.sqlSessionTemplate.selectList(statement,store);
+		LOG.debug("===================================");
+		LOG.debug("=3. flag="+list);
+		LOG.debug("===================================");
+		
+		return list;
+	}
 
 
 

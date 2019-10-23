@@ -31,7 +31,6 @@ import kr.co.sunnyside.main.service.LHJ_MainImageVO;
 import kr.co.sunnyside.movie.service.LHJ_MovieVO;
 import kr.co.sunnyside.store.service.SEJ_CartSvc;
 import kr.co.sunnyside.store.service.SEJ_CartVO;
-import kr.co.sunnyside.store.service.SEJ_PayVO;
 import kr.co.sunnyside.store.service.SEJ_StroreSvc;
 
 @Controller
@@ -50,28 +49,52 @@ public class SEJ_CartCtrl {
 	private final String AFTER_PAY_LIST_VIEW = "cart/successPay";
 	
 	// 0. 결제내역 저장(추가)
-		@RequestMapping(value ="cart/do_payComplete.do", method = RequestMethod.POST)
-		public String do_payComplete(SEJ_PayVO inVO, HttpSession session){
+		@RequestMapping(value ="cart/do_payComplete.do", method = RequestMethod.GET)
+		public String do_payComplete(SEJ_CartVO inVO,Model model){
 			LOG.debug("============================");
 			LOG.debug("=do_payComplete inVo="+inVO);
 			LOG.debug("============================");
-		
-			cartService.do_payComplete(inVO);
+			
+			int CutNumber = 15;  //결제코드 반복 수
+			String payCode = inVO.getPayCode(); 
+			LOG.debug("1.= source=" + payCode);
+			
+			int length = payCode.length(); //결제코드 길이
+			LOG.debug("1.= length=" + length);
+          
+			List<String> list = new ArrayList<String>();  //데이터길이(48) / 자르는갯수(16) + 5 
+			LOG.debug("1.= list=" + list); 
+			
+			for(int i = 0; i <length; i+= CutNumber){
+				if(i + CutNumber < length){
+					   list.add(payCode.substring(i, i + CutNumber));
+						LOG.debug("2.= list=" + list); 
+				}else{
+					   list.add(payCode.substring(i)); // 해당위치부터 나머지
+						LOG.debug("2-1.= list=" + list); 
+				}			
+			}
+
+			for(int i = 0; i < list.size(); i++){
+				
+				payCode =list.get(i);
+				inVO.setPayCode(payCode);
+				System.out.println(inVO);
+	     		//--------------------------------
+				//-1. 결제완료 테이블에 저장+카트 테이블 삭제
+				//--------------------------------	
+				cartService.do_payComplete(inVO);
+				System.out.println(list.get(i));
+			}
+			//카트테이블 삭제
 			cartService.do_deleteAll();
+     		//--------------------------------
+			//-2. 조회
+			//--------------------------------
 			
-			return AFTER_PAY_LIST_VIEW;
-		}
+			List<SEJ_CartSvc> payCompleteList = (List<SEJ_CartSvc>) this.cartService.do_payCompleteList(inVO);
+			model.addAttribute("list", payCompleteList);
 		
-	// 0. 결제내역 목록
-		@RequestMapping(value ="cart/do_payCompleteList.do",method = RequestMethod.GET)
-		public String do_payCompleteList(SEJ_PayVO inVO, Model model){
-			LOG.debug("1.=====================");
-			LOG.debug("1.= do_payCompleteList param=" + inVO);
-			LOG.debug("1.=====================");
-			
-			List<SEJ_PayVO> list = (List<SEJ_PayVO>) this.cartService.do_payCompleteList(inVO);
-			model.addAttribute("list", list);
-			
 			return AFTER_PAY_LIST_VIEW;
 		}
 	
@@ -166,7 +189,7 @@ public class SEJ_CartCtrl {
 			int length = productId.length();
 			LOG.debug("1.= length=" + length);
           
-			List<String> list = new ArrayList<String>(length/length);  //데이터길이(48) / 자르는갯수(16) + 5  %> 
+			List<String> list = new ArrayList<String>();  //데이터길이(48) / 자르는갯수(16) + 5 
 			LOG.debug("1.= list=" + list); 
 			
 			for(int i = 0; i <length; i+= CutNumber){
@@ -192,17 +215,18 @@ public class SEJ_CartCtrl {
 				productId =list.get(i);
 				inVO.setProductId(productId);
 				System.out.println(inVO);
-				
+				//--------------------------------
+				//-1. 코드값 수정
+				//--------------------------------	
 				cartService.do_make_codeNm(inVO);	
 				
 				System.out.println(list.get(i));
 			}
 
-			
      		//--------------------------------
 			//-2. 조회
 			//--------------------------------	
-			List<SEJ_CartVO> Cartlist = (List<SEJ_CartVO>) this.cartService.do_retrieve(inVO);
+			List<SEJ_CartVO> Cartlist = (List<SEJ_CartVO>) this.cartService.do_payRetrieve(inVO);
 			int totalCost=cartService.do_totalCost(inVO.getUserId());
 			model.addAttribute("list", Cartlist);
 			model.addAttribute("totalCost", totalCost);

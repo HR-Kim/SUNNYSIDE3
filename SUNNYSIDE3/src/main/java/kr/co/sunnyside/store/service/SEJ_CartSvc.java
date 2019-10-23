@@ -40,4 +40,8 @@ public interface SEJ_CartSvc {
 	/**주문코드 생성후 업데이트*/
 	public int do_make_codeNm(DTO dto);
 
+	/**주문하기창 목록 */
+	public List<?> do_payRetrieve(DTO dto);
+
+	
 }

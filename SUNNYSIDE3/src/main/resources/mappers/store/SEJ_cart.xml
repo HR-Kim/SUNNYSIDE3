@@ -15,14 +15,14 @@
 	     do_updateCountCart: 장바구니 상품수량 변경
 	   -->
 <!-- 결제완료 테이블에 저장 -->
-	<insert id="do_payComplete" parameterType="Pay">
+	<insert id="do_payComplete" parameterType="Cart">
 	INSERT INTO PAY_HISTORY  (
 			    cart_id,
 			    user_id,
 			    count,
 			    product_id,	
 			    pay_code,
-			    pay_cost,
+			    total_cost,
     			pay_dt   
 			) VALUES (
 			    #{cartId,jdbcType=VARCHAR},
@@ -30,20 +30,20 @@
 			    #{count,jdbcType=NUMERIC},
 			    #{productId,jdbcType=VARCHAR},
 			    #{payCode,jdbcType=VARCHAR},
-			    #{payCost,jdbcType=NUMERIC},
+			    #{totalCost,jdbcType=NUMERIC},
 			    SYSDATE
 			)		
 	</insert>
 
 <!-- 결제완료 목록 -->
-	<select id="do_payCompleteList" parameterType="Pay" resultType="Pay" >
+	<select id="do_payCompleteList" parameterType="Cart" resultType="Cart" >
 	 	SELECT
 	 		a.pay_code as payCode,
 		    a.cart_id as cartId,
 		    c.product_nm as productNm,
 		    b.user_id as userId,
 		    a.count,
-		    a.pay_cost as payCost,
+		    a.total_cost as totalCost,
 		    c.product_id as productId,
 		    a.pay_dt as payDt
 		FROM
@@ -66,8 +66,27 @@
 		     
 	</update>
  
- 
- 
+<!-- 주문하기창 목록 -->
+	<select id="do_payRetrieve" parameterType="Cart" resultType="Cart" >
+	 	SELECT
+	 		a.pay_code as payCode,
+		    a.cart_id as cartId,
+		    c.product_nm as productNm,
+		    b.user_id as userId,
+		    a.count,
+		    c.product_cost as  oriProductCost,
+		    c.product_cost*a.count as productCost,
+		    c.product_id as productId,
+		    c.save_file_nm as saveFileNm
+		FROM
+		    cart a, user_info b, product c 
+		WHERE
+		    b.user_id = a.user_id
+		    AND c.product_id = a.product_id
+		    AND a.user_id = #{userId,jdbcType=VARCHAR}
+		    AND a.pay_code = #{payCode,jdbcType=VARCHAR}
+	</select>
+
 
 <!-- 장바구니 저장(추가) -->
 	<insert id="do_save" parameterType="Cart">

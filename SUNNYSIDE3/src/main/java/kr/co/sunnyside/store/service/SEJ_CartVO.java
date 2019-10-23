@@ -17,7 +17,7 @@ public class SEJ_CartVO extends DTO {
 	private int oriProductCost   ; 
 	/**상품가격*/
 	private int productCost    ; 
-	/**상품총가격*/
+	/**상품총가격/결제금액*/
 	private int totalCost    ; 
 	/**상품ID*/
 	private String productId   ;  
@@ -27,7 +27,8 @@ public class SEJ_CartVO extends DTO {
 	private String saveFileNm  ;  
 	/**확장자명*/
 	private String ext         ;   
-	
+	/**결제일*/
+	private String payDt       ;  
 	
 	public SEJ_CartVO() {}
 

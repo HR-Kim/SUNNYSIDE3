@@ -1,5 +1,4 @@
 <%@page import="java.util.Enumeration"%>
-<%@page import="kr.co.sunnyside.store.service.SEJ_PayVO"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -8,8 +7,6 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <c:set var="context" value="${pageContext.request.contextPath }" />
-
-<%  String payCode = (String)session.getAttribute("payCode"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +29,7 @@
                         <th class="text-center">주문금액</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tbody">
 	                <c:choose>
 	                        <c:when test="${list.size() ==0 }">
 	                            <tr>
@@ -56,7 +53,7 @@
 				                        <td style="display: none;" id="userName"><strong>${user.userName }</strong></td>
 				                        <td style="display: none;" id="productId"><strong>${vo.productId }</strong></td>
 				                        <td style="display: none;" id="userId"><strong>${user.userId }</strong></td>
-				                        <td id="payCode"><strong>${vo.payCode }</strong></td>
+				                        <td style="display: none;" id="payCode"><strong>${vo.payCode }</strong></td>
 				                        <td class="col-sm-4 col-md-10 text-center"><strong><fmt:formatNumber value="${vo.productCost}" pattern="#,###,###"/>원</strong></td>	
 				                    </tr>			                      			                        				                   
                           		</c:forEach>			        		                       
@@ -153,43 +150,17 @@
 		}
 
 	function goPayList(){
-		 console.log("productId="+$("#productId").text());
-		 console.log("userId="+$("#userId").text());
-		 console.log("count="+$("#count").text());
-		 console.log("payCost="+$("#tatalCost").val());
-		 console.log("cartId="+$("#cartId").text());
 		 
-			//ajax
-		    $.ajax({
-		        type:"POST",
-		        url:"${context}/cart/do_payComplete.do",
-		        dataType:"html",
-		           data:{                               
-		        		   "productId":$("#productId").text(), 
-		        		   "userId":$("#userId").text(),       
-		        		   "count":$("#count").text(),                              
-		        		   "payCost":$("#tatalCost").val(),                              
-		        		   "cartId":$("#cartId").text()
-		          },   
-		      success: function(data){ 
-				  if(null != data && data.msgId=="1"){
-					  alert("결제되었습니다.");
-					  var userId = $("#userId").text();
-					  location.href="${context}/cart/do_payCompleteList.do?userId="+userId+"&&payCode=<%=payCode%>";
-					
-				  }else{
-					alert("결제되었습니다.");	
-					  var userId = $("#userId").text();
-					  location.href="${context}/cart/do_payCompleteList.do?userId="+userId+"&&payCode=<%=payCode%>";
-				  }
-		     },
-		     complete:function(data){
-		  	   
-		     },
-		     error:function(xhr,status,error){
-		         alert("error:"+error);
-		     }
-		    }); //--ajax  
+	    var tbody = $('#tbody');
+        var tr = tbody.children();
+        var payCode = tr.children('#payCode').text();
+        
+        console.log("payCode="+payCode); 
+        		
+	 	alert("결제가 완료되었습니다.");
+		var userId = $("#userId").text();
+
+		location.href="${context}/cart/do_payComplete.do?userId="+userId+"&&payCode="+payCode;
 	}
 	
 	
