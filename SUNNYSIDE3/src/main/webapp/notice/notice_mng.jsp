@@ -88,7 +88,6 @@
 					<button id="attrFile" type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#layerpop">파일</button>
 				</div>
 			</div>
-			
 			<!-- 첨부그리드 -->
 			<div class="form-group">
 				<label for="listFileTable" class="hidden-xs hidden-sm col-md-2 col-lg-2 control-label"></label>
@@ -97,8 +96,7 @@
 						<tbody></tbody>
 					</table>
 				</div>
-			</div>			
-			
+			</div>									
 		</form>
 		
 		<!-- Modal -->
@@ -130,7 +128,6 @@
 		    </div>
 		  </div>
 		 </div>
-		
 	</div>
 	<!--// div container -->
 	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
@@ -314,8 +311,6 @@
 			
 		});
 		
-		
-		
 		//파일삭제:db delete,file삭제
 		$("#listFileTable>tbody").on("click",".btn-danger",function(e){
 			//alert(".btn-danger");
@@ -496,6 +491,52 @@
 			}); 
 			//--ajax 			
 		}
+		
+		
+	
+		$(document).ready(function() {
+			//alert("ready");
+
+			//form validate
+			$("#noticeEditFrm").validate({
+				rules: {					
+					title: {
+						required: true,
+						minlength: 2,
+						maxlength: 100
+					},
+					contents: {
+						required: true,
+						minlength: 2,
+						maxlength: 1000000
+					}
+				},
+				messages: {
+					title: {
+						required: "제목을 입력 하세요.",
+						minlength: $.validator.format("{0}자 이상 입력 하세요."),
+						maxlength: $.validator.format("{0}자 내로 입력 하세요.")
+					},
+					contents: {
+						required: "내용을 입력 하세요.",
+						minlength: $.validator.format("{0}자 이상 입력 하세요."),
+						maxlength: $.validator.format("{0}자 내로 입력 하세요.")
+					}
+				},
+				errorPlacement : function(error, element) {
+				     //do nothing
+				    },
+				    invalidHandler : function(form, validator) {
+				     var errors = validator.numberOfInvalids();
+				     if (errors) {
+				      alert(validator.errorList[0].message);
+				      validator.errorList[0].element.focus();
+				     }
+				}
+
+			});						
+		});
+		
 	</script>
 </body>
 </html>

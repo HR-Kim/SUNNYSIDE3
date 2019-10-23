@@ -20,7 +20,7 @@
 	</sql>
 	
 	<!-- 목록조회 -->
-	<select id="do_retrieve" parameterType="kr.co.sunnyside.cmn.SearchVO" resultType="kr.co.sunnyside.notice.service.KYMNoticeVO">
+	<select id="do_retrieve" parameterType="SearchVO" resultType="KYMNoticeVO">
 	  SELECT T1.*,T2.*													
 	  FROM                                                              
 	  (                                                                 
@@ -60,13 +60,13 @@
 	  )T2  
 	</select>
 
-	<update id="do_updateReadCnt" parameterType="kr.co.sunnyside.notice.service.KYMNoticeVO">
+	<update id="do_updateReadCnt" parameterType="KYMNoticeVO">
 		UPDATE notice
 		SET  READ_CNT = (SELECT NVL(MAX(READ_CNT),0)+1 FROM notice WHERE NOTICE_ID = #{noticeId,jdbcType=VARCHAR})
 		WHERE NOTICE_ID = #{noticeId,jdbcType=VARCHAR}
 	</update>
 
-	<select id="do_boardIdList" parameterType="kr.co.sunnyside.cmn.SearchVO" resultType="kr.co.sunnyside.notice.service.KYMNoticeVO">
+	<select id="do_boardIdList" parameterType="SearchVO" resultType="KYMNoticeVO">
 		SELECT
 			NOTICE_ID as noticeId,
 			TITLE,
@@ -84,7 +84,7 @@
 	</select>
 
 	<!-- 단건조회 -->
-	<select id="do_selectOne" parameterType="kr.co.sunnyside.notice.service.KYMNoticeVO" resultType="kr.co.sunnyside.notice.service.KYMNoticeVO">
+	<select id="do_selectOne" parameterType="KYMNoticeVO" resultType="KYMNoticeVO">
 		SELECT
 			NOTICE_ID as noticeId,
 			TITLE,
@@ -101,7 +101,7 @@
 	</select>
 	
 	<!-- 수정 -->
-	<update id="do_update" parameterType="kr.co.sunnyside.notice.service.KYMNoticeVO">
+	<update id="do_update" parameterType="KYMNoticeVO">
 		UPDATE notice
 		SET   title = #{title,jdbcType=VARCHAR}
 			, org_file_nm = #{orgFileNm,jdbcType=VARCHAR}
@@ -116,7 +116,7 @@
 	</update>
 	
 	<!-- 등록 -->
-	<insert id="do_save" parameterType="kr.co.sunnyside.notice.service.KYMNoticeVO" >
+	<insert id="do_save" parameterType="KYMNoticeVO" >
 		INSERT INTO notice (
 			TITLE,
 			ORG_FILE_NM,
@@ -140,12 +140,12 @@
 		)
 	</insert>
 	
-	<delete id="do_delete" parameterType="kr.co.sunnyside.notice.service.KYMNoticeVO">
+	<delete id="do_delete" parameterType="KYMNoticeVO">
 		DELETE FROM notice
 		WHERE notice_id = #{noticeId,jdbcType=VARCHAR}
 	</delete>
 	
-	<select id="do_retrieveTwo" parameterType="kr.co.sunnyside.code.service.CodeVO" resultType="kr.co.sunnyside.code.service.CodeVO">
+	<select id="do_retrieveTwo" parameterType="CodeVO" resultType="CodeVO">
 		SELECT b.code_id as codeId      
 		     , b.code_nm as codeNm        
 		     , b.num                      
@@ -156,12 +156,12 @@
 		ORDER BY b.num                    
 	</select>
 	
-	<select id="do_retrieveThree" resultType="kr.co.sunnyside.notice.service.KYMBranchVO">
+	<select id="do_retrieveThree" resultType="KYMBranchVO">
 		SELECT DISTINCT BRANCH_NM as branchSNm
 		FROM BRANCH_INFO               
 	</select>
 	
-	<select id="do_retrieveFour" resultType="kr.co.sunnyside.notice.service.KYMBranchVO">
+	<select id="do_retrieveFour" resultType="KYMBranchVO">
 		SELECT DISTINCT BRANCH_NM as branchSNm
 		FROM BRANCH_INFO
 	</select>

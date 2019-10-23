@@ -49,6 +49,7 @@
 	
 	<context:component-scan base-package="kr.co.sunnyside" />
 	
-	
+	<!-- FileDownload View -->
+	<beans:bean id="downloadView" class="kr.co.sunnyside.cmn.DownloadView"/>
 	
 </beans:beans>

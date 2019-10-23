@@ -20,7 +20,7 @@
 	</sql>
 	
 	<!-- 목록조회 -->
-	<select id="do_retrieve" parameterType="kr.co.sunnyside.cmn.SearchVO" resultType="kr.co.sunnyside.qna.service.KYMQnaVO">
+	<select id="do_retrieve" parameterType="SearchVO" resultType="KYMQnaVO">
 	  SELECT T1.*,T2.*													
 	  FROM                                                              
 	  (                                                                 
@@ -62,13 +62,13 @@
 	  )T2  
 	</select>
 
-	<update id="do_updateReadCnt" parameterType="kr.co.sunnyside.qna.service.KYMQnaVO">
+	<update id="do_updateReadCnt" parameterType="KYMQnaVO">
 		UPDATE qna
 		SET  READ_CNT = (SELECT NVL(MAX(READ_CNT),0)+1 FROM qna WHERE USER_ID = #{userId,jdbcType=VARCHAR})
 		WHERE USER_ID = #{userId,jdbcType=VARCHAR}
 	</update>
 
-	<select id="do_boardIdList" parameterType="kr.co.sunnyside.cmn.SearchVO" resultType="kr.co.sunnyside.qna.service.KYMQnaVO">
+	<select id="do_boardIdList" parameterType="SearchVO" resultType="KYMQnaVO">
 		SELECT
 			  USER_ID      as userId    
 			, QNA_NUM      as qnaNum    
@@ -88,7 +88,7 @@
 	</select>
 
 	<!-- 단건조회 -->
-	<select id="do_selectOne" parameterType="kr.co.sunnyside.qna.service.KYMQnaVO" resultType="kr.co.sunnyside.qna.service.KYMQnaVO">
+	<select id="do_selectOne" parameterType="KYMQnaVO" resultType="KYMQnaVO">
 		SELECT
 			  USER_ID      as userId    
 			, QNA_NUM      as qnaNum    
@@ -107,7 +107,7 @@
 	</select>
 	
 	<!-- 수정 -->
-	<update id="do_update" parameterType="kr.co.sunnyside.qna.service.KYMQnaVO">
+	<update id="do_update" parameterType="KYMQnaVO">
 		UPDATE qna
 		SET   
 			  QNA_NUM      = #{qnaNum  ,jdbcType=VARCHAR}
@@ -125,7 +125,7 @@
 	</update>
 	
 	<!--관리자 수정 -->
-	<update id="do_updateTwo" parameterType="kr.co.sunnyside.qna.service.KYMQnaVO">
+	<update id="do_updateTwo" parameterType="KYMQnaVO">
 		UPDATE qna
 		SET   
 			  QNA_NUM      = #{qnaNum  ,jdbcType=VARCHAR}
@@ -142,7 +142,7 @@
 	</update>
 	
 	<!-- 등록 -->
-	<insert id="do_save" parameterType="kr.co.sunnyside.qna.service.KYMQnaVO" >
+	<insert id="do_save" parameterType="KYMQnaVO" >
 		INSERT INTO qna (
 		      QNA_NUM
 			, TITLE       
@@ -170,12 +170,12 @@
 		)
 	</insert>
 	
-	<delete id="do_delete" parameterType="kr.co.sunnyside.qna.service.KYMQnaVO">
+	<delete id="do_delete" parameterType="KYMQnaVO">
 		DELETE FROM qna
 		WHERE user_id = #{userId,jdbcType=VARCHAR}
 	</delete>
 	
-	<select id="do_retrieveTwo" parameterType="kr.co.sunnyside.code.service.CodeVO" resultType="kr.co.sunnyside.code.service.CodeVO">
+	<select id="do_retrieveTwo" parameterType="CodeVO" resultType="CodeVO">
 		SELECT b.code_id as codeId      
 		     , b.code_nm as codeNm        
 		     , b.num                      

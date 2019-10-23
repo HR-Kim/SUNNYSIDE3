@@ -43,6 +43,13 @@
 		<typeAlias type="kr.co.sunnyside.userpage.service.KDY_QnalistVO" alias="KDY_QnalistVO" />
 		<typeAlias type="kr.co.sunnyside.userpage.service.KDY_ReservationVO" alias="KDY_ReservationVO" />
 		
+		<!-- KYM -->
+		<typeAlias type="kr.co.sunnyside.cmn.SearchVO" alias="SearchVO" />
+		<typeAlias type="kr.co.sunnyside.qna.service.KYMQnaVO" alias="KYMQnaVO" />
+		<typeAlias type="kr.co.sunnyside.code.service.CodeVO" alias="CodeVO" />
+		<typeAlias type="kr.co.sunnyside.notice.service.KYMNoticeVO" alias="KYMNoticeVO" />
+		<typeAlias type="kr.co.sunnyside.notice.service.KYMBranchVO" alias="KYMBranchVO" />
+		
 	</typeAliases>
 
 

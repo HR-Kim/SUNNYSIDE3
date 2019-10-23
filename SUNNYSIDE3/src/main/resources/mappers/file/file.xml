@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.ehr.file">
+   <sql id="fileColumns">
+	    file_id as fileId,	
+	    num,	
+	    org_file_nm as orgFileNm,	
+	    division,	
+	    save_file_nm as saveFileNm,	
+	    f_size as fSize,	
+	    ext,	
+	    reg_id as regId,	
+	    TO_CHAR(reg_dt, 'yyyy/mm/dd HH24:MI:SS') as regDt   
+   </sql>
+   
+   <!-- get_file_count -->
+   <select id="do_file_count" parameterType="kr.co.sunnyside.file.service.File" resultType="int">
+	    SELECT COUNT(*) AS CNT 
+		FROM FILE_MNG A
+		WHERE A.file_id = #{fileId,jdbcType=VARCHAR}
+   </select>
+   
+	<!-- get_fileIdOrgFileNmList -->
+	<select id="do_fileIdOrgFileNmList" parameterType="Search" resultType="kr.co.sunnyside.file.service.File">
+		SELECT
+		    <include refid="fileColumns" />
+		FROM
+		    FILE_MNG
+		WHERE ORG_FILE_NM LIKE '%' || #{searchWord} || '%'
+		ORDER BY ORG_FILE_NM ASC	
+	</select>
+
+	<!-- FILE_ID기준 NUM증가 -->
+	<select id="num_max_plus_one" parameterType="kr.co.sunnyside.file.service.File" resultType="int">
+		SELECT NVL(MAX(NUM),0)+1 AS CNT 
+		FROM FILE_MNG A
+		WHERE A.file_id = #{fileId,jdbcType=VARCHAR}	
+	</select>
+	
+	
+	<!-- FILE_ID기준: 삭제 -->
+	<delete id="do_delete_file_id"
+		parameterType="kr.co.sunnyside.file.service.File">
+		<![CDATA[
+			DELETE FROM file_mng	
+			WHERE  file_id = #{fileId,jdbcType=VARCHAR}	
+		]]>
+	</delete>
+	
+	
+	
+	<!-- FILE_ID기준 조회 -->
+	<select id="do_fileIdList" parameterType="kr.co.sunnyside.file.service.File"
+		resultType="kr.co.sunnyside.file.service.File">
+		SELECT	
+		    <include refid="fileColumns" />
+		FROM	
+		    file_mng	
+		WHERE file_id = #{fileId,jdbcType=VARCHAR}
+		ORDER BY num
+	</select>
+	
+	
+	<!-- 등록 -->
+	<insert id="do_save" parameterType="kr.co.sunnyside.file.service.File">
+		INSERT INTO file_mng (	
+		    file_id,	
+		    num,	
+		    org_file_nm,	
+		    division,	
+		    save_file_nm,	
+		    f_size,	
+		    ext,	
+		    reg_id,	
+		    reg_dt	
+		) VALUES (	
+		    #{fileId,jdbcType=VARCHAR},	
+		    #{num,jdbcType=NUMERIC},	
+		    #{orgFileNm,jdbcType=VARCHAR},	
+		    #{division,jdbcType=VARCHAR},	
+		    #{saveFileNm,jdbcType=VARCHAR},	
+		    #{fSize,javaType=double},	
+		    #{ext,jdbcType=VARCHAR},	
+		    #{regId,jdbcType=VARCHAR},	
+		    SYSDATE	
+		)
+	</insert>
+	
+	<!-- 삭제 -->
+	<delete id="do_delete"
+		parameterType="kr.co.sunnyside.file.service.File">
+		<![CDATA[
+			DELETE FROM file_mng	
+			WHERE  file_id = #{fileId,jdbcType=VARCHAR}	
+			AND    num = #{num,jdbcType=NUMERIC}
+		]]>
+	</delete>
+	
+	
+</mapper>
