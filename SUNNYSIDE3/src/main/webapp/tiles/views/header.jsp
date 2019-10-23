@@ -154,7 +154,6 @@
 								<li><a href="/sunnyside/screenInfo/do_goingPage.do"><spring:message code="message.header.moviemanagement"/></a></li>							</ul>
 						</li>				
 						</c:when>
-
 						<c:otherwise>
 						</c:otherwise>			
 					</c:choose>
