@@ -91,6 +91,8 @@ message.movie.poster=포스터
 message.movie.expert_rate=전문가 평점	
 message.movie.visitor_rate=관람객 평점	
 message.movie.screen_state=상영상태	
+message.movie.ticketing=예매하기
+message.movie.detail=상세보기
 				
 				
 #Review				
@@ -152,7 +154,7 @@ message.schedule.status=처리상태
 #header
 message.header.home=홈
 message.header.movie=영화
-message.header.boxoffice=영화
+message.header.boxoffice=박스오피스
 message.header.planed=개봉예정
 message.header.screening=상영중
 message.header.video=비디오
@@ -171,4 +173,6 @@ message.header.theater=극장편성
 message.header.moviemanagement=영화편성
 
 
+#main
+message.main.banner_edit=베너수정
 

@@ -183,6 +183,6 @@
 	    	frm.action = "${context}/change_locale.do";
 	    	frm.submit();
 	    });
-	</script>	
+	</script>
 </body>
 </html>

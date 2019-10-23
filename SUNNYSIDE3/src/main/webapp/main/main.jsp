@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="context" value="${pageContext.request.contextPath }" />    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<c:set var="context" value="${pageContext.request.contextPath}"/>     
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,7 +56,7 @@
 				</c:when>        	
 				<c:otherwise>
 					<div class="hs-item set-bg" data-setbg="http://www.dailypoem.kr/news/photo/201906/10311_10553_4134.jpg" style="text-align: right">
-						<a href="@" class="site-btn sb-white" style="margin-top: 20px; margin-right: 30px;">Banner Edit</a>								
+						<a href="@" class="site-btn sb-white" style="margin-top: 20px; margin-right: 30px;"><spring:message code="message.main.banner_edit"/></a>								
 					</div>
 				</c:otherwise>
 			</c:choose>
@@ -69,7 +70,8 @@
 	<div class="container" style="margin-bottom: 40px">
 	<div class="container_inner default_template_holder clearfix page_container_inner"><div class="vc_row wpb_row section vc_row-fluid" style=" padding-top:0px; text-align:left;"><div class=" full_section_inner clearfix"><div class="vc_col-sm-12 wpb_column vc_column_container"><div class="wpb_wrapper"><div class="projects_holder_outer v3 portfolio_with_space portfolio_standard "><div class="projects_holder clearfix v3 standard">
 		<div class="section-title" style="margin-bottom: 20px">
-			<a href="/sunnyside/boxoffice/do_retrieve.do"><h2>박스오피스</h2></a>
+			<!-- 박스오피스 -->
+			<a href="/sunnyside/boxoffice/do_retrieve.do"><h2><spring:message code="message.header.boxoffice"/></h2></a>
 		</div>
 		<c:choose>
 			<c:when test="${boxofficeList.size()>0}">
@@ -85,8 +87,10 @@
 							<!--// 이미지  -->			
 							<!-- 예매하기, 상세보기 버튼 -->
 							<span class="text_holder"><span class="text_outer"><span class="text_inner" ><span class="feature_holder" ><span class="feature_holder_icons">
-								<a class="lightbox qbutton small white" href="#">예매하기</a>
-								<a class="lightbox qbutton small white" href="../movie/do_selectOne.do?movieId=<c:out value="${vo.movieId}"/>">상세보기</a>
+								<!-- 예매하기 -->
+								<a class="lightbox qbutton small white" href="#"><spring:message code="message.movie.ticketing"/></a>
+								<!-- 상세보기 -->
+								<a class="lightbox qbutton small white" href="../movie/do_selectOne.do?movieId=<c:out value="${vo.movieId}"/>"><spring:message code="message.movie.detail"/></a>
 								
 							</span></span></span></span></span>			
 							<!--// 예매하기, 상세보기 버튼 -->		
@@ -100,9 +104,9 @@
 								<a href="../movie/do_selectOne.do?movieId=<c:out value="${vo.movieId}"/>"><c:out value="${vo.kortitle}"/></a>
 							</h5>
 							<!--// 영화제목 -->
-							<!-- 영화정보 -->
-							<span class="project_category">관람 평점 <c:out value="${vo.visitorRate}"/></span>
-							<!--// 영화정보 -->
+							<!-- 관람평점 -->							
+							<span class="project_category"><spring:message code="message.movie.visitor_rate"/><c:out value="${vo.visitorRate}"/></span>
+							<!--// 관람평점 -->
 						</div>
 						<!--// 영화정보 영역 -->								
 					</article>	
