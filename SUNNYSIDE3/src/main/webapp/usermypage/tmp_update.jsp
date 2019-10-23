@@ -16,7 +16,11 @@
 			<div><input type="text" id="userId" name="userId" value="${user.userId}" ></div>
 		</form>
 		
-		<button id="updateView" name="updateView" >회원정보수정</button>	
+		<button id="updateView" name="updateView" >회원정보수정</button>
+		<br/>	
+		<button id="withdrawView" name="withdrawView" >회원탈퇴</button>	
+		
+		
 	</div>
 
 
@@ -34,6 +38,12 @@
 			frm.action = "${context}/usermypage/do_selectOne.do"
 			frm.submit();
 		});
+		
+		
+		$("#withdrawView").on("click",function(){
+			location.href="${context}/usermypage/withdraw_view.do"
+		});
+		
 		
 		
 	</script>

@@ -105,7 +105,16 @@
 		
 		/** 아이디찾기 확인 버튼 */
 		$("#confirm").on("click",function(){
-			//if($("#idFindForm").valid()==false)return;
+			//이름 validation
+			if( $("#userName").val() == ""){
+				alert("이름을 입력하세요.");
+				return;
+			}
+			//이메일 validation
+			if( $("#email").val() == ""){
+				alert("이메일을 입력하세요.");
+				return;
+			}
 			
 	    	var frm = document.idFindForm;
 			frm.action = "${context}/login/id_find.do"

@@ -50,17 +50,17 @@ public class SJH_LoginDaoTest {
 		LOG.debug("^^^^^^^^^^^^^^^^^^");
 		
 		users = Arrays.asList(
-				 new SJH_LoginVO("j01_126","1234","회원이름01","glwlzkwp@naver.com","BASIC",0,"01000000001","19990101","",190000,"")
-				,new SJH_LoginVO("j02_126","1234","회원이름02","glwlzkwp@naver.com","BASIC",0,"01000000002","19990102","",200000,"") //BASIC -> SILVER
-				,new SJH_LoginVO("j03_126","1234","회원이름03","glwlzkwp@naver.com","SILVER",0,"01000000003","19990103","",200000,"")
-				,new SJH_LoginVO("j04_126","1234","회원이름04","glwlzkwp@naver.com","SILVER",0,"01000000004","19990104","",400000,"") //SILVER -> GOLD
-				,new SJH_LoginVO("j05_126","1234","회원이름05","glwlzkwp@naver.com","BASIC",0,"01000000005","19990105","",500000,"")
+				 new SJH_LoginVO("j01_126","12345678","회원이름01","glwlzkwp@naver.com","BASIC",0,"01000000001","19990101","",190000,"")
+				,new SJH_LoginVO("j02_126","12345678","회원이름02","glwlzkwp@naver.com","BASIC",0,"01000000002","19990102","",200000,"") //BASIC -> SILVER
+				,new SJH_LoginVO("j03_126","12345678","회원이름03","glwlzkwp@naver.com","SILVER",0,"01000000003","19990103","",200000,"")
+				,new SJH_LoginVO("j04_126","12345678","회원이름04","glwlzkwp@naver.com","SILVER",0,"01000000004","19990104","",400000,"") //SILVER -> GOLD
+				,new SJH_LoginVO("j05_126","12345678","회원이름05","glwlzkwp@naver.com","BASIC",0,"01000000005","19990105","",500000,"")
 				
-//				 new SJH_LoginVO("j06_126","1234","회원이름06","glwlzkwp@naver.com","BASIC",0,"01000000001","19990101","",190000,"")
-//				,new SJH_LoginVO("j07_126","1234","회원이름07","glwlzkwp@naver.com","BASIC",0,"01000000002","19990102","",200000,"") //BASIC -> SILVER
-//				,new SJH_LoginVO("j08_126","1234","회원이름08","glwlzkwp@naver.com","SILVER",0,"01000000003","19990103","",200000,"")
-//				,new SJH_LoginVO("j09_126","1234","회원이름09","glwlzkwp@naver.com","SILVER",0,"01000000004","19990104","",400000,"") //SILVER -> GOLD
-//				,new SJH_LoginVO("j10_126","1234","회원이름10","glwlzkwp@naver.com","GOLD",0,"01000000005","19990105","",500000,"")
+//				 new SJH_LoginVO("j06_126","12345678","회원이름06","glwlzkwp@naver.com","BASIC",0,"01000000001","19990101","",190000,"")
+//				,new SJH_LoginVO("j07_126","12345678","회원이름07","glwlzkwp@naver.com","BASIC",0,"01000000002","19990102","",200000,"") //BASIC -> SILVER
+//				,new SJH_LoginVO("j08_126","12345678","회원이름08","glwlzkwp@naver.com","SILVER",0,"01000000003","19990103","",200000,"")
+//				,new SJH_LoginVO("j09_126","12345678","회원이름09","glwlzkwp@naver.com","SILVER",0,"01000000004","19990104","",400000,"") //SILVER -> GOLD
+//				,new SJH_LoginVO("j10_126","12345678","회원이름10","glwlzkwp@naver.com","GOLD",0,"01000000005","19990105","",500000,"")
 				
 			);
 	}

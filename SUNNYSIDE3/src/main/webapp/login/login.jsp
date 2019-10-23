@@ -168,7 +168,7 @@
 				url : "${context}/login/do_login.do",
 				dataType : "html",
 				data : {
-					"userId" :  $("#userId").val(),
+					"lang" :  $("#lang").val(),
 					"userId" : $("#userId").val(),
 					"passwd" : $("#passwd").val()
 				},

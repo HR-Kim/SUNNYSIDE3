@@ -112,6 +112,24 @@
 		
 		/** 비밀번호 찾기 확인 버튼 */
 		$("#confirm").on("click",function(){
+			
+			//아이디 validation
+			if( $("#userId").val() == ""){
+				alert("아이디를 입력하세요.");
+				return;
+			}
+			//이름 validation
+			if( $("#userName").val() == ""){
+				alert("이름을 입력하세요.");
+				return;
+			}
+			//이메일 validation
+			if( $("#email").val() == ""){
+				alert("이메일을 입력하세요.");
+				return;
+			}
+			
+			
 			$.ajax({
 		         type:"POST",
 		         url:"${context}/login/pw_find.do",

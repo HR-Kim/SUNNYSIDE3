@@ -38,7 +38,7 @@
 		) VALUES (
 		    ( SELECT DBMS_RANDOM.STRING('A', 15) FROM DUAL ),
 		    #{userId,jdbcType=VARCHAR},
-		    '3천원 할인쿠폰',
+		    '영화 3천원 할인쿠폰',
 		    NVL(#{usable,jdbcType=VARCHAR},0),
 		    ADD_MONTHS(SYSDATE, 1),
 		    3000,

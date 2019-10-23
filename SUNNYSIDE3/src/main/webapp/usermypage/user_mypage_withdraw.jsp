@@ -14,7 +14,7 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/bootstrap.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/icon-font.min.css">
 <!--===============================================================================================-->
@@ -110,19 +110,29 @@
 	<script type="text/javascript">
 		
 	
-		//가입
+		//탈퇴
 		$("#confirm").on("click",function(){
 			//console.log("join");
 			
 			//비밀번호 validation
-				if( $("#passwd").val() != $("#passwdCnfrm").val() ){
+			if( $("#passwd").val() != $("#passwdCnfrm").val() ){
 				alert("비밀번호가 일치하지 않습니다.");
 				return;
 			}
-	
-			if($("#withdrawForm").valid()==false)return;
+			//아이디 validation
+			if( $("#userId").val() == ""){
+				alert("아이디를 입력하세요.");
+				return;
+			}
+			//비밀번호 validation
+			if( $("#passwd").val() == ""){
+				alert("비밀번호를 입력하세요.");
+				return;
+			}
+			
+			
+			
 			if(false==confirm("탈퇴 하시겠습니까?"))return;
-	
 			
 			$.ajax({
 		         type:"POST",

@@ -111,17 +111,25 @@
 		//취소
 		$("#undo").on("click",function(){
 			if(false==confirm("추가정보는 반드시 입력해야 합니다.\n회원가입을 취소하시겠습니까?"))return;
-			location.href="${context}/main/main.do"
+			location.href="${context}/login/logout.do"
 		});
 		
 		
 		//네이버 추가정보 입력 가입
 		$("#join").on("click",function(){
-			//console.log("join");
-
-			//if($("#joinForm").valid()==false)return;
+			
+			//생년월일 validation
+			if( $("#birth").val() == ""){
+				alert("생년월일을 입력하세요.");
+				return;
+			}
+			//휴대폰번호 validation
+			if( $("#cellphone").val() == ""){
+				alert("휴대폰번호을 입력하세요.");
+				return;
+			}
+			
 			if(false==confirm("회원가입 하시겠습니까?"))return;
-
 			
 			$.ajax({
 		         type:"POST",
@@ -157,48 +165,6 @@
 		});
 		
 		
-	    //form validation
-		$("#joinForm").validate({
-				rules: {
-					birth: {
-						required: true,
-						minlength: 8,
-						maxlength: 8
-					},
-					cellphone: {
-						required: true,
-						minlength: 10,
-						maxlength: 11
-					}
-				},
-				messages: {
-					birth: {
-						required: "생년월일을 입력하세요.",
-						minlength: $.validator.format("생년월일을 {0}자로 입력하세요. ex)19990101"),
-						maxlength: $.validator.format("생년월일을 {0}자로 입력하세요. ex)19990101")
-					},
-					cellphone: {
-						required: "휴대폰번호를 입력하세요.",
-						minlength: $.validator.format("휴대폰번호를 {0}자 이상 입력하세요. ex)01012345678"),
-						maxlength: $.validator.format("휴대폰번호를 {0}자 내로 입력하세요. ex)01012345678")
-					}
-				},					
-				errorPlacement : function(error, element) {
-				     //do nothing
-			    },
-			    invalidHandler : function(form, validator) {
-				    var errors = validator.numberOfInvalids();
-				    if (errors) {
-					    alert(validator.errorList[0].message);
-					    validator.errorList[0].element.focus();
-				    }
-				}
-		 });
-		
-		
-		$(document).ready(function() {
-			//alert("ready");
-		});
 	
 	
 	</script>

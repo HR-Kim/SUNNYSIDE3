@@ -154,7 +154,7 @@ public class SJH_MypageCtrl {
 			message.setMsgMsg("탈퇴되었습니다.");
 		}else {
 			message.setMsgId(flag+"");
-			message.setMsgMsg("탈퇴실패.");
+			message.setMsgMsg("탈퇴실패.\n회원정보를 확인하세요.");
 		}
 		
 		//json으로 변환

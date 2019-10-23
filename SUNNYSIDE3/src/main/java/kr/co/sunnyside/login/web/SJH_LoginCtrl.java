@@ -374,7 +374,7 @@ public class SJH_LoginCtrl {
 			message.setMsgMsg(user.getUserName()+"님의 메일로 임시 비밀번호가 전송 되었습니다.");
 		}else {
 			message.setMsgId(flag+"");
-			message.setMsgMsg("비밀번호 찾기 실패. 입력한 정보를 찾을 수 없습니다.");		
+			message.setMsgMsg("비밀번호 찾기 실패.\n입력한 정보를 찾을 수 없습니다.");		
 		}
 	
 		//json으로 변환
