@@ -4,6 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="context" value="${pageContext.request.contextPath }" />    
 <%
 	/**페이지 사이즈*/
@@ -71,7 +72,7 @@
 	<div class="container">
 		<!-- div title -->
 		<div class="page-header">
-			<h1>영화 상세보기</h1>
+			<h1><spring:message code="message.movie.detail_page"/></h1>
 		</div>
 		<!--// div title -->
 
@@ -82,7 +83,8 @@
 				<aside class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 					<article class="gallery-wrap"> 
 						<div class="img-big-wrap">
-							<div><img src="<c:out value='${vo.poster}'/>" alt="영화포스터" style="height: 350px; width:250px;" onerror="this.src='../resources/image/layout/noImage.png'"></div>
+							<!-- 영화포스터 -->
+							<div><img src="<c:out value='${vo.poster}'/>" alt='<spring:message code="message.movie.poster"/>' style="height: 350px; width:250px;" onerror="this.src='../resources/image/layout/noImage_underline.png'"></div>
 						</div>
 					</article>
 				</aside>
@@ -103,16 +105,17 @@
 						</select>								
 						<!--// 별점 -->
 						<!-- 상세설명 -->
-						<b>평점</b> | <c:out value='${vo.visitorRate}'/><br>
-						<b>개봉일</b> | <c:out value='${vo.relDate}'/><br>
-						<b>감독</b> | <c:out value='${vo.director}'/><br>
-						<b>출연진</b> | <c:out value='${vo.cast}'/><br>
-						<b>장르</b> | <c:out value='${vo.genre}'/><br>
-						<b>러닝타임</b> | <c:out value='${vo.runningTime}'/><br>
-						<b>관람연령</b> | <c:out value='${vo.limitage}'/><br>	
+						<!-- 평점, 개봉일, 감독, 출연진, 장르, 러닝타임, 관람연령 -->
+						<b><spring:message code="message.movie.rate"/></b> | <c:out value='${vo.visitorRate}'/><br>
+						<b><spring:message code="message.movie.release_date"/></b> | <c:out value='${vo.relDate}'/><br>
+						<b><spring:message code="message.movie.director"/></b> | <c:out value='${vo.director}'/><br>
+						<b><spring:message code="message.movie.cast"/></b> | <c:out value="${StringUtil.castSubstring(vo.getCast())}"/><br>
+						<b><spring:message code="message.movie.genre"/></b> | <c:out value='${vo.genre}'/><br>
+						<b><spring:message code="message.movie.running_time"/></b> | <c:out value='${vo.runningTime}'/><br>
+						<b><spring:message code="message.movie.limitage"/></b> | <c:out value='${vo.limitage}'/><br>	
 						<hr>				
 						<dl class="item-property">
-							<dt>줄거리</dt>
+							<dt><spring:message code="message.movie.plot"/></dt>
 							<dd><p><c:out value='${vo.synopsis}'/></p></dd>
 						</dl>
 						<!--// 상세설명 -->
@@ -151,8 +154,10 @@
 							<div class="form-group">
 								<label for="reviewContents" class="col-sm-2 control-label"></label>
 								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-									<button type="button" class="btn btn-default btn-sm doSave" id="doSave">등록</button>
-									<button type="button" class="btn btn-default btn-sm doUpdate" id="doUpdate" style="display:none;">수정</button>
+									<!-- 등록 -->
+									<button type="button" class="btn btn-default btn-sm doSave" id="doSave"><spring:message code="message.button.save"/></button>
+									<!-- 수정 -->
+									<button type="button" class="btn btn-default btn-sm doUpdate" id="doUpdate" style="display:none;"><spring:message code="message.button.edit"/></button>
 								</div>
 							</div>
 						</td>
@@ -188,8 +193,10 @@
 <!-- 									수정/삭제 버튼									 -->
 									<c:choose>
 										<c:when test="${user.userId == listVO.userId}">
-											<span class="text-muted"><input type="button" id="doUpdateSelect" name="doUpdateSelect" class="btn btn-default btn-sm doUpdateSelect" value="수정" /></span>
-											<span class="text-muted"><input type="button" id="doDelete" name="doDelete" class="btn btn-default btn-sm doDelete" value="삭제" /></span>
+											<!-- 수정 -->
+											<span class="text-muted"><input type="button" id="doUpdateSelect" name="doUpdateSelect" class="btn btn-default btn-sm doUpdateSelect" value='<spring:message code="message.button.edit"/>' /></span>
+											<!-- 삭제 -->
+											<span class="text-muted"><input type="button" id="doDelete" name="doDelete" class="btn btn-default btn-sm doDelete" value='<spring:message code="message.button.delete"/>' /></span>
 										</c:when>
 									</c:choose>
 								</div>

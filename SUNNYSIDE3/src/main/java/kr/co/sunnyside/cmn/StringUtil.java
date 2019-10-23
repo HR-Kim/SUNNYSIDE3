@@ -543,4 +543,12 @@ public class StringUtil {
 			return str;
 		}		 
 	}
+	
+	public static String castSubstring(String str) {
+		if(str.length()>50) {
+			return str.substring(0, 50)+"...";
+		}else {
+			return str;
+		}		 
+	}
 }
