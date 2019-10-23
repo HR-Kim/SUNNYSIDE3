@@ -19,4 +19,6 @@ public interface SEJ_PhotoTicketSvc  {
 	public int do_insert(DTO dto);
 
 	public DTO do_selectOne(DTO dto);
+	
+	public List<?> do_retrieve_user(DTO dto);
 }

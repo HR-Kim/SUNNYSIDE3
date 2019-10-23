@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userpage">
+
+	<!-- 검색어 -->
+	<sql id="baseCondition">
+	<where>
+		<choose>
+			<when test="'10' == searchDiv">
+				TICKET_CODE LIKE '%' || #{searchWord} || '%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</where>
+	</sql>
+
+	<delete id="do_delete" parameterType="KDY_MoviehistoryVO">
+		DELETE FROM TICKET_HISTORY WHERE TICKET_CODE = #{ticket_code, jdbcType=VARCHAR}
+	</delete>
+	
+	<select id="do_retrieve" parameterType="listSearchVO" resultType="KDY_MoviehistoryVO">
+		SELECT T.RNUM as num
+			  ,T.ticket_code as ticket_code
+			  ,T.kortitle as kortitle
+			  ,T.ticket_dt as ticket_dt
+			  ,T.room_id as room_id
+		FROM(
+		    SELECT ROWNUM AS RNUM, A.*
+		    FROM(
+		         SELECT
+			     c.ticket_code,
+			     d.kortitle,
+			     c.ticket_dt,
+				 c.room_id
+			    		 FROM  ticket_history c JOIN movie d
+				 on c.movie_id =d.movie_id
+				 where c.user_id=#{user_id,jdbcType=VARCHAR}
+		         
+		        )A
+		    WHERE CEIL(ROWNUM/ #{pageSize, jdbcType=VARCHAR} ) = #{pageNum, jdbcType=VARCHAR}
+		    )T
+	</select>
+	
+	<select id="do_coupon_retrieve" parameterType="listSearchVO" resultType="KDY_CouponVO">
+		SELECT T.RNUM as num
+			  ,T.coupon_nm as coupon_nm
+			  ,T.coupon_code as coupon_code
+			  ,T.use_dt as use_dt
+			  ,T.usable as usable
+		FROM(
+		    SELECT ROWNUM AS RNUM, A.*
+		    FROM(
+		         SELECT
+				    coupon_nm,
+				    coupon_code,
+				    usable,
+				    use_dt
+				FROM
+				    user_coupon
+				    
+				WHERE
+					user_id=#{user_id,jdbcType=VARCHAR}
+			         
+			        )A
+		    WHERE CEIL(ROWNUM/ #{pageSize, jdbcType=VARCHAR} ) = #{pageNum, jdbcType=VARCHAR}
+		    )T
+	</select>
+	<select id="do_membership" parameterType="listSearchVO" resultType="KDY_UserinfoVO">
+		SELECT 
+			total_pay,
+			user_name,	
+			user_level,
+			user_id
+		FROM
+			 user_info
+		WHERE
+			user_id=#{user_id,jdbcType=VARCHAR}
+	</select>
+	
+	
+	<select id="do_qnaList" parameterType="listSearchVO" resultType="KDY_QnalistVO"> 
+		SELECT T.RNUM as num
+			  ,T.title as title
+			  ,T.status as status
+			  ,T.reg_dt as reg_dt
+		FROM(
+		    SELECT ROWNUM AS RNUM, A.*
+		    FROM(
+		       SELECT
+			        title,
+					status,
+					reg_dt
+				FROM
+					 qna
+				    
+				WHERE
+					user_id=#{user_id,jdbcType=VARCHAR}
+			         
+			        )A
+		    WHERE CEIL(ROWNUM/ #{pageSize, jdbcType=VARCHAR} ) = #{pageNum, jdbcType=VARCHAR}
+		    )T
+	</select>
+	
+	
+
+</mapper>
