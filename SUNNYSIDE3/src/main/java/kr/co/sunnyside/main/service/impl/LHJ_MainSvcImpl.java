@@ -13,6 +13,11 @@ public class LHJ_MainSvcImpl implements LHJ_MainSvc{
 	@Autowired
 	private LHJ_MainDaoImpl mainDaoImpl;
 	
+	/**공지조회*/
+	public List<?> do_notice_retrieve(){
+		return mainDaoImpl.do_notice_retrieve();
+	}
+	
 	/**베너이미지 전체조회*/
 	@Override
 	public List<?> do_banner_retrieve() {

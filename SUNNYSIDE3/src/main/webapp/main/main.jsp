@@ -132,39 +132,28 @@
 				<thead style="border: none">
 					<tr>
 						<!-- 분류 -->
-						<th class="text-center col-md-1 col-xs-1"><spring:message code="message.main.type"/></th>
+						<th class="text-center col-md-3 col-xs-3"><spring:message code="message.main.writerId"/></th>
 						<!-- 작성일 -->
 						<th class="text-center col-md-3 col-xs-3"><spring:message code="message.main.regdt"/></th>
 						<!-- 제목 -->
-						<th class="text-center col-md-8 col-xs-8"><spring:message code="message.main.title"/></th>
+						<th class="text-center col-md-6 col-xs-6"><spring:message code="message.main.title"/></th>					
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td class="text-center col-md-1 col-xs-1">전체</td>
-						<td class="text-center col-md-3 col-xs-3">2019.10.22</td>
-						<td class="text-left col-md-8 col-xs-8">영화관 공지사항</td>
-					</tr>
-					<tr>
-						<td class="text-center col-md-1 col-xs-1">전체</td>
-						<td class="text-center col-md-3 col-xs-3">2019.10.22</td>
-						<td class="text-left col-md-8 col-xs-8">영화관 공지사항</td>
-					</tr>
-					<tr>
-						<td class="text-center col-md-1 col-xs-1">전체</td>
-						<td class="text-center col-md-3 col-xs-3">2019.10.22</td>
-						<td class="text-left col-md-8 col-xs-8">영화관 공지사항</td>
-					</tr>
-					<tr>
-						<td class="text-center col-md-1 col-xs-1">전체</td>
-						<td class="text-center col-md-3 col-xs-3">2019.10.22</td>
-						<td class="text-left col-md-8 col-xs-8">영화관 공지사항</td>
-					</tr>
-					<tr>
-						<td class="text-center col-md-1 col-xs-1">전체</td>
-						<td class="text-center col-md-3 col-xs-3">2019.10.22</td>
-						<td class="text-left col-md-8 col-xs-8">영화관 공지사항</td>
-					</tr>
+					<c:choose>
+						<c:when test="${noticeList.size()>0}">
+							<c:forEach var="vo" items="${noticeList}">
+								<tr>
+									<td class="text-center col-md-3 col-xs-3"><c:out value="${vo.writerId}"/></td>
+									<td class="text-center col-md-3 col-xs-3"><c:out value="${vo.regDt}"/></td>	
+									<td class="text-left col-md-6 col-xs-6"><c:out value="${vo.title}"/></td>																	
+								</tr>
+							</c:forEach>
+						</c:when>
+					</c:choose>
+<%-- 					<c:otherwise> --%>
+<!-- 						<tr><td class="text-center" colspan="99">등록된 데이터가 없습니다.</td></tr> -->
+<%-- 					</c:otherwise> --%>
 				</tbody>
 			</table>
 		</aside>

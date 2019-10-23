@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.sunnyside.main"> 
+	<!-- 공지 조회 -->
+	<select id="do_notice_retrieve" resultType="kr.co.sunnyside.notice.service.KYMNoticeVO">
+		SELECT 
+		    notice_id as noticeId,
+		    title,
+		    org_file_nm as orgFileNm,
+		    save_file_nm as saveFileNm,
+		    ext,
+		    contents,
+		    writer_id as writerId,
+		    TO_CHAR(mod_dt, 'yyyy.mm.dd') as modDt,
+		    TO_CHAR(reg_dt, 'yyyy.mm.dd') as regDt,
+		    branch_nm as branchNm
+		FROM 
+		    (
+		    SELECT 
+		        notice_id,
+		        title,
+		        org_file_nm,
+		        save_file_nm,
+		        ext,
+		        contents,
+		        writer_id,
+		        mod_dt,
+		        reg_dt,
+		        branch_nm
+		    FROM 
+		        notice
+		    ORDER BY 
+		        reg_dt DESC
+		    )
+		WHERE 
+		    ROWNUM <![CDATA[ <= ]]> 5	
+	</select>
 	
 	<!-- 베너이미지 삭제 -->
 	<delete id="do_image_delete" parameterType="MainImage">

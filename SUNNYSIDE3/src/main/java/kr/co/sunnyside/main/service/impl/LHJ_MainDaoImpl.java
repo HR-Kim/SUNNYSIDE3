@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.co.sunnyside.cmn.DTO;
 import kr.co.sunnyside.cmn.WorkDiv;
 import kr.co.sunnyside.main.service.LHJ_MainImageVO;
+import kr.co.sunnyside.notice.service.KYMNoticeVO;
 
 @Repository
 public class LHJ_MainDaoImpl implements WorkDiv{
@@ -83,6 +84,17 @@ public class LHJ_MainDaoImpl implements WorkDiv{
 		return null;
 	}
 
+	public List<?> do_notice_retrieve() {
+		String statement = NAMESPACE + ".do_notice_retrieve";
+		LOG.debug("=============================");
+		LOG.debug("1. statement:"+statement);
+		List<KYMNoticeVO> list = this.sqlSessionTemplate.selectList(statement);		
+		LOG.debug("2. list:"+list);
+		LOG.debug("=============================");
+		
+		return list;
+	}
+	
 	public List<?> do_banner_retrieve() {
 		String statement = NAMESPACE + ".do_banner_retrieve";
 		LOG.debug("=============================");

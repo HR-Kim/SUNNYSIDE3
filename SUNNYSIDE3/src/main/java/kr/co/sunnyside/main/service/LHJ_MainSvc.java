@@ -6,6 +6,9 @@ import kr.co.sunnyside.cmn.DTO;
 
 public interface LHJ_MainSvc {
 
+	/**공지조회*/
+	public List<?> do_notice_retrieve();
+	
 	/**목록조회*/
 	public List<?> do_banner_retrieve();
 	
