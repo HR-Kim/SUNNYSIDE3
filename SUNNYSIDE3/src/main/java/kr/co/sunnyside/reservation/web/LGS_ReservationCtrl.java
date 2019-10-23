@@ -197,17 +197,16 @@ public class LGS_ReservationCtrl {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_payPage");
 		LOG.debug("==================================");
-	
-		String[] seatArr = (String[])seatInfo.split("%");
-		
+
 		model.addAttribute("vo", vo);
-		model.addAttribute("seatArr", seatArr);
+		model.addAttribute("seatInfo", seatInfo);
 		
 		LOG.debug("==================================");
 		LOG.debug("vo : " + vo);
-		LOG.debug("seatArr : " + seatArr);
+		LOG.debug("seatInfo : " + seatInfo);
 		LOG.debug("==================================");
 		
 		return VIEW_PAY;
 	}
+
 }

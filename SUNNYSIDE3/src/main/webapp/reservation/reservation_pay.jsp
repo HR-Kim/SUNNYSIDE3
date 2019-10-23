@@ -211,17 +211,19 @@
 		<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 		<script type="text/javascript">
     		$(document).ready(function(){
+    			resizeTo(465, 580);
+    			
     			var vo = "${vo.screenId}";
     			if(vo.length < 1){
     				alert("잘못된 접근입니다.");
-    				location.href = "${context}/main/main.do";
+    				self.close();
     				return;
     			}
     			
     			var userId = "${user.userId}";
     			if(userId.length < 1){
     				alert("로그인이 필요한 페이지입니다.");
-    				location.href = "${context}/login/login.jsp";
+    				self.close();
     				return;
     			}   			
     			
@@ -233,9 +235,9 @@
     		});
     		
     		function startPay(){
-    			var userCellphone = ${user.cellphone};
-    			var userName = ${user.userName};
-    			var email = ${user.email};
+    			var userCellphone = '${user.cellphone}';
+    			var userName = '${user.userName}';
+    			var email = '${user.email}';
     			var productNm = $("#topBarTitle").text();
     			var cost = $("#hd_final").val();
     			var IMP = window.IMP; // 생략가능
@@ -278,8 +280,10 @@
     	                        //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
     	                    }
     	                });
+    	                success();
+    	                seatUpdateUnable();
     	                //성공시 이동할 페이지
-    	                location.href='${context}/reservation/reservation_result.jsp;
+    	                location.replace='${context}/reservation/reservation_result.jsp';
     	            } else {
     	                msg = '결제에 실패하였습니다.\n';
     	                msg += '에러내용 : ' + rsp.error_msg;
@@ -416,8 +420,6 @@
     				alert("약관에 동의해주세요.");
     				return;
     			}
-    			
-    			getUsername();
     			startPay();
     		});
     		
@@ -425,10 +427,79 @@
     		$("#cancel").on("click", function(){
     			if(confirm("결제를 취소하시겠습니까?")==false) return;
     			alert("결제를 취소합니다.");
-    			self.opener = self;
-    			window.close();
+    			self.close();
     		});
     		
+    		//결제성공
+    		function success(){
+	   			var branchId = "${vo.branchId}";
+	   			var roomId = "${vo.roomId}";
+	   			var userId = "${user.userId}";
+	   			var movieId = "${vo.movieId}";
+	   			var adultCnt = "${vo.adultCnt}";
+	   			var screenId = "${vo.screenId}";
+	   			var payState = "1";
+	   			var cost = $("#hd_final").val();
+	   			
+	   			//좌석문자열정보를 배열로
+	   			var stringInfo = "${seatInfo}";
+    			var arr = stringInfo.split("%");
+
+				for(var i=1 ; i<arr.length ; i++){
+					var seatNm = arr[i];console.log(seatNm + "  " + i);
+					$.ajax({
+	    				type : "POST",
+	    				url : "${context}/reservation/do_save.do",
+	    				dataType : "json",
+	    				data : {
+	    					"branchId" : branchId,
+	    					"roomId" : roomId,
+	    					"screenId" : screenId,
+	    					"userId" : userId,
+	    					"movieId" : movieId,
+							"seatNm" : seatNm,
+	    					"adultCnt" : adultCnt,
+	    					"payState" : payState,
+	    					"cost" : cost
+	    				}
+					}).done(function(data){
+						var msg = data;console.log(seatNm + "  " + i);
+						if(msg.msgId == "1"){
+							//alert("1");
+						}else{
+							//alert("0");
+						}						
+					});
+				}
+    		}
+    		
+    		//좌석을 사용중으로 업데이트
+    		function seatUpdateUnable(){
+    			var roomId = "${vo.roomId}";
+    			var stringInfo = "${seatInfo}";
+    			var arr = stringInfo.split("%");
+
+    			for(var i=1 ; i<arr.length ; i++){
+    				var seatNm = arr[i];
+	    			$.ajax({
+	    				type : "POST",
+	    				url : "${context}/seat/do_update.do",
+	    				dataType : "json",
+	    				data : {
+	    					"roomId" : roomId,
+							"seatNm" : seatNm,
+							"useYN" : 0
+	    				}
+					}).done(function(data){
+						var msg = data;
+						if(msg.msgId == "1"){
+							//alert("u1");
+						}else{
+							//alert("u0");
+						}
+					});
+    			}
+    		}
     	</script>
 	</body>
 </html>

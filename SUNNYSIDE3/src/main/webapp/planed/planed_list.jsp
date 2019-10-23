@@ -108,7 +108,7 @@
 									<!--// 이미지  -->			
 									<!-- 예매하기, 상세보기 버튼 -->
 									<span class="text_holder"><span class="text_outer"><span class="text_inner" ><span class="feature_holder" ><span class="feature_holder_icons">
-										<a class="lightbox qbutton small white" href="#">예매하기</a>
+										<a class="lightbox qbutton small white" href="#" onclick="javascript:reservationPage();">예매하기</a>
 										<a class="lightbox qbutton small white" href="../movie/do_selectOne.do?movieId=<c:out value="${vo.movieId}"/>">상세보기</a>
 										
 									</span></span></span></span></span>			
@@ -152,7 +152,9 @@
 	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 	<script src="${context}/resources/js/jquery-1.12.4.js"></script>
 	<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
-	<script src="${context}/resources/js/bootstrap.min.js"></script>  	
+	<script src="${context}/resources/js/bootstrap.min.js"></script>
+	<!-- reservation 페이지 팝업 -->
+	<script src="${context}/resources/js/reservationPopup.js"></script>	
 	<script type="text/javascript">
 		function popup(url,name,width,height,top,left,location){
 	        var option = "width="+width+",height="+height+",top="+top+",left="+left+",resizeable=no";

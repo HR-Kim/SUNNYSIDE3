@@ -12,10 +12,25 @@
     	<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>결제완료</title>
 		<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
-
+	<style type="text/css">
+		.MAIN_MSG {
+			margin: 20px;
+			border-bottom: 2px double black;
+			border-top: 2px double black;
+			text-align: center;
+		}
+		.HIGHLIGHT {
+			color: red;
+		}
+	</style>
 	</head>
 	<body>
+		<div class="container">
+			<div class="MAIN_MSG">
+				<h3>결제가 <h class="HIGHLIGHT">완료</h>되었습니다.</h3>
+			</div>
 		
+		</div>
 	
 	
 		<script src="${context}/resources/js/jquery-1.12.4.js"></script>
