@@ -119,6 +119,14 @@ public class SEJ_CartSvcImple implements SEJ_CartSvc {
 		LOG.debug("==================");
 		return cartDaoImpl.do_totalCost(userId);
 	}
+	/**주문코드 생성후 업데이트*/
+	@Override
+	public int do_make_codeNm(DTO dto) {
+		LOG.debug("==================");
+		LOG.debug("=@Service do_make_codeNm="+dto);
+		LOG.debug("==================");
+		return cartDaoImpl.do_make_codeNm(dto);
+	}
 
 
 	

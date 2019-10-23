@@ -1,5 +1,9 @@
 package kr.co.sunnyside.store.web;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,8 +23,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+
 import kr.co.sunnyside.cmn.StringUtil;
 import kr.co.sunnyside.login.service.SJH_LoginVO;
+import kr.co.sunnyside.main.service.LHJ_MainImageVO;
+import kr.co.sunnyside.movie.service.LHJ_MovieVO;
 import kr.co.sunnyside.store.service.SEJ_CartSvc;
 import kr.co.sunnyside.store.service.SEJ_CartVO;
 import kr.co.sunnyside.store.service.SEJ_PayVO;
@@ -47,16 +55,16 @@ public class SEJ_CartCtrl {
 			LOG.debug("============================");
 			LOG.debug("=do_payComplete inVo="+inVO);
 			LOG.debug("============================");
-			
-				cartService.do_payComplete(inVO);
-				cartService.do_deleteAll();
 		
+			cartService.do_payComplete(inVO);
+			cartService.do_deleteAll();
+			
 			return AFTER_PAY_LIST_VIEW;
 		}
 		
 	// 0. 결제내역 목록
 		@RequestMapping(value ="cart/do_payCompleteList.do",method = RequestMethod.GET)
-		public String do_payCompleteList(SEJ_PayVO inVO,Model model){
+		public String do_payCompleteList(SEJ_PayVO inVO, Model model){
 			LOG.debug("1.=====================");
 			LOG.debug("1.= do_payCompleteList param=" + inVO);
 			LOG.debug("1.=====================");
@@ -144,18 +152,61 @@ public class SEJ_CartCtrl {
 		return CART_LIST_VIEW;
 	}
 	
-	// 5. 주문하기 목록
-		@RequestMapping(value ="cart/do_payRetrieve.do",method = RequestMethod.GET)
-		public String do_payRetrieve(SEJ_CartVO inVO,Model model){
+	// 5. 주문코드 생성
+		@RequestMapping(value ="cart/do_make_codeNm.do",method = RequestMethod.GET)
+		public String do_make_codeNm(SEJ_CartVO inVO,Model model){
 			LOG.debug("1.=====================");
-			LOG.debug("1.= do_retrieve param=" + inVO);
+			LOG.debug("1.= do_retrieve do_make_codeNm param=" + inVO);
 			LOG.debug("1.=====================");
 
-			List<SEJ_CartVO> list = (List<SEJ_CartVO>) this.cartService.do_retrieve(inVO);
+			int CutNumber = 16; 
+			String productId = inVO.getProductId();
+			LOG.debug("1.= source=" + productId);
+			
+			int length = productId.length();
+			LOG.debug("1.= length=" + length);
+          
+			List<String> list = new ArrayList<String>(length/length);  //데이터길이(48) / 자르는갯수(16) + 5  %> 
+			LOG.debug("1.= list=" + list); 
+			
+			for(int i = 0; i <length; i+= CutNumber){
+				if(i + CutNumber < length){
+					   list.add(productId.substring(i, i + CutNumber));
+						LOG.debug("2.= list=" + list); 
+				}else{
+					   list.add(productId.substring(i)); // 해당위치부터 나머지
+						LOG.debug("2-1.= list=" + list); 
+				}			
+			}
+
+			for(int i = 0; i < list.size(); i++){
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"+"-"+"hhmmss");
+				Calendar c1 = Calendar.getInstance();
+				String payCode = sdf.format(c1.getTime());
+				
+				System.out.println("sdf=" + sdf);
+				System.out.println("payCode=" + payCode);
+				
+				inVO.setPayCode(payCode);
+				
+				productId =list.get(i);
+				inVO.setProductId(productId);
+				System.out.println(inVO);
+				
+				cartService.do_make_codeNm(inVO);	
+				
+				System.out.println(list.get(i));
+			}
+
+			
+     		//--------------------------------
+			//-2. 조회
+			//--------------------------------	
+			List<SEJ_CartVO> Cartlist = (List<SEJ_CartVO>) this.cartService.do_retrieve(inVO);
 			int totalCost=cartService.do_totalCost(inVO.getUserId());
-			model.addAttribute("list", list);
+			model.addAttribute("list", Cartlist);
 			model.addAttribute("totalCost", totalCost);
 
-			return BEFORE_PAY_LIST_VIEW;
+     		return BEFORE_PAY_LIST_VIEW;
 		}
 }

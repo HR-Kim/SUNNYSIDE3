@@ -205,6 +205,24 @@ public class SEJ_CartDaoImpl implements WorkDiv{
 		return null;
 	}
 
+	/**주문코드 생성후 업데이트*/
+	public int do_make_codeNm(DTO dto) {
+		String statement = NAMESPACE+".do_make_codeNm";
+		SEJ_CartVO store = (SEJ_CartVO) dto;
+		LOG.debug("===================================");
+		LOG.debug("=1. param="+store);
+		LOG.debug("===================================");
+		LOG.debug("===================================");
+		LOG.debug("=2. statement="+statement);
+		LOG.debug("===================================");
+		
+		int flag = this.sqlSessionTemplate.update(statement,store);
+		LOG.debug("===================================");
+		LOG.debug("=3. flag="+flag);
+		LOG.debug("===================================");
+		
+		return flag;
+	}
 
 
 

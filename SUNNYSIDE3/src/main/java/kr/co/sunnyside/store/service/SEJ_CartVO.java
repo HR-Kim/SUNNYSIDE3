@@ -3,6 +3,8 @@ package kr.co.sunnyside.store.service;
 import kr.co.sunnyside.cmn.DTO;
 
 public class SEJ_CartVO extends DTO {
+	/**상품결제코드*/
+	private String payCode     ;  
 	/**장바구니코드*/
 	private String cartId      ;   
 	/**상품명*/
@@ -30,15 +32,17 @@ public class SEJ_CartVO extends DTO {
 	public SEJ_CartVO() {}
 
 
-	public SEJ_CartVO(String cartId, String productNm, String userId, int count, int oriProductCost, int productCost,
-			String productId, String orgFileNm, String saveFileNm, String ext) {
+	public SEJ_CartVO(String payCode, String cartId, String productNm, String userId, int count, int oriProductCost,
+			int productCost, int totalCost, String productId, String orgFileNm, String saveFileNm, String ext) {
 		super();
+		this.payCode = payCode;
 		this.cartId = cartId;
 		this.productNm = productNm;
 		this.userId = userId;
 		this.count = count;
 		this.oriProductCost = oriProductCost;
 		this.productCost = productCost;
+		this.totalCost = totalCost;
 		this.productId = productId;
 		this.orgFileNm = orgFileNm;
 		this.saveFileNm = saveFileNm;
@@ -46,12 +50,13 @@ public class SEJ_CartVO extends DTO {
 	}
 
 
-	@Override
-	public String toString() {
-		return "SEJ_CartVO [cartId=" + cartId + ", productNm=" + productNm + ", userId=" + userId + ", count=" + count
-				+ ", oriProductCost=" + oriProductCost + ", productCost=" + productCost + ", totalCost=" + totalCost
-				+ ", productId=" + productId + ", orgFileNm=" + orgFileNm + ", saveFileNm=" + saveFileNm + ", ext="
-				+ ext + ", toString()=" + super.toString() + "]";
+	public String getPayCode() {
+		return payCode;
+	}
+
+
+	public void setPayCode(String payCode) {
+		this.payCode = payCode;
 	}
 
 
@@ -115,6 +120,16 @@ public class SEJ_CartVO extends DTO {
 	}
 
 
+	public int getTotalCost() {
+		return totalCost;
+	}
+
+
+	public void setTotalCost(int totalCost) {
+		this.totalCost = totalCost;
+	}
+
+
 	public String getProductId() {
 		return productId;
 	}
@@ -155,18 +170,13 @@ public class SEJ_CartVO extends DTO {
 	}
 
 
-	public int getTotalCost() {
-		return totalCost;
+	@Override
+	public String toString() {
+		return "SEJ_CartVO [payCode=" + payCode + ", cartId=" + cartId + ", productNm=" + productNm + ", userId="
+				+ userId + ", count=" + count + ", oriProductCost=" + oriProductCost + ", productCost=" + productCost
+				+ ", totalCost=" + totalCost + ", productId=" + productId + ", orgFileNm=" + orgFileNm + ", saveFileNm="
+				+ saveFileNm + ", ext=" + ext + ", toString()=" + super.toString() + "]";
 	}
 
-
-	public void setTotalCost(int totalCost) {
-		this.totalCost = totalCost;
-	}
-
-
-	
-	
-	
 	
 }
