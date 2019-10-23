@@ -67,6 +67,6 @@
 	<script src="../../sunnyside/resources/js/divisima/jquery.nicescroll.min.js"></script>
 	<script src="../../sunnyside/resources/js/divisima/jquery.zoom.min.js"></script>
 	<script src="../../sunnyside/resources/js/divisima/jquery-ui.min.js"></script>
-	<script src="../../sunnyside/resources/js/divisima/main.js"></script>
+	<script src="../../sunnyside/resources/js/divisima/main.js"></script>	
 </body>
 </html>

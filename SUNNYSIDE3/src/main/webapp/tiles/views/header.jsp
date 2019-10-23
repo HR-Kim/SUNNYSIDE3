@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<c:set var="context" value="${pageContext.request.contextPath}"/>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,10 +82,13 @@
 						</div>
 					</div>
 					<div class="col-xl-1 col-lg-1">
-						<select name="lang" id="lang">
-					        <option value="ko" <c:if test="${lang == 'ko'}">selected</c:if> >한글</option>
-							<option value="en" <c:if test="${lang == 'en'}">selected</c:if> >English</option>
-					     </select>
+						<div class="row">
+						<form class="form-inline" name="langFrm" id="langFrm">
+							<input type="hidden" id="lang" name="lang"/>
+							<button type="button" id="koBtn" name="koBtn" class="btn btn-default btn-sm" style="padding: 0px;"><img class="btn-img" width="35px" src="http://localhost:8080/sunnyside/resources/img/icon/kor.png"></button>
+							<button type="button" id="enBtn" name="enBtn" class="btn btn-default btn-sm" style="padding: 0px;"><img class="btn-img" width="35px" src="http://localhost:8080/sunnyside/resources/img/icon/usa.png"></button>
+						</form>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -125,7 +129,7 @@
   					<!-- 로그인한 상태면 로그아웃 출력 -->
 					<c:choose>
   						<c:when test="${not empty user.userId}">
-							<li><a href="/sunnyside/login/logout.do">로그아웃</a></li>
+							<li><a href="/sunnyside/login/logout.do"><spring:message code="message.header.logout"/></a></li>
 							<!-- (임시)회원정보수정 -->
 							<li><a href="/sunnyside/usermypage/tmp_update_view.do"><spring:message code="message.header.userpage"/></a></li>
 						</c:when>
@@ -159,5 +163,26 @@
 			</div>
 		</nav>
 	</header>
+    <script src="../../sunnyside/resources/js/jquery-1.12.4.js"></script>
+	<script type="text/javascript">
+		/** 다국어처리 */
+		$("#koBtn").on("click",function(){
+			var frm = document.langFrm;
+			var lang = 'ko';
+			
+	    	frm.lang.value = lang;
+	    	frm.action = "${context}/change_locale.do";
+	    	frm.submit();
+	    });
+		
+		$("#enBtn").on("click",function(){
+			var frm = document.langFrm;
+			var lang = 'en';
+			
+	    	frm.lang.value = lang;
+	    	frm.action = "${context}/change_locale.do";
+	    	frm.submit();
+	    });
+	</script>	
 </body>
 </html>

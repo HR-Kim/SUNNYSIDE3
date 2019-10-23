@@ -186,7 +186,7 @@ public class LHJ_MainCtrl {
 	
 	/**목록조회 */
 	@RequestMapping(value="main/main.do",method = RequestMethod.GET)
-	public String do_selectOne(LHJ_MovieVO inVO,Model model) {
+	public String do_retrieve(LHJ_MovieVO inVO,Model model) {
 
 		
 		List<LHJ_MainImageVO> bannerList = (List<LHJ_MainImageVO>) this.service.do_banner_retrieve();
