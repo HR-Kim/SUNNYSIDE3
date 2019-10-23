@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sunnyside.notice">
+
+	<sql id="baseCondition">
+			<choose>
+				<when test="'10' == searchDiv">
+					and TITLE LIKE '%' || #{searchWord} || '%'
+				</when>
+				<when test="'20' == searchDiv">
+					and CONTENTS LIKE '%' || #{searchWord} || '%'
+				</when>
+				<when test="'30' == searchDiv">
+					and REG_ID LIKE '%' || #{searchWord} || '%'
+				</when>
+				<otherwise></otherwise>							
+			</choose>
+	</sql>
+	
+	<!-- 목록조회 -->
+	<select id="do_retrieve" parameterType="kr.co.sunnyside.cmn.SearchVO" resultType="kr.co.sunnyside.notice.service.KYMNoticeVO">
+	  SELECT T1.*,T2.*													
+	  FROM                                                              
+	  (                                                                 
+	  	SELECT       
+	  		B.NOTICE_ID as noticeId,
+			B.TITLE,
+			B.ORG_FILE_NM as orgFileNm,
+			B.SAVE_FILE_NM as saveFileNm,
+			B.EXT,
+			B.CONTENTS,
+			B.WRITER_ID as writerId,
+			B.MOD_DT as modDt,
+			B.REG_DT as regDt,
+			B.rnum as num,
+			B.BRANCH_NM as branchSNm
+	  	FROM                                                           
+	  	( 	SELECT ROWNUM AS rnum, A.*
+	  		FROM                                                       
+	  		(                                                           
+	  			SELECT  *                                              
+	  			FROM   notice    
+	  			WHERE  1=1
+	  			AND reg_dt <![CDATA[ >  ]]> to_date('19700101','yyyymmdd')
+				<include refid="baseCondition"/>                                  
+	  			ORDER BY reg_dt DESC
+	  		)A                                                         
+	  	   WHERE rownum <![CDATA[ <= ]]> (#{pageSize} * (#{pageNum}-1)+#{pageSize})
+	  	) B                                                            
+	  	WHERE B.rnum <![CDATA[ >= ]]> (#{pageSize} * (#{pageNum}-1)+1)
+	  )T1
+	  NATURAL JOIN
+	  (                                                                 
+	      SELECT COUNT(*) totalCnt                                     
+	      FROM notice       
+	      WHERE  1=1                                                
+	  	  <include refid="baseCondition"/>        		                               
+	  )T2  
+	</select>
+
+	<update id="do_updateReadCnt" parameterType="kr.co.sunnyside.notice.service.KYMNoticeVO">
+		UPDATE notice
+		SET  READ_CNT = (SELECT NVL(MAX(READ_CNT),0)+1 FROM notice WHERE NOTICE_ID = #{noticeId,jdbcType=VARCHAR})
+		WHERE NOTICE_ID = #{noticeId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="do_boardIdList" parameterType="kr.co.sunnyside.cmn.SearchVO" resultType="kr.co.sunnyside.notice.service.KYMNoticeVO">
+		SELECT
+			NOTICE_ID as noticeId,
+			TITLE,
+			ORG_FILE_NM as orgFileNm,
+			SAVE_FILE_NM as saveFileNm,
+			EXT,
+			CONTENTS,
+			WRITER_ID as writerId,
+			BRANCH_NM as branchSNm,
+			MOD_DT as modDt,
+			REG_DT as regDt
+		FROM notice
+		WHERE NOTICE_ID LIKE '%' || #{searchWord} || '%'
+		ORDER BY NOTICE_ID ASC
+	</select>
+
+	<!-- 단건조회 -->
+	<select id="do_selectOne" parameterType="kr.co.sunnyside.notice.service.KYMNoticeVO" resultType="kr.co.sunnyside.notice.service.KYMNoticeVO">
+		SELECT
+			NOTICE_ID as noticeId,
+			TITLE,
+			ORG_FILE_NM as orgFileNm,
+			SAVE_FILE_NM as saveFileNm,
+			EXT,
+			CONTENTS,
+			WRITER_ID as writerId,
+			MOD_DT as modDt,
+			REG_DT as regDt,
+			BRANCH_NM as branchSNm
+		FROM notice
+		WHERE notice_id = #{noticeId,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 수정 -->
+	<update id="do_update" parameterType="kr.co.sunnyside.notice.service.KYMNoticeVO">
+		UPDATE notice
+		SET   title = #{title,jdbcType=VARCHAR}
+			, org_file_nm = #{orgFileNm,jdbcType=VARCHAR}
+			, save_file_nm = #{saveFileNm,jdbcType=VARCHAR}
+			, ext = #{ext,jdbcType=VARCHAR}
+			, contents = #{contents,jdbcType=VARCHAR}
+			, writer_id = #{writerId,jdbcType=VARCHAR}
+			, BRANCH_NM = #{branchSNm,jdbcType=VARCHAR}
+			, MOD_DT = SYSDATE
+			, REG_DT = SYSDATE
+		WHERE notice_id = #{noticeId,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 등록 -->
+	<insert id="do_save" parameterType="kr.co.sunnyside.notice.service.KYMNoticeVO" >
+		INSERT INTO notice (
+			TITLE,
+			ORG_FILE_NM,
+			SAVE_FILE_NM,
+			EXT,
+			CONTENTS,
+			WRITER_ID,
+			BRANCH_NM,
+			MOD_DT,
+			REG_DT
+		) VALUES (
+			#{title,jdbcType=VARCHAR},
+			#{orgFileNm,jdbcType=VARCHAR},
+			#{saveFileNm,jdbcType=VARCHAR},
+			#{ext,jdbcType=VARCHAR},
+			#{contents,jdbcType=VARCHAR},
+			#{writerId,jdbcType=VARCHAR},
+			#{branchSNm,jdbcType=VARCHAR},
+			SYSDATE,
+			SYSDATE
+		)
+	</insert>
+	
+	<delete id="do_delete" parameterType="kr.co.sunnyside.notice.service.KYMNoticeVO">
+		DELETE FROM notice
+		WHERE notice_id = #{noticeId,jdbcType=VARCHAR}
+	</delete>
+	
+	<select id="do_retrieveTwo" parameterType="kr.co.sunnyside.code.service.CodeVO" resultType="kr.co.sunnyside.code.service.CodeVO">
+		SELECT b.code_id as codeId      
+		     , b.code_nm as codeNm        
+		     , b.num                      
+		FROM code_type a JOIN code b      
+		ON a.code_type_id = b.code_type_id
+		WHERE a.code_type_id = #{codeTypeId,jdbcType=VARCHAR}       
+		AND b.use_yn = 1                  
+		ORDER BY b.num                    
+	</select>
+	
+	<select id="do_retrieveThree" resultType="kr.co.sunnyside.notice.service.KYMBranchVO">
+		SELECT DISTINCT BRANCH_NM as branchSNm
+		FROM BRANCH_INFO               
+	</select>
+	
+	<select id="do_retrieveFour" resultType="kr.co.sunnyside.notice.service.KYMBranchVO">
+		SELECT DISTINCT BRANCH_NM as branchSNm
+		FROM BRANCH_INFO
+	</select>
+	
+</mapper>
