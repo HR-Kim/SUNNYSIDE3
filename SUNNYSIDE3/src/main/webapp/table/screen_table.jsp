@@ -64,8 +64,8 @@
 				position: absolute;
 				top: 0;
 				left: 0;
-				width: 100%;
-				height: 706px;
+				width: 100vw;
+				height: 100vh;
 				background-color: black;
 				opacity: 0.1;
 				z-index: 95;
@@ -98,8 +98,8 @@
 				position: absolute;
 				top: 0;
 				left: 0;
-				width: 100%;
-				height: 706px;
+				width: 100vw;
+				height: 100vh;
 				background-color: black;
 				opacity: 0.1;
 				z-index: 10;
@@ -305,7 +305,7 @@
     				var width = $(".loadingLayer").width();
         			var height = $(".loadingLayer").height();
         			var outWidth = $("body").width();
-        			var outHeight = $(".container").height();
+        			var outHeight = $("body").height();
         			
         			$(".loadingLayer").css("top", (outHeight-height)/2);
         			$(".loadingLayer").css("left", (outWidth-width)/2);
@@ -1120,9 +1120,10 @@
 
     			}
     			});
-				
-				
 			}
+			
+			//영화추가창 드래드가능
+			$(".layer-MovieTable").draggable();
 			
     	</script>
 	</body>
