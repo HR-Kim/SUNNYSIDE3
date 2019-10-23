@@ -80,7 +80,7 @@ message.movie.kortitle=한글제목
 message.movie.engtitle=영어제목	
 message.movie.limitage=관람가능연령	
 message.movie.genre=장르	
-message.movie.rel_date=개봉일	
+message.movie.rel_date=개봉예정일	
 message.movie.director=감독	
 message.movie.cast=출연진	
 message.movie.running_time=러닝타임 	
@@ -91,7 +91,13 @@ message.movie.poster=포스터
 message.movie.expert_rate=전문가 평점	
 message.movie.visitor_rate=관람객 평점	
 message.movie.screen_state=상영상태	
-				
+message.movie.ticketing=예매하기
+message.movie.detail=상세보기
+message.movie.boxoffice=박스오피스
+message.movie.planed=개봉예정작
+message.movie.screening=상영중
+message.movie.poster=영화포스터
+
 				
 #Review				
 message.review.user_id=회원ID	
@@ -152,7 +158,7 @@ message.schedule.status=처리상태
 #header
 message.header.home=홈
 message.header.movie=영화
-message.header.boxoffice=영화
+message.header.boxoffice=박스오피스
 message.header.planed=개봉예정
 message.header.screening=상영중
 message.header.video=비디오
@@ -169,6 +175,24 @@ message.header.welcome=님 환영합니다.
 message.header.theatermanagement=극장관리
 message.header.theater=극장편성
 message.header.moviemanagement=영화편성
+
+
+#main
+message.main.banner_edit=베너수정
+message.main.notice=공지사항
+message.main.type=분류
+message.main.regdt=작성일
+message.main.title=제목
+message.main.questions=1:1문의
+
+
+#footer
+message.footer.hongdae_store=홍대점
+message.footer.hongdae_address=서울특별시 마포구 월드컵북로 21 2층 풍성빌딩
+message.footer.gangnam_store=강남점
+message.footer.gangnam_address=서울특별시 강남구 테헤란로 132 한독약품빌딩
+message.footer.master=대표자 김도연
+message.footer.master_num=사업자 등록번호
 
 
 

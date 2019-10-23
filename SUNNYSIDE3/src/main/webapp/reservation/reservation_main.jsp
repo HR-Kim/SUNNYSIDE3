@@ -280,10 +280,10 @@
 			<form action="${context}/reservation/do_pay.do" method="post" id="mainForm">
 				<input type="hidden" id="hd_selectedMovieId" name="movieId" value="">
 				<input type="hidden" id="hd_selectedScreenId" name="screenId" value="">
-				<input type="hidden" id="hd_selectedBranchId" name="branchIn" value="">
+				<input type="hidden" id="hd_selectedBranchId" name="branchId" value="">
 				<input type="hidden" id="hd_selectedRoomId" name="roomId" value="">
 				<input type="hidden" id="hd_resultCost" name="cost" value="">
-				<input type="hidden" id="hd_adultYN" name="adultCnt	" value="">
+				<input type="hidden" id="hd_adultYN" name="adultCnt" value="">
 				<input type="hidden" id="hd_selectedSeat" name="seatInfo" value="">
 			</form>
 			
@@ -939,7 +939,12 @@
 					var resultCost = eval( eval(adult*aCost) + eval(student*sCost) );
 					
 					$("#hd_resultCost").val(resultCost);
-					if(adult > 0) $("#hd_adultYN").val("1");
+					if(adult > 0){
+						$("#hd_adultYN").val("1");
+					}else{
+						$("#hd_adultYN").val("0");
+					}
+						
 					
 					$("#infoBox_bottom>div").detach();
 					$("#submit_btn>div").detach();
@@ -962,7 +967,7 @@
 					if(select == 1){
 						$("#submit_btn").append(
 								"<div>"+
-								"<button class='submit btn btn-danger btn-lg' onclick='javascript:go_seat();'>다음단계</button>"+
+								"<button class='submit btn btn-danger btn-lg' onclick='javascript:go_seat(true);'>다음단계</button>"+
 								"</div>"
 						);
 						return;
@@ -986,17 +991,22 @@
 				}
 				
 				//좌석선택으로 가는 버튼
-				function go_seat(){
-					var adult = parseInt($("#hd_aNum").val());
-					var student = parseInt($("#hd_sNum").val());
-					var personTotal = eval(adult + student);
-					if(personTotal == 0){
-						alert("인원 수가 0명 입니다.");
-						return;
+				function go_seat(bool){
+					if(bool == true){
+						var adult = parseInt($("#hd_aNum").val());
+						var student = parseInt($("#hd_sNum").val());
+						var personTotal = eval(adult + student);
+						if(personTotal == 0){
+							alert("인원 수가 0명 입니다.");
+							return;
+						}
+						
+						$(".seatPage").css("display", "block");
+						create_Seat_Table();
+					}else{
+						delete_Seat_Table();
+						$(".seatPage").css("display", "none");
 					}
-					
-					$(".seatPage").css("display", "block");
-					create_Seat_Table();
 					$("#submit_btn>div").detach();
 				}
 				
@@ -1032,6 +1042,10 @@
 					$("#hd_personTotal").val("0");
     				$("#hd_selectedSeatTotal").val("0");
     				$("#hd_selectedSeat").val("");
+    				$(".numBtnAdult>button").css("background-color", "window");
+    				$(".numBtnAdult>button").css("opacity", "1");
+    				$(".numBtnStudent>button").css("background-color", "window");
+    				$(".numBtnStudent>button").css("opacity", "1");
 				});
 				
 				//좌석테이블 생성
@@ -1098,15 +1112,17 @@
 	    		}
 	    		
 	    		//좌석클릭시
-	    		$("button[data-y][data-x]").on("click", function(){console.log("===================");
+	    		$("button[data-y][data-x]").on("click", function(){
 	    			var seat = $(this);
 	    			var Y = seat.attr("data-y");
 					var X = seat.attr("data-x");
 					var seatNm = Y+""+X;
 					
+					var enable = seat.text();
+					if(enable == 'X') return;
+					
 					$("#submit_btn>div").detach();
 					
-					//저장한 좌석정보를 문자열->배열로 전환
 					var seatInfo = $("#hd_selectedSeat").val();	
 	    			var seatArr = convert_arrayNstring(true, seatInfo);
 	    			

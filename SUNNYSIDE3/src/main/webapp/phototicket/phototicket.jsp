@@ -5,9 +5,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-
-
-<c:set var="context" value="${pageContext.request.contextPath }" />      
+<c:set var="context" value="${pageContext.request.contextPath }" />    
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,39 +13,43 @@
 <title>File</title>
 
 
-
+   <link rel="stylesheet" href="${context}/resources/css/bootstrap.min.css">
 </head>
 <body>
-	<h3>File Upload</h3>
-	<hr/>
-	<form class="form-inline" enctype="multipart/form-data" method="post" name="saveFrm" id="saveFrm" >
-		<div>포토 티켓을만들 영화 리스트를 선택해 주세요:<select class="form-control input-sm" id="movieList">
-			
-			<c:choose>
-			
-					<c:when test="${moiveList.size()>0}">
-							<c:forEach var="vo" items="${moiveList}">
-								<option id="movieList" value='${vo.ticket_code}'>${vo.kortitle}</option>
-							</c:forEach>		
-					</c:when>
-						<c:otherwise>
-							
-						</c:otherwise>
-			</c:choose>
-		  	<input type="hidden"  name="selected"  id="selected" value="" >
-		 
-			</select></div><br/>
-			<div>포토 티켓을만들 이미지를 첨부해 주세요:<input type="file" name="file" /></div>	<br/>
-			
-		<input type="button" class="btn btn-default btn-sm" id="do_Save"
-							value="사진추가" />
-	
-	</form>
+
+	<div class="container">
+      <div class="row">
+        <div class="col">
+		<h3>포토티켓 생성</h3>
+		<hr/>
+		<form class="form-inline" enctype="multipart/form-data" method="post" name="saveFrm" id="saveFrm" >
+			<div>포토 티켓을만들 영화 리스트를 선택해 주세요:<select class="form-control input-sm" id="movieList">
+				
+				<c:choose>
+				
+						<c:when test="${moiveList.size()>0}">
+								<c:forEach var="vo" items="${moiveList}">
+									<option id="movieList" value='${vo.ticket_code}'>${vo.kortitle}</option>
+								</c:forEach>		
+						</c:when>
+							<c:otherwise>
+								
+							</c:otherwise>
+				</c:choose>
+			  	<input type="hidden"  name="selected"  id="selected" value="" >
+			 
+				</select></div><br/>
+				<div>포토 티켓을만들 이미지를 첨부해 주세요:<input type="file" name="file" /></div>	<br/>
+				
+			<input type="button" class="btn btn-default btn-sm" id="do_Save"
+								value="사진추가" />
+		
+		</form>
 
 	
 	<br/>
 	<br/>
-	<h3>File Download</h3>
+	<h3>포토티켓 결과</h3>
 
 	<hr/>
 
@@ -79,10 +81,11 @@
 		
 		
 	</table>
+	</div>
+	</div>
+	</div>
 	
 	
-	
-	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 	<script src="${context}/resources/js/jquery-1.12.4.js"></script>
 	<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
 	<script src="${context}/resources/js/bootstrap.min.js"></script>

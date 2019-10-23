@@ -142,4 +142,26 @@ public class LGS_ReservationDaoImpl implements WorkDiv {
 		return null;
 	}
 
+	public DTO do_selectOne_result(DTO dto) {
+		String statement = this.NAMESPACE + ".do_selectOne_result";
+
+		LOG.debug("==================================");
+		LOG.debug("statement = " + statement);
+		LOG.debug("==================================");
+		
+		LGS_TicketVO ticketVO = (LGS_TicketVO) dto;
+		
+		LOG.debug("==================================");
+		LOG.debug("ticketVO = " + ticketVO);
+		LOG.debug("==================================");
+		
+		LGS_TicketVO outVO = (LGS_TicketVO) sqlSessionTemplate.selectOne(statement, ticketVO);
+		
+		LOG.debug("==================================");
+		LOG.debug("outVO = " + outVO);
+		LOG.debug("==================================");
+		
+		return outVO;
+	}
+	
 }

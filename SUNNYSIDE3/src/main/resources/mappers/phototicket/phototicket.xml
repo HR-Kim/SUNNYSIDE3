@@ -79,6 +79,27 @@
 		    #{room_id,jdbcType=VARCHAR}
 		)
 	</insert>
+	
+	<select id="do_retrieve_user" parameterType="SEJ_PhotoTicketVO" resultType="SEJ_PhotoTicketVO">
+	  	SELECT
+    ticket_code,
+    user_id,
+    org_img_nm,
+    save_img_nm,
+    ext,
+    img_size,
+    reg_dt,
+    kortitle,
+    screen_dt,
+    seat_nm,
+    room_id
+FROM
+    photo_ticket
+    where 
+    user_id='u5'
+       
+  
+	</select>
 
 	
 </mapper>

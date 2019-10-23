@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,11 +18,15 @@
 					<div class="footer-widget about-widget">
 						<div class="fw-latest-post-widget">
 							<h2>SUNNYSIDE THEATER</h2>
-							<p><h6 style="font-weight: bold; color: #fff">=홍대점=</h6><br>
-							<h6 style="color: #fff">서울특별시 마포구 월드컵북로 21 2층 풍성빌딩</h6><br>
+							<!-- 홍대점 -->
+							<p><h6 style="font-weight: bold; color: #fff">=<spring:message code="message.footer.hongdae_store"/>=</h6><br>
+							<!-- 서울특별시 마포구 월드컵북로 21 2층 풍성빌딩 -->
+							<h6 style="color: #fff"><spring:message code="message.footer.hongdae_address"/></h6><br>
 							<h6 style="color: #fff">--------------------------------------------</h6><br>
-							<h6 style="color: #fff">=강남점=</h6><br>
-							<h6 style="color: #fff">서울특별시 강남구 테헤란로 132 한독약품빌딩</h6>
+							<!-- 강남점 -->
+							<h6 style="color: #fff">=<spring:message code="message.footer.gangnam_store"/>=</h6><br>
+							<!-- 서울특별시 강남구 테헤란로 132 한독약품빌딩 -->
+							<h6 style="color: #fff"><spring:message code="message.footer.gangnam_address"/></h6>
 							</p>
 						</div>
 					</div>
@@ -30,8 +35,10 @@
 					<div class="footer-widget about-widget">
 						<h2>REPRESENTATIVE</h2>
 						<div class="fw-latest-post-widget">
-							<p><h6 style="font-weight: bold; color: #fff">대표자 김도연</h6><br>
-                        	<h6 style="color: #fff">사업자 등록번호 211-86-45871</h6></p>    
+							<!-- 대표자 김도연 -->
+							<p><h6 style="font-weight: bold; color: #fff"><spring:message code="message.footer.master"/></h6><br>
+							<!-- 사업자 등록번호 -->
+                        	<h6 style="color: #fff"><spring:message code="message.footer.master_num"/></h6></p>    
                         </div>						
 					</div>
 				</div>

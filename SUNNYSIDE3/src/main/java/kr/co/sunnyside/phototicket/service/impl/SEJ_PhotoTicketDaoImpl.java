@@ -79,5 +79,26 @@ public class SEJ_PhotoTicketDaoImpl {
 		LOG.debug("========================");		
 		return outVO;
 	}
+	
+	
+	
+	public  List<?> do_retrieve_user(DTO dto) {
+		String statement = this.NAMESPACE+".do_retrieve_user";//kr.co.ehr.user.get_retrieve
+		SEJ_PhotoTicketVO MHVO = (SEJ_PhotoTicketVO) dto;
+		LOG.debug("========================");
+		LOG.debug("01.param="+MHVO);
+		LOG.debug("========================");
+		
+		LOG.debug("========================");
+		LOG.debug("02.statement="+statement);
+		LOG.debug("========================");
+		
+		List<SEJ_PhotoTicketVO> list = this.sqlSessionTemplate.selectList(statement, MHVO);
+		
+		LOG.debug("========================");
+		LOG.debug("03.list="+list);
+		LOG.debug("========================");		
+		return list;
+	}
 
 }

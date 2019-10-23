@@ -34,6 +34,14 @@
 		<typeAlias type="kr.co.sunnyside.phototicket.service.SEJ_PhotoTicketVO" alias="SEJ_PhotoTicketVO" />
 		<typeAlias type="kr.co.sunnyside.store.service.SEJ_CartVO" alias="Cart" />
 		<typeAlias type="kr.co.sunnyside.store.service.SEJ_PayVO" alias="Pay"/>
+	
+		<!-- KDY -->
+		<typeAlias type="kr.co.sunnyside.userpage.service.KDY_MoviehistoryVO" alias="KDY_MoviehistoryVO" />
+		<typeAlias type="kr.co.sunnyside.userpage.service.listSearchVO" alias="listSearchVO" />
+		<typeAlias type="kr.co.sunnyside.userpage.service.KDY_CouponVO" alias="KDY_CouponVO" />
+		<typeAlias type="kr.co.sunnyside.userpage.service.KDY_UserinfoVO" alias="KDY_UserinfoVO" />
+		<typeAlias type="kr.co.sunnyside.userpage.service.KDY_QnalistVO" alias="KDY_QnalistVO" />
+		<typeAlias type="kr.co.sunnyside.userpage.service.KDY_ReservationVO" alias="KDY_ReservationVO" />
 		
 	</typeAliases>
 

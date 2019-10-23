@@ -97,5 +97,18 @@
       <put-attribute name="title" value="SUNNYSIDE>극장편성" />
       <put-attribute name="menu" value="TABLE_THEATER" />
     </definition>
+    
+     <!-- userpage -->    
+    <definition name="userpage/*" extends="basede_definition">
+      <put-attribute name="body" value="/userpage/{1}.jsp" />
+      <put-attribute name="title" value="SUNNYSIDE>유저관리페이지" />
+      <put-attribute name="menu" value="userpage" />
+    </definition>
+     <!-- phototicket -->    
+    <definition name="phototicket/*" extends="basede_definition">
+      <put-attribute name="body" value="/phototicket/{1}.jsp" />
+      <put-attribute name="title" value="SUNNYSIDE>포토티켓" />
+      <put-attribute name="menu" value="phototicket" />
+    </definition>
 
 </tiles-definitions>

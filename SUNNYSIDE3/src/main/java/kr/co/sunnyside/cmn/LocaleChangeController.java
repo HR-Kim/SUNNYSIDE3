@@ -46,7 +46,7 @@ public class LocaleChangeController {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value="/change_locale.do",method=RequestMethod.GET)
+	@RequestMapping(value="locale/change_locale.do",method=RequestMethod.GET)
 	public String changeLocale(HttpServletRequest request,HttpServletResponse response, Model model) {
 		String language = StringUtil.nvl(request.getParameter("lang"),"ko");
 		

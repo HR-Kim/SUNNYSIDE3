@@ -108,7 +108,7 @@ public class SEJ_PhotoTicketCtrl {
 	
 	//ModelAndView : Model + View
 	@RequestMapping(value="phototicket/do_save.do",method = RequestMethod.POST)
-	public ModelAndView do_save(MultipartHttpServletRequest mReg
+	public ModelAndView do_save(MultipartHttpServletRequest mReg 
 			   , ModelAndView model,SEJ_PhotoTicketVO inVO) throws IllegalStateException, IOException {
 		String selected= (String) mReg.getParameter("selected");
 		inVO.setUser_id("u5");
@@ -195,7 +195,7 @@ public class SEJ_PhotoTicketCtrl {
 		
 		}
 
-	
+		
 		model.addObject("selectMovie",selectMovie);
 		model.setViewName(VIEW_NAME);
 		SPT.do_insert(selectMovie);

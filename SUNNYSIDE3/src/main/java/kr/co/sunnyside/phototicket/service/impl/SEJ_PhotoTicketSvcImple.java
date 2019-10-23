@@ -32,6 +32,12 @@ public class SEJ_PhotoTicketSvcImple implements SEJ_PhotoTicketSvc{
 		
 		
 	}
+
+	@Override
+	public List<SEJ_PhotoTicketVO> do_retrieve_user(DTO vo) {
+		return (List<SEJ_PhotoTicketVO>) photoTicketDaoImpl.do_retrieve_user(vo);
+	}
+	
 	
 
 }
