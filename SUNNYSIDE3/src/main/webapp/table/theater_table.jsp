@@ -15,8 +15,13 @@
     	<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>극장 관리</title>
 		<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
-
+		<link href="${context}/resources/css/jquery-ui.css" rel="stylesheet">
+		
 		<style type="text/css">
+			.HIGHLIGHT {
+				color: red;
+				font-weight: bold;
+			}
 			.loadingLayer {
 				position: absolute;
 				width: 200px;
@@ -122,7 +127,8 @@
 			<div>
 				<button id="branch_retrieve" class="btn btn-default">지점조회</button>
 				<button id="branch_plus" class="btn btn-default">지점추가</button>
-				<button id="branch_delete" class="btn btn-default">지점제거</button>
+				<button id="branch_delete" class="btn btn-danger">지점제거</button>
+				<button id="branch_update" class="btn btn-default">지점이름수정</button>
 			</div>
 			<input type="hidden" id="hd_branchId" value="">
 			<input type="hidden" id="hd_branchNm" value="">
@@ -163,15 +169,16 @@
 			</div>
 			
 			<div class="seatSetting_layer">
-			
+				<button id="seat_cancel" class="btn btn-default">취소</button>
 			</div>
 			
 			<div>
 				<button id="room_plus" class="btn btn-default">상영관추가</button>
-				<button id="room_delete" class="btn btn-default">상영관제거</button>
+				<button id="room_update" class="btn btn-default">상영관이름수정</button>
+				<button id="room_delete" class="btn btn-danger">상영관제거</button>
 				<button id="seat_add" class="btn btn-default">좌석생성</button>
-				<button id="seat_delete" class="btn btn-default">좌석제거</button>
-				<button id="room_reset" class="btn btn-default">새로고침</button>
+				<button id="seat_delete" class="btn btn-danger">좌석제거</button>
+				<button id="room_reset" class="btn btn-primary">새로고침</button>
 				<input type="hidden" id="hd_roomzero" value="">
 				<input type="hidden" id="hd_roomId" value="">
 				<input type="hidden" id="hd_roomNm" value="">
@@ -218,10 +225,15 @@
 		
 		<script src="${context}/resources/js/jquery-1.12.4.js"></script>
 		<script src="${context}/resources/js/bootstrap.min.js"></script>
+		<script src="${context}/resources/js/jquery-ui.js"></script>
 		
 		<script type="text/javascript">			
     		$(document).ready(function(){
-    			//alert("ready");
+    			var userId = "${user.userId}";
+    			if(userId != "admin"){
+    				alert("로그인이 필요한 페이지입니다.")
+    				location.replace("${context}/main/main.do");
+    			}
     		});
     		
     		$("#branch_retrieve").on("click", function(){
@@ -234,7 +246,7 @@
     				var width = $(".loadingLayer").width();
         			var height = $(".loadingLayer").height();
         			var outWidth = $("body").width();
-        			var outHeight = $(".container").height();
+        			var outHeight = $("body").height();
         			
         			$(".loadingLayer").css("top", (outHeight-height)/2);
         			$(".loadingLayer").css("left", (outWidth-width)/2);
@@ -354,7 +366,7 @@
     			var width = $(".room_Plus_layer").width();
     			var height = $(".room_Plus_layer").height();
     			var outWidth = $("body").width();
-    			var outHeight = $(".container").height();
+    			var outHeight = $("body").height();
     			
     			$(".room_Plus_layer").css("top", (outHeight-height)/2);
     			$(".room_Plus_layer").css("left", (outWidth-width)/2);
@@ -404,7 +416,7 @@
     			var width = $(".branch_Plus_layer").width();
     			var height = $(".branch_Plus_layer").height();
     			var outWidth = $("body").width();
-    			var outHeight = $(".container").height();
+    			var outHeight = $("body").height();
     			
     			$(".branch_Plus_layer").css("top", (outHeight-height)/2);
     			$(".branch_Plus_layer").css("left", (outWidth-width)/2);
@@ -427,6 +439,20 @@
     		//지점삭제버튼
 			$("#branch_delete").on("click", function(){
 				delete_branch();		
+    		});	
+			
+			//지점삭제버튼
+			$("#branch_update").on("click", function(){
+				var id = $("#hd_branchId").val();
+				var nm = $("#hd_branchNm").val();
+				if(id.length == 0 || nm.length == 0) return;
+				var newNm = prompt("'" + nm + "' 의 이름을 변경합니다");
+				if(confirm(nm + " -> " + newNm + "\n이름을 변경합니다")==false) return; 
+				if(newNm == ""){
+					alert("공백으로 이름을 변결할 수 없습니다.");
+					return;
+				}
+				update_branch(id, newNm);		
     		});	
     		
     		//상영관 테이블 클릭
@@ -474,7 +500,7 @@
     					"searchDiv" : searchDiv 
     				}, 
     			success: function(data){
-    				var roomArr = data;					console.log(data);			//roomList데이터를 json으로
+    				var roomArr = data;								//roomList데이터를 json으로
     				$(".roomTr").detach();							//room테이블의 tr을 전부 삭제
     				if(roomArr.length > 0){
     					$("#hd_roomzero").val("1");					//상영관이 하나이상 존재함을 표시
@@ -574,6 +600,36 @@
     			});
     		}
     		
+    		//지점삭제
+    		function update_branch(id, newNm){		
+				loading(true);
+				$.ajax({
+    				type : "POST",
+    				url : "${context}/branchInfo/do_update.do",
+    				dataType : "json",
+    				data : {
+    					"branchId" : id,
+    					"branchNm" : newNm
+    				}, 
+    			success: function(data){
+    				var jsonData = data;
+    				if(jsonData.msgId == 1){
+    					alert("수정되었습니다.");
+    					location.href = "${context}/branchInfo/do_retrieve.do";
+    				}else{
+    					alert("수정실패");
+    				}
+    				
+    			},
+    			complete:function(data){
+    				loading(false);
+    			},
+    			error:function(xhr,status,error){
+					alert("수정실패");
+    			}
+    			});
+    		}
+    		
     		//좌석테이블 생성
     		function create_Seat_Table(td){
     			$("#seatTableInfo").text("");
@@ -627,14 +683,53 @@
     			}); 
     		}
     		
-    		//좌석클릭시 정보
+    		//좌석클릭시
     		$("button[data-y][data-x]").on("click", function(){
     			var seat = $(this);
+    			var rawClass = seat.attr("class");
+    			var classArr = rawClass.split(" ");
+    			
+    			var branchNm = $("#hd_branchNm").val();
+    			var branchId = $("#hd_branchId").val();
+    			var roomNm = $("#hd_roomNm").val();
+    			var roomId = $("#hd_roomId").val();
+    			
     			if(seat.prop("disabled", false)){
-    				alert("asd");
+    				alert("시간되면 좌석전부빼는메소드추가필");
     			}
+    			
+    			$(".seatSetting_layer>div").detach();
+    			$(".seatSetting_layer").prepend(
+    				"<div>"+
+    				"<label>"+branchNm+"-"+roomNm+"의 <h class='HIGHLIGHT'>"+classArr[0]+""+classArr[1]+"</h>좌석</label>"+
+    				"</div>"	
+    			);
+    			
+    			$.ajax({
+    				type : "POST",
+    				url : "${context}/reservation/do_save.do",
+    				dataType : "json",
+    				data : {
+    					"branchId" : branchId,
+
+    				}
+				}).done(function(data){
+    			
+    			var width = $(".seatSetting_layer").width();
+    			var height = $(".seatSetting_layer").height();
+    			var outWidth = $("body").width();
+    			var outHeight = $("body").height();
+  			
+    			$(".seatSetting_layer").css("top", (outHeight-height)/2);
+    			$(".seatSetting_layer").css("left", (outWidth-width)/2);
+    			$(".seatSetting_layer").css("display", "block");
+    			
     		});
 
+    		$("#seat_cancel").on("click", function(){
+    			$(".seatSetting_layer").css("display", "none");
+    		});
+    		
     		//좌석버튼에 마우스 올렸을떄 색 변화
     		$("button[data-y][data-x]").on("mouseenter", function(){
     			var seat = $(this);
@@ -690,6 +785,52 @@
         				alert("상영관 추가 실패.") 
         			}
         			}); 
+    		}
+    		
+    		//상영관이름수정
+    		$("#room_update").on("click", function(){
+    			var roomNm = $("#hd_roomNm").val();
+    			var roomId = $("#hd_roomId").val();
+    			
+    			if(roomNm.length == 0 || roomId.length == 0) return;
+    			
+    			var newNm = prompt("'" + roomNm + "' 의 이름을 변경합니다");
+				if(confirm(roomNm + " -> " + newNm + "\n이름을 변경합니다")==false) return; 
+				if(newNm == ""){
+					alert("공백으로 이름을 변결할 수 없습니다.");
+					return;
+				}
+    			update_roomName(roomId, newNm);
+    		});
+    		
+    		//상영관이름수정
+    		function update_roomName(roomId, roomNm){
+    			var branchId = $("#hd_branchId").val();
+    			
+   				loading(true);
+   				$.ajax({
+       				type : "POST",
+       				url : "${context}/room/do_updateName.do",
+       				dataType : "json",
+       				data : {
+       					"roomId" : roomId,
+       					"roomNm" : roomNm
+       				}, 
+       			success: function(data){
+       				var msg = data;
+       				if(msg.msgId == 1){
+       					alert("이름이 수정되었습니다.");
+       					create_Room_Table(branchId);
+       				}else
+       					alert("수정실패.");
+       			},
+       			complete:function(data){
+       				loading(false);
+       			},
+       			error:function(xhr,status,error){
+       				alert("수정실패.");
+       			}
+       			});
     		}
     		
     		//상영관과 그 좌석모두 삭제
@@ -843,6 +984,8 @@
     			}
     			});   
     		}
+    		
+    		$(".seatSetting_layer").draggable();
     	</script>
 	</body>
 </html>

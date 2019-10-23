@@ -16,13 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
-import kr.co.sunnyside.branchinfo.service.LGS_BranchInfoVO;
 import kr.co.sunnyside.cmn.Message;
 import kr.co.sunnyside.cmn.SearchVO;
-import kr.co.sunnyside.code.service.CodeVO;
 import kr.co.sunnyside.movie.service.LHJ_MovieVO;
 import kr.co.sunnyside.movie.service.impl.LHJ_MovieSvcImpl;
-import kr.co.sunnyside.movie.service.impl.LHJ_ScreeningSvcImpl;
 import kr.co.sunnyside.screeninfo.service.LGS_ScreenInfoSvc;
 import kr.co.sunnyside.screeninfo.service.LGS_ScreenInfoVO;
 
@@ -34,7 +31,7 @@ public class LGS_ScreenInfoCtrl {
 	LGS_ScreenInfoSvc screenInfoSvc;
 	
 	@Autowired
-	LHJ_ScreeningSvcImpl screeningSvc;	
+	LHJ_MovieSvcImpl movieSvc;	
 	
 	//view
 	private final String VIEW_SCREEN_SETTING = "table/screen_table";
@@ -214,7 +211,7 @@ public class LGS_ScreenInfoCtrl {
 		if(search.getPageSize()==0) search.setPageSize(10);
 		if(search.getPageNum()==0) search.setPageNum(1);
 
-		List<LHJ_MovieVO> list = (List<LHJ_MovieVO>) this.screeningSvc.do_retrieve(search);
+		List<LHJ_MovieVO> list = (List<LHJ_MovieVO>) this.movieSvc.do_retrieve(search);
 		
 		LOG.debug("============================");
 		LOG.debug("list : " + list);
@@ -240,7 +237,7 @@ public class LGS_ScreenInfoCtrl {
 		
 		if(null == inVO.getMovieId() || "".equals(inVO.getMovieId())) throw new IllegalArgumentException("Movie ID를 입력 하세요.");
 		
-		LHJ_MovieVO outVO = (LHJ_MovieVO) this.screeningSvc.do_selectOne(inVO);
+		LHJ_MovieVO outVO = (LHJ_MovieVO) this.movieSvc.do_selectOne(inVO);
 		
 		Gson gson=new Gson();
 		String gsonStr = gson.toJson(outVO);		

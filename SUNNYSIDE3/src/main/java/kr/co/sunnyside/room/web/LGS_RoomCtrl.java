@@ -190,4 +190,40 @@ public class LGS_RoomCtrl {
 		return gsonStr;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "room/do_updateName.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	public String do_updateName(LGS_RoomVO room) {
+		LOG.debug("==================================");
+		LOG.debug("Controller : do_updateRoomName");
+		LOG.debug("==================================");
+		
+		//파라미터검사
+		if(room == null) throw new NullArgumentException();	//null
+		if(room.getRoomId() == null || room.getRoomId() == "") throw new IllegalArgumentException();
+		if(room.getRoomNm() == null || room.getRoomNm() == "") throw new IllegalArgumentException();
+
+		int flag = roomSvc.do_updateName(room);
+		
+		LOG.debug("==================================");
+		LOG.debug("flag : " + flag);
+		LOG.debug("==================================");
+		
+		Message message = new Message();
+		if(flag > 0) {
+			message.setMsgId("1");
+			message.setMsgMsg("성공");
+		}else {
+			message.setMsgId("0");
+			message.setMsgMsg("실패");
+		}
+		
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(message);
+		
+		LOG.debug("==================================");
+		LOG.debug("jsonStr : " + jsonStr);
+		LOG.debug("==================================");
+		
+		return jsonStr;
+	}
 }

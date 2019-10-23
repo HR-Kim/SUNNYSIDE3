@@ -15,4 +15,6 @@ public interface LGS_RoomSvc {
 	public List<?> do_retrieve(DTO dto);
 
 	public DTO do_selectOne(DTO dto);
+	
+	public int do_updateName(DTO dto);
 }

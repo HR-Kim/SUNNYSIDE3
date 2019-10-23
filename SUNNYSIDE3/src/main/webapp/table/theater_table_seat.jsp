@@ -68,7 +68,11 @@
 		
 		<script type="text/javascript">
     		$(document).ready(function(){
-    			
+    			var userId = "${user.userId}";
+    			if(userId != "admin"){
+    				alert("로그인이 필요한 페이지입니다.")
+    				location.replace("${context}/main/main.do");
+    			}
     		});
 		
     		$("#submit").on("click", function(){

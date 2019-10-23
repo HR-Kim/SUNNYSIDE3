@@ -21,6 +21,9 @@
 		<link href="${context}/resources/css/jquery-ui.css" rel="stylesheet">
 		<link  href="${context}/resources/css/jquery.timepicker.min.css" rel="stylesheet">
 		<style type="text/css">
+			#searchWord {
+				border: 1px solid black;
+			}
 			#datePicker, #timePicker, #adultCost, #studentCost{
 				border: 1px solid grey;
 			}
@@ -215,8 +218,9 @@
 							<tr>
 								<td hidden="hidden">총게시물수</td>
 								<td hidden="hidden">영화ID</td>
-								<td>제목</td>
-								<td>러닝타임</td>
+								<td class="col-sm-9">제목</td>
+								<td class="col-sm-1">러닝타임</td>
+								<td class="col-sm-2">구분</td>
 							</tr>
 						</thead>
 						<tbody>
@@ -296,6 +300,12 @@
 		
 		<script type="text/javascript">
     		$(document).ready(function(){
+    			var userId = "${user.userId}";
+    			if(userId != "admin"){
+    				alert("로그인이 필요한 페이지입니다.")
+    				location.replace("${context}/main/main.do");
+    			}
+    			
     			branchRetrieve();
     		});
     		
@@ -671,12 +681,18 @@
     				$("#movieTable>tbody>tr").detach();
     				if(movieArr.length > 0){
     					for(var i=0 ; i< movieArr.length ; i++){
+    						var state = movieArr[i].screenState;
+    						if(state == "010") state = "개봉";
+    						else if(state == "020") state = "개봉예정";
+    						else state = "비상영";
+    						
         					$("#movieTable>tbody").append(
         							"<tr>"+
         							"<td hidden='hidden'>"+movieArr[i].totalCnt+"</td>"+
         							"<td hidden='hidden'>"+movieArr[i].movieId+"</td>"+
         							"<td>"+movieArr[i].kortitle+"("+movieArr[i].engtitle+")</td>"+
         							"<td>"+movieArr[i].runningTime+"</td>"+
+        							"<td>"+state+"</td>"+
         							"</tr>"
         					);
         				}
@@ -837,12 +853,18 @@
     				if(movieArr.length > 0){
     					$("#movieTable>tbody>tr").detach();
     					for(var i=0 ; i< movieArr.length ; i++){
+    						var state = movieArr[i].screenState;
+    						if(state == "010") state = "개봉";
+    						else if(state == "020") state = "개봉예정";
+    						else state = "비상영";
+    						
         					$("#movieTable>tbody").append(
         							"<tr>"+
         							"<td hidden='hidden'>"+movieArr[i]+totalCnt+"</td>"+
         							"<td hidden='hidden'>"+movieArr[i].movieId+"</td>"+
         							"<td>"+movieArr[i].kortitle+"("+movieArr[i].engtitle+")</td>"+
         							"<td>"+movieArr[i].runningTime+"</td>"+
+        							"<td>"+state+"</td>"+
         							"</tr>"
         					);
         				}
@@ -1121,10 +1143,10 @@
     			}
     			});
 			}
-			
-			//영화추가창 드래드가능
+
+			//레이어드래그가능
 			$(".layer-MovieTable").draggable();
-			
+			$(".movieInfo").draggable();
     	</script>
 	</body>
 </html>

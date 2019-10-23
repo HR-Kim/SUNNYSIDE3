@@ -142,4 +142,25 @@ public class LGS_RoomDaoImpl implements WorkDiv {
 		return null;
 	}
 
+	public int do_updateName(DTO dto) {
+		String statement = this.NAMESPACE + ".do_updateName";
+		
+		LOG.debug("==================================");
+		LOG.debug("statement = " + statement);
+		LOG.debug("==================================");
+		
+		LGS_RoomVO room = (LGS_RoomVO) dto;
+		
+		LOG.debug("==================================");
+		LOG.debug("room = " + room);
+		LOG.debug("==================================");
+		
+		int flag = sqlSessionTemplate.update(statement, room);
+		
+		LOG.debug("==================================");
+		LOG.debug("flag = " + flag);
+		LOG.debug("==================================");
+		
+		return flag;
+	}
 }

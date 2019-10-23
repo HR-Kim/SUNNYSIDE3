@@ -61,6 +61,14 @@
 			ROOM_ID = #{roomId, jdbcType=VARCHAR}
 	</update>
 	
+	<update id="do_updateName" parameterType="Room">
+		UPDATE ROOM
+		SET
+			ROOM_NM = #{roomNm, jdbcType=VARCHAR}
+		WHERE
+			ROOM_ID = #{roomId, jdbcType=VARCHAR}
+	</update>
+	
 	<select id="do_retrieve" parameterType="Search" resultType="Room">
 		SELECT T.RNUM as NUM
 			  ,T.BRANCH_ID as branchId

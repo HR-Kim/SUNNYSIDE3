@@ -41,5 +41,10 @@ public class LGS_RoomSvcImpl implements LGS_RoomSvc {
 	public DTO do_selectOne(DTO dto) {
 		return roomDao.do_selectOne(dto);
 	}
+	
+	@Override
+	public int do_updateName(DTO dto) {
+		return roomDao.do_updateName(dto);
+	}
 
 }
