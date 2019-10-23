@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.sunnyside.code.service.CodeVO;
+import kr.co.sunnyside.notice.service.KYMBranchVO;
 
 public class StringUtil {
 	private static Logger LOG = LoggerFactory.getLogger(StringUtil.class);
@@ -282,6 +283,34 @@ public class StringUtil {
 
 			sb.append(">");
 			sb.append(vo.getCodeNm());
+			sb.append("</option>\n");
+		}
+		sb.append("</select> \n");
+		LOG.debug("------------------------");
+		LOG.debug(sb.toString());
+		LOG.debug("------------------------");
+		return sb.toString();
+	}
+	
+	public static String makeBranchBox(List<KYMBranchVO> list, String selectBoxNm, String selectedNm, boolean allYN) {
+		StringBuilder sb = new StringBuilder();
+		// <select name="lvl" id="lvl">
+		sb.append("<select  class=\"form-control input-sm\" name='" + selectBoxNm + "' id='" + selectBoxNm + "' > \n");
+		// 전체
+		if (allYN == true) {
+			sb.append("<option value=''>전체</option> \n");
+		}
+
+		// <option value="1" selected>일반사용자</option>
+		for (KYMBranchVO dto : list) {
+			KYMBranchVO vo = dto;
+			sb.append("\t<option value='" + vo.getbranchSNm() + "' ");
+			if (selectedNm.equals(vo.getbranchSNm())) {
+				sb.append("selected='selected' ");
+			}
+
+			sb.append(">");
+			sb.append(vo.getbranchSNm());
 			sb.append("</option>\n");
 		}
 		sb.append("</select> \n");

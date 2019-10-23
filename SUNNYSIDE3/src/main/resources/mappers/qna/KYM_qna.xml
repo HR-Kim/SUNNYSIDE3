@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sunnyside.qna">
+
+	<sql id="baseCondition">
+			<choose>
+				<when test="'10' == searchDiv">
+					and TITLE LIKE '%' || #{searchWord} || '%'
+				</when>
+				<when test="'20' == searchDiv">
+					and CONTENTS LIKE '%' || #{searchWord} || '%'
+				</when>
+				<when test="'30' == searchDiv">
+					and REG_ID LIKE '%' || #{searchWord} || '%'
+				</when>
+				<otherwise></otherwise>							
+			</choose>
+	</sql>
+	
+	<!-- 목록조회 -->
+	<select id="do_retrieve" parameterType="kr.co.sunnyside.cmn.SearchVO" resultType="kr.co.sunnyside.qna.service.KYMQnaVO">
+	  SELECT T1.*,T2.*													
+	  FROM                                                              
+	  (                                                                 
+	  	SELECT       
+			  B.USER_ID      as userId    
+			, B.QNA_NUM      as qnaNum    
+			, B.TITLE        as title     
+			, B.CONTENTS     as contents  
+			, B.STATUS       as status    
+			, B.REG_DT       as regDt     
+			, B.ORG_FILE_NM  as orgFileNm 
+			, B.SAVE_FILE_NM as saveFileNm
+			, B.EXT          as ext       
+			, B.FILE_SIZE    as fileSize  
+			, B.RE_CONTENTS  as reContents
+			, B.rnum         as num
+			, B.RE_DT        as reDt    
+	  	FROM                                                           
+	  	( 	SELECT ROWNUM AS rnum, A.*                                 
+	  		FROM                                                       
+	  		(                                                           
+	  			SELECT  *                                              
+	  			FROM   qna    
+	  			WHERE  1=1
+	  			AND reg_dt <![CDATA[ >  ]]> to_date('19700101','yyyymmdd')
+				<include refid="baseCondition"/>                                  
+	  			ORDER BY reg_dt DESC
+	  		)A                                                         
+	  	   WHERE rownum <![CDATA[ <= ]]> (#{pageSize} * (#{pageNum}-1)+#{pageSize})    						       
+	  	) B                                                            
+	  	WHERE B.rnum <![CDATA[ >= ]]> (#{pageSize} * (#{pageNum}-1)+1)                  				   
+	  )T1
+	  NATURAL JOIN                                                      
+	  (                                                                 
+	      SELECT COUNT(*) totalCnt                                     
+	      FROM qna       
+	      WHERE  1=1                                                
+	  	  <include refid="baseCondition"/>        		                               
+	  )T2  
+	</select>
+
+	<update id="do_updateReadCnt" parameterType="kr.co.sunnyside.qna.service.KYMQnaVO">
+		UPDATE qna
+		SET  READ_CNT = (SELECT NVL(MAX(READ_CNT),0)+1 FROM qna WHERE USER_ID = #{userId,jdbcType=VARCHAR})
+		WHERE USER_ID = #{userId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="do_boardIdList" parameterType="kr.co.sunnyside.cmn.SearchVO" resultType="kr.co.sunnyside.qna.service.KYMQnaVO">
+		SELECT
+			  USER_ID      as userId    
+			, QNA_NUM      as qnaNum    
+			, TITLE        as title     
+			, CONTENTS     as contents  
+			, STATUS       as status    
+			, REG_DT       as regDt     
+			, ORG_FILE_NM  as orgFileNm 
+			, SAVE_FILE_NM as saveFileNm
+			, EXT          as ext       
+			, FILE_SIZE    as fileSize  
+			, RE_CONTENTS  as reContents
+			, RE_DT        as reDt      
+		FROM qna
+		WHERE USER_ID LIKE '%' || #{searchWord} || '%'
+		ORDER BY USER_ID ASC
+	</select>
+
+	<!-- 단건조회 -->
+	<select id="do_selectOne" parameterType="kr.co.sunnyside.qna.service.KYMQnaVO" resultType="kr.co.sunnyside.qna.service.KYMQnaVO">
+		SELECT
+			  USER_ID      as userId    
+			, QNA_NUM      as qnaNum    
+			, TITLE        as title     
+			, CONTENTS     as contents  
+			, STATUS       as status    
+			, REG_DT       as regDt     
+			, ORG_FILE_NM  as orgFileNm 
+			, SAVE_FILE_NM as saveFileNm
+			, EXT          as ext       
+			, FILE_SIZE    as fileSize  
+			, RE_CONTENTS  as reContents
+			, RE_DT        as reDt  
+		FROM qna
+		WHERE USER_ID = #{userId,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 수정 -->
+	<update id="do_update" parameterType="kr.co.sunnyside.qna.service.KYMQnaVO">
+		UPDATE qna
+		SET   
+			  QNA_NUM      = #{qnaNum  ,jdbcType=VARCHAR}
+			, TITLE        = #{title   ,jdbcType=VARCHAR}
+			, CONTENTS     = #{contents,jdbcType=VARCHAR}
+			, STATUS       = #{status  ,jdbcType=VARCHAR}
+			, REG_DT       = SYSDATE
+			, ORG_FILE_NM  = #{orgFileNm ,jdbcType=VARCHAR}
+			, SAVE_FILE_NM = #{saveFileNm,jdbcType=VARCHAR}
+			, EXT          = #{ext       ,jdbcType=VARCHAR}
+			, FILE_SIZE    = #{fileSize  ,jdbcType=VARCHAR}
+			, RE_CONTENTS  = #{reContents,jdbcType=VARCHAR}
+			, RE_DT        = SYSDATE
+		WHERE USER_ID = #{userId,jdbcType=VARCHAR}
+	</update>
+	
+	<!--관리자 수정 -->
+	<update id="do_updateTwo" parameterType="kr.co.sunnyside.qna.service.KYMQnaVO">
+		UPDATE qna
+		SET   
+			  QNA_NUM      = #{qnaNum  ,jdbcType=VARCHAR}
+			, TITLE        = #{title   ,jdbcType=VARCHAR}
+			, CONTENTS     = #{contents,jdbcType=VARCHAR}
+			, STATUS       = #{status  ,jdbcType=VARCHAR}
+			, ORG_FILE_NM  = #{orgFileNm ,jdbcType=VARCHAR}
+			, SAVE_FILE_NM = #{saveFileNm,jdbcType=VARCHAR}
+			, EXT          = #{ext       ,jdbcType=VARCHAR}
+			, FILE_SIZE    = #{fileSize  ,jdbcType=VARCHAR}
+			, RE_CONTENTS  = #{reContents,jdbcType=VARCHAR}
+			, RE_DT        = SYSDATE
+		WHERE USER_ID = #{userId,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 등록 -->
+	<insert id="do_save" parameterType="kr.co.sunnyside.qna.service.KYMQnaVO" >
+		INSERT INTO qna (
+		      QNA_NUM
+			, TITLE       
+			, CONTENTS    
+			, STATUS      
+			, REG_DT      
+			, ORG_FILE_NM 
+			, SAVE_FILE_NM
+			, EXT         
+			, FILE_SIZE   
+			, RE_CONTENTS 
+			, RE_DT 
+		) VALUES (
+			  #{qnaNum  ,jdbcType=VARCHAR}
+			, #{title   ,jdbcType=VARCHAR}
+			, #{contents,jdbcType=VARCHAR}
+			, #{status  ,jdbcType=VARCHAR}
+			, SYSDATE
+			, #{orgFileNm ,jdbcType=VARCHAR}
+			, #{saveFileNm,jdbcType=VARCHAR}
+			, #{ext       ,jdbcType=VARCHAR}
+			, #{fileSize  ,jdbcType=VARCHAR}
+			, #{reContents,jdbcType=VARCHAR}
+			, SYSDATE
+		)
+	</insert>
+	
+	<delete id="do_delete" parameterType="kr.co.sunnyside.qna.service.KYMQnaVO">
+		DELETE FROM qna
+		WHERE user_id = #{userId,jdbcType=VARCHAR}
+	</delete>
+	
+	<select id="do_retrieveTwo" parameterType="kr.co.sunnyside.code.service.CodeVO" resultType="kr.co.sunnyside.code.service.CodeVO">
+		SELECT b.code_id as codeId      
+		     , b.code_nm as codeNm        
+		     , b.num                      
+		FROM code_type a JOIN code b      
+		ON a.code_type_id = b.code_type_id
+		WHERE a.code_type_id = #{codeTypeId,jdbcType=VARCHAR}       
+		AND b.use_yn = 1                  
+		ORDER BY b.num                    
+	</select>
+	
+</mapper>
