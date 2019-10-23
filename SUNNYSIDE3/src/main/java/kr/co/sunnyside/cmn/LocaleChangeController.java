@@ -20,6 +20,7 @@ import kr.co.sunnyside.main.service.LHJ_MainImageVO;
 import kr.co.sunnyside.main.service.impl.LHJ_MainSvcImpl;
 import kr.co.sunnyside.movie.service.LHJ_MovieVO;
 import kr.co.sunnyside.movie.service.impl.LHJ_BoxofficeSvcImpl;
+import kr.co.sunnyside.notice.service.KYMNoticeVO;
 
 @Controller
 public class LocaleChangeController {
@@ -55,6 +56,9 @@ public class LocaleChangeController {
 		
 		List<LHJ_MovieVO> boxofficeList = (List<LHJ_MovieVO>) this.boxofficeService.do_retrieve_main();
 		model.addAttribute("boxofficeList", boxofficeList);
+		
+		List<KYMNoticeVO> noticeList = (List<KYMNoticeVO>) this.mainService.do_notice_retrieve();
+		model.addAttribute("noticeList", noticeList);
 		
 		LOG.debug("======================");
 		LOG.debug("=language="+language);
