@@ -123,7 +123,7 @@
 	<div class="container" style="margin-bottom: 70px">
 		<aside class="col-md-6">
 			<div class="section-title" style="margin-bottom: 10px">
-				<a href="#">
+				<a href="/sunnyside/notice/do_retrieve.do">
 					<!-- 공지사항 -->
 					<h3 style="font-size: 22px; letter-spacing: 1px;"><spring:message code="message.main.notice"/></h3>
 				</a>
@@ -132,11 +132,11 @@
 				<thead style="border: none">
 					<tr>
 						<!-- 분류 -->
-						<th class="text-center col-md-3 col-xs-3"><spring:message code="message.main.writerId"/></th>
+						<th class="text-center col-md-2 col-xs-2"><spring:message code="message.main.store"/></th>
 						<!-- 작성일 -->
 						<th class="text-center col-md-3 col-xs-3"><spring:message code="message.main.regdt"/></th>
 						<!-- 제목 -->
-						<th class="text-center col-md-6 col-xs-6"><spring:message code="message.main.title"/></th>					
+						<th class="text-center col-md-7 col-xs-7"><spring:message code="message.main.title"/></th>					
 					</tr>
 				</thead>
 				<tbody>
@@ -144,9 +144,9 @@
 						<c:when test="${noticeList.size()>0}">
 							<c:forEach var="vo" items="${noticeList}">
 								<tr>
-									<td class="text-center col-md-3 col-xs-3"><c:out value="${vo.writerId}"/></td>
+									<td class="text-center col-md-2 col-xs-2"><c:out value="${vo.branchSNm}"/></td>
 									<td class="text-center col-md-3 col-xs-3"><c:out value="${vo.regDt}"/></td>	
-									<td class="text-left col-md-6 col-xs-6"><c:out value="${vo.title}"/></td>																	
+									<td class="text-left col-md-7 col-xs-7"><c:out value="${vo.title}"/></td>																	
 								</tr>
 							</c:forEach>
 						</c:when>
@@ -159,7 +159,7 @@
 		</aside>
 		<aside class="col-md-6">
 			<div class="section-title">
-				<a href="#">
+				<a href="/sunnyside/notice/do_retrieve.do">
 					<!-- 고객센터 -->
 					<h3 style="font-size: 22px; letter-spacing: 1px;"><spring:message code="message.header.customer"/></h3>
 				</a>
@@ -167,11 +167,11 @@
 			</div>
 			<div class="container"><div class="row"><div class="col-md-6 col-lg-6"><div style="text-align: center">
 				<p style="text-align: center">
-				<a href="#" class="btn btn-sq-lg col-md-6 col-lg-6" style="background-color: #f6f6f6; margin-left: 90px;">
 					<!-- 1:1문의 -->
+					<a href="/sunnyside/qna/do_retrieve.do" class="btn btn-sq-lg col-md-6 col-lg-6" style="background-color: #f6f6f6; margin-left: 90px;">
 					<i class="fa fa-pencil-square-o fa-5x" style="margin-top: 20px; margin-left: 15px"></i><br/><spring:message code="message.main.questions"/></a>
-				<a href="#" class="btn btn-sq-lg col-md-6 col-lg-6" style="background-color: #f6f6f6; margin-left: 30px;">
 					<!-- 고객센터 -->
+					<a href="#" class="btn btn-sq-lg col-md-6 col-lg-6" style="background-color: #f6f6f6; margin-left: 30px;">					
 					<i class="fa  fa-user-circle-o fa-5x" style="margin-top: 20px;"></i><br/><spring:message code="message.main.customer"/></a>
 				</p>
 			</div></div></div></div>

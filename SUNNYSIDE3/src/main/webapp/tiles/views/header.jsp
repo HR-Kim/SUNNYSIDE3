@@ -102,65 +102,74 @@
 				<!-- menu -->
 				<ul class="main-menu">
 						<!-- 홈 -->
-					<li><a href="/sunnyside/main/main.do"><spring:message code="message.header.home"/></a><li>
-						<!-- 영화 -->
-						<a href="/sunnyside/boxoffice/do_retrieve.do"><spring:message code="message.header.movie"/></a>
-						<ul class="sub-menu">
-							<!-- 박스오피스 -->
-							<li><a href="/sunnyside/boxoffice/do_retrieve.do"><spring:message code="message.header.boxoffice"/></a></li>
-							<!-- 상영중 -->
-							<li><a href="/sunnyside/screening/do_retrieve.do"><spring:message code="message.header.screening"/></a></li>
-							<!-- 개봉예정 -->
-							<li><a href="/sunnyside/planed/do_retrieve.do"><spring:message code="message.header.planed"/></a></li>
-						</ul>
-					</li>					
-					<li>
-						<!-- 스토어 -->
-						<a href="/sunnyside/store/do_main.do"><spring:message code="message.header.store"/></a>
-						<ul class="sub-menu">
-							<!-- 팝콘 -->
-							<li><a href="/sunnyside/store/do_retrieve_popcorn.do"><spring:message code="message.header.popcon"/></a></li>
-							<!-- 음료 -->
-							<li><a href="/sunnyside/store/do_retrieve_drink.do"><spring:message code="message.header.drink"/></a></li>
-							<!-- 영화예매권 -->
-							<li><a href="/sunnyside/store/do_retrieve_movieticket.do"><spring:message code="message.header.ticket"/></a></li>
-						</ul>
-					</li>
-					<li><a href="http://www.seechu.co.kr/index.asp">VOD</a></li>
-					<!-- 고객센터 -->
-					<li><a href="#"><spring:message code="message.header.customer"/></a></li>
-					
-  					<!-- 로그인한 상태면 로그아웃 출력 -->
-					<c:choose>
-  						<c:when test="${not empty user.userId}">
-							<li><a href="/sunnyside/login/logout.do"><spring:message code="message.header.logout"/></a></li>
-							<!-- (임시)회원정보수정 -->
-							<li><a href="/sunnyside/userpage/do_userpage.do"><spring:message code="message.header.userpage"/></a></li>
-						</c:when>
-						
-						<c:otherwise>
-							<!-- 로그인 -->
-							<li><a href="/sunnyside/login/login_view.do"><spring:message code="message.header.login"/></a></li>
-						</c:otherwise>
-						
-					</c:choose>
-					
-					<!-- 관리자로 로그인한 상태면 지점, 상영관 EDIT 출력 -->
-					<c:choose>
-  						<c:when test="${not empty user.userId && user.userId == 'admin'}">
-  						<li>
-  							<!-- 극장관리 -->
-							<a href="#"><spring:message code="message.header.theatermanagement"/></a>
+					<li><a href="/sunnyside/main/main.do"><spring:message code="message.header.home"/></a>
+						<li>
+							<!-- 영화 -->
+							<a href="/sunnyside/boxoffice/do_retrieve.do"><spring:message code="message.header.movie"/></a>
 							<ul class="sub-menu">
-								<!-- 극장편성 -->
-								<li><a href="/sunnyside/branchInfo/do_retrieve.do"><spring:message code="message.header.theater"/></a></li>
-								<!-- 영화편성 -->
-								<li><a href="/sunnyside/screenInfo/do_goingPage.do"><spring:message code="message.header.moviemanagement"/></a></li>							</ul>
-						</li>				
-						</c:when>
-						<c:otherwise>
-						</c:otherwise>			
-					</c:choose>
+								<!-- 박스오피스 -->
+								<li><a href="/sunnyside/boxoffice/do_retrieve.do"><spring:message code="message.header.boxoffice"/></a></li>
+								<!-- 상영중 -->
+								<li><a href="/sunnyside/screening/do_retrieve.do"><spring:message code="message.header.screening"/></a></li>
+								<!-- 개봉예정 -->
+								<li><a href="/sunnyside/planed/do_retrieve.do"><spring:message code="message.header.planed"/></a></li>
+							</ul>
+						</li>					
+						<li>
+							<!-- 스토어 -->
+							<a href="/sunnyside/store/do_main.do"><spring:message code="message.header.store"/></a>
+							<ul class="sub-menu">
+								<!-- 팝콘 -->
+								<li><a href="/sunnyside/store/do_retrieve_popcorn.do"><spring:message code="message.header.popcon"/></a></li>
+								<!-- 음료 -->
+								<li><a href="/sunnyside/store/do_retrieve_drink.do"><spring:message code="message.header.drink"/></a></li>
+								<!-- 영화예매권 -->
+								<li><a href="/sunnyside/store/do_retrieve_movieticket.do"><spring:message code="message.header.ticket"/></a></li>
+							</ul>
+						</li>
+						<li><a href="http://www.seechu.co.kr/index.asp">VOD</a></li>
+						<li>
+							<!-- 고객센터 -->
+							<a href="/sunnyside/notice/do_retrieve.do"><spring:message code="message.header.customer"/></a>
+							<ul class="sub-menu">
+								<!-- 공지사항 -->
+								<li><a href="/sunnyside/notice/do_retrieve.do"><spring:message code="message.header.notice"/></a></li>
+								<!-- 1:1문의 -->
+								<li><a href="/sunnyside/qna/do_retrieve.do"><spring:message code="message.header.questions"/></a></li>								
+							</ul>
+						</li>
+					
+	  					<!-- 로그인한 상태면 로그아웃 출력 -->
+						<c:choose>
+	  						<c:when test="${not empty user.userId}">
+								<li><a href="/sunnyside/login/logout.do"><spring:message code="message.header.logout"/></a></li>
+								<!-- (임시)회원정보수정 -->
+								<li><a href="/sunnyside/userpage/do_userpage.do"><spring:message code="message.header.userpage"/></a></li>
+							</c:when>
+							
+							<c:otherwise>
+								<!-- 로그인 -->
+								<li><a href="/sunnyside/login/login_view.do"><spring:message code="message.header.login"/></a></li>
+							</c:otherwise>
+							
+						</c:choose>
+					
+						<!-- 관리자로 로그인한 상태면 지점, 상영관 EDIT 출력 -->
+						<c:choose>
+	  						<c:when test="${not empty user.userId && user.userId == 'admin'}">
+	  						<li>
+	  							<!-- 극장관리 -->
+								<a href="#"><spring:message code="message.header.theatermanagement"/></a>
+								<ul class="sub-menu">
+									<!-- 극장편성 -->
+									<li><a href="/sunnyside/branchInfo/do_retrieve.do"><spring:message code="message.header.theater"/></a></li>
+									<!-- 영화편성 -->
+									<li><a href="/sunnyside/screenInfo/do_goingPage.do"><spring:message code="message.header.moviemanagement"/></a></li>							</ul>
+							</li>				
+							</c:when>
+							<c:otherwise>
+							</c:otherwise>			
+						</c:choose>
 					
 				</ul>
 			</div>
