@@ -36,7 +36,7 @@
 					           	</tr>
 					           	<tr>
 					            	<td align="center">결제금액</td>
-					           		<td><fmt:formatNumber value="${vo.payCost}" pattern="#,###,###"/>원</td>
+					           		<td><fmt:formatNumber value="${vo.totalCost}" pattern="#,###,###"/>원</td>
 					           	</tr>
 					           	<tr>
 					            	<td align="center">결제일</td>
