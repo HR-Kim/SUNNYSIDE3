@@ -1133,6 +1133,7 @@
     				}
     			},
     			complete:function(data){
+    				$("#hd_screenId").val("");
     				selectedMovie_Off();
     				var roomId = $("#hd_roomId").val();
                 	create_RoomTable(roomId, false);

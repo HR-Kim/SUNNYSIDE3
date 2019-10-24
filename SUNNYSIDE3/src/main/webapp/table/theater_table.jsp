@@ -227,7 +227,7 @@
 		<script src="${context}/resources/js/bootstrap.min.js"></script>
 		<script src="${context}/resources/js/jquery-ui.js"></script>
 		
-		<script type="text/javascript">			
+		<script type="text/javascript">		
     		$(document).ready(function(){
     			var userId = "${user.userId}";
     			if(userId != "admin"){
@@ -724,6 +724,7 @@
     			$(".seatSetting_layer").css("left", (outWidth-width)/2);
     			$(".seatSetting_layer").css("display", "block");
     			
+    			});
     		});
 
     		$("#seat_cancel").on("click", function(){
