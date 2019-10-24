@@ -36,6 +36,9 @@ public class SEJ_CartSvcImple implements SEJ_CartSvc {
 		LOG.debug("==================");
 		LOG.debug("=@Service do_payCompleteList="+dto);
 		LOG.debug("==================");
+//		SEJ_CartVO cartVO = new SEJ_CartVO();
+//		if(cartVO.get )
+		
 		return cartDaoImpl.do_payCompleteList(dto);
 	}
 	

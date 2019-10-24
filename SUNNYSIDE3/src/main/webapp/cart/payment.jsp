@@ -96,8 +96,8 @@
 		userId = $("#userId").text();
 		tatalCost = $("#tatalCost").val();
 		userName =$("#userName").text();	
-		payProduct();	 
-		
+		//payProduct();	 
+		goPayList()
 	});
 	
 	function payProduct(){
@@ -138,7 +138,7 @@
                     }
 				});
                 //성공시 이동할 페이지
-                goPayList();
+                //goPayList();
                 
 			 } else {
 		        msg = '결제에 실패하였습니다.  \n';
@@ -173,7 +173,8 @@
 	        		   "payCode":payCode, 
 	        		   "productId":productId, 
 	        		   "userId":$("#userId").text(),       
-	        		   "strCount":strCount   
+	        		   "strCount":strCount,
+	        		   "tatalCost":$("#tatalCost").val()
 	          },   
 	      success: function(data){ 
 			  if(null != data && data.msgId=="1"){
