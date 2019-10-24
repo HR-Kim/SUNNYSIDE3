@@ -48,6 +48,7 @@
 		<typeAlias type="kr.co.sunnyside.code.service.CodeVO" alias="CodeVO" />
 		<typeAlias type="kr.co.sunnyside.notice.service.KYMNoticeVO" alias="KYMNoticeVO" />
 		<typeAlias type="kr.co.sunnyside.notice.service.KYMBranchVO" alias="KYMBranchVO" />
+		<typeAlias type="kr.co.sunnyside.file.service.File" alias="File" />
 		
 	</typeAliases>
 

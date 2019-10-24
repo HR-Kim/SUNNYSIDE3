@@ -1,8 +1,8 @@
 package kr.co.sunnyside.file.web;
 
-import java.io.File;
-
 import static kr.co.sunnyside.cmn.StringUtil.UPLOAD_ROOT;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -15,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,8 +32,7 @@ import kr.co.sunnyside.file.service.FileVO;
 
 @Controller
 public class FileController {
-
-	Logger LOG = LoggerFactory.getLogger(this.getClass());
+	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private FileService fileService;
@@ -46,7 +44,7 @@ public class FileController {
 	private View download;
 	
 	@RequestMapping(value="file/do_delete.do",method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	@ResponseBody
+	@ResponseBody	
 	public String do_delete(kr.co.sunnyside.file.service.File inVO) {
 		LOG.debug("=============================");
 		LOG.debug("=inVO=="+inVO);
@@ -118,7 +116,8 @@ public class FileController {
 		mView.addObject("orgFileNm", orgFileNm);
 		
 		return mView;
-	}
+	}	
+	
 	
 	@RequestMapping(value="file/do_retrieve.do",method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody	
@@ -186,7 +185,7 @@ public class FileController {
 		//01.파일 Read      
 		Iterator<String> files = mReg.getFileNames();
 		while(files.hasNext()) {
-			kr.co.sunnyside.file.service.File fileVO = new kr.co.sunnyside.file.service.File();
+			kr.co.sunnyside.file.service.File fileVO=new kr.co.sunnyside.file.service.File();
 			String orgFileNm  = "";//원본파일명
 			String saveFileNm = "";//저장파일명
 			long   fileSize   = 0L;//파일사이즈
@@ -264,5 +263,5 @@ public class FileController {
 		LOG.debug("gsonStr:"+gsonStr);
 		return gsonStr;
 	}
-	
+		
 }

@@ -52,7 +52,7 @@
 		<!-- div title -->
 		<form class="form-horizontal" name="noticeEditFrm" id="noticeEditFrm" method="post" action="${context}/notice/do_save.do">
 			<input type="hidden" class="form-control" name="noticeId" id="noticeId" value="${vo.noticeId }">
-
+		    <input type="hidden"  name="fileId" id="fileId" >
 			<div class="form-group">
 				<label for="inputEmail3" class="col-sm-2 control-label">제목</label>
 				<div class="col-sm-8">
@@ -88,6 +88,7 @@
 					<button id="attrFile" type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#layerpop">파일</button>
 				</div>
 			</div>
+			
 			<!-- 첨부그리드 -->
 			<div class="form-group">
 				<label for="listFileTable" class="hidden-xs hidden-sm col-md-2 col-lg-2 control-label"></label>
@@ -146,7 +147,6 @@
 		//목록이동
 		$("#doRetrieve").on("click",function(){
 			//alert("doRetrieve");
-			//board_attr/get_retrieve.do
 			if(confirm("목록으로 이동 하시겠습니까?")== false)return;
 			location.href ="${context}/notice/do_retrieve.do";
 		});    
@@ -167,6 +167,7 @@
 				url : "${context}/notice/do_save.do",
 				dataType : "html",
 				data : {
+					"fileId":$("#fileId").val(),
 					"title" : $("#title").val(),
 					"contents" : $("#contents").val(),
 					"branchSNm" : branchSNm,
@@ -395,7 +396,7 @@
 		//파일목록 조회:
 		function doFileList(fileId){
 			//ajax
-			
+			alert("fileId:"+fileId);
 			$.ajax({
 				   type:"POST",
 				   url:"${context}/file/do_retrieve.do",
@@ -465,7 +466,6 @@
 				success: function(data){
 				  console.log("data.msgId:"+data.msgId)
 				  console.log("data:"+data.msgMsg)
-				  
 				  $("#attrFileId").val(data.msgMsg);
 				  $("#fileId").val(data.msgMsg);
 				  
@@ -475,9 +475,9 @@
 				  //var jData = JSON.parse(data);
 				  if(null != data && data.msgId=="1"){
 					//alert(data.msgMsg);
-					
 					//fileId file_mng조회
-					getFileList($("#fileId").val());
+					doFileList($("#fileId").val());
+					
 				  }else{
 					alert(data.msgId+"|"+data.msgMsg);
 				  }
@@ -491,9 +491,7 @@
 			}); 
 			//--ajax 			
 		}
-		
-		
-	
+
 		$(document).ready(function() {
 			//alert("ready");
 

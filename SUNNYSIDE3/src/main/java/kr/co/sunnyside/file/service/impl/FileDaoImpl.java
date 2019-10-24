@@ -1,6 +1,5 @@
 package kr.co.sunnyside.file.service.impl;
 
-
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -20,7 +19,7 @@ public class FileDaoImpl implements WorkDiv {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
-	//kr.co.ehr.file
+
 	private final String NAMESPACE = "kr.co.sunnyside.file";
 	
 	/**

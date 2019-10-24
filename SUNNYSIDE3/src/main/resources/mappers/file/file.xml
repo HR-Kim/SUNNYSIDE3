@@ -39,19 +39,15 @@
 	
 	
 	<!-- FILE_ID기준: 삭제 -->
-	<delete id="do_delete_file_id"
-		parameterType="kr.co.sunnyside.file.service.File">
+	<delete id="do_delete_file_id" parameterType="File">
 		<![CDATA[
 			DELETE FROM file_mng	
 			WHERE  file_id = #{fileId,jdbcType=VARCHAR}	
 		]]>
 	</delete>
 	
-	
-	
 	<!-- FILE_ID기준 조회 -->
-	<select id="do_fileIdList" parameterType="File"
-		resultType="kr.co.sunnyside.file.service.File">
+	<select id="do_fileIdList" parameterType="File" resultType="File">
 		SELECT	
 		    <include refid="fileColumns" />
 		FROM	
@@ -87,8 +83,7 @@
 	</insert>
 	
 	<!-- 삭제 -->
-	<delete id="do_delete"
-		parameterType="File">
+	<delete id="do_delete" parameterType="File">
 		<![CDATA[
 			DELETE FROM file_mng	
 			WHERE  file_id = #{fileId,jdbcType=VARCHAR}	
