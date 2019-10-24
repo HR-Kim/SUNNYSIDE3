@@ -22,8 +22,7 @@ public class LGS_ScreenInfoDaoImpl implements WorkDiv {
 	
 	private final String NAMESPACE = "screeninfo";
 	
-	@Override
-	public int do_save(DTO dto) {
+	public String do_save_NEW(DTO dto) {
 		String statement = this.NAMESPACE + ".do_save";
 		
 		LOG.debug("==================================");
@@ -42,7 +41,7 @@ public class LGS_ScreenInfoDaoImpl implements WorkDiv {
 		LOG.debug("flag = " + flag);
 		LOG.debug("==================================");
 		
-		return flag;
+		return screenInfo.getScreenId();
 	}
 
 	@Override
@@ -184,6 +183,12 @@ public class LGS_ScreenInfoDaoImpl implements WorkDiv {
 		LOG.debug("==================================");
 		
 		return list;
+	}
+
+	@Override
+	public int do_save(DTO dto) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

@@ -21,6 +21,12 @@
 		<link href="${context}/resources/css/jquery-ui.css" rel="stylesheet">
 		<link  href="${context}/resources/css/jquery.timepicker.min.css" rel="stylesheet">
 		<style type="text/css">
+			.ui-widget-content .ui-icon {
+				background-image: url("${context}/resources/image/jquery_ui/ui-icons_444444_256x240.png");
+			}
+			.ui-widget-header .ui-icon {
+				background-image: url("${context}/resources/image/jquery_ui/ui-icons_444444_256x240.png");
+			}
 			#searchWord {
 				border: 1px solid black;
 			}
@@ -1037,7 +1043,7 @@
 			});
 			
 			//상영영화추가
-			function add_NewScreenMovie(){
+			function add_NewScreenMovie(){alert("실행");
 				loading(true);
 				var eDate = $("#endDate").val(); 
 				var eTime = $("#endTime").val();
@@ -1055,7 +1061,7 @@
 				$.ajax({
     				type : "POST",
     				url : "${context}/screenInfo/do_save.do",
-    				dataType : "json",
+    				dataType : "HTML",
     				data : {
     					"roomId" : roomId,
     					"branchId" : branchId,
@@ -1067,11 +1073,11 @@
     					"studentCost" : studentCost
     				}, 
     			success: function(data){
-    				var msg = data;
-    				if(msg.msgId == 1){
-    					alert("성공");
+    				var screenId = data;
+    				if(screenId.length > 0){
+    					create_seat_reservation(roomId, screenId);
     				}else{
-    					alert("실패");
+    					alert("추가에 실패했습니다.\n해당 영화를 삭제하고 다시 편성해주세요.");
     				}
     			},
     			complete:function(data){
@@ -1082,9 +1088,38 @@
     				loading(false);
     			},
     			error:function(xhr,status,error){
-
+    				alert("추가에 실패했습니다.\n해당 영화를 삭제하고 다시 편성해주세요.");
     			}
     			});
+			}
+			
+			//영화편성시 편성영화 전용 좌석생성
+			function create_seat_reservation(roomId, screenId){
+				$.ajax({
+    				type : "POST",
+    				url : "${context}/seat/do_save_reservation.do",
+    				dataType : "json",
+    				data : {
+    					"roomId" : roomId,
+    					"screenId" : screenId
+    				}, 
+    				success: function(data){
+    					var msg = data;
+        				if(msg.msgId == 1){
+        					alert("편성되었습니다.");
+        				}else{
+        					alert("편성실패");
+        					delete_Plan(screenId);
+        				}
+        			},
+        			complete:function(data){
+        				
+        			},
+        			error:function(xhr,status,error){
+        				alert("편성오류");
+        				delete_Plan(screenId);
+        			}
+        		}); 
 			}
 			
 			function selectedMovie_Off(){

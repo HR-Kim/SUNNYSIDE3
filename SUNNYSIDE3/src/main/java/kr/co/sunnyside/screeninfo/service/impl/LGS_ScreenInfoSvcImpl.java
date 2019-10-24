@@ -16,8 +16,8 @@ public class LGS_ScreenInfoSvcImpl implements LGS_ScreenInfoSvc {
 	
 	
 	@Override
-	public int do_save(DTO dto) {
-		return screenInfoDao.do_save(dto);
+	public String do_save_NEW(DTO dto) {
+		return screenInfoDao.do_save_NEW(dto);
 	}
 
 	@Override

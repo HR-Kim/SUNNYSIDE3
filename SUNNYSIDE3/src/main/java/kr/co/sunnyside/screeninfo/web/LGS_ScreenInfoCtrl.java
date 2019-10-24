@@ -54,29 +54,13 @@ public class LGS_ScreenInfoCtrl {
 		if(screenInfo.getAdultCost() < 0) throw new IllegalArgumentException();
 		if(screenInfo.getEpisode() < 0) throw new IllegalArgumentException();
 				
-		int flag = screenInfoSvc.do_save(screenInfo);
+		String screenId = screenInfoSvc.do_save_NEW(screenInfo);
 		
 		LOG.debug("==================================");
-		LOG.debug("flag : " + flag);
+		LOG.debug("screenId : " + screenId);
 		LOG.debug("==================================");
 		
-		Message message = new Message();
-		if(flag > 0) {
-			message.setMsgId("1");
-			message.setMsgMsg("성공");
-		}else {
-			message.setMsgId("0");
-			message.setMsgMsg("실패");
-		}
-		
-		Gson gson = new Gson();
-		String jsonStr = gson.toJson(message);
-		
-		LOG.debug("==================================");
-		LOG.debug("jsonStr : " + jsonStr);
-		LOG.debug("==================================");
-		
-		return jsonStr;
+		return screenId;
 	}
 	
 	@ResponseBody

@@ -16,4 +16,14 @@ public interface LGS_SeatSvc {
 
 	public DTO do_selectOne(DTO dto);
 	
+	public int do_save_reservation(DTO dto);
+
+	public int do_delete_reservation(DTO dto);
+	
+	public int do_update_reservation(DTO dto);
+
+	public List<?> do_retrieve_reservation(DTO dto);
+
+	public DTO do_selectOne_reservation(DTO dto);
+	
 }

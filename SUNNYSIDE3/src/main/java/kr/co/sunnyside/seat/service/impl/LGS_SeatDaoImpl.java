@@ -141,5 +141,115 @@ Logger LOG = LoggerFactory.getLogger(this.getClass());
 	public List<?> do_excelDown(DTO dto) {
 		return null;
 	}
+	
+	public int do_save_reservation(DTO dto) {
+		String statement = this.NAMESPACE + ".do_save_reservation";
+		
+		LOG.debug("==================================");
+		LOG.debug("statement = " + statement);
+		LOG.debug("==================================");
+		
+		LGS_SeatVO seat = (LGS_SeatVO) dto;
+		
+		LOG.debug("==================================");
+		LOG.debug("seat = " + seat);
+		LOG.debug("==================================");
+		
+		int flag = sqlSessionTemplate.insert(statement, seat);
+		
+		LOG.debug("==================================");
+		LOG.debug("flag = " + flag);
+		LOG.debug("==================================");
+		
+		return flag;
+	}
+
+	public int do_delete_reservation(DTO dto) {
+		String statement = this.NAMESPACE + ".do_delete_reservation";
+		
+		LOG.debug("==================================");
+		LOG.debug("statement = " + statement);
+		LOG.debug("==================================");
+		
+		LGS_SeatVO seat = (LGS_SeatVO) dto;
+		
+		LOG.debug("==================================");
+		LOG.debug("seat = " + seat);
+		LOG.debug("==================================");
+		
+		int flag = sqlSessionTemplate.delete(statement, seat);
+		
+		LOG.debug("==================================");
+		LOG.debug("flag = " + flag);
+		LOG.debug("==================================");
+		
+		return flag;
+	}
+	
+	public int do_update_reservation(DTO dto) {
+		String statement = this.NAMESPACE + ".do_update_reservation";
+		
+		LOG.debug("==================================");
+		LOG.debug("statement = " + statement);
+		LOG.debug("==================================");
+		
+		LGS_SeatVO seat = (LGS_SeatVO) dto;
+		
+		LOG.debug("==================================");
+		LOG.debug("seat = " + seat);
+		LOG.debug("==================================");
+		
+		int flag = sqlSessionTemplate.update(statement, seat);
+		
+		LOG.debug("==================================");
+		LOG.debug("flag = " + flag);
+		LOG.debug("==================================");
+		
+		return flag;
+	}
+
+	public List<?> do_retrieve_reservation(DTO dto) {
+		String statement = this.NAMESPACE + ".do_retrieve_reservation";
+	
+		LOG.debug("==================================");
+		LOG.debug("statement = " + statement);
+		LOG.debug("==================================");
+		
+		SearchVO search = (SearchVO) dto;
+		
+		LOG.debug("==================================");
+		LOG.debug("search = " + search);
+		LOG.debug("==================================");
+		
+		List<LGS_SeatVO> list = sqlSessionTemplate.selectList(statement, search);
+		
+		LOG.debug("==================================");
+		LOG.debug("list = " + list);
+		LOG.debug("==================================");
+		
+		return list;
+	}
+
+	public DTO do_selectOne_reservation(DTO dto) {
+		String statement = this.NAMESPACE + ".do_selectOne_reservation";
+
+		LOG.debug("==================================");
+		LOG.debug("statement = " + statement);
+		LOG.debug("==================================");
+		
+		LGS_SeatVO seat = (LGS_SeatVO) dto;
+		
+		LOG.debug("==================================");
+		LOG.debug("seat = " + seat);
+		LOG.debug("==================================");
+		
+		LGS_SeatVO outVO = (LGS_SeatVO) sqlSessionTemplate.selectOne(statement, seat);
+		
+		LOG.debug("==================================");
+		LOG.debug("outVO = " + outVO);
+		LOG.debug("==================================");
+		
+		return outVO;
+	}
 
 }

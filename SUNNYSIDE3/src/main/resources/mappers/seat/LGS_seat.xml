@@ -26,6 +26,9 @@
 			<when test="'60' == searchDiv">
 				USE_YN LIKE '%' || #{searchWord, jdbcType=VARCHAR} || '%'
 			</when>
+			<when test="'70' == searchDiv">
+				SCREEN_ID LIKE '%' || #{searchWord, jdbcType=VARCHAR} || '%'
+			</when>
 			<otherwise></otherwise>
 		</choose>
 	</where>
@@ -94,4 +97,84 @@
 		WHERE ROOM_ID = #{roomId, jdbcType=VARCHAR}
 		AND SEAT_NM = #{seatNm, jdbcType=VARCHAR}
 	</update>
+	
+	<select id="do_save_reservation" parameterType="Seat">
+		INSERT INTO SEAT_RESERVATION (
+		    BRANCH_ID,
+		    ROOM_ID,
+		    SEAT_NM,
+		    SEAT_Y,
+			SEAT_X,
+			USE_YN,
+			SCREEN_ID
+		)
+        SELECT *
+		FROM
+		(
+		SELECT a.BRANCH_ID,
+		    a.ROOM_ID,
+		    a.SEAT_NM,
+		    a.SEAT_Y,
+			a.SEAT_X,
+			a.USE_YN,
+			b.screenId
+		FROM SEAT a,
+			(
+			SELECT #{screenId, jdbcType=VARCHAR} as screenId
+			FROM DUAL
+			)b
+		WHERE a.ROOM_ID = #{roomId, jdbcType=VARCHAR}
+		)
+	</select>
+	
+	<select id="do_retrieve_reservation" parameterType="Search" resultType="Seat">
+		SELECT T.RNUM as NUM
+			  ,T.BRANCH_ID as branchId
+			  ,T.ROOM_ID as roomId
+			  ,T.SEAT_NM as seatNm
+			  ,T.SEAT_Y as seatY
+			  ,T.SEAT_X as seatX
+			  ,T.USE_YN as useYN
+			  ,SCREEN_ID as screenId
+		FROM(
+		    SELECT ROWNUM AS RNUM, A.*
+		    FROM(
+		         SELECT *
+		         FROM SEAT_RESERVATION
+		         <include refid="baseCondition"/>
+		        )A
+		    WHERE CEIL(ROWNUM/ #{pageSize, jdbcType=VARCHAR} ) = #{pageNum, jdbcType=VARCHAR}
+		    )T
+		ORDER BY 1, 2, 3
+	</select>
+
+	<update id="do_update_reservation" parameterType="Seat">
+		UPDATE SEAT_RESERVATION
+		SET
+			USE_YN = #{useYN, jdbcType=NUMERIC}
+		WHERE ROOM_ID = #{roomId, jdbcType=VARCHAR}
+		AND SEAT_NM = #{seatNm, jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="do_delete_reservation" parameterType="Seat">
+		DELETE FROM SEAT_RESERVATION
+		WHERE SCREEN_ID = #{screenId, jdbcType=VARCHAR}
+	</delete>
+	
+	<select id="do_selectOne_reservation" parameterType="Seat" resultType="Seat">
+		SELECT
+			BRANCH_ID as branchId,
+		    ROOM_ID as roomId,
+			SEAT_NM as seatNm,
+			SEAT_Y as seatY,
+			SEAT_X as seatX,
+			USE_YN as useYN,
+			SCREEN_ID as screenId
+		FROM
+		    SEAT_RESERVATION
+		WHERE
+		    SEAT_NM = #{seatNm, jdbcType=VARCHAR}
+		AND
+			SCREEN_ID = #{screenId, jdbcType=VARCHAR}
+	</select>
 </mapper>

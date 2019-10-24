@@ -42,4 +42,29 @@ public class LGS_SeatSvcImpl implements LGS_SeatSvc {
 		return seatDao.do_selectOne(dto);
 	}
 
+	@Override
+	public int do_save_reservation(DTO dto) {
+		return seatDao.do_save_reservation(dto);
+	}
+
+	@Override
+	public int do_delete_reservation(DTO dto) {
+		return seatDao.do_delete_reservation(dto);
+	}
+
+	@Override
+	public int do_update_reservation(DTO dto) {
+		return seatDao.do_update_reservation(dto);
+	}
+
+	@Override
+	public List<?> do_retrieve_reservation(DTO dto) {
+		return seatDao.do_retrieve_reservation(dto);
+	}
+
+	@Override
+	public DTO do_selectOne_reservation(DTO dto) {
+		return seatDao.do_selectOne_reservation(dto);
+	}
+
 }

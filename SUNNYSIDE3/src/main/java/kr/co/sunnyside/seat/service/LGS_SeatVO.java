@@ -8,9 +8,9 @@ public class LGS_SeatVO extends DTO {
 	private String roomId;	//상영관id
 	private String seatNm;	//좌석명
 	private String seatY;	//Y축
-	private int seatX;	//X축
+	private int seatX;		//X축
 	private String useYN;	//사용여부
-		
+	private String screenId;
 	public LGS_SeatVO() {}
 
 	public LGS_SeatVO(String branchId, String roomId, String seatNm, String seatY, int seatX, String useYN) {
@@ -23,6 +23,14 @@ public class LGS_SeatVO extends DTO {
 		this.useYN = useYN;
 	}
 
+	public String getScreenId() {
+		return screenId;
+	}
+
+	public void setScreenId(String screenId) {
+		this.screenId = screenId;
+	}
+	
 	public String getBranchId() {
 		return branchId;
 	}
@@ -74,7 +82,8 @@ public class LGS_SeatVO extends DTO {
 	@Override
 	public String toString() {
 		return "LGS_SeatVO [branchId=" + branchId + ", roomId=" + roomId + ", seatNm=" + seatNm + ", seatY=" + seatY
-				+ ", seatX=" + seatX + ", useYN=" + useYN + ", toString()=" + super.toString() + "]";
+				+ ", seatX=" + seatX + ", useYN=" + useYN + ", screenId=" + screenId + ", toString()="
+				+ super.toString() + "]";
 	}
 
 }
