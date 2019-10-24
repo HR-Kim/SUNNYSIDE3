@@ -1,5 +1,7 @@
 package kr.co.sunnyside.coupon.service.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,11 @@ public class SJH_CouponSvcImpl implements SJH_CouponSvc {
 	@Override
 	public DTO do_selectOne(DTO dto) {
 		return couponDao.do_selectOne(dto);
+	}
+
+	@Override
+	public List<?> do_retrieve(DTO dto) {
+		return couponDao.do_retrieve(dto);
 	}
 
 	

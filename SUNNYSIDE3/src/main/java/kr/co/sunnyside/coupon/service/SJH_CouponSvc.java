@@ -1,5 +1,7 @@
 package kr.co.sunnyside.coupon.service;
 
+import java.util.List;
+
 import kr.co.sunnyside.cmn.DTO;
 
 public interface SJH_CouponSvc {
@@ -12,6 +14,9 @@ public interface SJH_CouponSvc {
 	
 	/** 쿠폰선택 */
 	public DTO do_selectOne(DTO dto);
+	
+	/** 쿠폰 여러장 선택 */
+	public List<?> do_retrieve(DTO dto);
 	
 	
 }

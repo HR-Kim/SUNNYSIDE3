@@ -1,5 +1,7 @@
 package kr.co.sunnyside.coupon.web;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,30 @@ public class SJH_CouponCtrl {
 	SJH_CouponSvc couponSvc;
 	
 	
+	
+	
+	//쿠폰전체조회
+	@RequestMapping(value="coupon/do_retrieve.do",method = RequestMethod.POST,produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public String do_retrieve(SJH_CouponVO inVO,Model model) {
+		LOG.debug("=========================");
+		LOG.debug("=@Controller=inVO=="+inVO);
+		LOG.debug("=========================");
+		
+		if(inVO.getUserId() == null || "".equals(inVO.getUserId())) {
+			throw new IllegalArgumentException("아이디를 입력하세요.");
+		}
+		
+		List<SJH_CouponVO> outVO = (List<SJH_CouponVO>) couponSvc.do_retrieve(inVO);
+
+		Gson gson=new Gson();
+		String json = gson.toJson(outVO);
+		LOG.debug("=========================");
+		LOG.debug("=@Controller gson=user=="+json);
+		LOG.debug("=========================");		
+		
+		return json;
+	}
 	
 	
 	
