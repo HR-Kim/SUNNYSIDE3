@@ -19,7 +19,7 @@
 	INSERT INTO PAY_HISTORY  (
 			    cart_id,
 			    user_id,
-			    count,
+			    str_count,
 			    product_id,	
 			    pay_code,
 			    total_cost,
@@ -27,7 +27,7 @@
 			) VALUES (
 			    #{cartId,jdbcType=VARCHAR},
 			    #{userId,jdbcType=VARCHAR},
-			    #{count,jdbcType=NUMERIC},
+			    #{strCount,jdbcType=VARCHAR},
 			    #{productId,jdbcType=VARCHAR},
 			    #{payCode,jdbcType=VARCHAR},
 			    #{totalCost,jdbcType=NUMERIC},
@@ -42,7 +42,7 @@
 		    a.cart_id as cartId,
 		    c.product_nm as productNm,
 		    b.user_id as userId,
-		    a.count,
+		    a.str_count as strCount,
 		    a.total_cost as totalCost,
 		    c.product_id as productId,
 		    a.pay_dt as payDt

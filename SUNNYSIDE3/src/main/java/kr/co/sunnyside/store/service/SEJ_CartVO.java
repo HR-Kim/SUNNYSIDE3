@@ -13,7 +13,7 @@ public class SEJ_CartVO extends DTO {
 	private String userId      ;   
 	/**수량*/
 	private int count          ;   
-	/**수량*/
+	/**수량 string버전*/
 	private String strCount          ;   
 	/**상품단가*/
 	private int oriProductCost   ; 
