@@ -16,7 +16,8 @@
 	  .center-block();
 	}
 	td.mouseOver {
-    	background: #f7f7f7;
+    	background: #ff9728;
+    	color:#ffffff;
     	text-align: center;
 	}
 	td.mouseOut {
@@ -35,14 +36,27 @@
 	
 	<br/>
 	<br/>
-		
+	
+	<div class="container">
+		<h1>SUNNYSIDE 홍대점</h1>		
+		<table style="width: 700px;">
+			<td style="width: 40%;"><strong>서울 마포구 서교동 447-5</strong></td>
+			<td style="width: 10%;"><strong>총 상영관수</strong></td>
+			<td style="width: 10%;">22개관</td>
+			<td style="width: 10%;"><strong>총 좌석수</strong></td>
+			<td style="width: 10%;">4,633석</td>
+		</table>
+	</div>
+	
+	<br/>
+	
 	<div class="container">
 		<br/>
 		<table class="table table-bordered" style="width: 400px;">
-			<td onMouseOver="this.className='mouseOver';" onMouseOut="this.className='mouseOut'" style="width: 200px;" class="text-center">
+			<td id="hongdaeInfo" onMouseOver="this.className='mouseOver';" onMouseOut="this.className='mouseOut'" style="width: 200px;" class="text-center">
 				영화관 소개
 			</td>
-			<td onMouseOver="this.className='mouseOver';" onMouseOut="this.className='mouseOut'" style="width: 200px;" class="text-center">
+			<td style="width: 200px; background: #000000; color:#ffffff;" class="text-center">
 				약도
 			</td>
 		</table>
@@ -56,12 +70,24 @@
 	<div class="center-block" id="map" style="width:50%;height:600px;"></div>
 	
 	
+	<br/>
+	<br/>
+	<br/>
+	
+	
 	
 	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
     <script src="${context}/resources/js/jquery-1.12.4.js"></script>
     <script src="${context}/resources/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=79dc5d9ee17692f633e4726d83f25b50&libraries=services"></script>
 	<script>
+	
+		/** 홍대정보로 이동 */
+		$("#hongdaeInfo").on("click",function(){
+			location.href = "${context}/theater/hongdae_info.do";
+		});
+	
+	
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = {
 		        center: new kakao.maps.LatLng(37.5565114, 126.9173146), // 지도의 중심좌표

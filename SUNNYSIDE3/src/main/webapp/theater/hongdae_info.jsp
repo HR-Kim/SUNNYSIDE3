@@ -16,7 +16,8 @@
 	  .center-block();
 	}
 	td.mouseOver {
-    	background: #f7f7f7;
+    	background: #ff9728;
+    	color:#ffffff;
     	text-align: center;
 	}
 	td.mouseOut {
@@ -37,7 +38,6 @@
 	<br/>
 	
 	<div class="container">
-	<button class="btn btn-default">수정</button>
 		<h1>SUNNYSIDE 홍대점</h1>		
 		<table style="width: 700px;">
 			<td style="width: 40%;"><strong>서울 마포구 서교동 447-5</strong></td>
@@ -49,16 +49,14 @@
 	</div>
 	
 	<br/>
-	<br/>
-	<br/>
 	
 	<div class="container">
 		<br/>
 		<table class="table table-bordered" style="width: 400px;">
-			<td onMouseOver="this.className='mouseOver';" onMouseOut="this.className='mouseOut'" style="width: 200px;" class="text-center">
+			<td style="width: 200px; background: #000000; color:#ffffff;" class="text-center">
 				영화관 소개
 			</td>
-			<td onMouseOver="this.className='mouseOver';" onMouseOut="this.className='mouseOut'" style="width: 200px;" class="text-center">
+			<td id="hongdaeApi" onMouseOver="this.className='mouseOver';" onMouseOut="this.className='mouseOut'" style="width: 200px;" class="text-center">
 				약도
 			</td>
 		</table>
@@ -67,13 +65,21 @@
 	
 	<br/>
 	<br/>
+	<br/>
+	<br/>
 	
 	<div class="container">
-		<img class="center-block" src="${context }/resources/img/divisima/logo.png">
+		<img class="center-block" src="${context }/resources/image/theater.png">
 	</div>
 	
-	
-	
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
 	
 	
 	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
@@ -83,10 +89,15 @@
     
     
 	<script type="text/javascript">
+		
+		/** 아이디 찾기 */
+		$("#hongdaeApi").on("click",function(){
+			location.href = "${context}/theater/hongdae_api.do";
+		});
+	
+	
 	
 	</script>
-	
-	
 	
 </body>
 </html>
