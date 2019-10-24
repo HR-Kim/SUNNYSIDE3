@@ -1,5 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.sunnyside.faq"> 
+
+	<!-- 전체조회 -->
+	<select id="do_retrieve" resultType="Faq">
+		SELECT
+		    question_id as questionId,
+		    title,
+		    contents,
+		    reg_dt as regDt
+		FROM
+		    faq
+		ORDER BY
+			reg_dt DESC
+	</select>
+
+	<!-- 수정 -->
+	<update id="do_update" parameterType="Faq">	
+		UPDATE 
+		    faq
+		SET
+		    title = #{title, jdbcType=VARCHAR}
+		    ,contents = #{contents, jdbcType=VARCHAR}
+		WHERE
+		    question_id = #{questionId, jdbcType=VARCHAR}
+	</update>
 	
+	<!-- 삭제 -->
+	<delete id="do_delete" parameterType="Faq">
+		DELETE 
+		FROM 
+		    faq
+		WHERE
+		    question_id = #{questionId, jdbcType=VARCHAR}
+	</delete>
+	
+	<!-- Faq 저장 -->
+	<insert id="do_save" parameterType="Faq">
+		INSERT INTO faq (
+		    question_id,
+		    title,
+		    contents,
+		    reg_dt
+		) VALUES (
+			'FAQ-'||TO_CHAR(FAQ_SEQ.NEXTVAL, 'FM00000')
+		    ,#{title, jdbcType=VARCHAR}
+		    ,#{contents, jdbcType=VARCHAR}
+		    ,SYSDATE
+		)
+	</insert>
 </mapper>
