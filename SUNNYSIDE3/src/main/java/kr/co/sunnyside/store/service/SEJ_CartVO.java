@@ -13,6 +13,8 @@ public class SEJ_CartVO extends DTO {
 	private String userId      ;   
 	/**수량*/
 	private int count          ;   
+	/**수량*/
+	private String strCount          ;   
 	/**상품단가*/
 	private int oriProductCost   ; 
 	/**상품가격*/
@@ -168,6 +170,26 @@ public class SEJ_CartVO extends DTO {
 
 	public void setExt(String ext) {
 		this.ext = ext;
+	}
+
+
+	public String getStrCount() {
+		return strCount;
+	}
+
+
+	public void setStrCount(String strCount) {
+		this.strCount = strCount;
+	}
+
+
+	public String getPayDt() {
+		return payDt;
+	}
+
+
+	public void setPayDt(String payDt) {
+		this.payDt = payDt;
 	}
 
 

@@ -49,54 +49,44 @@ public class SEJ_CartCtrl {
 	private final String AFTER_PAY_LIST_VIEW = "cart/successPay";
 	
 	// 0. 결제내역 저장(추가)
-		@RequestMapping(value ="cart/do_payComplete.do", method = RequestMethod.GET)
-		public String do_payComplete(SEJ_CartVO inVO,Model model){
-			LOG.debug("============================");
-			LOG.debug("=do_payComplete inVo="+inVO);
-			LOG.debug("============================");
-			
-			int CutNumber = 15;  //결제코드 반복 수
-			String payCode = inVO.getPayCode(); 
-			LOG.debug("1.= source=" + payCode);
-			
-			int length = payCode.length(); //결제코드 길이
-			LOG.debug("1.= length=" + length);
-          
-			List<String> list = new ArrayList<String>();  //데이터길이(48) / 자르는갯수(16) + 5 
-			LOG.debug("1.= list=" + list); 
-			
-			for(int i = 0; i <length; i+= CutNumber){
-				if(i + CutNumber < length){
-					   list.add(payCode.substring(i, i + CutNumber));
-						LOG.debug("2.= list=" + list); 
-				}else{
-					   list.add(payCode.substring(i)); // 해당위치부터 나머지
-						LOG.debug("2-1.= list=" + list); 
-				}			
-			}
-
-			for(int i = 0; i < list.size(); i++){
-				
-				payCode =list.get(i);
-				inVO.setPayCode(payCode);
-				System.out.println(inVO);
-	     		//--------------------------------
-				//-1. 결제완료 테이블에 저장+카트 테이블 삭제
-				//--------------------------------	
-				cartService.do_payComplete(inVO);
-				System.out.println(list.get(i));
-			}
-			//카트테이블 삭제
-			cartService.do_deleteAll();
-     		//--------------------------------
-			//-2. 조회
-			//--------------------------------
-			
-			List<SEJ_CartSvc> payCompleteList = (List<SEJ_CartSvc>) this.cartService.do_payCompleteList(inVO);
-			model.addAttribute("list", payCompleteList);
+	@RequestMapping(value ="cart/do_payComplete.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String do_payComplete(SEJ_CartVO inVO,Model model){
+		LOG.debug("============================");
+		LOG.debug("=do_payComplete inVo="+inVO);
+		LOG.debug("============================");
 		
+		List<String> productIdList =StringUtil.CutProductId(inVO); //상품아이디 자르기
+		List<String> payCodeList =StringUtil.CutpayCode(inVO); //결제코드 자르기
+		List<String> countList =StringUtil.Cutcount(inVO); //수량 자르기
+		
+		for(int i=0; i<productIdList.size();i++) {
+			SEJ_CartVO cartVO = inVO;
+			cartVO.setProductId(productIdList.get(i)); 
+			cartVO.setPayCode(payCodeList.get(i));
+			cartVO.setStrCount(countList.get(i));
+			cartService.do_payComplete(cartVO);//결제 테이블에 추가하기 
+		}
+		
+		cartService.do_deleteAll();//카트 비우기
+		
+		return AFTER_PAY_LIST_VIEW;
+	}
+	
+	
+	// 0. 결제내역 목록
+		@RequestMapping(value ="cart/do_payCompleteList.do",method = RequestMethod.GET)
+		public String do_payCompleteList(SEJ_CartVO inVO,Model model){
+			LOG.debug("1.=====================");
+			LOG.debug("1.= do_payCompleteList param=" + inVO);
+			LOG.debug("1.=====================");
+			
+			List<SEJ_CartVO> list = (List<SEJ_CartVO>) this.cartService.do_payCompleteList(inVO);
+			model.addAttribute("list", list);
+			
 			return AFTER_PAY_LIST_VIEW;
 		}
+			
 	
 	
 	// 1. 장바구니 저장(추가)
