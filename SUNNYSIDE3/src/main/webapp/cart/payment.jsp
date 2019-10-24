@@ -21,6 +21,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-10 col-md-offset-1">  
+      
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -47,9 +48,8 @@
 					                            </div>
 					                        </div>
 				                        </td>
-				                        <td class="col-sm-4 col-md-2" ><c:out value="${vo.count }"/>개</td>
+				                        <td class="col-sm-4 col-md-2" id="strCount" >${vo.count }개</td>
 				                        <td style="display: none;" id="cartId"><strong>${vo.cartId }</strong></td>
-				                        <td style="display: none;" id="count"><strong>${vo.count }</strong></td>
 				                        <td style="display: none;" id="userName"><strong>${user.userName }</strong></td>
 				                        <td style="display: none;" id="productId"><strong>${vo.productId }</strong></td>
 				                        <td style="display: none;" id="userId"><strong>${user.userId }</strong></td>
@@ -64,7 +64,8 @@
 					                    </tr> 
 					               </c:otherwise>
                 		</c:choose> 
-			</table>
+				</table>
+
 			<table>                   
                     <tr>					                   	
                         <td>   </td>
@@ -95,12 +96,13 @@
 		userId = $("#userId").text();
 		tatalCost = $("#tatalCost").val();
 		userName =$("#userName").text();	
-		payProduct();	
+		payProduct();	 
+		
 	});
 	
 	function payProduct(){
 		var IMP = window.IMP; // 생략가능
-		IMP.init('iamport'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+		IMP.init('imp74230965'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 		var msg;
 		
 		IMP.request_pay({
@@ -154,13 +156,48 @@
 	    var tbody = $('#tbody');
         var tr = tbody.children();
         var payCode = tr.children('#payCode').text();
+        var productId = tr.children('#productId').text();
+        var strCount = tr.children('#strCount').text();
         
         console.log("payCode="+payCode); 
-        		
-	 	alert("결제가 완료되었습니다.");
-		var userId = $("#userId").text();
+        console.log("productId="+productId); 
+        console.log("userId="+$("#userId").text()); 
+        console.log("strCount="+strCount); 
 
-		location.href="${context}/cart/do_payComplete.do?userId="+userId+"&&payCode="+payCode;
+      //ajax
+	     $.ajax({
+	        type:"POST",
+	        url:"${context}/cart/do_payComplete.do",
+	        dataType:"html",
+	           data:{                               
+	        		   "payCode":payCode, 
+	        		   "productId":productId, 
+	        		   "userId":$("#userId").text(),       
+	        		   "strCount":strCount   
+	          },   
+	      success: function(data){ 
+			  if(null != data && data.msgId=="1"){
+				  alert("결제가 완료되었습니다.");
+				  var userId = $("#userId").text();
+				  location.href="${context}/cart/do_payCompleteList.do?userId="+userId+"&&payCode="+payCode;
+				
+			  }else{
+				alert("결제가 완료되었습니다.");	
+				  var userId = $("#userId").text();
+				  location.href="${context}/cart/do_payCompleteList.do?userId="+userId+"&&payCode="+payCode;
+			  }
+	     },
+	     complete:function(data){
+	  	   
+	     },
+	     error:function(xhr,status,error){
+	         alert("error:"+error);
+	     }
+	    }); //--ajax  
+        
+        
+		
+		
 	}
 	
 	

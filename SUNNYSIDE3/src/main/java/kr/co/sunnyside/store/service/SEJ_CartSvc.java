@@ -8,6 +8,9 @@ public interface SEJ_CartSvc {
 	/**결제내역 추가 */
 	public int do_payComplete(DTO dto);
 	
+//	/**결제내역 추가 */
+//	public void do_payComplete(List<SEJ_CartVO> list);
+	
 	/**결제내역 목록 */
 	public List<?> do_payCompleteList(DTO dto);
 	

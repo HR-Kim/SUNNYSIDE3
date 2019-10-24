@@ -6,6 +6,7 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -18,6 +19,7 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.sunnyside.code.service.CodeVO;
 import kr.co.sunnyside.notice.service.KYMBranchVO;
+import kr.co.sunnyside.store.service.SEJ_CartVO;
 
 public class StringUtil {
 	private static Logger LOG = LoggerFactory.getLogger(StringUtil.class);
@@ -26,6 +28,102 @@ public class StringUtil {
 	public static final String UPLOAD_ROOT = "C:\\Users\\sist\\git\\SUNNYSIDE3\\SUNNYSIDE3\\src\\main\\webapp\\resources\\image";
 	public static final String MAIN_IMAGE_ROOT = "C:\\Users\\sist\\git\\SUNNYSIDE3\\SUNNYSIDE3\\src\\main\\webapp\\resources\\img\\banner";
 
+	//payCode 자르기 메소드 (스토어)
+	public static List<String> CutpayCode(SEJ_CartVO inVO) {
+		int CutNumber = 15;  //결제코드 반복 수
+		String payCode = inVO.getPayCode(); 
+		LOG.debug("1.= source=" + payCode);
+		
+		int length = payCode.length(); //결제코드 길이
+		LOG.debug("1.= length=" + length);
+	  
+		List<String> list = new ArrayList<String>();  //데이터길이(48) / 자르는갯수(16) + 5 
+		LOG.debug("1.= list=" + list); 
+		
+		for(int i = 0; i <length; i+= CutNumber){
+			if(i + CutNumber < length){
+				   list.add(payCode.substring(i, i + CutNumber));
+					LOG.debug("2.= list=" + list); 
+			}else{
+				   list.add(payCode.substring(i)); // 해당위치부터 나머지
+					LOG.debug("2-1.= list=" + list); 
+			}			
+		}
+
+		for(int i = 0; i < list.size(); i++){
+			
+			payCode =list.get(i);
+			inVO.setPayCode(payCode);
+			System.out.println(inVO);
+	 		//--------------------------------
+			//-1. 결제완료 테이블에 저장+카트 테이블 삭제
+			//--------------------------------				
+			System.out.println(list.get(i));
+		}
+		return list;
+	}
+	
+	
+	//ProductId 자르기 메소드 (스토어)
+	public static List<String> CutProductId(SEJ_CartVO inVO) { //20191023-002-041   20191022-001-021
+		int ProductIdCutNumber = 16; 
+		String productId = inVO.getProductId();  
+		LOG.debug("1.= source=" + productId);
+		
+		int ProductIdLength = productId.length();
+		LOG.debug("1.= ProductIdLength=" + ProductIdLength);
+      
+		List<String> ProductIdList = new ArrayList<String>();  //데이터길이(48) / 자르는갯수(16) + 5 
+		LOG.debug("1.= ProductIdList=" + ProductIdList); 
+		
+		for(int i = 0; i <ProductIdLength; i+= ProductIdCutNumber){
+			if(i + ProductIdCutNumber < ProductIdLength){
+				ProductIdList.add(productId.substring(i, i + ProductIdCutNumber));
+					LOG.debug("2.= list=" + ProductIdList); 
+			}else{
+				ProductIdList.add(productId.substring(i)); // 해당위치부터 나머지
+					LOG.debug("2-1.= list=" + ProductIdList); 
+			}			
+		}
+
+		for(int i = 0; i < ProductIdList.size(); i++){			
+			productId =ProductIdList.get(i);
+			inVO.setProductId(productId);
+			System.out.println(inVO);
+	}
+		return ProductIdList;
+		
+	}
+
+	
+	//count 자르기 메소드 (스토어)
+	public static List<String> Cutcount(SEJ_CartVO inVO) {
+		String count =inVO.getStrCount(); 
+		String[] words = count.split("개");
+		LOG.debug("1.= count=" + count);
+		LOG.debug("1.= words=" + words);
+      
+		List<String> countList = new ArrayList<String>(); 
+		LOG.debug("1.= countList=" + countList); 
+		
+		for(String wo : words){
+			countList.add(wo);	
+			LOG.debug("1.= wo=" + wo); 
+		}
+
+		for(int i = 0; i < countList.size(); i++){			
+			count =countList.get(i);
+			inVO.setStrCount(count);
+			LOG.debug("1.= inVO=" + inVO); 
+		}
+		return countList;	
+	}
+	
+	
+	
+	
+	
+	
 	/**
 	 * D:\\HR_FILE\2019\09
 	 */

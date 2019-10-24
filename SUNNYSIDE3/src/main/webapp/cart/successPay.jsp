@@ -12,7 +12,7 @@
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet"> 
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <!------ Include the above in your HEAD tag ---------->
-<title>결제완료</title>${payCode }
+<title>결제완료</title>
 </head>
 <hr>
 <h2 style="margin-top: 100px; margin-bottom: 90px; font-weight: bold; text-align: center;">결제가 <h style="color: red;">완료</h>되었습니다.</h2>
