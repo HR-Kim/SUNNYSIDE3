@@ -49,18 +49,21 @@
 					</div>
 					<div class="col-xl-4 col-lg-5">
 						<div class="user-panel">
-   							<!-- 로그인 하면 아이디 보임 -->
+						
+   							<!-- 로그인 시 헤더 모습 -->
 							<c:choose>
 								<c:when test="${not empty user.userId}">
 									<!-- 님 환영합니다. -->
 									${user.userName} <spring:message code="message.header.welcome"/>
+									<li><a href="/sunnyside/login/logout.do"><spring:message code="message.header.logout"/></a></li>
+									<li><a href="/sunnyside/userpage/do_userpage.do"><spring:message code="message.header.userpage"/></a></li>
 								</c:when>
-								<c:otherwise>
+								<c:otherwise> <!-- 로그아웃 시 헤더 모습 -->
 									<div class="up-item">
 										<div class="user-panel">
 											<div class="up-item">
 												<i class="flaticon-profile"></i>
-												<a href="#">Sign</a> In or <a href="#">Create Account</a>
+												<a href="/sunnyside/login/login_view.do"><spring:message code="message.login.login"/></a> / <a href="/sunnyside/login/join_view.do"><spring:message code="message.login.join"/></a>
 											</div>							
 										</div>
 									</div>
@@ -148,21 +151,6 @@
 								<li><a href="/sunnyside/qna/do_retrieve.do"><spring:message code="message.header.questions"/></a></li>								
 							</ul>
 						</li>
-					
-	  					<!-- 로그인한 상태면 로그아웃 출력 -->
-						<c:choose>
-	  						<c:when test="${not empty user.userId}">
-								<li><a href="/sunnyside/login/logout.do"><spring:message code="message.header.logout"/></a></li>
-								<!-- (임시)회원정보수정 -->
-								<li><a href="/sunnyside/userpage/do_userpage.do"><spring:message code="message.header.userpage"/></a></li>
-							</c:when>
-							
-							<c:otherwise>
-								<!-- 로그인 -->
-								<li><a href="/sunnyside/login/login_view.do"><spring:message code="message.header.login"/></a></li>
-							</c:otherwise>
-							
-						</c:choose>
 					
 						<!-- 관리자로 로그인한 상태면 지점, 상영관 EDIT 출력 -->
 						<c:choose>
