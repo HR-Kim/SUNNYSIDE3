@@ -17,7 +17,6 @@
 <!-- 결제완료 테이블에 저장 -->
 	<insert id="do_payComplete" parameterType="Cart">
 	INSERT INTO PAY_HISTORY  (
-			    cart_id,
 			    user_id,
 			    str_count,
 			    product_id,	
@@ -25,7 +24,6 @@
 			    total_cost,
     			pay_dt   
 			) VALUES (
-			    #{cartId,jdbcType=VARCHAR},
 			    #{userId,jdbcType=VARCHAR},
 			    #{strCount,jdbcType=VARCHAR},
 			    #{productId,jdbcType=VARCHAR},
@@ -39,7 +37,6 @@
 	<select id="do_payCompleteList" parameterType="Cart" resultType="Cart" >
 	 	SELECT
 	 		a.pay_code as payCode,
-		    a.cart_id as cartId,
 		    c.product_nm as productNm,
 		    b.user_id as userId,
 		    a.str_count as strCount,

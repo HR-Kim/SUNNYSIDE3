@@ -48,7 +48,7 @@
 				    </c:otherwise>			       
 	           	</c:choose>
            </table>
-             <button type="button" class="btn btn-default" id="goHomeBtn" name="goHomeBtn" style="margin-left: 180px; margin-bottom: 50px;">
+             <button type="button" class="btn btn-default" id="goHomeBtn" name="goHomeBtn" style="margin-left: 180px; margin-bottom: 50px; margin-top: 10px;">
 				<span class="glyphicon glyphicon-home"></span> 메인으로 돌아가기
 			 </button>
         </div>
