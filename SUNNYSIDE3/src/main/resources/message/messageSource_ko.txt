@@ -1,96 +1,94 @@
-#common				
-message.common.confirm=확인	
-message.common.undo=취소	
-				
-				
+#common
+message.common.confirm=확인
+message.common.undo=취소
+
+
 #message
 message.msg.id_find=아이디 : 
 message.msg.pw_find=임시 비밀번호가 회원님의 이메일로 전송 되었습니다.
 message.msg.id_not_found=아이디가 존재하지 않습니다.
 
-				
-				
-#login				
-message.login.login=로그인	
+
+#login
+message.login.login=로그인
 message.login.join=회원가입
-message.login.add_info=추가정보 입력 (필수)	
-message.login.id_save=아이디 저장	
-message.login.user_id=회원ID	
+message.login.add_info=추가정보 입력 (필수)
+message.login.id_save=아이디 저장
+message.login.user_id=회원ID
 message.login.passwd=비밀번호
 message.login.passwd_confirm=비밀번호 확인
-message.login.user_name=이름	
-message.login.email=이메일	
-message.login.user_level=등급	
-message.login.point=포인트	
-message.login.cellphone=휴대폰번호	
-message.login.birth=생년월일	
+message.login.user_name=이름
+message.login.email=이메일
+message.login.user_level=등급
+message.login.point=포인트
+message.login.cellphone=휴대폰번호
+message.login.birth=생년월일
 message.login.reg_dt=등록일
-message.login.id_save=아이디저장	
-message.login.id_find=아이디 찾기	
+message.login.id_save=아이디저장
+message.login.id_find=아이디 찾기
 message.login.pw_find=비밀번호 찾기
 message.login.duplicate_check=중복체크
-message.login.id_validation=ID를 입력해주세요.	
-message.login.pw_validation=비밀번호를 입력해주세요.	
+message.login.id_validation=ID를 입력해주세요.
+message.login.pw_validation=비밀번호를 입력해주세요.
 
-				
-				
-#usermypage	
-message.usermypage.my_cinema=마이시네마	
-message.usermypage.level=회원등급	
-message.usermypage.purchase_history=총 구매내역	
-message.usermypage.my_coupon=나의 쿠폰함	
-message.usermypage.movie_history=무비 히스토리	
+
+
+#usermypage
+message.usermypage.my_cinema=마이시네마
+message.usermypage.level=회원등급
+message.usermypage.purchase_history=총 구매내역
+message.usermypage.my_coupon=나의 쿠폰함
+message.usermypage.movie_history=무비 히스토리
 message.usermypage.QNA=나의 문의내역
-message.usermypage.modi_info=님 회원정보수정		
-message.usermypage.info_change=회원정보변경	
-message.usermypage.withdrawal=회원탈퇴	
-				
-				
-#table				
-message.table.screen_id=편성ID	
-message.table.movie_id=영화ID	
-message.table.start_time=상영시작시간	
-message.table.end_time=상영종료시간	
-message.table.screen_dt=상영날짜	
-message.table.adult_cost=성인	
-message.table.student_cost=학생	
-message.table.episode=회차	
-message.table.rest_seat=잔여좌석	
-message.table.total_seat=총좌석	
-message.table.room_nm=상영관명	
-message.table.branch_nm=지점명	
-message.table.branch_id=지점ID	
-message.table.room_id=상영관ID	
-message.table.user_id=회원ID	
-				
-				
-#reservation				
-message.reservation.ticket_code=예매코드	
-message.reservation.seat_num=좌석번호	
-message.reservation.adult_cnt=성인유무	
-message.reservation.pay_state=결제상태	
-message.reservation.cost=가격	
-message.reservation.pay_dt=결제일	
-message.reservation.ticket_dt=예매일	
-				
-				
-#movie				
-message.movie.movie_id=영화ID	
-message.movie.kortitle=한글제목	
-message.movie.engtitle=영어제목	
-message.movie.limitage=관람연령	
-message.movie.genre=장르	
-message.movie.rel_date=개봉예정일	
-message.movie.director=감독	
-message.movie.cast=출연진	
-message.movie.running_time=상영시간 	
-message.movie.plot=줄거리	
-message.movie.trailer=예고편	
-message.movie.film_type=타입	
-message.movie.poster=포스터	
-message.movie.expert_rate=전문가 평점	
-message.movie.visitor_rate=관람객 평점	
-message.movie.screen_state=상영상태	
+message.usermypage.info_change=회원정보변경
+message.usermypage.withdrawal=회원탈퇴
+
+
+#table
+message.table.screen_id=편성ID
+message.table.movie_id=영화ID
+message.table.start_time=상영시작시간
+message.table.end_time=상영종료시간
+message.table.screen_dt=상영날짜
+message.table.adult_cost=성인
+message.table.student_cost=학생
+message.table.episode=회차
+message.table.rest_seat=잔여좌석
+message.table.total_seat=총좌석
+message.table.room_nm=상영관명
+message.table.branch_nm=지점명
+message.table.branch_id=지점ID
+message.table.room_id=상영관ID
+message.table.user_id=회원ID
+
+
+#reservation
+message.reservation.ticket_code=예매코드
+message.reservation.seat_num=좌석번호
+message.reservation.adult_cnt=성인유무
+message.reservation.pay_state=결제상태
+message.reservation.cost=가격
+message.reservation.pay_dt=결제일
+message.reservation.ticket_dt=예매일
+
+
+#movie
+message.movie.movie_id=영화ID
+message.movie.kortitle=한글제목
+message.movie.engtitle=영어제목
+message.movie.limitage=관람연령
+message.movie.genre=장르
+message.movie.rel_date=개봉예정일
+message.movie.director=감독
+message.movie.cast=출연진
+message.movie.running_time=상영시간 
+message.movie.plot=줄거리
+message.movie.trailer=예고편
+message.movie.film_type=타입
+message.movie.poster=포스터
+message.movie.expert_rate=전문가 평점
+message.movie.visitor_rate=관람객 평점
+message.movie.screen_state=상영상태
 message.movie.ticketing=예매하기
 message.movie.detail=상세보기
 message.movie.boxoffice=박스오피스
@@ -101,68 +99,67 @@ message.movie.detail_page=영화 상세보기
 message.movie.rate=평점
 message.movie.release_date=개봉일
 
+#Review
+message.review.user_id=회원ID
+message.review.contents=내용
+message.review.reg_dt=등록일
 
-				
-#Review				
-message.review.user_id=회원ID	
-message.review.contents=내용	
-message.review.reg_dt=등록일	
-				
-				
-#phototicket				
-message.store.ticket_code=예매코드	
-message.store.reg_dt=등록일	
-				
-				
-#product				
-message.store.product_id=상품ID	
-message.store.product_nm=상품명	
-message.store.pruduct_info=상품정보	
-message.store.category=분류	
-message.store.product_cost=상품가격	
-message.store.cart_id=장바구니코드	
-message.store.count=수량	
-message.store.pay_code=상품결제코드	
-message.store.pay_dt=결제일	
-	
-				
-#store				
-message.store.user_id=회원ID	
-message.store.ext=확장자명	
-message.store.org_file_nm=원본파일명	
-message.store.save_file_nm=저장파일명	
-message.store.img_size=용량	
-				
-				
-#notice_list				
-message.schedule.notice=공지	
-message.schedule.notice_list=번호	
-message.schedule.branch_id=영화관	
-message.schedule.title=제목	
-message.schedule.reg_dt=등록일	
-	
-				
-#notice_list				
-message.schedule.consulting_list=일대일 상담	
-message.schedule.qna_list=문의내역	
-message.schedule.title=제목	
-message.schedule.contents=내용	
-message.schedule.reg_dt=문의날짜	
-message.schedule.status=답변상태	
-	
-				
-#qna_list				
-message.schedule.search=검색	
-message.schedule.num=번호	
-message.schedule.title=제목	
-message.schedule.reg_dt=등록일	
-message.schedule.status=처리상태	
 
+#phototicket
+message.store.ticket_code=예매코드
+message.store.reg_dt=등록일
+
+
+#product
+message.store.product_id=상품ID
+message.store.product_nm=상품명
+message.store.pruduct_info=상품정보
+message.store.category=분류
+message.store.product_cost=상품가격
+message.store.cart_id=장바구니코드
+message.store.count=수량
+message.store.pay_code=상품결제코드
+message.store.pay_dt=결제일
+
+
+#store
+message.store.user_id=회원ID
+message.store.ext=확장자명
+message.store.org_file_nm=원본파일명
+message.store.save_file_nm=저장파일명
+message.store.img_size=용량
+
+
+#notice_list
+message.schedule.notice=공지
+message.schedule.notice_list=번호
+message.schedule.branch_id=영화관
+message.schedule.title=제목
+message.schedule.reg_dt=등록일
+
+
+#notice_list
+message.schedule.consulting_list=일대일 상담
+message.schedule.qna_list=문의내역
+message.schedule.title=제목
+message.schedule.contents=내용
+message.schedule.reg_dt=문의날짜
+message.schedule.status=답변상태
+
+
+#qna_list
+message.schedule.search=검색
+message.schedule.num=번호
+message.schedule.title=제목
+message.schedule.reg_dt=등록일
+message.schedule.status=처리상태
 
 #header
 message.header.home=홈
 message.header.movie=영화
 message.header.theaterbranch=영화관
+message.header.theaterhongdae=홍대점
+message.header.theaterkangnam=강남점
 message.header.boxoffice=박스오피스
 message.header.planed=개봉예정
 message.header.screening=상영중
@@ -184,13 +181,14 @@ message.header.notice=공지사항
 message.header.questions=1:1문의
 
 
+
 #main
 message.main.banner_edit=베너수정
 message.main.notice=공지사항
 message.main.store=지점명
 message.main.regdt=작성일
 message.main.title=제목
-message.main.customer=고객센터	
+message.main.customer=고객센터
 message.main.questions=1:1문의
 
 
@@ -207,4 +205,3 @@ message.footer.master_num=사업자 등록번호
 message.button.save=등록
 message.button.edit=수정
 message.button.delete=삭제
-

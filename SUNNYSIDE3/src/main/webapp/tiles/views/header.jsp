@@ -117,12 +117,12 @@
 						</li>	
 						<li>
 							<!-- 영화관 -->
-							<a href="/sunnyside/theater/hongdae_info.do"><spring:message code="message.header.movie"/></a>
+							<a href="/sunnyside/theater/hongdae_info.do"><spring:message code="message.header.theaterbranch"/></a>
 							<ul class="sub-menu">
 								<!-- 홍대점 -->
-								<li><a href="/sunnyside/theater/hongdae_info.do"><spring:message code="message.header.boxoffice"/></a></li>
+								<li><a href="/sunnyside/theater/hongdae_info.do"><spring:message code="message.header.theaterhongdae"/></a></li>
 								<!-- 강남점 -->
-								<li><a href="/sunnyside/theater/kangnam_info.do"><spring:message code="message.header.screening"/></a></li>
+								<li><a href="/sunnyside/theater/kangnam_info.do"><spring:message code="message.header.theaterkangnam"/></a></li>
 							</ul>
 						</li>				
 						<li>
