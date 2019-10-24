@@ -186,7 +186,7 @@ $("[id^=updateBtn]").on("click",function(){
 
 	// 리스트 페이지로 이동
 	$("#btnList").on("click",function(){
-		alert("메인 페이지로 이동합니다.");
+		alert("상품목록 페이지로 이동합니다.");
 		location.href="${context}/store/do_main.do";
 	});
 

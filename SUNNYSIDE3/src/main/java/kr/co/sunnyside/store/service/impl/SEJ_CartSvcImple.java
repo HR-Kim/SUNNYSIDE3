@@ -20,6 +20,17 @@ public class SEJ_CartSvcImple implements SEJ_CartSvc {
 	private SEJ_CartDaoImpl cartDaoImpl;
 	
 	
+	/**바로 결제하기 기능*/
+	@Override
+	public int do_directPay(DTO dto) {
+		LOG.debug("==================");
+		LOG.debug("=@Service do_directPay="+dto);
+		LOG.debug("==================");
+		
+		return cartDaoImpl.do_directPay(dto);
+	}
+	
+	
 	/**결제내역 추가 */
 	@Override
 	public int do_payComplete(DTO dto) {

@@ -48,6 +48,35 @@ public class SEJ_CartCtrl {
 	private final String BEFORE_PAY_LIST_VIEW = "cart/payment";
 	private final String AFTER_PAY_LIST_VIEW = "cart/successPay";
 	
+	//-2 바로결제 후 장바구니 조회
+	@RequestMapping(value ="cart/do_payRetrieve.do",method = RequestMethod.GET)
+	public String do_payRetrieve(SEJ_CartVO inVO,Model model){
+
+		LOG.debug("1.=====================");
+		LOG.debug("1.= do_retrieve param=" + inVO);
+		LOG.debug("1.=====================");
+		
+		List<SEJ_CartVO> Cartlist = (List<SEJ_CartVO>) this.cartService.do_payRetrieve(inVO);
+		model.addAttribute("list", Cartlist);
+		
+		return BEFORE_PAY_LIST_VIEW;
+	}
+	
+	
+	
+	//-1. 바로결제하기 기능
+	@RequestMapping(value ="cart/do_directPay.do",method = RequestMethod.POST)
+	public String do_directPay(SEJ_CartVO inVO,Model model){
+		LOG.debug("1.=====================");
+		LOG.debug("1.= do_insert do_directPay param=" + inVO);
+		LOG.debug("1.=====================");
+
+		cartService.do_directPay(inVO);
+		
+		return BEFORE_PAY_LIST_VIEW;	
+	}
+	
+	
 	// 0. 결제내역 저장(추가)
 	@RequestMapping(value ="cart/do_payComplete.do", method = RequestMethod.POST)
 	@ResponseBody

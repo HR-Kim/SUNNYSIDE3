@@ -9,7 +9,6 @@
 <%
 	String userId = request.getParameter("userId"); 
 	String productId = request.getParameter("productId"); 
-
 %>
 <!DOCTYPE html>
 <html>
@@ -26,8 +25,7 @@
 </head>
 <body>
 <h3 class="h4"  style="margin-left: 400px; margin-top: 2em;">상품 상세정보</h3>
-<table style="margin-top: 150px; margin-bottom: 50px; margin-left: 350px;" >
-
+<table style="margin-top: 80px; margin-bottom: 50px; margin-left: 350px;" id="tbody" >
 	<tr>
 		<td style="display: none;" id="productId" class="productId">${vo.productId }</td>
 		<td style="display: none;" id="userId" class="userId">${user.userId }</td>
@@ -38,14 +36,14 @@
 			<img width="340" height="300" src="${vo.saveFileNm }">
 		</td>
 	<td>
-		<table border="1" style="height: 300px; width: 400px;">
+		<table style="height: 300px; width: 400px; "  class="table table-bordered" >
 			<tr align="center">
 				<td>상품명</td>
-				<td><input readonly="readonly" id="productNm" name="productNm" value="${vo.productNm }"/></td>
+				<td><input style="padding-left: 80px;" readonly="readonly" id="productNm" name="productNm" value="${vo.productNm }"/></td>
 			</tr>
 			<tr align="center">
 				<td>가격</td>
-				<td><input readonly="readonly" id="productCost" name="productCost" value="<fmt:formatNumber value="${vo.productCost }" pattern="#,###,###"/>"/>원</td>
+				<td><input style="padding-left: 100px;" readonly="readonly" id="productCost" name="productCost" value="<fmt:formatNumber value="${vo.productCost}" pattern="#,###,###원"/>"/></td>
 			</tr>
 			<tr align="center">
 				<td colspan="2">
@@ -197,6 +195,70 @@
 	    }); //--ajax  
 	 }
 
+	 //바로결제하기 버튼
+	 $("#pay").on("click",function(){
+		 //alert("pay");
+		var tbody = $('#tbody');
+        var tr = tbody.children().children();
+        var productId = tr.children('#productId').text();
+        var userId = tr.children('#userId').text();
+        
+        console.log("productId="+productId); //20191013-001-018 라고 출력
+        console.log("userId="+userId); 
+        
+		//로그인 시 이동가능 
+		if("${user.userId}"!= ""){ //로그인 되어있으면 		
+		 	if(false==confirm('바로 결제하시겠습니까?')) return;
+		 	directPay();
+			
+	     }else{// 로그인이 안되어있으면
+			alert("회원만 사용가능한 서비스입니다.\n로그인을 해주세요.");
+	    	location.href ="${context}/login/login_view.do";
+	     }		
+ 
+	 });
+	 
+	 function directPay(){
+		 console.log("productId="+$("#productId").text());
+		 console.log("userId="+$("#userId").text());
+		 console.log("count="+$("#count option:selected").val());
+	
+		//ajax
+	     $.ajax({
+	        type:"POST",
+	        url:"${context}/cart/do_directPay.do",
+	        dataType:"html",
+	           data:{
+		           "productId":$("#productId").text(),
+		           "userId":$("#userId").text(),
+		           "productCost":$("#productCost").text(),
+		           "count":$("#count option:selected").val()                       
+	       
+	          },   
+	      success: function(data){ 
+			  if(null != data && data.msgId=="1"){
+				  alert("추가되었습니다.");
+				  userId=$("#userId").text();
+				  payCode=$("#payCode").text();
+				  location.href="${context}/cart/do_payRetrieve.do?userId="+userId+"&&payCode="+payCode;
+				
+			  }else{
+				alert("추가되었습니다.");	
+				userId=$("#userId").text();
+				payCode=$("#payCode").text();
+				location.href="${context}/cart/do_payRetrieve.do?userId="+userId+"&&payCode="+payCode;
+			  }
+	     },
+	     complete:function(data){
+	  	   
+	     },
+	     error:function(xhr,status,error){
+	         alert("error:"+error);
+	     }
+	    }); //--ajax  
+	 }
+	 
+	 
 
 	$(document).ready(function(){
 		//admin일때만 작성가능

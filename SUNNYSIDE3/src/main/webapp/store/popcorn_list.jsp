@@ -23,7 +23,7 @@
 	<div class="container">
 	    <h3 class="h4">팝콘</h3>
 	    <hr>
-		    <div class="row">
+		    <div class="row" style="margin-top: 50px; margin-bottom: 50px;">
 			    <c:choose>
 			    	<c:when test="${list.size()>0 }">
 			    		<c:forEach var="vo" items="${list }">			    		
@@ -32,8 +32,8 @@
 					                <div class="product-image">					                    
 					                    <img class="pic-1" style="height: 270px" width="270px" src='<c:out value="${vo.saveFileNm }"/>'>		
 					                    <ul class="social">
-					                        <li><a href="do_selectOne.do?productId=${vo.productId }" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-					                        <li><a id="goCart" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+					                        <li><a href="do_selectOne.do?productId=${vo.productId }" data-tip="Quick View"><i class="fa fa-search" style="margin-top: 10px;"></i></a></li>
+					                        <li><a id="goCart" data-tip="Add to Cart"><i class="fa fa-shopping-cart" style="margin-top: 10px;"></i></a></li>
 					                    </ul>
 					                    <input type="hidden" id="count" name="count" value="1">
 					                    <input type="hidden" id="userId" name="userId" value="${user.userId}">

@@ -5,10 +5,13 @@ import java.util.List;
 import kr.co.sunnyside.cmn.DTO;
 
 public interface SEJ_CartSvc {
+	
+	/**바로 결제하기 기능*/
+	public int do_directPay(DTO dto);
+	
 	/**결제내역 추가 */
 	public int do_payComplete(DTO dto);
-	
-	
+
 	/**결제내역 목록 */
 	public List<?> do_payCompleteList(DTO dto);
 	

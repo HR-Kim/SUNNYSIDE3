@@ -4,7 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.sunnyside.cart">
 	<!-- 
+		 do_directPay :바로 결제하기 기능
 		 do_payComplete   : 결제완료 테이블에 저장
+		 do_payCompleteList : 결제완료 목록
 		 do_save   : 장바구니 저장
 		 do_delete : 장바구니 삭제
 		 do_deleteAll : 장바구니 전체 삭제
@@ -14,6 +16,25 @@
 	     do_countCart: 장바구니 동일한 상품 레코드 확인
 	     do_updateCountCart: 장바구니 상품수량 변경
 	   -->
+
+<!-- 바로 결제하기 기능 -->
+	<insert id="do_directPay" parameterType="Cart">
+	INSERT INTO CART (
+				pay_code,
+			    cart_id,
+			    user_id,
+			    count,
+			    product_id				    
+			) VALUES (
+			 	TO_CHAR(SYSDATE,'yyyymmdd')||'-'||to_char(SYSDATE,'HHMISS'),
+			    TO_CHAR(SYSDATE,'yyyymmdd')||'-'||to_char(CART_SEQ.NEXTVAL, 'FM000'),
+			    #{userId,jdbcType=VARCHAR},
+			    #{count,jdbcType=NUMERIC},
+			    #{productId,jdbcType=VARCHAR}
+			)		
+	</insert>	   
+	   
+	   
 <!-- 결제완료 테이블에 저장 -->
 	<insert id="do_payComplete" parameterType="Cart">
 	INSERT INTO PAY_HISTORY  (
@@ -62,7 +83,7 @@
 		    AND user_id =  #{userId,jdbcType=VARCHAR}
 		     
 	</update>
- 
+
 <!-- 주문하기창 목록 -->
 	<select id="do_payRetrieve" parameterType="Cart" resultType="Cart" >
 	 	SELECT

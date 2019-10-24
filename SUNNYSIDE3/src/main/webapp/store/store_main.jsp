@@ -36,8 +36,8 @@
 					                <div class="product-image">					                    
 					                    <img class="pic-1" style="height: 270px" width="250px" src='<c:out value="${vo.saveFileNm }"/>'>		
 					                    <ul class="social">
-					                        <li><a href="do_selectOne.do?productId=${vo.productId }" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-					                        <li><a id="goCart" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+					                        <li><a href="do_selectOne.do?productId=${vo.productId }" data-tip="Quick View"><i class="fa fa-search" style="margin-top: 10px;"></i></a></li>
+					                        <li><a id="goCart" data-tip="Add to Cart"><i class="fa fa-shopping-cart" style="margin-top: 10px;"></i></a></li>
 					                    </ul>
 					                    <input type="hidden" id="count" name="count" value="1">
 					                    <input type="hidden" id="userId" name="userId" value="${user.userId}">
@@ -70,8 +70,8 @@
 					                <div class="product-image">
 					                    <img class="pic-1" src="<c:out value="${vo.saveFileNm }"/>">		
 					                    <ul class="social">
-					                        <li><a href="do_selectOne.do?productId=${vo.productId }" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-					                        <li><a id="goCart" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+					                        <li><a href="do_selectOne.do?productId=${vo.productId }" data-tip="Quick View"><i class="fa fa-search" style="margin-top: 10px;"></i></a></li>
+					                        <li><a id="goCart" data-tip="Add to Cart"><i class="fa fa-shopping-cart" style="margin-top: 10px;"></i></a></li>
 					                    </ul>
 					                    <input type="hidden" id="count" name="count" value="1">
 					                    <input type="hidden" id="userId" name="userId" value="${user.userId}">
@@ -93,7 +93,6 @@
 <hr>
 <div class="container" style="margin-bottom: 30px;">
 	   <h3 class="h3">영화관람권</h3>
-	     <form name="ticketFrm" id="ticketFrm"  method="get">
 		    <div class="row">
 		    <a style="margin-left: 1100px; margin-bottom: 50px;" href="do_retrieve_movieticket.do" class="btn_movieticket_product"><i class="fa fa-plus"></i> 더보기</a>
 			    <c:choose>
@@ -102,10 +101,10 @@
 					        <div class="col-md-3 col-sm-6">
 					            <div class="product-grid">
 					                <div class="product-image">
-					                    <img class="pic-1" style="height: 270px" width="270px" src="<c:out value="${vo.saveFileNm }"/>">		
-					                    <ul class="social" style="width:150px;padding:0;margin:0;list-style:none;opacity:0;transform:translateY(-50%) translateX(-50%);position:absolute;top:50%;left:50%;z-index:1;transition:all .3s ease 0s">
-					                        <li><a href="do_selectOne.do?productId=${vo.productId }" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-					                        <li><a id="goCart" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+					                    <img class="pic-1" style="height: 270px" width="250px" src="<c:out value="${vo.saveFileNm }"/>">		
+					                    <ul class="social">
+					                        <li><a href="do_selectOne.do?productId=${vo.productId }" data-tip="Quick View"><i class="fa fa-search" style="margin-top: 10px;"></i></a></li>
+					                        <li><a id="goCart" data-tip="Add to Cart"><i class="fa fa-shopping-cart" style="margin-top: 10px;"></i></a></li>
 					                    </ul>
 					                     <input type="hidden" id="count" name="count" value="1">
 					                     <input type="hidden" id="userId" name="userId" value="${user.userId}">
@@ -123,7 +122,6 @@
 			        </c:when>
 			    </c:choose>
 			</div>
-		</form>
 	 </div>
 <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 <script src="${context}/resources/js/jquery-1.12.4.js"></script>
