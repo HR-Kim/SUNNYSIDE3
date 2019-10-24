@@ -3,20 +3,34 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+	.center-block {
+	  display: block;
+	  margin-left: auto;
+	  margin-right: auto;
+	}
+	.element {
+	  .center-block();
+	}
+</style>
     <meta charset="utf-8">
     <title>SUNNYSIDE</title>
     
 </head>
 <body>
 	
-	<div id="map" style="width:50%;height:600px;"></div>
+	<br/>
+	<br/>
+	<div class="center-block" id="map" style="width:50%;height:600px;"></div>
+	
+	
 	
 	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=79dc5d9ee17692f633e4726d83f25b50&libraries=services"></script>
 	<script>
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = {
-	        center: new kakao.maps.LatLng(37.4992874, 127.0310189), // 지도의 중심좌표
+	        center: new kakao.maps.LatLng(37.5565114, 126.9173146), // 지도의 중심좌표
 	        level: 3 // 지도의 확대 레벨
 	    };  
 	
@@ -27,7 +41,7 @@
 	var geocoder = new kakao.maps.services.Geocoder();
 	
 	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch('서울특별시 강남구 역삼동 735-1', function(result, status) {
+	geocoder.addressSearch('서울 마포구 서교동 447-5', function(result, status) {
 	
 	    // 정상적으로 검색이 완료됐으면 
 	     if (status === kakao.maps.services.Status.OK) {
@@ -42,7 +56,7 @@
 	
 	        // 인포윈도우로 장소에 대한 설명을 표시합니다
 	        var infowindow = new kakao.maps.InfoWindow({
-	            content: '<div style="width:150px;text-align:center;padding:3px 0;">강남점</div>'
+	            content: '<div style="width:150px;text-align:center;padding:3px 0;">홍대점</div>'
 	        });
 	        infowindow.open(map, marker);
 	

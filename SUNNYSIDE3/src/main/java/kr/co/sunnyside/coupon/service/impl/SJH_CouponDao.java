@@ -114,7 +114,7 @@ public class SJH_CouponDao implements WorkDiv {
 		LOG.debug("=02.statement="+statement);
 		LOG.debug("========================");
 		
-		List<SJH_CouponVO> outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
+		List<SJH_CouponVO> outVO = this.sqlSessionTemplate.selectList(statement, inVO);
 		
 		LOG.debug("========================");
 		LOG.debug("03.outVO="+outVO);

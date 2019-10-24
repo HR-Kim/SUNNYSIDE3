@@ -81,6 +81,15 @@ private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	
 	@Test
 	@Ignore
+	public void do_retrieve() {
+		SJH_CouponVO coupon01 = new SJH_CouponVO();
+		coupon01.setUserId("회원아이디01");
+		couponDao.do_retrieve(coupon01);
+	}
+	
+	
+	@Test
+	@Ignore
 	public void do_selectOne() {
 		SJH_CouponVO coupon01 = new SJH_CouponVO();
 		coupon01.setUserId("회원아이디01");
