@@ -81,8 +81,8 @@ public class SEJ_CartCtrl {
 			LOG.debug("1.= do_payCompleteList param=" + inVO);
 			LOG.debug("1.=====================");
 			
-			List<SEJ_CartVO> list = (List<SEJ_CartVO>) this.cartService.do_payCompleteList(inVO);
-			model.addAttribute("list", list);
+			List<SEJ_CartVO> completeList = (List<SEJ_CartVO>) this.cartService.do_payCompleteList(inVO);
+			model.addAttribute("list", completeList);
 			
 			return AFTER_PAY_LIST_VIEW;
 		}

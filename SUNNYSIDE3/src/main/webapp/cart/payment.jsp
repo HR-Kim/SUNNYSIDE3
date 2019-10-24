@@ -179,11 +179,13 @@
 			  if(null != data && data.msgId=="1"){
 				  alert("결제가 완료되었습니다.");
 				  var userId = $("#userId").text();
+				  var payCode = $("#payCode").text();
 				  location.href="${context}/cart/do_payCompleteList.do?userId="+userId+"&&payCode="+payCode;
 				
 			  }else{
 				alert("결제가 완료되었습니다.");	
 				  var userId = $("#userId").text();
+				  var payCode = $("#payCode").text();
 				  location.href="${context}/cart/do_payCompleteList.do?userId="+userId+"&&payCode="+payCode;
 			  }
 	     },
