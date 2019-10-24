@@ -3,7 +3,8 @@ package kr.co.sunnyside.store.service;
 import kr.co.sunnyside.cmn.DTO;
 
 public class SEJ_StroreVO extends DTO {
-	
+	/**장바구니ID */ 
+	private String cartId;	
 	/**상품ID 20190927-분류명-001 */ 
 	private String productId;
 	/**상품명 */
@@ -25,11 +26,28 @@ public class SEJ_StroreVO extends DTO {
 	public SEJ_StroreVO() {}
 
 
-	@Override
-	public String toString() {
-		return "SEJ_StroreVO [productId=" + productId + ", productNm=" + productNm + ", productInfo=" + productInfo
-				+ ", category=" + category + ", productCost=" + productCost + ", orgFileNm=" + orgFileNm
-				+ ", saveFileNm=" + saveFileNm + ", ext=" + ext + ", toString()=" + super.toString() + "]";
+	public SEJ_StroreVO(String cartId, String productId, String productNm, String productInfo, int category,
+			int productCost, String orgFileNm, String saveFileNm, String ext) {
+		super();
+		this.cartId = cartId;
+		this.productId = productId;
+		this.productNm = productNm;
+		this.productInfo = productInfo;
+		this.category = category;
+		this.productCost = productCost;
+		this.orgFileNm = orgFileNm;
+		this.saveFileNm = saveFileNm;
+		this.ext = ext;
+	}
+
+
+	public String getCartId() {
+		return cartId;
+	}
+
+
+	public void setCartId(String cartId) {
+		this.cartId = cartId;
 	}
 
 
@@ -113,18 +131,16 @@ public class SEJ_StroreVO extends DTO {
 	}
 
 
-	public SEJ_StroreVO(String productId, String productNm, String productInfo, int category, int productCost,
-			String orgFileNm, String saveFileNm, String ext) {
-		super();
-		this.productId = productId;
-		this.productNm = productNm;
-		this.productInfo = productInfo;
-		this.category = category;
-		this.productCost = productCost;
-		this.orgFileNm = orgFileNm;
-		this.saveFileNm = saveFileNm;
-		this.ext = ext;
+	@Override
+	public String toString() {
+		return "SEJ_StroreVO [cartId=" + cartId + ", productId=" + productId + ", productNm=" + productNm
+				+ ", productInfo=" + productInfo + ", category=" + category + ", productCost=" + productCost
+				+ ", orgFileNm=" + orgFileNm + ", saveFileNm=" + saveFileNm + ", ext=" + ext + ", toString()="
+				+ super.toString() + "]";
 	}
+
+
+	
 
 
 	

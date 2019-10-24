@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.sunnyside.cart">
 	<!-- 
+		 do_directPayRetrieve:바로결제시 주문하기창 목록 
 		 do_directPay :바로 결제하기 기능
 		 do_payComplete   : 결제완료 테이블에 저장
 		 do_payCompleteList : 결제완료 목록
@@ -17,6 +18,27 @@
 	     do_updateCountCart: 장바구니 상품수량 변경
 	   -->
 
+<!-- 바로결제시 주문하기창 목록 -->
+	<select id="do_directPayRetrieve" parameterType="Cart" resultType="Cart" >
+	 	SELECT
+	 		a.pay_code as payCode,
+		    c.product_nm as productNm,
+		    b.user_id as userId,
+		    a.count,
+		    c.product_cost as  oriProductCost,
+		    c.product_cost*a.count as productCost,
+		    c.product_cost*a.count as totalCost,
+		    c.product_id as productId,
+		    c.save_file_nm as saveFileNm
+		FROM
+		    cart a, user_info b, product c 
+		WHERE
+		    b.user_id = a.user_id
+		    AND c.product_id = a.product_id
+		    AND a.user_id = #{userId,jdbcType=VARCHAR}
+		    AND a.cart_id = #{cartId,jdbcType=VARCHAR}
+	</select>
+
 <!-- 바로 결제하기 기능 -->
 	<insert id="do_directPay" parameterType="Cart">
 	INSERT INTO CART (
@@ -27,7 +49,7 @@
 			    product_id				    
 			) VALUES (
 			 	TO_CHAR(SYSDATE,'yyyymmdd')||'-'||to_char(SYSDATE,'HHMISS'),
-			    TO_CHAR(SYSDATE,'yyyymmdd')||'-'||to_char(CART_SEQ.NEXTVAL, 'FM000'),
+			    #{cartId,jdbcType=VARCHAR},
 			    #{userId,jdbcType=VARCHAR},
 			    #{count,jdbcType=NUMERIC},
 			    #{productId,jdbcType=VARCHAR}

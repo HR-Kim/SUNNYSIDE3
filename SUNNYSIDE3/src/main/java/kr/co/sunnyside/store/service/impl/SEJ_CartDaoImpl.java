@@ -22,6 +22,26 @@ public class SEJ_CartDaoImpl implements WorkDiv{
 	
 	private final String NAMESPACE = "kr.co.sunnyside.cart"; 
 	
+	/**바로 결제하기 후 주문하기창 목록*/
+	public List<?> do_directPayRetrieve(DTO dto) {
+		String statement = NAMESPACE+".do_directPayRetrieve";
+		SEJ_CartVO store = (SEJ_CartVO) dto;
+		LOG.debug("===================================");
+		LOG.debug("=1. param="+store);
+		LOG.debug("===================================");
+		LOG.debug("===================================");
+		LOG.debug("=2. statement="+statement);
+		LOG.debug("===================================");
+		
+		List<SEJ_CartVO> list= this.sqlSessionTemplate.selectList(statement,store);
+		LOG.debug("===================================");
+		LOG.debug("=3. flag="+list);
+		LOG.debug("===================================");
+		
+		return list;
+	}
+	
+	
 	/**바로 결제하기 기능*/
 	public int do_directPay(DTO dto) {
 		String statement = NAMESPACE+".do_directPay";

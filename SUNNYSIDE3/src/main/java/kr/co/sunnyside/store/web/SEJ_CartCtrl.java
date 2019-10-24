@@ -49,15 +49,15 @@ public class SEJ_CartCtrl {
 	private final String AFTER_PAY_LIST_VIEW = "cart/successPay";
 	
 	//-2 바로결제 후 장바구니 조회
-	@RequestMapping(value ="cart/do_payRetrieve.do",method = RequestMethod.GET)
+	@RequestMapping(value ="cart/do_directPayRetrieve.do",method = RequestMethod.GET)
 	public String do_payRetrieve(SEJ_CartVO inVO,Model model){
 
 		LOG.debug("1.=====================");
 		LOG.debug("1.= do_retrieve param=" + inVO);
 		LOG.debug("1.=====================");
 		
-		List<SEJ_CartVO> Cartlist = (List<SEJ_CartVO>) this.cartService.do_payRetrieve(inVO);
-		model.addAttribute("list", Cartlist);
+		List<SEJ_CartVO> directCartlist = (List<SEJ_CartVO>) this.cartService.do_directPayRetrieve(inVO);
+		model.addAttribute("list", directCartlist);
 		
 		return BEFORE_PAY_LIST_VIEW;
 	}

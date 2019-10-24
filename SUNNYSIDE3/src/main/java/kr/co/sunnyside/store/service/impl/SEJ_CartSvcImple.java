@@ -19,6 +19,15 @@ public class SEJ_CartSvcImple implements SEJ_CartSvc {
 	@Autowired
 	private SEJ_CartDaoImpl cartDaoImpl;
 	
+	/**바로 결제하기 후 주문하기창 목록 */
+	@Override
+	public List<?> do_directPayRetrieve(DTO dto) {
+		LOG.debug("==================");
+		LOG.debug("=@Service do_directPayRetrieve="+dto);
+		LOG.debug("==================");
+		return cartDaoImpl.do_directPayRetrieve(dto);
+	}
+
 	
 	/**바로 결제하기 기능*/
 	@Override
@@ -149,6 +158,8 @@ public class SEJ_CartSvcImple implements SEJ_CartSvc {
 		LOG.debug("==================");
 		return cartDaoImpl.do_payRetrieve(dto);
 	}
+
+
 
 
 

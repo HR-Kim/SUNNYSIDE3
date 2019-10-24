@@ -48,10 +48,10 @@ public class SEJ_StroreDaoTest {
 		
 		//LOG.debug(fileId.length()+"");// 번호 등록될 때 아이디랑 뒤에 번호 아무거나 붙여져서 나온다
 		list = Arrays.asList(
-				new SEJ_StroreVO("20191015-001-021","고소팝콘(L)","옥수수 본연의 맛을 즐길 수 있는 짭짜름한 클래식 고소팝콘!",001,5000,"plainPopcorn.jpg","plainPopcorn.jpg","jpg"),
-				new SEJ_StroreVO("20191010-001-001","달콤팝콘(L)","달콤한 카라멜 향이 가득한 달콤팝콘을 즐겨보세요!",001,6000,"caramelPopcorn.jpg","caramelPopcorn.jpg","jpg"),
-				new SEJ_StroreVO("20191010-001-002","더블치즈팝콘(L)","치즈매니아들이라면 놓칠 수 없는 바로 그 팝콘!",001,6000,"doublecheesePop.jpg","doublecheesePop.jpg","jpg"),
-				new SEJ_StroreVO("20191010-001-003","바질어니언팝콘(L)","수많은 매니아를 보유한 바로 그 팝콘! 중독성 200%",001,6000,"onionPop.jpg","onionPop.jpg","jpg")
+//				new SEJ_StroreVO("20191015-001-021","고소팝콘(L)","옥수수 본연의 맛을 즐길 수 있는 짭짜름한 클래식 고소팝콘!",001,5000,"plainPopcorn.jpg","plainPopcorn.jpg","jpg"),
+//				new SEJ_StroreVO("20191010-001-001","달콤팝콘(L)","달콤한 카라멜 향이 가득한 달콤팝콘을 즐겨보세요!",001,6000,"caramelPopcorn.jpg","caramelPopcorn.jpg","jpg"),
+//				new SEJ_StroreVO("20191010-001-002","더블치즈팝콘(L)","치즈매니아들이라면 놓칠 수 없는 바로 그 팝콘!",001,6000,"doublecheesePop.jpg","doublecheesePop.jpg","jpg"),
+//				new SEJ_StroreVO("20191010-001-003","바질어니언팝콘(L)","수많은 매니아를 보유한 바로 그 팝콘! 중독성 200%",001,6000,"onionPop.jpg","onionPop.jpg","jpg")
 		
 				);
 	}

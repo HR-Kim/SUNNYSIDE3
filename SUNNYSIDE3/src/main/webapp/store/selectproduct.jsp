@@ -30,6 +30,7 @@
 		<td style="display: none;" id="productId" class="productId">${vo.productId }</td>
 		<td style="display: none;" id="userId" class="userId">${user.userId }</td>
 		<td style="display: none;" id="category" class="category" >${vo.category }</td>
+		<td style="display: none;" id="cartId" class="cartId" >${vo.cartId }</td>
 		<td style="display: none;" id="orgFileNm" class="orgFileNm" >${vo.orgFileNm }</td>
 		<td style="display: none;" id="saveFileNm" class="saveFileNm" >${vo.saveFileNm }</td>		
 		<td>
@@ -196,16 +197,7 @@
 	 }
 
 	 //바로결제하기 버튼
-	 $("#pay").on("click",function(){
-		 //alert("pay");
-		var tbody = $('#tbody');
-        var tr = tbody.children().children();
-        var productId = tr.children('#productId').text();
-        var userId = tr.children('#userId').text();
-        
-        console.log("productId="+productId); //20191013-001-018 라고 출력
-        console.log("userId="+userId); 
-        
+	 $("#pay").on("click",function(){        
 		//로그인 시 이동가능 
 		if("${user.userId}"!= ""){ //로그인 되어있으면 		
 		 	if(false==confirm('바로 결제하시겠습니까?')) return;
@@ -221,6 +213,7 @@
 	 function directPay(){
 		 console.log("productId="+$("#productId").text());
 		 console.log("userId="+$("#userId").text());
+		 console.log("cartId="+$("#cartId").text());
 		 console.log("count="+$("#count option:selected").val());
 	
 		//ajax
@@ -229,24 +222,23 @@
 	        url:"${context}/cart/do_directPay.do",
 	        dataType:"html",
 	           data:{
-		           "productId":$("#productId").text(),
+		           "cartId":$("#cartId").text(),
 		           "userId":$("#userId").text(),
-		           "productCost":$("#productCost").text(),
-		           "count":$("#count option:selected").val()                       
-	       
+		           "count":$("#count option:selected").val(),  
+		           "productId":$("#productId").text()                  
 	          },   
 	      success: function(data){ 
 			  if(null != data && data.msgId=="1"){
 				  alert("추가되었습니다.");
 				  userId=$("#userId").text();
-				  payCode=$("#payCode").text();
-				  location.href="${context}/cart/do_payRetrieve.do?userId="+userId+"&&payCode="+payCode;
+				  cartId=$("#cartId").text();
+				  location.href="${context}/cart/do_directPayRetrieve.do?userId="+userId+"&&cartId="+cartId;
 				
 			  }else{
 				alert("추가되었습니다.");	
 				userId=$("#userId").text();
-				payCode=$("#payCode").text();
-				location.href="${context}/cart/do_payRetrieve.do?userId="+userId+"&&payCode="+payCode;
+				cartId=$("#cartId").text();
+				location.href="${context}/cart/do_directPayRetrieve.do?userId="+userId+"&&cartId="+cartId;
 			  }
 	     },
 	     complete:function(data){

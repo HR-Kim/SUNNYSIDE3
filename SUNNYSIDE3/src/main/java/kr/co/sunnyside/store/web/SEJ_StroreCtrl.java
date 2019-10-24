@@ -85,6 +85,7 @@ public class SEJ_StroreCtrl {
 
 		// 입력한 것 꺼내기
 		String productId = StringUtil.nvl(mReg.getParameter("productId"));
+		String cartId = StringUtil.nvl(mReg.getParameter("cartId"));
 		String productNm = StringUtil.nvl(mReg.getParameter("productNm"));
 		String productInfo = StringUtil.nvl(mReg.getParameter("productInfo"));
 		String category = mReg.getParameter("category");
@@ -92,6 +93,7 @@ public class SEJ_StroreCtrl {
 
 		LOG.debug("======================");
 		LOG.debug("=@Controller productId=" + productId);
+		LOG.debug("=@Controller cartId=" + cartId);
 		LOG.debug("=@Controller productNm=" + productNm);
 		LOG.debug("=@Controller productInfo=" + productInfo);
 		LOG.debug("=@Controller category=" + category);
