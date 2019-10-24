@@ -14,14 +14,16 @@ public class KYMNoticeVO extends DTO {
 	private String modDt;      //수정일
 	private String regDt;      //등록일
 	private String branchSNm;  //지점명
+	private String fileId;
 	
 	public KYMNoticeVO() {}
 
 	@Override
 	public String toString() {
-		return "KYMCenterVO [noticeId=" + noticeId + ", title=" + title + ", orgFileNm=" + orgFileNm + ", saveFileNm="
+		return "KYMNoticeVO [noticeId=" + noticeId + ", title=" + title + ", orgFileNm=" + orgFileNm + ", saveFileNm="
 				+ saveFileNm + ", ext=" + ext + ", contents=" + contents + ", writerId=" + writerId + ", modDt=" + modDt
-				+ ", regDt=" + regDt + ", branchSNm=" + branchSNm + ", toString()=" + super.toString() + "]";
+				+ ", regDt=" + regDt + ", branchSNm=" + branchSNm + ", fileId=" + fileId + ", toString()="
+				+ super.toString() + "]";
 	}
 
 	public String getNoticeId() {
@@ -104,8 +106,16 @@ public class KYMNoticeVO extends DTO {
 		this.branchSNm = branchSNm;
 	}
 
+	public String getFileId() {
+		return fileId;
+	}
+
+	public void setFileId(String fileId) {
+		this.fileId = fileId;
+	}
+
 	public KYMNoticeVO(String noticeId, String title, String orgFileNm, String saveFileNm, String ext, String contents,
-			String writerId, String modDt, String regDt, String branchSNm) {
+			String writerId, String modDt, String regDt, String branchSNm, String fileId) {
 		super();
 		this.noticeId = noticeId;
 		this.title = title;
@@ -117,6 +127,7 @@ public class KYMNoticeVO extends DTO {
 		this.modDt = modDt;
 		this.regDt = regDt;
 		this.branchSNm = branchSNm;
+		this.fileId = fileId;
 	}
 
 	@Override
@@ -126,6 +137,7 @@ public class KYMNoticeVO extends DTO {
 		result = prime * result + ((branchSNm == null) ? 0 : branchSNm.hashCode());
 		result = prime * result + ((contents == null) ? 0 : contents.hashCode());
 		result = prime * result + ((ext == null) ? 0 : ext.hashCode());
+		result = prime * result + ((fileId == null) ? 0 : fileId.hashCode());
 		result = prime * result + ((modDt == null) ? 0 : modDt.hashCode());
 		result = prime * result + ((noticeId == null) ? 0 : noticeId.hashCode());
 		result = prime * result + ((orgFileNm == null) ? 0 : orgFileNm.hashCode());
@@ -159,6 +171,11 @@ public class KYMNoticeVO extends DTO {
 			if (other.ext != null)
 				return false;
 		} else if (!ext.equals(other.ext))
+			return false;
+		if (fileId == null) {
+			if (other.fileId != null)
+				return false;
+		} else if (!fileId.equals(other.fileId))
 			return false;
 		if (modDt == null) {
 			if (other.modDt != null)

@@ -35,7 +35,8 @@
 			B.MOD_DT as modDt,
 			B.REG_DT as regDt,
 			B.rnum as num,
-			B.BRANCH_NM as branchSNm
+			B.BRANCH_NM as branchSNm,
+			NVL(B.FILE_ID,'0')  as fileId
 	  	FROM                                                           
 	  	( 	SELECT ROWNUM AS rnum, A.*
 	  		FROM                                                       
@@ -77,7 +78,8 @@
 			WRITER_ID as writerId,
 			BRANCH_NM as branchSNm,
 			MOD_DT as modDt,
-			REG_DT as regDt
+			REG_DT as regDt,
+			FILE_ID as fileId
 		FROM notice
 		WHERE NOTICE_ID LIKE '%' || #{searchWord} || '%'
 		ORDER BY NOTICE_ID ASC
@@ -95,7 +97,8 @@
 			WRITER_ID as writerId,
 			MOD_DT as modDt,
 			REG_DT as regDt,
-			BRANCH_NM as branchSNm
+			BRANCH_NM as branchSNm,
+			FILE_ID as fileId
 		FROM notice
 		WHERE notice_id = #{noticeId,jdbcType=VARCHAR}
 	</select>
@@ -110,6 +113,7 @@
 			, contents = #{contents,jdbcType=VARCHAR}
 			, writer_id = #{writerId,jdbcType=VARCHAR}
 			, BRANCH_NM = #{branchSNm,jdbcType=VARCHAR}
+			, FILE_ID = #{fileId,jdbcType=VARCHAR}
 			, MOD_DT = SYSDATE
 			, REG_DT = SYSDATE
 		WHERE notice_id = #{noticeId,jdbcType=VARCHAR}
@@ -125,6 +129,7 @@
 			CONTENTS,
 			WRITER_ID,
 			BRANCH_NM,
+			FILE_ID,
 			MOD_DT,
 			REG_DT
 		) VALUES (
@@ -135,6 +140,7 @@
 			#{contents,jdbcType=VARCHAR},
 			#{writerId,jdbcType=VARCHAR},
 			#{branchSNm,jdbcType=VARCHAR},
+			#{fileId,jdbcType=VARCHAR},
 			SYSDATE,
 			SYSDATE
 		)

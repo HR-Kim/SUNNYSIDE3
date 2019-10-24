@@ -21,7 +21,7 @@ public class FileDaoImpl implements WorkDiv {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	//kr.co.ehr.file
-	private final String NAMESPACE = "kr.co.sunnside.file";
+	private final String NAMESPACE = "kr.co.sunnyside.file";
 	
 	/**
 	 * file_count

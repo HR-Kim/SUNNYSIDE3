@@ -119,7 +119,12 @@
 									<td class="text-center" style="display:none;"><c:out value="${vo.noticeId }"/></td>
 									<td class="text-center"><c:out value="${vo.num }"/></td>
 									<td class="text-center"><c:out value="${vo.branchSNm }"/></td>
-									<td class="text-left"><c:out value="${vo.title }"/></td>
+									<td class="text-left"><c:out value="${vo.title }"/>
+										<c:out value="${vo.title}"/>
+										&nbsp;<c:if test="${not empty vo.fileId and '0'!=vo.fileId}">
+												<img alt="img" src="<c:url  value='/resources/img/phototicket/file.gif'/>">
+										</c:if> 
+									</td>
 									<td class="text-center" style="font-size:0.9em;"><c:out value="${vo.regDt }"/></td>
 								</tr>
 							</c:forEach>

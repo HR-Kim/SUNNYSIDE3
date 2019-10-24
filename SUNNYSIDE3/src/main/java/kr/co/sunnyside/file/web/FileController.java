@@ -39,7 +39,8 @@ public class FileController {
 	@Autowired
 	private FileService fileService;
 	
-	private static final String VIEW_NAME   = "file/file";
+	private final String VIEW_LIST_NM = "file/file_list";
+	private final String VIEW_MNG_NM = "file/file_mng";	
 	
 	@Resource(name="downloadView")
 	private View download;
@@ -117,15 +118,6 @@ public class FileController {
 		mView.addObject("orgFileNm", orgFileNm);
 		
 		return mView;
-	}
-	
-	//http://localhost:8080/ehr/file/uploadfileview.do
-	@RequestMapping(value="file/uploadfileview.do")
-	public String uploadFileView() {
-		LOG.debug("===============================");
-		LOG.debug("=@Controller uploadFileView=");
-		LOG.debug("===============================");
-		return VIEW_NAME;
 	}
 	
 	@RequestMapping(value="file/do_retrieve.do",method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
