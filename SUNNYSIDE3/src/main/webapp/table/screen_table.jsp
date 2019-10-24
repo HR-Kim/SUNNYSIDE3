@@ -203,14 +203,19 @@
 				<input type="hidden" id="hd_movieId" value="">
 				<input type="hidden" id="hd_movieNm" value="">
 				<input type="hidden" id="hd_movieRTime" value="">
-				<input type="hidden" id="hd_searchDiv" value="">
+				<input type="hidden" id="hd_searchDiv" value="10">
 				<input type="hidden" id="hd_searchWord" value="">
+				<input type="hidden" id="hd_searchWord_second" value="">
 				<div class="row">
 					<div class="col-md-2">
 						<label>영화</label>
 						<button id="movieRetrive" class="btn btn-primary btn-xs">조회</button>
 					</div>
 					<div class="col-md-10 text-right">
+						<button id="allBtn" class="btn btn-default btn-xs">전체</button>
+						<button id="openBtn" class="btn btn-default btn-xs">개봉</button>
+						<button id="scheduledBtn" class="btn btn-default btn-xs">개봉예정</button>
+						<button id="endBtn" class="btn btn-default btn-xs">미상영</button>
 						<select id="searchDiv">
 							<option value="10">제목</option>
 						</select>
@@ -627,7 +632,7 @@
 
        			$(".movieTable-dim").css("display", "block");
           		$(".layer-MovieTable").css("display", "block");
-          		$("#hd_searchDiv").val("");		//검색구분 초기화
+          		$("#hd_searchDiv").val("10");		//검색구분 초기화
           		$("#hd_searchWord").val("");	//검색어 초기화
           		movieRerieve();
           	});
@@ -666,21 +671,27 @@
           	
           	//편성할 영화 조회
           	$("#movieRetrive").on("click", function(){
-          		$("#hd_searchDiv").val("");		//검색구분 초기화
-          		$("#hd_searchWord").val("");	//검색어 초기화
+          		$("#hd_searchDiv").val("10");
+          		$("#hd_searchWord").val("");
           		movieRerieve();
           	});
           	
           	//전체영화조회
           	function movieRerieve(){
           		loading(true);
+          		var word = $("#hd_searchWord_second").val();
+          		if(word == "개봉") word = "010";
+          		else if(word == "비상영") word = "000";
+          		else if(word == "개봉예정") word = "020";
+          		
             	$.ajax({
     				type : "POST",
     				url : "${context}/screenInfo/do_retrieve_movie.do",
     				dataType : "json",
     				data : {
     					"searchDiv" : $("#hd_searchDiv").val(),
-    					"searchWord" : $("#hd_searchWord").val()
+    					"searchWord" : $("#hd_searchWord").val(),
+    					"searchWord_second" :word
     				}, 
     			success: function(data){
     				var movieArr = data;
@@ -968,7 +979,6 @@
 			
 			//영화검색
 			function movieSearch(){
-				$("#hd_searchDiv").val($("#searchDiv").val());
 				$("#hd_searchWord").val($("#searchWord").val());
 				movieRerieve();
 			}
@@ -1183,6 +1193,30 @@
 			//레이어드래그가능
 			$(".layer-MovieTable").draggable();
 			$(".movieInfo").draggable();
+			
+			$("#allBtn").on("click", function(){
+				$("#hd_searchDiv").val("10");
+				$("#hd_searchWord_second").val("");
+				movieRerieve();
+			});
+			
+			$("#openBtn").on("click", function(){
+				$("#hd_searchDiv").val("30");
+				$("#hd_searchWord_second").val("010");
+				movieRerieve();
+			});
+			
+			$("#scheduledBtn").on("click", function(){
+				$("#hd_searchDiv").val("30");
+				$("#hd_searchWord_second").val("020");
+				movieRerieve();
+			});
+			
+			$("#endBtn").on("click", function(){
+				$("#hd_searchDiv").val("30");
+				$("#hd_searchWord_second").val("000");
+				movieRerieve();
+			});
     	</script>
 	</body>
 </html>

@@ -28,7 +28,8 @@
 				and DIRECTOR LIKE '%' || #{searchWord} || '%'				
 			</when>
 			<when test="'30' == searchDiv">
-				and SCREEN_STATE LIKE '%' || #{searchWord} || '%'				
+				and SCREEN_STATE LIKE '%' || #{searchWord_second} || '%'	
+				and KORTITLE LIKE '%' || #{searchWord} || '%'			
 			</when>
 		</choose>
 	</sql>
