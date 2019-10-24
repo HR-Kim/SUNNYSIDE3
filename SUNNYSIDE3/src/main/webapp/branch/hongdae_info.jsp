@@ -35,7 +35,23 @@
 	
 	<br/>
 	<br/>
-		
+	
+	<div class="container">
+	<button class="btn btn-default">수정</button>
+		<h1>SUNNYSIDE 홍대점</h1>		
+		<table style="width: 700px;">
+			<td style="width: 40%;"><strong>서울 마포구 서교동 447-5</strong></td>
+			<td style="width: 10%;"><strong>총 상영관수</strong></td>
+			<td style="width: 10%;">22개관</td>
+			<td style="width: 10%;"><strong>총 좌석수</strong></td>
+			<td style="width: 10%;">4,633석</td>
+		</table>
+	</div>
+	
+	<br/>
+	<br/>
+	<br/>
+	
 	<div class="container">
 		<br/>
 		<table class="table table-bordered" style="width: 400px;">
@@ -52,52 +68,25 @@
 	<br/>
 	<br/>
 	
-	<!-- 지도 -->
-	<div class="center-block" id="map" style="width:50%;height:600px;"></div>
+	<div class="container">
+		<img class="center-block" src="${context }/resources/img/divisima/logo.png">
+	</div>
+	
+	
 	
 	
 	
 	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
     <script src="${context}/resources/js/jquery-1.12.4.js"></script>
+    <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
     <script src="${context}/resources/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=79dc5d9ee17692f633e4726d83f25b50&libraries=services"></script>
-	<script>
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		    mapOption = {
-		        center: new kakao.maps.LatLng(37.5565114, 126.9173146), // 지도의 중심좌표
-		        level: 3 // 지도의 확대 레벨
-		    };  
-		
-		// 지도를 생성합니다    
-		var map = new kakao.maps.Map(mapContainer, mapOption); 
-		
-		// 주소-좌표 변환 객체를 생성합니다
-		var geocoder = new kakao.maps.services.Geocoder();
-		
-		// 주소로 좌표를 검색합니다
-		geocoder.addressSearch('서울 마포구 서교동 447-5', function(result, status) {
-		
-		    // 정상적으로 검색이 완료됐으면 
-		     if (status === kakao.maps.services.Status.OK) {
-		
-		        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-		
-		        // 결과값으로 받은 위치를 마커로 표시합니다
-		        var marker = new kakao.maps.Marker({
-		            map: map,
-		            position: coords
-		        });
-		
-		        // 인포윈도우로 장소에 대한 설명을 표시합니다
-		        var infowindow = new kakao.maps.InfoWindow({
-		            content: '<div style="width:150px;text-align:center;padding:3px 0;">홍대점</div>'
-		        });
-		        infowindow.open(map, marker);
-		
-		        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-		        map.setCenter(coords);
-		    } 
-		});    
+    
+    
+	<script type="text/javascript">
+	
 	</script>
+	
+	
+	
 </body>
 </html>

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<c:set var="context" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,18 +15,50 @@
 	.element {
 	  .center-block();
 	}
+	td.mouseOver {
+    	background: #f7f7f7;
+    	text-align: center;
+	}
+	td.mouseOut {
+	    background: #fff;
+	    text-align: center;
+	}
 </style>
-    <meta charset="utf-8">
-    <title>SUNNYSIDE</title>
-    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 부트스트랩 -->
+<link href="${context }/resources/css/bootstrap.min.css" rel="stylesheet">
+	<title>영화관 강남</title>
 </head>
 <body>
 	
 	<br/>
 	<br/>
+		
+	<div class="container">
+		<br/>
+		<table class="table table-bordered" style="width: 400px;">
+			<td onMouseOver="this.className='mouseOver';" onMouseOut="this.className='mouseOut'" style="width: 200px;" class="text-center">
+				영화관 소개
+			</td>
+			<td onMouseOver="this.className='mouseOver';" onMouseOut="this.className='mouseOut'" style="width: 200px;" class="text-center">
+				약도
+			</td>
+		</table>
+	</div>
+	
+	
+	<br/>
+	<br/>
+	
+	<!-- 지도 -->
 	<div class="center-block" id="map" style="width:50%;height:600px;"></div>
 	
 	
+	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
+    <script src="${context}/resources/js/jquery-1.12.4.js"></script>
+    <script src="${context}/resources/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=79dc5d9ee17692f633e4726d83f25b50&libraries=services"></script>
 	<script>
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
