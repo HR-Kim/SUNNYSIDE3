@@ -13,7 +13,7 @@
 		    writer_id as writerId,
 		    TO_CHAR(mod_dt, 'yyyy.mm.dd') as modDt,
 		    TO_CHAR(reg_dt, 'yyyy.mm.dd') as regDt,
-		    branch_nm as branchNm
+		    branch_nm as branchSNm
 		FROM 
 		    (
 		    SELECT 

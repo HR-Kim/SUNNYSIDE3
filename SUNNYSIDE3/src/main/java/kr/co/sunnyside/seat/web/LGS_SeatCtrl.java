@@ -35,7 +35,7 @@ public class LGS_SeatCtrl {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_updatee_seat");
 		LOG.debug("==================================");
-	System.out.println(seat);
+
 		if(seat == null) throw new NullArgumentException(); //null
 		if(seat.getSeatNm() == null || seat.getSeatNm() == "") throw new IllegalArgumentException(); //좌석명
 		if(seat.getRoomId() == null || seat.getRoomId() == "") throw new IllegalArgumentException(); //상영관ID
@@ -174,6 +174,161 @@ public class LGS_SeatCtrl {
 		if(search.getPageNum() == 0) search.setPageNum(1);
 				
 		List<LGS_SeatVO> list = (List<LGS_SeatVO>) seatSvc.do_retrieve(search);
+				
+		//model.addAttribute("list", list);
+		
+		LOG.debug("==================================");
+		LOG.debug("list : " + list);
+		LOG.debug("==================================");
+		
+		Gson gson=new Gson();
+		String gsonStr = gson.toJson(list);		
+		
+		return gsonStr;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "seat/do_update_reservation.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	public String do_update_reservation(LGS_SeatVO seat) {
+		LOG.debug("==================================");
+		LOG.debug("Controller : do_updatee_seat_reservation");
+		LOG.debug("==================================");
+
+		if(seat == null) throw new NullArgumentException(); //null
+		if(seat.getSeatNm() == null || seat.getSeatNm() == "") throw new IllegalArgumentException(); //좌석명
+		if(seat.getRoomId() == null || seat.getRoomId() == "") throw new IllegalArgumentException(); //상영관ID
+		
+		int flag = seatSvc.do_update_reservation(seat);
+		
+		LOG.debug("==================================");
+		LOG.debug("flag : " + flag);
+		LOG.debug("==================================");
+		
+		Message message = new Message();
+		if(flag > 0) {
+			message.setMsgId("1");
+			message.setMsgMsg("성공");
+		}else {
+			message.setMsgId("0");
+			message.setMsgMsg("실패");
+		}
+		
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(message);
+		
+		LOG.debug("==================================");
+		LOG.debug("jsonStr : " + jsonStr);
+		LOG.debug("==================================");
+		
+		return jsonStr;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "seat/do_save_reservation.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	public String do_save_seat_reservation(LGS_SeatVO seat) {
+		LOG.debug("==================================");
+		LOG.debug("Controller : do_save_seat_reservation");
+		LOG.debug("==================================");
+		
+		if(seat == null) throw new NullArgumentException();	//null
+		if(seat.getRoomId() == null || seat.getRoomId() == "") throw new IllegalArgumentException(); //상영관id
+		if(seat.getScreenId() == null || seat.getScreenId() == "") throw new IllegalArgumentException();
+		
+		int flag = seatSvc.do_save_reservation(seat);
+		
+		LOG.debug("==================================");
+		LOG.debug("flag : " + flag);
+		LOG.debug("==================================");
+		
+		Message message = new Message();
+		if(flag > 0) {
+			message.setMsgId("1");
+			message.setMsgMsg("성공");
+		}else {
+			message.setMsgId("0");
+			message.setMsgMsg("실패");
+		}
+		
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(message);
+		
+		LOG.debug("==================================");
+		LOG.debug("jsonStr : " + jsonStr);
+		LOG.debug("==================================");
+		
+		return jsonStr;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "seat/do_delete_reservation.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	public String do_delete_reservation(LGS_SeatVO seat) {
+		LOG.debug("==================================");
+		LOG.debug("Controller : do_delete_seat");
+		LOG.debug("==================================");
+		
+		if(seat == null) throw new NullArgumentException(); //null
+		if(seat.getScreenId() == null || seat.getScreenId() == "") throw new IllegalArgumentException();
+		
+		int flag = seatSvc.do_delete_reservation(seat);
+		
+		LOG.debug("==================================");
+		LOG.debug("flag : " + flag);
+		LOG.debug("==================================");
+		
+		Message message = new Message();
+		if(flag > 0) {
+			message.setMsgId("1");
+			message.setMsgMsg("성공");
+		}else {
+			message.setMsgId("0");
+			message.setMsgMsg("실패");
+		}
+		
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(message);
+		
+		LOG.debug("==================================");
+		LOG.debug("jsonStr : " + jsonStr);
+		LOG.debug("==================================");
+		
+		return jsonStr;
+	}
+	
+	@RequestMapping(value = "seat/do_selectOne_reservation.do", method = RequestMethod.POST)
+	public String do_selectOne_reservation(LGS_SeatVO seat, Model model) {
+		LOG.debug("==================================");
+		LOG.debug("Controller : do_selectOne_seat_reservation");
+		LOG.debug("==================================");
+		
+		if(seat == null) throw new NullArgumentException(); //null
+		if(seat.getSeatNm() == null || seat.getSeatNm() == "") throw new IllegalArgumentException(); //좌석명
+		if(seat.getScreenId() == null || seat.getScreenId() == "") throw new IllegalArgumentException();
+		
+		LGS_SeatVO outVO = (LGS_SeatVO) seatSvc.do_selectOne_reservation(seat);
+		model.addAttribute("seatVO", outVO);
+		
+		LOG.debug("==================================");
+		LOG.debug("outVO : " + outVO);
+		LOG.debug("==================================");
+		
+		return VIEW_;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "seat/do_retrieve_reservation.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	public String do_retrieve_reservation(SearchVO search, Model model) {
+		LOG.debug("==================================");
+		LOG.debug("Controller : do_retrieve_seat_reservation");
+		LOG.debug("==================================");
+		
+		LOG.debug("==================================");
+		LOG.debug("param : " + search.toString());
+		LOG.debug("==================================");
+		
+		if(search.getPageSize() == 0) search.setPageSize(1000);
+		if(search.getPageNum() == 0) search.setPageNum(1);
+				
+		List<LGS_SeatVO> list = (List<LGS_SeatVO>) seatSvc.do_retrieve_reservation(search);
 				
 		//model.addAttribute("list", list);
 		

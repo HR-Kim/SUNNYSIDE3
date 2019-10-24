@@ -21,6 +21,12 @@
 		<link href="${context}/resources/css/jquery-ui.css" rel="stylesheet">
 		<link  href="${context}/resources/css/jquery.timepicker.min.css" rel="stylesheet">
 		<style type="text/css">
+			.ui-widget-content .ui-icon {
+				background-image: url("${context}/resources/image/jquery_ui/ui-icons_444444_256x240.png");
+			}
+			.ui-widget-header .ui-icon {
+				background-image: url("${context}/resources/image/jquery_ui/ui-icons_444444_256x240.png");
+			}
 			#searchWord {
 				border: 1px solid black;
 			}
@@ -197,14 +203,19 @@
 				<input type="hidden" id="hd_movieId" value="">
 				<input type="hidden" id="hd_movieNm" value="">
 				<input type="hidden" id="hd_movieRTime" value="">
-				<input type="hidden" id="hd_searchDiv" value="">
+				<input type="hidden" id="hd_searchDiv" value="10">
 				<input type="hidden" id="hd_searchWord" value="">
+				<input type="hidden" id="hd_searchWord_second" value="">
 				<div class="row">
 					<div class="col-md-2">
 						<label>영화</label>
 						<button id="movieRetrive" class="btn btn-primary btn-xs">조회</button>
 					</div>
 					<div class="col-md-10 text-right">
+						<button id="allBtn" class="btn btn-default btn-xs">전체</button>
+						<button id="openBtn" class="btn btn-default btn-xs">개봉</button>
+						<button id="scheduledBtn" class="btn btn-default btn-xs">개봉예정</button>
+						<button id="endBtn" class="btn btn-default btn-xs">미상영</button>
 						<select id="searchDiv">
 							<option value="10">제목</option>
 						</select>
@@ -621,7 +632,7 @@
 
        			$(".movieTable-dim").css("display", "block");
           		$(".layer-MovieTable").css("display", "block");
-          		$("#hd_searchDiv").val("");		//검색구분 초기화
+          		$("#hd_searchDiv").val("10");		//검색구분 초기화
           		$("#hd_searchWord").val("");	//검색어 초기화
           		movieRerieve();
           	});
@@ -660,21 +671,27 @@
           	
           	//편성할 영화 조회
           	$("#movieRetrive").on("click", function(){
-          		$("#hd_searchDiv").val("");		//검색구분 초기화
-          		$("#hd_searchWord").val("");	//검색어 초기화
+          		$("#hd_searchDiv").val("10");
+          		$("#hd_searchWord").val("");
           		movieRerieve();
           	});
           	
           	//전체영화조회
           	function movieRerieve(){
           		loading(true);
+          		var word = $("#hd_searchWord_second").val();
+          		if(word == "개봉") word = "010";
+          		else if(word == "비상영") word = "000";
+          		else if(word == "개봉예정") word = "020";
+          		
             	$.ajax({
     				type : "POST",
     				url : "${context}/screenInfo/do_retrieve_movie.do",
     				dataType : "json",
     				data : {
     					"searchDiv" : $("#hd_searchDiv").val(),
-    					"searchWord" : $("#hd_searchWord").val()
+    					"searchWord" : $("#hd_searchWord").val(),
+    					"searchWord_second" :word
     				}, 
     			success: function(data){
     				var movieArr = data;
@@ -962,7 +979,6 @@
 			
 			//영화검색
 			function movieSearch(){
-				$("#hd_searchDiv").val($("#searchDiv").val());
 				$("#hd_searchWord").val($("#searchWord").val());
 				movieRerieve();
 			}
@@ -1037,7 +1053,7 @@
 			});
 			
 			//상영영화추가
-			function add_NewScreenMovie(){
+			function add_NewScreenMovie(){alert("실행");
 				loading(true);
 				var eDate = $("#endDate").val(); 
 				var eTime = $("#endTime").val();
@@ -1055,7 +1071,7 @@
 				$.ajax({
     				type : "POST",
     				url : "${context}/screenInfo/do_save.do",
-    				dataType : "json",
+    				dataType : "HTML",
     				data : {
     					"roomId" : roomId,
     					"branchId" : branchId,
@@ -1067,11 +1083,11 @@
     					"studentCost" : studentCost
     				}, 
     			success: function(data){
-    				var msg = data;
-    				if(msg.msgId == 1){
-    					alert("성공");
+    				var screenId = data;
+    				if(screenId.length > 0){
+    					create_seat_reservation(roomId, screenId);
     				}else{
-    					alert("실패");
+    					alert("추가에 실패했습니다.\n해당 영화를 삭제하고 다시 편성해주세요.");
     				}
     			},
     			complete:function(data){
@@ -1082,9 +1098,38 @@
     				loading(false);
     			},
     			error:function(xhr,status,error){
-
+    				alert("추가에 실패했습니다.\n해당 영화를 삭제하고 다시 편성해주세요.");
     			}
     			});
+			}
+			
+			//영화편성시 편성영화 전용 좌석생성
+			function create_seat_reservation(roomId, screenId){
+				$.ajax({
+    				type : "POST",
+    				url : "${context}/seat/do_save_reservation.do",
+    				dataType : "json",
+    				data : {
+    					"roomId" : roomId,
+    					"screenId" : screenId
+    				}, 
+    				success: function(data){
+    					var msg = data;
+        				if(msg.msgId == 1){
+        					alert("편성되었습니다.");
+        				}else{
+        					alert("편성실패");
+        					delete_Plan(screenId);
+        				}
+        			},
+        			complete:function(data){
+        				
+        			},
+        			error:function(xhr,status,error){
+        				alert("편성오류");
+        				delete_Plan(screenId);
+        			}
+        		}); 
 			}
 			
 			function selectedMovie_Off(){
@@ -1148,6 +1193,30 @@
 			//레이어드래그가능
 			$(".layer-MovieTable").draggable();
 			$(".movieInfo").draggable();
+			
+			$("#allBtn").on("click", function(){
+				$("#hd_searchDiv").val("10");
+				$("#hd_searchWord_second").val("");
+				movieRerieve();
+			});
+			
+			$("#openBtn").on("click", function(){
+				$("#hd_searchDiv").val("30");
+				$("#hd_searchWord_second").val("010");
+				movieRerieve();
+			});
+			
+			$("#scheduledBtn").on("click", function(){
+				$("#hd_searchDiv").val("30");
+				$("#hd_searchWord_second").val("020");
+				movieRerieve();
+			});
+			
+			$("#endBtn").on("click", function(){
+				$("#hd_searchDiv").val("30");
+				$("#hd_searchWord_second").val("000");
+				movieRerieve();
+			});
     	</script>
 	</body>
 </html>

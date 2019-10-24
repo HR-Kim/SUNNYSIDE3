@@ -6,7 +6,7 @@ import kr.co.sunnyside.cmn.DTO;
 
 public interface LGS_ScreenInfoSvc {
 
-	public int do_save(DTO dto);
+	public String do_save_NEW(DTO dto);
 
 	public int do_delete(DTO dto);
 

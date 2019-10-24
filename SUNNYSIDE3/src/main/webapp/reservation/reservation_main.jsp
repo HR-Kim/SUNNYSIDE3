@@ -1050,15 +1050,15 @@
 				
 				//좌석테이블 생성
 	    		function create_Seat_Table(){
-					var roomId = $("#hd_selectedRoomId").val();						//상영관ID
-	    			var searchDiv = "20";
+					var searchWord = $("#hd_selectedScreenId").val();
+	    			var searchDiv = "70";
 	    			
 	    			$.ajax({
 	    				type : "POST",
-	    				url : "${context}/seat/do_retrieve.do",
+	    				url : "${context}/seat/do_retrieve_reservation.do",
 	    				dataType : "json",
 	    				data : {
-	    					"searchWord" : roomId,
+	    					"searchWord" : searchWord,
 	    					"searchDiv" : searchDiv
 	    				}, 
 	    			success: function(data){
