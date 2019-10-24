@@ -162,6 +162,7 @@ message.schedule.status=처리상태
 #header
 message.header.home=홈
 message.header.movie=영화
+message.header.theaterbranch=영화관
 message.header.boxoffice=박스오피스
 message.header.planed=개봉예정
 message.header.screening=상영중
@@ -189,6 +190,7 @@ message.main.notice=공지사항
 message.main.store=지점명
 message.main.regdt=작성일
 message.main.title=제목
+message.main.customer=고객센터	
 message.main.questions=1:1문의
 
 

@@ -114,7 +114,17 @@
 								<!-- 개봉예정 -->
 								<li><a href="/sunnyside/planed/do_retrieve.do"><spring:message code="message.header.planed"/></a></li>
 							</ul>
-						</li>					
+						</li>	
+						<li>
+							<!-- 영화관 -->
+							<a href="/sunnyside/theater/hongdae_info.do"><spring:message code="message.header.movie"/></a>
+							<ul class="sub-menu">
+								<!-- 홍대점 -->
+								<li><a href="/sunnyside/theater/hongdae_info.do"><spring:message code="message.header.boxoffice"/></a></li>
+								<!-- 강남점 -->
+								<li><a href="/sunnyside/theater/kangnam_info.do"><spring:message code="message.header.screening"/></a></li>
+							</ul>
+						</li>				
 						<li>
 							<!-- 스토어 -->
 							<a href="/sunnyside/store/do_main.do"><spring:message code="message.header.store"/></a>
