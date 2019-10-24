@@ -171,8 +171,8 @@
 					<a href="/sunnyside/qna/do_retrieve.do" class="btn btn-sq-lg col-md-6 col-lg-6" style="background-color: #f6f6f6; margin-left: 90px;">
 					<i class="fa fa-pencil-square-o fa-5x" style="margin-top: 20px; margin-left: 15px"></i><br/><spring:message code="message.main.questions"/></a>
 					<!-- 고객센터 -->
-					<a href="#" class="btn btn-sq-lg col-md-6 col-lg-6" style="background-color: #f6f6f6; margin-left: 30px;">					
-					<i class="fa  fa-user-circle-o fa-5x" style="margin-top: 20px;"></i><br/><spring:message code="message.main.customer"/></a>
+					<a href="/sunnyside/faq/do_retrieve.do" class="btn btn-sq-lg col-md-6 col-lg-6" style="background-color: #f6f6f6; margin-left: 30px;">					
+					<i class="fa fa-question-circle-o fa-5x" style="margin-top: 20px;"></i><br/>자주하는 질문</a>
 				</p>
 			</div></div></div></div>
 		</aside>

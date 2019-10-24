@@ -19,7 +19,7 @@
 
 <!------ Include the above in your HEAD tag ---------->
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="../resources/css/list.css" rel="stylesheet" type="text/css"> 
+<link href="../resources/css/headerStyle.css" rel="stylesheet" type="text/css"> 
 
 <!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js -->
 <!-- WARNING: Respond.js 는 당신이 file:// 을 통해 페이지를 볼 때는 동작하지 않습니다. -->
@@ -31,15 +31,15 @@
 
 <body>	
 	<!-- div container -->
-	<div class="container">
+	<div class="container" style="margin-bottom: 70px">
 		<!-- div title --> 
 		<div class="page-header">
 			<h1>FAQ</h1>
-<%-- 			<c:choose> --%>
-<%-- 				<c:when test="${'admin' == user.userLevel}"> --%>
+			<c:choose>
+				<c:when test="${'admin' == user.userLevel}">
 					<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#savePop">등록</button>					
-<%-- 				</c:when> --%>
-<%-- 			</c:choose> --%>
+				</c:when>
+			</c:choose>
 		</div>
 		
 		<form class="form-horizontal" id="faqForm" name="faqForm">			
@@ -52,14 +52,14 @@
 								<!-- 질문내용 -->
 								<div class="panel-heading">									
 									<strong class="voTitle"><c:out value="${vo.title}"/></strong>
-<%-- 									<c:choose> --%>
-<%-- 										<c:when test="${'admin' == user.userLevel}"> --%>
+									<c:choose>
+										<c:when test="${'admin' == user.userLevel}">
 											<!-- 수정 -->
 											<input type="button" id="doUpdateSelect" name="doUpdateSelect" class="btn btn-default btn-sm doUpdateSelect" data-toggle="modal" data-target="#updatePop" value='<spring:message code="message.button.edit"/>'/>
 											<!-- 삭제 --> 
 											<input type="button" id="doDelete" name="doDelete" class="btn btn-default btn-sm doDelete" value='<spring:message code="message.button.delete"/>'/>
-<%-- 										</c:when> --%>
-<%-- 									</c:choose> --%>
+										</c:when>
+									</c:choose>
 									<span class="questionId" style="display: none"><c:out value="${vo.questionId}"/></span>
 								</div>	
 								<!--// 질문내용 -->

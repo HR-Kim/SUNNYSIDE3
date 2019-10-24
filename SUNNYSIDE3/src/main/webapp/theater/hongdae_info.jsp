@@ -29,7 +29,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 부트스트랩 -->
-<link href="${context }/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="${context}/resources/css/headerStyle.css" rel="stylesheet" type="text/css"> 
 	<title>영화관 홍대</title>
 </head>
 <body>
