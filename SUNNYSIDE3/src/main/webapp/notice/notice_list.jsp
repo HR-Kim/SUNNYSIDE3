@@ -71,6 +71,44 @@
 <!-- 부트스트랩 -->
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 
+<style>
+    #container {
+      width: 70%;
+      margin: 0 auto;     /* 가로로 중앙에 배치 */
+      padding-top: 10%;   /* 테두리와 내용 사이의 패딩 여백 */
+    }
+     
+    #list {
+      text-align: center;
+    }
+   
+    #write {
+      text-align: right;
+    }
+     
+    /* Bootstrap 수정 */
+    .table > thead {
+      background-color: black;
+    }
+    .table > thead > tr > th {
+      text-align: center;
+    }
+    .table-hover > tbody > tr:hover {
+      background-color: gray;
+    }
+    .table > tbody > tr > #contents {
+      text-align: center;
+    }
+    .table > tbody > tr > #title {
+      text-align: left;
+    }
+     
+    div > #paging {
+      text-align: center;
+    }
+
+  </style>
+
 </head>
 <body>
 	<!-- div container -->

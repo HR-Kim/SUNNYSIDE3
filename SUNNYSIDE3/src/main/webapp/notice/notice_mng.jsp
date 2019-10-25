@@ -52,7 +52,7 @@
 		<!-- div title -->
 		<form class="form-horizontal" name="noticeEditFrm" id="noticeEditFrm" method="POST" action="${context}/notice/do_save.do">
 			<input type="hidden" class="form-control" name="noticeId" id="noticeId" value="${vo.noticeId }">
-		    <input type="hidden" name="fileId" id="fileId" value="${vo.fileId }" >
+		    <input type="hidden" class="form-control" name="fileId" id="fileId" value="${vo.fileId }" >
 			<div class="form-group">
 				<label for="inputEmail3" class="col-sm-2 control-label">제목</label>
 				<div class="col-sm-8">
@@ -452,7 +452,7 @@
 		});
 		
 		function doUploadFile(){
-			var form = $('form')[1];
+			var form = $('form')[2];
 			var formData = new FormData(form);
 			
 			//ajax

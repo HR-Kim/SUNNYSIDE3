@@ -31,7 +31,12 @@
 		<div class="row">
 			<div class="col-lg-10 col-sm-10 col-xs-10">
 				<div class="text-right">
-					<button type="button" class="btn btn-default btn-sm" id="doSelectOneAdmin">답변달기</button>
+					<c:choose>
+						<c:when test="${'admin' == user.userLevel}">
+								<button type="button" class="btn btn-default btn-sm" id="doSelectOneAdmin">답변달기</button>		
+						</c:when>
+					</c:choose>
+					<!-- <button type="button" class="btn btn-default btn-sm" id="doSelectOneAdmin">답변달기</button> -->
 					<button type="button" class="btn btn-default btn-sm" id="doRetrieve">목록</button>
 					<button type="button" class="btn btn-default btn-sm" id="doInit">초기화</button>
 					<button type="button" class="btn btn-default btn-sm" id="doSave">등록</button>
