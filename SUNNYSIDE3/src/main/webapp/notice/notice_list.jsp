@@ -84,7 +84,7 @@
 		<!-- 검색영역 -->
 		<div class="row">
 			<div class="col-md-12 text-right">
-				<form class="form-inline" name="noticeFrm" id="noticeFrm" method="get" />
+				<form class="form-inline" name="noticeFrm" id="noticeFrm" method="GET" />
 					<input type="hidden" name="pageNum" id="pageNum" value="${vo.pageNum }"/>
 					<input type="hidden" name="noticeId" id="noticeId" />
 					<div class="form-group">
@@ -120,7 +120,6 @@
 									<td class="text-center"><c:out value="${vo.num }"/></td>
 									<td class="text-center"><c:out value="${vo.branchSNm }"/></td>
 									<td class="text-left"><c:out value="${vo.title }"/>
-										<c:out value="${vo.title}"/>
 										&nbsp;<c:if test="${not empty vo.fileId and '0'!=vo.fileId}">
 												<img alt="img" src="<c:url  value='/resources/img/phototicket/file.gif'/>">
 										</c:if> 

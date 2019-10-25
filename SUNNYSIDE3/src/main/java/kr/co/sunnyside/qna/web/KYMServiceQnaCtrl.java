@@ -47,8 +47,8 @@ public class KYMServiceQnaCtrl {
 	//view
 	private final String VIEW_LIST_NM = "qna/qna_list";
 	private final String VIEW_MNG_NM = "qna/qna_mng";
-	private final String VIEW_ADMIN_LIST_NM = "qna/admin_qna_list";
-	private final String VIEW_ADMIN_MNG_NM = "qna/admin_qna_mng";
+	private final String VIEW_ADMIN_LIST_NM = "qna/qna_list_admin";
+	private final String VIEW_ADMIN_MNG_NM = "qna/qna_mng_admin";
 	
 	/**수정 */
 	@RequestMapping(value="qna/do_update.do",method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
@@ -208,7 +208,7 @@ public class KYMServiceQnaCtrl {
 		
 	}
 	
-	@RequestMapping(value = "qna/do_selectOne_admin.do", method = RequestMethod.GET)
+	@RequestMapping(value = "qna/do_selectOne_admin.do", method = RequestMethod.POST)
 	public String do_selectOne_admin(KYMQnaVO kymQnaVO, Model model) {
 		LOG.debug("================");
 		LOG.debug("kymQnaVO"+kymQnaVO);
@@ -328,7 +328,7 @@ public class KYMServiceQnaCtrl {
 
 	}
 	
-	@RequestMapping(value="qna/admin_qna_mng.do", method = RequestMethod.GET)	
+	@RequestMapping(value="qna/qna_mng_admin_.do", method = RequestMethod.POST)	
 	public String adminqnaRegView(KYMQnaVO kymQnaVO, Model model) {
 		
 		return VIEW_ADMIN_LIST_NM;

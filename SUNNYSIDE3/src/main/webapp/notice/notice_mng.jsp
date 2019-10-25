@@ -50,9 +50,9 @@
 		</div>
 		<div class="col-lg-11"></div>
 		<!-- div title -->
-		<form class="form-horizontal" name="noticeEditFrm" id="noticeEditFrm" method="post" action="${context}/notice/do_save.do">
+		<form class="form-horizontal" name="noticeEditFrm" id="noticeEditFrm" method="POST" action="${context}/notice/do_save.do">
 			<input type="hidden" class="form-control" name="noticeId" id="noticeId" value="${vo.noticeId }">
-		    <input type="hidden"  name="fileId" id="fileId" >
+		    <input type="hidden" name="fileId" id="fileId" value="${vo.fileId }" >
 			<div class="form-group">
 				<label for="inputEmail3" class="col-sm-2 control-label">제목</label>
 				<div class="col-sm-8">
@@ -111,8 +111,8 @@
 		      <div class="modal-body">
 		        <form class="form-horizontal" action="${context }/file/do_save.do" 
 		           name="saveFileForm" id="saveFileForm" method="post" enctype="multipart/form-data">
-		            <input type="hidden"  name="work_dir"   id="work_dir" value="com">
-		            <input type="hidden"  name="attrFileId" id="attrFileId" >
+		            <input type="hidden"  name="work_dir"   id="work_dir" value="com" >
+		            <input type="hidden"  name="attrFileId" id="attrFileId" value="<c:out value='${vo.fileId}'/>">
 		            <input type="hidden"  name="orgFileNm"  id="orgFileNm" >
 		            <input type="hidden"  name="saveFileNm" id="saveFileNm" >
 		           
@@ -133,7 +133,7 @@
 	<!--// div container -->
 	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 	<script src="${context}/resources/js/jquery-1.12.4.js"></script>
-	<script src="${context}/resources/js/jquery.validate.js"></script>
+<%-- 	<script src="${context}/resources/js/jquery.validate.js"></script> --%>
 	<script src="${context}/resources/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 	
@@ -158,7 +158,7 @@
 				branchSNm = "전체";
 			}
 			//validation
-			if($("#noticeEditFrm").valid()==false)return;
+// 			if($("#noticeEditFrm").valid()==false)return;
 			
 			if (confirm("등록 하시겠습니까?") == false)return;
 
@@ -168,7 +168,7 @@
 				dataType : "html",
 				data : {
 					"fileId":$("#fileId").val(),
-					"title" : $("#title").val(),
+					"title":$("#title").val(),
 					"contents" : $("#contents").val(),
 					"branchSNm" : branchSNm,
 				},
@@ -197,7 +197,7 @@
 		//삭제:submit->
 		$("#doUpdate").on("click", function() {
 			//validation
-			if($("#noticeEditFrm").valid()==false)return;
+// 			if($("#noticeEditFrm").valid()==false)return;
 			
 			console.log("noticeId:" + $("#noticeId").val());
 			if (confirm("수정 하시겠습니까?") == false)
@@ -247,7 +247,9 @@
 				url : "${context}/notice/do_delete.do",
 				dataType : "html",
 				data : {
-					"noticeId" : $("#noticeId").val()
+				   /*  "noticeId":"do_delete", */
+				    "noticeId" : $("#noticeId").val(),
+				    "fileId":$("#fileId").val(),
 				},
 				success : function(data) {
 					var jData = JSON.parse(data);
@@ -272,43 +274,43 @@
 
 		$(document).ready(function() {
 			//form validate
-			$("#noticeEditFrm").validate({
-				rules: {					
-					title: {
-						required: true,
-						minlength: 2,
-						maxlength: 100
-					},
-					contents: {
-						required: true,
-						minlength: 2,
-						maxlength: 1000000
-					}
-				},
-				messages: {
-					title: {
-						required: "제목을 입력 하세요.",
-						minlength: $.validator.format("{0}자 이상 입력 하세요."),
-						maxlength: $.validator.format("{0}자 내로 입력 하세요.")
-					},
-					contents: {
-						required: "내용을 입력 하세요.",
-						minlength: $.validator.format("{0}자 이상 입력 하세요."),
-						maxlength: $.validator.format("{0}자 내로 입력 하세요.")
-					}
-				},
-				errorPlacement : function(error, element) {
-				     //do nothing
-				    },
-				    invalidHandler : function(form, validator) {
-				     var errors = validator.numberOfInvalids();
-				     if (errors) {
-				      alert(validator.errorList[0].message);
-				      validator.errorList[0].element.focus();
-				     }
-				}
+// 			$("#noticeEditFrm").validate({
+// 				rules: {					
+// 					title: {
+// 						required: true,
+// 						minlength: 2,
+// 						maxlength: 100
+// 					},
+// 					contents: {
+// 						required: true,
+// 						minlength: 2,
+// 						maxlength: 1000000
+// 					}
+// 				},
+// 				messages: {
+// 					title: {
+// 						required: "제목을 입력 하세요.",
+// 						minlength: $.validator.format("{0}자 이상 입력 하세요."),
+// 						maxlength: $.validator.format("{0}자 내로 입력 하세요.")
+// 					},
+// 					contents: {
+// 						required: "내용을 입력 하세요.",
+// 						minlength: $.validator.format("{0}자 이상 입력 하세요."),
+// 						maxlength: $.validator.format("{0}자 내로 입력 하세요.")
+// 					}
+// 				},
+// 				errorPlacement : function(error, element) {
+// 				     //do nothing
+// 				    },
+// 				    invalidHandler : function(form, validator) {
+// 				     var errors = validator.numberOfInvalids();
+// 				     if (errors) {
+// 				      alert(validator.errorList[0].message);
+// 				      validator.errorList[0].element.focus();
+// 				     }
+// 				}
 
-			});			
+// 			});			
 			
 		});
 		
@@ -494,45 +496,49 @@
 
 		$(document).ready(function() {
 			//alert("ready");
+			
+			if("${vo.fileId}" !=""){
+				doFileList('${vo.fileId}');
+			}
 
 			//form validate
-			$("#noticeEditFrm").validate({
-				rules: {					
-					title: {
-						required: true,
-						minlength: 2,
-						maxlength: 100
-					},
-					contents: {
-						required: true,
-						minlength: 2,
-						maxlength: 1000000
-					}
-				},
-				messages: {
-					title: {
-						required: "제목을 입력 하세요.",
-						minlength: $.validator.format("{0}자 이상 입력 하세요."),
-						maxlength: $.validator.format("{0}자 내로 입력 하세요.")
-					},
-					contents: {
-						required: "내용을 입력 하세요.",
-						minlength: $.validator.format("{0}자 이상 입력 하세요."),
-						maxlength: $.validator.format("{0}자 내로 입력 하세요.")
-					}
-				},
-				errorPlacement : function(error, element) {
-				     //do nothing
-				    },
-				    invalidHandler : function(form, validator) {
-				     var errors = validator.numberOfInvalids();
-				     if (errors) {
-				      alert(validator.errorList[0].message);
-				      validator.errorList[0].element.focus();
-				     }
-				}
+// 			$("#noticeEditFrm").validate({
+// 				rules: {					
+// 					title: {
+// 						required: true,
+// 						minlength: 2,
+// 						maxlength: 100
+// 					},
+// 					contents: {
+// 						required: true,
+// 						minlength: 2,
+// 						maxlength: 1000000
+// 					}
+// 				},
+// 				messages: {
+// 					title: {
+// 						required: "제목을 입력 하세요.",
+// 						minlength: $.validator.format("{0}자 이상 입력 하세요."),
+// 						maxlength: $.validator.format("{0}자 내로 입력 하세요.")
+// 					},
+// 					contents: {
+// 						required: "내용을 입력 하세요.",
+// 						minlength: $.validator.format("{0}자 이상 입력 하세요."),
+// 						maxlength: $.validator.format("{0}자 내로 입력 하세요.")
+// 					}
+// 				},
+// 				errorPlacement : function(error, element) {
+// 				     //do nothing
+// 				    },
+// 				    invalidHandler : function(form, validator) {
+// 				     var errors = validator.numberOfInvalids();
+// 				     if (errors) {
+// 				      alert(validator.errorList[0].message);
+// 				      validator.errorList[0].element.focus();
+// 				     }
+// 				}
 
-			});						
+// 			});						
 		});
 		
 	</script>

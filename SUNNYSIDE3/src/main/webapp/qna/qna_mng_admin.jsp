@@ -42,7 +42,7 @@
 		</div>
 		<div class="col-lg-11"></div>
 		<!-- div title -->
-		<form class="form-horizontal" name="qnaEditFrm" id="qnaEditFrm" method="post" action="${context}/qna/do_save.do">
+		<form class="form-horizontal" name="qnaEditFrm" id="qnaEditFrm" method="POST" action="${context}/qna/do_save.do">
 			<input type="hidden" class="form-control" name="userId" id="userId" value="${vo.userId }">
 
 			<div class="form-group">
@@ -81,7 +81,7 @@
 	<!--// div container -->
 	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 	<script src="${context}/resources/js/jquery-1.12.4.js"></script>
-	<script src="${context}/resources/js/jquery.validate.js"></script>
+	<%-- <script src="${context}/resources/js/jquery.validate.js"></script> --%>
 	<script src="${context}/resources/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 	
@@ -102,7 +102,7 @@
 		//등록	    
 		$("#doSave").on("click", function() {
 			//validation
-			if($("#qnaEditFrm").valid()==false)return;
+			/* if($("#qnaEditFrm").valid()==false)return; */
 			
 			if (confirm("등록 하시겠습니까?") == false)return;
 
@@ -142,7 +142,7 @@
 		//삭제:submit->
 		$("#doUpdate").on("click", function() {
 			//validation
-			if($("#qnaEditFrm").valid()==false)return;
+			/* if($("#qnaEditFrm").valid()==false)return; */
 			
 			console.log("userId:" + $("#userId").val());
 			if (confirm("수정 하시겠습니까?") == false)
@@ -163,7 +163,7 @@
 					var jData = JSON.parse(data);
 					if (null != jData && jData.msgId == "1") {
 						alert(jData.msgMsg);
-						location.href = "${context}/qna/do_retrieve_admin.do";
+						location.href = "${context}/qna/do_retrieve.do";
 
 					} else {
 						alert(jData.msgId + "|" + jData.msgMsg);
@@ -217,7 +217,7 @@
 
 		$(document).ready(function() {
 			//form validate
-			$("#qnaEditFrm").validate({
+/* 			$("#qnaEditFrm").validate({
 				rules: {					
 					title: {
 						required: true,
@@ -253,7 +253,7 @@
 				     }
 				}
 
-			});			
+			});		 */	
 			
 		});
 	</script>

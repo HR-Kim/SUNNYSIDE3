@@ -167,7 +167,7 @@ public class KYMServiceNoticeCtrl {
 
 	/**단건조회 */
 	@RequestMapping(value = "notice/do_selectOne.do", method = RequestMethod.GET)
-	public String get_selectOne(KYMNoticeVO kymNoticeVO, Model model) {
+	public String do_selectOne(KYMNoticeVO kymNoticeVO, Model model) {
 		LOG.debug("================");
 		LOG.debug("kymNoticeVO"+kymNoticeVO);
 		LOG.debug("================");

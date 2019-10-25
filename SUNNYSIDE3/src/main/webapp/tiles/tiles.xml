@@ -119,11 +119,26 @@
       <put-attribute name="title" value="SUNNYSIDE>유저관리페이지" />
       <put-attribute name="menu" value="userpage" />
     </definition>
+    
      <!-- phototicket -->    
     <definition name="phototicket/*" extends="basede_definition">
       <put-attribute name="body" value="/phototicket/{1}.jsp" />
       <put-attribute name="title" value="SUNNYSIDE>포토티켓" />
       <put-attribute name="menu" value="phototicket" />
+    </definition>
+    
+    <!-- notice -->    
+    <definition name="notice/*" extends="basede_definition">
+      <put-attribute name="body" value="/notice/{1}.jsp" />
+      <put-attribute name="title" value="SUNNYSIDE>포토티켓" />
+      <put-attribute name="menu" value="notice" />
+    </definition>
+    
+        <!-- notice -->    
+    <definition name="qna/*" extends="basede_definition">
+      <put-attribute name="body" value="/qna/{1}.jsp" />
+      <put-attribute name="title" value="SUNNYSIDE>포토티켓" />
+      <put-attribute name="menu" value="qna" />
     </definition>
 
 </tiles-definitions>

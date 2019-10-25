@@ -80,7 +80,7 @@
 		<!-- 검색영역 -->
 		<div class="row">
 			<div class="col-md-12 text-right">
-				<form class="form-inline" name="qnaFrm" id="qnaFrm" method="get" />
+				<form class="form-inline" name="qnaFrm" id="qnaFrm" method="GET" />
 					<input type="hidden" name="pageNum" id="pageNum" value="${vo.pageNum }"/>
 					<input type="hidden" name="userId" id="userId" />
 					<div class="form-group">
