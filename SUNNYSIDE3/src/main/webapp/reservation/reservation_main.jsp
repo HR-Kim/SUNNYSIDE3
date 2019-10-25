@@ -66,6 +66,12 @@
 			margin-left: 25px;
 			margin-top: 10px;	
 		}
+		.submit_half {
+			width: 72px;
+			border-radius: .5rem;
+			margin-left: 20px;
+			margin-top: 10px;	
+		}
 		.costlight {
 			color: yellow;
 			font-weight: bold;
@@ -740,7 +746,7 @@
 			}
 			
 			//좌석선택시 (성인)
-			$(".numBtnAdult>button").on("click", function(){
+			$(".numBtnAdult>button").on("click", function(){asd();
 				var btn = $(this)[0];
 				
 				$(".numBtnAdult>button").css("background-color", "window");
@@ -754,7 +760,7 @@
 			});
 			
 			//좌석선택시 (학생)
-			$(".numBtnStudent>button").on("click", function(){
+			$(".numBtnStudent>button").on("click", function(){asd();
 				var btn = $(this)[0];
 				
 				$(".numBtnStudent>button").css("background-color", "window");
@@ -931,7 +937,7 @@
 				}
 	
 				//요약 - 인원, 금액, 예매버튼
-				function infoBox_bottom(){
+				function infoBox_bottom(){asd();
 					var adult = parseInt($("#hd_aNum").val());
 					var student = parseInt($("#hd_sNum").val());
 					var aCost = parseInt($("#hd_aCost").val());
@@ -962,8 +968,8 @@
 					submit_btn(1);
 				}
 				
-				//단계버튼		1:좌석선택으로, 2:결제단계로
-				function submit_btn(select){
+				//단계버튼		1:좌석선택으로, 2:결제단계로, 3:뒤로가기
+				function submit_btn(select){asd();
 					if(select == 1){
 						$("#submit_btn").append(
 								"<div>"+
@@ -974,7 +980,15 @@
 					}else if(select == 2){
 						$("#submit_btn").append(
 								"<div>"+
-								"<button class='submit btn btn-danger btn-lg' onclick='javascript:go_pay();'>다음단계</button>"+
+								"<button class='submit_half btn btn-warning btn-sm' onclick='javascript:go_back();'>뒤로가기</button>"+
+								"<button class='submit_half btn btn-danger btn-sm' onclick='javascript:go_pay();'>결제하기</button>"+
+								"</div>"
+						);
+						return;
+					}else if(select == 3){
+						$("#submit_btn").append(
+								"<div>"+
+								"<button class='submit btn btn-warning btn-lg' onclick='javascript:go_back();'>뒤로가기</button>"+
 								"</div>"
 						);
 						return;
@@ -991,7 +1005,7 @@
 				}
 				
 				//좌석선택으로 가는 버튼
-				function go_seat(bool){
+				function go_seat(bool){asd();
 					if(bool == true){
 						var adult = parseInt($("#hd_aNum").val());
 						var student = parseInt($("#hd_sNum").val());
@@ -1008,6 +1022,7 @@
 						$(".seatPage").css("display", "none");
 					}
 					$("#submit_btn>div").detach();
+					submit_btn(3);
 				}
 				
 				//예매다시하기버튼
@@ -1046,13 +1061,15 @@
     				$(".numBtnAdult>button").css("opacity", "1");
     				$(".numBtnStudent>button").css("background-color", "window");
     				$(".numBtnStudent>button").css("opacity", "1");
+    				
+    				$("button[data-y][data-x]").attr("data-nowSelect", "0");
 				});
 				
 				//좌석테이블 생성
 	    		function create_Seat_Table(){
 					var searchWord = $("#hd_selectedScreenId").val();
 	    			var searchDiv = "70";
-	    			alert("진입");
+	    			
 	    			$.ajax({
 	    				type : "POST",
 	    				url : "${context}/seat/do_retrieve_reservation.do",
@@ -1122,6 +1139,7 @@
 					if(enable == 'X') return;
 					
 					$("#submit_btn>div").detach();
+					submit_btn(3);
 					
 					var seatInfo = $("#hd_selectedSeat").val();	
 	    			var seatArr = convert_arrayNstring(true, seatInfo);
@@ -1147,7 +1165,10 @@
 
 		    				now = parseInt($("#hd_selectedSeatTotal").val());
 							d = total - now; 
-	    					if(d <= 0) submit_btn(2);
+	    					if(d <= 0){
+	    						$("#submit_btn>div").detach();
+	    						submit_btn(2);
+	    					}
 		    			}else if(nowSelect == 1){							//취소
 		    				seat.attr("data-nowSelect", 0);
 		    				seat.css("background-color", "blue");
@@ -1162,6 +1183,7 @@
 							$("#hd_selectedSeat").val(seatString);
 		    			}else if(d <= 0){									//선택불가
 		    				alert("좌석을 모두 선택했습니다.\n다음단계로 진행해주세요.");
+		    				$("#submit_btn>div").detach();
 		    				submit_btn(2);
 		    			}
 		    			
@@ -1205,11 +1227,39 @@
 	    		//결제페이지로
 	    		function go_pay(){
 	    			if(confirm("결제페이지로 이동하시겠습니까?")==false) return;
-	    			
 	    			var frm = $("#mainForm");
 	    			frm.submit();
 	    		}
 	    		
+	    		//뒤로
+	    		function go_back(){asd();
+	    			$("button[data-y][data-x]").attr("data-nowSelect", "0");
+	    			$("#hd_selectedSeatTotal").val("0");
+	    			$("#hd_selectedSeat").val("");	
+					
+					go_seat(false);
+	    			$("#submit_btn>div").detach();
+	    			submit_btn(1);
+	    		}
+	    		
+	    		function asd(){
+	    			console.log("=================");
+	    			console.log("hd_adultYN : " + $("#hd_adultYN").val());
+	    			console.log("hd_resultCost : " + $("#hd_resultCost").val());
+	    			console.log("hd_aNum : " + $("#hd_aNum").val());
+	    			console.log("hd_sNum : " + $("#hd_sNum").val());
+	    			console.log("hd_aCost : " + $("#hd_aCost").val());
+	    			console.log("hd_sCost : " + $("#hd_sCost").val());
+	    			console.log("hd_selectedMovieId : " + $("#hd_selectedMovieId").val());
+	    			console.log("hd_selectedScreenId : " + $("#hd_selectedScreenId").val());
+	    			console.log("hd_selectedBranchId : " + $("#hd_selectedBranchId").val());
+	    			console.log("hd_selectedRoomId : " + $("#hd_selectedRoomId").val());
+	    			console.log("hd_resultCost : " + $("#hd_resultCost").val());
+	    			console.log("hd_selectedSeat : " + $("#hd_selectedSeat").val());
+	    			console.log("hd_personTotal : " + $("#hd_personTotal").val());
+	    			console.log("hd_selectedSeatTotal : " + $("#hd_selectedSeatTotal").val());
+	    			console.log("=================");
+	    		}
     	</script>
 	</body>
 </html>

@@ -349,7 +349,7 @@
     			var userId = "${user.userId}";
     			$.ajax({
     				type : "POST",
-    				url : "${context}/coupon/do_selectOne.do",
+    				url : "${context}/coupon/do_retrieve.do",
     				dataType : "json",
     				data : {
     					"userId" : userId
