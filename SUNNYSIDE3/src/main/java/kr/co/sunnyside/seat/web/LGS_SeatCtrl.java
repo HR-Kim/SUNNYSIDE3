@@ -189,23 +189,38 @@ public class LGS_SeatCtrl {
 
 	@ResponseBody
 	@RequestMapping(value = "seat/do_update_reservation.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
-	public String do_update_reservation(LGS_SeatVO seat) {
+	public String do_update_reservation(String seatArr, String roomId, String useYN) {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_updatee_seat_reservation");
 		LOG.debug("==================================");
 
-		if(seat == null) throw new NullArgumentException(); //null
-		if(seat.getSeatNm() == null || seat.getSeatNm() == "") throw new IllegalArgumentException(); //좌석명
-		if(seat.getRoomId() == null || seat.getRoomId() == "") throw new IllegalArgumentException(); //상영관ID
+		LOG.debug("==================================");
+		LOG.debug("seatArr : " + seatArr);
+		LOG.debug("roomId : " + roomId);
+		LOG.debug("useYN : " + useYN);
+		LOG.debug("==================================");
 		
-		int flag = seatSvc.do_update_reservation(seat);
+		if(seatArr == null) throw new IllegalArgumentException();
+		if(roomId == null || roomId == "") throw new IllegalArgumentException();
+		if(useYN == null || useYN == "") throw new IllegalArgumentException();
+		
+		String[] arr = seatArr.split("%");
+		int flag = 0;
+		for(int i=1 ; i<arr.length ; i++) {
+			LGS_SeatVO vo = new LGS_SeatVO();
+			vo.setSeatNm(arr[i]);
+			vo.setRoomId(roomId);
+			vo.setUseYN(useYN);
+		flag += seatSvc.do_update_reservation(vo);
+		}
 		
 		LOG.debug("==================================");
+		LOG.debug("length : " + arr.length + "(-1)");
 		LOG.debug("flag : " + flag);
 		LOG.debug("==================================");
 		
 		Message message = new Message();
-		if(flag > 0) {
+		if(flag >= arr.length-1) {
 			message.setMsgId("1");
 			message.setMsgMsg("성공");
 		}else {

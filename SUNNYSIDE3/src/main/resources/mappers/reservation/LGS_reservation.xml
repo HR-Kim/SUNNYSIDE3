@@ -137,4 +137,24 @@
         AND
             SEAT_NM = #{seatNm, jdbcType=VARCHAR}
 	</select>
+	
+	<select id="do_retrieve_seatRealTime" parameterType="Search" resultType="Seat">
+		SELECT BRANCH_ID as branchId,
+			    ROOM_ID as roomId,
+				SEAT_NM as seatNm,
+				SEAT_Y as seatY,
+				SEAT_X as seatX,
+				USE_YN as useYN,
+				SCREEN_ID as screenId
+		FROM SEAT_RESERVATION
+		WHERE ROOM_ID = #{searchWord, jdbcType=VARCHAR}
+		AND SCREEN_ID = (
+		                SELECT SCREEN_ID
+		                FROM SCREEN_INFO
+		                WHERE ROOM_ID = #{searchWord, jdbcType=VARCHAR}
+		                AND TO_CHAR(SYSDATE, 'YYYY-MM-DD') = TO_CHAR(SCREEN_DT, 'YYYY-MM-DD')
+		                AND SYSDATE <![CDATA[>=]]> START_TIME
+		                AND SYSDATE <![CDATA[<]]> END_TIME
+		                )
+	</select>
 </mapper>

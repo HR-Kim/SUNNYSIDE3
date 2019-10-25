@@ -241,7 +241,11 @@
     			setFinalCost();
     		});
     		
-    		function startPay(){
+    		function startPay(){success();
+            seatUpdateUnable();
+            //성공시 이동할 페이지
+            var mainForm = $("#mainForm");
+            mainForm.submit();
     			var userCellphone = '${user.cellphone}';
     			var userName = '${user.userName}';
     			var email = '${user.email}';
@@ -315,8 +319,8 @@
 					var movieInfo = data;
 					var kortitle = movieInfo.kortitle;
 					var engtitle = movieInfo.engtitle;
-					if(kortitle == "undefined" || kortitle.length < 1) kortitle = "";
-					if(engtitle == "undefined" || engtitle.length < 1) engtitle = "";
+					if(kortitle == null) kortitle = "...";
+					if(engtitle == null) engtitle = "...";
 					$("#hd_kortitle").val(kortitle);
 					$("#hd_engtitle").val(engtitle);
 
@@ -496,28 +500,26 @@
     		function seatUpdateUnable(){
     			var roomId = "${vo.roomId}";
     			var stringInfo = "${seatInfo}";
-    			var arr = stringInfo.split("%");
+    			var seatArr = stringInfo;
 
-    			for(var i=1 ; i<arr.length ; i++){
-    				var seatNm = arr[i];
-	    			$.ajax({
-	    				type : "POST",
-	    				url : "${context}/seat/do_update.do",
-	    				dataType : "json",
-	    				data : {
-	    					"roomId" : roomId,
-							"seatNm" : seatNm,
-							"useYN" : 0
-	    				}
-					}).done(function(data){
-						var msg = data;
-						if(msg.msgId == "1"){
-							//alert("u1");
-						}else{
-							//alert("u0");
-						}
-					});
-    			}
+    			$.ajax({
+    				type : "POST",
+    				url : "${context}/seat/do_update_reservation.do",
+    				dataType : "json",
+    				data : {
+    					"roomId" : roomId,
+						"useYN" : 0,
+						"seatArr" : seatArr
+    				}
+				}).done(function(data){
+					var msg = data;
+					if(msg.msgId == "1"){
+						//alert("u1");
+					}else{
+						//alert("u0");
+					}
+				});
+   			
     		}
     	</script>
 	</body>

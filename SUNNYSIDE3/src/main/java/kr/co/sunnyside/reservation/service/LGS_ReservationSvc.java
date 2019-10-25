@@ -17,4 +17,6 @@ public interface LGS_ReservationSvc {
 	public DTO do_selectOne(DTO dto);
 
 	public DTO do_selectOne_result(DTO dto);
+	
+	public List<?> do_retrieve_seatRealTime(DTO dto);
 }

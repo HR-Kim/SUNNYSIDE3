@@ -1052,7 +1052,7 @@
 	    		function create_Seat_Table(){
 					var searchWord = $("#hd_selectedScreenId").val();
 	    			var searchDiv = "70";
-	    			
+	    			alert("진입");
 	    			$.ajax({
 	    				type : "POST",
 	    				url : "${context}/seat/do_retrieve_reservation.do",
@@ -1064,7 +1064,7 @@
 	    			success: function(data){
 	    				var seatArr = data;
 	    				if(seatArr.length != 0){
-	    					
+	    					console.log(seatArr);
 	    					$(".seatPage").css("display", "block");
 	    					
 	    					for(var i=0 ; i< seatArr.length ; i++){

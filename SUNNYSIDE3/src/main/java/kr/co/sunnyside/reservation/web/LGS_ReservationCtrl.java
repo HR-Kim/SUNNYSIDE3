@@ -19,6 +19,7 @@ import kr.co.sunnyside.cmn.SearchVO;
 import kr.co.sunnyside.reservation.service.LGS_ReservationSvc;
 import kr.co.sunnyside.reservation.service.LGS_TicketVO;
 import kr.co.sunnyside.screeninfo.service.LGS_ScreenInfoVO;
+import kr.co.sunnyside.seat.service.LGS_SeatVO;
 
 @Controller
 public class LGS_ReservationCtrl {
@@ -248,6 +249,28 @@ public class LGS_ReservationCtrl {
 		
 		LOG.debug("==================================");
 		LOG.debug("jsonStr : " + jsonStr);
+		LOG.debug("==================================");
+		
+		return jsonStr;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "reservation/do_retrieve_seatRealTime.do", method = RequestMethod.POST)
+	public String do_retrieve_seatRealTime(SearchVO search, Model model) {
+		LOG.debug("==================================");
+		LOG.debug("Controller : do_retrieve_screenInfo");
+		LOG.debug("==================================");
+		
+		if(search.getPageSize() == 0) search.setPageSize(10);
+		if(search.getPageNum() == 0) search.setPageNum(1);
+		
+		List<LGS_SeatVO> list = (List<LGS_SeatVO>) reservationSvc.do_retrieve_seatRealTime(search);
+		
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(list);
+		
+		LOG.debug("==================================");
+		LOG.debug("list : " + list);
 		LOG.debug("==================================");
 		
 		return jsonStr;

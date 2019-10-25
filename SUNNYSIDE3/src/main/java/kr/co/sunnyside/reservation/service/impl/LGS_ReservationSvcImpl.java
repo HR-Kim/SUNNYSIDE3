@@ -47,4 +47,10 @@ public class LGS_ReservationSvcImpl implements LGS_ReservationSvc {
 		return reservationDao.do_selectOne_result(dto);
 	}
 
+	@Override
+	public List<?> do_retrieve_seatRealTime(DTO dto) {
+		return reservationDao.do_retrieve_seatRealTime(dto);
+	}
+
+	
 }

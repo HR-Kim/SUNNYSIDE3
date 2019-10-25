@@ -467,7 +467,7 @@
     			$("#hd_totalSeat").val(td.eq(4).text());				//총좌석(히든)
     			
     			delete_Seat_Table();
-    			create_Seat_Table(td);
+    			create_seatRealTime_Table(td);
     		});
     		
     		//지점 테이블 클릭
@@ -630,7 +630,7 @@
     			});
     		}
     		
-    		//좌석테이블 생성
+    		//원본좌석테이블 생성
     		function create_Seat_Table(td){
     			$("#seatTableInfo").text("");
     			if(td == null || td.length == 1)return;
@@ -672,6 +672,58 @@
         				}		
     				}else{
     					$("#seatTableInfo").text(td.eq(2).text() + "은 좌석이 없습니다.\n좌석을 생성해주세요.");
+    				}
+    			},
+    			complete:function(data){
+    				loading(false);
+    			},
+    			error:function(xhr,status,error){
+    				
+    			}
+    			}); 
+    		}
+    		
+    		//영화가 편성된 좌석테이블 생성
+    		function create_seatRealTime_Table(td){
+    			$("#seatTableInfo").text("");
+    			if(td == null || td.length == 1)return;
+    			loading(true);
+    			
+				var searchWord = td.eq(1).text();			//상영관ID
+    			console.log(searchWord);
+    			$.ajax({
+    				type : "POST",
+    				url : "${context}/reservation/do_retrieve_seatRealTime.do",
+    				dataType : "json",
+    				data : {
+    					"searchWord" : searchWord
+    				}, 
+    			success: function(data){
+    				var seatArr = data;console.log(seatArr);
+    				if(seatArr.length != 0){
+    					var screenId = seatArr[0].screenId;
+    					$("#seatTableInfo").text(td.eq(2).text() + "의 좌석테이블 입니다.\n현재 상영중입니다. (상영ID : "+screenId+")");
+    					$(".seatWrap").css("display", "block");
+    					for(var i=0 ; i< seatArr.length ; i++){
+        					var y= seatArr[i].seatY;		//Y축값
+        					var x= seatArr[i].seatX;		//X축값
+        					var yn = seatArr[i].useYN;		//사용여부
+        					var seat = $("button[data-y="+y+"][data-x="+x+"]");	//좌석버튼찾기
+        					seat.css("color", "white");
+        					if(yn == '1'){										//사용가능좌석인 것(1)
+        	   					seat.prop("disabled", false);					//해당 버튼을 사용가능하도록 만든다
+        	   					seat.text(x);
+        	   					seat.css("background-color", "blue");
+        					}else if(yn == '0') {								//사용불가인것(0) X표시
+        						seat.prop("disabled", false);
+        	   					seat.text("X");
+        	   					seat.css("background-color", "red");
+        					}else{												//(3) 이면 복도
+        						seat.css("visibility" ,"hidden");
+        					}
+        				}		
+    				}else{
+    					create_Seat_Table(td);
     				}
     			},
     			complete:function(data){

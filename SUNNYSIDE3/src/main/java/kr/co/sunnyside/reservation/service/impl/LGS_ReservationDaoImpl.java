@@ -12,6 +12,7 @@ import kr.co.sunnyside.cmn.DTO;
 import kr.co.sunnyside.cmn.SearchVO;
 import kr.co.sunnyside.cmn.WorkDiv;
 import kr.co.sunnyside.reservation.service.LGS_TicketVO;
+import kr.co.sunnyside.seat.service.LGS_SeatVO;
 
 @Repository
 public class LGS_ReservationDaoImpl implements WorkDiv {
@@ -164,4 +165,25 @@ public class LGS_ReservationDaoImpl implements WorkDiv {
 		return outVO;
 	}
 	
+	public List<?> do_retrieve_seatRealTime(DTO dto) {
+		String statement = this.NAMESPACE + ".do_retrieve_seatRealTime";
+	
+		LOG.debug("==================================");
+		LOG.debug("statement = " + statement);
+		LOG.debug("==================================");
+		
+		SearchVO search = (SearchVO) dto;
+		
+		LOG.debug("==================================");
+		LOG.debug("search = " + search);
+		LOG.debug("==================================");
+		
+		List<LGS_SeatVO> list = sqlSessionTemplate.selectList(statement, search);
+		
+		LOG.debug("==================================");
+		LOG.debug("list = " + list);
+		LOG.debug("==================================");
+		
+		return list;
+	}
 }
