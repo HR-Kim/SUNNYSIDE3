@@ -44,42 +44,33 @@
 							<img src="${context}/resources/img/divisima/logo.png" alt="">
 						</a>
 					</div>
-					<div class="col-xl-5 col-lg-4">
-						
-					</div>
-					<div class="col-xl-4 col-lg-5">
+					<div class="col-xl-8 col-lg-8 text-right">
 						<div class="user-panel">
 						
    							<!-- 로그인 시 헤더 모습 -->
 							<c:choose>
 								<c:when test="${not empty user.userId}">
 									<!-- 님 환영합니다. -->
+									<i class="flaticon-profile"></i>
 									${user.userName} <spring:message code="message.header.welcome"/>
-									<li><a href="${context}/login/logout.do"><spring:message code="message.header.logout"/></a></li>
-									<li><a href="${context}/userpage/do_userpage.do"><spring:message code="message.header.userpage"/></a></li>
+									(<a href="${context}/login/logout.do"><spring:message code="message.header.logout"/></a>)
+									
+									&nbsp &nbsp
+									<%-- <a href="${context}/userpage/do_userpage.do"><spring:message code="message.header.userpage"/></a> --%>
 								</c:when>
 								<c:otherwise> <!-- 로그아웃 시 헤더 모습 -->
-									<div class="up-item">
-										<div class="user-panel">
-											<div class="up-item">
-												<i class="flaticon-profile"></i>
-												<a href="${context}/login/login_view.do"><spring:message code="message.login.login"/></a> / <a href="${context}/login/join_view.do"><spring:message code="message.login.join"/></a>
-											</div>							
-										</div>
-									</div>
+									<i class="flaticon-profile"></i>
+									<a href="${context}/login/login_view.do"><spring:message code="message.login.login"/></a> / <a href="${context}/login/join_view.do"><spring:message code="message.login.join"/></a>
 								</c:otherwise>
 							</c:choose>
 				
     						<!-- 로그인 했을 때만 장바구니 표시 -->
 							<c:choose>
  								<c:when test="${not empty user.userId}">
-									<div class="up-item" >
-										<div class="shopping-card">
-											<i class="flaticon-bag"></i>
-										</div>
-										<!-- 장바구니 -->
-										<a href="${context}/cart/do_retrieve.do?userId=<c:out value="${user.userId}"/>"><spring:message code="message.header.cart"/></a>
-									</div>
+ 									<!-- 장바구니 -->
+									<i class="flaticon-bag"></i>
+									<a href="${context}/cart/do_retrieve.do?userId=<c:out value="${user.userId}"/>"><spring:message code="message.header.cart"/></a>
+									&nbsp
 								</c:when>
 								<c:otherwise>
 									<div></div>
