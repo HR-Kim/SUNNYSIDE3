@@ -9,8 +9,6 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="${context}/resources/image/login/favicon.ico"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -31,9 +29,7 @@
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/util.css">
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/main.css">
 <!--===============================================================================================-->
-
-<!-- 부트스트랩 -->
-<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="${context}/resources/css/headerStyle.css" rel="stylesheet"> 
 
 </head>
 <body>

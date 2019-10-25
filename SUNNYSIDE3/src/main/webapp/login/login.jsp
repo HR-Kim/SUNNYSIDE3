@@ -30,8 +30,6 @@
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login/main.css">
 <!--===============================================================================================-->
 <link href="${context}/resources/css/headerStyle.css" rel="stylesheet"> 
-<!-- 부트스트랩 -->
-<%-- <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet"> --%>
 
 </head>
 <body> 
@@ -117,7 +115,6 @@
 	<script src="${context}/resources/js/login/animsition.min.js"></script>
 <!--===============================================================================================-->
 	<script src="${context}/resources/js/login/popper.js"></script>
-	<script src="${context}/resources/js/login/bootstrap.min.js"></script>
 <!--===============================================================================================-->
 	<script src="${context}/resources/js/login/select2.min.js"></script>
 <!--===============================================================================================-->
