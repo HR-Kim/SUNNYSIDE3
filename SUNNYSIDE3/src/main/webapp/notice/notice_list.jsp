@@ -47,6 +47,7 @@
 	int bottomCount = 10;
 	int currPageNo  = 1;//pageNum
 	int rowPerPage  = 10;//pageSize
+	int pageIndex  = 0;
 	
 	String url      = request.getContextPath()+"/notice/do_retrieve.do";
 	String scriptName ="search_page";
@@ -155,7 +156,7 @@
 							<c:forEach var="vo" items="${list}">
 								<tr>
 									<td class="text-center" style="display:none;"><c:out value="${vo.noticeId }"/></td>
-									<td class="text-center"><c:out value="${vo.num }"/></td>
+									<td class="text-center"><c:out value="<%=maxNum - (rowPerPage * currPageNo)+pageIndex-- %>"/></td>
 									<td class="text-center"><c:out value="${vo.branchSNm }"/></td>
 									<td class="text-left"><c:out value="${vo.title }"/>
 										&nbsp;<c:if test="${not empty vo.fileId and '0'!=vo.fileId}">
