@@ -11,7 +11,7 @@
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 <%-- <link href="${context}/resources/css/headerStyle.css" rel="stylesheet" type="text/css"> --%>
 <!-- <link href="../resources/css/list.css" rel="stylesheet" type="text/css">  -->
-<link href="../resources/css/list.css" rel="stylesheet" type="text/css"> 
+<link href="${context}/resources/css/list.css" rel="stylesheet" type="text/css"> 
 </head>
 <style>
 .btn-sq-lg {
@@ -83,7 +83,7 @@
 							<!-- 이미지  -->			
 							<span class="image">
 								<!-- 영화포스터 -->
-								<img src="<c:out value='${vo.poster}'/>" alt='<spring:message code="message.movie.poster"/>' style="height: 350px; width:250px;" onerror="this.src='../resources/image/layout/noImage.png'">
+								<img src="<c:out value='${vo.poster}'/>" alt='<spring:message code="message.movie.poster"/>' style="height: 350px; width:250px;" onerror="this.src='${context}/resources/image/layout/noImage.png'">
 							</span>
 							<!--// 이미지  -->			
 							<!-- 예매하기, 상세보기 버튼 -->

@@ -24,31 +24,39 @@ public class LHJ_BoxofficeSvcImpl implements LHJ_BoxofficeSvc {
 	
 	/**매일 오전 9시마다 박스오피스 데이터 delete 한 뒤 insert*/
 	public void do_deleteAndSave() {
-		boxofficeDaoImpl.do_delete();
 		
-		List<LHJ_MovieVO> kobisList = LHJ_MovieParsing.getBoxofficeList();
-		LOG.debug("============================");
-	 	LOG.debug("=kobisList="+kobisList);
-	 	LOG.debug("============================");	
-		
-	 	int count = 0;
-	 	for(LHJ_MovieVO vo : kobisList) {
-	 		count = movieDaoImpl.do_exist(vo); //kobis(박스오피스)에서 읽어온 영화정보가 movie테이블에 없으면
-	 		if(count == 0) {
-	 			//kmdb에서 영화제목과 개봉일자를 이용하여 url을 구하고, 데이터를 가져온다.
-	 			LOG.debug(vo.getKortitle()+"kmdb에서 영화제목과 개봉일자를 이용하여 url을 구하고, 데이터를 가져온다.");
-	 			List<LHJ_MovieVO> kmdbTitleList = LHJ_MovieParsing.getMovieSearchList(vo.getKortitle(), vo.getRelDate());
-	 			for(LHJ_MovieVO kmdbVO : kmdbTitleList) {
-	 				LOG.debug("============================");
-	 				LOG.debug("=kmdbTitleList="+kmdbTitleList);
-	 				LOG.debug("============================");	
-	 				LOG.debug("============================");
-	 			 	LOG.debug("=제목="+kmdbVO.getKortitle());
-	 			 	LOG.debug("============================");	
-	 				movieDaoImpl.do_save(kmdbVO); //가져온 데이터를 movie테이블에 save(insert)한다.
-	 			}
-	 		}
-	 	}
+			boxofficeDaoImpl.do_delete();
+			
+			List<LHJ_MovieVO> kobisList = LHJ_MovieParsing.getBoxofficeList();
+			LOG.debug("============================");
+		 	LOG.debug("=kobisList="+kobisList);
+		 	LOG.debug("============================");	
+			
+		 	int count = 0;
+		 	for(LHJ_MovieVO vo : kobisList) {
+		 		count = movieDaoImpl.do_exist(vo); //kobis(박스오피스)에서 읽어온 영화정보가 movie테이블에 없으면
+		 		if(count == 0) {
+		 			//kmdb에서 영화제목과 개봉일자를 이용하여 url을 구하고, 데이터를 가져온다.
+		 			LOG.debug(vo.getKortitle()+"kmdb에서 영화제목과 개봉일자를 이용하여 url을 구하고, 데이터를 가져온다.");
+		 			List<LHJ_MovieVO> kmdbTitleList = LHJ_MovieParsing.getMovieSearchList(vo.getKortitle(), vo.getRelDate());
+		 			for(LHJ_MovieVO kmdbVO : kmdbTitleList) {
+		 				LOG.debug("============================");
+		 				LOG.debug("=kmdbTitleList="+kmdbTitleList);
+		 				LOG.debug("============================");	
+		 				LOG.debug("============================");
+		 			 	LOG.debug("=제목="+kmdbVO.getKortitle());
+		 			 	LOG.debug("============================");	
+		 			 	try {
+		 			 		movieDaoImpl.do_save(kmdbVO); //가져온 데이터를 movie테이블에 save(insert)한다.
+		 			 	} catch (Exception e) {
+		 					LOG.debug("============================");
+		 					LOG.debug("Exception:"+e.toString());
+		 					LOG.debug("============================");
+		 					continue; 
+		 				}	
+		 			}
+		 		}
+		 	}	
 	 	
 		for(LHJ_MovieVO vo : kobisList) {
 			boxofficeDaoImpl.do_save(vo);

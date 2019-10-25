@@ -11,7 +11,7 @@
 	<section class="footer-section">
 		<div class="container">
 			<div class="footer-logo text-center">
-				<a href="index.html"><img src="../../sunnyside/resources/img/divisima/logo-light.png" alt="/sunnyside/main/main.do"></a>
+				<a href="${context}/sunnyside/main/main.do"><img src="${context}/sunnyside/resources/img/divisima/logo-light.png" alt="로고이미지"></a>
 			</div>
 			<div class="row">
 				<div class="col-lg-4 col-sm-7">
@@ -67,13 +67,13 @@
 	</section>
 	<!-- Footer section end -->
     <!--====== Javascripts & Jquery ======-->
-	<script src="../../sunnyside/resources/js/divisima/jquery-3.2.1.min.js"></script>
-	<script src="../../sunnyside/resources/js/divisima/bootstrap.min.js"></script>
-	<script src="../../sunnyside/resources/js/divisima/jquery.slicknav.min.js"></script>
-	<script src="../../sunnyside/resources/js/divisima/owl.carousel.min.js"></script>
-	<script src="../../sunnyside/resources/js/divisima/jquery.nicescroll.min.js"></script>
-	<script src="../../sunnyside/resources/js/divisima/jquery.zoom.min.js"></script>
-	<script src="../../sunnyside/resources/js/divisima/jquery-ui.min.js"></script>
-	<script src="../../sunnyside/resources/js/divisima/main.js"></script>	
+	<script src="${context}/sunnyside/resources/js/divisima/jquery-3.2.1.min.js"></script>
+	<script src="${context}/sunnyside/resources/js/divisima/bootstrap.min.js"></script>
+	<script src="${context}/sunnyside/resources/js/divisima/jquery.slicknav.min.js"></script>
+	<script src="${context}/sunnyside/resources/js/divisima/owl.carousel.min.js"></script>
+	<script src="${context}/sunnyside/resources/js/divisima/jquery.nicescroll.min.js"></script>
+	<script src="${context}/sunnyside/resources/js/divisima/jquery.zoom.min.js"></script>
+	<script src="${context}/sunnyside/resources/js/divisima/jquery-ui.min.js"></script>
+	<script src="${context}/sunnyside/resources/js/divisima/main.js"></script>	
 </body>
 </html>

@@ -30,7 +30,9 @@ public class LHJ_MovieParsing {
 	public static List<LHJ_MovieVO> getMovieSearchList(String title, String date) {
 		List<LHJ_MovieVO> list = new ArrayList<LHJ_MovieVO>();
 		
-		title = title.replace(" ", "%20");
+//		title = title.replace(" ", "%20");
+		
+		title = title.substring(0, title.indexOf(" "));
 		try {
 			URL url = new URL(KmdbUrlTitle(title, date));//url
 			list=getKmdbData(url);//데이터를 List형태로 반환
