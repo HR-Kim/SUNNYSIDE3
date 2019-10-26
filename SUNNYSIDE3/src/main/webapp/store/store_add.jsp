@@ -79,7 +79,7 @@
 	 /**등록*/ 
 		$("#addBtn").on("click",function(e){
 			
-			if(confirm("등록하시겠습니까?")==false) return;
+			//if(confirm("등록하시겠습니까?")==false)return;
 
 			  console.log($("#productId").val());
 			  console.log($("#productNm").val());
@@ -113,6 +113,7 @@
 	      success: function(data){ 
 			  if(null != data && data.msgId=="1"){
 				  alert("등록 되었습니다.");
+				  opener.parent.location.reload();
 				  window.close();
 				
 			  }else{

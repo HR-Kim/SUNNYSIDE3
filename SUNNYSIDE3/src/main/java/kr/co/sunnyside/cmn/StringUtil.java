@@ -25,8 +25,8 @@ public class StringUtil {
 	private static Logger LOG = LoggerFactory.getLogger(StringUtil.class);
 
 	// File Root 디렉토리
-	//public static final String UPLOAD_ROOT = "/usr/local/apache-tomcat-8.5.34/webapps/SUNNYSIDE3/resources/image"; //aws 사용했을 때 상품사진 저장 위치 
-	public static final String UPLOAD_ROOT = "C:\\Users\\sist\\git\\SUNNYSIDE3\\SUNNYSIDE3\\src\\main\\webapp\\resources\\image";
+	public static final String UPLOAD_ROOT = "/usr/local/apache-tomcat-8.5.34/webapps/SUNNYSIDE3/resources/image"; //aws 사용했을 때 상품사진 저장 위치 
+	//public static final String UPLOAD_ROOT = "C:\\Users\\sist\\git\\SUNNYSIDE3\\SUNNYSIDE3\\src\\main\\webapp\\resources\\image";
 	public static final String MAIN_IMAGE_ROOT = "C:\\Users\\sist\\git\\SUNNYSIDE3\\SUNNYSIDE3\\src\\main\\webapp\\resources\\img\\banner";
 
 	//payCode 자르기 메소드 (스토어)
@@ -198,8 +198,8 @@ public class StringUtil {
 	 * @return 파일 rename명 cloude.jpg->cloude1~9999.jpg
 	 */
 	public static String changePath(String str) {
-		//str = ".."+str.substring(str.indexOf("/resources"));
-		str = ".."+str.substring(str.indexOf("\\resources")).replace("\\", "/");
+		str = ".."+str.substring(str.indexOf("/resources"));
+		//str = ".."+str.substring(str.indexOf("\\resources")).replace("\\", "/");
 		
 		return str;
 	}
@@ -211,8 +211,8 @@ public class StringUtil {
 	 * @return 파일 rename명 cloude.jpg->cloude1~9999.jpg
 	 */
 	public static String backPath(String str) {
-		//str = "/usr/local/apache-tomcat-8.5.34/webapps/SUNNYSIDE3"+str.substring(str.indexOf("/resources"));
-		  str = "C:\\Users\\sist\\git\\SUNNYSIDE3\\SUNNYSIDE3\\src\\main\\webapp"+str.substring(str.indexOf("/resources")).replace("/", "\\");
+		str = "/usr/local/apache-tomcat-8.5.34/webapps/SUNNYSIDE3"+str.substring(str.indexOf("/resources"));
+		// str = "C:\\Users\\sist\\git\\SUNNYSIDE3\\SUNNYSIDE3\\src\\main\\webapp"+str.substring(str.indexOf("/resources")).replace("/", "\\");
 		return str;
 	}
 	

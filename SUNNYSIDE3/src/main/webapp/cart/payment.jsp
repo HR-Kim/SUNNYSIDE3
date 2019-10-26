@@ -96,8 +96,8 @@
 		userId = $("#userId").text();
 		tatalCost = $("#tatalCost").val();
 		userName =$("#userName").text();	
-		//payProduct();	 
-		goPayList()
+		payProduct();	 
+		//goPayList() //api없이 결제할 경우 이걸 주석칠 것
 	});
 	
 	function payProduct(){
@@ -138,7 +138,7 @@
                     }
 				});
                 //성공시 이동할 페이지
-                //goPayList();
+                goPayList();
                 
 			 } else {
 		        msg = '결제에 실패하였습니다.  \n';

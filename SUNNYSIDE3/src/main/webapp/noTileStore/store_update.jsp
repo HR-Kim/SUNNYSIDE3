@@ -80,7 +80,6 @@
   	<tr>
   	 <td colspan="2" align="center">
   	 	<input type="submit" value="수정" id="doUpdate"  class="btn btn-outline-dark">
-  	 	<input type="button" value="취소" id="backBtn"  class="btn btn-outline-dark">
   	 </td>
   	</tr> 	
   </table> 
@@ -95,7 +94,7 @@
 
 	//수정
 		$("#doUpdate").on("click",function(e){
-			if(confirm("수정하시겠습니까?")==false) return;
+			
 			console.log("productNm="+$("#productNm").val());
 			console.log("productCost="+$("#productCost").val());
 			console.log("productInfo="+$("#productInfo").val());
@@ -142,6 +141,8 @@
 	     }
 	    }); //--ajax  
 	 }
+	 
+	 
 	 
  $(document).ready(function(){
 	//form validate
