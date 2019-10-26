@@ -67,4 +67,9 @@ public class LGS_SeatSvcImpl implements LGS_SeatSvc {
 		return seatDao.do_selectOne_reservation(dto);
 	}
 
+	@Override
+	public int do_deleteAll_reservation() {
+		return seatDao.do_deleteAll_reservation();
+	}
+
 }

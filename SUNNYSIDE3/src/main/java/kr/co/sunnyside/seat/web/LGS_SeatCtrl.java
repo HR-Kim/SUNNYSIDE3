@@ -356,4 +356,36 @@ public class LGS_SeatCtrl {
 		
 		return gsonStr;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "seat/do_deleteAll_reservation.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	public String do_deleteAll_reservation(LGS_SeatVO seat) {
+		LOG.debug("==================================");
+		LOG.debug("Controller : do_deleteAll_seat");
+		LOG.debug("==================================");
+
+		int flag = seatSvc.do_deleteAll_reservation();
+		
+		LOG.debug("==================================");
+		LOG.debug("flag : " + flag);
+		LOG.debug("==================================");
+		
+		Message message = new Message();
+		if(flag > 0) {
+			message.setMsgId("1");
+			message.setMsgMsg("성공");
+		}else {
+			message.setMsgId("0");
+			message.setMsgMsg("실패");
+		}
+		
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(message);
+		
+		LOG.debug("==================================");
+		LOG.debug("jsonStr : " + jsonStr);
+		LOG.debug("==================================");
+		
+		return jsonStr;
+	}
 }

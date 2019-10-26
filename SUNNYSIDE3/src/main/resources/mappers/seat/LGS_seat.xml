@@ -161,6 +161,11 @@
 		WHERE SCREEN_ID = #{screenId, jdbcType=VARCHAR}
 	</delete>
 	
+	<delete id="do_deleteAll_reservation">
+		DELETE FROM SEAT_RESERVATION
+		WHERE 1=1
+	</delete>
+	
 	<select id="do_selectOne_reservation" parameterType="Seat" resultType="Seat">
 		SELECT
 			BRANCH_ID as branchId,

@@ -26,4 +26,6 @@ public interface LGS_SeatSvc {
 
 	public DTO do_selectOne_reservation(DTO dto);
 	
+	public int do_deleteAll_reservation();
+	
 }

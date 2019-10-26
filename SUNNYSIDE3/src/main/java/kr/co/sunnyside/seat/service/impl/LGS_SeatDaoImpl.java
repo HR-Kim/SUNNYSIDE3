@@ -252,4 +252,19 @@ Logger LOG = LoggerFactory.getLogger(this.getClass());
 		return outVO;
 	}
 
+	public int do_deleteAll_reservation() {
+		String statement = this.NAMESPACE + ".do_deleteAll_reservation";
+		
+		LOG.debug("==================================");
+		LOG.debug("statement = " + statement);
+		LOG.debug("==================================");
+
+		int flag = sqlSessionTemplate.delete(statement);
+		
+		LOG.debug("==================================");
+		LOG.debug("flag = " + flag);
+		LOG.debug("==================================");
+		
+		return flag;
+	}
 }

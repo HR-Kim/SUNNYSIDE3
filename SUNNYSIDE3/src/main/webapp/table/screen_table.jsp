@@ -1053,7 +1053,7 @@
 			});
 			
 			//상영영화추가
-			function add_NewScreenMovie(){alert("실행");
+			function add_NewScreenMovie(){
 				loading(true);
 				var eDate = $("#endDate").val(); 
 				var eTime = $("#endTime").val();
@@ -1095,7 +1095,7 @@
     				//selectedMovie_Off();
     				var roomId = $("#hd_roomId").val();
                 	create_RoomTable(roomId, false);
-    				loading(false);
+    				
     			},
     			error:function(xhr,status,error){
     				alert("추가에 실패했습니다.\n해당 영화를 삭제하고 다시 편성해주세요.");
@@ -1123,7 +1123,7 @@
         				}
         			},
         			complete:function(data){
-        				
+        				loading(false);
         			},
         			error:function(xhr,status,error){
         				alert("편성오류");
