@@ -245,7 +245,7 @@
 	  	   
 	     },
 	     error:function(xhr,status,error){
-	         alert("error:"+error);
+	         alert("이미 추가된 상품입니다.");
 	     }
 	    }); //--ajax  
 	 }

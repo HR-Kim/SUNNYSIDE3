@@ -163,6 +163,7 @@
         console.log("productId="+productId); 
         console.log("userId="+$("#userId").text()); 
         console.log("strCount="+strCount); 
+        console.log("tatalCost="+$("#tatalCost").text()); 
 
       //ajax
 	     $.ajax({
@@ -174,7 +175,7 @@
 	        		   "productId":productId, 
 	        		   "userId":$("#userId").text(),       
 	        		   "strCount":strCount,
-	        		   "tatalCost":$("#tatalCost").val()
+	        		   "tatalCost":$("#tatalCost").text()
 	          },   
 	      success: function(data){ 
 			  if(null != data && data.msgId=="1"){

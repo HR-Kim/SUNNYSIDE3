@@ -57,7 +57,9 @@ public class SEJ_CartCtrl {
 		LOG.debug("1.=====================");
 		
 		List<SEJ_CartVO> directCartlist = (List<SEJ_CartVO>) this.cartService.do_directPayRetrieve(inVO);
+		int totalCost=cartService.do_totalCost(inVO.getUserId());
 		model.addAttribute("list", directCartlist);
+		model.addAttribute("totalCost", totalCost);	
 		
 		return BEFORE_PAY_LIST_VIEW;
 	}
@@ -88,12 +90,14 @@ public class SEJ_CartCtrl {
 		List<String> productIdList =StringUtil.CutProductId(inVO); //상품아이디 자르기
 		List<String> payCodeList =StringUtil.CutpayCode(inVO); //결제코드 자르기
 		List<String> countList =StringUtil.Cutcount(inVO); //수량 자르기
+		int totalCost = cartService.do_totalCost(inVO.getUserId());
 		
 		for(int i=0; i<productIdList.size();i++) {
 			SEJ_CartVO cartVO = inVO;
 			cartVO.setProductId(productIdList.get(i)); 
 			cartVO.setPayCode(payCodeList.get(i));
 			cartVO.setStrCount(countList.get(i));
+			cartVO.setTotalCost(totalCost);
 			cartService.do_payComplete(cartVO);//결제 테이블에 추가하기 
 		}
 		
@@ -111,6 +115,7 @@ public class SEJ_CartCtrl {
 			LOG.debug("1.=====================");
 			
 			List<SEJ_CartVO> completeList = (List<SEJ_CartVO>) this.cartService.do_payCompleteList(inVO);
+			
 			model.addAttribute("list", completeList);
 			
 			return AFTER_PAY_LIST_VIEW;

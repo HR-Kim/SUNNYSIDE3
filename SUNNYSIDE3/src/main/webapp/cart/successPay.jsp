@@ -23,30 +23,48 @@
         <h4>결제 내역</h4>
             <table class="table table-bordered">
             	<c:choose>
-	                 <c:when test="${list.size() >0 }">
-		            
-		                  	<c:forEach items="${list }" var="vo">
-					            <tr>
-					            	<td align="center">결제번호</td>
-					           		<td><c:out value="${vo.payCode}"/></td>
-					           	</tr>
-					           	<tr>
-					            	<td align="center">상품이름</td>
-					           		<td><c:out value="${vo.productNm}"/></td>
-					           	</tr>
-					           	<tr>
-					            	<td align="center">결제금액</td>
-					           		<td><fmt:formatNumber value="${vo.totalCost}" pattern="#,###,###"/>원</td>
-					           	</tr>
-					           	<tr>
-					            	<td align="center">결제일</td>
-					           		<td><c:out value="${vo.payDt}"/></td>
-					           	</tr>
-				       		</c:forEach>
-				    </c:when>
-				    <c:otherwise>
-				    </c:otherwise>			       
-	           	</c:choose>
+				    <c:when test="${list.size() == 1 }">
+				         <c:forEach items="${list }" var="vo">
+				            <tr>
+				               <td align="center">결제번호</td>
+				               <td><c:out value="${vo.payCode}"/></td>
+				            </tr>
+				            <tr>
+				               <td align="center">상품이름</td>
+				               <td><c:out value="${vo.productNm}"/></td>
+				            </tr>
+				            <tr>
+				               <td align="center">결제금액</td>
+				               <td><fmt:formatNumber value="${vo.totalCost}" pattern="#,###,###"/>원</td>
+				            </tr>
+				            <tr>
+				               <td align="center">결제일</td>
+				               <td><c:out value="${vo.payDt}"/></td>
+				            </tr>
+				         </c:forEach>
+				   </c:when>
+				   <c:when test="${list.size() >0 }">
+				      <c:forEach items="${list }" var="vo" begin="0" end="0">
+				         <tr>
+				            <td align="center">결제번호</td>
+				            <td><c:out value="${vo.payCode}"/></td>
+				         </tr>
+				         <tr>
+				            <td align="center">상품이름</td>
+				            <td><c:out value="${vo.productNm}"/> 외 <c:out value="${list.size()-1}"/> 건</td>
+				         </tr>
+				         <tr>
+				            <td align="center">결제금액</td>
+				            <td><fmt:formatNumber value="${vo.totalCost}" pattern="#,###,###"/>원</td>
+				         </tr>
+				         <tr>
+				            <td align="center">결제일</td>
+				            <td><c:out value="${vo.payDt}"/></td>
+				         </tr>
+				      </c:forEach>
+				   </c:when>
+				   <c:otherwise></c:otherwise>                
+				</c:choose>
            </table>
              <button type="button" class="btn btn-default" id="goHomeBtn" name="goHomeBtn" style="margin-left: 180px; margin-bottom: 50px; margin-top: 10px;">
 				<span class="glyphicon glyphicon-home"></span> 메인으로 돌아가기

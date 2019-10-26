@@ -78,7 +78,7 @@
 
 <!-- 결제완료 목록 -->
 	<select id="do_payCompleteList" parameterType="Cart" resultType="Cart" >
-	 	SELECT
+	 	SELECT 
 	 		a.pay_code as payCode,
 		    c.product_nm as productNm,
 		    b.user_id as userId,
