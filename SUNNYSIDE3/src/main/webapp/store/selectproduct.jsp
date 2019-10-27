@@ -33,7 +33,7 @@
 		<td style="display: none;" id="cartId" class="cartId" >${vo.cartId }</td>
 		<td style="display: none;" id="orgFileNm" class="orgFileNm" >${vo.orgFileNm }</td>
 		<td style="display: none;" id="saveFileNm" class="saveFileNm" >${vo.saveFileNm }</td>		
-		<td>
+		<td class="col-sm-20 col-md-18">
 			<img width="340" height="300" src="${vo.saveFileNm }">
 		</td>
 	<td>
