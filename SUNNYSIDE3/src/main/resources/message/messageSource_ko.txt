@@ -179,6 +179,7 @@ message.header.theater=극장편성
 message.header.moviemanagement=영화편성
 message.header.notice=공지사항
 message.header.questions=1:1문의
+message.header.faq=자주하는 질문
 
 
 
