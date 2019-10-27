@@ -56,7 +56,7 @@
 									(<a href="${context}/login/logout.do"><spring:message code="message.header.logout"/></a>)
 									
 									&nbsp &nbsp
-									<a href="${context}/userpage/do_userpage.do">유저마이페이지<%-- <spring:message code="message.header.userpage"/> --%></a>
+									<a href="${context}/userpage/do_userpage.do">유저마이페이지</a>
 								</c:when>
 								<c:otherwise> <!-- 로그아웃 시 헤더 모습 -->
 									<i class="flaticon-profile"></i>
