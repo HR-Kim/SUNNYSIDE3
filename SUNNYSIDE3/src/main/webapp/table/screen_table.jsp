@@ -21,6 +21,18 @@
 		<link href="${context}/resources/css/jquery-ui.css" rel="stylesheet">
 		<link  href="${context}/resources/css/jquery.timepicker.min.css" rel="stylesheet">
 		<style type="text/css">
+			.BTN_DELETE {
+				background-color: #BC4B4B;
+				color: white;
+			}
+			.BTN_RE {
+				background-color: #DBAE55;
+				color: white;
+			}
+			.THEAD_BG {
+				background-color: #282828;
+				color: white;
+			}
 			.ui-widget-content .ui-icon {
 				background-image: url("${context}/resources/image/jquery_ui/ui-icons_444444_256x240.png");
 			}
@@ -127,10 +139,10 @@
 				<label>지점 현황</label>
 				<input type="hidden" id="hd_branchId" value="">
 				<input type="hidden" id="hd_branchNm" value="">
-				<button id="branchRetrive" class="btn btn-primary btn-xs">지점조회</button>
+				<button id="branchRetrive" class="btn BTN_RE btn-xs">지점조회</button>
 				<div class="table-responsive">
 					<table id="branchTable" class="table table-hover table-bordered">
-						<thead class="bg-primary">
+						<thead class="THEAD_BG">
 							<tr>
 								<td hidden="hidden">지점ID</td>
 								<td>지점명</td>
@@ -149,7 +161,7 @@
 				<input type="hidden" id="hd_roomNm" value="">
 				<div class="table-responsive">
 					<table id="roomTable" class="table table-hover table-bordered">
-						<thead class="bg-primary">
+						<thead class="THEAD_BG">
 							<tr>
 								<td hidden="hidden">상영관ID</td>
 								<td>상영관명</td>
@@ -171,7 +183,7 @@
 				<input type="hidden" id="hd_screenId" value="">
 				<div class="table-responsive">
 					<table id="planedMovieTable" class="table table-hover table-bordered">
-						<thead class="bg-primary">
+						<thead class="THEAD_BG">
 							<tr>
 								<td hidden="hidden">스크린ID</td>
 								<td>제목</td>
@@ -190,11 +202,11 @@
 				</div>
 				<div class="planedTablePaging"></div>
 				<div class="row">
-					<div class="col-md-2">
-						<button id="moviePlan" class="btn btn-default">영화추가</button>
+					<div class="col-md-2 col-sm-2 col-xs-2">
+						<button id="moviePlan" class="btn btn-success">영화추가</button>
 					</div>
-					<div class="col-md-10 text-right">
-						<button id="planDelete" class="btn btn-default">제거</button>
+					<div class="col-md-10 col-sm-10 col-xs-10 text-right">
+						<button id="planDelete" class="btn BTN_DELETE">제거</button>
 					</div>
 				</div>
 			</div>	
@@ -209,7 +221,7 @@
 				<div class="row">
 					<div class="col-md-2">
 						<label>영화</label>
-						<button id="movieRetrive" class="btn btn-primary btn-xs">조회</button>
+						<button id="movieRetrive" class="btn BTN_RE btn-xs">조회</button>
 					</div>
 					<div class="col-md-10 text-right">
 						<button id="allBtn" class="btn btn-default btn-xs">전체</button>
@@ -225,7 +237,7 @@
 				</div>
 				<div class="table-responsive">
 					<table id="movieTable" class="table table-hover table-bordered">
-						<thead class="bg-primary">
+						<thead class="THEAD_BG">
 							<tr>
 								<td hidden="hidden">총게시물수</td>
 								<td hidden="hidden">영화ID</td>
@@ -243,10 +255,10 @@
 				</div>
 				<div class="movieTablePaging"></div>
 				<div class="row">
-					<div class="col-md-1">
-						<button id="moviePlan-add" class="btn btn-default">선택</button>
+					<div class="col-md-1 col-sm-1 col-xs-1">
+						<button id="moviePlan-add" class="btn btn-success">선택</button>
 					</div>
-					<div class="col-md-11 text-right">
+					<div class="col-md-11 col-sm-11 col-xs-11 text-right">
 						<button id="moviePlan-info" class="btn btn-default">영화정보</button>
 						<button id="moviePlan-cancel" class="btn btn-default">취소</button>
 					</div>
@@ -266,7 +278,7 @@
 				<hr/>
 				<label>선택한 영화</label>
 				<table id="selectedMovieTable" class="table table-hover table-bordered">
-					<thead class="bg-primary">
+					<thead class="THEAD_BG">
 						<tr>
 							<td>영화ID</td>
 							<td>제목</td>
@@ -458,7 +470,7 @@
             	var tr = $(this);
             	var td = tr.children();
             	$("#branchTable>tbody>tr").css("background-color", "");	//tr색 초기화
-    			$(tr).css("background-color", "red");					//선택tr 색표시
+    			$(tr).css("background-color", "#CECECE");					//선택tr 색표시
     			
             	if(td.eq(1).length == 0)return;
             	
@@ -508,7 +520,7 @@
             	var tr = $(this);
             	var td = tr.children();
             	$("#roomTable>tbody>tr").css("background-color", "");	//tr색 초기화
-    			$(tr).css("background-color", "red");					//선택tr 색표시
+    			$(tr).css("background-color", "#CECECE");					//선택tr 색표시
     			
             	if(td.eq(1).length == 0)return;
     			
@@ -988,7 +1000,7 @@
             	var tr = $(this);
             	var td = tr.children();
             	$("#movieTable>tbody>tr").css("background-color", "");	//tr색 초기화
-    			$(tr).css("background-color", "red");					//선택tr 색표시
+    			$(tr).css("background-color", "#CECECE");					//선택tr 색표시
 
             	if(td.eq(1).length == 0)return;
     			

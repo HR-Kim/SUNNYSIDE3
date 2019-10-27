@@ -18,6 +18,18 @@
 		<link href="${context}/resources/css/jquery-ui.css" rel="stylesheet">
 		
 		<style type="text/css">
+			.BTN_RE {
+				background-color: #DBAE55;
+				color: white;
+			}
+			.BTN_DELETE {
+				background-color: #BC4B4B;
+				color: white;
+			}
+			.THEAD_BG {
+				background-color: #282828;
+				color: white;
+			}
 			.HIGHLIGHT {
 				color: red;
 				font-weight: bold;
@@ -125,16 +137,16 @@
 			</div>
 		
 			<div>
-				<button id="branch_retrieve" class="btn btn-default">지점조회</button>
 				<button id="branch_plus" class="btn btn-default">지점추가</button>
-				<button id="branch_delete" class="btn btn-danger">지점제거</button>
 				<button id="branch_update" class="btn btn-default">지점이름수정</button>
+				<button id="branch_delete" class="btn BTN_DELETE">지점제거</button>
+				<button id="branch_retrieve" class="btn BTN_RE">새로고침</button>
 			</div>
 			<input type="hidden" id="hd_branchId" value="">
 			<input type="hidden" id="hd_branchNm" value="">
 			<div class="table-responsive">
 				<table id="branchTable" class="table table-hover table-bordered">
-					<thead class="bg-primary">
+					<thead class="THEAD_BG">
 						<tr>
 							<td class="text-center col-md-6 col-xs-6">지점ID</td>
 							<td class="text-center col-md-6 col-xs-6">지점명</td>
@@ -175,10 +187,10 @@
 			<div>
 				<button id="room_plus" class="btn btn-default">상영관추가</button>
 				<button id="room_update" class="btn btn-default">상영관이름수정</button>
-				<button id="room_delete" class="btn btn-danger">상영관제거</button>
 				<button id="seat_add" class="btn btn-default">좌석생성</button>
-				<button id="seat_delete" class="btn btn-danger">좌석제거</button>
-				<button id="room_reset" class="btn btn-primary">새로고침</button>
+				<button id="room_delete" class="btn BTN_DELETE">상영관제거</button>
+				<button id="seat_delete" class="btn BTN_DELETE">좌석제거</button>
+				<button id="room_reset" class="btn BTN_RE">새로고침</button>
 				<input type="hidden" id="hd_roomzero" value="">
 				<input type="hidden" id="hd_roomId" value="">
 				<input type="hidden" id="hd_roomNm" value="">
@@ -186,7 +198,7 @@
 			</div>
 			<div class="table-responsive">
 				<table id="roomTable" class="table table-hover table-bordered">
-					<thead class="bg-primary">
+					<thead class="THEAD_BG">
 						<tr>
 							<td class="text-center col-md-3 col-xs-3">지점ID</td>
 							<td class="text-center col-md-3 col-xs-3">상영관ID</td>
@@ -461,7 +473,7 @@
     			var td = tr.children();
     			
     			$("#roomTable>tbody>tr").css("background-color", "");	//tr색 초기화
-    			$(tr).css("background-color", "red");					//선택tr 색표시
+    			$(tr).css("background-color", "#CECECE");					//선택tr 색표시
     			$("#hd_roomId").val(td.eq(1).text());					//상영관id 표시(히든)
     			$("#hd_roomNm").val(td.eq(2).text());					//상영관이름 표시(히든)
     			$("#hd_totalSeat").val(td.eq(4).text());				//총좌석(히든)
@@ -476,7 +488,7 @@
     			var td = tr.children();
     			
     			$("#branchTable>tbody>tr").css("background-color", "");	//tr색 초기화
-    			$(tr).css("background-color", "red");					//선택tr 색표시
+    			$(tr).css("background-color", "#CECECE");					//선택tr 색표시
     			$("#hd_branchId").val(td.eq(0).text());					//지점id표시(히든)
     			$("#hd_branchNm").val(td.eq(1).text());					//지점이름표시(히든)	
     			delete_Seat_Table();

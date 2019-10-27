@@ -19,6 +19,10 @@
 		.ui-datepicker select.ui-datepicker-month{ width:30%; font-size: 11px; }
 		.ui-datepicker select.ui-datepicker-year{ width:40%; font-size: 11px; }
 		.ui-widget-content .ui-icon {background-image: url("../resources/image/jquery_ui/ui-icons_444444_256x240.png");}
+		.BTN_RE {
+				background-color: #DBAE55;
+				color: white;
+		}
 		.seatPage p {
 			padding-left: 10px;
 		}
@@ -152,7 +156,7 @@
 			left: 650px;
 			width: 200px;
 			height: 560px;
-			background-color: #525572;
+			background-color: #3e3e3e;
 			border-radius: .5rem;
 		}
 		#selectNum {
@@ -176,7 +180,7 @@
 			left: 450px;
 			width: 200px;
 			height: 350px;
-			background-color: #7B7E9F;
+			background-color: #5c5c5c;
 		}
 		#selectMovie {
 			position: absolute;
@@ -197,7 +201,7 @@
 			border-radius: .5rem;
 		}
 		.bar {
-			background-color: #7B7E9F;
+			background-color: #282828;
 			height: 25px;
 			line-height: 25px;
 		}
@@ -210,14 +214,14 @@
 			padding-bottom: 10px;
 		}
 		.formal {
-			background-color: #EEEEF0;
+			background-color: #5c5c5c;
 			height: 25px;
 			line-height: 25px;
 			border-radius:.25rem;
 		}
 		.formal button {
-			background-color: #EEEEF0;
-			color: #525572;
+			background-color: #5c5c5c;
+			color: #e1e1e1;
 			font-weight: 700;
 		}
 		.date {
@@ -386,7 +390,7 @@
 
 			<div id="summary">
 				<div id="" class="infoBar center">
-					<button id="resetBtn" class="btn btn-warning btn-xs">예매 다시하기</button>
+					<button id="resetBtn" class="btn BTN_RE btn-xs">예매 다시하기</button>
 				</div>
 				<div id="imgBox" class="center"></div>
 				<div id="infoBox"></div>
@@ -1007,7 +1011,7 @@
 					}else if(select == 2){
 						$("#submit_btn").append(
 								"<div>"+
-								"<button class='submit_half btn btn-warning btn-sm' onclick='javascript:go_back();'>뒤로가기</button>"+
+								"<button class='submit_half btn BTN_RE btn-sm' onclick='javascript:go_back();'>뒤로가기</button>"+
 								"<button class='submit_half btn btn-danger btn-sm' onclick='javascript:go_pay();'>결제하기</button>"+
 								"</div>"
 						);
@@ -1015,7 +1019,7 @@
 					}else if(select == 3){
 						$("#submit_btn").append(
 								"<div>"+
-								"<button class='submit btn btn-warning btn-lg' onclick='javascript:go_back();'>뒤로가기</button>"+
+								"<button class='submit btn BTN_RE btn-lg' onclick='javascript:go_back();'>뒤로가기</button>"+
 								"</div>"
 						);
 						return;
