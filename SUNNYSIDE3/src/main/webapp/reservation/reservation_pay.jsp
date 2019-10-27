@@ -10,7 +10,7 @@
 		<meta charset="utf-8">
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>결제페이지</title>
+		<title><spring:message code="message.reservation.pamentPage"/></title>
 		<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 		<style type="text/css">
 		#startPay{
@@ -31,7 +31,7 @@
 		}
 		.agreeBox {
 			position: inherit;
-			top: 330px;
+			top: 320px;
 			left: 0px;
 			font-size: 11px;
 			border-top: 1px solid gray;
@@ -47,6 +47,7 @@
 		}
 		.finalCostInfo {
 			background-color: lightyellow;
+			height: 200px;
 		}
 		#couponBox {
 			border-bottom: 1px dotted gray;
@@ -169,33 +170,33 @@
 					</div>
 					<div class="main">
 						<div id="couponBox">
-							<label class="BAR">쿠폰</label>
+							<label class="BAR"><spring:message code="message.reservation.coupon"/></label>
 							<br/>
 						</div>
 						<div class="agreeBox">
 							&nbsp;<input type="checkbox" id="chkAll" value="0" onclick="javascript:chkAll();">
-									<b class="CHKAll">전체 동의하기</b>
+									<b class="CHKAll"><spring:message code="message.reservation.acceptAll"/></b>
 									<br/>
 							&nbsp;&nbsp;&nbsp;<input type="checkbox" id="chkA" value="0">
-								위 상품의 구매조건 확인 결제진행 동의
+								<spring:message code="message.reservation.confirmMsg1"/>
 							<br/>
 							&nbsp;&nbsp;&nbsp;<input type="checkbox" id="chkB" value="0">
-								거래정보 제공 동의 (제공받는 판매자: <b>SunnySide Theater</b>)
+								<spring:message code="message.reservation.confirmMsg2"/>
 		
 						</div>
 					</div>
 					<div class="sub">
 						<div class="finalCostInfo">
-							<label class="FINAL_COST">총 결제금액</label>
+							<label class="FINAL_COST"><spring:message code="message.reservation.PayAmount"/></label>
 							<br/>
 							<label id="final_cost"></label>
 							<br/>
 							<div>
-								<label class="PRODUCT_COST">상품금액</label>
+								<label class="PRODUCT_COST"><spring:message code="message.reservation.cPrice"/></label>
 								<br/>
 								<label id="rawCost"></label>
 								<br/>
-								<label class="COUPON">쿠폰할인금액</label>
+								<label class="COUPON"><spring:message code="message.reservation.couponDiscount"/></label>
 								<br/>
 								<label id="couponValue">-</label>
 								<br/>
@@ -203,8 +204,8 @@
 						</div>
 					</div>
 					<div class="bottom">
-						<button id="startPay" class="btn btn-success btn-lg">결제</button>
-						<button id="cancel" class="btn btn-default btn-lg">취소</button>
+						<button id="startPay" class="btn btn-success btn-lg"><spring:message code="message.reservation.payment"/></button>
+						<button id="cancel" class="btn btn-default btn-lg"><spring:message code="message.reservation.cancel"/></button>
 					</div>
 				</div>
 			</c:when>
@@ -218,6 +219,7 @@
 		<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 		<script type="text/javascript">
     		$(document).ready(function(){
+    			window.history.forward();
     			resizeTo(446, 594);				//리사이즈 430(+16) 530(+64)
     			
     			var vo = "${vo.screenId}";
@@ -229,7 +231,7 @@
     			
     			var userId = "${user.userId}";
     			if(userId.length < 1){			//로그인없이 들어왔을때
-    				alert("로그인이 필요한 페이지입니다.");
+    				alert("<spring:message code='message.reservation.pleaseLogin'/>");
     				self.close();
     				return;
     			}   			
@@ -298,7 +300,7 @@
     	                mainForm.submit();
     	               	//location.replace='${context}/reservation/reservation_result.jsp';
     	            } else {
-    	                msg = '결제에 실패하였습니다.\n';
+    	                msg = "<spring:message code='message.reservation.failedPay'/>\n";
     	                msg += '에러내용 : ' + rsp.error_msg;
     	                alert(msg);
     	            }
@@ -331,7 +333,7 @@
 					if(mdET.length > 10){mdET = mdET.substr(0, 10).concat("...");}
 					var topBarTitle = mdKT + "(" + mdET + ")";
 					
-					$("#topBarTitle").text("[영화] " + topBarTitle);
+					$("#topBarTitle").text("[<spring:message code='message.reservation.movie'/>] " + topBarTitle);
 				});
     		};
         		
@@ -339,8 +341,8 @@
     		function setRawCost(){
     			var cost = "${vo.cost}";
     			$("#hd_cost").val(cost);
-    			$("#topBarCost").text(cost + "원");
-    			$("#rawCost").text(cost + "원");
+    			$("#topBarCost").text(cost + "<spring:message code='message.reservation.won'/>");
+    			$("#rawCost").text(cost + "<spring:message code='message.reservation.won'/>");
     			$("#hd_final").val(cost);
     		}
 
@@ -356,33 +358,34 @@
     				}
 				}).done(function(data){
 					var coupon = data;
-					console.log(data);
+
 					$("#couponBox>.couponInfo").detach();
-					if(coupon == null){
+					if(coupon.length == 0){
 						$("#couponBox").append(
 							"<div id='couponInfo'>"+
-							"&nbsp;<label class='COUPON'>쿠폰이 없습니다.</label>"+
+							"&nbsp;<label class='COUPON'><spring:message code='message.reservation.noCoupon'/></label>"+
 							"</div>"
 						);
 					}else{
-						var cNm = coupon.couponNm;
-						var usable = coupon.usable;
-						var discount = coupon.discount;
-						
-						$("#couponBox").append(
-							"<div id='couponInfo'>"+
-							"&nbsp;<label class='COUPON'>쿠폰이름: " + cNm + "</label>"+
-							"</div>"
-						);
-						
-						if(usable == '1'){
-							$("#couponInfo").append(
-								"<button class='btn btn-xs btn-danger'>이미사용</button>"
-							);
-						}else{
-							$("#couponInfo").append(
-								"<button onclick='javascript:cpON("+discount+");' class='btn btn-xs btn-success'>적용</button>"
-							);
+						for(var i=0 ; i<coupon.length ; i++){
+							var cNm = coupon[i].couponNm;
+							var usable = coupon[i].usable;
+							var discount = coupon[i].discount;
+							$("#couponBox").append(
+									"<div id='couponInfo'>"+
+									"&nbsp;<label class='COUPON'><spring:message code='message.reservation.couponNm'/>: " + cNm + "</label>"+
+									"</div>"
+								);
+								
+								if(usable == "1"){
+									$("#couponInfo").append(
+										"<button class='btn btn-xs btn-danger'><spring:message code='message.reservation.alreadyUsed'/></button>"
+									);
+								}else{
+									$("#couponInfo").append(
+										"<button onclick='javascript:cpON("+discount+");' class='btn btn-xs btn-success'><spring:message code='message.reservation.apply'/></button>"
+									);
+								}
 						}
 					}
 				});	
@@ -392,12 +395,12 @@
     		function cpON(discount){
     			$("#couponInfo>button").detach();
     			
-    			$("#couponValue").text("(-)" + discount + "원");
+    			$("#couponValue").text("(-)" + discount + "<spring:message code='message.reservation.won'/>");
     			$("#hd_coupon").val(discount);
     			setFinalCost();
     			
     			$("#couponInfo").append(
-						"<button onclick='javascript:cpOFF("+discount+");' class='btn btn-xs btn-danger'>취소</button>"
+						"<button onclick='javascript:cpOFF("+discount+");' class='btn btn-xs btn-danger'><spring:message code='message.reservation.cancel'/></button>"
 					);
     		}
     		
@@ -410,7 +413,7 @@
     			setFinalCost();
     			
     			$("#couponInfo").append(
-						"<button onclick='javascript:cpON("+discount+");' class='btn btn-xs btn-success'>적용</button>"
+						"<button onclick='javascript:cpON("+discount+");' class='btn btn-xs btn-success'><spring:message code='message.reservation.apply'/></button>"
 					);
     		}
     		
@@ -420,7 +423,8 @@
     			var coupon = ($("#hd_coupon").val())? $("#hd_coupon").val():"0";
     			var finalCost = eval(parseInt(rawCost) - parseInt(coupon));
     			if(finalCost < 0) finalCost = 0;
-    			$("#final_cost").text(finalCost + "원");
+    			$("#hd_final").val(finalCost);
+    			$("#final_cost").text(finalCost + "<spring:message code='message.reservation.won'/>");
     		}
     		
     		//체크박스 모두체크
@@ -440,7 +444,7 @@
     			var A = $("#chkA").prop("checked");
     			var B = $("#chkB").prop("checked");
     			if(A == false || B == false){
-    				alert("약관에 동의해주세요.");
+    				alert("<spring:message code='message.reservation.confirmMsg3'/>");
     				return;
     			}
     			startPay();
@@ -448,8 +452,8 @@
     		
     		//취소버튼
     		$("#cancel").on("click", function(){
-    			if(confirm("결제를 취소하시겠습니까?")==false) return;
-    			alert("결제를 취소합니다.");
+    			if(confirm("<spring:message code='message.reservation.payCancel'/>")==false) return;
+    			alert("<spring:message code='message.reservation.payCancelYes'/>");
     			self.close();
     		});
     		

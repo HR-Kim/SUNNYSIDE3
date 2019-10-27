@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -93,6 +94,25 @@ public class LocaleChangeController {
 		
 	}
 	
-	
+	/**
+	 * 예매페이지 다국어
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="reservation/reservation_main_locale.do",method=RequestMethod.GET)
+	public String reservationChangeLocale(HttpServletRequest request,HttpServletResponse response) {
+		String language = LocaleContextHolder.getLocale().toString();
+		
+		LOG.debug("======================");
+		LOG.debug("=language="+language);
+		LOG.debug("======================");
+		
+		Locale locale = new Locale(language);
+		localeResolver.setLocale(request, response, locale);
+		
+		return "reservation/reservation_main";
+		
+	}
 	
 }

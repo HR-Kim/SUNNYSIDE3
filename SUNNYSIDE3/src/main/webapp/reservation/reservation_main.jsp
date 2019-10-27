@@ -11,7 +11,7 @@
 		<meta charset="utf-8">
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>영화예매</title>
+		<title><spring:message code="message.reservation.title"/></title>
 		<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 		<link href="${context}/resources/css/jquery-ui.css" rel="stylesheet">
 	<style type="text/css">
@@ -274,7 +274,7 @@
 
 			<div class="seatPage">
 				<div class="bar">
-					&nbsp;<label>좌석선택</label>
+					&nbsp;<label><spring:message code="message.reservation.selectSeat"/></label>
 				</div>
 				<div class="seatWrap">
 					<p class="screen">SCREEN</p>
@@ -282,7 +282,7 @@
 						<%= StringUtil.makeSeatButton(0) %>
 					</div>
 				</div>
-				<p>선택한 인원 수 만큼 좌석을 선택해주세요.</p>
+				<p><spring:message code="message.reservation.pleasSelectSeat"/></p>
 			</div>
 			<input type="hidden" id="isStart" value="0">
 			<input type="hidden" id="hd_personTotal" value="0">
@@ -300,10 +300,10 @@
 			
 			<div id="selectMovie" class="case">
 				<div class="bar">
-					&nbsp;<label>영화선택</label>
+					&nbsp;<label><spring:message code="message.reservation.selectMovie"/></label>
 				</div>
 				<div class="formal">
-					&nbsp;<button id="movieFBtn" class="btn btn-xs">가나다순</button>
+					&nbsp;<button id="movieFBtn" class="btn btn-xs"><spring:message code="message.reservation.order"/></button>
 				</div>
 				<div class="tableCase">
 					<table id="movieTable" class="table table-hover table-bordered">
@@ -316,11 +316,11 @@
 			<input type="hidden" id="hd_selectedBranchNm" value="">
 			<div id="selectBranchRoom" class="case">
 				<div class="bar">
-					&nbsp;<label>극장선택</label>
+					&nbsp;<label><spring:message code="message.reservation.selectTheater"/></label>
 				</div>
 				<div class="formal">
-					&nbsp;<button id="allBranch" class="btn btn-xs">전체극장</button>
-					&nbsp;<button id="liveBranch" class="btn btn-xs">상영극장</button>
+					&nbsp;<button id="allBranch" class="btn btn-xs"><spring:message code="message.reservation.allTheater"/></button>
+					&nbsp;<button id="liveBranch" class="btn btn-xs"><spring:message code="message.reservation.screeningTheater"/></button>
 				</div>
 				<div class="tableCase">
 				<table id="branchTable" class="table table-hover table-bordered">
@@ -333,7 +333,7 @@
 			<input type="hidden" id="hd_selectedDate" value="">
 			<div id="selectDate" class="case">
 				<div class="bar">
-					&nbsp;<label>날짜선택</label>
+					&nbsp;<label><spring:message code="message.reservation.selectDate"/></label>
 				</div>
 				<div class="date">
 					<div id="datePicker"></div>
@@ -342,7 +342,7 @@
 
 			<div id="selectTime" class="case">
 				<div id="" class="bar">
-					&nbsp;<label>상영시간표</label>
+					&nbsp;<label><spring:message code="message.reservation.screeningSchedule"/></label>
 				</div>
 				<div class="branchInfo"><label></label></div>
 				<div id="selectTimeBtnCase">
@@ -356,12 +356,12 @@
 			<input type="hidden" id="hd_sCost" value="0">
 			<div id="selectNum" class="case">
 				<div id="" class="bar">
-					&nbsp;<label>인원선택</label>
+					&nbsp;<label><spring:message code="message.reservation.selectNumber"/></label>
 				</div>
 				<div id="numBtnCase">
 					&nbsp;<label class="seatFont"></label>
 					<div class="numBtnAdult">
-						&nbsp;<b>성인</b><label class="costFont"></label>
+						&nbsp;<b><spring:message code="message.reservation.adult"/></b><label class="costFont"></label>
 						<br/>&nbsp;
 						<button class="aBtn" value="0">0</button>
 						<button class="aBtn" value="1">1</button>
@@ -374,7 +374,7 @@
 					</div>
 					<br/>
 					<div class="numBtnStudent">
-						&nbsp;<b>학생</b><label class="costFont"></label>
+						&nbsp;<b><spring:message code="message.reservation.student"/></b><label class="costFont"></label>
 						<br/>&nbsp;
 						<button class="sBtn" value="0">0</button>
 						<button class="sBtn" value="1">1</button>
@@ -390,7 +390,7 @@
 
 			<div id="summary">
 				<div id="" class="infoBar center">
-					<button id="resetBtn" class="btn BTN_RE btn-xs">예매 다시하기</button>
+					<button id="resetBtn" class="btn BTN_RE btn-xs"><spring:message code="message.reservation.again"/></button>
 				</div>
 				<div id="imgBox" class="center"></div>
 				<div id="infoBox"></div>
@@ -419,12 +419,12 @@
 	            ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
 	            ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
 	            ,buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
-	            ,buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                
-	            ,yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
+	            ,buttonText: "Select" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                
+	            ,yearSuffix: "Year" //달력의 년도 부분 뒤에 붙는 텍스트
 	            ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'] //달력의 월 부분 텍스트
-	            ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip 텍스트
+	            ,monthNames: ['January','February','March','April','May','June','July','August','September','October','November','December'] //달력의 월 부분 Tooltip 텍스트
 	            ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
-	            ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
+	            ,dayNames: ['Sunday','Monday','Theuday','Wednesday','Thursday','Friday','Saturday'] //달력의 요일 부분 Tooltip 텍스트
 	            ,minDate: "+0D" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년년전)
 	            ,maxDate: "+13D" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
 			    });
@@ -501,7 +501,7 @@
 		    				return;
 						}
 					}
-					alert("선택하신 영화는 아직 예매할 수 없습니다.")
+					alert("<spring:message code='message.reservation.notyet'/>")
 				}
 				$("#isStart").val("1");
 			}
@@ -769,15 +769,15 @@
 						
 						$("#numBtnCase").css("display", "block");
 						
-						$(".seatFont").text("좌석현황: "+restSeat+"/"+totolSeat);
-						$(".costFont").text("1인/"+adultCost+"원");
-						$(".costFont").text("1인/"+studentCost+"원");
+						$(".seatFont").text("<spring:message code='message.reservation.seatStatus'/>: "+restSeat+"/"+totolSeat);
+						$(".costFont").text("<spring:message code='message.reservation.onePerson'/>/"+adultCost+"<spring:message code='message.reservation.won'/>");
+						$(".costFont").text("<spring:message code='message.reservation.onePerson'/>/"+studentCost+"<spring:message code='message.reservation.won'/>");
 					});
 				});
 			}
 			
 			//좌석선택시 (성인)
-			$(".numBtnAdult>button").on("click", function(){asd();
+			$(".numBtnAdult>button").on("click", function(){
 				var btn = $(this)[0];
 				
 				$(".numBtnAdult>button").css("background-color", "window");
@@ -791,7 +791,7 @@
 			});
 			
 			//좌석선택시 (학생)
-			$(".numBtnStudent>button").on("click", function(){asd();
+			$(".numBtnStudent>button").on("click", function(){
 				var btn = $(this)[0];
 				
 				$(".numBtnStudent>button").css("background-color", "window");
@@ -958,17 +958,17 @@
 					$("#infoBox_middle").append(
 						"<div>"+
 						"<hr/>"+
-						"&nbsp;&nbsp;<label class='lowlight'>극장</label>"+
+						"&nbsp;&nbsp;<label class='lowlight'><spring:message code='message.reservation.theater'/></label>"+
 						"&nbsp;<label class='highlight'>"+branchNm+" - "+roomNm+"</label>"+
 						"<br/>"+
-						"&nbsp;&nbsp;<label class='lowlight'>날짜</label>"+
+						"&nbsp;&nbsp;<label class='lowlight'><spring:message code='message.reservation.date'/></label>"+
 						"&nbsp;<label class='highlight'>"+date+"</label>"+
 						"<br/>"
 					);	
 				}
 	
 				//요약 - 인원, 금액, 예매버튼
-				function infoBox_bottom(){asd();
+				function infoBox_bottom(){
 					var adult = parseInt($("#hd_aNum").val());
 					var student = parseInt($("#hd_sNum").val());
 					var aCost = parseInt($("#hd_aCost").val());
@@ -988,38 +988,38 @@
 					
 					$("#infoBox_bottom").append(
 							"<div>"+
-							"&nbsp;&nbsp;<label class='lowlight'>인원</label>"+
-							"&nbsp;<label class='highlight'>성인 "+adult+", 학생 "+student+"</label>"+
+							"&nbsp;&nbsp;<label class='lowlight'><spring:message code='message.reservation.personnel'/></label>"+
+							"&nbsp;<label class='highlight'><spring:message code='message.reservation.adult'/> "+adult+", <spring:message code='message.reservation.student'/> "+student+"</label>"+
 							"<br/>"+
-							"&nbsp;&nbsp;<label class='lowlight'>금액</label>"+
+							"&nbsp;&nbsp;<label class='lowlight'><spring:message code='message.reservation.total'/></label>"+
 							"&nbsp;<label class='costlight'>"+resultCost+"</label>"+
-							"<label class='highlight'>원</label>"+
+							"<label class='highlight'><spring:message code='message.reservation.won'/></label>"+
 							"<br/>"
 					);	
 					submit_btn(1);
 				}
 				
 				//단계버튼		1:좌석선택으로, 2:결제단계로, 3:뒤로가기
-				function submit_btn(select){asd();
+				function submit_btn(select){
 					if(select == 1){
 						$("#submit_btn").append(
 								"<div>"+
-								"<button class='submit btn btn-danger btn-lg' onclick='javascript:go_seat(true);'>다음단계</button>"+
+								"<button class='submit btn btn-danger btn-lg' onclick='javascript:go_seat(true);'><spring:message code='message.reservation.next'/></button>"+
 								"</div>"
 						);
 						return;
 					}else if(select == 2){
 						$("#submit_btn").append(
 								"<div>"+
-								"<button class='submit_half btn BTN_RE btn-sm' onclick='javascript:go_back();'>뒤로가기</button>"+
-								"<button class='submit_half btn btn-danger btn-sm' onclick='javascript:go_pay();'>결제하기</button>"+
+								"<button class='submit_half btn BTN_RE btn-sm' onclick='javascript:go_back();'><spring:message code='message.reservation.back'/></button>"+
+								"<button class='submit_half btn btn-danger btn-sm' onclick='javascript:go_pay();'><spring:message code='message.reservation.payment'/></button>"+
 								"</div>"
 						);
 						return;
 					}else if(select == 3){
 						$("#submit_btn").append(
 								"<div>"+
-								"<button class='submit btn BTN_RE btn-lg' onclick='javascript:go_back();'>뒤로가기</button>"+
+								"<button class='submit btn BTN_RE btn-lg' onclick='javascript:go_back();'><spring:message code='message.reservation.back'/></button>"+
 								"</div>"
 						);
 						return;
@@ -1036,13 +1036,13 @@
 				}
 				
 				//좌석선택으로 가는 버튼
-				function go_seat(bool){asd();
+				function go_seat(bool){
 					if(bool == true){
 						var adult = parseInt($("#hd_aNum").val());
 						var student = parseInt($("#hd_sNum").val());
 						var personTotal = eval(adult + student);
 						if(personTotal == 0){
-							alert("인원 수가 0명 입니다.");
+							alert("<spring:message code='message.reservation.peoplezero'/>");
 							return;
 						}
 						
@@ -1058,7 +1058,7 @@
 				
 				//예매다시하기버튼
 				$("#resetBtn").on("click", function(){
-					if(confirm("기록을 지우고 처음으로 돌아갑니다.")==false) return;
+					if(confirm("<spring:message code='message.reservation.clearReturn'/>")==false) return;
 					
 					$(".seatPage").css("display", "none");
 					
@@ -1112,7 +1112,7 @@
 	    			success: function(data){
 	    				var seatArr = data;
 	    				if(seatArr.length != 0){
-	    					console.log(seatArr);
+
 	    					$(".seatPage").css("display", "block");
 	    					
 	    					for(var i=0 ; i< seatArr.length ; i++){
@@ -1213,7 +1213,7 @@
 							var seatString = convert_arrayNstring(false, seatArr);
 							$("#hd_selectedSeat").val(seatString);
 		    			}else if(d <= 0){									//선택불가
-		    				alert("좌석을 모두 선택했습니다.\n다음단계로 진행해주세요.");
+		    				alert("<spring:message code='message.reservation.pleaseNext'/>\n<spring:message code='message.reservation.pleaseNext2'/>");
 		    				$("#submit_btn>div").detach();
 		    				submit_btn(2);
 		    			}
@@ -1257,13 +1257,13 @@
 	    		
 	    		//결제페이지로
 	    		function go_pay(){
-	    			if(confirm("결제페이지로 이동하시겠습니까?")==false) return;
+	    			if(confirm("<spring:message code='message.reservation.confirmNext'/>")==false) return;
 	    			var frm = $("#mainForm");
 	    			frm.submit();
 	    		}
 	    		
 	    		//뒤로
-	    		function go_back(){asd();
+	    		function go_back(){
 	    			$("button[data-y][data-x]").attr("data-nowSelect", "0");
 	    			$("#hd_selectedSeatTotal").val("0");
 	    			$("#hd_selectedSeat").val("");	
@@ -1271,25 +1271,6 @@
 					go_seat(false);
 	    			$("#submit_btn>div").detach();
 	    			submit_btn(1);
-	    		}
-	    		
-	    		function asd(){
-	    			console.log("=================");
-	    			console.log("hd_adultYN : " + $("#hd_adultYN").val());
-	    			console.log("hd_resultCost : " + $("#hd_resultCost").val());
-	    			console.log("hd_aNum : " + $("#hd_aNum").val());
-	    			console.log("hd_sNum : " + $("#hd_sNum").val());
-	    			console.log("hd_aCost : " + $("#hd_aCost").val());
-	    			console.log("hd_sCost : " + $("#hd_sCost").val());
-	    			console.log("hd_selectedMovieId : " + $("#hd_selectedMovieId").val());
-	    			console.log("hd_selectedScreenId : " + $("#hd_selectedScreenId").val());
-	    			console.log("hd_selectedBranchId : " + $("#hd_selectedBranchId").val());
-	    			console.log("hd_selectedRoomId : " + $("#hd_selectedRoomId").val());
-	    			console.log("hd_resultCost : " + $("#hd_resultCost").val());
-	    			console.log("hd_selectedSeat : " + $("#hd_selectedSeat").val());
-	    			console.log("hd_personTotal : " + $("#hd_personTotal").val());
-	    			console.log("hd_selectedSeatTotal : " + $("#hd_selectedSeatTotal").val());
-	    			console.log("=================");
 	    		}
     	</script>
 	</body>

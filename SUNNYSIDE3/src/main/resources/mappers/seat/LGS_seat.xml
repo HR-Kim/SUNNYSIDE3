@@ -106,7 +106,8 @@
 		    SEAT_Y,
 			SEAT_X,
 			USE_YN,
-			SCREEN_ID
+			SCREEN_ID,
+			REG_DT
 		)
         SELECT *
 		FROM
@@ -117,7 +118,8 @@
 		    a.SEAT_Y,
 			a.SEAT_X,
 			a.USE_YN,
-			b.screenId
+			b.screenId,
+			SYSDATE
 		FROM SEAT a,
 			(
 			SELECT #{screenId, jdbcType=VARCHAR} as screenId
@@ -163,7 +165,7 @@
 	
 	<delete id="do_deleteAll_reservation">
 		DELETE FROM SEAT_RESERVATION
-		WHERE 1=1
+		WHERE REG_DT+7 <![CDATA[<=]]> SYSDATE
 	</delete>
 	
 	<select id="do_selectOne_reservation" parameterType="Seat" resultType="Seat">

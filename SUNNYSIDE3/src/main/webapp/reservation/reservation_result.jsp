@@ -4,14 +4,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="context" value="${pageContext.request.contextPath }" />
-<%request.setAttribute("notGo", 1); %>
+<%
+
+response.setHeader("Cache-Control","no-store");
+
+response.setHeader("Pragma","no-cache");
+
+response.setDateHeader("Expires",0);
+
+if(request.getProtocol().equals("HTTP/1.1"))
+
+    response.setHeader("Cache-Control","no-cache");
+
+%>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>결제완료</title>
+		<title><spring:message code="message.reservation.payCompleted"/></title>
 		<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 	<style type="text/css">
 		.MAIN_MSG {
@@ -34,7 +46,7 @@
 	<body>
 		<div class="container">
 			<div class="MAIN_MSG">
-				<h3>결제가 <h class="HIGHLIGHT">완료</h>되었습니다.</h3>
+				<h3><spring:message code="message.reservation.payEnd1"/> <h class="HIGHLIGHT"><spring:message code="message.reservation.payEnd2"/></h><spring:message code="message.reservation.payEnd3"/></h3>
 			</div>
 			
 			<div>
@@ -52,8 +64,8 @@
 			
 			
 			<div class="OK">
-				<p>예매정보는 마이페이지에서 다시 보실 수 있습니다.</p>
-				<button id="okBtn" class="btn btn-primary btn-lg">확인</button>
+				<p><spring:message code="message.reservation.payEndMsg"/></p>
+				<button id="okBtn" class="btn btn-primary btn-lg"><spring:message code="message.reservation.confirm"/></button>
 			</div>
 		</div>
 	
@@ -80,7 +92,7 @@
 			}
 			
 			function setTitle(kor, eng){
-				var title = "[영화] " + kor + "(" + eng + ")";
+				var title = "[<spring:message code='message.reservation.movie'/>] " + kor + "(" + eng + ")";
 				$("#title").append(
 					"<label>"+title+"</label>"
 				);
@@ -88,7 +100,7 @@
 			
 			function setCost(cost){
 				$("#cost").append(
-					"<label>가격 : "+cost+" 원</label>"
+					"<label><spring:message code='message.reservation.price'/> : "+cost+" <spring:message code='message.reservation.won'/></label>"
 				);
 			}
 			
@@ -115,8 +127,8 @@
 						var seat = vo.seatNm;
 
 						$(".arrData").prepend(
-							"<labal class='individual'>좌석 : "+seat+
-							"(티켓코드 : <h class='HIGHLIGHT'>"+code+"</h>)</label>"+
+							"<labal class='individual'><spring:message code='message.reservation.seat'/> : "+seat+
+							"(<spring:message code='message.reservation.ticketCode'/> : <h class='HIGHLIGHT'>"+code+"</h>)</label>"+
 							"<br/>"
 						);
 					});
@@ -124,8 +136,8 @@
 			}
 			
 			$("#okBtn").on("click", function(){
-				if(confirm("페이지에서 벗어납니다.")==false) return;
-				alert("예매정보는 마이페이지에서 다시 보실 수 있습니다.");
+				if(confirm("<spring:message code='message.reservation.leave'/>")==false) return;
+				alert("<spring:message code='message.reservation.payEndMsg'/>");
 				self.close();
 			});
     	</script>
