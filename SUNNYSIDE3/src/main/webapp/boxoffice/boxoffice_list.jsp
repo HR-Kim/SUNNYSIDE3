@@ -31,7 +31,6 @@
 </head>
 
 <body>
-
 	<div class="container ">
 	<!-- div title --> 
 	<div class="page-header">
@@ -62,7 +61,7 @@
 							<!-- 예매하기, 상세보기 버튼 -->
 							<span class="text_holder"><span class="text_outer"><span class="text_inner" ><span class="feature_holder" ><span class="feature_holder_icons">
 								<!-- 예매하기 -->
-								<a class="lightbox qbutton small white" href="#" onclick="javascript:reservationPage();"><spring:message code="message.movie.ticketing"/></a>
+								<a class="lightbox qbutton small white" href="#" onclick="javascript:reservationPage('<c:out value='${vo.movieId}'/>');"><spring:message code="message.movie.ticketing"/></a>
 								<!-- 상세보기 -->
 								<a class="lightbox qbutton small white" href="../movie/do_selectOne.do?movieId=<c:out value="${vo.movieId}"/>"><spring:message code="message.movie.detail"/></a>
 								
@@ -93,6 +92,9 @@
 		</c:choose>
 		
 	</div></div></div></div></div></div></div></div>
+	<input type="hidden" id="selectedMovieId" value="">
+	
+	
 	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 	<script src="${context}/resources/js/jquery-1.12.4.js"></script>
 	<!-- reservation 페이지 팝업 -->

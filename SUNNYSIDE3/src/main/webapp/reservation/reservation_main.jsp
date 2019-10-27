@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="context" value="${pageContext.request.contextPath }" />
-
+<%System.out.println("rererer-> : " + request.getParameter("movieId")); %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -280,6 +280,7 @@
 				</div>
 				<p>선택한 인원 수 만큼 좌석을 선택해주세요.</p>
 			</div>
+			<input type="hidden" id="isStart" value="0">
 			<input type="hidden" id="hd_personTotal" value="0">
 			<input type="hidden" id="hd_selectedSeatTotal" value="0">
 			
@@ -459,9 +460,9 @@
     				}
     			},
     			complete:function(data){
+    				selectedMovieStart();
     			},
     			error:function(xhr,status,error){
-
     			}
     			});
 			}
@@ -470,13 +471,39 @@
             $("#movieTable>tbody").on("click","tr", function(){
             	var tr = $(this);
             	var td = tr.children();
+            	
             	$("#movieTable>tbody>tr").css("background-color", "");		//tr색 초기화
     			$(tr).css("background-color", "lightgray");					//선택tr 색표시
     			
             	if(td.eq(1).length == 0)return;
     			
     			var movieId = td.eq(0).text();
-            	$("#hd_selectedMovieId").val(movieId);
+            	create_branchTable(movieId);
+            });			
+			
+			//영화를 선택하고 페이지에 들어왔을때 영화자동선택
+			function selectedMovieStart(){
+				var isStart = $("#isStart").val();
+				if(isStart == "0"){
+					var inputMovieId = opener.document.getElementById("selectedMovieId").value;
+					var trList = $("#movieTable>tbody>tr");
+					
+					for(var i=0 ; i<trList.length ; i++){
+						var td = trList.eq(i).children();
+						if(td.eq(0).text() == inputMovieId){
+							$("#movieTable>tbody>tr").css("background-color", "");
+		    				$(trList.eq(i)).css("background-color", "lightgray");
+		    				create_branchTable(inputMovieId);
+		    				return;
+						}
+					}
+					alert("선택하신 영화는 아직 예매할 수 없습니다.")
+				}
+				$("#isStart").val("1");
+			}
+			
+			function create_branchTable(movieId){
+				$("#hd_selectedMovieId").val(movieId);
             	$("#datePicker").datepicker("destroy");
 				$("#selectTimeBtnCase>div").detach();
 				$("#hd_selectedBranchId").val("");
@@ -485,8 +512,8 @@
 				
             	All_branch();
             	infoBox_imgNtitle(movieId);
-            });			
-			
+			}
+
 			//선택한 영화의 영화ID로 지점 불러오기
 			function All_branch(){
 				$.ajax({

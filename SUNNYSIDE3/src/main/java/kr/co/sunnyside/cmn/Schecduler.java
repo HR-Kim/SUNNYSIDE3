@@ -53,7 +53,7 @@ public class Schecduler {
 	}
 	
 	/**
-	 * 상영끝난 좌석데이터 삭제 스케줄러 (cron 초 분 시 일 월 요일)
+	 * 상영끝난 좌석데이터 삭제 스케줄러 (cron 초 분 시 일 월 요일) --- 월요일마다
 	 * @throws SQLException
 	 */ 
 	@Scheduled(cron = "0 0 0 * * MON")
