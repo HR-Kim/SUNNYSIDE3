@@ -139,7 +139,9 @@
 								<!-- 공지사항 -->
 								<li><a href="${context}/notice/do_retrieve.do"><spring:message code="message.header.notice"/></a></li>
 								<!-- 1:1문의 -->
-								<li><a href="${context}/qna/do_retrieve.do"><spring:message code="message.header.questions"/></a></li>								
+								<li><a href="${context}/qna/do_retrieve.do"><spring:message code="message.header.questions"/></a></li>
+								<!-- 자주하는 질문 -->								
+								<li><a href="${context}/faq/do_retrieve.do"><spring:message code="message.header.faq"/></a></li>								
 							</ul>
 						</li>
 					
