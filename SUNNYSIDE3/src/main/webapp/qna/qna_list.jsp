@@ -67,6 +67,7 @@
 
 <!-- 부트스트랩 -->
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="${context}/resources/css/headerStyle.css" rel="stylesheet" type="text/css">
 
 <style>
     #container {
@@ -148,7 +149,7 @@
 							<c:forEach var="vo" items="${list}">
 								<tr>
 									<td class="text-center" style="display:none;"><c:out value="${vo.userId }"/></td>
-									<td class="text-center"><c:out value="${vo.title }"/></td>
+									<td class="text-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${vo.title }"/></td>
 									<td class="text-center" style="font-size:0.9em;"><c:out value="${vo.regDt }"/></td>
 									<td class="text-center" ><c:out value="${vo.status }"/></td>
 								</tr>
