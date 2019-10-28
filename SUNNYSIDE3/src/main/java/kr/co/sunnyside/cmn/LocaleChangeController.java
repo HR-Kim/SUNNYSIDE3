@@ -100,7 +100,7 @@ public class LocaleChangeController {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value="reservation/reservation_main_locale.do",method=RequestMethod.GET)
+	@RequestMapping(value="reservation/reservation_main.do",method=RequestMethod.GET)
 	public String reservationChangeLocale(HttpServletRequest request,HttpServletResponse response) {
 		String language = LocaleContextHolder.getLocale().toString();
 		

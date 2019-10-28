@@ -12,6 +12,6 @@ function reservationPage(movieId){
 	if(pX < 0) pX = 450;				//창이 전체화면이 아니여서 x축 계산값이 -나올때 값을 임의조정 
 	
 	var opt = "width="+pageWidth+", height="+pageHeight+", left="+pX+", top="+pY+", status=0, toolbar=0, location=0, menubar=0, resizable=no";
-	var url = "/sunnyside/reservation/reservation_main_locale.do";
+	var url = "/sunnyside/reservation/reservation_main.do";
 	var popup = window.open(url, "_blank", opt);
 }
