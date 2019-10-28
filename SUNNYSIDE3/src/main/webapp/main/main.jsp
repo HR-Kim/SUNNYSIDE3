@@ -150,13 +150,19 @@
 								</tr>
 							</c:forEach>
 						</c:when>
+						<c:otherwise>
+	<!-- 						<tr><td class="text-center" colspan="99">등록된 데이터가 없습니다.</td></tr> -->
+							<tr>
+								<td class="text-center col-md-2 col-xs-2">ㅇㅇ</td>
+								<td class="text-center col-md-3 col-xs-3">ㅇㅇ</td>	
+								<td class="text-left col-md-7 col-xs-7">ㅇㅇ</td>																	
+							</tr>
+						</c:otherwise>
 					</c:choose>
-<%-- 					<c:otherwise> --%>
-<!-- 						<tr><td class="text-center" colspan="99">등록된 데이터가 없습니다.</td></tr> -->
-<%-- 					</c:otherwise> --%>
 				</tbody>
 			</table>
 		</aside>
+		
 		<aside class="col-md-6">
 			<div class="section-title">
 				<a href="/sunnyside/notice/do_retrieve.do">
@@ -172,7 +178,7 @@
 					<i class="fa fa-pencil-square-o fa-5x" style="margin-top: 20px; margin-left: 15px"></i><br/><spring:message code="message.main.questions"/></a>
 					<!-- 고객센터 -->
 					<a href="${context}/sunnyside/faq/do_retrieve.do" class="btn btn-sq-lg col-md-6 col-lg-6" style="background-color: #f6f6f6; margin-left: 30px;">					
-					<i class="fa fa-question-circle-o fa-5x" style="margin-top: 20px;"></i><br/><spring:message code="message.main.faq"/></a>
+					<i class="fa fa-question-circle-o fa-5x" style="margin-top: 20px;"></i><br/><spring:message code="message.header.faq"/></a>
 				</p>
 			</div></div></div></div>
 		</aside>
