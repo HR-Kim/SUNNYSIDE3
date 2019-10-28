@@ -126,15 +126,13 @@
 		$("#doSave").on("click", function() {
 			//validation
 			/* if($("#qnaEditFrm").valid()==false)return; */
-			
 			if (confirm("등록 하시겠습니까?") == false)return;
-
+	
 			$.ajax({
 				type : "POST",
 				url : "${context}/qna/do_save.do",
 				dataType : "html",
 				data : {
-					"User_Id":$("#userId").val(),
 					"title" : $("#title").val(),
 					"contents" : $("#contents").val(),
 					"status" : "답변대기"

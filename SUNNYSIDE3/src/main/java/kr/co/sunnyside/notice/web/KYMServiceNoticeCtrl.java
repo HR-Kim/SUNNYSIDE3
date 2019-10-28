@@ -57,7 +57,7 @@ public class KYMServiceNoticeCtrl {
 	private final String VIEW_MNG_NM = "notice/notice_mng";
 	
 	/**수정 */
-	@RequestMapping(value="notice/do_update.do",method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value="notice/do_update.do",method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody		
 	public String do_update(KYMNoticeVO kymNoticeVO) {
 		String gsonStr = "";
