@@ -104,6 +104,7 @@ message.movie.release_date=개봉일
 message.review.user_id=회원ID
 message.review.contents=내용
 message.review.reg_dt=등록일
+message.review.review=한줄평
 
 
 #phototicket
