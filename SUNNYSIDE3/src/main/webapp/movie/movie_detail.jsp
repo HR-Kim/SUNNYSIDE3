@@ -180,7 +180,7 @@
 		<!-- Grid영역 -->
 		<div class="table-responsive">
 			<aside class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></aside>
-			<aside class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+			<aside class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
 			<c:choose>
 				<c:when test="${list.size()>0}">
 					<c:forEach var="listVO" items="${list}">

@@ -47,7 +47,7 @@
 					<c:forEach var="vo" items="${bannerList}">
 						<div class="hs-item set-bg" data-setbg="<c:out value='${vo.saveImgNm}'/>" style="text-align: right">
 							<c:choose>
-								<c:when test="${'admin' == user.userLevel}">
+								<c:when test="${not empty user.userId && user.userId == 'admin'}">
 									<a href="#" onclick="popup('do_banner_retrieve.do','베너 이미지 수정',1200,800,100,400,'no');" class="site-btn sb-white" style="margin-top: 20px; margin-right: 30px;"><spring:message code="message.main.banner_edit"/></a>
 								</c:when>
 							</c:choose>								
