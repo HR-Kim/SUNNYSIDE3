@@ -112,6 +112,7 @@
 				url : "${context}/qna/do_save.do",
 				dataType : "html",
 				data : {
+					"User_Id":User_id,
 					"title" : $("#title").val(),
 					"contents" : $("#contents").val(),
 					"reContents" : $("#reContents").val(),

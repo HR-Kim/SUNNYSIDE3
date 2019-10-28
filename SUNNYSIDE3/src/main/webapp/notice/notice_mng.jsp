@@ -168,6 +168,7 @@
 				url : "${context}/notice/do_save.do",
 				dataType : "html",
 				data : {
+					"User_Id":User_id,
 					"fileId":$("#fileId").val(),
 					"title":$("#title").val(),
 					"contents" : $("#contents").val(),

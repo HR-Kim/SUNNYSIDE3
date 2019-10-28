@@ -131,6 +131,7 @@ public class KYMServiceNoticeCtrl {
 	@RequestMapping(value="notice/do_save.do",method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody	
 	public String do_save(KYMNoticeVO kymNoticeVO, HttpSession session) {
+		
 		LOG.debug("============================");
 		LOG.debug("=kymNoticeVO="+kymNoticeVO);
 		LOG.debug("============================");
