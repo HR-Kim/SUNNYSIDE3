@@ -126,7 +126,7 @@
 									</h5>
 									<!--// 영화제목 -->
 									<!-- 관람평점 -->
-										<span class="project_category"><spring:message code="message.movie.visitor_rate"/> <c:out value="${vo.visitorRate}"/></span>
+										<span class="project_category"><spring:message code="message.movie.visitor_rate"/> : <c:out value="${vo.visitorRate}"/></span>
 									<!--// 관람평점 -->
 								</div>
 								<!--// 영화정보 영역 -->								

@@ -97,7 +97,7 @@
 			//alert("doRetrieve");
 			//board_attr/get_retrieve.do
 			if(confirm("목록으로 이동 하시겠습니까?")== false)return;
-			location.href ="${context}/qna/do_retrieve_admin.do";
+			location.href ="${context}/qna/do_retrieve.do";
 		});    
 	
 		//등록	    
@@ -106,13 +106,13 @@
 			/* if($("#qnaEditFrm").valid()==false)return; */
 			
 			if (confirm("등록 하시겠습니까?") == false)return;
+			console.log($("#userId").val());
 
 			$.ajax({
 				type : "POST",
 				url : "${context}/qna/do_save.do",
 				dataType : "html",
 				data : {
-					"User_Id":$("#userId").val(),
 					"title" : $("#title").val(),
 					"contents" : $("#contents").val(),
 					"reContents" : $("#reContents").val(),

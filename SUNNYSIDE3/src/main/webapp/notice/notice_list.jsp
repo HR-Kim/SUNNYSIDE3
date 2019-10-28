@@ -106,11 +106,6 @@
     div > #paging {
       text-align: center;
     }
-    
-    div {
-  	margin-bottom : 10px;
-
-	}
 
   </style>
 

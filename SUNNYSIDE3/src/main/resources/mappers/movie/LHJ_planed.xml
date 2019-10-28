@@ -30,7 +30,7 @@
 		</choose>
 	</sql>
 	
-	<!-- 최근 3개월 영화 조회 -->
+	<!-- 영화 조회 -->
 	<select id="do_planedUp_retrieve" parameterType="Search" resultType="Movie">
 	  SELECT T1.*,T2.*                                       
      FROM                                                              
@@ -102,7 +102,7 @@
               WHERE  1=1                          
               AND screen_state = '020'
               <include refid="planedBaseCondition"/>                                        
-              ORDER BY rel_date DESC nulls last                                     
+              ORDER BY rel_date ASC nulls last                                     
            )A                                                         
            WHERE rownum <![CDATA[ <= ]]> (#{pageSize} * (#{pageNum}-1)+#{pageSize})                             
         ) B                                                            
