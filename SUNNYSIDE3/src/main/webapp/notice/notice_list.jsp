@@ -58,7 +58,7 @@
 	maxNum = Integer.valueOf(tmpTotalCnt);
 	currPageNo = Integer.valueOf(pageNum);
 	rowPerPage = Integer.valueOf(pageSize);
-	
+	pageIndex = Integer.valueOf(rowPerPage);
 
 %>
 <html lang="ko">
