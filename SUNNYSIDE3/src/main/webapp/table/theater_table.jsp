@@ -51,7 +51,7 @@
 				top: 0;
 				left: 0;
 				width: 100vw;
-				height: 100vh;
+				height: 200vh;
 				background-color: black;
 				opacity: 0.1;
 				z-index: 95;
@@ -722,7 +722,7 @@
     					"searchWord" : searchWord
     				}, 
     			success: function(data){
-    				var seatArr = data;console.log(seatArr);
+    				var seatArr = data;
     				if(seatArr.length != 0){
     					var screenId = seatArr[0].screenId;
     					$("#hd_screenId").val(screenId);
@@ -778,9 +778,7 @@
     			
     			if(seat.text() != "X"){
     				return;
-    			}	
-    			console.log("classFNm : " + classFNm);
-    			console.log("screenId : " + screenId);
+    			}
     			
     			$.ajax({
     				type : "POST",
@@ -805,7 +803,7 @@
 	    			var height = $(".seatSetting_layer").height();
 	    			var outWidth = $("body").width();
 	    			var outHeight = $("body").height();
-	  				console.log(outHeight);
+
 	    			$(".seatSetting_layer").css("top", $(".seatWrap").css("top"));
 	    			$(".seatSetting_layer").css("left", (outWidth-width)/2);
 	    			$(".seatSetting_layer").css("display", "block");
@@ -844,10 +842,9 @@
     					"useYN" : "1"
     				}
 				}).done(function(data){
-					alert("제거되었습니다.")
+					alert("제거되었습니다. 좌석테이블을 다시 불러 새로고침해주세요.")
 					$(".seatSetting_layer").css("display", "none");
 	    			$(".dim").css("display", "none");
-	    			//delete_Seat_Table();
 				});
     			
     		}

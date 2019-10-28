@@ -473,34 +473,31 @@
 	   			
 	   			//좌석문자열정보를 배열로
 	   			var stringInfo = "${seatInfo}";
-    			var arr = stringInfo.split("%");
 
-				for(var i=1 ; i<arr.length ; i++){
-					var seatNm = arr[i];
-					$.ajax({
-	    				type : "POST",
-	    				url : "${context}/reservation/do_save.do",
-	    				dataType : "json",
-	    				data : {
-	    					"branchId" : branchId,
-	    					"roomId" : roomId,
-	    					"screenId" : screenId,
-	    					"userId" : userId,
-	    					"movieId" : movieId,
-							"seatNm" : seatNm,
-	    					"adultCnt" : adultCnt,
-	    					"payState" : payState,
-	    					"cost" : cost
-	    				}
-					}).done(function(data){
-						var msg = data;
-						if(msg.msgId == "1"){
-							//alert("1");
-						}else{
-							//alert("0");
-						}						
-					});
-				}
+				$.ajax({
+    				type : "POST",
+    				url : "${context}/reservation/do_save.do",
+    				dataType : "json",
+    				data : {
+    					"branchId" : branchId,
+    					"roomId" : roomId,
+    					"screenId" : screenId,
+    					"userId" : userId,
+    					"movieId" : movieId,
+						"seatNmArr" : stringInfo,
+    					"adultCnt" : adultCnt,
+    					"payState" : payState,
+    					"cost" : cost
+    				}
+				}).done(function(data){
+					var msg = data;
+					if(msg.msgId == "1"){
+						//alert("1");
+					}else{
+						//alert("0");
+					}						
+				});
+				
     		}
     		
     		//좌석을 사용중으로 업데이트
@@ -509,7 +506,7 @@
     			var screenId = "${vo.screenId}";
     			var stringInfo = "${seatInfo}";
     			var seatArr = stringInfo;
-console.log(screenId);
+
     			$.ajax({
     				type : "POST",
     				url : "${context}/seat/do_update_reservation.do",
