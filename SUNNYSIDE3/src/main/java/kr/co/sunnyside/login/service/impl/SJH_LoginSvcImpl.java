@@ -88,7 +88,7 @@ public class SJH_LoginSvcImpl implements SJH_LoginSvc{
 			//보내는 사람
 			String host = "smtp.naver.com";
 			final String userName = "glwlzkwp";
-			final String password = "";
+			final String password = "tmpsunny1029";
 			int port = 465;
 			
 			
