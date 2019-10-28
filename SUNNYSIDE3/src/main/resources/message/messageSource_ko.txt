@@ -34,6 +34,7 @@ message.login.pw_validation=비밀번호를 입력해주세요.
 
 
 #usermypage
+message.usermypage.usermypage=마이페이지
 message.usermypage.my_cinema=마이시네마
 message.usermypage.level=회원등급
 message.usermypage.purchase_history=총 구매내역
