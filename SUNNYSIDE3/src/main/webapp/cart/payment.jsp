@@ -59,8 +59,8 @@
                           		</c:forEach>			        		                       
 					                    <tr>
 					                        <td>   </td>
-					                        <td class="col-sm-1 col-md-1 text-right"><h3>결제금액</h3></td>
-					                        <td class="col-sm-1 col-md-1 text-right"><h3><strong><input type="hidden" value="${totalCost}" id="tatalCost"><fmt:formatNumber value="${totalCost}" pattern="#,###,###"/>원</strong></h3></td>
+					                        <td  class=" text-right"><h3>결제금액</h3></td>
+					                        <td class=" text-right"><h3><strong><input type="hidden" value="${totalCost}" id="tatalCost"><fmt:formatNumber value="${totalCost}" pattern="#,###,###"/>원</strong></h3></td>
 					                    </tr> 
 					               </c:otherwise>
                 		</c:choose> 

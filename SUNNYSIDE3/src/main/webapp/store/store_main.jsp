@@ -21,13 +21,15 @@
 <body>
 <div class="container" style="margin-right: 420px;">
 	<div class="productadd" id="productadd" style="display: none;">
-		<input type="button" value="상품등록" id="addbtn" class="btn btn-outline-dark" style="margin-top: 40px;">
+		<input type="button" value="상품등록" id="addbtn" class="btn btn-outline-dark" style="margin-top: 50px;">
 	</div>
 </div>
    	<div class="container">
 	    <h3 class="h3">팝콘</h3>
+	    		 <div class="col-md-12 col-xs-12 col-sm-12" style="text-align: right;">
+			   		<a href="do_retrieve_popcorn.do" class="btn_popcorn_product"><i class="fa fa-plus"></i> 더보기</a> <!-- style="margin-left: 1100px; margin-bottom: 50px;" -->
+			    </div>
 		    <div class="row">
-		    <a style="margin-left: 1100px; margin-bottom: 50px;" href="do_retrieve_popcorn.do" class="btn_popcorn_product"><i class="fa fa-plus"></i> 더보기</a> 
 			    <c:choose>
 			    	<c:when test="${popcornlist.size()>0 }">
 			    		<c:forEach var="vo" items="${popcornlist }">			    		
@@ -60,7 +62,9 @@
 	<div class="container">
 	    <h3 class="h3">음료</h3>
 		    <div class="row">
-		       <a style="margin-left: 1100px; margin-bottom: 50px;" href="do_retrieve_drink.do" class="btn_drink_product"><i class="fa fa-plus"></i> 더보기</a> 
+		    	<div class="col-md-12 col-xs-12 col-sm-12" style="text-align: right;">
+		             <a href="do_retrieve_drink.do" class="btn_drink_product"><i class="fa fa-plus"></i> 더보기</a> 
+		        </div>
 			    <c:choose>
 			    	<c:when test="${drinklist.size()>0 }">
 			    		<c:forEach var="vo" items="${drinklist }">
@@ -94,7 +98,9 @@
 <div class="container" style="margin-bottom: 30px;">
 	   <h3 class="h3">영화관람권</h3>
 		    <div class="row">
-		    <a style="margin-left: 1100px; margin-bottom: 50px;" href="do_retrieve_movieticket.do" class="btn_movieticket_product"><i class="fa fa-plus"></i> 더보기</a>
+		    	<div class="col-md-12 col-xs-12 col-sm-12" style="text-align: right;">
+		 		   <a href="do_retrieve_movieticket.do" class="btn_movieticket_product"><i class="fa fa-plus"></i> 더보기</a>
+		 		</div>
 			    <c:choose>
 			    	<c:when test="${ticketlist.size()>0 }">
 			    		<c:forEach var="vo" items="${ticketlist }">

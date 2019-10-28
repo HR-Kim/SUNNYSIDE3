@@ -24,17 +24,17 @@
 <title>상품상세</title>
 </head>
 <body>
-<h3 class="h4"  style="margin-left: 400px; margin-top: 2em;">상품 상세정보</h3>
-<table style="margin-top: 80px; margin-bottom: 50px; margin-left: 350px;" id="tbody" >
-	<tr>
+<h3 class="h4 col-sm-12 col-md-12 col-xs-12"  style="margin-left: 400px; margin-top: 2em;">상품 상세정보</h3>
+<table class="col-sm-12 col-md-12 col-xs-12"  id="tbody" ><!-- style="margin-top: 80px; margin-bottom: 50px; margin-left: 350px;" -->
+	<tr >
 		<td style="display: none;" id="productId" class="productId">${vo.productId }</td>
 		<td style="display: none;" id="userId" class="userId">${user.userId }</td>
 		<td style="display: none;" id="category" class="category" >${vo.category }</td>
 		<td style="display: none;" id="cartId" class="cartId" >${vo.cartId }</td>
 		<td style="display: none;" id="orgFileNm" class="orgFileNm" >${vo.orgFileNm }</td>
 		<td style="display: none;" id="saveFileNm" class="saveFileNm" >${vo.saveFileNm }</td>		
-		<td class="col-sm-20 col-md-18">
-			<img width="340" height="300" src="${vo.saveFileNm }">
+		<td >
+			<img width="340" height="300" style="float: right;" src="${vo.saveFileNm }">
 		</td>
 	<td>
 		<table style="height: 300px; width: 400px; "  class="table table-bordered" >
@@ -66,14 +66,14 @@
 	</tr>
 </table>
 <hr>
-<table style="margin-top: 20px; margin-left: 400px;">
+<table class="col-sm-12 col-md-12 col-xs-12" style="margin-left: 400px; margin-top: 4em; margin-bottom: 4em;">
 	<tr>
 		<td style="text-align:left;margin:1em;text-transform:capitalize; font-size:18px; font-weight: bold">상품소개</td><tr>
 		<td style="text-align:left;margin:1em;text-transform:capitalize; font-size:15px; padding-top: 10px;">${vo.productInfo}</td>
 	</tr>
 </table>
 <hr>
-<table style="margin-left: 970px;display: none;" id="btns" class="btns">
+<table style="display: none; margin-left: 800px;" id="btns" class="btns col-sm-12 col-md-12 col-xs-12">
 	<tr>
 		<td style="padding-right: 10px; padding-bottom:30px;"><input type="submit" value="수정" id="updatebtn" name="updatebtn" class="btn btn-outline-dark" ></td>
 		<td style="padding-bottom:30px;"><input type="button" value="삭제" id="delbtn" name="delbtn" class="btn btn-outline-dark" ></td>	
