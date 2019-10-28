@@ -89,7 +89,7 @@
 							<!-- 예매하기, 상세보기 버튼 -->
 							<span class="text_holder"><span class="text_outer"><span class="text_inner" ><span class="feature_holder" ><span class="feature_holder_icons">
 								<!-- 예매하기 -->
-								<a class="lightbox qbutton small white" href="#" onclick="javascript:reservationPage();"><spring:message code="message.movie.ticketing"/></a>
+								<a class="lightbox qbutton small white" href="#" onclick="javascript:reservationPage('${context}','${vo.movieId}');"><spring:message code="message.movie.ticketing"/></a>
 								<!-- 상세보기 -->
 								<a class="lightbox qbutton small white" href="../movie/do_selectOne.do?movieId=<c:out value="${vo.movieId}"/>"><spring:message code="message.movie.detail"/></a>
 								
