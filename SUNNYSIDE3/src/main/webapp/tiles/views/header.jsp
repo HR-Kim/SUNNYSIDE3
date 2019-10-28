@@ -162,8 +162,6 @@
 							</c:otherwise>			
 						</c:choose>
 						
-						
-						<li><a href="${context}/userpage/do_userpage.do">VOD</a></li>
 					
 				</ul>
 			</div>
