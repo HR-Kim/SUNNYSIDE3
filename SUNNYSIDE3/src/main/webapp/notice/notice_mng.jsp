@@ -34,59 +34,72 @@
 	<div class="container">
 		<!-- div title -->
 		<div class="page-header">
-			<h1>게시관리</h1>
+			<h1><spring:message code="message.main.notice"/></h1>
 		</div>
 		<!--// div title -->
 		<!-- Button Area -->
 		<div class="row">
 			<div class="col-lg-10 col-sm-10 col-xs-10">
 				<div class="text-right">
-					<button type="button" class="btn btn-default btn-sm" id="doRetrieve">목록</button>
-					<button type="button" class="btn btn-default btn-sm" id="doInit">초기화</button>
-					<button type="button" class="btn btn-default btn-sm" id="doSave">등록</button>
-					<button type="button" class="btn btn-default btn-sm" id="doUpdate">수정</button>
-					<button type="button" class="btn btn-default btn-sm" id="doDelete">삭제</button>
+					<!-- 목록 -->
+					<button type="button" class="btn btn-default btn-sm" id="doRetrieve"><spring:message code="message.button.list"/></button>
+					<!-- 초기화 -->
+					<button type="button" class="btn btn-default btn-sm" id="doInit"><spring:message code="message.button.init"/></button>
+					<!-- 등록 -->
+					<button type="button" class="btn btn-default btn-sm" id="doSave"><spring:message code="message.button.save"/></button>
+					<!-- 수정 -->
+					<button type="button" class="btn btn-default btn-sm" id="doUpdate"><spring:message code="message.button.edit"/></button>
+					<!-- 삭제 -->
+					<button type="button" class="btn btn-default btn-sm" id="doDelete"><spring:message code="message.button.delete"/></button>
 				</div>
 			</div>
 		</div>
+		<!--// Button Area -->
+		<br>
 		<div class="col-lg-11"></div>
 		<!-- div title -->
 		<form class="form-horizontal" name="noticeEditFrm" id="noticeEditFrm" method="POST" action="${context}/notice/do_save.do">
 			<input type="hidden" class="form-control" name="noticeId" id="noticeId" value="${vo.noticeId }">
 		    <input type="hidden" class="form-control" name="fileId" id="fileId" value="${vo.fileId }" >
 			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">제목</label>
+				<!-- 제목 -->
+				<label for="inputEmail3" class="col-sm-2 control-label"><spring:message code="message.qna.title"/></label>
 				<div class="col-sm-8">
-					<input type="text" class="form-control" name="title" id="title" placeholder="제목" value="<c:out value='${vo.title }' />">
+					<input type="text" class="form-control" name="title" id="title" placeholder='<spring:message code="message.qna.title"/>' value="<c:out value='${vo.title }' />">
 				</div>
 			</div>
 			
 			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">지점</label>
+				<!-- 지점 -->
+				<label for="inputEmail3" class="col-sm-2 control-label"><spring:message code="message.notice.store"/></label>
 					<div class="col-sm-8">
 						<%=StringUtil.makeBranchBox(Branchlist, "branchSNm", selectedNm, true) %>
 					</div>
 			</div>
 
 			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">내용</label>
+				<!-- 내용 -->
+				<label for="inputEmail3" class="col-sm-2 control-label"><spring:message code="message.qna.contents"/></label>
 				<div class="col-sm-8">
-					<textarea class="form-control" name="contents" id="contents" rows="7" placeholder="내용"><c:out value="${vo.contents }" /></textarea>
+					<textarea class="form-control" name="contents" id="contents" rows="7" placeholder='<spring:message code="message.qna.contents"/>'><c:out value="${vo.contents }" /></textarea>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">등록일</label>
+				<!-- 등록일 -->
+				<label for="inputEmail3" class="col-sm-2 control-label"><spring:message code="message.qna.reg_dt"/></label>
 				<div class="col-sm-8">
-					<input type="text" class="form-control" name="regDt" id="regDt" placeholder="등록일" value="<c:out value='${vo.regDt }' />" disabled="disabled">
+					<input type="text" class="form-control" name="regDt" id="regDt" placeholder='<spring:message code="message.qna.reg_dt"/>' value="<c:out value='${vo.regDt }' />" disabled="disabled">
 				</div>
 			</div> 
 			
 			<!-- 첨부 -->
 			<div class="form-group">
-				<label for="attrFile" class="hidden-xs hidden-sm col-md-2 col-lg-2 control-label">파일첨부</label>
+				<!-- 파일 첨부 -->
+				<label for="attrFile" class="hidden-xs hidden-sm col-md-2 col-lg-2 control-label"><spring:message code="message.notice.file_add"/></label>
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-					<button id="attrFile" type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#layerpop">파일</button>
+					<!-- 파일 -->
+					<button id="attrFile" type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#layerpop"><spring:message code="message.notice.file"/></button>
 				</div>
 			</div>
 			
@@ -107,7 +120,8 @@
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="myModalLabel">File Upload</h4>
+		        <!-- 파일 업로드 -->
+		        <h4 class="modal-title" id="myModalLabel"><spring:message code="message.notice.file_upload"/></h4>
 		      </div>
 		      <div class="modal-body">
 		        <form class="form-horizontal" action="${context }/file/do_save.do" 
@@ -124,8 +138,10 @@
 		        </form>
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal" id="doFileUpload">저장</button>
-		        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+		      	<!-- 저장 -->
+		        <button type="button" class="btn btn-default" data-dismiss="modal" id="doFileUpload"><spring:message code="message.button.save"/></button>
+		        <!-- 취소 -->
+		        <button type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="message.button.cancel"/></button>
 		      </div>
 		    </div>
 		  </div>
@@ -168,7 +184,6 @@
 				url : "${context}/notice/do_save.do",
 				dataType : "html",
 				data : {
-					"User_Id":$("#userId").val(),
 					"fileId":$("#fileId").val(),
 					"title":$("#title").val(),
 					"contents" : $("#contents").val(),

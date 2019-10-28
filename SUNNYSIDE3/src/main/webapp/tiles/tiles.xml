@@ -130,14 +130,14 @@
     <!-- notice -->    
     <definition name="notice/*" extends="basede_definition">
       <put-attribute name="body" value="/notice/{1}.jsp" />
-      <put-attribute name="title" value="SUNNYSIDE>포토티켓" />
+      <put-attribute name="title" value="SUNNYSIDE>공지사항" />
       <put-attribute name="menu" value="notice" />
     </definition>
     
         <!-- notice -->    
     <definition name="qna/*" extends="basede_definition">
       <put-attribute name="body" value="/qna/{1}.jsp" />
-      <put-attribute name="title" value="SUNNYSIDE>포토티켓" />
+      <put-attribute name="title" value="SUNNYSIDE>1:1문의" />
       <put-attribute name="menu" value="qna" />
     </definition>
 

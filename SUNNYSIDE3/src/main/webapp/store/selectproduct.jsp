@@ -21,12 +21,13 @@
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="${context}/resources/css/headerStyle.css" rel="stylesheet" type="text/css"> 
 <link href="../resources/css/store_main.css" rel="stylesheet" type="text/css">
-<title>상품상세</title>
+<title><spring:message code="message.store.productDetail"/></title>
 </head>
 <body>
-<h3 class="h4 col-sm-12 col-md-12 col-xs-12"  style="margin-left: 400px; margin-top: 2em;">상품 상세정보</h3>
+<!--상품 상세정보  --> 
+<h3 class="h4 col-sm-12 col-md-12 col-xs-12"  style="margin-left: 400px; margin-top: 2em;"><spring:message code="message.store.productDetail"/></h3>
 <table class="col-sm-12 col-md-12 col-xs-12"  id="tbody" ><!-- style="margin-top: 80px; margin-bottom: 50px; margin-left: 350px;" -->
-	<tr >
+	<tr  >
 		<td style="display: none;" id="productId" class="productId">${vo.productId }</td>
 		<td style="display: none;" id="userId" class="userId">${user.userId }</td>
 		<td style="display: none;" id="category" class="category" >${vo.category }</td>
@@ -34,16 +35,18 @@
 		<td style="display: none;" id="orgFileNm" class="orgFileNm" >${vo.orgFileNm }</td>
 		<td style="display: none;" id="saveFileNm" class="saveFileNm" >${vo.saveFileNm }</td>		
 		<td >
-			<img width="340" height="300" style="float: right;" src="${vo.saveFileNm }">
+			<img width="340" height="300" style="float: right;" src="${vo.saveFileNm }"><!-- float: right; -->
 		</td>
 	<td>
-		<table style="height: 300px; width: 400px; "  class="table table-bordered" >
+		<table style="height: 300px; width: 400px; margin-left: 50px;"  class="table table-bordered" >
 			<tr align="center">
-				<td>상품명</td>
-				<td><input style="padding-left: 80px;" readonly="readonly" id="productNm" name="productNm" value="${vo.productNm }"/></td>
+				<!-- 상품명 -->
+				<td><spring:message code="message.store.prouctName"/></td>
+				<td><input  style="padding-left: 80px;" readonly="readonly" id="productNm" name="productNm" value="${vo.productNm }"/></td>
 			</tr>
 			<tr align="center">
-				<td>가격</td>
+			<!-- 가격 -->
+				<td><spring:message code="message.store.prouctCost"/></td>
 				<td><input style="padding-left: 100px;" readonly="readonly" id="productCost" name="productCost" value="<fmt:formatNumber value="${vo.productCost}" pattern="#,###,###원"/>"/></td>
 			</tr>
 			<tr align="center">
@@ -51,14 +54,17 @@
 					<form action="${context}/cart/do_save.do" name="selectProductForm" id="selectProductForm" method="post">
 						<input type="hidden" value="${vo.productId }" name="productId" id="productId">
 						<input type="hidden" value="${user.userId }" name="userId" id="userId">
-						수량: <select name="count" id="count">
+						<!-- 수량 -->
+						<spring:message code="message.store.count"/>: <select name="count" id="count">
 								<c:forEach begin="1" end="10" var="i">
                         			<option value="${i}">${i}</option>
                     			</c:forEach>
-						</select> &nbsp; 개		
-					</form>				
-						<input style="margin-left:35px; margin-top: 30px; margin-right: 30px;" id="goCart" name="goCart" type="submit" value="장바구니에 담기" class="btn btn-outline-dark" >					
-						<input style="margin-top: 30px; margin-right: 30px;" id="pay" name="pay" type="button" class="btn btn-outline-dark" value="바로 결제하기" >
+						</select> &nbsp; <spring:message code="message.store.measure"/>	<!-- 개 -->	
+					</form>		
+					<!-- 장바구니에 담기 -->		
+						<input style="margin-left:35px; margin-top: 30px; margin-right: 30px;" id="goCart" name="goCart" type="submit" value=" <spring:message code="message.store.addCart"/>" class="btn btn-outline-dark" >					
+					<!-- 바로 결제하기 -->			
+						<input style="margin-top: 30px; margin-right: 30px;" id="pay" name="pay" type="button" class="btn btn-outline-dark" value="<spring:message code="message.store.goPay"/>" >
 				</td>
 			</tr>			
 		</table>
@@ -68,7 +74,8 @@
 <hr>
 <table class="col-sm-12 col-md-12 col-xs-12" style="margin-left: 400px; margin-top: 4em; margin-bottom: 4em;">
 	<tr>
-		<td style="text-align:left;margin:1em;text-transform:capitalize; font-size:18px; font-weight: bold">상품소개</td><tr>
+		<!-- 상품소개 -->
+		<td style="text-align:left;margin:1em;text-transform:capitalize; font-size:18px; font-weight: bold"><spring:message code="message.store.productInfo"/></td><tr>
 		<td style="text-align:left;margin:1em;text-transform:capitalize; font-size:15px; padding-top: 10px;">${vo.productInfo}</td>
 	</tr>
 </table>

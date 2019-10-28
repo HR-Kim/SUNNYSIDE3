@@ -51,7 +51,7 @@
 							<div class="panel panel-default">								
 								<!-- 질문내용 -->
 								<div class="panel-heading">									
-									<strong class="voTitle"><c:out value="${vo.title}"/></strong>
+									<strong class="voTitle">Q. <c:out value="${vo.title}"/></strong>
 									<c:choose>
 										<c:when test="${'admin' == user.userLevel}">
 											<!-- 수정 -->
@@ -65,7 +65,7 @@
 								<!--// 질문내용 -->
 								<!-- 답변내용 -->
 								<div class="panel-body">
-									<strong class="contents"><c:out value="${vo.contents}"/></strong>
+									<strong class="contents">A. <c:out value="${vo.contents}"/></strong>
 								</div>
 								<!--// 답변내용 -->
 							</div>

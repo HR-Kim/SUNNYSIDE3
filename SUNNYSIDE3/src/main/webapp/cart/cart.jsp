@@ -12,19 +12,21 @@
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet"> 
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <!------ Include the above in your HEAD tag ---------->
-<title>장바구니</title>
+<!-- 장바구니 -->
+<title><spring:message code="message.cart.cart"/></title>
 </head>
-<h2 style="margin-left: 450px;margin-top: 70px; margin-bottom: 40px; font-weight: bold">장바구니</h2>
+<!-- 장바구니 -->
+<h2 style="margin-left: 450px;margin-top: 70px; margin-bottom: 40px; font-weight: bold"><spring:message code="message.cart.cart"/></h2>
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-10 col-md-offset-1">
             <table class="table table-hover" id="cartFrm">
                 <thead>
                     <tr>
-                        <th>상품명</th>
-                        <th>수량</th>
-                        <th class="text-center">가격</th>
-                        <th class="text-center">금액</th>
+                        <th><spring:message code="message.store.prouctName"/></th><!-- 상품명 -->
+                        <th><spring:message code="message.store.count"/></th><!-- 수량 -->
+                        <th class="text-center"><spring:message code="message.store.prouctCost"/></th><!-- 가격 -->
+                        <th class="text-center"><spring:message code="message.cart.MultipleCost"/></th><!-- 금액 -->
                         <th> </th>
                     </tr>
                 </thead>
@@ -32,7 +34,7 @@
 	                <c:choose>
 	                        <c:when test="${list.size() ==0 }">
 	                            <tr>
-	                             <td colspan="6">장바구니가 비었습니다.</td>
+	                             <td colspan="6"><spring:message code="message.cart.emptycart"/></td><!--장바구니가 비었습니다.  -->
 	                            </tr>
 	                        </c:when>
 	                        <c:otherwise>
@@ -49,11 +51,11 @@
 				                        <td class="col-sm-1 col-md-1" style="text-align: center" >				                     
 				                       	   <input type="text" class="form-control" id="count" value="${vo.count }">
 				                        </td>
-				                        <td class="col-sm-1 col-md-1 text-center"><strong><fmt:formatNumber value="${vo.oriProductCost}" pattern="#,###,###"/>원</strong></td>
+				                        <td class="col-sm-1 col-md-1 text-center"><strong><fmt:formatNumber value="${vo.oriProductCost}" pattern="#,###,###"/><spring:message code="message.cart.won"/></strong></td>
 				                        <td style="display: none;" id="cartId"><strong>${vo.cartId }</strong></td>
 				                        <td style="display: none;" id="productId"><strong>${vo.productId }</strong></td>
 				                        <td style="display: none;" id="userId"><strong>${user.userId }</strong></td>
-				                        <td class="col-sm-1 col-md-1 text-center"><strong><fmt:formatNumber value="${vo.productCost}" pattern="#,###,###"/>원</strong></td>
+				                        <td class="col-sm-1 col-md-1 text-center"><strong><fmt:formatNumber value="${vo.productCost}" pattern="#,###,###"/><spring:message code="message.cart.won"/></strong></td>
 				                        <td class="col-sm-1 col-md-1" >
 					                        <button type="button" class="btn btn-danger" id="deleteBtn"  style="margin-left: 5px; padding-bottom: 12px;">
 					                            <span class="glyphicon glyphicon-remove"></span>
@@ -68,8 +70,8 @@
 					                        <td>   </td>
 					                        <td>   </td>
 					                        <td>   </td>
-					                        <td><h3>총금액</h3></td>
-					                        <td class="text-right"><h3><strong><fmt:formatNumber value="${totalCost}" pattern="#,###,###"/>원</strong></h3></td>
+					                        <td><h3><spring:message code="message.cart.AllMultipleCost"/></h3></td><!--총금액 -->
+					                        <td class="text-right"><h3><strong><fmt:formatNumber value="${totalCost}" pattern="#,###,###"/><spring:message code="message.cart.won"/></strong></h3></td>
 					                    </tr>                         
 					                    <tr>
 					                        <td>   </td>
@@ -77,11 +79,13 @@
 					                        <td>   </td>
 					                        <td>
 					                        <button type="button" class="btn btn-default" id="btnList" name="btnList">
-					                            <span class="glyphicon glyphicon-shopping-cart"></span> 쇼핑계속하기
+					                          <!-- 쇼핑계속하기 -->
+					                            <span class="glyphicon glyphicon-shopping-cart"></span><spring:message code="message.cart.continueShop"/>  
 					                        </button></td>
 					                        <td>
+					                        <!-- 구매하기 -->
 						                        <button type="button" class="btn btn-success" id="paybtn" name="paybtn">
-						                           	 구매하기 <span class="glyphicon glyphicon-play"></span>
+						                           <spring:message code="message.cart.justPay"/><span class="glyphicon glyphicon-play"></span>
 						                        </button>
 						                   </td>
 					                     </tr>
@@ -211,4 +215,4 @@ $(document).ready(function(){
 });
 </script>
 </body>
-</html>
+</html> 

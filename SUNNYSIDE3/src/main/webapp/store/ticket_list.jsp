@@ -17,11 +17,13 @@
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="${context}/resources/css/headerStyle.css" rel="stylesheet" type="text/css">
 <link href="../resources/css/store_main.css" rel="stylesheet" type="text/css">
-<title>영화예매권</title>
+<!-- 영화예매권 --> 
+<title><spring:message code="message.store.movieTicket"/></title>
 </head>
 <body>
 	<div class="container">
-	   <h3 class="h4">영화예매권</h3>
+	<!-- 영화예매권 -->
+	   <h3 class="h4"><spring:message code="message.store.movieTicket"/></h3>
 	   <hr>
 	     <form name="ticketFrm" id="ticketFrm"  method="get">
 		    <div class="row" style="margin-top: 50px; margin-bottom: 50px;">

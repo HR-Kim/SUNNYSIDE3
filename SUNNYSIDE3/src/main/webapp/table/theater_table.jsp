@@ -120,7 +120,9 @@
 		
 	</head>
 	<body>
-		<div class="container">
+		<c:choose>
+			<c:when test="${user.userId == 'admin'}">
+				<div class="container">
 		<h3>극장관리</h3>
 		<hr/><br/>
 			<div class="loadingLayer">
@@ -234,6 +236,9 @@
 			<br/>
 			
 		</div>
+			</c:when>
+			<c:otherwise></c:otherwise>
+		</c:choose>
 		
 		<script src="${context}/resources/js/jquery-1.12.4.js"></script>
 		<script src="${context}/resources/js/bootstrap.min.js"></script>
@@ -758,8 +763,8 @@
     			var roomNm = $("#hd_roomNm").val();
     			var roomId = $("#hd_roomId").val();
     			
-    			if(seat.prop("disabled", false)){
-    				alert("시간되면 좌석전부빼는메소드추가필");
+    			if(seat.text() == "X"){
+    				return;
     			}
     			
     			$(".seatSetting_layer>div").detach();
@@ -771,11 +776,11 @@
     			
     			$.ajax({
     				type : "POST",
-    				url : "${context}/reservation/do_save.do",
+    				url : "${context}/seat/do_selectOne.do",
     				dataType : "json",
     				data : {
-    					"branchId" : branchId,
-
+    					"SEAT_NM" : seatNm,
+    					"SCREEN_ID" : screenId
     				}
 				}).done(function(data){
     			
@@ -789,6 +794,7 @@
     			$(".seatSetting_layer").css("display", "block");
     			
     			});
+    			
     		});
 
     		$("#seat_cancel").on("click", function(){

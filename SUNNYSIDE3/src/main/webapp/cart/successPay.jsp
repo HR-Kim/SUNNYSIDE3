@@ -12,33 +12,40 @@
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet"> 
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <!------ Include the above in your HEAD tag ---------->
-<title>결제완료</title>
+<!-- 결제완료 -->
+<title><spring:message code="message.cart.finishpay"/></title>
 </head>
 <hr>
-<h2 style="margin-top: 100px; margin-bottom: 90px; font-weight: bold; text-align: center;">결제가 <h style="color: red;">완료</h>되었습니다.</h2>
+<!-- 결제가 완료 되었습니다. -->
+<h2 style="margin-top: 100px; margin-bottom: 90px; font-weight: bold; text-align: center;"><spring:message code="message.cart.payis"/></h2>
 <hr>
 <div class="container">
-    <div class="row">
+    <div class="row"> 
         <div class="col-sm-8 col-md-6 col-md-offset-1" style="margin-left: 300px;">
-        <h4>결제 내역</h4>
+        <!-- 결제 내역 -->
+        <h4><spring:message code="message.cart.payList"/></h4>
             <table class="table table-bordered">
             	<c:choose>
 				    <c:when test="${list.size() == 1 }">
 				         <c:forEach items="${list }" var="vo">
 				            <tr>
-				               <td align="center">결제번호</td>
+				            <!-- 결제번호 -->
+				               <td align="center"><spring:message code="message.cart.payCode"/></td>
 				               <td><c:out value="${vo.payCode}"/></td>
 				            </tr>
 				            <tr>
-				               <td align="center">상품이름</td>
+				            <!-- 상품이름 -->
+				               <td align="center"><spring:message code="message.cart.payName"/></td>
 				               <td><c:out value="${vo.productNm}"/></td>
 				            </tr>
 				            <tr>
-				               <td align="center">결제금액</td>
+				            <!-- 결제금액 -->
+				               <td align="center"><spring:message code="message.cart.payCost"/></td>
 				               <td><fmt:formatNumber value="${vo.totalCost}" pattern="#,###,###"/>원</td>
 				            </tr>
 				            <tr>
-				               <td align="center">결제일</td>
+				            <!-- 결제일 -->
+				               <td align="center"><spring:message code="message.cart.payDate"/></td>
 				               <td><c:out value="${vo.payDt}"/></td>
 				            </tr>
 				         </c:forEach>
@@ -46,19 +53,24 @@
 				   <c:when test="${list.size() >0 }">
 				      <c:forEach items="${list }" var="vo" begin="0" end="0">
 				         <tr>
-				            <td align="center">결제번호</td>
+				           <!-- 결제번호 -->
+				            <td align="center"><spring:message code="message.cart.payCode"/></td>
 				            <td><c:out value="${vo.payCode}"/></td>
 				         </tr>
 				         <tr>
-				            <td align="center">상품이름</td>
+				            <!-- 상품이름 -->
+				            <td align="center"><spring:message code="message.cart.payName"/></td>
 				            <td><c:out value="${vo.productNm}"/> 외 <c:out value="${list.size()-1}"/> 건</td>
 				         </tr>
 				         <tr>
-				            <td align="center">결제금액</td>
-				            <td><fmt:formatNumber value="${vo.totalCost}" pattern="#,###,###"/>원</td>
+				            <!-- 결제금액 -->
+				            <td align="center"><spring:message code="message.cart.payCost"/></td>
+				            <!-- 원 -->
+				            <td><fmt:formatNumber value="${vo.totalCost}" pattern="#,###,###"/><spring:message code="message.cart.won"/></td>
 				         </tr>
 				         <tr>
-				            <td align="center">결제일</td>
+				         	<!-- 결제일 -->
+				            <td align="center"><spring:message code="message.cart.payDate"/></td>
 				            <td><c:out value="${vo.payDt}"/></td>
 				         </tr>
 				      </c:forEach>
@@ -67,7 +79,8 @@
 				</c:choose>
            </table>
              <button type="button" class="btn btn-default" id="goHomeBtn" name="goHomeBtn" style="margin-left: 180px; margin-bottom: 50px; margin-top: 10px;">
-				<span class="glyphicon glyphicon-home"></span> 메인으로 돌아가기
+             	<!-- 메인으로 돌아가기 -->
+				<span class="glyphicon glyphicon-home"></span> <spring:message code="message.cart.backToMain"/>
 			 </button>
         </div>
     </div>
