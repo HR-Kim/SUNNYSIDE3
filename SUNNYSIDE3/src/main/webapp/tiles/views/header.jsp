@@ -56,7 +56,7 @@
 									(<a href="${context}/login/logout.do"><spring:message code="message.header.logout"/></a>)
 									
 									&nbsp &nbsp
-									<a href="${context}/userpage/do_userpage.do"><spring:message code="message.header.userpage"/></a>
+									<a href="${context}/userpage/do_userpage.do"><spring:message code="message.usermypage.usermypage"/></a>
 								</c:when>
 								<c:otherwise> <!-- 로그아웃 시 헤더 모습 -->
 									<i class="flaticon-profile"></i>
@@ -67,6 +67,7 @@
     						<!-- 로그인 했을 때만 장바구니 표시 -->
 							<c:choose>
  								<c:when test="${not empty user.userId}">
+ 									&nbsp &nbsp
  									<!-- 장바구니 -->
 									<i class="flaticon-bag"></i>
 									<a href="${context}/cart/do_retrieve.do?userId=<c:out value="${user.userId}"/>"><spring:message code="message.header.cart"/></a>
@@ -162,8 +163,6 @@
 							</c:otherwise>			
 						</c:choose>
 						
-						
-						<li><a href="${context}/userpage/do_userpage.do">VOD</a></li>
 					
 				</ul>
 			</div>

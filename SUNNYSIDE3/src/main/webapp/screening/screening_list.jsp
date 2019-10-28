@@ -82,7 +82,7 @@
 		<div class="page-header row">
 			<h1><spring:message code="message.movie.screening"/></h1>
 			<c:choose>
-				<c:when test="${'admin' == user.userLevel}">
+				<c:when test="${not empty user.userId && user.userId == 'admin'}">
 					<button type="button" class="btn btn-default btn-sm" onclick="popup('do_screenUp_retrieve.do','개봉예정 리스트에 등록',1200,800,100,400,'no');">등록</button>
 					<button type="button" class="btn btn-default btn-sm" onclick="popup('do_screenDown_retrieve.do','개봉예정 리스트에 등록',1200,800,100,400,'no');">삭제</button>
 				</c:when>
