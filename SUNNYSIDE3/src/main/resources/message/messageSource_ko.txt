@@ -130,29 +130,17 @@ message.store.save_file_nm=저장파일명
 message.store.img_size=용량
 
 
-#notice_list
-message.schedule.notice=공지
-message.schedule.notice_list=번호
-message.schedule.branch_id=영화관
+#notice
+message.schedule.num=번호
+message.schedule.branchSNm=지점
 message.schedule.title=제목
 message.schedule.reg_dt=등록일
 
-
-#notice_list
-message.schedule.consulting_list=일대일 상담
-message.schedule.qna_list=문의내역
+#qna
 message.schedule.title=제목
 message.schedule.contents=내용
-message.schedule.reg_dt=문의날짜
-message.schedule.status=답변상태
-
-
-#qna_list
-message.schedule.search=검색
-message.schedule.num=번호
-message.schedule.title=제목
 message.schedule.reg_dt=등록일
-message.schedule.status=처리상태
+message.schedule.status= 답변상태
 
 
 #faq
