@@ -67,6 +67,7 @@
     						<!-- 로그인 했을 때만 장바구니 표시 -->
 							<c:choose>
  								<c:when test="${not empty user.userId}">
+ 									&nbsp &nbsp
  									<!-- 장바구니 -->
 									<i class="flaticon-bag"></i>
 									<a href="${context}/cart/do_retrieve.do?userId=<c:out value="${user.userId}"/>"><spring:message code="message.header.cart"/></a>
