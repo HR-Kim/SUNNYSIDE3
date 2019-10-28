@@ -16,6 +16,7 @@
 		<title>극장 관리</title>
 		<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 		<link href="${context}/resources/css/jquery-ui.css" rel="stylesheet">
+		<link href="${context}/resources/css/headerStyle.css" rel="stylesheet" type="text/css">
 		
 		<style type="text/css">
 			.BTN_RE {

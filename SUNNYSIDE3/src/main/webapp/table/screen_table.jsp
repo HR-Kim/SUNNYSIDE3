@@ -20,6 +20,7 @@
 		<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 		<link href="${context}/resources/css/jquery-ui.css" rel="stylesheet">
 		<link  href="${context}/resources/css/jquery.timepicker.min.css" rel="stylesheet">
+		<link href="${context}/resources/css/headerStyle.css" rel="stylesheet" type="text/css">
 		<style type="text/css">
 			.BTN_DELETE {
 				background-color: #BC4B4B;
