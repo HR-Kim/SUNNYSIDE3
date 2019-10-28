@@ -11,7 +11,8 @@
 	<meta name="keywords" content="divisima, eCommerce, creative, html">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Favicon -->
-	<link href="${context}/resources/img/divisima/favicon2.ico" rel="shortcut icon"/>
+<%-- 	<link href="${context}/resources/img/divisima/favicon2.ico" rel="shortcut icon"/> --%>
+	<link rel="icon" href="${context}/resources/img/divisima/favicon2.ico" type="image/x-icon" />
 	
 	<!-- Google Font -->
 	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
