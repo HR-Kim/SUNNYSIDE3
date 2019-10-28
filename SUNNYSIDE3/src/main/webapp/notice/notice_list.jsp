@@ -149,7 +149,8 @@
 		<div class="table-responsive">
 			<table class="table  table-striped table-bordered table-hover" id="listTable">
 				<thead bg-default" style="background-color: #333333; color: #f0f0f0">
-				    <th class="text-center col-md-1 col-xs-1" style="display:none;">notice_ID</th>
+				 	<th class="text-center col-md-1 col-xs-1" style="display:none;">notice_ID</th>
+				    <th class="text-center col-md-1 col-xs-1" style="display:none;">USER_ID</th>
 					<th class="text-center col-md-1 col-xs-1"><spring:message code="message.notice.num"/></th>
 					<th class="text-center col-md-1 col-xs-1"><spring:message code="message.notice.branchSNm"/></th>
 					<th class="text-center col-md-9 col-xs-6 "><spring:message code="message.notice.title"/></th>
@@ -161,6 +162,7 @@
 							<c:forEach var="vo" items="${list}">
 								<tr>
 									<td class="text-center" style="display:none;"><c:out value="${vo.noticeId }"/></td>
+									<td class="text-center" style="display:none;"><c:out value="${user.userId }"/></td>
 									<td class="text-center"><c:out value="<%=maxNum - (rowPerPage * currPageNo)+pageIndex-- %>"/></td>
 									<td class="text-center"><c:out value="${vo.branchSNm }"/></td>
 									<td class="text-left"><c:out value="${vo.title }"/>

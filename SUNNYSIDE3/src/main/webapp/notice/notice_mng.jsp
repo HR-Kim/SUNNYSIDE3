@@ -59,6 +59,7 @@
 		<div class="col-lg-11"></div>
 		<!-- div title -->
 		<form class="form-horizontal" name="noticeEditFrm" id="noticeEditFrm" method="POST" action="${context}/notice/do_save.do">
+			<input type="hidden" class="form-control" name="userId" id="userId" value="${user.userId }">
 			<input type="hidden" class="form-control" name="noticeId" id="noticeId" value="${vo.noticeId }">
 		    <input type="hidden" class="form-control" name="fileId" id="fileId" value="${vo.fileId }" >
 			<div class="form-group">
@@ -184,6 +185,8 @@
 				url : "${context}/notice/do_save.do",
 				dataType : "html",
 				data : {
+					"noticeId":$("#noticeId").val(),
+					"userId":$("#userId").val(),
 					"fileId":$("#fileId").val(),
 					"title":$("#title").val(),
 					"contents" : $("#contents").val(),
@@ -225,6 +228,7 @@
 				url : "${context}/notice/do_update.do",
 				dataType : "html",
 				data : {
+					"userId" : $("#userId").val(),
 					"noticeId" : $("#noticeId").val(),
 					"title" : $("#title").val(),
 					"branchSNm" : $("#branchSNm").val(),
@@ -265,6 +269,7 @@
 				dataType : "html",
 				data : {
 				   /*  "noticeId":"do_delete", */
+				   "userId" : $("#userId").val(),
 				    "noticeId" : $("#noticeId").val(),
 				    "fileId":$("#fileId").val(),
 				},
@@ -352,6 +357,7 @@
 				   url:"${context}/file/do_delete.do",
 				   dataType:"html",
 				   data:{
+					"userId" : $("#userId").val(),
 				   "fileId":fileId,
 				   "num":num,
 				   "orgFileNm":orgFileNm,

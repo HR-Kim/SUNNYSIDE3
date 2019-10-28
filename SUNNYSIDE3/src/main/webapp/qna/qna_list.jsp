@@ -120,7 +120,7 @@
 			<div class="col-md-12 text-right">
 				<form class="form-inline" name="qnaFrm" id="qnaFrm" method="GET" />
 					<input type="hidden" name="pageNum" id="pageNum" value="${vo.pageNum }"/>
-					<input type="hidden" name="userId" id="userId" />
+					<input type="hidden" name="qnaNum" id="qNum" />
 					<div class="form-group">
 						<!-- 검색구분 --> 
 						<%=StringUtil.makeSelectBox(listQnaSearch, "searchDiv", searchDiv, true) %>
@@ -143,6 +143,7 @@
 			<table class="table table-striped table-bordered table-hover" id="listTable">
 				<thead bg-default" style="background-color: #333333; color: #f0f0f0">
 				    <th class="text-center col-md-1 col-xs-1" style="display:none;">user_ID</th>
+				    <th class="text-center col-md-1 col-xs-1" style="display:none;">qna_num</th>
 					<th class="text-center col-md-7 col-xs-1"><spring:message code="message.qna.title"/></th>
 					<th class="text-center col-md-1 col-xs-6 "><spring:message code="message.qna.reg_dt"/></th>
 					<th class="text-center col-md-1 col-xs-2"><spring:message code="message.qna.status"/></th>
@@ -152,7 +153,8 @@
 						<c:when test="${list.size()>0 }">
 							<c:forEach var="vo" items="${list}">
 								<tr>
-									<td class="text-center" style="display:none;"><c:out value="${vo.userId }"/></td>
+									<td class="text-center" style="display:none;"><c:out value="${user.userId }"/></td>
+									<td class="text-center" style="display:none;"><c:out value="${vo.qnaNum }"/></td>
 									<td class="text-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${vo.title }"/></td>
 									<td class="text-center" style="font-size:0.9em;"><c:out value="${vo.regDt }"/></td>
 									<td class="text-center" ><c:out value="${vo.status }"/></td>
@@ -201,10 +203,10 @@
 			//alert("td.length:"+td.length);
 			
 			
-			var userId = td.eq(0).text();
-			//console.log("userId:"+userId);
+			var qNum = td.eq(1).text();
+			console.log("qnum:"+qNum);
 			var frm = document.qnaFrm;
-			frm.userId.value=userId;
+			frm.qnaNum.value=qNum;
 			frm.action = "${context}/qna/do_selectOne.do";
 			frm.submit();
 			

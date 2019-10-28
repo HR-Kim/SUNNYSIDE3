@@ -44,8 +44,8 @@
 		<div class="col-lg-11"></div>
 		<!-- div title -->
 		<form class="form-horizontal" name="qnaEditFrm" id="qnaEditFrm" method="POST" action="${context}/qna/do_save.do">
-			<input type="hidden" class="form-control" name="userId" id="userId" value="${vo.userId }">
-
+			<input type="hidden" class="form-control" name="userId" id="userId" value="${user.userId }">
+			<input type="hidden" id="qnaNum" value="<c:out value='${vo.qnaNum }' />">
 			<div class="form-group">
 				<label for="inputEmail3" class="col-sm-2 control-label">제목</label>
 				<div class="col-sm-8">
@@ -113,6 +113,7 @@
 				url : "${context}/qna/do_save.do",
 				dataType : "html",
 				data : {
+					"userId" : $("#userId").val(),
 					"title" : $("#title").val(),
 					"contents" : $("#contents").val(),
 					"reContents" : $("#reContents").val(),
@@ -156,6 +157,7 @@
 				dataType : "html",
 				data : {
 					"userId" : $("#userId").val(),
+					"qnaNum" : $("#qnaNum").val(),
 					"title" : $("#title").val(),
 					"contents" : $("#contents").val(),
 					"reContents" : $("#reContents").val(),

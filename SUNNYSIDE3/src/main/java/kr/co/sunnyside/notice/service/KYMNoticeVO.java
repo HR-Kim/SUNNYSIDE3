@@ -15,6 +15,7 @@ public class KYMNoticeVO extends DTO {
 	private String regDt;      //등록일
 	private String branchSNm;  //지점명
 	private String fileId;
+	private String userId;
 	
 	public KYMNoticeVO() {}
 
@@ -22,8 +23,8 @@ public class KYMNoticeVO extends DTO {
 	public String toString() {
 		return "KYMNoticeVO [noticeId=" + noticeId + ", title=" + title + ", orgFileNm=" + orgFileNm + ", saveFileNm="
 				+ saveFileNm + ", ext=" + ext + ", contents=" + contents + ", writerId=" + writerId + ", modDt=" + modDt
-				+ ", regDt=" + regDt + ", branchSNm=" + branchSNm + ", fileId=" + fileId + ", toString()="
-				+ super.toString() + "]";
+				+ ", regDt=" + regDt + ", branchSNm=" + branchSNm + ", fileId=" + fileId + ", userId=" + userId
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 	public String getNoticeId() {
@@ -114,8 +115,16 @@ public class KYMNoticeVO extends DTO {
 		this.fileId = fileId;
 	}
 
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
 	public KYMNoticeVO(String noticeId, String title, String orgFileNm, String saveFileNm, String ext, String contents,
-			String writerId, String modDt, String regDt, String branchSNm, String fileId) {
+			String writerId, String modDt, String regDt, String branchSNm, String fileId, String userId) {
 		super();
 		this.noticeId = noticeId;
 		this.title = title;
@@ -128,6 +137,7 @@ public class KYMNoticeVO extends DTO {
 		this.regDt = regDt;
 		this.branchSNm = branchSNm;
 		this.fileId = fileId;
+		this.userId = userId;
 	}
 
 	@Override
@@ -144,6 +154,7 @@ public class KYMNoticeVO extends DTO {
 		result = prime * result + ((regDt == null) ? 0 : regDt.hashCode());
 		result = prime * result + ((saveFileNm == null) ? 0 : saveFileNm.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		result = prime * result + ((writerId == null) ? 0 : writerId.hashCode());
 		return result;
 	}
@@ -206,6 +217,11 @@ public class KYMNoticeVO extends DTO {
 			if (other.title != null)
 				return false;
 		} else if (!title.equals(other.title))
+			return false;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
 			return false;
 		if (writerId == null) {
 			if (other.writerId != null)

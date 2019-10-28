@@ -105,15 +105,14 @@
 			, RE_CONTENTS  as reContents
 			, RE_DT        as reDt  
 		FROM qna
-		WHERE USER_ID = #{userId,jdbcType=VARCHAR}
+		WHERE QNA_NUM = #{qnaNum,jdbcType=VARCHAR}
 	</select>
 	
 	<!-- 수정 -->
 	<update id="do_update" parameterType="KYMQnaVO">
 		UPDATE qna
 		SET   
-			  QNA_NUM      = #{qnaNum  ,jdbcType=VARCHAR}
-			, TITLE        = #{title   ,jdbcType=VARCHAR}
+			  TITLE        = #{title   ,jdbcType=VARCHAR}
 			, CONTENTS     = #{contents,jdbcType=VARCHAR}
 			, STATUS       = #{status  ,jdbcType=VARCHAR}
 			, REG_DT       = SYSDATE
@@ -124,6 +123,7 @@
 			, RE_CONTENTS  = #{reContents,jdbcType=VARCHAR}
 			, RE_DT        = SYSDATE
 		WHERE USER_ID = #{userId,jdbcType=VARCHAR}
+		AND QNA_NUM = #{qnaNum,jdbcType=VARCHAR}
 	</update>
 	
 	<!--관리자 수정 -->
@@ -146,7 +146,7 @@
 	<!-- 등록 -->
 	<insert id="do_save" parameterType="KYMQnaVO" >
 		INSERT INTO qna (
-		      QNA_NUM
+			  USER_ID
 			, TITLE       
 			, CONTENTS    
 			, STATUS      
@@ -158,7 +158,7 @@
 			, RE_CONTENTS 
 			, RE_DT 
 		) VALUES (
-			  #{qnaNum  ,jdbcType=VARCHAR}
+			  #{userId  ,jdbcType=VARCHAR}
 			, #{title   ,jdbcType=VARCHAR}
 			, #{contents,jdbcType=VARCHAR}
 			, #{status  ,jdbcType=VARCHAR}

@@ -196,8 +196,8 @@ public class KYMServiceQnaCtrl {
 		LOG.debug("kymQnaVO"+kymQnaVO);
 		LOG.debug("================");
 		
-		if(null == kymQnaVO.getUserId() || "".equals(kymQnaVO.getUserId())) {
-			throw new IllegalArgumentException("ID를 확인하세요");
+		if(null == kymQnaVO.getQnaNum() || "".equals(kymQnaVO.getQnaNum())) {
+			throw new IllegalArgumentException("QnaNum를 확인하세요");
 			
 		}
 		

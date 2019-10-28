@@ -56,12 +56,12 @@
 		<div class="col-lg-11"></div>
 		<!-- div title -->
 		<form class="form-horizontal" name="qnaEditFrm" id="qnaEditFrm" method="POST" action="${context}/qna/do_save.do">
-			<input type="hidden" class="form-control" name="userId" id="userId" value="${vo.userId }">
-
+			<input type="hidden" class="form-control" name="userId" id="userId" value="${user.userId }">
+			<input type="hidden" id="qnaNum" value="<c:out value='${vo.qnaNum }' />">
 			<div class="form-group">
 				<!-- 제목 -->
 				<label for="inputEmail3" class="col-sm-2 control-label"><spring:message code="message.qna.title"/></label>
-				<div class="col-sm-8">
+			<div class="col-sm-8">
 					<input type="text" class="form-control" name="title" id="title" placeholder='<spring:message code="message.qna.title"/>' value="<c:out value='${vo.title }' />">
 				</div>
 			</div>
@@ -145,6 +145,7 @@
 				url : "${context}/qna/do_save.do",
 				dataType : "html",
 				data : {
+					"userId" : $("#userId").val(),
 					"title" : $("#title").val(),
 					"contents" : $("#contents").val(),
 					"status" : "답변대기"
@@ -186,6 +187,7 @@
 				dataType : "html",
 				data : {
 					"userId" : $("#userId").val(),
+					"qnaNum" : $("#qnaNum").val(),
 					"title" : $("#title").val(),
 					"contents" : $("#contents").val(),
 					"status" : "답변대기",

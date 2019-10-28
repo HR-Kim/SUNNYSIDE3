@@ -25,6 +25,7 @@
 	  FROM                                                              
 	  (                                                                 
 	  	SELECT       
+	  		B.USER_ID as userId,
 	  		B.NOTICE_ID as noticeId,
 			B.TITLE,
 			B.ORG_FILE_NM as orgFileNm,
@@ -65,11 +66,12 @@
 	<update id="do_updateReadCnt" parameterType="KYMNoticeVO">
 		UPDATE notice
 		SET  READ_CNT = (SELECT NVL(MAX(READ_CNT),0)+1 FROM notice WHERE NOTICE_ID = #{noticeId,jdbcType=VARCHAR})
-		WHERE NOTICE_ID = #{noticeId,jdbcType=VARCHAR}
+		WHERE USER_ID = #{userId,jdbcType=VARCHAR}
 	</update>
 
 	<select id="do_boardIdList" parameterType="SearchVO" resultType="KYMNoticeVO">
 		SELECT
+			USER_ID as userId,
 			NOTICE_ID as noticeId,
 			TITLE,
 			ORG_FILE_NM as orgFileNm,
@@ -82,7 +84,7 @@
 			REG_DT as regDt,
 			FILE_ID as fileId
 		FROM notice
-		WHERE NOTICE_ID LIKE '%' || #{searchWord} || '%'
+		WHERE USER_ID LIKE '%' || #{searchWord} || '%'
 		ORDER BY NOTICE_ID ASC
 	</select>
 
@@ -101,13 +103,15 @@
 			BRANCH_NM as branchSNm,
 			FILE_ID as fileId
 		FROM notice
-		WHERE notice_id = #{noticeId,jdbcType=VARCHAR}
+		WHERE NOTICE_ID = #{noticeId,jdbcType=VARCHAR}
 	</select>
 	
 	<!-- 수정 -->
 	<update id="do_update" parameterType="KYMNoticeVO">
 		UPDATE notice
-		SET   title = #{title,jdbcType=VARCHAR}
+		SET   
+			  USER_ID = #{userId,jdbcType=VARCHAR}
+			, title = #{title,jdbcType=VARCHAR}
 			, org_file_nm = #{orgFileNm,jdbcType=VARCHAR}
 			, save_file_nm = #{saveFileNm,jdbcType=VARCHAR}
 			, ext = #{ext,jdbcType=VARCHAR}
@@ -117,12 +121,14 @@
 			, FILE_ID = #{fileId,jdbcType=VARCHAR}
 			, MOD_DT = SYSDATE
 			, REG_DT = SYSDATE
-		WHERE notice_id = #{noticeId,jdbcType=VARCHAR}
+		WHERE NOTICE_id = #{noticeId,jdbcType=VARCHAR}
+		AND USER_iD = #{userId,jdbcType=VARCHAR}
 	</update>
 	
 	<!-- 등록 -->
 	<insert id="do_save" parameterType="KYMNoticeVO" >
 		INSERT INTO notice (
+			USER_ID,
 			TITLE,
 			ORG_FILE_NM,
 			SAVE_FILE_NM,
@@ -134,6 +140,7 @@
 			MOD_DT,
 			REG_DT
 		) VALUES (
+			#{userId,jdbcType=VARCHAR},
 			#{title,jdbcType=VARCHAR},
 			#{orgFileNm,jdbcType=VARCHAR},
 			#{saveFileNm,jdbcType=VARCHAR},
