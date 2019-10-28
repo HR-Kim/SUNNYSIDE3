@@ -100,6 +100,7 @@
 					</button>
 					&nbsp &nbsp
 					<input type="hidden" id="naverUrl" name="naverUrl" value="${url}" >
+					${url}
 					<a id="naverLogin"><img src="${context}/resources/image/login/naverlogin.png"/></a>	
 				</div>
 							

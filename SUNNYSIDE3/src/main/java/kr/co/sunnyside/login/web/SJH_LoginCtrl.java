@@ -136,7 +136,6 @@ public class SJH_LoginCtrl {
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
 		LOG.debug("네이버:" + naverAuthUrl);
 		model.addAttribute("url", naverAuthUrl);
-		LOG.debug("naverAuthUrl: "+naverAuthUrl);
 
 		//다국어
 		String language = StringUtil.nvl(request.getParameter("loginLang"),"ko");
@@ -157,22 +156,21 @@ public class SJH_LoginCtrl {
 	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
 		LOG.debug("callback");
 		OAuth2AccessToken oauthToken;
+		
+		LOG.debug("ㅋㅋsession: "+session);
+		LOG.debug("ㅋㅋcode: "+code);
+		LOG.debug("ㅋㅋstate: "+state);
+		
 		oauthToken = naverLoginBO.getAccessToken(session, code, state);
 		LOG.debug("oauthToken: "+oauthToken);
 		
 		//1. 로그인 사용자 정보를 읽어온다.
 		apiResult = naverLoginBO.getUserProfile(oauthToken); //String형식의 json데이터
-		/** apiResult json 구조
-		{"resultcode":"00",
-		"message":"success",
-		"response":{"id":"33666449","nickname":"shinn****","age":"20-29","gender":"M","email":"shinn0608@naver.com","name":"\uc2e0\ubc94\ud638"}}
-		**/
 		
 		//2. String형식인 apiResult를 json형태로 바꿈
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(apiResult);
 		JSONObject jsonObj = (JSONObject) obj;
-		
 		
 		//3. 데이터 파싱
 		//Top레벨 단계 _response 파싱
