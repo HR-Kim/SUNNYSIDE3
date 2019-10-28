@@ -1,2 +1,0 @@
-file_mng에 division(바차2 30바이트) 추가
-board_attr 추가 (기존 보드 테이블에 파일_ID 추가(바차2 40바이트))
