@@ -774,7 +774,26 @@
     				"</div>"	
     			);
     			
+    			$.ajax({
+    				type : "POST",
+    				url : "${context}/seat/do_selectOne.do",
+    				dataType : "json",
+    				data : {
+    					"SEAT_NM" : seatNm,
+    					"SCREEN_ID" : screenId
+    				}
+				}).done(function(data){
     			
+    			var width = $(".seatSetting_layer").width();
+    			var height = $(".seatSetting_layer").height();
+    			var outWidth = $("body").width();
+    			var outHeight = $("body").height();
+  			
+    			$(".seatSetting_layer").css("top", (outHeight-height)/2);
+    			$(".seatSetting_layer").css("left", (outWidth-width)/2);
+    			$(".seatSetting_layer").css("display", "block");
+    			
+    			});
     			
     		});
 
