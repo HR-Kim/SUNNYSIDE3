@@ -134,7 +134,7 @@
 				url : "${context}/qna/do_save.do",
 				dataType : "html",
 				data : {
-					"User_Id":User_id,
+					"User_Id":$("#userId").val(),
 					"title" : $("#title").val(),
 					"contents" : $("#contents").val(),
 					"status" : "답변대기"
