@@ -36,7 +36,7 @@
 		<div class="page-header">
 			<h1><spring:message code="message.header.faq"/></h1>
 			<c:choose>
-				<c:when test="${'admin' == user.userLevel}">
+				<c:when test="${not empty user.userId && user.userId == 'admin'}">
 					<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#savePop"><spring:message code="message.button.save"/></button>					
 				</c:when>
 			</c:choose>
