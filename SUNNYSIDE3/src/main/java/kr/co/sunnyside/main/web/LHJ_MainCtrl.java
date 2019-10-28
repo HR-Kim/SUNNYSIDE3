@@ -156,7 +156,8 @@ public class LHJ_MainCtrl {
 				newFile = StringUtil.fileRename(orgFileCheck);
 			}
 			
-			String saveImgNm = ".."+newFile.substring(newFile.indexOf("\\resources")).replace("\\", "/");
+//			String saveImgNm = ".."+newFile.substring(newFile.indexOf("\\resources")).replace("\\", "/");
+			String saveImgNm = StringUtil.changePath(newFile);
 			
 			fileVO.setOrgImgNm(orgFileNm);
 			fileVO.setSaveImgNm(saveImgNm);

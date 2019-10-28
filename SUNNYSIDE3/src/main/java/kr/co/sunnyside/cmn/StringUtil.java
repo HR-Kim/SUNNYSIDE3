@@ -25,9 +25,10 @@ public class StringUtil {
 	private static Logger LOG = LoggerFactory.getLogger(StringUtil.class);
 
 	// File Root 디렉토리
-	public static final String UPLOAD_ROOT = "/usr/local/apache-tomcat-8.5.34/webapps/SUNNYSIDE3/resources/image"; //aws 사용했을 때 상품사진 저장 위치 
+	public static final String UPLOAD_ROOT = "/usr/local/apache-tomcat-8.5.34/webapps/SUNNYSIDE3/resources/image"; //aws 사용했을 때 상품사진 저장 위치
+	public static final String MAIN_IMAGE_ROOT = "/usr/local/apache-tomcat-8.5.34/webapps/SUNNYSIDE3/resources/img/banner";
 	//public static final String UPLOAD_ROOT = "C:\\Users\\sist\\git\\SUNNYSIDE3\\SUNNYSIDE3\\src\\main\\webapp\\resources\\image";
-	public static final String MAIN_IMAGE_ROOT = "C:\\Users\\sist\\git\\SUNNYSIDE3\\SUNNYSIDE3\\src\\main\\webapp\\resources\\img\\banner";
+//	public static final String MAIN_IMAGE_ROOT = "C:\\Users\\sist\\git\\SUNNYSIDE3\\SUNNYSIDE3\\src\\main\\webapp\\resources\\img\\banner";
 
 	//payCode 자르기 메소드 (스토어)
 	public static List<String> CutpayCode(SEJ_CartVO inVO) {

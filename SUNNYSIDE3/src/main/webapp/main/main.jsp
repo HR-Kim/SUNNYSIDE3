@@ -71,7 +71,7 @@
 	<div class="container_inner default_template_holder clearfix page_container_inner"><div class="vc_row wpb_row section vc_row-fluid" style=" padding-top:0px; text-align:left;"><div class=" full_section_inner clearfix"><div class="vc_col-sm-12 wpb_column vc_column_container"><div class="wpb_wrapper"><div class="projects_holder_outer v3 portfolio_with_space portfolio_standard "><div class="projects_holder clearfix v3 standard">
 		<div class="section-title" style="margin-bottom: 20px">
 			<!-- 박스오피스 -->
-			<a href="/sunnyside/boxoffice/do_retrieve.do"><h2><spring:message code="message.header.boxoffice"/></h2></a>
+			<a href="${context}/boxoffice/do_retrieve.do"><h2><spring:message code="message.header.boxoffice"/></h2></a>
 		</div>
 		<c:choose>
 			<c:when test="${boxofficeList.size()>0}">
@@ -123,7 +123,7 @@
 	<div class="container" style="margin-bottom: 70px">
 		<aside class="col-md-6">
 			<div class="section-title" style="margin-bottom: 10px">
-				<a href="/sunnyside/notice/do_retrieve.do">
+				<a href="${context}/notice/do_retrieve.do">
 					<!-- 공지사항 -->
 					<h3 style="font-size: 22px; letter-spacing: 1px;"><spring:message code="message.main.notice"/></h3>
 				</a>
@@ -165,7 +165,7 @@
 		
 		<aside class="col-md-6">
 			<div class="section-title">
-				<a href="/sunnyside/notice/do_retrieve.do">
+				<a href="${context}/qna/do_retrieve.do">
 					<!-- 고객센터 -->
 					<h3 style="font-size: 22px; letter-spacing: 1px;"><spring:message code="message.header.customer"/></h3>
 				</a>
@@ -174,10 +174,10 @@
 			<div class="container"><div class="row"><div class="col-md-6 col-lg-6"><div style="text-align: center">
 				<p style="text-align: center">
 					<!-- 1:1문의 -->
-					<a href="${context}/sunnyside/qna/do_retrieve.do" class="btn btn-sq-lg col-md-6 col-lg-6" style="background-color: #f6f6f6; margin-left: 90px;">
+					<a href="${context}/qna/do_retrieve.do" class="btn btn-sq-lg col-md-6 col-lg-6" style="background-color: #f6f6f6; margin-left: 90px;">
 					<i class="fa fa-pencil-square-o fa-5x" style="margin-top: 20px; margin-left: 15px"></i><br/><spring:message code="message.main.questions"/></a>
 					<!-- 고객센터 -->
-					<a href="${context}/sunnyside/faq/do_retrieve.do" class="btn btn-sq-lg col-md-6 col-lg-6" style="background-color: #f6f6f6; margin-left: 30px;">					
+					<a href="${context}/faq/do_retrieve.do" class="btn btn-sq-lg col-md-6 col-lg-6" style="background-color: #f6f6f6; margin-left: 30px;">					
 					<i class="fa fa-question-circle-o fa-5x" style="margin-top: 20px;"></i><br/><spring:message code="message.header.faq"/></a>
 				</p>
 			</div></div></div></div>
