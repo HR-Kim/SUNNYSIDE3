@@ -25,9 +25,10 @@
 	</div>
 </div>
    	<div class="container">
-	    <h3 class="h3">팝콘</h3>
+   	<!-- 팝콘 -->
+	    <h3 class="h3"><spring:message code="message.store.popcorn"/></h3>
 	    		 <div class="col-md-12 col-xs-12 col-sm-12" style="text-align: right;">
-			   		<a href="do_retrieve_popcorn.do" class="btn_popcorn_product"><i class="fa fa-plus"></i> 더보기</a> <!-- style="margin-left: 1100px; margin-bottom: 50px;" -->
+			   		<a href="do_retrieve_popcorn.do" class="btn_popcorn_product"><i class="fa fa-plus"></i> <spring:message code="message.store.moreItem"/></a> <!-- 더보기-->
 			    </div>
 		    <div class="row">
 			    <c:choose>
@@ -60,10 +61,11 @@
 	 </div>
 <hr>
 	<div class="container">
-	    <h3 class="h3">음료</h3>
+	<!-- 음료 -->
+	    <h3 class="h3"><spring:message code="message.store.drink"/></h3>
 		    <div class="row">
 		    	<div class="col-md-12 col-xs-12 col-sm-12" style="text-align: right;">
-		             <a href="do_retrieve_drink.do" class="btn_drink_product"><i class="fa fa-plus"></i> 더보기</a> 
+		             <a href="do_retrieve_drink.do" class="btn_drink_product"><i class="fa fa-plus"></i> <spring:message code="message.store.moreItem"/></a> <!-- 더보기-->
 		        </div>
 			    <c:choose>
 			    	<c:when test="${drinklist.size()>0 }">
@@ -96,10 +98,11 @@
 	 </div>
 <hr>
 <div class="container" style="margin-bottom: 30px;">
-	   <h3 class="h3">영화관람권</h3>
+<!-- 영화예매권 -->
+	   <h3 class="h3"><spring:message code="message.store.movieTicket"/></h3>
 		    <div class="row">
 		    	<div class="col-md-12 col-xs-12 col-sm-12" style="text-align: right;">
-		 		   <a href="do_retrieve_movieticket.do" class="btn_movieticket_product"><i class="fa fa-plus"></i> 더보기</a>
+		 		   <a href="do_retrieve_movieticket.do" class="btn_movieticket_product"><i class="fa fa-plus"></i> <spring:message code="message.store.moreItem"/></a> <!-- 더보기-->
 		 		</div>
 			    <c:choose>
 			    	<c:when test="${ticketlist.size()>0 }">

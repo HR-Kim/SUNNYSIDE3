@@ -267,3 +267,41 @@ message.reservation.price=가격
 message.reservation.ticketCode=티켓코드
 message.reservation.seat=좌석	Seat
 message.reservation.leave=페이지에서 벗어납니다.
+
+#store
+message.store.popcorn=팝콘
+message.store.drink=음료
+message.store.movieTicket=영화관람권
+message.store.moreItem=더보기
+message.store.productDetail=상품 상세정보
+message.store.prouctName=상품명
+message.store.prouctCost=가격
+message.store.count=수량
+message.store.measure=개
+message.store.addCart=장바구니에 담기
+message.store.goPay=바로 결제하기
+message.store.productInfo=상품소개
+
+#cart
+message.cart.cart=장바구니
+message.cart.MultipleCost=금액
+message.cart.emptycart=장바구니가 비었습니다.		
+message.cart.emptyorder=주문내역이 없습니다.	
+message.cart.AllMultipleCost=총금액
+message.cart.won=원
+message.cart.continueShop=쇼핑계속하기
+message.cart.justPay=구매하기
+message.cart.readyPay=주문/결제
+message.cart.productInfo=상품정보
+message.cart.cartCost=주문금액
+message.cart.cancleCart=주문취소
+message.cart.readypay=결제
+message.cart.finishpay=결제완료
+message.cart.payis=결제가 완료 되었습니다.
+message.cart.payList=결제내역
+message.cart.backToMain=메인으로 돌아가기 
+message.cart.payCode=결제번호
+message.cart.payName=상품이름
+message.cart.payCost=결제금액
+message.cart.payDate=결제일
+

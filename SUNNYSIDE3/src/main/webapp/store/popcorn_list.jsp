@@ -17,11 +17,13 @@
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="${context}/resources/css/headerStyle.css" rel="stylesheet" type="text/css"> 
 <link href="../resources/css/store_main.css" rel="stylesheet" type="text/css">
-<title>팝콘</title>
+<!-- 팝콘 -->
+<title><spring:message code="message.store.popcorn"/></title>
 </head>
 <body>
 	<div class="container">
-	    <h3 class="h4">팝콘</h3>
+	<!-- 팝콘 -->
+	    <h3 class="h4"><spring:message code="message.store.popcorn"/></h3>
 	    <hr>
 		    <div class="row" style="margin-top: 50px; margin-bottom: 50px;">
 			    <c:choose>

@@ -15,9 +15,11 @@
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet"> 
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <!------ Include the above in your HEAD tag ---------->
-<title>주문/결제</title>
+<!-- 주문/결제 -->
+<title><spring:message code="message.cart.readyPay"/></title>
 </head>
-<h2 style="margin-left: 450px;margin-top: 70px; margin-bottom: 40px; font-weight: bold">주문/결제 </h2>
+<!-- 주문/결제 -->
+<h2 style="margin-left: 450px;margin-top: 70px; margin-bottom: 40px; font-weight: bold"><spring:message code="message.cart.readyPay"/> </h2>
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-10 col-md-offset-1">  
@@ -25,16 +27,20 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>상품정보</th>
-                        <th>수량</th>
-                        <th class="text-center">주문금액</th>
+                    	<!-- 상품정보 -->
+                        <th><spring:message code="message.cart.productInfo"/></th>
+                        <!-- 수량 -->
+                        <th><spring:message code="message.store.count"/></th>
+                        <!-- 주문금액 -->
+                        <th class="text-center"><spring:message code="message.cart.cartCost"/></th>
                     </tr>
                 </thead>
                 <tbody id="tbody">
 	                <c:choose>
 	                        <c:when test="${list.size() ==0 }">
 	                            <tr>
-	                             <td colspan="6">주문내역이 없습니다.</td>
+	                            <!-- 주문내역이 없습니다. -->
+	                             <td colspan="6"><spring:message code="message.cart.emptyorder"/></td>
 	                            </tr>
 	                        </c:when>
 	                        <c:otherwise>
@@ -48,19 +54,22 @@
 					                            </div>
 					                        </div>
 				                        </td>
-				                        <td class="col-sm-4 col-md-2" id="strCount" >${vo.count }개</td>
+				                        <!-- 개 -->
+				                        <td class="col-sm-4 col-md-2" id="strCount" >${vo.count }<spring:message code="message.store.measure"/></td>
 				                        <td style="display: none;" id="cartId"><strong>${vo.cartId }</strong></td>
 				                        <td style="display: none;" id="userName"><strong>${user.userName }</strong></td>
 				                        <td style="display: none;" id="productId"><strong>${vo.productId }</strong></td>
 				                        <td style="display: none;" id="userId"><strong>${user.userId }</strong></td>
 				                        <td style="display: none;" id="payCode"><strong>${vo.payCode }</strong></td>
-				                        <td class="col-sm-4 col-md-10 text-center"><strong><fmt:formatNumber value="${vo.productCost}" pattern="#,###,###"/>원</strong></td>	
+				                        <!-- 원 -->
+				                        <td class="col-sm-4 col-md-10 text-center"><strong><fmt:formatNumber value="${vo.productCost}" pattern="#,###,###"/><spring:message code="message.cart.won"/></strong></td>	
 				                    </tr>			                      			                        				                   
                           		</c:forEach>			        		                       
 					                    <tr>
 					                        <td>   </td>
-					                        <td  class=" text-right"><h3>결제금액</h3></td>
-					                        <td class=" text-right"><h3><strong><input type="hidden" value="${totalCost}" id="tatalCost"><fmt:formatNumber value="${totalCost}" pattern="#,###,###"/>원</strong></h3></td>
+					                        <!-- 결제금액 -->
+					                        <td  class=" text-right"><h3><spring:message code="message.cart.payCost"/></h3></td>
+					                        <td class=" text-right"><h3><strong><input type="hidden" value="${totalCost}" id="tatalCost"><fmt:formatNumber value="${totalCost}" pattern="#,###,###"/><spring:message code="message.cart.won"/></strong></h3></td>
 					                    </tr> 
 					               </c:otherwise>
                 		</c:choose> 
@@ -71,11 +80,13 @@
                         <td>   </td>
                         <td> 
                         <button type="button" class="btn btn-default" id="cancleBtn" name="cancleBtn" style="margin-left: 380px; margin-top: 20px; margin-bottom: 40px;">
-                            <span class="glyphicon"></span>주문취소
+                           <!-- 주문취소 -->
+                            <span class="glyphicon"></span><spring:message code="message.cart.cancleCart"/>
                         </button></td>
                         <td>
+                        	<!-- 결제  -->
 	                        <button type="button" class="btn btn-success" id="paybtn" style="margin-left: 20px; margin-top: 20px; margin-bottom: 40px;">
-	                           	 결제 
+	                           	 <spring:message code="message.cart.readypay"/>
 	                        </button>
 	                   </td>
                      </tr>
