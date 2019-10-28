@@ -154,6 +154,13 @@ message.schedule.title=제목
 message.schedule.reg_dt=등록일
 message.schedule.status=처리상태
 
+
+#faq
+message.faq.question=질문
+message.faq.answer=답변
+message.faq.nodata=등록된 내용이 없습니다.
+
+
 #header
 message.header.home=홈
 message.header.movie=영화
@@ -206,8 +213,7 @@ message.footer.master_num=사업자 등록번호
 message.button.save=등록
 message.button.edit=수정
 message.button.delete=삭제
-
-
+message.button.cancel=취소
 
 #reservation_main
 message.reservation.title=영화 예매

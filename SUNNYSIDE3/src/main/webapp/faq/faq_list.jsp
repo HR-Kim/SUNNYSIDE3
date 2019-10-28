@@ -34,10 +34,10 @@
 	<div class="container" style="margin-bottom: 70px">
 		<!-- div title --> 
 		<div class="page-header">
-			<h1>FAQ</h1>
+			<h1><spring:message code="message.header.faq"/></h1>
 			<c:choose>
 				<c:when test="${'admin' == user.userLevel}">
-					<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#savePop">등록</button>					
+					<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#savePop"><spring:message code="message.button.save"/></button>					
 				</c:when>
 			</c:choose>
 		</div>
@@ -77,7 +77,8 @@
 						<div class="panel panel-default">
 							<!-- 질문내용 -->
 							<div class="panel-heading">
-								<strong>등록된 내용이 없습니다.</strong>
+								<!-- 등록된 내용이 없습니다. -->
+								<strong><spring:message code="message.faq.nodata"/></strong>
 							</div>	
 							<!--// 질문내용 -->
 							<!-- 답변내용 -->
@@ -96,20 +97,21 @@
 	<div class="modal fade" id="savePop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><div class="modal-dialog" role="document"><div class="modal-content">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<h4 class="modal-title" id="myModalLabel">등록</h4>
+			<!-- 등록 -->
+			<h4 class="modal-title" id="myModalLabel"><spring:message code="message.button.edit"/></h4>
 		</div>
 		<div class="modal-body">
 			<form class="form-horizontal" action="${context}/faq/do_save.do" name="saveForm" id="saveForm" method="post">
 				<!-- 질문 -->
 				<div class="form-group">
-					<label for="saveTitle" class="hidden-xs hidden-sm col-md-2 col-lg-2 control-label">질문</label>
+					<label for="saveTitle" class="hidden-xs hidden-sm col-md-2 col-lg-2 control-label"><spring:message code="message.faq.question"/></label>
 					<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 						<input type="text" class="form-control" id="saveTitle" name="saveTitle">
 					</div>
 				</div>
 				<!-- 답변 -->
 				<div class="form-group">
-					<label for="saveContents" class="hidden-xs hidden-sm col-md-2 col-lg-2 control-label">답변</label>
+					<label for="saveContents" class="hidden-xs hidden-sm col-md-2 col-lg-2 control-label"><spring:message code="message.faq.answer"/></label>
 					<div class="col-sm-8">
 						<textarea class="form-control" id="saveContents" name="saveContents" rows="5"></textarea>
 					</div>
@@ -117,7 +119,7 @@
 			</form>
 		</div>
 		<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal" id="doSave" name="doSave">저장</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal" id="doSave" name="doSave"><spring:message code="message.button.save"/></button>
 			<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 		</div>
 	</div></div></div>
@@ -126,21 +128,22 @@
 	<div class="modal fade" id="updatePop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><div class="modal-dialog" role="document"><div class="modal-content">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<h4 class="modal-title" id="myModalLabel">수정</h4>
+			<!-- 수정 -->
+			<h4 class="modal-title" id="myModalLabel"><spring:message code="message.button.edit"/></h4>
 		</div>
 		<div class="modal-body">
 			<form class="form-horizontal" action="${context}/faq/do_update.do" name="updateForm" id="updateForm" method="post">
 				<input type="hidden" id="updateQuestionId" name="updateQuestionId">
 				<!-- 질문 -->
 				<div class="form-group">
-					<label for="updateTitle" class="hidden-xs hidden-sm col-md-2 col-lg-2 control-label">질문</label>
+					<label for="updateTitle" class="hidden-xs hidden-sm col-md-2 col-lg-2 control-label"><spring:message code="message.faq.question"/></label>
 					<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 						<input type="text" class="form-control" id="updateTitle" name="updateTitle">
 					</div>
 				</div>
 				<!-- 답변 -->
 				<div class="form-group">
-					<label for="updateContents" class="hidden-xs hidden-sm col-md-2 col-lg-2 control-label">답변</label>
+					<label for="updateContents" class="hidden-xs hidden-sm col-md-2 col-lg-2 control-label"><spring:message code="message.faq.answer"/></label>
 					<div class="col-sm-8">
 						<textarea class="form-control" id="updateContents" name="updateContents" rows="5"></textarea>
 					</div>
@@ -148,8 +151,10 @@
 			</form>
 		</div>
 		<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal" id="doUpdate" name="doUpdate">수정</button>
-			<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+			<!-- 수정 -->
+			<button type="button" class="btn btn-default" data-dismiss="modal" id="doUpdate" name="doUpdate"><spring:message code="message.button.edit"/></button>
+			<!-- 취소 -->
+			<button type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="message.button.cancel"/></button>
 		</div>
 	</div></div></div>
 	
