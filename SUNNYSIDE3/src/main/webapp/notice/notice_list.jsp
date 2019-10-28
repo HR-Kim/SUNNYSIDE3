@@ -106,6 +106,11 @@
     div > #paging {
       text-align: center;
     }
+    
+    div {
+  	margin-bottom : 10px;
+
+	}
 
   </style>
 
@@ -142,7 +147,6 @@
 			</div>
 		</div>
 		<!--// 검색영역 -->
-
 		<!-- Grid영역 -->
 		<div class="table-responsive">
 			<table class="table  table-striped table-bordered table-hover" id="listTable">
