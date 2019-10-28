@@ -131,8 +131,8 @@
 			<aside class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></aside>
 			<aside class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
 				<div class="table-responsive" style="overflow-x: hidden">
-					
-					<p>한줄평</p>
+					<!-- 한줄평 -->
+					<p><spring:message code="message.review.review"/></p>
 					<input type="hidden" name="movieId" id="movieId" value="${vo.movieId}"/>
 					<input type="text" name="userId" id="userId" value="${user.userId}"/>
 					<table class="table  table-striped table-bordered table-hover" id="listTable">
