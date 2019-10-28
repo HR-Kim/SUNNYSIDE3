@@ -30,14 +30,16 @@
 			, B.TITLE        as title     
 			, B.CONTENTS     as contents  
 			, B.STATUS       as status    
-			, B.REG_DT       as regDt     
+			, CASE TO_CHAR(B.reg_dt, 'yyyy.mm.dd') when TO_CHAR(sysdate, 'yyyy.mm.dd') THEN TO_CHAR(sysdate, 'HH24:MI')
+            	ELSE TO_CHAR(B.reg_dt, 'yyyy.mm.dd') END AS regDt
 			, B.ORG_FILE_NM  as orgFileNm 
 			, B.SAVE_FILE_NM as saveFileNm
 			, B.EXT          as ext       
 			, B.FILE_SIZE    as fileSize  
 			, B.RE_CONTENTS  as reContents
 			, B.rnum         as num
-			, B.RE_DT        as reDt    
+			, CASE TO_CHAR(B.re_dt, 'yyyy.mm.dd') when TO_CHAR(sysdate, 'yyyy.mm.dd') THEN TO_CHAR(sysdate, 'HH24:MI')
+				ELSE TO_CHAR(B.re_dt, 'yyyy.mm.dd') END AS reDt
 	  	FROM                                                           
 	  	( 	SELECT ROWNUM AS rnum, A.*                                 
 	  		FROM                                                       

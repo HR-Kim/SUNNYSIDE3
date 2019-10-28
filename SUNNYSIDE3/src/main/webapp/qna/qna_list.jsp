@@ -138,10 +138,9 @@
 			<table class="table table-striped table-bordered table-hover" id="listTable">
 				<thead bg-default" style="background-color: #333333; color: #f0f0f0">
 				    <th class="text-center col-md-1 col-xs-1" style="display:none;">user_ID</th>
-					<th class="text-center col-md-2 col-xs-1">제목</th>
-					<th class="text-center col-md-6 col-xs-1">내용</th>
-					<th class="text-center col-md-1 col-xs-6 ">문의 날짜</th>
-					<th class="text-center col-md-1 col-xs-2">답변상태</th>
+					<th class="text-center col-md-7 col-xs-1"><spring:message code="message.qna.title"/></th>
+					<th class="text-center col-md-1 col-xs-6 "><spring:message code="message.qna.reg_dt"/></th>
+					<th class="text-center col-md-1 col-xs-2"><spring:message code="message.qna.status"/></th>
 				</thead>
 				<tbody>
 					<c:choose>
@@ -150,7 +149,6 @@
 								<tr>
 									<td class="text-center" style="display:none;"><c:out value="${vo.userId }"/></td>
 									<td class="text-center"><c:out value="${vo.title }"/></td>
-									<td class="text-left"><c:out value="${vo.contents }"/></td>
 									<td class="text-center" style="font-size:0.9em;"><c:out value="${vo.regDt }"/></td>
 									<td class="text-center" ><c:out value="${vo.status }"/></td>
 								</tr>

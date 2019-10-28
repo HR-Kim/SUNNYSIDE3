@@ -130,7 +130,11 @@
 						<input type="text" class="form-control input-sm" id="searchWord" name="searchWord" placeholder="검색어"/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<button type="button" class="btn btn-default btn-sm" id="doRetrieve">조회</button>
-						<button type="button" class="btn btn-default btn-sm" id="doSave">글쓰기</button>	
+						<c:choose>
+							<c:when test="${'admin' == user.userLevel}">
+								<button type="button" class="btn btn-default btn-sm" id="doSave">글쓰기</button>	
+							</c:when>
+						</c:choose>
 		
 					</div>
 				</form>
@@ -143,10 +147,10 @@
 			<table class="table  table-striped table-bordered table-hover" id="listTable">
 				<thead bg-default" style="background-color: #333333; color: #f0f0f0">
 				    <th class="text-center col-md-1 col-xs-1" style="display:none;">notice_ID</th>
-					<th class="text-center col-md-1 col-xs-1">번호</th>
-					<th class="text-center col-md-1 col-xs-1">지점</th>
-					<th class="text-center col-md-9 col-xs-6 ">제목</th>
-					<th class="text-center col-md-1 col-xs-2">등록일</th>
+					<th class="text-center col-md-1 col-xs-1"><spring:message code="message.notice.num"/></th>
+					<th class="text-center col-md-1 col-xs-1"><spring:message code="message.notice.branchSNm"/></th>
+					<th class="text-center col-md-9 col-xs-6 "><spring:message code="message.notice.title"/></th>
+					<th class="text-center col-md-1 col-xs-2"><spring:message code="message.notice.reg_dt"/></th>
 				</thead>
 				<tbody>
 					<c:choose>

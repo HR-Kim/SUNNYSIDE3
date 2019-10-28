@@ -33,11 +33,12 @@
 			B.CONTENTS,
 			B.WRITER_ID as writerId,
 			B.MOD_DT as modDt,
-			B.REG_DT as regDt,
+ 			CASE TO_CHAR(B.reg_dt, 'yyyy.mm.dd') when TO_CHAR(sysdate, 'yyyy.mm.dd') THEN TO_CHAR(sysdate, 'HH24:MI')
+            ELSE TO_CHAR(B.reg_dt, 'yyyy.mm.dd') END AS regDt,
 			B.rnum as num,
 			B.BRANCH_NM as branchSNm,
 			NVL(B.FILE_ID,'0')  as fileId
-	  	FROM                                                           
+	  	FROM                  
 	  	( 	SELECT ROWNUM AS rnum, A.*
 	  		FROM                                                       
 	  		(                                                           
