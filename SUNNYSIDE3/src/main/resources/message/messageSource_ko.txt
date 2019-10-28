@@ -132,16 +132,24 @@ message.store.img_size=용량
 
 
 #notice
-message.schedule.num=번호
-message.schedule.branchSNm=지점
-message.schedule.title=제목
-message.schedule.reg_dt=등록일
+message.notice.num=번호
+message.notice.branchSNm=지점
+message.notice.title=제목
+message.notice.reg_dt=등록일
+message.notice.file_upload=파일 업로드
+message.notice.file_add=파일첨부
+message.notice.file=파일
+message.notice.store=지점
+
 
 #qna
-message.schedule.title=제목
-message.schedule.contents=내용
-message.schedule.reg_dt=등록일
-message.schedule.status= 답변상태
+message.qna.title=제목
+message.qna.contents=내용
+message.qna.reg_dt=등록일
+message.qna.status= 답변상태
+message.qna.reply=답변달기
+message.qna.replycontents=답변내용
+message.qna.waiting=답변대기
 
 
 #faq
@@ -203,6 +211,12 @@ message.button.save=등록
 message.button.edit=수정
 message.button.delete=삭제
 message.button.cancel=취소
+message.button.retrieve=조회
+message.button.write=글쓰기
+message.button.searchword=검색어
+message.button.list=목록
+message.button.init=초기화
+
 
 #reservation_main
 message.reservation.title=영화 예매
@@ -268,6 +282,7 @@ message.reservation.ticketCode=티켓코드
 message.reservation.seat=좌석	Seat
 message.reservation.leave=페이지에서 벗어납니다.
 
+
 #store
 message.store.popcorn=팝콘
 message.store.drink=음료
@@ -304,5 +319,3 @@ message.cart.payCode=결제번호
 message.cart.payName=상품이름
 message.cart.payCost=결제금액
 message.cart.payDate=결제일
-
- 

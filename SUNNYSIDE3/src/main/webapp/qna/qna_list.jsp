@@ -63,7 +63,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-<title>고객센터</title>
+<!-- 1:1문의 -->
+<title><spring:message code="message.header.questions"/></title>
 
 <!-- 부트스트랩 -->
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -108,10 +109,10 @@
 </head>
 <body>
 	<!-- div container -->
-	<div class="container">
+	<div class="container" style="margin-bottom: 70px">
 		<!-- div title -->
 		<div class="page-header">
-			<h1>1:1문의</h1>
+			<h1><spring:message code="message.header.questions"/></h1>
 		</div>
 		
 		<!-- 검색영역 -->
@@ -123,17 +124,20 @@
 					<div class="form-group">
 						<!-- 검색구분 --> 
 						<%=StringUtil.makeSelectBox(listQnaSearch, "searchDiv", searchDiv, true) %>
-						<input type="text" class="form-control input-sm" id="searchWord" name="searchWord" placeholder="검색어"/>
+						<!-- 검색어 -->
+						<input type="text" class="form-control input-sm" id="searchWord" name="searchWord" placeholder='<spring:message code="message.button.searchword"/>'/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<button type="button" class="btn btn-default btn-sm" id="doRetrieve">조회</button>
-						<button type="button" class="btn btn-default btn-sm" id="doSave">글쓰기</button>	
+						<!-- 조회 -->
+						<button ype="button" class="btn btn-default btn-sm" id="doRetrieve"><spring:message code="message.button.retrieve"/></button>
+						<!-- 글쓰기 -->
+						<button type="button" class="btn btn-default btn-sm" id="doSave"><spring:message code="message.button.write"/></button>	
 		
 					</div>
 				</form>
 			</div>
 		</div>
 		<!--// 검색영역 -->
-
+		<br>
 		<!-- Grid영역 -->
 		<div class="table-responsive">			
 			<table class="table table-striped table-bordered table-hover" id="listTable">
@@ -156,7 +160,7 @@
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
-							<tr><td class="text-center" colspan="99">등록된 게시물이 없습니다.</td></tr>
+							<tr><td class="text-center" colspan="99"><spring:message code="message.faq.nodata"/></td></tr>
 						</c:otherwise>
 					</c:choose>
 				</tbody>

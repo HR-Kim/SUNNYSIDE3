@@ -15,17 +15,17 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-<title>게시관리</title>
+<title><spring:message code="message.header.questions"/></title>
 <!-- 부트스트랩 -->
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="${context}/resources/css/headerStyle.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<!-- div container -->
-	<div class="container">
+	<div class="container" style="margin-bottom: 70px">
 		<!-- div title -->
 		<div class="page-header">
-			<h1>게시관리</h1>
+			<h1><spring:message code="message.header.questions"/></h1>
 		</div>
 		<!--// div title -->
 		<!-- Button Area -->
@@ -34,50 +34,62 @@
 				<div class="text-right">
 					<c:choose>
 						<c:when test="${'admin' == user.userLevel}">
-								<button type="button" class="btn btn-default btn-sm" id="doSelectOneAdmin">답변달기</button>		
+								<!-- 답변달기 -->
+								<button type="button" class="btn btn-default btn-sm" id="doSelectOneAdmin"><spring:message code="message.qna.reply"/></button>		
 						</c:when>
 					</c:choose>
 					<!-- <button type="button" class="btn btn-default btn-sm" id="doSelectOneAdmin">답변달기</button> -->
-					<button type="button" class="btn btn-default btn-sm" id="doRetrieve">목록</button>
-					<button type="button" class="btn btn-default btn-sm" id="doInit">초기화</button>
-					<button type="button" class="btn btn-default btn-sm" id="doSave">등록</button>
-					<button type="button" class="btn btn-default btn-sm" id="doUpdate">수정</button>
-					<button type="button" class="btn btn-default btn-sm" id="doDelete">삭제</button>
+					<!-- 목록 -->
+					<button type="button" class="btn btn-default btn-sm" id="doRetrieve"><spring:message code="message.button.list"/></button>
+					<!-- 초기화 -->
+					<button type="button" class="btn btn-default btn-sm" id="doInit"><spring:message code="message.button.init"/></button>
+					<!-- 등록 -->
+					<button type="button" class="btn btn-default btn-sm" id="doSave"><spring:message code="message.button.save"/></button>
+					<!-- 수정 -->
+					<button type="button" class="btn btn-default btn-sm" id="doUpdate"><spring:message code="message.button.edit"/></button>
+					<!-- 삭제 -->
+					<button type="button" class="btn btn-default btn-sm" id="doDelete"><spring:message code="message.button.delete"/></button>
 				</div>
 			</div>
 		</div>
+		<br>
 		<div class="col-lg-11"></div>
 		<!-- div title -->
 		<form class="form-horizontal" name="qnaEditFrm" id="qnaEditFrm" method="POST" action="${context}/qna/do_save.do">
 			<input type="hidden" class="form-control" name="userId" id="userId" value="${vo.userId }">
 
 			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">제목</label>
+				<!-- 제목 -->
+				<label for="inputEmail3" class="col-sm-2 control-label"><spring:message code="message.qna.title"/></label>
 				<div class="col-sm-8">
-					<input type="text" class="form-control" name="title" id="title" placeholder="제목" value="<c:out value='${vo.title }' />">
+					<input type="text" class="form-control" name="title" id="title" placeholder='<spring:message code="message.qna.title"/>' value="<c:out value='${vo.title }' />">
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">내용</label>
+				<!-- 내용 -->
+				<label for="inputEmail3" class="col-sm-2 control-label"><spring:message code="message.qna.contents"/></label>
 				<div class="col-sm-8">
-					<textarea class="form-control" name="contents" id="contents" rows="7" placeholder="내용"><c:out value="${vo.contents }" /></textarea>
+					<textarea class="form-control" name="contents" id="contents" rows="7" placeholder='<spring:message code="message.qna.contents"/>'><c:out value="${vo.contents }" /></textarea>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">등록일</label>
+				<!-- 등록일 -->
+				<label for="inputEmail3" class="col-sm-2 control-label"><spring:message code="message.qna.reg_dt"/></label>
 				<div class="col-sm-8">
-					<input type="text" class="form-control" name="regDt" id="regDt" placeholder="등록일" value="<c:out value='${vo.regDt }' />" disabled="disabled">
+					<input type="text" class="form-control" name="regDt" id="regDt" placeholder='<spring:message code="message.qna.reg_dt"/>' value="<c:out value='${vo.regDt }' />" disabled="disabled">
 				</div>
 			</div> 
 			
 			<hr/>
 			
 			<div id="a" class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">답변내용</label>
+				<!-- 답변내용 -->
+				<label for="inputEmail3" class="col-sm-2 control-label"><spring:message code="message.qna.replycontents"/></label>
 				<div class="col-sm-8">
-					<textarea class="form-control" name="reContents" id="reContents" rows="7" placeholder="답변대기" disabled="disabled"><c:out value="${vo.reContents }" /></textarea>
+					<!-- 답변대기 -->
+					<textarea class="form-control" name="reContents" id="reContents" rows="7" placeholder='<spring:message code="message.qna.waiting"/>' disabled="disabled"><c:out value="${vo.reContents }" /></textarea>
 				</div>
 			</div>
 					
