@@ -129,7 +129,9 @@
 		</style>
 	</head>
 	<body>
-		<div class="container">
+		<c:choose>
+			<c:when test="${user.userId == 'admin'}">
+				<div class="container">
 		<h3>영화편성</h3>
 			<div class="loadingLayer">
 				<p>...작업중입니다...</p>
@@ -316,6 +318,11 @@
 			<button id="planBtn" class="btn btn-warning btn-nm">확인</button>
 			</div>
 		</div>
+			</c:when>
+			<c:otherwise></c:otherwise>
+		</c:choose>
+		
+		
 		<script src="${context}/resources/js/jquery-1.12.4.js"></script>
 		<script src="${context}/resources/js/bootstrap.min.js"></script>
 		<script src="${context}/resources/js/jquery-ui.js"></script>

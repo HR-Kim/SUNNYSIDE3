@@ -662,7 +662,7 @@
     					"searchWord" : movieId
     				}
 				}).done(function(data){
-    				var scheduleArr = data;    				
+    				var scheduleArr = data;    				console.log(data);
     				createTimeBtnBox(scheduleArr);
     			});
 			}
@@ -708,7 +708,6 @@
 								var script = 'javascript:scheduleBtn("'+sId+'")';
 								var startTime = scheduleArr[q].startTime;
 								var time = convertTime(scheduleArr[q].startTime);
-								$("#hd_selectedScreenId").val(sId);
 								
 								if(todayFilter(startTime) == null){//끝난영화일때
 									$(target).append(
@@ -731,6 +730,7 @@
 			
 			//상영관 선택시
 			function scheduleBtn(screenId){
+				$("#hd_selectedScreenId").val(screenId);
 				$.ajax({
     				type : "POST",
     				url : "${context}/screenInfo/do_retrieve.do",
