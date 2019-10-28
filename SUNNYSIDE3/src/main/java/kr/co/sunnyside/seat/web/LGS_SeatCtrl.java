@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 
 import kr.co.sunnyside.cmn.Message;
 import kr.co.sunnyside.cmn.SearchVO;
+import kr.co.sunnyside.reservation.service.LGS_TicketVO;
 import kr.co.sunnyside.seat.service.LGS_SeatSvc;
 import kr.co.sunnyside.seat.service.LGS_SeatVO;
 
@@ -240,6 +241,42 @@ public class LGS_SeatCtrl {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value = "seat/do_updateOne_reservation.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	public String do_updateOne_reservation(LGS_SeatVO inVO) {
+		LOG.debug("==================================");
+		LOG.debug("Controller : do_updatee_seat_reservation");
+		LOG.debug("==================================");
+
+		LOG.debug("==================================");
+		LOG.debug("inVO : " + inVO.toString());
+		LOG.debug("==================================");
+		
+		if(inVO.getSeatNm() == null || inVO.getSeatNm() == "") throw new IllegalArgumentException();
+		if(inVO.getRoomId() == null || inVO.getRoomId() == "") throw new IllegalArgumentException();
+		if(inVO.getUseYN() == null || inVO.getUseYN() == "") throw new IllegalArgumentException();
+
+		int flag = seatSvc.do_update_reservation(inVO);
+		
+		Message message = new Message();
+		if(flag >= 1) {
+			message.setMsgId("1");
+			message.setMsgMsg("성공");
+		}else {
+			message.setMsgId("0");
+			message.setMsgMsg("실패");
+		}
+		
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(message);
+		
+		LOG.debug("==================================");
+		LOG.debug("jsonStr : " + jsonStr);
+		LOG.debug("==================================");
+		
+		return jsonStr;
+	}
+	
+	@ResponseBody
 	@RequestMapping(value = "seat/do_save_reservation.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
 	public String do_save_seat_reservation(LGS_SeatVO seat) {
 		LOG.debug("==================================");
@@ -310,6 +347,7 @@ public class LGS_SeatCtrl {
 		return jsonStr;
 	}
 	
+	@ResponseBody
 	@RequestMapping(value = "seat/do_selectOne_reservation.do", method = RequestMethod.POST)
 	public String do_selectOne_reservation(LGS_SeatVO seat, Model model) {
 		LOG.debug("==================================");
@@ -321,13 +359,15 @@ public class LGS_SeatCtrl {
 		if(seat.getScreenId() == null || seat.getScreenId() == "") throw new IllegalArgumentException();
 		
 		LGS_SeatVO outVO = (LGS_SeatVO) seatSvc.do_selectOne_reservation(seat);
-		model.addAttribute("seatVO", outVO);
 		
 		LOG.debug("==================================");
 		LOG.debug("outVO : " + outVO);
 		LOG.debug("==================================");
 		
-		return VIEW_;
+		Gson gson=new Gson();
+		String gsonStr = gson.toJson(outVO);		
+		
+		return gsonStr;
 	}
 	
 	@ResponseBody

@@ -50,8 +50,8 @@
 				position: absolute;
 				top: 0;
 				left: 0;
-				width: 100%;
-				height: 100%;
+				width: 100vw;
+				height: 100vh;
 				background-color: black;
 				opacity: 0.1;
 				z-index: 95;
@@ -59,14 +59,14 @@
 			}
 			.seatSetting_layer {
 				position: absolute;
-				width: 500px;
-				height: 500px;
+				width: 200px;
+				height: 150px;
 				display: none;
 				border: 1px solid black;
 				background-color: white;
 				text-align: center;
 				padding: 10px;
-				z-index: 20;
+				z-index: 96;
 			}
 			.room_Plus_layer {
 				position: absolute;
@@ -218,6 +218,8 @@
 			</div>
 			
 			<hr/>
+			
+			<input type="hidden" id="hd_screenId" value="">
 			<p id="seatTableInfo"></p>
 			<div class="seatWrap">
 				<p class="screen">SCREEN</p>
@@ -278,12 +280,16 @@
     		
     		//상영관 새로고침버튼
     		$("#room_reset").on("click", function(){
+    			 roomReset();
+    		});
+    		
+    		function roomReset(){
     			var branchId = $("#hd_branchId").val();				//지점ID
     			var roomId = $("#hd_roomId").val();
     			if(roomId == null || roomId == "") roomId = ".";
     			update_room(roomId);
 				create_Room_Table(branchId);
-    		});
+    		}
     		
     		//좌석생성버튼
     		$("#seat_add").on("click", function(){
@@ -667,7 +673,7 @@
     			success: function(data){
     				var seatArr = data;
     				if(seatArr.length != 0){
-    					$("#seatTableInfo").text(td.eq(2).text() + "의 좌석테이블 입니다.");
+    					$("#seatTableInfo").text(td.eq(2).text() + "의 좌석테이블 입니다.(현재 미상영중)");
     					$(".seatWrap").css("display", "block");
     					for(var i=0 ; i< seatArr.length ; i++){
         					var y= seatArr[i].seatY;		//Y축값
@@ -707,7 +713,7 @@
     			loading(true);
     			
 				var searchWord = td.eq(1).text();			//상영관ID
-    			console.log(searchWord);
+
     			$.ajax({
     				type : "POST",
     				url : "${context}/reservation/do_retrieve_seatRealTime.do",
@@ -719,6 +725,8 @@
     				var seatArr = data;console.log(seatArr);
     				if(seatArr.length != 0){
     					var screenId = seatArr[0].screenId;
+    					$("#hd_screenId").val(screenId);
+    					
     					$("#seatTableInfo").text(td.eq(2).text() + "의 좌석테이블 입니다.\n현재 상영중입니다. (상영ID : "+screenId+")");
     					$(".seatWrap").css("display", "block");
     					for(var i=0 ; i< seatArr.length ; i++){
@@ -758,47 +766,95 @@
     			var rawClass = seat.attr("class");
     			var classArr = rawClass.split(" ");
     			
+    			var screenId = $("#hd_screenId").val();
     			var branchNm = $("#hd_branchNm").val();
     			var branchId = $("#hd_branchId").val();
     			var roomNm = $("#hd_roomNm").val();
     			var roomId = $("#hd_roomId").val();
+    			var classArr = seat.attr("class").split(" ");
+    			var classF = classArr[0];
+    			var classE = classArr[1].split("_")[1];
+    			var classFNm = classF + "" + classE;
     			
-    			if(seat.text() == "X"){
+    			if(seat.text() != "X"){
     				return;
-    			}
-    			
-    			$(".seatSetting_layer>div").detach();
-    			$(".seatSetting_layer").prepend(
-    				"<div>"+
-    				"<label>"+branchNm+"-"+roomNm+"의 <h class='HIGHLIGHT'>"+classArr[0]+""+classArr[1]+"</h>좌석</label>"+
-    				"</div>"	
-    			);
+    			}	
+    			console.log("classFNm : " + classFNm);
+    			console.log("screenId : " + screenId);
     			
     			$.ajax({
     				type : "POST",
-    				url : "${context}/seat/do_selectOne.do",
+    				url : "${context}/reservation/do_selectOne.do",
     				dataType : "json",
     				data : {
-    					"SEAT_NM" : seatNm,
-    					"SCREEN_ID" : screenId
+    					"seatNm" : classFNm,
+    					"screenId" : screenId
     				}
 				}).done(function(data){
-    			
-    			var width = $(".seatSetting_layer").width();
-    			var height = $(".seatSetting_layer").height();
-    			var outWidth = $("body").width();
-    			var outHeight = $("body").height();
-  			
-    			$(".seatSetting_layer").css("top", (outHeight-height)/2);
-    			$(".seatSetting_layer").css("left", (outWidth-width)/2);
-    			$(".seatSetting_layer").css("display", "block");
-    			
-    			});
-    			
-    		});
 
+	    			$(".seatSetting_layer>div").detach();
+	    			$(".seatSetting_layer").prepend(
+	    				"<div>"+
+	    				"<label>"+branchNm+"-"+roomNm+"의 <h class='HIGHLIGHT'>"+classArr[0]+""+classArr[1]+"</h>좌석</label>"+
+	    				"<label>유저아이디 : " + data.userId + "</label>"+
+	    				"<br/><button id='seat_userDelete' onclick='javascript:userSeatDelete(\""+data.ticketCode+"\", \""+data.roomId+"\", \""+data.screenId+"\", \""+data.seatNm+"\");' class='btn BTN_DELETE'>좌석비우기</button>"+
+	    				"</div>"
+	    			);
+
+	    			var width = $(".seatSetting_layer").width();
+	    			var height = $(".seatSetting_layer").height();
+	    			var outWidth = $("body").width();
+	    			var outHeight = $("body").height();
+	  				console.log(outHeight);
+	    			$(".seatSetting_layer").css("top", $(".seatWrap").css("top"));
+	    			$(".seatSetting_layer").css("left", (outWidth-width)/2);
+	    			$(".seatSetting_layer").css("display", "block");
+	    			$(".dim").css("height", outHeight*2.5);
+	    			$(".dim").css("display", "block");
+	    			
+	    			$("body").scrollTop((outHeight-height)/2);
+    			});
+    		});
+    		
+    		function userSeatDelete(ticketCode, roomId, screenId, seatNm){
+    			if(confirm("정말로 좌석을 비우시겠습니까?")==false) return;
+    			
+    			$.ajax({
+    				type : "POST",
+    				url : "${context}/reservation/do_delete.do",
+    				dataType : "json",
+    				data : {
+    					"ticketCode" : ticketCode
+    				}
+				}).done(function(data){
+					reservationSeatDelete(roomId, screenId, seatNm);
+					
+				});
+    		}
+
+    		function reservationSeatDelete(roomId, screenId, seatNm){
+    			$.ajax({
+    				type : "POST",
+    				url : "${context}/seat/do_updateOne_reservation.do",
+    				dataType : "json",
+    				data : {
+    					"roomId" : roomId,
+    					"screenId" : screenId,
+    					"seatNm" : seatNm,
+    					"useYN" : "1"
+    				}
+				}).done(function(data){
+					alert("제거되었습니다.")
+					$(".seatSetting_layer").css("display", "none");
+	    			$(".dim").css("display", "none");
+	    			//delete_Seat_Table();
+				});
+    			
+    		}
+    		
     		$("#seat_cancel").on("click", function(){
     			$(".seatSetting_layer").css("display", "none");
+    			$(".dim").css("display", "none");
     		});
     		
     		//좌석버튼에 마우스 올렸을떄 색 변화

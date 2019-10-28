@@ -37,7 +37,9 @@
 		FROM
 		    TICKET_HISTORY
 		WHERE
-		    USER_ID = #{userId, jdbcType=VARCHAR}
+		    SCREEN_ID = #{screenId, jdbcType=VARCHAR}
+		AND
+			SEAT_NM = #{seatNm, jdbcType=VARCHAR}
 	</select>
 	 
 	<select id="do_save" parameterType="TicketVO">

@@ -157,6 +157,7 @@ public class LGS_ReservationCtrl {
 		return jsonStr;
 	}
 	
+	@ResponseBody
 	@RequestMapping(value = "reservation/do_selectOne.do", method = RequestMethod.POST)
 	public String do_selectOne(LGS_TicketVO ticketVO, Model model) {
 		LOG.debug("==================================");
@@ -164,16 +165,23 @@ public class LGS_ReservationCtrl {
 		LOG.debug("==================================");
 		
 		if(ticketVO == null) throw new NullArgumentException(); //null
-		if(ticketVO.getUserId() == null || ticketVO.getUserId() == "") throw new IllegalArgumentException();
+		if(ticketVO.getSeatNm() == null || ticketVO.getSeatNm() == "") throw new IllegalArgumentException();
+		if(ticketVO.getScreenId() == null || ticketVO.getScreenId() == "") throw new IllegalArgumentException();
 		
 		LGS_TicketVO outVO = (LGS_TicketVO) reservationSvc.do_selectOne(ticketVO);
-		model.addAttribute("TictetVO", outVO);
-		
+
 		LOG.debug("==================================");
 		LOG.debug("outVO : " + outVO);
 		LOG.debug("==================================");
 		
-		return "";
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(outVO);
+		
+		LOG.debug("==================================");
+		LOG.debug("jsonStr : " + jsonStr);
+		LOG.debug("==================================");
+		
+		return jsonStr;
 	}
 	
 	@RequestMapping(value = "reservation/do_retrieve.do", method = RequestMethod.POST)
