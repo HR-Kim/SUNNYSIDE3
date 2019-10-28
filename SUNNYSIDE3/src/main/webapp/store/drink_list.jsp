@@ -22,7 +22,7 @@
 <title><spring:message code="message.store.drink"/></title>
 </head>
 <body>
-	<div class="container">
+	<div class="container"> 
 	<!-- 음료 -->
 	    <h3 class="h4"><spring:message code="message.store.drink"/></h3>
 	    <hr>

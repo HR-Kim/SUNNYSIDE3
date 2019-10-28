@@ -21,7 +21,7 @@
 <title><spring:message code="message.store.popcorn"/></title>
 </head>
 <body>
-	<div class="container">
+	<div class="container"> 
 	<!-- 팝콘 -->
 	    <h3 class="h4"><spring:message code="message.store.popcorn"/></h3>
 	    <hr>

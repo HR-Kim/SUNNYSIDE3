@@ -17,7 +17,7 @@
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="${context}/resources/css/headerStyle.css" rel="stylesheet" type="text/css">
 <link href="../resources/css/store_main.css" rel="stylesheet" type="text/css">
-<!-- 영화예매권 -->
+<!-- 영화예매권 --> 
 <title><spring:message code="message.store.movieTicket"/></title>
 </head>
 <body>

@@ -24,7 +24,7 @@
 <title><spring:message code="message.store.productDetail"/></title>
 </head>
 <body>
-<!--상품 상세정보  -->
+<!--상품 상세정보  --> 
 <h3 class="h4 col-sm-12 col-md-12 col-xs-12"  style="margin-left: 400px; margin-top: 2em;"><spring:message code="message.store.productDetail"/></h3>
 <table class="col-sm-12 col-md-12 col-xs-12"  id="tbody" ><!-- style="margin-top: 80px; margin-bottom: 50px; margin-left: 350px;" -->
 	<tr  >

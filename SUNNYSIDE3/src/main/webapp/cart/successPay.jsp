@@ -20,7 +20,7 @@
 <h2 style="margin-top: 100px; margin-bottom: 90px; font-weight: bold; text-align: center;"><spring:message code="message.cart.payis"/></h2>
 <hr>
 <div class="container">
-    <div class="row">
+    <div class="row"> 
         <div class="col-sm-8 col-md-6 col-md-offset-1" style="margin-left: 300px;">
         <!-- 결제 내역 -->
         <h4><spring:message code="message.cart.payList"/></h4>

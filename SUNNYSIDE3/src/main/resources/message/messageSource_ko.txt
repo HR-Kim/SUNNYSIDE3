@@ -305,3 +305,4 @@ message.cart.payName=상품이름
 message.cart.payCost=결제금액
 message.cart.payDate=결제일
 
+ 

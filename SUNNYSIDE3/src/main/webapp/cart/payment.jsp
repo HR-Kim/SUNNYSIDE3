@@ -26,7 +26,7 @@
       
             <table class="table table-hover">
                 <thead>
-                    <tr>
+                    <tr> 
                     	<!-- 상품정보 -->
                         <th><spring:message code="message.cart.productInfo"/></th>
                         <!-- 수량 -->

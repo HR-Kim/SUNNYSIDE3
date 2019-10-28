@@ -25,7 +25,7 @@
 	</div>
 </div>
    	<div class="container">
-   	<!-- 팝콘 -->
+   	<!-- 팝콘 --> 
 	    <h3 class="h3"><spring:message code="message.store.popcorn"/></h3>
 	    		 <div class="col-md-12 col-xs-12 col-sm-12" style="text-align: right;">
 			   		<a href="do_retrieve_popcorn.do" class="btn_popcorn_product"><i class="fa fa-plus"></i> <spring:message code="message.store.moreItem"/></a> <!-- 더보기-->
