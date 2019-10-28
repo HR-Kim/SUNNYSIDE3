@@ -8,28 +8,24 @@
 	
 	
 	<select id="do_retrieve" parameterType="SEJ_PhotoTicketVO" resultType="SEJ_PhotoTicketVO">
-	  	select 	b.kortitle,
-		      	c.screen_dt,
-		      	a.seat_nm,
-			  	a.ticket_code,
-			  	a.user_id,
-			  	c.room_id
+	  	select	b.kortitle,
+        a.seat_nm,
+	  	a.ticket_code,
+	  	a.user_id
 	  	from ticket_history a JOIN movie b
 		ON a.movie_id=b.movie_id
 		JOIN screen_info c
-		ON a.movie_id =c.movie_id
+        ON c.movie_id=c.movie_id
 		where a.user_id=#{user_id,jdbcType=VARCHAR}
         MINUS (
-            select  b.kortitle,
-                    c.screen_dt,
-                    a.seat_nm,
-                    a.ticket_code,
-                    a.user_id,
-                    c.room_id
-            from ticket_history a JOIN movie b
-            ON a.movie_id=b.movie_id
-            JOIN screen_info c
-            ON a.movie_id =c.movie_id
+            select	b.kortitle,
+	        a.seat_nm,
+		  	a.ticket_code,
+		  	a.user_id
+		  	from ticket_history a JOIN movie b
+			ON a.movie_id=b.movie_id
+			JOIN screen_info c
+	        ON c.movie_id=c.movie_id
             JOIN photo_ticket d
             ON a.ticket_code =d.ticket_code
             where a.user_id=#{user_id,jdbcType=VARCHAR})
@@ -37,16 +33,14 @@
 	</select>
 	
 	<select id="do_selectOne" parameterType="SEJ_PhotoTicketVO" resultType="SEJ_PhotoTicketVO">
-	  	select 	b.kortitle,
-		      	c.screen_dt,
-		      	a.seat_nm,
-			  	a.ticket_code,
-			  	a.user_id,
-			  	c.room_id
+	  	select	b.kortitle,
+        a.seat_nm,
+	  	a.ticket_code,
+	  	a.user_id
 	  	from ticket_history a JOIN movie b
 		ON a.movie_id=b.movie_id
 		JOIN screen_info c
-		ON a.movie_id =c.movie_id
+        ON c.movie_id=c.movie_id
 		where a.user_id=#{user_id,jdbcType=VARCHAR}
 		and a.ticket_code=#{ticket_code,jdbcType=VARCHAR}
 	</select>
@@ -64,7 +58,9 @@
 			    ext,
 			    img_size,
 			    reg_dt,
-			    room_id
+			    room_id,
+			    ThisFileNm
+			    
 		) VALUES (
 		    #{kortitle,jdbcType=VARCHAR},
 		    to_date(#{screen_dt,jdbcType=DATE},'YY-MM-DD HH24:mi:SS'),
@@ -76,7 +72,8 @@
 		    #{ext,jdbcType=VARCHAR},
 		    #{img_size,jdbcType=VARCHAR},
 		    SYSDATE,
-		    #{room_id,jdbcType=VARCHAR}
+		    #{room_id,jdbcType=VARCHAR},
+		    #{ThisFileNm,jdbcType=VARCHAR}
 		)
 	</insert>
 	
@@ -92,11 +89,12 @@
     kortitle,
     screen_dt,
     seat_nm,
-    room_id
+    room_id,
+    thisFileNm
 FROM
     photo_ticket
     where 
-    user_id='u5'
+    user_id=#{user_id,jdbcType=VARCHAR}
        
   
 	</select>

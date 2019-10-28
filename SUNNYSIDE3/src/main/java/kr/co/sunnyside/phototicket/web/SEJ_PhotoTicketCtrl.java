@@ -48,7 +48,7 @@ public class SEJ_PhotoTicketCtrl {
 	@RequestMapping(value="phototicket/do_retrieve.do",method=RequestMethod.GET)
 	public String do_retrieve(HttpServletRequest req,Model model,SEJ_PhotoTicketVO inVO,HttpSession session) {
 		
-		inVO.setUser_id("u5");
+		inVO.setUser_id("admin");
 		List<SEJ_PhotoTicketVO> moiveList = (List<SEJ_PhotoTicketVO>) SPT.do_retrieve(inVO);
 		
 		model.addAttribute("moiveList", moiveList);
@@ -111,7 +111,7 @@ public class SEJ_PhotoTicketCtrl {
 	public ModelAndView do_save(MultipartHttpServletRequest mReg 
 			   , ModelAndView model,SEJ_PhotoTicketVO inVO) throws IllegalStateException, IOException {
 		String selected= (String) mReg.getParameter("selected");
-		inVO.setUser_id("u5");
+		inVO.setUser_id("admin");
 		inVO.setTicket_code(selected);
 		
 		SEJ_PhotoTicketVO selectMovie = (SEJ_PhotoTicketVO) SPT.do_selectOne(inVO);

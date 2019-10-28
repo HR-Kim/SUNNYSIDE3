@@ -10,6 +10,7 @@
 <title>Insert title here</title>
    <link rel="stylesheet" href="${context}/resources/css/bootstrap.min.css">
    <link rel="stylesheet" href="${context}/resources/css/userpage.css">
+   <link href="${context}/resources/css/headerStyle.css" rel="stylesheet" type="text/css">
 </head>	
 <body>
 
@@ -110,7 +111,7 @@
 						 
 						 event_data += '<tr>                                                                                       ' ;
 						 event_data += '<td class="text-center">'+value.kortitle+'</td>                                                              ' ;
-						 event_data += '<td style="display:none;"><input type="hidden"  name="selected"  id="selected" value="'+value.ticket_code+'"></td> ' ;
+						 event_data += '<td style="display:none;">'+value.ticket_code+'</td>' ;
 						 event_data += '<td class="text-center">'+value.room_nm+'</td>                                                              ' ;
 						 event_data += '<td>'+value.ticket_dt+'</td>  ';
 						 event_data += '<td class="text-center"><button type="button" class="btn btn-default btn-sm" id="doDelete">예매 취소</button></td>' ;
@@ -127,9 +128,10 @@
 							 
 							 event_data += '<tr>' ;
 							 event_data += '<td class="text-center">'+value.product_nm+'</td>' ;
-							 event_data += '<td>'+value.pay_code+'</td>' ;
+							 event_data += '<td class="text-center">'+value.pay_code+'</td>' ;
 							 event_data += '<td class="text-right">'+value.total_cost+'</td>' ;
 							 event_data += '<td class="text-right">'+value.pay_dt+'</td>' ;
+							 event_data += '<td class="text-center"><button type="button" class="btn btn-default btn-sm" id="doDelete">예매 취소</button></td>' ;
 							 event_data += '</tr>';
 							 
 						 });
@@ -141,8 +143,9 @@
 						$("#movielistTable>tbody").empty();
 						 $.each(jData,function(index, value){
 							 
-							 event_data += '<tr>                                                                                       ' ;
-							 event_data += '<td>'+value.kortitle+'</td>                                                              ' ;
+							 event_data += '<tr>' ;
+							 event_data += '<td class="text-center">'+value.kortitle+'</td>' ;
+							 event_data += '<td class="text-center"><img src="../resources/img/phototicket/'+value.ThisFileNm+'" /></td>' ;
 							 event_data += '<td style="display:none;"><input type="hidden"  name="selected"  id="selected" value="'+value.ticket_code+'"></td> ' ;
 							 event_data += '</tr>																						';
 						 });
@@ -158,10 +161,13 @@
 							if(value.usable==0){
 								var useable="사용가능";
 							}
+							else{
+								var useable="사용함";
+							}
 							 event_data += '<tr> ' ;
 							 event_data += '<td class="text-center">'+value.num+'</td>' ;
 							 event_data += '<td class="text-center">'+value.coupon_nm+'</td>'  ;
-							 event_data += '<td class="text-left">'+value.coupon_code+'</td> ' ;
+							 event_data += '<td class="text-center">'+value.coupon_code+'</td> ' ;
 							 event_data += '<td class="text-right">'+value.use_dt+'</td>'  ;
 							 event_data += '<td class="text-center">'+useable+'</td> ' ;
 							 event_data += '</tr>';
@@ -179,10 +185,10 @@
 						 $.each(jData,function(index, value){
 							
 							 event_data += '<tr> ' ;
-							 event_data += '<td>'+value.num+'</td>' ;
-							 event_data += '<td>'+value.title+'</td>'  ;
-							 event_data += '<td>'+value.reg_dt+'</td> ' ;
-							 event_data += '<td>'+value.status+'</td>'  ;
+							 event_data += '<td class="text-center">'+value.num+'</td>' ;
+							 event_data += '<td class="text-center">'+value.title+'</td>'  ;
+							 event_data += '<td class="text-left">'+value.reg_dt+'</td> ' ;
+							 event_data += '<td class="text-center">'+value.status+'</td>'  ;
 							 event_data += '</tr>';
 							
 						 });
@@ -202,27 +208,86 @@
 		}
 	});
 	
-	function doDelete(){
-		var frm = document.deleteFrm;
-		frm.action = "${context}/userpage/do_delete.do";
-		frm.selected.value=$("#movieList option:selected").val();
-		frm.submit();
-	}
 	
-	$("#doDelete").on("click",function(){
-		doDelete();
+	
+	
+	$("#tiketHistoryTable>tbody").on("click","button",function(event){
 		
+		var tr = $(this).parent().parent();
+		console.log(tr);
+		var td = tr.children();
 		
+		console.log(td);
+		var ticket_code = td.eq(1).text();
+		console.log(ticket_code);
+		
+	
+		$.ajax({
+			   type:"POST",
+			   url:"${context}/userpage/do_delete.do",
+			   dataType:"html",
+			   data:{
+				   "ticket_code" :ticket_code
+				   
+			   }, 
+			   success : function(data) {
+					var jData = JSON.parse(data);
+					if (null != jData && jData.msgId == "1") {
+						alert(jData.msgMsg);
+						location.href = "${context}/userpage/do_userpage.do";
+
+					} else {
+						alert(jData.msgId + "|" + jData.msgMsg);
+					}
+				},
+				complete : function(data) {
+
+				},
+				error : function(xhr, status, error) {
+					alert("error:" + error);
+				}
+			});
 		
 	});
+	$("#reservationTable>tbody").on("click","button",function(event){
+		var tr = $(this).parent().parent();
+		console.log(tr);
+		var td = tr.children();
+		console.log(td);
+		var pay_code = td.eq(1).text();
+		console.log(pay_code);
+		
+		$.ajax({
+			   type:"POST",
+			   url:"${context}/userpage/do_delete_item.do",
+			   dataType:"html",
+			   data:{
+				   "pay_code" :pay_code
+				   
+			   }, 
+			   success : function(data) {
+					var jData = JSON.parse(data);
+					if (null != jData && jData.msgId == "1") {
+						alert(jData.msgMsg);
+						location.href = "${context}/userpage/do_userpage.do";
 
-	
+					} else {
+						alert(jData.msgId + "|" + jData.msgMsg);
+					}
+				},
+				complete : function(data) {
+
+				},
+				error : function(xhr, status, error) {
+					alert("error:" + error);
+				}
+			});
+		
+	});
 	
 	$(document).ready(function(){
 		console.log("ready");
 		
-		
-
 		
 	});
 	

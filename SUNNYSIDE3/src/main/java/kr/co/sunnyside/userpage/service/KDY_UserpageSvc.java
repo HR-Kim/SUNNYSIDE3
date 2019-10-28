@@ -11,6 +11,8 @@ public interface KDY_UserpageSvc {
 	
 	public int do_delete(DTO dto);
 	
+	public int do_delete_item(DTO dto);
+	
 	public List<?> do_coupon_retrieve(DTO dto);
 
 	public List<?> do_membership(DTO dto);

@@ -17,7 +17,7 @@
 	</sql>
 
 	<delete id="do_delete" parameterType="KDY_MoviehistoryVO">
-		DELETE FROM TICKET_HISTORY WHERE TICKET_CODE = #{ticket_code, jdbcType=VARCHAR}
+		DELETE FROM TICKET_HISTORY WHERE ticket_code = #{ticket_code, jdbcType=VARCHAR}
 	</delete>
 	
 	<select id="do_retrieve" parameterType="listSearchVO" resultType="KDY_MoviehistoryVO">
@@ -86,7 +86,7 @@
 		SELECT T.RNUM as num
 			  ,T.title as title
 			  ,T.status as status
-			  ,T.reg_dt as reg_dt
+			  ,to_char(T.reg_dt,'YYYY-MM-DD') as reg_dt
 		FROM(
 		    SELECT ROWNUM AS RNUM, A.*
 		    FROM(
@@ -131,7 +131,9 @@
 		    WHERE CEIL(ROWNUM/ #{pageSize, jdbcType=VARCHAR} ) = #{pageNum, jdbcType=VARCHAR}
 		    )T
 	</select>
-	
+	<delete id="do_delete_item" parameterType="KDY_ReservationVO">
+		DELETE FROM PAY_HISTORY WHERE pay_code = #{pay_code, jdbcType=VARCHAR}
+	</delete>
 	
 
 </mapper>

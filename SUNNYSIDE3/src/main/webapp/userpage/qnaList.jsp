@@ -9,9 +9,9 @@
 <body>
 
 
-		<table table-striped table-bordered table-hover id="qnalistTable">
+		<table class="table table-striped table-bordered table-hover" id="qnalistTable">
 		<h3>1:1 문의</h3>
-		<thead class="bg-primary">
+		<thead  class="bg-default" style="background-color: #333333; color: #f0f0f0">
 				<tr>
 			
 					<th class="text-center col-md-2 col-xs-2">번호</th>
@@ -32,7 +32,7 @@
 		</tbody></tr>
 		</tbody>
 </table>
-         
+       
 
 
 

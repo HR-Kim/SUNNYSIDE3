@@ -35,3 +35,6 @@ li.nav-item> a.nav-link:focus
     border-radius:0;
     transition:background 0.20s linear;
 }
+table{
+	margin-bottom: 70px;
+}

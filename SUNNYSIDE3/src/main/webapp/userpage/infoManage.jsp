@@ -9,7 +9,7 @@
 <body>
 
 
-		<table table-striped table-bordered table-hover id="listTable">
+		<table class="table table-striped table-bordered table-hover" id="listTable">
 		<h3>나의 정보 관리</h3>
 		
 			
