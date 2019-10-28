@@ -189,7 +189,7 @@ public class LGS_SeatCtrl {
 
 	@ResponseBody
 	@RequestMapping(value = "seat/do_update_reservation.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
-	public String do_update_reservation(String seatArr, String roomId, String useYN) {
+	public String do_update_reservation(String seatArr, String roomId, String useYN, String screenId) {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_updatee_seat_reservation");
 		LOG.debug("==================================");
@@ -211,6 +211,7 @@ public class LGS_SeatCtrl {
 			vo.setSeatNm(arr[i]);
 			vo.setRoomId(roomId);
 			vo.setUseYN(useYN);
+			vo.setScreenId(screenId);
 		flag += seatSvc.do_update_reservation(vo);
 		}
 		

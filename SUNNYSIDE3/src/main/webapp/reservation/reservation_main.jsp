@@ -489,7 +489,8 @@
 			function selectedMovieStart(){
 				var isStart = $("#isStart").val();
 				if(isStart == "0"){
-					var inputMovieId = opener.document.getElementById("selectedMovieId").value;
+					var inputMovieId = opener.document.getElementById("selectedMovieId");
+					if(inputMovieId != null) inputMovieId = inputMovieId.value;
 					var trList = $("#movieTable>tbody>tr");
 					
 					for(var i=0 ; i<trList.length ; i++){
@@ -1100,7 +1101,7 @@
 	    		function create_Seat_Table(){
 					var searchWord = $("#hd_selectedScreenId").val();
 	    			var searchDiv = "70";
-	    			
+	    			console.log($("#hd_selectedScreenId").val());
 	    			$.ajax({
 	    				type : "POST",
 	    				url : "${context}/seat/do_retrieve_reservation.do",

@@ -155,6 +155,7 @@
 		SET
 			USE_YN = #{useYN, jdbcType=NUMERIC}
 		WHERE ROOM_ID = #{roomId, jdbcType=VARCHAR}
+		AND SCREEN_ID = #{screenId, jdbcType=VARCHAR}
 		AND SEAT_NM = #{seatNm, jdbcType=VARCHAR}
 	</update>
 	

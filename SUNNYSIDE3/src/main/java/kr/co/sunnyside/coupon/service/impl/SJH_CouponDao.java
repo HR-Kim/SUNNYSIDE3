@@ -124,13 +124,26 @@ public class SJH_CouponDao implements WorkDiv {
 	}
 
 	
-	
-	
-	
 	@Override
 	public int do_update(DTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		String statement = this.NAMESPACE+".do_update";
+		SJH_CouponVO coupon = (SJH_CouponVO) dto;
+		
+		LOG.debug("========================");
+		LOG.debug("=01.param="+coupon);
+		LOG.debug("========================");
+		
+		LOG.debug("========================");
+		LOG.debug("=02.statement="+statement);
+		LOG.debug("========================");
+		
+		int flag = this.sqlSessionTemplate.update(statement, coupon);
+		
+		LOG.debug("========================");
+		LOG.debug("03.flag="+flag);
+		LOG.debug("========================");	
+		
+		return flag;
 	}
 
 

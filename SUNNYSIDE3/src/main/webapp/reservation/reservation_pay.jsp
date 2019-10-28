@@ -159,7 +159,7 @@
 	    				<input type="hidden" id="hd_screenId" name="screenId" value="${vo.screenId}">
 	    				<input type="hidden" id="hd_seatData" name="seatData" value="${seatInfo}">
 					</form>
-	
+
 					<input type="hidden" id="hd_coupon" value="">
 					<input type="hidden" id="hd_cost" value="">
 					
@@ -371,6 +371,8 @@
 							var cNm = coupon[i].couponNm;
 							var usable = coupon[i].usable;
 							var discount = coupon[i].discount;
+							var code = coupon[i].couponCode;
+							
 							$("#couponBox").append(
 									"<div id='couponInfo'>"+
 									"&nbsp;<label class='COUPON'><spring:message code='message.reservation.couponNm'/>: " + cNm + "</label>"+
@@ -383,7 +385,7 @@
 									);
 								}else{
 									$("#couponInfo").append(
-										"<button onclick='javascript:cpON("+discount+");' class='btn btn-xs btn-success'><spring:message code='message.reservation.apply'/></button>"
+										"<button onclick='javascript:cpON("+discount+",\""+code+"\");' class='btn btn-xs btn-success'><spring:message code='message.reservation.apply'/></button>"
 									);
 								}
 						}
@@ -392,28 +394,29 @@
     		}
     		
     		//쿠폰적용
-    		function cpON(discount){
+    		function cpON(discount, couponCode){
     			$("#couponInfo>button").detach();
     			
     			$("#couponValue").text("(-)" + discount + "<spring:message code='message.reservation.won'/>");
     			$("#hd_coupon").val(discount);
     			setFinalCost();
-    			
+    			couponUpdate(couponCode, true);
     			$("#couponInfo").append(
-						"<button onclick='javascript:cpOFF("+discount+");' class='btn btn-xs btn-danger'><spring:message code='message.reservation.cancel'/></button>"
+						"<button onclick='javascript:cpOFF("+discount+",\""+couponCode+"\");' class='btn btn-xs btn-danger'><spring:message code='message.reservation.cancel'/></button>"
 					);
     		}
     		
     		//쿠폰해제
-    		function cpOFF(discount){
+    		function cpOFF(discount, couponCode){
     			$("#couponInfo>button").detach();
     			
     			$("#couponValue").text("-");
     			$("#hd_coupon").val("");
     			setFinalCost();
+    			couponUpdate(couponCode, false);
     			
     			$("#couponInfo").append(
-						"<button onclick='javascript:cpON("+discount+");' class='btn btn-xs btn-success'><spring:message code='message.reservation.apply'/></button>"
+						"<button onclick='javascript:cpON("+discount+",\""+couponCode+"\");' class='btn btn-xs btn-success'><spring:message code='message.reservation.apply'/></button>"
 					);
     		}
     		
@@ -503,15 +506,17 @@
     		//좌석을 사용중으로 업데이트
     		function seatUpdateUnable(){
     			var roomId = "${vo.roomId}";
+    			var screenId = "${vo.screenId}";
     			var stringInfo = "${seatInfo}";
     			var seatArr = stringInfo;
-
+console.log(screenId);
     			$.ajax({
     				type : "POST",
     				url : "${context}/seat/do_update_reservation.do",
     				dataType : "json",
     				data : {
     					"roomId" : roomId,
+    					"screenId" : screenId,
 						"useYN" : 0,
 						"seatArr" : seatArr
     				}
@@ -524,6 +529,30 @@
 					}
 				});
    			
+    		}
+    		
+    		//쿠폰사용적용
+    		function couponUpdate(couponCode, bool){
+    			var userId = "${user.userId}";
+    			var usable = "0";
+    			if(bool == true) usable = "1";
+    			$.ajax({
+    				type : "POST",
+    				url : "${context}/coupon/do_update.do",
+    				dataType : "json",
+    				data : {
+    					"userId" : userId,
+    					"usable" : usable,
+    					"couponCode" : couponCode
+    				}
+				}).done(function(data){
+					var msg = data;
+					if(msg.msgId == "1"){
+						//alert("u1");
+					}else{
+						//alert("u0");
+					}
+				});
     		}
     	</script>
 	</body>

@@ -41,5 +41,8 @@ public class SJH_CouponSvcImpl implements SJH_CouponSvc {
 		return couponDao.do_retrieve(dto);
 	}
 
-	
+	@Override
+	public int do_update(DTO dto) {
+		return couponDao.do_update(dto);
+	}
 }

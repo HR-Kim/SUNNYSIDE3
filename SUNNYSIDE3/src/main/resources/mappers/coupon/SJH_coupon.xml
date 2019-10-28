@@ -75,5 +75,14 @@
 		    AND user_id = #{userId,jdbcType=VARCHAR}
 	</delete>
 	
-
+	
+	<!-- 쿠폰업데이트 -->
+	<update id="do_update" parameterType="SJH_CouponVO">
+		UPDATE user_coupon
+		SET
+		    USABLE = #{usable,jdbcType=VARCHAR}
+		WHERE
+		    coupon_code = #{couponCode,jdbcType=VARCHAR}
+		    AND user_id = #{userId,jdbcType=VARCHAR}
+	</update>
 </mapper>

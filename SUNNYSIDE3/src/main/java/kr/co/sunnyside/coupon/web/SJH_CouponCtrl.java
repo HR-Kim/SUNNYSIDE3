@@ -138,5 +138,32 @@ public class SJH_CouponCtrl {
 		return json;
 	}
 	
-	
+	//쿠폰업데이트
+	@RequestMapping(value="coupon/do_update.do",method = RequestMethod.POST,produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public String do_update(SJH_CouponVO inVO) {
+		LOG.debug("========================");
+		LOG.debug("=@Controller=inVO="+inVO);
+		LOG.debug("========================");
+		
+		//flag>0 성공, 실패
+		int flag = couponSvc.do_update(inVO);
+		Message message = new Message();
+		if(flag>0) {
+			message.setMsgId(flag+"");
+			message.setMsgMsg("쿠폰이 업데이트 되었습니다.");
+		}else {
+			message.setMsgId(flag+"");
+			message.setMsgMsg("쿠폰업데이트실패.");
+		}
+		
+		//json으로 변환
+		Gson gson = new Gson();
+		String json = gson.toJson(message);
+		LOG.debug("=========================");
+		LOG.debug("=@Controller 쿠폰업데이트gson=user="+json);
+		LOG.debug("=========================");		
+		
+		return json;
+	}
 }
