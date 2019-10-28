@@ -56,7 +56,7 @@ private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	
 	@Test
 	//@Ignore
-	public void get_retrieve() {
+	public void do_retrieve() {
 		//수정할 데이터 검색
 		SearchVO search=new SearchVO();
 		search.setSearchWord("공지");
