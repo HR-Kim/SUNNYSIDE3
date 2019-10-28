@@ -90,9 +90,7 @@
     .table > thead > tr > th {
       text-align: center;
     }
-    .table-hover > tbody > tr:hover {
-      background-color: gray;
-    }
+    
     .table > tbody > tr > #contents {
       text-align: center;
     }
@@ -137,8 +135,8 @@
 
 		<!-- Grid영역 -->
 		<div class="table-responsive">			
-			<table class="table  table-striped table-bordered table-hover" id="listTable">
-				<thead class="bg-primary">
+			<table class="table table-striped table-bordered table-hover" id="listTable">
+				<thead bg-default" style="background-color: #333333; color: #f0f0f0">
 				    <th class="text-center col-md-1 col-xs-1" style="display:none;">user_ID</th>
 					<th class="text-center col-md-2 col-xs-1">제목</th>
 					<th class="text-center col-md-6 col-xs-1">내용</th>
