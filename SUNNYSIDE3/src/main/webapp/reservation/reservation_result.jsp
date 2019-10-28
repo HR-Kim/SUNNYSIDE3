@@ -109,7 +109,7 @@ if(request.getProtocol().equals("HTTP/1.1"))
 				//좌석문자열을 배열로
 				var stringInfo = arrData;
     			var arr = stringInfo.split("%");
-    			console.log(arr);
+
     			$(".arrData>.individual").detach();
     			for(var i=1 ; i<arr.length ; i++){
     				$.ajax({
@@ -121,7 +121,7 @@ if(request.getProtocol().equals("HTTP/1.1"))
 	    					"screenId" : screenId,
 	    					"userId" : userId
 	    				}
-					}).done(function(data){console.log(vo);
+					}).done(function(data){
 						var vo = data;
 						var code = vo.ticketCode;
 						var seat = vo.seatNm;
