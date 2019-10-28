@@ -6,7 +6,7 @@ public class KDY_MoviehistoryVO extends DTO {
 	private String ticket_code;	//예매코드
 	private String kortitle;	//지점id
 	private String ticket_dt;
-	private String room_id;
+	private String room_nm;
 	
 	
 	
@@ -58,15 +58,15 @@ public class KDY_MoviehistoryVO extends DTO {
 
 
 
-	public String getRoom_id() {
-		return room_id;
+	public String getRoom_nm() {
+		return room_nm;
 	}
 
 
 
 
-	public void setRoom_id(String room_id) {
-		this.room_id = room_id;
+	public void setRoom_nm(String room_nm) {
+		this.room_nm = room_nm;
 	}
 
 
@@ -75,21 +75,22 @@ public class KDY_MoviehistoryVO extends DTO {
 	@Override
 	public String toString() {
 		return "KDY_MoviehistoryVO [ticket_code=" + ticket_code + ", kortitle=" + kortitle + ", ticket_dt=" + ticket_dt
-				+ ", room_id=" + room_id + "]";
+				+ ", room_nm=" + room_nm + "]";
 	}
 
 
 
 
-	public KDY_MoviehistoryVO(String ticket_code, String kortitle, String ticket_dt, String room_id) {
+	public KDY_MoviehistoryVO(String ticket_code, String kortitle, String ticket_dt, String room_nm) {
 		super();
 		this.ticket_code = ticket_code;
 		this.kortitle = kortitle;
 		this.ticket_dt = ticket_dt;
-		this.room_id = room_id;
+		this.room_nm = room_nm;
 	}
 
 
 
-	
+
+		
 }

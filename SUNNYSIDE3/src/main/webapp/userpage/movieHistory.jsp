@@ -9,9 +9,9 @@
 <body>
 
 
-		<table border="1" id="movielistTable">
+		<table table-striped table-bordered table-hover="1" id="movielistTable">
 		<h3>포토 티켓</h3>
-		<thead>
+		<thead class="bg-primary">
 				<tr>
 			
 					<th class="text-center col-md-12 col-xs-9">포토티켓 리스트</th>

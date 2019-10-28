@@ -9,9 +9,9 @@
 <body>
 
 
-		<table border="1" id="reservationTable">
+		<table table-striped table-bordered table-hover id="reservationTable">
 		<h3>상품 결제 내역</h3>
-		<thead>
+		<thead class="bg-primary">
 				<tr>
 			
 					<th class="text-center col-md-2 col-xs-2">상품이름</th>

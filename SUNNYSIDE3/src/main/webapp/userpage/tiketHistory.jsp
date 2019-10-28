@@ -9,12 +9,12 @@
 <body>
 
 <form class="form-inline"  method="post" id="tiketHistoryList" >
-	<table border="1" id="tiketHistoryTable" name="listTable">
+	<table table-striped table-bordered table-hover  id="tiketHistoryTable" name="listTable">
 		<h3>예매/구매 내역</h3>
-		<thead>
+		<thead class="bg-primary">
 				<tr>
 			
-					<th class="text-center col-md-6 col-xs-6">예매한 영화 이름</th>
+					<th class="text-center col-md-6 col-xs-4">예매한 영화 이름</th>
 					<th class="text-center col-md-2 col-xs-2">상영관 이름</th>
 					<th class="text-center col-md-1 col-xs-1">예매일</th>
 					<th class="text-center col-md-1 col-xs-1" style="display:none;">티켓코드</th>

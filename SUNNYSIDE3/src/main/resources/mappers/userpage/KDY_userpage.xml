@@ -24,8 +24,8 @@
 		SELECT T.RNUM as num
 			  ,T.ticket_code as ticket_code
 			  ,T.kortitle as kortitle
-			  ,T.ticket_dt as ticket_dt
-			  ,T.room_id as room_id
+			  ,to_char(T.ticket_dt,'YYYY-MM-DD') as ticket_dt
+			  ,T.room_nm as room_nm
 		FROM(
 		    SELECT ROWNUM AS RNUM, A.*
 		    FROM(
@@ -33,9 +33,11 @@
 			     c.ticket_code,
 			     d.kortitle,
 			     c.ticket_dt,
-				 c.room_id
+				 e.room_nm
 			    		 FROM  ticket_history c JOIN movie d
-				 on c.movie_id =d.movie_id
+                         on c.movie_id =d.movie_id
+                         join room e
+                         on e.room_id = c.room_id
 				 where c.user_id=#{user_id,jdbcType=VARCHAR}
 		         
 		        )A
@@ -47,7 +49,7 @@
 		SELECT T.RNUM as num
 			  ,T.coupon_nm as coupon_nm
 			  ,T.coupon_code as coupon_code
-			  ,T.use_dt as use_dt
+			  ,to_char(T.use_dt,'YYYY-MM-DD') as use_dt
 			  ,T.usable as usable
 		FROM(
 		    SELECT ROWNUM AS RNUM, A.*
@@ -107,15 +109,15 @@
 		SELECT T.RNUM as num
 			  ,T.pay_code as pay_code
 			  ,T.product_nm as product_nm
-			  ,T.pay_cost as pay_cost
-			  ,T.pay_dt as pay_dt
+			  ,to_char(T.total_cost,'999,999,999')as total_cost
+			  ,to_char(T.pay_dt,'YYYY-MM-DD') as pay_dt
 		FROM(
 		    SELECT ROWNUM AS RNUM, A.*
 		    FROM(
 		        SELECT
 					b.pay_code,
 					a.product_nm,
-					b.pay_cost,
+					b.total_cost,
 					b.pay_dt
 				FROM
 					PRODUCT a JOIN PAY_HISTORY b

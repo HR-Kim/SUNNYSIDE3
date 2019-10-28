@@ -9,9 +9,9 @@
 <body>
 
 
-		<table border="1" id="qnalistTable">
+		<table table-striped table-bordered table-hover id="qnalistTable">
 		<h3>1:1 문의</h3>
-		<thead>
+		<thead class="bg-primary">
 				<tr>
 			
 					<th class="text-center col-md-2 col-xs-2">번호</th>

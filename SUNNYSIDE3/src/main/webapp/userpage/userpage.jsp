@@ -9,7 +9,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
    <link rel="stylesheet" href="${context}/resources/css/bootstrap.min.css">
-</head>
+   <link rel="stylesheet" href="${context}/resources/css/userpage.css">
+</head>	
 <body>
 
 	<div class="container">
@@ -30,9 +31,9 @@
 						</c:otherwise>
 			</c:choose>
           </div>
-            <ul class="nav nav-pills" id="tab_id">
+            <ul class="nav nav-tabs nav-pills" id="nav-tab" role="tablist">
               <li class="nav-item" name="do_tiketHistory.do">
-                <a name="tiketHistory" class="nav-link" data-toggle="tab" href="#tiketHistory">예매/구매 내역</a>
+                <a class="nav-link" data-toggle="tab" href="#tiketHistory">예매/구매 내역</a>
               </li>
               <li class="nav-item" name="do_reservationList.do">
                 <a class="nav-link" data-toggle="tab" href="#reservationList">상품결제 내역</a>
@@ -80,7 +81,7 @@
 	<script type="text/javascript">
 	
 	
-	$("#tab_id").on("click","li",function(event){
+	$("#nav-tab").on("click","li",function(event){
 		var location = $(this).attr('name');
 		console.log("${context}/userpage/"+location);
 		var User_id=$("#userId").val();
@@ -108,11 +109,11 @@
 					 $.each(jData,function(index, value){
 						 
 						 event_data += '<tr>                                                                                       ' ;
-						 event_data += '<td>'+value.kortitle+'</td>                                                              ' ;
+						 event_data += '<td class="text-center">'+value.kortitle+'</td>                                                              ' ;
 						 event_data += '<td style="display:none;"><input type="hidden"  name="selected"  id="selected" value="'+value.ticket_code+'"></td> ' ;
-						 event_data += '<td>'+value.room_id+'</td>                                                              ' ;
+						 event_data += '<td class="text-center">'+value.room_nm+'</td>                                                              ' ;
 						 event_data += '<td>'+value.ticket_dt+'</td>  ';
-						 event_data += '<td><button type="button" class="btn btn-default btn-sm" id="doDelete">예매 취소</button></td>' ;
+						 event_data += '<td class="text-center"><button type="button" class="btn btn-default btn-sm" id="doDelete">예매 취소</button></td>' ;
 						 event_data += '</tr>																						';
 					 });
 					 console.log(event_data);
@@ -125,10 +126,10 @@
 						 $.each(jData,function(index, value){
 							 
 							 event_data += '<tr>' ;
-							 event_data += '<td>'+value.product_nm+'</td>' ;
+							 event_data += '<td class="text-center">'+value.product_nm+'</td>' ;
 							 event_data += '<td>'+value.pay_code+'</td>' ;
-							 event_data += '<td>'+value.pay_cost+'</td>' ;
-							 event_data += '<td>'+value.pay_dt+'</td>' ;
+							 event_data += '<td class="text-right">'+value.total_cost+'</td>' ;
+							 event_data += '<td class="text-right">'+value.pay_dt+'</td>' ;
 							 event_data += '</tr>';
 							 
 						 });
@@ -158,11 +159,11 @@
 								var useable="사용가능";
 							}
 							 event_data += '<tr> ' ;
-							 event_data += '<td>'+value.num+'</td>' ;
-							 event_data += '<td>'+value.coupon_nm+'</td>'  ;
-							 event_data += '<td>'+value.coupon_code+'</td> ' ;
-							 event_data += '<td>'+value.use_dt+'</td>'  ;
-							 event_data += '<td>'+useable+'</td> ' ;
+							 event_data += '<td class="text-center">'+value.num+'</td>' ;
+							 event_data += '<td class="text-center">'+value.coupon_nm+'</td>'  ;
+							 event_data += '<td class="text-left">'+value.coupon_code+'</td> ' ;
+							 event_data += '<td class="text-right">'+value.use_dt+'</td>'  ;
+							 event_data += '<td class="text-center">'+useable+'</td> ' ;
 							 event_data += '</tr>';
 						 });
 						 console.log(event_data);

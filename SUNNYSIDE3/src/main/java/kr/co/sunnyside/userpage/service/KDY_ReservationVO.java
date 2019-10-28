@@ -5,7 +5,7 @@ import kr.co.sunnyside.cmn.DTO;
 public class KDY_ReservationVO  extends DTO{
 	private String pay_code;
 	private String product_nm;
-	private String pay_cost;
+	private String total_cost;
 	private String pay_dt;
 	
 	KDY_ReservationVO(){}
@@ -26,12 +26,12 @@ public class KDY_ReservationVO  extends DTO{
 		this.product_nm = product_nm;
 	}
 
-	public String getPay_cost() {
-		return pay_cost;
+	public String getTotal_cost() {
+		return total_cost;
 	}
 
-	public void setPay_cost(String pay_cost) {
-		this.pay_cost = pay_cost;
+	public void setTotal_cost(String total_cost) {
+		this.total_cost = total_cost;
 	}
 
 	public String getPay_dt() {
@@ -44,17 +44,17 @@ public class KDY_ReservationVO  extends DTO{
 
 	@Override
 	public String toString() {
-		return "KDY_ReservationVO [pay_code=" + pay_code + ", product_nm=" + product_nm + ", pay_cost=" + pay_cost
+		return "KDY_ReservationVO [pay_code=" + pay_code + ", product_nm=" + product_nm + ", total_cost=" + total_cost
 				+ ", pay_dt=" + pay_dt + "]";
 	}
 
-	public KDY_ReservationVO(String pay_code, String product_nm, String pay_cost, String pay_dt) {
+	public KDY_ReservationVO(String pay_code, String product_nm, String total_cost, String pay_dt) {
 		super();
 		this.pay_code = pay_code;
 		this.product_nm = product_nm;
-		this.pay_cost = pay_cost;
+		this.total_cost = total_cost;
 		this.pay_dt = pay_dt;
 	}
-	
-	
+
+		
 }
