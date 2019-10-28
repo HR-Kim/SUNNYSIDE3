@@ -267,17 +267,3 @@ message.reservation.price=가격
 message.reservation.ticketCode=티켓코드
 message.reservation.seat=좌석	Seat
 message.reservation.leave=페이지에서 벗어납니다.
-
-#store
-message.store.popcorn=팝콘
-message.store.drink=음료
-message.store.movieTicket=영화관람권
-message.store.moreItem=더보기
-message.store.productDetail=상품 상세정보
-message.store.prouctName=상품명
-message.store.prouctCost=가격
-message.store.count=수량
-message.store.measure=개
-message.store.addCart=장바구니에 담기
-message.store.goPay=바로 결제하기
-message.store.productInfo=상품소개
