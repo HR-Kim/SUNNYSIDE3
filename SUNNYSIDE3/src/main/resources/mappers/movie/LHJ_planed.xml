@@ -56,7 +56,7 @@
            (                                                           
               SELECT  *                                              
               FROM   movie                        
-              WHERE 1=1
+              WHERE screen_state NOT IN ('010', '020')   
               <include refid="planedBaseCondition"/>                                        
               ORDER BY rel_date DESC nulls last                                     
            )A                                                         
@@ -68,7 +68,7 @@
      (                                                                 
          SELECT COUNT(*) totalCnt                                     
          FROM movie       
-         WHERE 1=1                                   
+         WHERE screen_state NOT IN ('010', '020')                                  
          <include refid="planedBaseCondition"/>                                             
      )T2  
 	</select>	

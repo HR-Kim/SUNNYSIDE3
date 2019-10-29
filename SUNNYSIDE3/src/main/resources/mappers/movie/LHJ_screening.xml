@@ -30,7 +30,7 @@
 		</choose>
 	</sql>
 	
-	<!-- 최근 3개월 영화 조회 -->
+	<!-- 영화 조회 -->
 	<select id="do_screenUp_retrieve" parameterType="Search" resultType="Movie">
 	  SELECT T1.*,T2.*                                       
      FROM                                                              
@@ -56,7 +56,7 @@
            (                                                           
               SELECT  *                                              
               FROM   movie                        
-              WHERE 1=1
+              WHERE screen_state NOT IN ('010')   
               <include refid="screenBaseCondition"/>                                        
               ORDER BY rel_date DESC nulls last                                     
            )A                                                         
@@ -68,7 +68,7 @@
      (                                                                 
          SELECT COUNT(*) totalCnt                                     
          FROM movie       
-         WHERE 1=1                                    
+         WHERE screen_state NOT IN ('010')                                    
          <include refid="screenBaseCondition"/>                                             
      )T2  
 	</select>	
