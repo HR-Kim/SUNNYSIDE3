@@ -131,7 +131,7 @@
 							 event_data += '<td class="text-center">'+value.pay_code+'</td>' ;
 							 event_data += '<td class="text-right">'+value.total_cost+'</td>' ;
 							 event_data += '<td class="text-right">'+value.pay_dt+'</td>' ;
-							 event_data += '<td class="text-center"><button type="button" class="btn btn-default btn-sm" id="doDelete">예매 취소</button></td>' ;
+							 event_data += '<td class="text-center"><button type="button" class="btn btn-default btn-sm" id="doDelete">결제 취소</button></td>' ;
 							 event_data += '</tr>';
 							 
 						 });
