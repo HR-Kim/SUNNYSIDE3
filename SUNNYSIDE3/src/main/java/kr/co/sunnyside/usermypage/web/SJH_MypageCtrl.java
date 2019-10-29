@@ -95,7 +95,7 @@ public class SJH_MypageCtrl {
 		Message message=new Message();
 		if(flag>0) {
 			message.setMsgId(flag+"");
-			message.setMsgMsg(inVO.getUserId()+"님 수정 되었습니다.");
+			message.setMsgMsg(inVO.getUserId()+"님 수정 되었습니다.\n다시 로그인 해주세요.");
 		}else {
 			message.setMsgId(flag+"");
 			message.setMsgMsg(inVO.getUserId()+"님 수정 실패.");			

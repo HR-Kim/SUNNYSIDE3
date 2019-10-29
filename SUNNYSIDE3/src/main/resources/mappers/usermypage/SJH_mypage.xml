@@ -53,7 +53,7 @@
 	
 	<!-- 회원선택(수정할 때 정보 가져가기) -->
 	<select id="do_selectOne" parameterType="SJH_MypageVO" resultType="SJH_MypageVO">
-      SELECT										
+        SELECT										
 		    user_id as userId,
 		    passwd,
 		    user_name as userName,

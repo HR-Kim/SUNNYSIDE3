@@ -237,7 +237,7 @@
 		          	var parseData = $.parseJSON(data); //JSON으로 바꿔줌
 		          	if(parseData.msgId == "1"){
 		          		alert(parseData.msgMsg);
-		          		location.href="${context}/main/main.do" //메인페이지로 바꾸기
+		          		location.href="${context}/login/logout.do" //로그아웃됨
 		          	}else{
 		          		alert(parseData.msgMsg);
 		          	}

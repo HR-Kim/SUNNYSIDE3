@@ -204,6 +204,18 @@
 				alert("비밀번호가 일치하지 않습니다.");
 				return;
 			}
+			
+			//생년월일 validation
+			if( $("#birth").val() == ""){
+				alert("생년월일을 입력하세요.");
+				return;
+			}
+			
+			//휴대폰번호 validation
+			if( $("#cellphone").val() == ""){
+				alert("휴대폰번호을 입력하세요.");
+				return;
+			}
 
 			//if($("#joinForm").valid()==false)return;
 			if(false==confirm("회원가입 하시겠습니까?"))return;
