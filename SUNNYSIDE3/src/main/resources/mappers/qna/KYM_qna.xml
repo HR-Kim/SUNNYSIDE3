@@ -106,6 +106,7 @@
 			, RE_DT        as reDt  
 		FROM qna
 		WHERE QNA_NUM = #{qnaNum,jdbcType=VARCHAR}
+		AND USER_ID = #{userId,jdbcType=VARCHAR}
 	</select>
 	
 	<!-- 수정 -->

@@ -45,8 +45,12 @@
 					<button type="button" class="btn btn-default btn-sm" id="doRetrieve"><spring:message code="message.button.list"/></button>
 					<c:choose>
 						<c:when test="${'admin' == user.userLevel}">
+					<!-- 초기화 -->
+					<button type="button" class="btn btn-default btn-sm" id="doInit"><spring:message code="message.button.init"/></button>
 					<!-- 수정 -->
 					<button type="button" class="btn btn-default btn-sm" id="doUpdate"><spring:message code="message.button.edit"/></button>
+					<!-- 삭제 -->
+					<button type="button" class="btn btn-default btn-sm" id="doDelete"><spring:message code="message.button.delete"/></button>
 						</c:when>
 					</c:choose>
 				</div>
@@ -64,15 +68,15 @@
 				<!-- 제목 -->
 				<label for="inputEmail3" class="col-sm-2 control-label"><spring:message code="message.qna.title"/></label>
 				<div class="col-sm-8">
-					<input type="text" class="form-control" name="title" id="title" placeholder='<spring:message code="message.qna.title"/>' value="<c:out value='${vo.title }' />" disabled="disabled">
+					<input type="text" class="form-control" name="title" id="title" placeholder='<spring:message code="message.qna.title"/>' value="<c:out value='${vo.title }' />">
 				</div>
 			</div>
 			
 			<div class="form-group">
 				<!-- 지점 -->
-				<label for="inputEmail3" class="col-sm-2 control-label" ><spring:message code="message.notice.store"/></label>
+				<label for="inputEmail3" class="col-sm-2 control-label"><spring:message code="message.notice.store"/></label>
 					<div class="col-sm-8">
-						<%=StringUtil.makeBranchBox(Branchlist, "branchSNm", selectedNm, true, true) %>
+						<%=StringUtil.makeBranchBox(Branchlist, "branchSNm", selectedNm, true, false) %>
 					</div>
 			</div>
 
@@ -80,7 +84,7 @@
 				<!-- 내용 -->
 				<label for="inputEmail3" class="col-sm-2 control-label"><spring:message code="message.qna.contents"/></label>
 				<div class="col-sm-8">
-					<textarea class="form-control" name="contents" id="contents" rows="7" placeholder='<spring:message code="message.qna.contents"/>' disabled="disabled" ><c:out value="${vo.contents }" /></textarea>
+					<textarea class="form-control" name="contents" id="contents" rows="7" placeholder='<spring:message code="message.qna.contents"/>'><c:out value="${vo.contents }" /></textarea>
 				</div>
 			</div>
 
@@ -98,7 +102,7 @@
 				<label for="attrFile" class="hidden-xs hidden-sm col-md-2 col-lg-2 control-label"><spring:message code="message.notice.file_add"/></label>
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 					<!-- 파일 -->
-					<button id="attrFile" type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#layerpop" disabled="disabled"><spring:message code="message.notice.file"/></button>
+					<button id="attrFile" type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#layerpop"><spring:message code="message.notice.file"/></button>
 				</div>
 			</div>
 			
@@ -165,23 +169,7 @@
 			//alert("doRetrieve");
 			if(confirm("목록으로 이동 하시겠습니까?")== false)return;
 			location.href ="${context}/notice/do_retrieve.do";
-		});  
-		
-		//수정으로 이동
-		$("#doUpdate").on("click",function(){
-			if(confirm("수정 하시겠습니까?")== false)return;
-			//alert("listTable");
-			var trs = $(this);
-			var td  = trs.children();
-			if(null==td || td.length==1)return;
-			//alert("td.length:"+td.length);
-			var test = $("#userId").val();
-
-			//console.log("userId:"+userId);
-			var frm = document.noticeEditFrm;
-			frm.action = "${context}/notice/notice_mng_update.do";
-			frm.submit();
-		});
+		});    
 	
 		//등록	    
 		$("#doSave").on("click", function() {
@@ -229,10 +217,46 @@
 
 		//수정:submit->control->notice_mng.jsp: (성공)?notice_list.jsp:notice_mng.jsp
 		//삭제:submit->
-// 		$("#doUpdate").on("click", function() {
-// 				if(confirm("목록으로 이동 하시겠습니까?")== false)return;
-// 				location.href ="${context}/notice/do_retrieve.do";
-// 		}); 
+		$("#doUpdate").on("click", function() {
+			//validation
+// 			if($("#noticeEditFrm").valid()==false)return;
+			
+			console.log("noticeId:" + $("#noticeId").val());
+			if (confirm("수정 하시겠습니까?") == false)
+				return;
+
+			$.ajax({
+				type : "POST",
+				url : "${context}/notice/do_update.do",
+				dataType : "html",
+				data : {
+					"userId" : $("#userId").val(),
+					"noticeId" : $("#noticeId").val(),
+					"title" : $("#title").val(),
+					"branchSNm" : $("#branchSNm").val(),
+					"contents" : $("#contents").val(),
+					"regId" : $("#regId").val(),
+				},
+				success : function(data) {
+					var jData = JSON.parse(data);
+					if (null != jData && jData.msgId == "1") {
+						alert(jData.msgMsg);
+						location.href = "${context}/notice/do_retrieve.do";
+
+					} else {
+						alert(jData.msgId + "|" + jData.msgMsg);
+					}
+				},
+				complete : function(data) {
+
+				},
+				error : function(xhr, status, error) {
+					alert("error:" + error);
+				}
+			});
+			//--ajax  
+
+		});
 
 		//삭제:submit->
 		$("#doDelete").on("click", function() {

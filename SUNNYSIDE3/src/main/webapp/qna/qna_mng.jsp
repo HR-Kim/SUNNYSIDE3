@@ -15,17 +15,18 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-<title><spring:message code="message.header.questions"/></title>
+<title>게시관리</title>
 <!-- 부트스트랩 -->
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="${context}/resources/css/headerStyle.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<!-- div container -->
-	<div class="container" style="margin-bottom: 70px">
+	<c:choose>
+		<c:when test="${user.userId == 'admin' || vo.userId == user.userId || vo.userId == '' || vo.userId == null}">
+			<!-- div container -->
+	<div class="container">
 		<!-- div title -->
 		<div class="page-header">
-			<h1><spring:message code="message.header.questions"/></h1>
+			<h1>게시관리</h1>
 		</div>
 		<!--// div title -->
 		<!-- Button Area -->
@@ -34,35 +35,37 @@
 				<div class="text-right">
 					<c:choose>
 						<c:when test="${'admin' == user.userLevel}">
-								<!-- 답변달기 -->
-								<button type="button" class="btn btn-default btn-sm" id="doSelectOneAdmin"><spring:message code="message.qna.reply"/></button>		
+								<button type="button" class="btn btn-default btn-sm" id="doSelectOneAdmin">답변달기</button>		
 						</c:when>
 					</c:choose>
 					<!-- <button type="button" class="btn btn-default btn-sm" id="doSelectOneAdmin">답변달기</button> -->
-					<!-- 목록 -->
-					<button type="button" class="btn btn-default btn-sm" id="doRetrieve"><spring:message code="message.button.list"/></button>
-					<!-- 초기화 -->
-					<button type="button" class="btn btn-default btn-sm" id="doInit"><spring:message code="message.button.init"/></button>
-					<!-- 등록 -->
-					<button type="button" class="btn btn-default btn-sm" id="doSave"><spring:message code="message.button.save"/></button>
-					<!-- 수정 -->
-					<button type="button" class="btn btn-default btn-sm" id="doUpdate"><spring:message code="message.button.edit"/></button>
-					<!-- 삭제 -->
-					<button type="button" class="btn btn-default btn-sm" id="doDelete"><spring:message code="message.button.delete"/></button>
+					<button type="button" class="btn btn-default btn-sm" id="doRetrieve">목록</button>
+					<button type="button" class="btn btn-default btn-sm" id="doInit">초기화</button>
+					<button type="button" class="btn btn-default btn-sm" id="doSave">등록</button>
+					<button type="button" class="btn btn-default btn-sm" id="doUpdate">수정</button>
+					<button type="button" class="btn btn-default btn-sm" id="doDelete">삭제</button>
 				</div>
 			</div>
 		</div>
-		<br>
 		<div class="col-lg-11"></div>
 		<!-- div title -->
-		<form class="form-horizontal" name="qnaEditFrm" id="qnaEditFrm" method="POST" action="${context}/qna/do_save.do">
-			<input type="hidden" class="form-control" name="userId" id="userId" value="${user.userId }">
-			<input type="hidden" id="qnaNum" value="<c:out value='${vo.qnaNum }' />">
+		<form class="form-horizontal" name="qnaFrm" id="qnaFrm" method="POST" action="${context}/qna/do_save.do">
+			<input type="hidden" class="form-control" name="userId" id="userId" value="${vo.userId }">
+			<input type="hidden" name="qnaNum" id="qnaNum" value="${vo.qnaNum }">
+			
+			<div class="form-group">
+				<!-- 유저아이디 -->
+				<label for="inputEmail3" class="col-sm-2 control-label"><spring:message code="message.qna.userId"/></label>
+			<div class="col-sm-8">
+					<input type="text" class="form-control" name="userId" id="userId" placeholder='<spring:message code="message.qna.userId"/>' value="<c:out value='${vo.userId }' />" disabled="disabled">
+				</div>
+			</div>
+
 			<div class="form-group">
 				<!-- 제목 -->
 				<label for="inputEmail3" class="col-sm-2 control-label"><spring:message code="message.qna.title"/></label>
-			<div class="col-sm-8">
-					<input type="text" class="form-control" name="title" id="title" placeholder='<spring:message code="message.qna.title"/>' value="<c:out value='${vo.title }' />">
+				<div class="col-sm-8">
+					<input type="text" class="form-control" name="title" id="title" placeholder='<spring:message code="message.qna.title"/>' value="<c:out value='${vo.title }' />" >
 				</div>
 			</div>
 
@@ -70,7 +73,7 @@
 				<!-- 내용 -->
 				<label for="inputEmail3" class="col-sm-2 control-label"><spring:message code="message.qna.contents"/></label>
 				<div class="col-sm-8">
-					<textarea class="form-control" name="contents" id="contents" rows="7" placeholder='<spring:message code="message.qna.contents"/>'><c:out value="${vo.contents }" /></textarea>
+					<textarea class="form-control" name="contents" id="contents" rows="7" placeholder='<spring:message code="message.qna.contents"/>' ><c:out value="${vo.contents }" /></textarea>
 				</div>
 			</div>
 
@@ -96,6 +99,9 @@
 		</form>
 	</div>
 	<!--// div container -->
+		</c:when>
+		<c:otherwise></c:otherwise>
+	</c:choose>
 	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 	<script src="${context}/resources/js/jquery-1.12.4.js"></script>
 	<%-- <script src="${context}/resources/js/jquery.validate.js"></script> --%>
@@ -112,8 +118,13 @@
 			//alert("td.length:"+td.length);
 			var test = $("#userId").val();
 
-			//console.log("userId:"+userId);
-			var frm = document.qnaEditFrm;
+			var userId = '${vo.userId }';
+			var qnaNum = '${vo.qnaNum }';
+
+			var frm = document.qnaFrm;
+			frm.qnaNum.value=qnaNum;
+			frm.userId.value=userId;
+			
 			frm.action = "${context}/qna/do_selectOne_admin.do";
 			frm.submit();
 		
@@ -138,8 +149,9 @@
 		$("#doSave").on("click", function() {
 			//validation
 			/* if($("#qnaEditFrm").valid()==false)return; */
+			
 			if (confirm("등록 하시겠습니까?") == false)return;
-	
+
 			$.ajax({
 				type : "POST",
 				url : "${context}/qna/do_save.do",
@@ -148,6 +160,8 @@
 					"userId" : $("#userId").val(),
 					"title" : $("#title").val(),
 					"contents" : $("#contents").val(),
+					"reContents" : $("#reContents").val(),
+					"regDt" : $("#regDt").val(),
 					"status" : "답변대기"
 				},
 				success : function(data) {
@@ -190,6 +204,7 @@
 					"qnaNum" : $("#qnaNum").val(),
 					"title" : $("#title").val(),
 					"contents" : $("#contents").val(),
+					"reContents" : $("#reContents").val(),
 					"status" : "답변대기",
 				},
 				success : function(data) {
@@ -225,7 +240,7 @@
 				url : "${context}/qna/do_delete.do",
 				dataType : "html",
 				data : {
-					"userId" : $("#userId").val()
+					"qnaNum" : $("#qnaNum").val()
 				},
 				success : function(data) {
 					var jData = JSON.parse(data);
@@ -249,44 +264,24 @@
 		});
 
 		$(document).ready(function() {
-			//form validate
-			/* $("#qnaEditFrm").validate({
-				rules: {					
-					title: {
-						required: true,
-						minlength: 2,
-						maxlength: 100
-					},
-					contents: {
-						required: true,
-						minlength: 2,
-						maxlength: 1000000
-					}
-				},
-				messages: {
-					title: {
-						required: "제목을 입력 하세요.",
-						minlength: $.validator.format("{0}자 이상 입력 하세요."),
-						maxlength: $.validator.format("{0}자 내로 입력 하세요.")
-					},
-					contents: {
-						required: "내용을 입력 하세요.",
-						minlength: $.validator.format("{0}자 이상 입력 하세요."),
-						maxlength: $.validator.format("{0}자 내로 입력 하세요.")
-					}
-				},
-				errorPlacement : function(error, element) {
-				     //do nothing
-				    },
-				    invalidHandler : function(form, validator) {
-				     var errors = validator.numberOfInvalids();
-				     if (errors) {
-				      alert(validator.errorList[0].message);
-				      validator.errorList[0].element.focus();
-				     }
+			var writer = '${vo.userId}';
+			if(writer == '' || writer == null) writer = '${user.userId}';
+			var user = '${user.userId}';
+			if(writer != user){
+				if(user != 'admin'){
+					alert("권한이 없습니다.");
+					history.back(0);
 				}
+			}
 
-			});			 */
+			//들어온 경로
+			var key = '${key}';
+			if(key == 'insert'){
+				$("#doUpdate").css("display", "none");
+				$("#doDelete").css("display", "none");
+			}else if(key == 'selectOne'){
+				$("#doSave").css("display", "none");
+			}
 			
 		});
 	</script>

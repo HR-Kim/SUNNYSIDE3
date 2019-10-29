@@ -63,12 +63,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-<!-- 1:1문의 -->
-<title><spring:message code="message.header.questions"/></title>
+<title>고객센터</title>
 
 <!-- 부트스트랩 -->
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="${context}/resources/css/headerStyle.css" rel="stylesheet" type="text/css">
 
 <style>
     #container {
@@ -109,10 +107,10 @@
 </head>
 <body>
 	<!-- div container -->
-	<div class="container" style="margin-bottom: 70px">
+	<div class="container">
 		<!-- div title -->
 		<div class="page-header">
-			<h1><spring:message code="message.header.questions"/></h1>
+			<h1>문의내역</h1>
 		</div>
 		
 		<!-- 검색영역 -->
@@ -120,17 +118,15 @@
 			<div class="col-md-12 text-right">
 				<form class="form-inline" name="qnaFrm" id="qnaFrm" method="GET" />
 					<input type="hidden" name="pageNum" id="pageNum" value="${vo.pageNum }"/>
-					<input type="hidden" name="qnaNum" id="qNum" />
+					<input type="hidden" name="userId" id="userId" />
+					<input type="hidden" name="qnaNum" id="qnaNum" />
 					<div class="form-group">
 						<!-- 검색구분 --> 
 						<%=StringUtil.makeSelectBox(listQnaSearch, "searchDiv", searchDiv, true) %>
-						<!-- 검색어 -->
-						<input type="text" class="form-control input-sm" id="searchWord" name="searchWord" placeholder='<spring:message code="message.button.searchword"/>'/>
+						<input type="text" class="form-control input-sm" id="searchWord" name="searchWord" placeholder="검색어"/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<!-- 조회 -->
-						<button ype="button" class="btn btn-default btn-sm" id="doRetrieve"><spring:message code="message.button.retrieve"/></button>
-						<!-- 글쓰기 -->
-						<button type="button" class="btn btn-default btn-sm" id="doSave"><spring:message code="message.button.write"/></button>	
+						<button type="button" class="btn btn-default btn-sm" id="doRetrieve">조회</button>
+						<button type="button" class="btn btn-default btn-sm" id="doSave">글쓰기</button>	
 		
 					</div>
 				</form>
@@ -142,9 +138,9 @@
 		<div class="table-responsive">			
 			<table class="table table-striped table-bordered table-hover" id="listTable">
 				<thead bg-default" style="background-color: #333333; color: #f0f0f0">
-				    <th class="text-center col-md-1 col-xs-1" style="display:none;">user_ID</th>
+				    <th class="text-center col-md-1 col-xs-1"><spring:message code="message.qna.userId"/></th>
 				    <th class="text-center col-md-1 col-xs-1" style="display:none;">qna_num</th>
-					<th class="text-center col-md-7 col-xs-1"><spring:message code="message.qna.title"/></th>
+					<th class="text-center col-md-6 col-xs-1"><spring:message code="message.qna.title"/></th>
 					<th class="text-center col-md-1 col-xs-6 "><spring:message code="message.qna.reg_dt"/></th>
 					<th class="text-center col-md-1 col-xs-2"><spring:message code="message.qna.status"/></th>
 				</thead>
@@ -153,7 +149,7 @@
 						<c:when test="${list.size()>0 }">
 							<c:forEach var="vo" items="${list}">
 								<tr>
-									<td class="text-center" style="display:none;"><c:out value="${user.userId }"/></td>
+									<td class="text-center" ><c:out value="${vo.userId }"/></td>
 									<td class="text-center" style="display:none;"><c:out value="${vo.qnaNum }"/></td>
 									<td class="text-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${vo.title }"/></td>
 									<td class="text-center" style="font-size:0.9em;"><c:out value="${vo.regDt }"/></td>
@@ -202,11 +198,12 @@
 			if(null==td || td.length==1)return;
 			//alert("td.length:"+td.length);
 			
-			
-			var qNum = td.eq(1).text();
-			console.log("qnum:"+qNum);
+			var userId = td.eq(0).text();
+			var qnaNum = td.eq(1).text();
+			//console.log("userId:"+userId);
 			var frm = document.qnaFrm;
-			frm.qnaNum.value=qNum;
+			frm.qnaNum.value=qnaNum;
+			frm.userId.value=userId;
 			frm.action = "${context}/qna/do_selectOne.do";
 			frm.submit();
 			
@@ -241,7 +238,11 @@
 		});
 	
 		$(document).ready(function() {
-			//alert("ready");
+			var userId = '${user.userId}';
+			if(userId == '' || userId == null) {
+				$("#doSave").css("display", "none");
+			}
+			
 		});
 	</script>
 </body>

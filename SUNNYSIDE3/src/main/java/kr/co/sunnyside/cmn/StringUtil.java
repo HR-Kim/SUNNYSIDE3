@@ -393,10 +393,14 @@ public class StringUtil {
 		return sb.toString();
 	}
 	
-	public static String makeBranchBox(List<KYMBranchVO> list, String selectBoxNm, String selectedNm, boolean allYN) {
+	public static String makeBranchBox(List<KYMBranchVO> list, String selectBoxNm, String selectedNm, boolean allYN, boolean disable) {
 		StringBuilder sb = new StringBuilder();
 		// <select name="lvl" id="lvl">
-		sb.append("<select  class=\"form-control input-sm\" name='" + selectBoxNm + "' id='" + selectBoxNm + "' > \n");
+		if(disable == true) {
+			sb.append("<select disabled=\"disabled\" class=\"form-control input-sm\" name='" + selectBoxNm + "' id='" + selectBoxNm + "' > \n");
+		}else {
+			sb.append("<select  class=\"form-control input-sm\" name='" + selectBoxNm + "' id='" + selectBoxNm + "' > \n");
+		}
 		// 전체
 		if (allYN == true) {
 			sb.append("<option value=''>전체</option> \n");

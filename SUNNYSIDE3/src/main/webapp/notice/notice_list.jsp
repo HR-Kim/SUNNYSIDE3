@@ -200,7 +200,6 @@
 		$("#doSave").on("click",function(e){
 			e.preventDefault();
 			
-
 			var frm = document.noticeFrm;
 			frm.action = "${context}/notice/notice_mng.do";
 			frm.submit();

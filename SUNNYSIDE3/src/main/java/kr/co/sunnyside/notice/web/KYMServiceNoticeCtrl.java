@@ -37,6 +37,7 @@ import kr.co.sunnyside.code.service.CodeService;
 import kr.co.sunnyside.notice.service.KYMBranchVO;
 import kr.co.sunnyside.notice.service.KYMNoticeSvc;
 import kr.co.sunnyside.notice.service.KYMNoticeVO;
+import kr.co.sunnyside.qna.service.KYMQnaVO;
 
 @Controller
 public class KYMServiceNoticeCtrl {
@@ -55,6 +56,7 @@ public class KYMServiceNoticeCtrl {
 	//view
 	private final String VIEW_LIST_NM = "notice/notice_list";
 	private final String VIEW_MNG_NM = "notice/notice_mng";
+	private final String VIEW_MNG_NM_UPDATE = "notice/notice_mng_update";
 	
 	/**수정 */
 	@RequestMapping(value="notice/do_update.do",method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
@@ -248,6 +250,32 @@ public class KYMServiceNoticeCtrl {
 		model.addAttribute("Branchlist", branchlist);
 		
 		return VIEW_MNG_NM;
+
+	}
+	
+	@RequestMapping(value="notice/notice_mng_update.do", method = RequestMethod.POST)	
+	public String noticeupdate(KYMNoticeVO kymNoticeVO, Model model) {
+		
+		LOG.debug("================");
+		LOG.debug("kymNoticeVO"+kymNoticeVO);
+		LOG.debug("================");
+		
+		if(null == kymNoticeVO.getNoticeId() || "".equals(kymNoticeVO.getNoticeId())) {
+			throw new IllegalArgumentException("ID를 확인하세요");
+			
+		}
+		
+		KYMNoticeVO outVO = (KYMNoticeVO) this.kymNoticeSvc.do_selectOne(kymNoticeVO);
+		model.addAttribute("vo", outVO);
+		
+		List<KYMBranchVO> branchlist = (List<KYMBranchVO>) this.kymNoticeSvc.do_retrieveFour(kymNoticeVO);
+		model.addAttribute("Branchlist", branchlist);
+		
+		KYMNoticeVO vo = (KYMNoticeVO) this.kymNoticeSvc.do_selectOne(kymNoticeVO);
+		String branchSNm = vo.getBranchSNm();
+		model.addAttribute("branchSNm", branchSNm);
+		
+		return VIEW_MNG_NM_UPDATE;
 
 	}
 	

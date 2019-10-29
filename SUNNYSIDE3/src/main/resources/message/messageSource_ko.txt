@@ -151,6 +151,7 @@ message.qna.status= 답변상태
 message.qna.reply=답변달기
 message.qna.replycontents=답변내용
 message.qna.waiting=답변대기
+message.qna.userId=아이디
 
 
 #faq

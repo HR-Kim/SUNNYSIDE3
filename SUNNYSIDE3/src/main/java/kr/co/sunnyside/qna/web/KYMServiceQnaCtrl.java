@@ -196,6 +196,11 @@ public class KYMServiceQnaCtrl {
 		LOG.debug("kymQnaVO"+kymQnaVO);
 		LOG.debug("================");
 		
+		if(null == kymQnaVO.getUserId() || "".equals(kymQnaVO.getUserId())) {
+			throw new IllegalArgumentException("UserId를 확인하세요");
+			
+		}
+		
 		if(null == kymQnaVO.getQnaNum() || "".equals(kymQnaVO.getQnaNum())) {
 			throw new IllegalArgumentException("QnaNum를 확인하세요");
 			
@@ -203,6 +208,7 @@ public class KYMServiceQnaCtrl {
 		
 		KYMQnaVO outVO = (KYMQnaVO) this.kymQnaSvc.do_selectOne(kymQnaVO);
 		model.addAttribute("vo", outVO);
+		model.addAttribute("key", "selectOne");
 		
 		return VIEW_MNG_NM;
 		
@@ -215,7 +221,12 @@ public class KYMServiceQnaCtrl {
 		LOG.debug("================");
 		
 		if(null == kymQnaVO.getUserId() || "".equals(kymQnaVO.getUserId())) {
-			throw new IllegalArgumentException("ID를 확인하세요");
+			throw new IllegalArgumentException("QnaNum를 확인하세요");
+			
+		}
+		
+		if(null == kymQnaVO.getQnaNum() || "".equals(kymQnaVO.getQnaNum())) {
+			throw new IllegalArgumentException("QnaNum를 확인하세요");
 			
 		}
 		
@@ -323,12 +334,12 @@ public class KYMServiceQnaCtrl {
 	
 	@RequestMapping(value="qna/qna_mng.do", method = RequestMethod.GET)	
 	public String qnaRegView(KYMQnaVO kymQnaVO, Model model) {
-		
+		model.addAttribute("key", "insert");
 		return VIEW_MNG_NM;
 
 	}
 	
-	@RequestMapping(value="qna/qna_mng_admin_.do", method = RequestMethod.POST)	
+	@RequestMapping(value="qna/qna_mng_admin.do", method = RequestMethod.POST)	
 	public String adminqnaRegView(KYMQnaVO kymQnaVO, Model model) {
 		
 		return VIEW_ADMIN_LIST_NM;
