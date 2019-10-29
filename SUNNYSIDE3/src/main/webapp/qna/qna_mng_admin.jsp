@@ -32,16 +32,9 @@
 		<div class="row">
 			<div class="col-lg-10 col-sm-10 col-xs-10">
 				<div class="text-right">
-					<c:choose>
-						<c:when test="${'admin' == user.userLevel}">
-								<button type="button" class="btn btn-default btn-sm" id="doSelectOneAdmin">답변달기</button>		
-						</c:when>
-					</c:choose>
+
 					<!-- <button type="button" class="btn btn-default btn-sm" id="doSelectOneAdmin">답변달기</button> -->
-					<button type="button" class="btn btn-default btn-sm" id="doRetrieve">목록</button>
-					<button type="button" class="btn btn-default btn-sm" id="doInit">초기화</button>
 					<button type="button" class="btn btn-default btn-sm" id="doUpdate">수정</button>
-					<button type="button" class="btn btn-default btn-sm" id="doDelete">삭제</button>
 				</div>
 			</div>
 		</div>
