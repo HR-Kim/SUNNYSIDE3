@@ -243,11 +243,7 @@
     			setFinalCost();
     		});
     		
-    		function startPay(){success();
-            seatUpdateUnable();
-            //성공시 이동할 페이지
-            var mainForm = $("#mainForm");
-            mainForm.submit();
+    		function startPay(){
     			var userCellphone = '${user.cellphone}';
     			var userName = '${user.userName}';
     			var email = '${user.email}';
