@@ -882,6 +882,7 @@
     				dataType : "json",
     				data : {
     					"pageNum" : idx,
+    					"pageSize" : "10",
     					"searchDiv" : $("#hd_searchDiv").val(),
     					"searchWord" : $("#hd_searchWord").val()
     				}, 
