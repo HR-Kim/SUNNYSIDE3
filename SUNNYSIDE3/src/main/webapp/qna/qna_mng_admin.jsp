@@ -34,7 +34,7 @@
 				<div class="text-right">
 
 					<!-- <button type="button" class="btn btn-default btn-sm" id="doSelectOneAdmin">답변달기</button> -->
-					<button type="button" class="btn btn-default btn-sm" id="doUpdate">수정</button>
+					<button type="button" class="btn btn-default btn-sm" id="doUpdate">등록</button>
 				</div>
 			</div>
 		</div>
