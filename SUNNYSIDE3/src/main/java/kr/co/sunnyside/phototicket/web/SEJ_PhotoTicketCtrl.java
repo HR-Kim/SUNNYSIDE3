@@ -111,7 +111,8 @@ public class SEJ_PhotoTicketCtrl {
 	public ModelAndView do_save(MultipartHttpServletRequest mReg 
 			   , ModelAndView model,SEJ_PhotoTicketVO inVO) throws IllegalStateException, IOException {
 		String selected= (String) mReg.getParameter("selected");
-		inVO.setUser_id("admin");
+		String user_id= (String) mReg.getParameter("user_id");
+		inVO.setUser_id(user_id);
 		inVO.setTicket_code(selected);
 		
 		SEJ_PhotoTicketVO selectMovie = (SEJ_PhotoTicketVO) SPT.do_selectOne(inVO);
