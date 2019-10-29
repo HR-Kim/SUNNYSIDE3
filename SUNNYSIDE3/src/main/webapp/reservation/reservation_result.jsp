@@ -109,7 +109,7 @@ if(request.getProtocol().equals("HTTP/1.1"))
 				//좌석문자열을 배열로
 				var stringInfo = arrData;
     			var arr = stringInfo.split("%");
-    			
+
     			$(".arrData>.individual").detach();
     			for(var i=1 ; i<arr.length ; i++){
     				$.ajax({

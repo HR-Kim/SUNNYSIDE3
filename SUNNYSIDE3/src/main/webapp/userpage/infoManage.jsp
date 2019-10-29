@@ -9,7 +9,7 @@
 <body>
 
 
-		<table table-striped table-bordered table-hover id="listTable">
+		<table class="table table-striped table-bordered table-hover" id="listTable">
 		<h3>나의 정보 관리</h3>
 		
 			
@@ -19,7 +19,7 @@
 					<th class="text-center col-md-6 col-xs-6"><button type="button" class="btn btn-default btn-sm"
 							id="doDelete">회원 탈퇴</button></th>
 		
-</table>
+</table>  
          
 
 

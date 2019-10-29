@@ -64,7 +64,8 @@ public class KDY_UserpageCtrl {
 		return gsonStr;
 		
 	}
-	@RequestMapping(value = "userpage/do_delete.do", method = RequestMethod.POST)
+	@RequestMapping(value = "userpage/do_delete.do", method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+	@ResponseBody
 	public String do_delete(KDY_MoviehistoryVO moviehistoryVO) {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_delete_screenInfo");
@@ -199,6 +200,40 @@ public class KDY_UserpageCtrl {
 		return gsonStr;
 		
 	}
+	@RequestMapping(value = "userpage/do_delete_item.do", method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String do_delete_item(KDY_ReservationVO reservationVO) {
+		LOG.debug("==================================");
+		LOG.debug("Controller : do_delete_screenInfo");
+		LOG.debug("==================================");
+		
+		if(reservationVO == null) throw new NullArgumentException(); //null
+		
+		int flag = userpageSvc.do_delete_item(reservationVO);
+		
+		LOG.debug("==================================");
+		LOG.debug("flag : " + flag);
+		LOG.debug("==================================");
+		
+		Message message = new Message();
+		if(flag > 0) {
+			message.setMsgId("1");
+			message.setMsgMsg("성공");
+		}else {
+			message.setMsgId("0");
+			message.setMsgMsg("실패");
+		}
+		
+		Gson gson = new Gson();
+		String jsonString = gson.toJson(message);
+		
+		LOG.debug("==================================");
+		LOG.debug("jsonString : " + jsonString);
+		LOG.debug("==================================");
+		
+		return jsonString;
+	}
+	
 	
 	
 }

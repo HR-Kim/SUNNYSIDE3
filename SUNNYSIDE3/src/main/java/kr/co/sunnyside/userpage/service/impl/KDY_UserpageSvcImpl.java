@@ -61,6 +61,13 @@ public class KDY_UserpageSvcImpl implements KDY_UserpageSvc {
 	public List<?> do_reservationList(DTO dto) {
 		return UserpageDao.do_reservationList(dto);
 	}
+
+
+
+	@Override
+	public int do_delete_item(DTO dto) {
+		return UserpageDao.do_delete_item(dto);
+	}
 	
 	
 }

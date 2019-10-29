@@ -20,6 +20,7 @@
 		<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
 		<link href="${context}/resources/css/jquery-ui.css" rel="stylesheet">
 		<link  href="${context}/resources/css/jquery.timepicker.min.css" rel="stylesheet">
+		<link href="${context}/resources/css/headerStyle.css" rel="stylesheet" type="text/css">
 		<style type="text/css">
 			.BTN_DELETE {
 				background-color: #BC4B4B;
@@ -86,7 +87,7 @@
 				top: 0;
 				left: 0;
 				width: 100vw;
-				height: 100vh;
+				height: 250vh;
 				background-color: black;
 				opacity: 0.1;
 				z-index: 95;
@@ -98,7 +99,7 @@
 			.layer-MovieTable {
 				position: absolute;
 				width: 700px;
-				height: 650px;
+				height: 670px;
 				display: none;
 				background-color: white;
 				border: 1px solid black;
@@ -120,7 +121,7 @@
 				top: 0;
 				left: 0;
 				width: 100vw;
-				height: 100vh;
+				height: 250vh;
 				background-color: black;
 				opacity: 0.1;
 				z-index: 10;

@@ -34,7 +34,7 @@ public class LGS_ReservationCtrl {
 	
 	@ResponseBody
 	@RequestMapping(value = "reservation/do_save.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
-	public String do_save(LGS_TicketVO ticketVO) {
+	public String do_save(LGS_TicketVO ticketVO, String seatNmArr) {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_save_reservation");
 		LOG.debug("==================================");
@@ -46,12 +46,17 @@ public class LGS_ReservationCtrl {
 		if(ticketVO.getScreenId() == "" || ticketVO.getScreenId() == null) throw new IllegalArgumentException();
 		if(ticketVO.getUserId() == "" || ticketVO.getUserId() == null) throw new IllegalArgumentException();
 		if(ticketVO.getMovieId() == "" || ticketVO.getMovieId() == null) throw new IllegalArgumentException();
-		if(ticketVO.getSeatNm() == "" || ticketVO.getSeatNm() == null) throw new IllegalArgumentException();
 		if(ticketVO.getAdultCnt() < 0 || ticketVO.getAdultCnt() > 1) throw new IllegalArgumentException();
 		if(ticketVO.getPayState() < 0 || ticketVO.getPayState() > 1) throw new IllegalArgumentException();
 		if(ticketVO.getCost() < 0 ) throw new IllegalArgumentException();
 		
-		int flag = reservationSvc.do_save(ticketVO);
+		String[] arr = seatNmArr.split("%");
+		int flag = 0;
+		for(int i=1 ; i<arr.length ; i++) {
+			LGS_TicketVO vo = ticketVO;
+			vo.setSeatNm(arr[i]);
+			flag += reservationSvc.do_save(vo);
+		}
 		
 		LOG.debug("==================================");
 		LOG.debug("flag : " + flag);

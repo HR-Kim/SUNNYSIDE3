@@ -175,7 +175,28 @@ public class KDY_UserpageDaoImpl implements WorkDiv {
 		
 		return flag;
 	}
-
+	
+	public int 	do_delete_item(DTO dto) {
+		String statement = this.NAMESPACE + ".do_delete_item";
+		
+		LOG.debug("==================================");
+		LOG.debug("statement = " + statement);
+		LOG.debug("==================================");
+		
+		KDY_ReservationVO reservationVO = (KDY_ReservationVO) dto;
+		
+		LOG.debug("==================================");
+		LOG.debug("MoviehistoryVO = " + reservationVO);
+		LOG.debug("==================================");
+		
+		int flag = sqlSessionTemplate.delete(statement, reservationVO);
+		
+		LOG.debug("==================================");
+		LOG.debug("flag = " + flag);
+		LOG.debug("==================================");
+		
+		return flag;
+	}
 
 
 

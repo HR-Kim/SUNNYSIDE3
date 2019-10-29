@@ -9,8 +9,9 @@
 <head>
 <meta charset="UTF-8">
 <!-- 부트스트랩 -->
-<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet"> 
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="${context}/resources/css/headerStyle.css" rel="stylesheet" type="text/css"> 
+<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
 <!------ Include the above in your HEAD tag ---------->
 <!-- 결제완료 -->
 <title><spring:message code="message.cart.finishpay"/></title>

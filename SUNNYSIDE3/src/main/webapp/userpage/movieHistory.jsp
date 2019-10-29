@@ -9,22 +9,23 @@
 <body>
 
 
-		<table table-striped table-bordered table-hover="1" id="movielistTable">
+		<table class="table table-striped table-bordered table-hover" id="movielistTable">
 		<h3>포토 티켓</h3>
-		<thead class="bg-primary">
+		 <thead class="bg-default" style="background-color: #333333; color: #f0f0f0">
 				<tr>
 			
-					<th class="text-center col-md-12 col-xs-9">포토티켓 리스트</th>
+					<th class="text-center col-md-6 col-xs-6">포토티켓 리스트</th>
+					<th class="text-center col-md-7 col-xs-7">이미지</th>
 					<th class="text-center col-md-1 col-xs-1" style="display:none;">티켓코드</th>
 					
 				</tr>
-		</thead>
+		</thead> 
 		
 		<tbody>			
 					
 		</tbody>
 </table>
-         
+ 
 
 
 

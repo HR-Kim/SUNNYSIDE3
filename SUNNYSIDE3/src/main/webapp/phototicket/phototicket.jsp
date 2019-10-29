@@ -37,6 +37,7 @@
 							</c:otherwise>
 				</c:choose>
 			  	<input type="hidden"  name="selected"  id="selected" value="" >
+			  	<input type="hidden"  name=thisFileNm  id="thisFileNm" value='${selectMovie.thisFileNm}' >
 			 
 				</select></div><br/>
 				<div>포토 티켓을만들 이미지를 첨부해 주세요:<input type="file" name="file" /></div>	<br/>
@@ -54,23 +55,25 @@
 	<hr/>
 
 	
-	<table border="1" id="listTable">
-	
-		<tbody>
-					<tr>
-							<td>사진 </td>
-							<td>영화이름 </td>
-							<td>좌석 </td>
-							<td>티켓코드 </td>
-							
-						</tr>
+	<table class="table table-striped table-bordered table-hover" id="listTable">
+		<thead  class="bg-default" style="background-color: #333333; color: #f0f0f0">
+				<tr>
+			
+					<th class="text-center col-md-2 col-xs-2">사진</th>
+					<th class="text-center col-md-6 col-xs-6">영화이름</th>
+					<th class="text-center col-md-2 col-xs-2">좌석</th>
+					<th class="text-center col-md-2 col-xs-2">티켓코드</th>
+				</tr>
+		</thead>
+		<tbody >
+					
 			
 				
 						<tr>
 							<td><img src='<c:url value="/resources/img/phototicket/${selectMovie.thisFileNm}" />'> </td>
-							<td><c:out value="${selectMovie.kortitle}" /> </td>
-							<td><c:out value="${selectMovie.seat_num}" /> </td>
-							<td><c:out value="${selectMovie.ticket_code}" /> </td>
+							<td class="text-center"><c:out value="${selectMovie.kortitle}" /> </td>
+							<td class="text-center"><c:out value="${selectMovie.seat_num}" /> </td>
+							<td class="text-center"><c:out value="${selectMovie.ticket_code}" /> </td>
 							
 						</tr>
 						
