@@ -51,7 +51,7 @@
 		<div class="col-lg-11"></div>
 		<!-- div title -->
 		<form class="form-horizontal" name="qnaFrm" id="qnaFrm" method="POST" action="${context}/qna/do_save.do">
-			<input type="hidden" class="form-control" name="userId" id="userId" value="${vo.userId }">
+			<input type="hidden" class="form-control" name="userId" id="userId" value="">
 			<input type="hidden" name="qnaNum" id="qnaNum" value="${vo.qnaNum }">
 			
 			<div class="form-group">
@@ -124,7 +124,8 @@
 
 			var frm = document.qnaFrm;
 			frm.qnaNum.value=qnaNum;
-			frm.userId.value=userId;
+			$("#userId").val(userId);
+			//frm.userId.value=userId;
 			
 			frm.action = "${context}/qna/do_selectOne_admin.do";
 			frm.submit();
@@ -158,7 +159,7 @@
 				url : "${context}/qna/do_save.do",
 				dataType : "html",
 				data : {
-					"userId" : $("#userId").val(),
+					"userId" : "${user.userId}",
 					"title" : $("#title").val(),
 					"contents" : $("#contents").val(),
 					"reContents" : $("#reContents").val(),
