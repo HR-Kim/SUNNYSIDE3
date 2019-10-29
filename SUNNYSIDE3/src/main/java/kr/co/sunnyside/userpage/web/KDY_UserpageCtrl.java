@@ -2,7 +2,11 @@ package kr.co.sunnyside.userpage.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.math3.exception.NullArgumentException;
+import org.apache.tiles.request.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -140,11 +144,12 @@ public class KDY_UserpageCtrl {
 		
 	}
 	@RequestMapping(value = "userpage/do_userpage.do", method = RequestMethod.GET)
-	public String do_userpage(listSearchVO search, Model model) {
+	public String do_userpage(listSearchVO search, Model model,HttpServletRequest req ) {
 		LOG.debug("==================================");
 		LOG.debug("Controller : do_userpage");
 		LOG.debug("==================================");
-//		search.setUser_id("j02_126");
+		
+//		search.setUser_id("admin");
 		
 		List<KDY_UserinfoVO> list = (List<KDY_UserinfoVO>) userpageSvc.do_membership(search);
 		

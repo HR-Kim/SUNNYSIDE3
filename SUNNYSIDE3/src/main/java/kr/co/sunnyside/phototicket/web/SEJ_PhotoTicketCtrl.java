@@ -48,7 +48,7 @@ public class SEJ_PhotoTicketCtrl {
 	@RequestMapping(value="phototicket/do_retrieve.do",method=RequestMethod.GET)
 	public String do_retrieve(HttpServletRequest req,Model model,SEJ_PhotoTicketVO inVO,HttpSession session) {
 		
-		inVO.setUser_id("admin");
+		
 		List<SEJ_PhotoTicketVO> moiveList = (List<SEJ_PhotoTicketVO>) SPT.do_retrieve(inVO);
 		
 		model.addAttribute("moiveList", moiveList);

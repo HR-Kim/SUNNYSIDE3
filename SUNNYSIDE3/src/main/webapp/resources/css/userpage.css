@@ -4,6 +4,7 @@
     color:#fff;
     background:#272e38;
     border-radius:0;
+   
 
 }
 li.nav-item> a.nav-link,
@@ -34,4 +35,8 @@ li.nav-item> a.nav-link:focus
     color:#fff;
     border-radius:0;
     transition:background 0.20s linear;
+}
+#nav-tab{
+	margin-bottom: 50px;
+	margin-top: 50px;
 }

@@ -9,7 +9,7 @@
 <body>
 
 <div class="table-responsive">	
-		<table class="table-striped table-bordered table-hover" id="couponlistTable">
+		<table class="table table-striped table-bordered table-hover" id="couponlistTable">
 		<h3>영화 할인 쿠폰</h3>
 		<thead  class="bg-default" style="background-color: #333333; color: #f0f0f0">
 				<tr>

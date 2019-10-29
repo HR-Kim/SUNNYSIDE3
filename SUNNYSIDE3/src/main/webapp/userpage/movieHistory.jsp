@@ -7,6 +7,9 @@
 
 </head>
 <body>
+	<div class="col-md-12 text-right" id="photo">
+		<button type="button" class="btn btn-default btn-sm" >포토티켓</button>	
+	</div>
 
 
 		<table class="table table-striped table-bordered table-hover" id="movielistTable">

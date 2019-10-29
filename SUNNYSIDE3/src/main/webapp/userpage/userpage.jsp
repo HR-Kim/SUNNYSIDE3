@@ -53,7 +53,7 @@
               </li>
             </ul>
             <div class="tab-content">
-              <div class="tab-pane fade" id="tiketHistory">
+              <div class="tab-pane fade active show in" id="tiketHistory">
                 <%@include file="../userpage/tiketHistory.jsp"%>
 			  </div>
 			  <div class="tab-pane fade" id="reservationList">
@@ -289,6 +289,12 @@
 		console.log("ready");
 		
 		
+	});
+	
+	
+	$("#photo").on("click","button",function(event){
+		console.log("photo");
+		window.location.href=  "${context}/phototicket/do_retrieve.do?user_id=${user.userId}";
 	});
 	
 </script>
