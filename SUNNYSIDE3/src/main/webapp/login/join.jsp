@@ -216,6 +216,12 @@
 				alert("휴대폰번호을 입력하세요.");
 				return;
 			}
+			
+			//이메일 validation
+			if( $("#email").val() == ""){
+				alert("이메일을 입력하세요.");
+				return;
+			}
 
 			//if($("#joinForm").valid()==false)return;
 			if(false==confirm("회원가입 하시겠습니까?"))return;
