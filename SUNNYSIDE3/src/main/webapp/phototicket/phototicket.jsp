@@ -38,7 +38,7 @@
 				</c:choose>
 			  	<input type="hidden"  name="selected"  id="selected" value="" >
 			  	<input type="hidden"  name=thisFileNm  id="thisFileNm" value='${selectMovie.thisFileNm}' >
-			 
+			 	<input type="hidden"  name="user_id"  id="user_id" value="${user.userId}" >
 				</select></div><br/>
 				<div>포토 티켓을만들 이미지를 첨부해 주세요:<input type="file" name="file" /></div>	<br/>
 				
@@ -98,6 +98,7 @@
 		var frm = document.saveFrm;
 		frm.action = "${context}/phototicket/do_save.do";
 		frm.selected.value=$("#movieList option:selected").val();
+		frm.user_id.value="${user.userId}";
 		frm.submit();
 	}
 	
