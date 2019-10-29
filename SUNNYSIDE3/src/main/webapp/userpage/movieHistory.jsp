@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div class="col-md-12 text-right" id="photo">
-		<button type="button" class="btn btn-default btn-sm" >포토티켓</button>	
+		<button type="button" class="btn btn-primary btn-lg" >포토티켓</button>	
 	</div>
 
 

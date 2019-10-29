@@ -66,6 +66,7 @@ if(request.getProtocol().equals("HTTP/1.1"))
 			<div class="OK">
 				<p><spring:message code="message.reservation.payEndMsg"/></p>
 				<button id="okBtn" class="btn btn-primary btn-lg"><spring:message code="message.reservation.confirm"/></button>
+				<button id="photo" type="button" class="btn btn-primary btn-lg" >포토티켓</button>
 			</div>
 		</div>
 	
@@ -139,6 +140,10 @@ if(request.getProtocol().equals("HTTP/1.1"))
 				if(confirm("<spring:message code='message.reservation.leave'/>")==false) return;
 				alert("<spring:message code='message.reservation.payEndMsg'/>");
 				self.close();
+			});
+			$("#photo").on("click",function(event){
+				
+				window.location.href=  "${context}/phototicket/do_retrieve.do?user_id=${user.userId}";
 			});
     	</script>
 	</body>

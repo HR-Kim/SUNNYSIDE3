@@ -24,16 +24,10 @@
 						<th class="text-center col-md-3 col-xs-3">예매취소</th>
 					</tr>
 			</thead>
-			<tbody>			
-			
-								
-				
-						
-							
-							
-								
-								
-						
+			<tbody>
+					<td class="text-center" colspan="99">
+									<h3>탭을 클릭해주세요</h3>
+					</td>			
 			</tbody>
 
 		</table>
