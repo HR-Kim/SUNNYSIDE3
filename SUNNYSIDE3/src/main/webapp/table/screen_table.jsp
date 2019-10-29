@@ -885,7 +885,7 @@
     					"pageSize" : "10",
     					"searchDiv" : $("#hd_searchDiv").val(),
     					"searchWord" : $("#hd_searchWord").val()
-    				}, 
+    				},
     			success: function(data){
     				var movieArr = data;
     				if(movieArr.length > 0){
