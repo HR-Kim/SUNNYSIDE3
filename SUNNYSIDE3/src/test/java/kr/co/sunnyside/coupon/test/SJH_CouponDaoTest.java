@@ -52,11 +52,11 @@ private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 		LOG.debug("^^^^^^^^^^^^^^^^^^");
 		
 		coupons = Arrays.asList(
-				 new SJH_CouponVO("쿠폰코드01","회원이름01","3천원 할인 쿠폰","","",3000,"")
-				,new SJH_CouponVO("쿠폰코드02","회원이름01","3천원 할인 쿠폰","","",3000,"")
-				,new SJH_CouponVO("쿠폰코드03","회원이름02","3천원 할인 쿠폰","","",3000,"")
-				,new SJH_CouponVO("쿠폰코드04","회원이름02","3천원 할인 쿠폰","","",3000,"")
-				,new SJH_CouponVO("쿠폰코드05","회원이름03","3천원 할인 쿠폰","","",3000,"")
+				 new SJH_CouponVO("쿠폰코드01","j01_126","3천원 할인 쿠폰","","",3000,"")
+				,new SJH_CouponVO("쿠폰코드02","j02_126","3천원 할인 쿠폰","","",3000,"")
+				,new SJH_CouponVO("쿠폰코드03","j03_126","3천원 할인 쿠폰","","",3000,"")
+				,new SJH_CouponVO("쿠폰코드04","j04_126","3천원 할인 쿠폰","","",3000,"")
+				,new SJH_CouponVO("쿠폰코드05","j05_126","3천원 할인 쿠폰","","",3000,"")
 			);
 	}
 	
@@ -98,9 +98,9 @@ private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void do_save() {
-		SJH_CouponVO coupon01 = coupons.get(4);
+		SJH_CouponVO coupon01 = coupons.get(0);
 		int flag = couponDao.do_save(coupon01);
 	}
 	
