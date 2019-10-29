@@ -63,7 +63,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-<title>고객센터</title>
+<title><spring:message code="message.header.questions"/></title>
 
 <!-- 부트스트랩 -->
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -75,7 +75,7 @@
 	<div class="container">
 		<!-- div title -->
 		<div class="page-header">
-			<h1>관리자 문의내역</h1>
+			<h1><spring:message code="message.header.questions"/></h1>
 		</div>
 		
 		<!-- 검색영역 -->
