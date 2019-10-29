@@ -157,6 +157,15 @@ public class SJH_LoginCtrl {
 		LOG.debug("callback");
 		OAuth2AccessToken oauthToken;
 		
+		List<LHJ_MainImageVO> bannerList = (List<LHJ_MainImageVO>) this.mainService.do_banner_retrieve();
+		model.addAttribute("bannerList", bannerList);
+      
+		List<LHJ_MovieVO> boxofficeList = (List<LHJ_MovieVO>) this.boxofficeService.do_retrieve_main();
+		model.addAttribute("boxofficeList", boxofficeList);
+      
+		List<KYMNoticeVO> noticeList = (List<KYMNoticeVO>) this.mainService.do_notice_retrieve();
+		model.addAttribute("noticeList", noticeList);
+	      
 		LOG.debug("ㅋㅋsession: "+session);
 		LOG.debug("ㅋㅋcode: "+code);
 		LOG.debug("ㅋㅋstate: "+state);
