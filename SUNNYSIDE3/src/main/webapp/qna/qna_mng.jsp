@@ -18,6 +18,7 @@
 <title>게시관리</title>
 <!-- 부트스트랩 -->
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="${context}/resources/css/headerStyle.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<c:choose>

@@ -67,6 +67,7 @@
 
 <!-- 부트스트랩 -->
 <link href="${context}/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="${context}/resources/css/headerStyle.css" rel="stylesheet" type="text/css">
 
 <style>
     #container {
@@ -110,7 +111,7 @@
 	<div class="container">
 		<!-- div title -->
 		<div class="page-header">
-			<h1>1:1문의</h1>
+			<h1><spring:message code="message.header.questions"/></h1>
 		</div>
 		
 		<!-- 검색영역 -->
