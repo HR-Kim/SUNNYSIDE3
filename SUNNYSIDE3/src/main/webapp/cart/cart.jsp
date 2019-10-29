@@ -17,8 +17,8 @@
 <title><spring:message code="message.cart.cart"/></title>
 </head>
 <!-- 장바구니 -->
-<h2 style="margin-left: 450px;margin-top: 70px; margin-bottom: 40px; font-weight: bold"><spring:message code="message.cart.cart"/></h2>
-<div class="container">
+<h2 style="margin-left: 450px;margin-top: 70px; margin-bottom: 40px; font-weight: bold;"><spring:message code="message.cart.cart"/></h2>
+<div class="container" style="margin-bottom: 70px;">
     <div class="row">
         <div class="col-sm-12 col-md-10 col-md-offset-1">
             <table class="table table-hover" id="cartFrm">
