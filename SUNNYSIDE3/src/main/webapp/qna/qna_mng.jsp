@@ -50,7 +50,7 @@
 		<div class="col-lg-11"></div>
 		<!-- div title -->
 		<form class="form-horizontal" name="qnaFrm" id="qnaFrm" method="POST" action="${context}/qna/do_save.do">
-			<input type="hidden" class="form-control" name="userId" id="userId" value="${user.userId }">
+			<input type="hidden" class="form-control" name="userId" id="userId" value="${vo.userId }">
 			<input type="hidden" name="qnaNum" id="qnaNum" value="${vo.qnaNum }">
 			
 			<div class="form-group">
