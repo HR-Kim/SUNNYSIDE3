@@ -87,7 +87,7 @@
 				top: 0;
 				left: 0;
 				width: 100vw;
-				height: 100vh;
+				height: 250vh;
 				background-color: black;
 				opacity: 0.1;
 				z-index: 95;
@@ -99,7 +99,7 @@
 			.layer-MovieTable {
 				position: absolute;
 				width: 700px;
-				height: 650px;
+				height: 670px;
 				display: none;
 				background-color: white;
 				border: 1px solid black;
@@ -121,7 +121,7 @@
 				top: 0;
 				left: 0;
 				width: 100vw;
-				height: 100vh;
+				height: 250vh;
 				background-color: black;
 				opacity: 0.1;
 				z-index: 10;

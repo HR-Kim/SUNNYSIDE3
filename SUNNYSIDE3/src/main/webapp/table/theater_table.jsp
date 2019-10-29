@@ -52,7 +52,7 @@
 				top: 0;
 				left: 0;
 				width: 100vw;
-				height: 200vh;
+				height: 1300px;
 				background-color: black;
 				opacity: 0.1;
 				z-index: 95;
