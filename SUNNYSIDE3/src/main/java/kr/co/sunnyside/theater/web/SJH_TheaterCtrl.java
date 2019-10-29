@@ -1,4 +1,4 @@
-package kr.co.sunnyside.theater;
+package kr.co.sunnyside.theater.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -137,23 +137,22 @@
 			$.ajax({
 		         type:"POST",
 		         url:"${context}/usermypage/do_delete.do",
-		         dataType:"html",// JSON
+		         dataType:"html",
 		         data:{
 		        	 "userId": $("#userId").val(),
 		        	 "passwd": $("#passwd").val()
 		         },
-		         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-		          	//console.log(data); //스트링으로 들어온 데이터
-		          	var parseData = $.parseJSON(data); //JSON으로 바꿔줌
+		         success: function(data){
+		          	var parseData = $.parseJSON(data);
 		          	if(parseData.msgId == "1"){
 		          		alert(parseData.msgMsg);
-		          		location.href="${context}/main/main.do" //메인페이지로 바꾸기
+		          		location.href="${context}/main/main.do"
 		          	}else{
 		          		alert(parseData.msgMsg);
 		          	}
 		          	
 		         },
-		         complete: function(data){//무조건 수행
+		         complete: function(data){
 		          
 		         },
 		         error: function(xhr,status,error){
