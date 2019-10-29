@@ -175,7 +175,7 @@
 	
 	<delete id="do_delete" parameterType="KYMQnaVO">
 		DELETE FROM qna
-		WHERE user_id = #{userId,jdbcType=VARCHAR}
+		WHERE QNA_NUM = #{qnaNum,jdbcType=VARCHAR}
 	</delete>
 	
 	<select id="do_retrieveTwo" parameterType="CodeVO" resultType="CodeVO">

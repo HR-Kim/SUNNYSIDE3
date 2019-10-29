@@ -110,7 +110,7 @@
 	<div class="container">
 		<!-- div title -->
 		<div class="page-header">
-			<h1>문의내역</h1>
+			<h1>1:1문의</h1>
 		</div>
 		
 		<!-- 검색영역 -->
