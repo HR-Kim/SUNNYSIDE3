@@ -23,8 +23,8 @@
 			
 					<c:when test="${membershiplist.size()>0}">
 							<c:forEach var="vo" items="${membershiplist}">
-								<h3>${vo.user_name}회원님 환영합니다</h3>
-								<h3>회원 등급은 ${vo.user_level} 입니다</h3>
+								<h4>${vo.user_name}회원님 환영합니다</h4>
+								<h4>회원 등급은 ${vo.user_level} 입니다</h4>
 							</c:forEach>		
 					</c:when>
 						<c:otherwise>
@@ -293,9 +293,20 @@
 	
 	
 	$("#photo").on("click","button",function(event){
-		console.log("photo");
+	
 		window.location.href=  "${context}/phototicket/do_retrieve.do?user_id=${user.userId}";
 	});
+	
+	$("#update").on("click",function(event){
+	
+		window.location.href=  "${context}/usermypage/update_view.do?user_id=${user.userId}";
+	});
+	$("#withdraw").on("click",function(event){
+
+		window.location.href=  "${context}/usermypage/withdraw_view.do?user_id=${user.userId}";
+	});
+	
+	
 	
 </script>
 
