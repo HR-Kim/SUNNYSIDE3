@@ -16,7 +16,7 @@
 
 	<div class="container">
       <div class="row">
-        <div class="col">
+        <div class="col"> 
           <div>
            	<input type="hidden" id="userId" value="${user.userId}" >
           <c:choose>

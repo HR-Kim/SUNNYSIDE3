@@ -20,7 +20,7 @@
 					<th class="text-center col-md-2 col-xs-2">결제일</th>
 					<th class="text-center col-md-2 col-xs-2">예매취소</th>
 				</tr>
-		</thead>
+		</thead> 
 		<tbody>			
 					<tr>
 							<td> </td>

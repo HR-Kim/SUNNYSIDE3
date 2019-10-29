@@ -19,8 +19,8 @@
 					<th class="text-center col-md-2 col-xs-2">등록일</th>
 					<th class="text-center col-md-2 col-xs-2">처리상태</th>
 				</tr>
-		</thead>
-		<tbody>			
+		</thead> 
+		<tbody>			 
 					<tr>
 							<td> </td>
 							<td> </td>

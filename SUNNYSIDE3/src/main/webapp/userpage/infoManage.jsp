@@ -19,7 +19,7 @@
 					<th class="text-center col-md-6 col-xs-6"><button type="button" class="btn btn-default btn-sm"
 							id="doDelete">회원 탈퇴</button></th>
 		
-</table>
+</table>  
          
 
 

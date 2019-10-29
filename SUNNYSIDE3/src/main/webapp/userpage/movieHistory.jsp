@@ -19,7 +19,7 @@
 					<th class="text-center col-md-1 col-xs-1" style="display:none;">티켓코드</th>
 					
 				</tr>
-		</thead>
+		</thead> 
 		
 		<tbody>			
 					
