@@ -229,6 +229,7 @@
 		        	 "userId": $("#userId").val(),
 		        	 "passwd": $("#passwd").val(),
 		        	 "userName": $("#userName").val(),
+		        	 "birth": $("#birth").val(),
 		        	 "cellphone": $("#cellphone").val(),
 		        	 "email": $("#email").val()
 		         },

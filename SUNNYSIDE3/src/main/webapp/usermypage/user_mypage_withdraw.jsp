@@ -146,7 +146,7 @@
 		          	var parseData = $.parseJSON(data);
 		          	if(parseData.msgId == "1"){
 		          		alert(parseData.msgMsg);
-		          		location.href="${context}/main/main.do"
+		          		location.href="${context}/login/logout.do"
 		          	}else{
 		          		alert(parseData.msgMsg);
 		          	}

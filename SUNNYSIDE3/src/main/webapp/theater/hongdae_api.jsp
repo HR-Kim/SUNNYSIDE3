@@ -43,9 +43,9 @@
 		<table style="width: 700px;">
 			<td style="width: 40%;"><strong>서울 마포구 서교동 447-5</strong></td>
 			<td style="width: 10%;"><strong>총 상영관수</strong></td>
-			<td style="width: 10%;">22개관</td>
+			<td style="width: 10%;">6개관</td>
 			<td style="width: 10%;"><strong>총 좌석수</strong></td>
-			<td style="width: 10%;">4,633석</td>
+			<td style="width: 10%;">2400석</td>
 		</table>
 	</div>
 	
