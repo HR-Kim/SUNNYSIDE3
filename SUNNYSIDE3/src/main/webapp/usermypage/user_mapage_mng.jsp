@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>회원탈퇴</title>
+	<title>회원정보수정</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -43,7 +43,7 @@
 					<input type="hidden" id="flag" name="flag" value="${user.flag}" >
 					
 					<span class="text-center login100-form-title p-b-32">
-						${user.userName}<spring:message code="message.usermypage.modi_info"/>
+						${user.userName}<spring:message code="message.usermypage.info_change"/>
 					</span>
 					
   					<c:choose>
