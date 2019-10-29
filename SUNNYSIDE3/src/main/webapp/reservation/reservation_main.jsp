@@ -497,8 +497,11 @@
 						var td = trList.eq(i).children();
 						if(td.eq(0).text() == inputMovieId){
 							$("#movieTable>tbody>tr").css("background-color", "");
-		    				$(trList.eq(i)).css("background-color", "lightgray");
+		    				$(trList.eq(i)).css("background-color", "lightgray");		
 		    				create_branchTable(inputMovieId);
+		    				console.log($(trList.eq(i)).offset().top);
+		    				var scroll = $(trList.eq(i)).offset().top;
+		    				$(".tableCase").scrollTop( scroll-40 );
 		    				return;
 						}
 					}
