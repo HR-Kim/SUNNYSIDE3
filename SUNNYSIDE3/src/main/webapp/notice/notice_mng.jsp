@@ -46,7 +46,7 @@
 					<c:choose>
 						<c:when test="${'admin' == user.userLevel}">
 					<!-- 수정 -->
-					<button type="button" class="btn btn-default btn-sm" id="doUpdate"><spring:message code="message.button.edit"/></button>
+					<button type="button" class="btn btn-default btn-sm" id="doSave"><spring:message code="message.button.save"/></button>
 						</c:when>
 					</c:choose>
 				</div>
@@ -64,7 +64,7 @@
 				<!-- 제목 -->
 				<label for="inputEmail3" class="col-sm-2 control-label"><spring:message code="message.qna.title"/></label>
 				<div class="col-sm-8">
-					<input type="text" class="form-control" name="title" id="title" placeholder='<spring:message code="message.qna.title"/>' value="<c:out value='${vo.title }' />" disabled="disabled">
+					<input type="text" class="form-control" name="title" id="title" placeholder='<spring:message code="message.qna.title"/>' value="<c:out value='${vo.title }' />" >
 				</div>
 			</div>
 			
@@ -72,7 +72,7 @@
 				<!-- 지점 -->
 				<label for="inputEmail3" class="col-sm-2 control-label" ><spring:message code="message.notice.store"/></label>
 					<div class="col-sm-8">
-						<%=StringUtil.makeBranchBox(Branchlist, "branchSNm", selectedNm, true, true) %>
+						<%=StringUtil.makeBranchBox(Branchlist, "branchSNm", selectedNm, true, false) %>
 					</div>
 			</div>
 
@@ -80,7 +80,7 @@
 				<!-- 내용 -->
 				<label for="inputEmail3" class="col-sm-2 control-label"><spring:message code="message.qna.contents"/></label>
 				<div class="col-sm-8">
-					<textarea class="form-control" name="contents" id="contents" rows="7" placeholder='<spring:message code="message.qna.contents"/>' disabled="disabled" ><c:out value="${vo.contents }" /></textarea>
+					<textarea class="form-control" name="contents" id="contents" rows="7" placeholder='<spring:message code="message.qna.contents"/>' ><c:out value="${vo.contents }" /></textarea>
 				</div>
 			</div>
 
@@ -98,7 +98,7 @@
 				<label for="attrFile" class="hidden-xs hidden-sm col-md-2 col-lg-2 control-label"><spring:message code="message.notice.file_add"/></label>
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 					<!-- 파일 -->
-					<button id="attrFile" type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#layerpop" disabled="disabled"><spring:message code="message.notice.file"/></button>
+					<button id="attrFile" type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#layerpop" ><spring:message code="message.notice.file"/></button>
 				</div>
 			</div>
 			

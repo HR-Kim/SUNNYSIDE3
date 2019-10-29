@@ -219,7 +219,7 @@
 			//console.log("noticeId:"+noticeId);
 			var frm = document.noticeFrm;
 			frm.noticeId.value=noticeId;
-			frm.action = "${context}/notice/do_selectOne.do";
+			frm.action = "${context}/notice/do_selectOne_admin.do";
 			frm.submit();
 			
 		});
