@@ -14,7 +14,7 @@
 </head>	
 <body>
 
-	<div class="container">
+	<div class="container" style="margin-top:50px; margin-bottom: 80px">
       <div class="row">
         <div class="col"> 
           <div>
