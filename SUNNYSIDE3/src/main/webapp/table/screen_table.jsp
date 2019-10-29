@@ -700,9 +700,9 @@
           	function movieRerieve(){
           		loading(true);
           		var word = $("#hd_searchWord_second").val();
-          		if(word == "개봉") word = "010";
+          		/* if(word == "개봉") word = "010";
           		else if(word == "비상영") word = "000";
-          		else if(word == "개봉예정") word = "020";
+          		else if(word == "개봉예정") word = "020"; */
           		
             	$.ajax({
     				type : "POST",
@@ -711,7 +711,7 @@
     				data : {
     					"searchDiv" : $("#hd_searchDiv").val(),
     					"searchWord" : $("#hd_searchWord").val(),
-    					"searchWord_second" :word
+    					"searchWord_second" : word
     				}, 
     			success: function(data){
     				var movieArr = data;
@@ -884,7 +884,8 @@
     					"pageNum" : idx,
     					"pageSize" : "10",
     					"searchDiv" : $("#hd_searchDiv").val(),
-    					"searchWord" : $("#hd_searchWord").val()
+    					"searchWord" : $("#hd_searchWord").val(),
+    					"searchWord_second" : $("#hd_searchWord_second").val()
     				},
     			success: function(data){
     				var movieArr = data;
