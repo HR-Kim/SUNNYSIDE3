@@ -43,6 +43,7 @@
 		SET
 		    passwd = #{passwd,jdbcType=VARCHAR},
 		    user_name = #{userName,jdbcType=VARCHAR},
+		    birth = #{birth,jdbcType=VARCHAR},
 		    cellphone = encryption_aes.enc_aes(#{cellphone,jdbcType=VARCHAR}),
 		    email = encryption_aes.enc_aes(#{email,jdbcType=VARCHAR})
 		WHERE
