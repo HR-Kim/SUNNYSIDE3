@@ -45,6 +45,9 @@
               <li class="nav-item" name="do_movieHistory.do">
                 <a class="nav-link" data-toggle="tab" href="#movieHistory">무비히스토리</a>
               </li>
+              <li class="nav-item" name="do_movieHistory.do">
+                <a class="nav-link" data-toggle="tab" href="#movieStatistics">나의 관람 통계</a>
+              </li>
               <li class="nav-item" name="do_qnaList.do">
                 <a class="nav-link" data-toggle="tab" href="#qnaList">나의 문의 내역</a>
               </li>
@@ -62,6 +65,9 @@
 			   <div class="tab-pane fade" id="couponList">
                <%@include file="../userpage/couponList.jsp"%>
                </div>
+              <div class="tab-pane fade" id="movieStatistics">
+                <%@include file="../userpage/line_chart.jsp"%> 
+              </div>
               <div class="tab-pane fade" id="movieHistory">
                 <%@include file="../userpage/movieHistory.jsp"%> 
               </div>

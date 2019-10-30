@@ -81,7 +81,7 @@
   			<h1>예매통계</h1>
   		</div>
   		<div class="row">
-    		<div id="curve_chart" style="width: 100%; height: 100%;"></div>
+    		<div id="curve_chart" style="width:100%; height:100%;"></div>
     	</div>
     </div>
   </body>
