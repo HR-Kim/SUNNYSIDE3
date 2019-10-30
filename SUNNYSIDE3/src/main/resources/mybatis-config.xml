@@ -29,6 +29,7 @@
 		<typeAlias type="kr.co.sunnyside.login.service.SJH_LoginVO" alias="SJH_LoginVO"/>
 		<typeAlias type="kr.co.sunnyside.usermypage.service.SJH_MypageVO" alias="SJH_MypageVO"/>
 		<typeAlias type="kr.co.sunnyside.coupon.service.SJH_CouponVO" alias="SJH_CouponVO" />
+		<typeAlias type="kr.co.sunnyside.chart.service.SJH_ChartVO" alias="SJH_ChartVO" />
 		
 		<!-- SEJ -->
 		<typeAlias type="kr.co.sunnyside.store.service.SEJ_StroreVO" alias="Store" />

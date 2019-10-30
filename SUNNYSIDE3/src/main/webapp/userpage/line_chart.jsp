@@ -44,7 +44,7 @@
 				  			async : false,
 				  			dataType : "html",
 				  			data : {
-				  		
+				  				"userId": $("#userId").val()
 				  			}
   		       		   }).responseText;
   		console.log("jsonString:"+jsonString);
@@ -64,7 +64,7 @@
   		
 
         var options = {
-          title: '예매통계',
+          title: '',
           curveType: 'function',
           legend: { position: 'bottom' }
         };
@@ -78,9 +78,10 @@
   <body>
   	<div class="container">
   		<div class="page-header">
-  			<h1>예매통계</h1>
+  			<h1>나의 관람 통계</h1>
   		</div>
   		<div class="row">
+  			<input type="hidden" id="userId" name="userId" value="${user.userId}" >
     		<div id="curve_chart" style="width:100%; height:100%;"></div>
     	</div>
     </div>

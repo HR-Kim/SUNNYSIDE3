@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>	
+<!DOCTYPE mapper	
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"	
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">	
+<mapper namespace="kr.co.sunnyside.chart">
+
+	<!-- 일년 간 예매내역 전체조회 -->
+	<select id="do_getAll" parameterType="SJH_ChartVO">
+		SELECT 
+			COUNT(TICKET_CODE) CNT
+		FROM
+		    TICKET_HISTORY
+		WHERE
+			USER_ID = #{userId,jdbcType=VARCHAR}
+		AND
+			TO_CHAR(TICKET_DT, 'YYYY') = TO_CHAR(SYSDATE, 'YYYY')
+		AND
+			TO_CHAR(TICKET_DT, 'MM') = #{month,jdbcType=VARCHAR}  
+	</select>
+
+
+</mapper>

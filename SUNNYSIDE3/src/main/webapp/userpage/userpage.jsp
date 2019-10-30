@@ -298,6 +298,13 @@
 	});
 	
 	
+	
+	$("#movieStatistics").on("click","button",function(event){
+		
+		window.location.href=  "${context}/chart/line_chart.do?user_id=${user.userId}";
+	});
+	
+	
 	$("#photo").on("click","button",function(event){
 	
 		window.location.href=  "${context}/phototicket/do_retrieve.do?user_id=${user.userId}";
