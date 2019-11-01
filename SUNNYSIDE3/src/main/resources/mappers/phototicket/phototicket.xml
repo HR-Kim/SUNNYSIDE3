@@ -1,108 +1,217 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+
 <!DOCTYPE mapper
+
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="kr.co.sunnyside.phototicket">
+
 	
+
 	
+
 	
+
 	
+
 	<select id="do_retrieve" parameterType="SEJ_PhotoTicketVO" resultType="SEJ_PhotoTicketVO">
+
 	  	select 	b.kortitle,
+
 		      	c.screen_dt,
+
 		      	a.seat_nm,
+
 			  	a.ticket_code,
+
 			  	a.user_id,
+
 			  	c.room_id
+
 	  	from ticket_history a JOIN movie b
+
 		ON a.movie_id=b.movie_id
+
 		JOIN screen_info c
+
 		ON a.movie_id =c.movie_id
+
 		where a.user_id=#{user_id,jdbcType=VARCHAR}
+
         MINUS (
+
             select  b.kortitle,
+
                     c.screen_dt,
+
                     a.seat_nm,
+
                     a.ticket_code,
+
                     a.user_id,
+
                     c.room_id
+
             from ticket_history a JOIN movie b
+
             ON a.movie_id=b.movie_id
+
             JOIN screen_info c
+
 			ON a.movie_id =c.movie_id
+
             JOIN photo_ticket d
+
             ON a.ticket_code =d.ticket_code
+
             where a.user_id=#{user_id,jdbcType=VARCHAR})
+
         
+
 	</select>
+
 	
+
 	<select id="do_selectOne" parameterType="SEJ_PhotoTicketVO" resultType="SEJ_PhotoTicketVO">
+
 	  	select	
+
         a.seat_nm,
+
 	  	a.ticket_code,
+
 	  	a.user_id,
+		
+		b.kortitle,
+		
         c.screen_dt
+
 	  	from ticket_history a JOIN movie b
+
 		ON a.movie_id=b.movie_id
+
 		JOIN screen_info c
+
         ON a.screen_id=c.screen_id
+
 		where a.user_id=#{user_id,jdbcType=VARCHAR}
+
 		and a.ticket_code=#{ticket_code,jdbcType=VARCHAR}
+
 	</select>
 
+
+
 	
+
 	<insert id="do_save" parameterType="SEJ_PhotoTicketVO">
+
 		INSERT INTO photo_ticket (
+
 			    kortitle,
+
 			    screen_dt,
+
 			    seat_nm,
+
 			    ticket_code,
+
 			    user_id,
+
 			    org_img_nm,
+
 			    save_img_nm,
+
 			    ext,
+
 			    img_size,
+
 			    reg_dt,
+
 			    room_id,
+
 			    ThisFileNm
+
 			    
+
 		) VALUES (
+
 		    #{kortitle,jdbcType=VARCHAR},
+
 		    to_date(#{screen_dt,jdbcType=DATE},'YY-MM-DD HH24:mi:SS'),
+
 		    #{seat_nm,jdbcType=NUMERIC},
+
 		    #{ticket_code,jdbcType=VARCHAR},
+
 		    #{user_id,jdbcType=VARCHAR},
+
 		    #{org_img_nm,jdbcType=VARCHAR},
+
 		    #{save_img_nm,jdbcType=VARCHAR},
+
 		    #{ext,jdbcType=VARCHAR},
+
 		    #{img_size,jdbcType=VARCHAR},
+
 		    SYSDATE,
+
 		    #{room_id,jdbcType=VARCHAR},
+
 		    #{ThisFileNm,jdbcType=VARCHAR}
+
 		)
+
 	</insert>
-	
-	<select id="do_retrieve_user" parameterType="SEJ_PhotoTicketVO" resultType="SEJ_PhotoTicketVO">
-	  	SELECT
-    ticket_code,
-    user_id,
-    org_img_nm,
-    save_img_nm,
-    ext,
-    img_size,
-    reg_dt,
-    kortitle,
-    screen_dt,
-    seat_nm,
-    room_id,
-    thisFileNm
-FROM
-    photo_ticket
-    where 
-    user_id=#{user_id,jdbcType=VARCHAR}
-       
-  
-	</select>
 
 	
+
+	<select id="do_retrieve_user" parameterType="SEJ_PhotoTicketVO" resultType="SEJ_PhotoTicketVO">
+
+	  	SELECT
+
+    ticket_code,
+
+    user_id,
+
+    org_img_nm,
+
+    save_img_nm,
+
+    ext,
+
+    img_size,
+
+    reg_dt,
+
+    kortitle,
+
+    screen_dt,
+
+    seat_nm,
+
+    room_id,
+
+    thisFileNm
+
+FROM
+
+    photo_ticket
+
+    where 
+
+    user_id=#{user_id,jdbcType=VARCHAR}
+
+       
+
+  
+
+	</select>
+
+
+
+	
+
 </mapper>
